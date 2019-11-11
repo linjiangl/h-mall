@@ -12,8 +12,17 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Hyperf\Snowflake\IdGenerator;
+use Hyperf\Di\Annotation\Inject;
+
 class IndexController extends AbstractController
 {
+    /**
+     * @Inject
+     * @var IdGenerator\SnowflakeIdGenerator
+     */
+    protected $idGenerator;
+
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
@@ -22,6 +31,7 @@ class IndexController extends AbstractController
         return [
             'method' => $method,
             'message' => "Hello {$user}.",
+            'id' => $this->idGenerator->generate()
         ];
     }
 }

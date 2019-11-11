@@ -52,7 +52,8 @@
         "yurunsoft/pay-sdk": "^2.0",
         "overtrue/wechat": "^4.2",
         "yurunsoft/yurun-oauth-login": "^2.0",
-        "yurunsoft/phpmailer-swoole": "^1.0"
+        "yurunsoft/phpmailer-swoole": "^1.0",
+        "hyperf/snowflake": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
@@ -63,8 +64,7 @@
         "phpstan/phpstan": "^0.11.2",
         "hyperf/testing": "~1.1.0",
         "hyperf/swagger": "^1.1",
-        "hyperf/swoole-tracker": "^1.1",
-        "firstphp/wsdebug": "^1.1"
+        "hyperf/swoole-tracker": "^1.1"
     },
     "suggest": {
         "ext-openssl": "Required to use HTTPS.",

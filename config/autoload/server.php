@@ -25,7 +25,7 @@ return [
             'callbacks' => [
                 SwooleEvent::ON_REQUEST => [Hyperf\HttpServer\Server::class, 'onRequest'],
             ],
-        ],
+        ]
     ],
     'settings' => [
         'enable_coroutine' => true,
