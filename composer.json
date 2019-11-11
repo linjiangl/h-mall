@@ -48,7 +48,11 @@
         "hyperf/elasticsearch": "~1.1.0",
         "hyperf/tracer": "~1.1.0",
         "hyperf/rate-limit": "^1.1",
-        "hyperf/crontab": "^1.1"
+        "hyperf/crontab": "^1.1",
+        "yurunsoft/pay-sdk": "^2.0",
+        "overtrue/wechat": "^4.2",
+        "yurunsoft/yurun-oauth-login": "^2.0",
+        "yurunsoft/phpmailer-swoole": "^1.0"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
