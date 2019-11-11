@@ -47,7 +47,8 @@
         "hyperf/model-cache": "~1.1.0",
         "hyperf/elasticsearch": "~1.1.0",
         "hyperf/tracer": "~1.1.0",
-        "hyperf/rate-limit": "^1.1"
+        "hyperf/rate-limit": "^1.1",
+        "hyperf/crontab": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
