@@ -56,7 +56,8 @@
         "doctrine/common": "^2.9",
         "phpstan/phpstan": "^0.11.2",
         "hyperf/testing": "~1.1.0",
-        "hyperf/swagger": "^1.1"
+        "hyperf/swagger": "^1.1",
+        "hyperf/swoole-tracker": "^1.1"
     },
     "suggest": {
         "ext-openssl": "Required to use HTTPS.",
