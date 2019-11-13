@@ -6,16 +6,18 @@ use Hyperf\Database\Migrations\Migration;
 
 class CreateUserWalletTable extends Migration
 {
-    protected $table = 'user_wallet';
-
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create($this->table, function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->timestamps();
+        Schema::create('user_wallet', function (Blueprint $table) {
+            $table->integer('user_id', false, true)->unique();
+            $table->integer('integral', false, true)->default(0);
+            $table->decimal('balance', 10, 2)->default(0);
+            $table->decimal('red_packet', 7, 2)->default(0);
+            $table->integer('freeze_integral', false, true)->default(0);
+            $table->decimal('freeze_balance', 10, 2)->default(0);
         });
     }
 
@@ -24,6 +26,6 @@ class CreateUserWalletTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists($this->table);
+        Schema::dropIfExists('user_wallet');
     }
 }
