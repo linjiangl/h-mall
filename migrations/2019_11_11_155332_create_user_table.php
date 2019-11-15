@@ -6,12 +6,14 @@ use Hyperf\Database\Migrations\Migration;
 
 class CreateUserTable extends Migration
 {
+    protected $table = 'user';
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->string('username', 30)->comment('用户名');
             $table->string('nickname', 50)->comment('昵称');
@@ -32,6 +34,8 @@ class CreateUserTable extends Migration
             $table->index(['nickname']);
             $table->index(['created_at']);
         });
+
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户'");
     }
 
     /**
@@ -39,6 +43,6 @@ class CreateUserTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists($this->table);
     }
 }

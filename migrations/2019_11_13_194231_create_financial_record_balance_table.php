@@ -13,14 +13,16 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateUserVipTable extends Migration
+class CreateFinancialRecordBalanceTable extends Migration
 {
+    protected $table = 'financial_record_balance';
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('user_vip', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->timestamps();
         });
@@ -31,6 +33,6 @@ class CreateUserVipTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_vip');
+        Schema::dropIfExists($this->table);
     }
 }
