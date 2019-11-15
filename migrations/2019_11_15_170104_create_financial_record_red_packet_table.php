@@ -1,21 +1,12 @@
 <?php
 
-declare(strict_types=1);
-/**
- * Multi-user mall
- *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
- * @contact  8257796@qq.com
- */
-
-use Hyperf\Database\Migrations\Migration;
-use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Migrations\Migration;
 
-class CreateFinancialRecordBalanceTable extends Migration
+class CreateFinancialRecordRedPacketTable extends Migration
 {
-    protected $table = 'financial_record_balance';
+    protected $table = 'financial_record_red_packet';
 
     /**
      * Run the migrations.
@@ -25,8 +16,8 @@ class CreateFinancialRecordBalanceTable extends Migration
         Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
-            $table->string('type', 30)->comment('类型 recharged:充值 consumed:消费');
-            $table->decimal('fee', 9, 2)->default(0);
+            $table->string('type', 30)->comment('类型 system_presented:系统赠送 consumed:消费');
+            $table->decimal('fee', 6, 2)->default(0);
             $table->string('remark', 255);
             $table->timestamps();
             $table->softDeletes();
@@ -37,7 +28,7 @@ class CreateFinancialRecordBalanceTable extends Migration
             $table->index(['created_at']);
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '财务流水记录-余额'");
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '财务流水记录-红包'");
     }
 
     /**

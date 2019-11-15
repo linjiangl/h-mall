@@ -26,7 +26,6 @@ class CreateUserTable extends Migration
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 1:正常, 2:禁用');
             $table->timestamp('last_login_at')->comment('最后登录时间');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->unique(['username']);
             $table->index(['mobile']);
