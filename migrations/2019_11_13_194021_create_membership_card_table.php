@@ -13,7 +13,7 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateUserMembershipCardTable extends Migration
+class CreateMembershipCardTable extends Migration
 {
     protected $table = 'membership_card';
 

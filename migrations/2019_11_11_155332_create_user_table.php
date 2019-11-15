@@ -24,6 +24,7 @@ class CreateUserTable extends Migration
             $table->string('password', 64)->comment('密码');
             $table->string('salt', 24)->default('')->comment('加密盐');
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 1:正常, 2:禁用');
+            $table->tinyInteger('role', false, true)->default(0)->comment('角色 0:普通用户 1:管理员');
             $table->timestamp('last_login_at')->comment('最后登录时间');
             $table->timestamps();
 
