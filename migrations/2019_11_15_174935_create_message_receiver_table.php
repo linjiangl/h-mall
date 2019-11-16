@@ -15,13 +15,14 @@ class CreateMessageReceiverTable extends Migration
     {
         Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->integer('message_id', false, true);
             $table->integer('user_id', false, true);
+            $table->integer('message_id', false, true);
             $table->tinyInteger('status', false, true)->default(2)->comment("状态 1:已读, 2:未读");
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['message_id', 'user_id']);
+            $table->unique(['user_id', 'message_id'], 'user_id_message_id');
+            $table->unique(['user_id', 'status'], 'user_id_status');
         });
     }
 

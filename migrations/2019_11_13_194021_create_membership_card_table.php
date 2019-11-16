@@ -23,22 +23,26 @@ class CreateMembershipCardTable extends Migration
     public function up(): void
     {
         Schema::create($this->table, function (Blueprint $table) {
-            $table->integer('user_id', false, true)->unique();
-            $table->string('serial_no', 20)->comment('会员卡号')->unique();
+            $table->integer('user_id', false, true);
+            $table->string('serial_no', 20)->comment('会员卡号');
             $table->tinyInteger('grade', false, true)->default(1)->comment('会员等级');
             $table->integer('total_exp', false, true)->default(0)->comment('总经验');
             $table->integer('current_exp', false, true)->default(0)->comment('当前经验');
-            $table->string('real_name', 20)->comment('真实姓名');
+            $table->string('real_name', 20)->default('')->comment('真实姓名');
             $table->string('mobile', 20)->comment('手机号码');
-            $table->string('id_card', 20)->comment('身份证号码');
-            $table->string('password', 32)->comment('会员卡密码');
+            $table->string('id_card', 20)->default('')->comment('身份证号码');
+            $table->string('password', 32)->default('')->comment('会员卡密码');
+            $table->tinyInteger('status', false, true)->default(2)->comment('状态 1:已激活 2:未激活');
             $table->timestamps();
 
-            $table->index(['grade']);
-            $table->index(['total_exp']);
-            $table->index(['real_name']);
-            $table->index(['mobile']);
-            $table->index(['id_card']);
+            $table->unique(['user_id'], 'user_id');
+            $table->unique(['serial_no'], 'serial_no');
+            $table->unique(['mobile'], 'mobile');
+            $table->index(['grade'], 'grade');
+            $table->index(['total_exp'], 'total_exp');
+            $table->index(['real_name'], 'real_name');
+            $table->index(['id_card'], 'id_card');
+            $table->index(['created_at', 'status'], 'created_at_status');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户会员卡'");

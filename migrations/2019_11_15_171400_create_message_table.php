@@ -25,10 +25,10 @@ class CreateMessageTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['to_id', 'status']);
-            $table->index(['to_id', 'type']);
-            $table->index(['to_id', 'created_at']);
-            $table->index(['created_at']);
+            $table->index(['to_id', 'status'], 'to_id_status');
+            $table->index(['to_id', 'type'], 'to_id_type');
+            $table->index(['to_id', 'created_at'], 'to_id_created_at');
+            $table->index(['created_at', 'status'], 'created_at_status');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '消息'");

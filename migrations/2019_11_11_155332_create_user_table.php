@@ -25,14 +25,15 @@ class CreateUserTable extends Migration
             $table->string('salt', 24)->default('')->comment('加密盐');
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 1:正常, 2:禁用');
             $table->tinyInteger('role', false, true)->default(0)->comment('角色 0:普通用户 1:管理员');
-            $table->timestamp('last_login_at')->comment('最后登录时间');
+            $table->timestamp('lasted_login_at')->comment('最后登录时间');
             $table->timestamps();
 
-            $table->unique(['username']);
-            $table->index(['mobile']);
-            $table->index(['email']);
-            $table->index(['nickname']);
-            $table->index(['created_at']);
+            $table->unique(['username'], 'username');
+            $table->index(['mobile'], 'mobile');
+            $table->index(['email'], 'email');
+            $table->index(['nickname'], 'nickname');
+            $table->index(['lasted_login_at'], 'lasted_login_at');
+            $table->index(['created_at', 'status'], 'created_at_status');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户'");
