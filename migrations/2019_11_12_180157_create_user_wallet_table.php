@@ -23,9 +23,9 @@ class CreateUserWalletTable extends Migration
             $table->decimal('freeze_red_packet', 10, 2)->default(0);
 
             $table->unique(['user_id'], 'user_id');
-            $table->unique(['integral'], 'integral');
-            $table->unique(['balance'], 'balance');
-            $table->unique(['red_packet'], 'red_packet');
+            $table->index(['integral'], 'integral');
+            $table->index(['balance'], 'balance');
+            $table->index(['red_packet'], 'red_packet');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户钱包'");
