@@ -53,7 +53,8 @@
         "overtrue/wechat": "^4.2",
         "yurunsoft/yurun-oauth-login": "^2.0",
         "yurunsoft/phpmailer-swoole": "^1.0",
-        "hyperf/snowflake": "^1.1"
+        "hyperf/snowflake": "^1.1",
+        "hyperf/validation": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
