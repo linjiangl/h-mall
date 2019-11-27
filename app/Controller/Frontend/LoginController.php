@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Frontend;
 
+use App\Exception\BadRequestException;
 use App\Model\Service\JwtService;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -35,7 +36,7 @@ class LoginController extends BaseController
             $jwtService = new JwtService();
             return $jwtService->check($token);
         } catch (\Exception $e) {
-            return '402';
+            throw new BadRequestException('验证失败');
         }
     }
 }
