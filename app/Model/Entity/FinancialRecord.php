@@ -1,23 +1,32 @@
 <?php
 
-declare (strict_types=1);
-namespace App\Model;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
+ */
+
+namespace App\Model\Entity;
 
 use Hyperf\DbConnection\Model\Model;
+
 /**
- * @property float $amount 
- * @property \Carbon\Carbon $created_at 
- * @property string $deleted_at 
- * @property int $id 
- * @property int $integral 
- * @property string $intro 
- * @property float $red_packet 
- * @property string $remark 
- * @property string $target 
- * @property int $target_id 
- * @property string $type 
- * @property \Carbon\Carbon $updated_at 
- * @property int $user_id 
+ * @property float $amount
+ * @property \Carbon\Carbon $created_at
+ * @property string $deleted_at
+ * @property int $id
+ * @property int $integral
+ * @property string $intro
+ * @property float $red_packet
+ * @property string $remark
+ * @property string $target
+ * @property int $target_id
+ * @property string $type
+ * @property \Carbon\Carbon $updated_at
+ * @property int $user_id
  */
 class FinancialRecord extends Model
 {
@@ -27,12 +36,14 @@ class FinancialRecord extends Model
      * @var string
      */
     protected $table = 'financial_record';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [];
+
     /**
      * The attributes that should be cast to native types.
      *

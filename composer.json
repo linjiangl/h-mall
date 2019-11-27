@@ -14,6 +14,9 @@
     "require": {
         "php": ">=7.2",
         "ext-swoole": ">=4.4",
+        "ext-json": "*",
+        "ext-bcmath": "*",
+        "ext-openssl": "*",
         "hyperf/cache": "~1.1.0",
         "hyperf/command": "~1.1.0",
         "hyperf/config": "~1.1.0",
@@ -54,7 +57,9 @@
         "yurunsoft/yurun-oauth-login": "^2.0",
         "yurunsoft/phpmailer-swoole": "^1.0",
         "hyperf/snowflake": "^1.1",
-        "hyperf/validation": "^1.1"
+        "hyperf/validation": "^1.1",
+        "gregwar/captcha": "^1.1",
+        "firebase/php-jwt": "^5.0"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

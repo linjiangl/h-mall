@@ -1,13 +1,22 @@
 <?php
 
-declare (strict_types=1);
-namespace App\Model\Message;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
+ */
+
+namespace App\Model\Entity\Message;
 
 use Hyperf\DbConnection\Model\Model;
+
 /**
- * @property string $content 
- * @property int $id 
- * @property string $title 
+ * @property string $content
+ * @property int $id
+ * @property string $title
  */
 class MessageText extends Model
 {
@@ -17,12 +26,14 @@ class MessageText extends Model
      * @var string
      */
     protected $table = 'message_text';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [];
+
     /**
      * The attributes that should be cast to native types.
      *
