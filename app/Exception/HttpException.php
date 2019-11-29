@@ -11,11 +11,12 @@ declare(strict_types=1);
 
 namespace App\Exception;
 
+use Hyperf\Server\Exception\ServerException;
 use Throwable;
 
-class BadRequestException extends HttpException
+class HttpException extends ServerException
 {
-    public function __construct($message = '错误的请求', $code = 400, Throwable $previous = null)
+    public function __construct($message = "", $code = 200, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

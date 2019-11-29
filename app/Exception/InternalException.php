@@ -11,12 +11,11 @@ declare(strict_types=1);
 
 namespace App\Exception;
 
-use Hyperf\Server\Exception\ServerException;
 use Throwable;
 
-class ApiException extends ServerException
+class InternalException extends HttpException
 {
-    public function __construct($message = "请求错误", $code = 400, Throwable $previous = null)
+    public function __construct($message = '验证失败', $code = 422, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

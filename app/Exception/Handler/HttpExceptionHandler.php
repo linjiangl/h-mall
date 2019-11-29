@@ -1,17 +1,17 @@
 <?php
 namespace App\Exception\Handler;
 
-use App\Exception\ApiException;
+use App\Exception\HttpException;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-class ApiExceptionHandler extends  ExceptionHandler
+class HttpExceptionHandler extends  ExceptionHandler
 {
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        if ($throwable instanceof ApiException) {
+        if ($throwable instanceof HttpException) {
             $data = json_encode([
                 'code' => $throwable->getCode(),
                 'message' => $throwable->getMessage(),
