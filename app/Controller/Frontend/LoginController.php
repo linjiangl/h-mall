@@ -41,6 +41,6 @@ class LoginController extends BaseController
     }
 
     public function g() {
-        return 'llll';
+        return 'sss';
     }
 }

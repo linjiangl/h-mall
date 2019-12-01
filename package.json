@@ -6,14 +6,11 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {
-    "nrm": "^1.2.1"
+  "scripts": {
+    "watch": "nodemon -w ./app -e php --exec 'php ./bin/hyperf.php start'"
   },
   "devDependencies": {
     "nodemon": "^2.0.1"
-  },
-  "scripts": {
-    "watch": "nodemon --exec 'php ./bin/hyperf.php start'"
   },
   "repository": {
     "type": "git",
