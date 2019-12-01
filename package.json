@@ -1,0 +1,28 @@
+{
+  "name": "membership_card",
+  "version": "1.0.0",
+  "description": "会员卡服务",
+  "main": "",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "nrm": "^1.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  },
+  "scripts": {
+    "watch": "nodemon --exec 'php ./bin/hyperf.php start'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linjiangl/general_membership_card.git"
+  },
+  "author": "linjiangl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linjiangl/general_membership_card/issues"
+  },
+  "homepage": "https://github.com/linjiangl/general_membership_card#readme"
+}

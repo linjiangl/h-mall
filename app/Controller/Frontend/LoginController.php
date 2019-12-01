@@ -39,4 +39,8 @@ class LoginController extends BaseController
             throw new BadRequestException('验证失败');
         }
     }
+
+    public function g() {
+        return 'llll';
+    }
 }
