@@ -20,7 +20,7 @@ const ENTRY_POINT_FILE = './bin/hyperf.php';
 # PID File Path PID文件路径
 const PID_FILE_PATH = './runtime/hyperf.pid';
 # Scan Interval 扫描间隔（毫秒，默认2000）
-const SCAN_INTERVAL = 2000;
+const SCAN_INTERVAL = 5000;
 if (!function_exists('exec')) {
     echo "[x] 请取消禁用exec函数" . PHP_EOL;
     exit(1);
