@@ -10,22 +10,9 @@ declare(strict_types=1);
  */
 
 return [
-    'frontend' => [
-        'key' => 'kvRHkeRCl12vlNDFu3oQtHIJhJbQLAiu',
-        'issuer' => 'frontend',
-        'audience' => 'frontend',
-        'subject' => 'frontend',
-        'id' => 'frontend',
-        'expire' => 864000,
-        'header' => 'Access-Token',
-    ],
-    'backend' => [
-        'key' => 'eatE9gNotDuKACbm2oaXoDQzR6PGDrJlVq',
-        'issuer' => 'backend',
-        'audience' => 'backend',
-        'subject' => 'backend',
-        'id' => 'backend',
-        'expire' => 86400,
-        'header' => 'Access-Token',
-    ],
+	'key' => 'U4SG5mUYHwoRbfN48DmzQteGV99k3u5GRmI6Qs8lkJjPVLaGBvGHqZvlkS6oYUgok4ivCMUo9xW5AAdDPCbtLlEgvmfUY9aXNwj8W92yRqmLgSD64UH34kZQbc/q3EeFH95Ne7LG4xOv6afk3ohqOQMtMUPmS8dXjpevEtNolkk=',
+	'issuer' => 'www.doubi.site',
+	'audience' => 'www.doubi.site',
+	'expire' => 864000,
+	'header' => 'Access-Token',
 ];

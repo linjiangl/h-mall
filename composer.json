@@ -59,7 +59,8 @@
         "hyperf/snowflake": "^1.1",
         "hyperf/validation": "^1.1",
         "gregwar/captcha": "^1.1",
-        "firebase/php-jwt": "^5.0"
+        "firebase/php-jwt": "^5.0",
+        "hyperf/session": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
