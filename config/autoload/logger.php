@@ -10,22 +10,52 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
+//return [
+//    'default' => [
+//        'handler' => [
+//            'class' => Monolog\Handler\StreamHandler::class,
+//            'constructor' => [
+//                'stream' => BASE_PATH . '/runtime/logs/hyperf.log',
+//                'level' => Monolog\Logger::DEBUG,
+//            ],
+//        ],
+//        'formatter' => [
+//            'class' => Monolog\Formatter\LineFormatter::class,
+//            'constructor' => [
+//                'format' => null,
+//                'dateFormat' => null,
+//                'allowInlineLineBreaks' => true,
+//            ],
+//        ],
+//    ],
+//];
+
+$appEnv = env('APP_ENV', 'dev');
+if ($appEnv == 'dev') {
+	$formatter = [
+		'class' => \Monolog\Formatter\LineFormatter::class,
+		'constructor' => [
+			'format' => "||%datetime%||%channel%||%level_name%||%message%||%context%||%extra%\n",
+			'allowInlineLineBreaks' => true,
+			'includeStacktraces' => true,
+		],
+	];
+} else {
+	$formatter = [
+		'class' => \Monolog\Formatter\JsonFormatter::class,
+		'constructor' => [],
+	];
+}
+
 return [
-    'default' => [
-        'handler' => [
-            'class' => Monolog\Handler\StreamHandler::class,
-            'constructor' => [
-                'stream' => BASE_PATH . '/runtime/logs/hyperf.log',
-                'level' => Monolog\Logger::DEBUG,
-            ],
-        ],
-        'formatter' => [
-            'class' => Monolog\Formatter\LineFormatter::class,
-            'constructor' => [
-                'format' => null,
-                'dateFormat' => null,
-                'allowInlineLineBreaks' => true,
-            ],
-        ],
-    ],
+	'default' => [
+		'handler' => [
+			'class' => \Monolog\Handler\StreamHandler::class,
+			'constructor' => [
+				'stream' => BASE_PATH . '/runtime/logs/hyperf.log',
+				'level' => \Monolog\Logger::ERROR,
+			],
+		],
+		'formatter' => $formatter,
+	],
 ];

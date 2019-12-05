@@ -84,7 +84,9 @@
         "psr-4": {
             "App\\": "app/"
         },
-        "files": []
+		"files": [
+			"app/Utils/Functions.php"
+		]
     },
     "autoload-dev": {
         "psr-4": {
