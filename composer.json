@@ -85,7 +85,7 @@
             "App\\": "app/"
         },
 		"files": [
-			"app/Utils/Functions.php"
+			"app/Helper/Functions.php"
 		]
     },
     "autoload-dev": {

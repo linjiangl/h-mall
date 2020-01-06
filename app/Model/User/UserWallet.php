@@ -9,27 +9,29 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-namespace App\Model\Entity\Message;
+namespace App\Model\User;
 
 use Hyperf\DbConnection\Model\Model;
 
 /**
- * @property \Carbon\Carbon $created_at
- * @property string $deleted_at
- * @property int $id
- * @property int $message_id
- * @property int $status
- * @property \Carbon\Carbon $updated_at
+ * @property float $balance
+ * @property float $freeze_balance
+ * @property int $freeze_integral
+ * @property float $freeze_red_packet
+ * @property int $integral
+ * @property float $red_packet
  * @property int $user_id
  */
-class MessageReceiver extends Model
+class UserWallet extends Model
 {
+    public $timestamps = false;
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'message_receiver';
+    protected $table = 'user_wallet';
 
     /**
      * The attributes that are mass assignable.
@@ -43,5 +45,5 @@ class MessageReceiver extends Model
      *
      * @var array
      */
-    protected $casts = ['created_at' => 'datetime', 'id' => 'int', 'message_id' => 'integer', 'status' => 'integer', 'updated_at' => 'datetime', 'user_id' => 'integer'];
+    protected $casts = ['balance' => 'float', 'freeze_balance' => 'float', 'freeze_integral' => 'integer', 'freeze_red_packet' => 'float', 'integral' => 'integer', 'red_packet' => 'float', 'user_id' => 'integer'];
 }

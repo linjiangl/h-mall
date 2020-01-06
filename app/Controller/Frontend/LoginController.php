@@ -11,11 +11,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Frontend;
 
-use App\Exception\BadRequestException;
 use App\Exception\HttpException;
-use App\Model\Service\CacheService;
-use App\Model\Service\JwtService;
-use Hyperf\Di\Annotation\Inject;
+use App\Utils\CacheUtils;
+use App\Utils\JwtUtils;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
@@ -26,20 +24,19 @@ use Hyperf\HttpServer\Contract\ResponseInterface;
 class LoginController extends BaseController
 {
 
-
     public function index(RequestInterface $request, ResponseInterface $response)
     {
-    	CacheService::set('aa', '111');
+    	CacheUtils::set('aa', '111');
 
-    	return CacheService::get('aa');
+    	return CacheUtils::get('aa');
 	}
 
     public function show(RequestInterface $request)
     {
         try {
             $token = $request->query('token');
-            $jwtService = new JwtService();
-            return $jwtService->checkToken($token);
+            $jwtUtils = new JwtUtils();
+            return $jwtUtils->checkToken($token);
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

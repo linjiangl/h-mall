@@ -9,33 +9,32 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-namespace App\Model\Entity;
+namespace App\Model\User;
 
 use Hyperf\DbConnection\Model\Model;
 
 /**
- * @property float $amount
  * @property \Carbon\Carbon $created_at
- * @property string $deleted_at
- * @property int $id
- * @property int $integral
- * @property string $intro
- * @property float $red_packet
- * @property string $remark
- * @property string $target
- * @property int $target_id
- * @property string $type
+ * @property int $current_exp
+ * @property int $grade
+ * @property string $id_card
+ * @property string $mobile
+ * @property string $password
+ * @property string $real_name
+ * @property string $serial_no
+ * @property int $status
+ * @property int $total_exp
  * @property \Carbon\Carbon $updated_at
  * @property int $user_id
  */
-class FinancialRecord extends Model
+class MembershipCard extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'financial_record';
+    protected $table = 'membership_card';
 
     /**
      * The attributes that are mass assignable.
@@ -49,5 +48,5 @@ class FinancialRecord extends Model
      *
      * @var array
      */
-    protected $casts = ['amount' => 'float', 'created_at' => 'datetime', 'id' => 'int', 'integral' => 'integer', 'red_packet' => 'float', 'target_id' => 'integer', 'updated_at' => 'datetime', 'user_id' => 'integer'];
+    protected $casts = ['created_at' => 'datetime', 'current_exp' => 'integer', 'grade' => 'integer', 'status' => 'integer', 'total_exp' => 'integer', 'updated_at' => 'datetime', 'user_id' => 'integer'];
 }

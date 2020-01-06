@@ -9,14 +9,12 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-namespace App\Model\Service;
+namespace App\Utils;
 
 use App\Exception\BadRequestException;
 use Firebase\JWT\JWT;
-use Hyperf\Di\Annotation\Inject;
 
-
-class JwtService
+class JwtUtils
 {
     public $expire;
 

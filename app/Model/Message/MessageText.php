@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-namespace App\Model\Entity\Message;
+namespace App\Model\Message;
 
 use Hyperf\DbConnection\Model\Model;
 

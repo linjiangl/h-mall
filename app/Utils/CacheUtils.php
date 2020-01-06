@@ -9,12 +9,12 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-namespace App\Model\Service;
+namespace App\Utils;
 
 use App\Exception\CacheErrorException;
 use Psr\SimpleCache\InvalidArgumentException;
 
-class CacheService
+class CacheUtils
 {
     public static function get($key, $default = null)
     {

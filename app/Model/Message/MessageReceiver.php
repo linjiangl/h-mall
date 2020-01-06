@@ -9,32 +9,27 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-namespace App\Model\Entity\User;
+namespace App\Model\Message;
 
 use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property \Carbon\Carbon $created_at
- * @property int $current_exp
- * @property int $grade
- * @property string $id_card
- * @property string $mobile
- * @property string $password
- * @property string $real_name
- * @property string $serial_no
+ * @property string $deleted_at
+ * @property int $id
+ * @property int $message_id
  * @property int $status
- * @property int $total_exp
  * @property \Carbon\Carbon $updated_at
  * @property int $user_id
  */
-class MembershipCard extends Model
+class MessageReceiver extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'membership_card';
+    protected $table = 'message_receiver';
 
     /**
      * The attributes that are mass assignable.
@@ -48,5 +43,5 @@ class MembershipCard extends Model
      *
      * @var array
      */
-    protected $casts = ['created_at' => 'datetime', 'current_exp' => 'integer', 'grade' => 'integer', 'status' => 'integer', 'total_exp' => 'integer', 'updated_at' => 'datetime', 'user_id' => 'integer'];
+    protected $casts = ['created_at' => 'datetime', 'id' => 'int', 'message_id' => 'integer', 'status' => 'integer', 'updated_at' => 'datetime', 'user_id' => 'integer'];
 }
