@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Carbon\Carbon;
 use Hyperf\Snowflake\IdGenerator;
 use Hyperf\Di\Annotation\Inject;
 
@@ -31,7 +32,8 @@ class IndexController extends AbstractController
         return [
             'method' => $method,
             'message' => "Hello {$user}.",
-            'id' => $this->idGenerator->generate()
+            'id' => $this->idGenerator->generate(),
+			'now' => Carbon::now()->toDateTimeString(),
         ];
     }
 }
