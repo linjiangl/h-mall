@@ -40,7 +40,7 @@ use Swoole\Event;
 swoole_async_set(['enable_coroutine' => false]);
 $hashes = [];
 $serve = null;
-echo "🚀 Start @ " . date('Y-m-d H:i:s') . PHP_EOL;
+echo "Start @ " . date('Y-m-d H:i:s') . PHP_EOL;
 start();
 state();
 Timer::tick(SCAN_INTERVAL, 'watch');
@@ -86,12 +86,12 @@ function state()
     $files = php_files(WATCH_DIR);
     $hashes = array_combine($files, array_map('file_hash', $files));
     $count = count($hashes);
-    echo "📡 Watching $count files..." . PHP_EOL;
+    echo "Watching $count files..." . PHP_EOL;
 }
 function change()
 {
     global $serve;
-    echo "🔄 Restart @ " . date('Y-m-d H:i:s') . PHP_EOL;
+    echo "Restart @ " . date('Y-m-d H:i:s') . PHP_EOL;
     Process::kill($serve->pid);
     start();
 }
