@@ -25,8 +25,7 @@ class CreateMessageTable extends Migration
             $table->timestamps();
 
             $table->index(['sender_id'], 'sender_id');
-            $table->index(['receiver_id'], 'receiver_id');
-            $table->index(['type', 'status', 'receiver_id'], 'type_status_receiver_id');
+            $table->index(['receiver_id', 'type', 'status'], 'receiver_id_type_status');
             $table->index(['created_at'], 'created_at');
         });
 

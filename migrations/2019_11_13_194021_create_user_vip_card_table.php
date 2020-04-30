@@ -13,9 +13,9 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateMembershipCardTable extends Migration
+class CreateUserVipCardTable extends Migration
 {
-    protected $table = 'membership_card';
+    protected $table = 'user_vip_card';
 
     /**
      * Run the migrations.

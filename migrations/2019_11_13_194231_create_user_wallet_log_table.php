@@ -13,9 +13,9 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateFinancialRecordTable extends Migration
+class CreateUserWalletLogTable extends Migration
 {
-    protected $table = 'financial_record';
+    protected $table = 'user_wallet_log';
 
     /**
      * Run the migrations.
@@ -30,19 +30,14 @@ class CreateFinancialRecordTable extends Migration
             $table->integer('integral')->default(0)->comment('积分');
             $table->decimal('red_packet', 5, 2)->default(0)->comment('红包');
             $table->string('intro', 100)->default('')->comment('简介');
-            $table->string('target', 30)->default('');
-            $table->integer('target_id', false, true)->default(0);
+            $table->string('module', 30)->default('')->comment('模块 order:订单');
+            $table->integer('module_id', false, true)->default(0);
             $table->string('remark', 255)->default('');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['user_id'], 'user_id');
             $table->index(['user_id', 'type'], 'user_id_type');
-            $table->index(['user_id', 'amount'], 'user_id_amount');
-            $table->index(['user_id', 'integral'], 'user_id_integral');
-            $table->index(['user_id', 'red_packet'], 'user_id_red_packet');
-            $table->index(['user_id', 'created_at'], 'user_id_created_at');
-            $table->index(['created_at', 'type'], 'created_at_type');
+            $table->index(['created_at'], 'created_at');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '财务流水记录-余额'");

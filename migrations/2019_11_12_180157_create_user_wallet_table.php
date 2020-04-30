@@ -15,18 +15,16 @@ class CreateUserWalletTable extends Migration
     {
         Schema::create($this->table, function (Blueprint $table) {
             $table->integer('user_id', false, true);
-            $table->integer('integral', false, true)->default(0);
-            $table->decimal('balance', 10, 2)->default(0);
-            $table->decimal('red_packet', 7, 2)->default(0);
-            $table->integer('freeze_integral', false, true)->default(0);
-            $table->decimal('freeze_balance', 10, 2)->default(0);
-            $table->decimal('freeze_red_packet', 10, 2)->default(0);
+            $table->integer('integral', false, true)->default(0)->comment('积分');
+            $table->decimal('balance', 10, 2)->default(0)->comment('余额');
+            $table->integer('freeze_integral', false, true)->default(0)->comment('冻结的积分');
+            $table->decimal('freeze_balance', 10, 2)->default(0)->comment('冻结的余额');
 
             $table->unique(['user_id'], 'user_id');
             $table->index(['integral'], 'integral');
             $table->index(['balance'], 'balance');
-            $table->index(['red_packet'], 'red_packet');
         });
+
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户钱包'");
     }
