@@ -17,11 +17,11 @@ class CreateMessageReceiverTable extends Migration
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->integer('message_id', false, true);
-            $table->tinyInteger('status', false, true)->default(2)->comment("状态 1:已读, 2:未读");
+            $table->tinyInteger('status', false, true)->default(2)->comment("状态 0:删除, 1:已读, 2:未读");
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['user_id', 'message_id'], 'user_id_message_id');
+            $table->unique(['message_id'], 'message_id');
             $table->unique(['user_id', 'status'], 'user_id_status');
         });
     }

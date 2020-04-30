@@ -29,7 +29,7 @@ class CreateFinancialRecordTable extends Migration
             $table->decimal('amount', 9, 2)->default(0)->comment('金额');
             $table->integer('integral')->default(0)->comment('积分');
             $table->decimal('red_packet', 5, 2)->default(0)->comment('红包');
-            $table->string('intro', 100)->comment('');
+            $table->string('intro', 100)->default('')->comment('简介');
             $table->string('target', 30)->default('');
             $table->integer('target_id', false, true)->default(0);
             $table->string('remark', 255)->default('');
