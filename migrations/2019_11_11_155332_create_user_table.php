@@ -35,8 +35,6 @@ class CreateUserTable extends Migration
             $table->index(['lasted_login_at'], 'lasted_login_at');
             $table->index(['created_at'], 'created_at');
         });
-
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户'");
     }
 
     /**

@@ -45,7 +45,7 @@ class CreateUserVipCardTable extends Migration
             $table->index(['created_at', 'status'], 'created_at_status');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户会员卡'");
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-会员卡'");
     }
 
     /**
