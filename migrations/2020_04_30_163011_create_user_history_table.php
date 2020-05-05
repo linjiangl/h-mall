@@ -6,12 +6,14 @@ use Hyperf\Database\Migrations\Migration;
 
 class CreateUserHistoryTable extends Migration
 {
+	protected $table = 'user_history';
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('user_history', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
 			$table->integerIncrements('id');
 			$table->integer('user_id', false, true);
 			$table->integer('product_id', false, true);
@@ -28,6 +30,6 @@ class CreateUserHistoryTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_history');
+        Schema::dropIfExists($this->table);
     }
 }

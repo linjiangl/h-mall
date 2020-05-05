@@ -26,6 +26,11 @@ class CreateOrderInvoiceTable extends Migration
 			$table->string('refused_reason', 255)->default('')->comment('拒绝理由');
 			$table->text('invoice')->comment('发票内容');
 			$table->timestamps();
+
+			$table->index(['shop_id'], 'shop_id');
+			$table->index(['user_id'], 'user_id');
+			$table->index(['order_id'], 'order_id');
+			$table->index(['order_sn'], 'order_sn');
         });
     }
 

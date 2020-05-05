@@ -27,6 +27,11 @@ class CreateOrderProductTable extends Migration
 			$table->string('refund_type', 30)->default('');
 			$table->string('remark', 255)->default('')->comment('备注');
 			$table->timestamps();
+
+			$table->index(['order_id'], 'order_id');
+			$table->index(['product_id'], 'product_id');
+			$table->index(['product_sku_id'], 'product_sku_id');
+			$table->index(['product_name'], 'product_name');
         });
     }
 

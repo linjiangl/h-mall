@@ -13,7 +13,6 @@ class CreateShopTable extends Migration
     {
         Schema::create('shop', function (Blueprint $table) {
 			$table->integerIncrements('id');
-			$table->integer('shop_id', false, true);
 			$table->integer('user_id', false, true);
 			$table->integer('text_id', false, true);
 			$table->string('name', 50)->comment('店铺名称');
@@ -22,7 +21,6 @@ class CreateShopTable extends Migration
 			$table->tinyInteger('status', false, true)->default(0)->comment('状态 0:待审核, 1:已通过, 2:未通过, 3:已关闭');
 			$table->timestamps();
 
-			$table->index(['shop_id'], 'shop_id');
 			$table->index(['user_id'], 'user_id');
         });
     }

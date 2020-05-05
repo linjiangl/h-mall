@@ -6,12 +6,13 @@ use Hyperf\Database\Migrations\Migration;
 
 class CreateUserFavoriteTable extends Migration
 {
+	protected $table = 'user_favorite';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('user_favorite', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
 			$table->integerIncrements('id');
 			$table->integer('user_id', false, true);
 			$table->string('module', 30)->comment('模块 product:商品, shop:店铺');
@@ -30,6 +31,6 @@ class CreateUserFavoriteTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_favorite');
+        Schema::dropIfExists($this->table);
     }
 }

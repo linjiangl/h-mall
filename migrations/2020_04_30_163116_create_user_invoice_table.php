@@ -6,12 +6,13 @@ use Hyperf\Database\Migrations\Migration;
 
 class CreateUserInvoiceTable extends Migration
 {
+	protected $table = 'user_invoice';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('user_invoice', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
 			$table->integerIncrements('id');
 			$table->integer('user_id', false, true);
 			$table->tinyInteger('open_type', false, true)->default(1)->comment('开具类型 0:个人 1:企业');
@@ -38,6 +39,6 @@ class CreateUserInvoiceTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_invoice');
+        Schema::dropIfExists($this->table);
     }
 }

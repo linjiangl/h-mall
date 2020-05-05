@@ -13,7 +13,7 @@ class CreateOrderExpressTable extends Migration
     {
         Schema::create('order_express', function (Blueprint $table) {
 			$table->integerIncrements('id');
-			$table->integer('order_id', false, true);
+			$table->integer('order_id', false, true)->default(0);
 			$table->integer('refund_id', false, true)->default(0);
 			$table->integer('express_id', false, true);
 			$table->string('express_name', 20)->comment('快递名称');
@@ -22,6 +22,10 @@ class CreateOrderExpressTable extends Migration
 			$table->integer('text_id')->default(0);
 			$table->string('remark', 255)->default('');
 			$table->timestamps();
+
+			$table->index(['order_id'], 'order_id');
+			$table->index(['refund_id'], 'refund_id');
+			$table->index(['express_id'], 'express_id');
         });
     }
 

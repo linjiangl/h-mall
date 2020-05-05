@@ -15,12 +15,13 @@ class CreateOrderTable extends Migration
 			$table->integerIncrements('id');
 			$table->integer('shop_id', false, true);
 			$table->integer('buyer_id', false, true);
-			$table->string('order_sn', 32)->comment('订单号');
+			$table->string('order_sn', 64)->comment('订单号');
+			$table->string('payment_method', 30)->default('')->comment('支付类型');
+			$table->string('payment_no', 64)->default('')->comment('第三方支付流水号');
 			$table->decimal('product_amount', 10, 2)->unsigned()->default(0)->comment('商品总金额');
 			$table->decimal('total_amount', 10, 2)->unsigned()->default(0)->comment('订单总金额');
 			$table->decimal('express_amount', 6, 2)->unsigned()->default(0)->comment('运费');
 			$table->decimal('discount_amount', 7, 2)->unsigned()->default(0)->comment('折扣金额');
-			$table->tinyInteger('status', false, true)->comment('订单状态');
 			$table->string('consignee', 50)->comment('收件人');
 			$table->string('mobile', 20)->comment('手机号');
 			$table->string('province', 20)->comment('省');
@@ -29,22 +30,28 @@ class CreateOrderTable extends Migration
 			$table->string('street', 50)->default('')->comment('街道');
 			$table->string('address', 150)->comment('收货地址');
 			$table->string('zip_code', 20)->default('')->comment('邮政编码');
-			$table->string('payment_method', 30)->default('')->comment('支付类型');
-			$table->string('payment_no', 64)->default('')->comment('第三方支付流水号');
+			$table->tinyInteger('is_dispatched', false, true)->default(0)->comment('是否需要发货');
+			$table->tinyInteger('is_comment', false, true)->default(0)->comment('是否评论');
+			$table->tinyInteger('is_additional', false, true)->default(0)->comment('是否追加评论');
+			$table->tinyInteger('is_credited', false, true)->default(0)->comment('是否入账');
 			$table->timestamp('payment_at')->nullable()->comment('支付时间');
 			$table->timestamp('dispatched_at')->nullable()->comment('发货时间');
 			$table->timestamp('confirmed_at')->nullable()->comment('确认时间');
 			$table->timestamp('canceled_at')->nullable()->comment('取消时间');
 			$table->timestamp('comment_at')->nullable()->comment('评论时间');
 			$table->timestamp('additional_comment_at')->nullable()->comment('追加评论时间');
-			$table->tinyInteger('is_dispatched', false, true)->default(0)->comment('是否需要发货');
-			$table->tinyInteger('is_comment', false, true)->default(0)->comment('是否评论');
-			$table->tinyInteger('is_additional', false, true)->default(0)->comment('是否追加评论');
-			$table->tinyInteger('is_credited', false, true)->default(0)->comment('是否入账');
-			$table->string('refund_type', 30)->default('');
+			$table->tinyInteger('status', false, true)->comment('订单状态');
 			$table->string('buyer_message', 255)->default('')->comment('买家留言');
 			$table->string('seller_message', 255)->default('')->comment('买家留言');
+			$table->string('refund_type', 30)->default('');
 			$table->timestamps();
+
+			$table->unique(['order_sn'], 'order_sn');
+			$table->index(['shop_id'], 'shop_id');
+			$table->index(['buyer_id'], 'buyer_id');
+			$table->index(['mobile'], 'mobile');
+			$table->index(['status'], 'status');
+			$table->index(['created_at'], 'created_at');
         });
     }
 
