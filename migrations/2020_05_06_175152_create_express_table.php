@@ -11,7 +11,7 @@ class CreateExpressTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('system_express', function (Blueprint $table) {
+        Schema::create('express', function (Blueprint $table) {
 			$table->smallIncrements('id');
 			$table->string('name', 50)->comment('公司名称');
 			$table->string('code', 50)->comment('公司编码');
@@ -25,6 +25,6 @@ class CreateExpressTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_express');
+        Schema::dropIfExists('express');
     }
 }

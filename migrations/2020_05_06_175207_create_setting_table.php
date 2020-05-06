@@ -11,7 +11,7 @@ class CreateSettingTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('system_setting', function (Blueprint $table) {
+        Schema::create('setting', function (Blueprint $table) {
 			$table->string('key', 50);
 			$table->mediumText('value');
 			$table->timestamps();
@@ -23,6 +23,6 @@ class CreateSettingTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_setting');
+        Schema::dropIfExists('setting');
     }
 }

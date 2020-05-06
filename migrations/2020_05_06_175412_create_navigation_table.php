@@ -11,7 +11,7 @@ class CreateNavigationTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('system_navigation', function (Blueprint $table) {
+        Schema::create('navigation', function (Blueprint $table) {
 			$table->integerIncrements('id');
 			$table->string('title', 50);
 			$table->string('url', 255)->default('');
@@ -26,6 +26,6 @@ class CreateNavigationTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_navigation');
+        Schema::dropIfExists('navigation');
     }
 }

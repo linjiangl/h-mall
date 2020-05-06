@@ -11,7 +11,7 @@ class CreateSlideTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('system_slide', function (Blueprint $table) {
+        Schema::create('slide', function (Blueprint $table) {
 			$table->integerIncrements('id');
 			$table->integer('shop_id', false, true);
 			$table->string('title', 50);
@@ -27,6 +27,6 @@ class CreateSlideTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_slide');
+        Schema::dropIfExists('slide');
     }
 }
