@@ -26,6 +26,7 @@ class CreateOrderExpressTable extends Migration
 			$table->index(['order_id'], 'order_id');
 			$table->index(['refund_id'], 'refund_id');
 			$table->index(['express_id'], 'express_id');
+			$table->index(['express_no'], 'express_no');
         });
     }
 

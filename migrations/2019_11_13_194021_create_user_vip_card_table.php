@@ -40,9 +40,8 @@ class CreateUserVipCardTable extends Migration
             $table->unique(['mobile'], 'mobile');
             $table->index(['grade'], 'grade');
             $table->index(['total_exp'], 'total_exp');
-            $table->index(['real_name'], 'real_name');
             $table->index(['id_card'], 'id_card');
-            $table->index(['created_at', 'status'], 'created_at_status');
+            $table->index(['created_at'], 'created_at');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-会员卡'");

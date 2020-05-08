@@ -19,6 +19,8 @@ class CreateSlideTable extends Migration
 			$table->string('url', 255)->default('');
 			$table->smallInteger('position')->default(0)->comment('排序 倒叙');
 			$table->timestamps();
+
+			$table->index(['shop_id'], 'shop_id');
         });
     }
 

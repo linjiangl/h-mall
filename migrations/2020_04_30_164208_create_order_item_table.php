@@ -4,14 +4,14 @@ use Hyperf\Database\Schema\Schema;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Migrations\Migration;
 
-class CreateOrderProductTable extends Migration
+class CreateOrderItemTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_item', function (Blueprint $table) {
 			$table->integerIncrements('id');
 			$table->integer('order_id', false, true);
 			$table->integer('product_id', false, true);
@@ -28,9 +28,8 @@ class CreateOrderProductTable extends Migration
 			$table->string('remark', 255)->default('')->comment('备注');
 			$table->timestamps();
 
-			$table->index(['order_id'], 'order_id');
+			$table->unique(['order_id', 'product_sku_id'], 'order_id_product_sku_id');
 			$table->index(['product_id'], 'product_id');
-			$table->index(['product_sku_id'], 'product_sku_id');
 			$table->index(['product_name'], 'product_name');
         });
     }
@@ -40,6 +39,6 @@ class CreateOrderProductTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_product');
+        Schema::dropIfExists('order_item');
     }
 }

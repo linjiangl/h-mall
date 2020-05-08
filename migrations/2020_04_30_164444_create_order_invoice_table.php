@@ -28,7 +28,7 @@ class CreateOrderInvoiceTable extends Migration
 			$table->timestamps();
 
 			$table->index(['shop_id'], 'shop_id');
-			$table->index(['user_id'], 'user_id');
+			$table->index(['user_id', 'status'], 'user_id_status');
 			$table->index(['order_id'], 'order_id');
 			$table->index(['order_sn'], 'order_sn');
         });

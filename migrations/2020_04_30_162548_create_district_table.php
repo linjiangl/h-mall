@@ -13,9 +13,12 @@ class CreateDistrictTable extends Migration
     {
         Schema::create('district', function (Blueprint $table) {
 			$table->integerIncrements('id');
-			$table->string('name', 50);
 			$table->integer('parent_id', false, true)->default(0);
+			$table->string('name', 50);
 			$table->timestamps();
+
+			$table->index(['parent_id'], 'parent_id');
+			$table->index(['name'], 'name');
         });
     }
 

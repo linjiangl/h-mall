@@ -16,6 +16,8 @@ class CreateProductOptionTable extends Migration
 			$table->integer('product_id', false, true);
 			$table->integer('option_id', false, true);
 			$table->timestamps();
+
+			$table->unique(['product_id', 'option_id'], 'product_id_option_id');
         });
     }
 

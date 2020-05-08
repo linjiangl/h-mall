@@ -17,6 +17,8 @@ class CreateOptionValueTable extends Migration
 			$table->string('value', 100);
 			$table->tinyInteger('position', false, true)->default(0);
 			$table->timestamps();
+
+			$table->index(['option_id'], 'option_id');
         });
     }
 

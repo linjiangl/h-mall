@@ -28,8 +28,7 @@ class CreateUserWalletLogTable extends Migration
             $table->string('type', 30)->comment('类型 recharged:充值 consumed:消费');
             $table->decimal('amount', 9, 2)->default(0)->comment('金额');
             $table->integer('integral')->default(0)->comment('积分');
-            $table->decimal('red_packet', 5, 2)->default(0)->comment('红包');
-            $table->string('intro', 100)->default('')->comment('简介');
+            $table->string('description', 100)->default('')->comment('描述');
             $table->string('module', 30)->default('')->comment('模块 order:订单');
             $table->integer('module_id', false, true)->default(0);
             $table->string('remark', 255)->default('');

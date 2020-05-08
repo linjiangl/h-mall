@@ -20,6 +20,8 @@ class CreateRefundActionTable extends Migration
 			$table->tinyInteger('refund_status', false, true)->comment('退款状态');
 			$table->string('remark', 255)->default('');
 			$table->timestamps();
+
+			$table->index(['refund_id'], 'refund_id');
         });
     }
 

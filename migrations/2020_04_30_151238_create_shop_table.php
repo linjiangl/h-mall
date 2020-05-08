@@ -21,7 +21,9 @@ class CreateShopTable extends Migration
 			$table->tinyInteger('status', false, true)->default(0)->comment('状态 0:待审核, 1:已通过, 2:未通过, 3:已关闭');
 			$table->timestamps();
 
-			$table->index(['user_id'], 'user_id');
+			$table->unique(['user_id'], 'user_id');
+			$table->index(['status'], 'status');
+			$table->index(['created_at'], 'created_at');
         });
     }
 

@@ -47,9 +47,11 @@ class CreateOrderTable extends Migration
 			$table->timestamps();
 
 			$table->unique(['order_sn'], 'order_sn');
-			$table->index(['shop_id'], 'shop_id');
-			$table->index(['buyer_id'], 'buyer_id');
 			$table->index(['mobile'], 'mobile');
+			$table->index(['payment_no'], 'payment_no');
+			$table->index(['shop_id', 'status'], 'shop_id_status');
+			$table->index(['buyer_id', 'status'], 'buyer_id_status');
+			$table->index(['total_amount', 'status'], 'total_amount_status');
 			$table->index(['status'], 'status');
 			$table->index(['created_at'], 'created_at');
         });

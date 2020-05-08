@@ -17,9 +17,9 @@ class CreateUserFavoriteTable extends Migration
 			$table->integer('user_id', false, true);
 			$table->string('module', 30)->comment('模块 product:商品, shop:店铺');
 			$table->integer('module_id', false, true);
-			$table->timestamp('created_at')->nullable();
+			$table->timestamps();
 
-			$table->index(['user_id', 'module'], 'user_id_module');
+			$table->unique(['user_id', 'module', 'module_id'], 'user_id_module_id');
         });
 
 		\Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-收藏'");

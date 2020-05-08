@@ -12,6 +12,7 @@ class CreateSettingTable extends Migration
     public function up(): void
     {
         Schema::create('setting', function (Blueprint $table) {
+			$table->integerIncrements('id');
 			$table->string('key', 50);
 			$table->mediumText('value');
 			$table->timestamps();

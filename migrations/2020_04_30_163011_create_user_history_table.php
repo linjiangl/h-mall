@@ -17,9 +17,9 @@ class CreateUserHistoryTable extends Migration
 			$table->integerIncrements('id');
 			$table->integer('user_id', false, true);
 			$table->integer('product_id', false, true);
-			$table->timestamp('created_at')->nullable();
+			$table->timestamps();
 
-			$table->index(['user_id'], 'user_id');
+			$table->unique(['user_id', 'product_id'], 'user_id_product_id');
         });
 
 		\Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-浏览记录'");

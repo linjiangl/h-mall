@@ -20,6 +20,8 @@ class CreateQqTable extends Migration
 			$table->string('remark', 255)->default('')->comment('备注');
 			$table->tinyInteger('status')->default(0)->comment('状态 0:关闭, 1:开启');
 			$table->timestamps();
+
+			$table->index(['shop_id'], 'shop_id');
         });
     }
 

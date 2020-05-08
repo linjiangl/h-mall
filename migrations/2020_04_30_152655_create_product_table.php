@@ -21,7 +21,7 @@ class CreateProductTable extends Migration
 			$table->integer('category_id', false, true);
 			$table->integer('text_id', false, true);
 			$table->string('title', 100)->comment('商品标题');
-			$table->string('intro', 255)->comment('简介');
+			$table->string('description', 255)->comment('描述');
 			$table->integer('sales', false, true)->default(0)->comment('销量');
 			$table->integer('clicks', false, true)->default(0)->comment('点击量');
 			$table->smallInteger('buy_limit', false, true)->default(0)->comment('单次购买上限 0:不限制');
@@ -34,9 +34,10 @@ class CreateProductTable extends Migration
 			$table->tinyInteger('status')->default(1)->comment('状态 0:删除, 1:正常, 2:下架');
 			$table->timestamps();
 
-			$table->index(['shop_id'], 'shop_id');
-			$table->index(['user_id'], 'user_id');
-			$table->index(['category_id'], 'category_id');
+			$table->index(['shop_id', 'status'], 'shop_id_status');
+			$table->index(['user_id', 'status'], 'user_id_status');
+			$table->index(['category_id', 'status'], 'category_id_status');
+			$table->index(['created_at', 'status'], 'created_at_status');
         });
     }
 

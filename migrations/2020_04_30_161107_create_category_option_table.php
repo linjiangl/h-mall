@@ -16,6 +16,8 @@ class CreateCategoryOptionTable extends Migration
 			$table->integer('category_id', false, true);
 			$table->integer('option_id', false, true);
 			$table->timestamps();
+
+			$table->unique(['category_id', 'option_id'], 'category_id_option_id');
         });
     }
 

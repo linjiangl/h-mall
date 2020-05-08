@@ -13,9 +13,10 @@ class CreateRefundTable extends Migration
     {
         Schema::create('refund', function (Blueprint $table) {
 			$table->integerIncrements('id');
-			$table->string('refund_sn', 32);
 			$table->integer('user_id', false, true);
+			$table->integer('shop_id', false, true);
 			$table->integer('order_id', false, true);
+			$table->string('refund_sn', 32);
 			$table->string('order_sn', 32);
 			$table->string('order_status', 30);
 			$table->string('service_type', 30)->comment('服务类型 money:仅退款, all:退货退款');
@@ -36,6 +37,14 @@ class CreateRefundTable extends Migration
 			$table->string('proofs', 1000)->default('')->comment('退款凭证');
 			$table->string('remark', 255)->default('');
 			$table->timestamps();
+
+			$table->unique(['refund_sn'], 'refund_sn');
+			$table->index(['user_id', 'status'], 'user_id_status');
+			$table->index(['shop_id', 'status'], 'shop_id_status');
+			$table->index(['order_id'], 'order_id');
+			$table->index(['order_sn'], 'order_sn');
+			$table->index(['status'], 'status');
+			$table->index(['created_at'], 'created_at');
         });
     }
 
