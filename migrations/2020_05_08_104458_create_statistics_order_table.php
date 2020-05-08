@@ -45,6 +45,8 @@ class CreateStatisticsOrderTable extends Migration
 			$table->integer('order_canceled_sku', false, true)->default(0)->comment('已取消商品属性件数');
 			$table->integer('order_finished_sku', false, true)->default(0)->comment('已完成商品属性件数');
 			$table->timestamps();
+
+			$table->unique(['date'], 'date');
         });
     }
 
