@@ -34,7 +34,7 @@ class CreateOrderCommentTable extends Migration
 			$table->unique(['order_item_id'], 'order_item_id');
 			$table->index(['order_id'], 'order_id');
 			$table->index(['user_id', 'status'], 'user_id_status');
-			$table->index(['product_id'], 'product_id');
+			$table->index(['product_id', 'top'], 'product_id_top');
         });
     }
 
