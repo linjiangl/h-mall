@@ -16,12 +16,13 @@ use Hyperf\Logger\LoggerFactory;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class AppExceptionHandler extends ExceptionHandler
 {
 	/**
-	 * @var \Psr\Log\LoggerInterface
+	 * @var LoggerInterface
 	 */
     protected $logger;
 

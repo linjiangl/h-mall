@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases;
 
 use App\Model\User;
-use App\Service\LoginService;
+use App\Service\LoginServiceAbstract;
 use HyperfTest\HttpTestCase;
 use PHPUnit\Framework\TestCase;
 use Hyperf\Testing\Client;
