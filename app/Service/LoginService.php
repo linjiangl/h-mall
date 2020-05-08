@@ -6,7 +6,7 @@ namespace App\Service;
 
 use App\Model\User\User;
 
-class LoginService extends ServiceAbstract
+class LoginService extends Service
 {
 	public function index($userId)
 	{
