@@ -14,7 +14,7 @@ use Hyperf\Contract\StdoutLoggerInterface;
 use Psr\Log\LogLevel;
 
 return [
-    'app_env' => env('APP_ENV', 'dev'),
+    'app_env' => env('APP_ENV', 'prod'),
     'app_name' => env('APP_NAME', 'skeleton'),
     StdoutLoggerInterface::class => [
         'log_level' => [
@@ -23,7 +23,7 @@ return [
 //            LogLevel::DEBUG,
             LogLevel::EMERGENCY,
             LogLevel::ERROR,
-            LogLevel::INFO,
+//            LogLevel::INFO,
             LogLevel::NOTICE,
             LogLevel::WARNING,
         ],

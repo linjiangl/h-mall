@@ -4,7 +4,7 @@
 namespace App\Dao;
 
 
-Abstract class Dao
+Abstract class AbstractDao
 {
 
 }
