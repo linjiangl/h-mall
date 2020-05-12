@@ -2,20 +2,25 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * Multi-user mall
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
  */
 
 namespace App\Controller;
 
 use Carbon\Carbon;
-use Hyperf\Snowflake\IdGenerator;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\RateLimit\Annotation\RateLimit;
+use Hyperf\Snowflake\IdGenerator;
 
+/**
+ * @Controller(prefix="rate-limit")
+ * @RateLimit()
+ */
 class IndexController extends AbstractController
 {
     /**
@@ -33,7 +38,12 @@ class IndexController extends AbstractController
             'method' => $method,
             'message' => "Hello {$user}.",
             'id' => $this->idGenerator->generate(),
-			'now' => Carbon::now()->toDateTimeString(),
+            'now' => Carbon::now()->toDateTimeString(),
         ];
+    }
+
+    public function test()
+    {
+        return ['QPS 1, 峰值3'];
     }
 }

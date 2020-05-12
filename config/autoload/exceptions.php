@@ -14,7 +14,8 @@ return [
     'handler' => [
         'http' => [
             \App\Exception\Handler\HttpExceptionHandler::class,
-            App\Exception\Handler\AppExceptionHandler::class,
+            \App\Exception\Handler\AppExceptionHandler::class,
+			\App\Exception\Handler\RateLimitExceptionHandler::class
         ],
     ],
 ];

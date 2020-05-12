@@ -9,14 +9,10 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-use Hyperf\Session\Handler;
-
 return [
-    'handler' => Handler\RedisHandler::class,
-    'options' => [
-        'connection' => 'default',
-        'path' => BASE_PATH . '/runtime/session',
-        'gc_maxlifetime' => 86400 * 15,
-    ],
+    'create' => 100,
+    'consume' => 1,
+    'capacity' => 10000,
+    'limitCallback' => [],
+    'waitTimeout' => 3,
 ];

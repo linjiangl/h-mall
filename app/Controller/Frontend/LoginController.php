@@ -17,9 +17,11 @@ use App\Utils\JwtUtils;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use Hyperf\RateLimit\Annotation\RateLimit;
 
 /**
- * @AutoController
+ * @AutoController()
+ * @RateLimit()
  */
 class LoginController extends BaseController
 {

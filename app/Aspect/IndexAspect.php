@@ -12,7 +12,7 @@ use Hyperf\Di\Exception\Exception;
 class IndexAspect extends AbstractAspect
 {
 	public $classes = [
-		IndexController::class . '::' . '*'
+		IndexController::class
 	];
 
 	/**
