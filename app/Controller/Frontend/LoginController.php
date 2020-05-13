@@ -11,37 +11,46 @@ declare(strict_types=1);
 
 namespace App\Controller\Frontend;
 
-use App\Exception\HttpException;
-use App\Utils\CacheUtils;
-use App\Utils\JwtUtils;
-use Hyperf\HttpServer\Annotation\AutoController;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Exception\CacheErrorException;
+use Hyperf\Di\Annotation\Inject;
+use Phper666\JWTAuth\JWT;
 use Hyperf\RateLimit\Annotation\RateLimit;
+use Psr\SimpleCache\InvalidArgumentException;
 
 /**
- * @AutoController()
  * @RateLimit()
  */
 class LoginController extends BaseController
 {
 
-    public function index(RequestInterface $request, ResponseInterface $response)
-    {
-    	CacheUtils::set('aa', '111');
+	/**
+	 * @Inject()
+	 * @var Jwt
+	 */
+	protected $jwt;
 
-    	return CacheUtils::get('aa');
+    public function index()
+    {
+		$userData = [
+			'user_id' => 100,
+			'username' => 'username',
+		];
+		try {
+			$token = $this->jwt->getToken($userData);
+			$data = [
+				'token' => $this->jwt->tokenPrefix . ' ' . (string)$token,
+				'exp' => $this->jwt->getTTL(),
+			];
+		} catch (InvalidArgumentException $e) {
+			throw new CacheErrorException();
+		}
+
+		return $data;
 	}
 
-    public function show(RequestInterface $request)
+    public function show()
     {
-        try {
-            $token = $request->query('token');
-            $jwtUtils = new JwtUtils();
-            return $jwtUtils->checkToken($token);
-        } catch (\Exception $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        return 'login';
     }
 
     public function g() {

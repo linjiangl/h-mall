@@ -44,7 +44,6 @@ class IndexController extends AbstractController
 
     public function test()
     {
-		redis()->set('aa', 'bb', 60);
-		return redis()->get('aa');
+		return $this->request->getAttribute('user_id');
     }
 }

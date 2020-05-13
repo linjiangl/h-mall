@@ -10,6 +10,14 @@ declare(strict_types=1);
  */
 
 use Hyperf\HttpServer\Router\Router;
+use App\Middleware\JWTAuthMiddleware;
 
-Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@index');
-Router::get('/test', 'App\Controller\IndexController@test');
+Router::addGroup('/v1', function () {
+	Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@index');
+	Router::get('/test', 'App\Controller\IndexController@test');
+}, ['middleware' => [JWTAuthMiddleware::class]]);
+
+
+Router::addGroup('/v1', function () {
+	Router::get('/login', 'App\Controller\Frontend\LoginController@index');
+});

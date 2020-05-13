@@ -6,9 +6,15 @@ use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
+use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 
 class HttpExceptionHandler extends  ExceptionHandler
 {
+	/**
+	 * @var HttpResponse
+	 */
+	protected $response;
+
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
         if ($throwable instanceof HttpException) {
@@ -18,7 +24,7 @@ class HttpExceptionHandler extends  ExceptionHandler
             ], JSON_UNESCAPED_UNICODE);
 
             $this->stopPropagation();
-            return $response->withStatus($throwable->getCode())->withBody(new SwooleStream($data));
+            return $response->withAddedHeader('Content-Type', 'application/json')->withStatus($throwable->getCode())->withBody(new SwooleStream($data));
         }
 
         return $response;
