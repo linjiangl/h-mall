@@ -9,8 +9,9 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
+use App\Controller\AbstractController;
 use Carbon\Carbon;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -19,7 +20,7 @@ use Hyperf\Snowflake\IdGenerator;
 
 /**
  * @Controller(prefix="rate-limit")
- * @RateLimit()
+ * @RateLimit
  */
 class IndexController extends AbstractController
 {
@@ -44,6 +45,6 @@ class IndexController extends AbstractController
 
     public function test()
     {
-		return $this->request->getAttribute('user_id');
+        return $this->request->getAttribute('user_id');
     }
 }

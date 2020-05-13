@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+use App\Exception\CacheErrorException;
 use App\Exception\UnauthorizedException;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Phper666\JWTAuth\JWT;
@@ -62,17 +63,19 @@ class JWTAuthMiddleware implements MiddlewareInterface
 				}
 			}
 
-			if ($isValidToken) {
-				$jwtData = $this->jwt->getParserData();
-				$request = Context::get(ServerRequestInterface::class);
-				$request = $request->withAttribute('user_id', $jwtData['user_id']);
-				Context::set(ServerRequestInterface::class, $request);
-				return $handler->handle($request);
+			if (!$isValidToken) {
+				throw new UnauthorizedException();
 			}
+
+			$jwtData = $this->jwt->getParserData();
+			$request = Context::get(ServerRequestInterface::class);
+			$request = $request->withAttribute('user_id', $jwtData['user_id']);
+			Context::set(ServerRequestInterface::class, $request);
 		} catch (InvalidArgumentException $e) {
+			throw new CacheErrorException();
 		} catch (\Throwable $e) {
 		}
 
-		throw new UnauthorizedException();
+		return $handler->handle($request);
     }
 }

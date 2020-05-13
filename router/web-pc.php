@@ -13,11 +13,11 @@ use Hyperf\HttpServer\Router\Router;
 use App\Middleware\JWTAuthMiddleware;
 
 Router::addGroup('/v1', function () {
-	Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@index');
-	Router::get('/test', 'App\Controller\IndexController@test');
-}, ['middleware' => [JWTAuthMiddleware::class]]);
-
+	Router::get('/login', 'App\Controller\Frontend\Auth\LoginController@index');
+	Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\Frontend\IndexController@index');
+	Router::get('/test', 'App\Controller\Frontend\IndexController@test');
+});
 
 Router::addGroup('/v1', function () {
-	Router::get('/login', 'App\Controller\Frontend\LoginController@index');
-});
+	Router::post('/auth/user', 'App\Controller\Frontend\Auth\UserController@index');
+}, ['middleware' => [JWTAuthMiddleware::class]]);
