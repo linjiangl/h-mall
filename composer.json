@@ -59,8 +59,8 @@
         "yurunsoft/phpmailer-swoole": "^1.0",
         "hyperf/validation": "^1.1",
         "gregwar/captcha": "^1.1",
-        "firebase/php-jwt": "^5.0",
-        "hyperf/snowflake": "^1.1"
+        "hyperf/snowflake": "^1.1",
+        "phper666/jwt-auth": "^3.0"
 	},
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

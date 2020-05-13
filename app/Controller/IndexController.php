@@ -44,6 +44,7 @@ class IndexController extends AbstractController
 
     public function test()
     {
-        return ['QPS 1, 峰值3'];
+		redis()->set('aa', 'bb', 60);
+		return redis()->get('aa');
     }
 }
