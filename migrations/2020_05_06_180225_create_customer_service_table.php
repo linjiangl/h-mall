@@ -4,14 +4,14 @@ use Hyperf\Database\Schema\Schema;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Migrations\Migration;
 
-class CreateQqTable extends Migration
+class CreateCustomerServiceTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('qq', function (Blueprint $table) {
+        Schema::create('customer_service', function (Blueprint $table) {
 			$table->integerIncrements('id');
 			$table->integer('shop_id', false, true);
 			$table->tinyInteger('type', false, true);
@@ -23,6 +23,8 @@ class CreateQqTable extends Migration
 
 			$table->index(['shop_id'], 'shop_id');
         });
+
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '客服'");
     }
 
     /**
@@ -30,6 +32,6 @@ class CreateQqTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('qq');
+        Schema::dropIfExists('customer_service');
     }
 }

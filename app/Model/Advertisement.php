@@ -8,39 +8,41 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Model\Message;
+namespace App\Model;
 
 use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
- * @property int $user_id
- * @property int $message_id
- * @property int $status 状态 0:删除, 1:已读, 2:未读
+ * @property string $title 标题
+ * @property string $image 图片
+ * @property string $url 链接
+ * @property string $position 位置
+ * @property int $status 状态 0:不可用, 1:可用
+ * @property int $clicks 点击量
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string $deleted_at
  */
-class MessageReceiver extends Model
+class Advertisement extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'message_receiver';
+    protected $table = 'advertisement';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'message_id', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'title', 'image', 'url', 'position', 'status', 'clicks', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'message_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'status' => 'integer', 'clicks' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

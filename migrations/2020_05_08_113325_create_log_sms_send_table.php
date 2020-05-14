@@ -4,14 +4,15 @@ use Hyperf\Database\Schema\Schema;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Migrations\Migration;
 
-class CreateLogSendSmsTable extends Migration
+class CreateLogSmsSendTable extends Migration
 {
+    protected $table = 'log_sms_send';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('log_send_sms', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
 			$table->integerIncrements('id');
 			$table->tinyInteger('type')->default(0)->comment('短信类型 0:验证码');
 			$table->string('mobile', 20);
@@ -34,6 +35,6 @@ class CreateLogSendSmsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('log_send_sms');
+        Schema::dropIfExists($this->table);
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf4a80351f5d387f20ef749aeee6143e",
+    "content-hash": "d0f89eb655fe2850883794f897b6d664",
     "packages": [
         {
             "name": "bandwidth-throttle/token-bucket",
@@ -1691,6 +1691,61 @@
                 "php"
             ],
             "time": "2020-05-03T05:29:33+00:00"
+        },
+        {
+            "name": "hyperf/db",
+            "version": "v1.1.26",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/db.git",
+                "reference": "f16141c40d114d2ca3585c57977545a9fcc03068"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hyperf/db/zipball/f16141c40d114d2ca3585c57977545a9fcc03068",
+                "reference": "f16141c40d114d2ca3585c57977545a9fcc03068",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-swoole": ">=4.4",
+                "hyperf/config": "~1.1.0",
+                "hyperf/contract": "~1.1.0",
+                "hyperf/pool": "~1.1.0",
+                "hyperf/utils": "~1.1.0",
+                "php": ">=7.2",
+                "psr/container": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "hyperf/testing": "1.1.*",
+                "mockery/mockery": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "hyperf": {
+                    "config": "Hyperf\\DB\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hyperf\\DB\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "hyperf",
+                "php"
+            ],
+            "time": "2020-04-16T03:41:10+00:00"
         },
         {
             "name": "hyperf/db-connection",

@@ -30,6 +30,11 @@ class IndexAspect extends AbstractAspect
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
         $result = $proceedingJoinPoint->process();
-        return $result . 'Aspect !!!';
+        if (is_array($result)) {
+            $result['aspect'] = 'Aspect !!!';
+        } else {
+            $result = $result . 'Aspect !!!';
+        }
+        return $result;
     }
 }

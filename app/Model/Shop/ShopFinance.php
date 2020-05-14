@@ -8,39 +8,36 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Model\User;
+namespace App\Model\Shop;
 
 use Hyperf\DbConnection\Model\Model;
 
 /**
+ * @property int $shop_id
  * @property int $user_id
- * @property int $integral 积分
  * @property float $balance 余额
- * @property int $freeze_integral 冻结的积分
- * @property float $freeze_balance 冻结的余额
+ * @property float $freeze_balance 冻结余额
  */
-class UserWallet extends Model
+class ShopFinance extends Model
 {
-    public $timestamps = false;
-
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'user_wallet';
+    protected $table = 'shop_finance';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'integral', 'balance', 'freeze_integral', 'freeze_balance'];
+    protected $fillable = ['shop_id', 'user_id', 'balance', 'freeze_balance'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['user_id' => 'integer', 'integral' => 'integer', 'balance' => 'float', 'freeze_integral' => 'integer', 'freeze_balance' => 'float'];
+    protected $casts = ['shop_id' => 'integer', 'user_id' => 'integer', 'balance' => 'float', 'freeze_balance' => 'float'];
 }
