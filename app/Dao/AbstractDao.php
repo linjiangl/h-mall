@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 namespace App\Dao;
 
-use Hyperf\DbConnection\Model\Model;
+use App\Model\User\User;
+use Hyperf\Database\Model\Model;
 
 abstract class AbstractDao
 {
@@ -20,8 +21,13 @@ abstract class AbstractDao
      */
     protected $model;
 
-    public function info($id, $with = [])
+    /**
+     * @param int $id
+     * @param array $with
+     * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Model\Builder[]|\Hyperf\Database\Model\Collection|Model|null|User
+     */
+    public function info(int $id, $with = [])
     {
-        return $this->model::query()->with($with)->find($id);
+        return User::query()->with($with)->find($id);
     }
 }

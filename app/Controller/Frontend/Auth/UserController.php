@@ -27,7 +27,11 @@ class UserController extends AbstractController
     {
         try {
             $service = new AuthService();
-            return $service->user()->toArray();
+            $user = $service->user();
+            if ($user) {
+                return $user->nickname;
+            }
+            return '';
         } catch (\Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
