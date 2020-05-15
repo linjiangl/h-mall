@@ -12,11 +12,10 @@ declare(strict_types=1);
 namespace App\Controller\Frontend\Auth;
 
 use App\Controller\AbstractController;
-use App\Exception\CacheErrorException;
+use App\Service\AuthService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\RateLimit\Annotation\RateLimit;
 use Phper666\JWTAuth\JWT;
-use Psr\SimpleCache\InvalidArgumentException;
 
 /**
  * @RateLimit
@@ -31,20 +30,7 @@ class LoginController extends AbstractController
 
     public function index()
     {
-        $userData = [
-            'user_id' => 100,
-            'username' => 'username',
-        ];
-        try {
-            $token = $this->jwt->getToken($userData);
-            $data = [
-                'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
-                'exp' => $this->jwt->getTTL(),
-            ];
-        } catch (InvalidArgumentException $e) {
-            throw new CacheErrorException();
-        }
-
-        return $data;
+        $authService = new AuthService($this->jwt);
+        return $authService->login();
     }
 }
