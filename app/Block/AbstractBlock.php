@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace App\Block;
 
 use App\Service\AbstractService;
-use Hyperf\HttpMessage\Server\Request;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 abstract class AbstractBlock implements InterfaceBlock
@@ -87,6 +86,26 @@ abstract class AbstractBlock implements InterfaceBlock
 
     public function index(RequestInterface $request)
     {
-        $query = $request->query('page');
+
+    }
+
+    public function show(RequestInterface $request, $id)
+    {
+        // TODO: Implement show() method.
+    }
+
+    public function store(RequestInterface $request)
+    {
+        // TODO: Implement store() method.
+    }
+
+    public function update(RequestInterface $request, $id)
+    {
+        // TODO: Implement update() method.
+    }
+
+    public function destroy(RequestInterface $request, $id)
+    {
+        // TODO: Implement destroy() method.
     }
 }

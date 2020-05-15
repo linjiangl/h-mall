@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Frontend;
 
+use App\Block\Frontend\IndexBlock;
 use App\Controller\AbstractController;
 use Carbon\Carbon;
 use Hyperf\Di\Annotation\Inject;
@@ -31,7 +32,12 @@ class IndexController extends AbstractController
      */
     protected $idGenerator;
 
-    public function index()
+    public function index(RequestInterface $request)
+    {
+        return (new IndexBlock())->index($request);
+    }
+
+    public function info()
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
@@ -46,7 +52,7 @@ class IndexController extends AbstractController
 
     public function test()
     {
-        return $this->request->getAttribute('user_id');
+        return 100;
     }
 
     public function show(RequestInterface $request, $id)
