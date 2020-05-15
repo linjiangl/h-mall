@@ -29,6 +29,16 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'username' => 'required|max:20',
+            'age' => 'required|integer',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'username' => '用户名',
+            'age' => '年龄',
         ];
     }
 }

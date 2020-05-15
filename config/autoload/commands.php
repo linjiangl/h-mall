@@ -11,5 +11,5 @@ declare(strict_types=1);
  */
 
 return [
-    Hyperf\Swagger\Command\GenCommand::class,
+    \Hyperf\Swagger\Command\GenCommand::class,
 ];

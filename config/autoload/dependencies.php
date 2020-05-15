@@ -11,5 +11,6 @@ declare(strict_types=1);
  */
 
 return [
-    Hyperf\HttpServer\CoreMiddleware::class => App\Middleware\CoreMiddleware::class
+    \Hyperf\HttpServer\CoreMiddleware::class => \App\Middleware\CoreMiddleware::class,
+    \Hyperf\Validation\ValidationExceptionHandler::class => \App\Exception\Handler\ValidationExceptionHandler::class
 ];
