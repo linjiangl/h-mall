@@ -9,5 +9,5 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-require_once BASE_PATH . '/router/web-pc.php';
-require_once BASE_PATH . '/router/web-mobile.php';
+require_once BASE_PATH . '/route/web-pc.php';
+require_once BASE_PATH . '/route/web-mobile.php';

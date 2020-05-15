@@ -15,6 +15,7 @@ use App\Controller\AbstractController;
 use Carbon\Carbon;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
 use Hyperf\Snowflake\IdGenerator;
 
@@ -46,5 +47,10 @@ class IndexController extends AbstractController
     public function test()
     {
         return $this->request->getAttribute('user_id');
+    }
+
+    public function show(RequestInterface $request, $id)
+    {
+        return $id;
     }
 }

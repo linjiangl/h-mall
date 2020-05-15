@@ -14,19 +14,27 @@ namespace App\Controller\Frontend\Auth;
 use App\Controller\AbstractController;
 use App\Exception\HttpException;
 use App\Service\AuthService;
+use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\RateLimit\Annotation\RateLimit;
+use Phper666\JWTAuth\JWT;
 
 /**
  * @Controller(prefix="rate-limit")
  * @RateLimit
  */
-class UserController extends AbstractController
+class AuthController extends AbstractController
 {
-    public function index()
+    /**
+     * @Inject()
+     * @var Jwt
+     */
+    protected $jwt;
+
+    public function user()
     {
         try {
-            $service = new AuthService();
+            $service = new AuthService($this->jwt);
             $user = $service->user();
             if ($user) {
                 return $user->nickname;

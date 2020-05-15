@@ -14,10 +14,12 @@ namespace App\Controller\Frontend\Auth;
 use App\Controller\AbstractController;
 use App\Service\AuthService;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\RateLimit\Annotation\RateLimit;
 use Phper666\JWTAuth\JWT;
 
 /**
+ * @Controller(prefix="rate-limit")
  * @RateLimit
  */
 class LoginController extends AbstractController

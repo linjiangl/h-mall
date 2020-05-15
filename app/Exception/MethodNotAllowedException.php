@@ -11,12 +11,11 @@ declare(strict_types=1);
 
 namespace App\Exception;
 
-use Throwable;
-
-class NotFoundException extends HttpException
+class MethodNotAllowedException extends HttpException
 {
-    public function __construct($message = 'Not Found', $code = 404, Throwable $previous = null)
+    public function __construct($message = '', $code = 405, \Throwable $previous = null)
     {
+        $message = $message ? $message . 'Method Not Allowed' : 'Method Not Allowed';
         parent::__construct($message, $code, $previous);
     }
 }
