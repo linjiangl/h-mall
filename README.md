@@ -30,4 +30,5 @@ $ composer start-dev
 
 ![image](./docs/images/QQ20200516-194336@2x.png)
 ![image](./docs/images/QQ20200516-194431@2x.png)
+![image](./docs/images/QQ20200516-194826@2x.png)
 
