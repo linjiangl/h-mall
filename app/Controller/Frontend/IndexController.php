@@ -52,9 +52,9 @@ class IndexController extends AbstractController
         ];
     }
 
-    public function test(UserRequest $request)
+    public function test()
     {
-        $validated = $request->validated();
+    	// $validated = $request->validated();
         return 100;
     }
 
