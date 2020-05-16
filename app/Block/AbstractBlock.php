@@ -61,32 +61,31 @@ abstract class AbstractBlock implements InterfaceBlock
     ];
 
     /**
-     * 参数类型
+     * 参数类型.
      * @var array
      */
     protected $paramType = [];
 
     /**
-     * 执行的方法
+     * 执行的方法.
      * @var string
      */
     protected $action = '';
 
     /**
-     * 默认分页条数
+     * 默认分页条数.
      * @var int
      */
     protected $limit = 20;
 
     /**
-     * 请求的数据
+     * 请求的数据.
      * @var array
      */
     protected $data = [];
 
     public function index(RequestInterface $request)
     {
-
     }
 
     public function show(RequestInterface $request, $id)

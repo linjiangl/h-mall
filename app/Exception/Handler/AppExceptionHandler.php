@@ -2,28 +2,27 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * Multi-user mall
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
  */
 
 namespace App\Exception\Handler;
 
-use Hyperf\Logger\LoggerFactory;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
+use Hyperf\Logger\LoggerFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
 class AppExceptionHandler extends ExceptionHandler
 {
-	/**
-	 * @var LoggerInterface
-	 */
+    /**
+     * @var LoggerInterface
+     */
     protected $logger;
 
     public function __construct(LoggerFactory $loggerFactory)
@@ -35,11 +34,11 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
-		$data = json_encode([
-			'code' => 500,
-			'message' => $throwable->getMessage(),
-		], JSON_UNESCAPED_UNICODE);
-		return $response->withAddedHeader('Content-Type', 'application/json')->withStatus(500)->withBody(new SwooleStream($data));
+        $data = json_encode([
+            'code' => 500,
+            'message' => $throwable->getMessage(),
+        ], JSON_UNESCAPED_UNICODE);
+        return $response->withAddedHeader('Content-Type', 'application/json')->withStatus(500)->withBody(new SwooleStream($data));
     }
 
     public function isValid(Throwable $throwable): bool

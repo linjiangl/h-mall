@@ -15,5 +15,4 @@ use App\Controller\AbstractController;
 
 class PublicController extends AbstractController
 {
-
 }

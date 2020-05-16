@@ -22,9 +22,8 @@ abstract class AbstractDao
     protected $model;
 
     /**
-     * @param int $id
      * @param array $with
-     * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Model\Builder[]|\Hyperf\Database\Model\Collection|Model|null|User
+     * @return null|\Hyperf\Database\Model\Builder|\Hyperf\Database\Model\Builder[]|\Hyperf\Database\Model\Collection|Model|User
      */
     public function info(int $id, $with = [])
     {

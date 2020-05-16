@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace App\Exception\Handler;
 
-use App\Exception\InternalException;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\Validation\ValidationException;
 use Psr\Http\Message\ResponseInterface;

@@ -23,7 +23,6 @@ class IndexAspect extends AbstractAspect
     ];
 
     /**
-     * @param ProceedingJoinPoint $proceedingJoinPoint
      * @throws Exception
      * @return mixed return the value from process method of ProceedingJoinPoint, or the value that you handled
      */
@@ -31,7 +30,7 @@ class IndexAspect extends AbstractAspect
     {
         $result = $proceedingJoinPoint->process();
         if (is_string($result)) {
-			$result = $result . 'Aspect !!!';
+            $result = $result . 'Aspect !!!';
         }
         return $result;
     }

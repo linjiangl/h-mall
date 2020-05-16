@@ -28,44 +28,42 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
 {
-	/**
-	 * Process an incoming server request and return a response, optionally delegating
-	 * response creation to a handler.
-	 */
-	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-	{
-		$request = Context::set(ServerRequestInterface::class, $request);
+    /**
+     * Process an incoming server request and return a response, optionally delegating
+     * response creation to a handler.
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $request = Context::set(ServerRequestInterface::class, $request);
 
-		/** @var Dispatched $dispatched */
-		$dispatched = $request->getAttribute(Dispatched::class);
+        /** @var Dispatched $dispatched */
+        $dispatched = $request->getAttribute(Dispatched::class);
 
-		if (! $dispatched instanceof Dispatched) {
-			throw new ServerException(sprintf('The dispatched object is not a %s object.', Dispatched::class));
-		}
+        if (! $dispatched instanceof Dispatched) {
+            throw new ServerException(sprintf('The dispatched object is not a %s object.', Dispatched::class));
+        }
 
-		switch ($dispatched->status) {
-			case Dispatcher::NOT_FOUND:
-				$response = $this->handleNotFound($request);
-				break;
-			case Dispatcher::METHOD_NOT_ALLOWED:
-				$response = $this->handleMethodNotAllowed($dispatched->params, $request);
-				break;
-			case Dispatcher::FOUND:
-				$response = $this->handleFound($dispatched, $request);
-				break;
-		}
+        switch ($dispatched->status) {
+            case Dispatcher::NOT_FOUND:
+                $response = $this->handleNotFound($request);
+                break;
+            case Dispatcher::METHOD_NOT_ALLOWED:
+                $response = $this->handleMethodNotAllowed($dispatched->params, $request);
+                break;
+            case Dispatcher::FOUND:
+                $response = $this->handleFound($dispatched, $request);
+                break;
+        }
 
-		if (! $response instanceof ResponseInterface) {
-			$response = $this->transferToResponse($response, $request);
-		}
-		return $response->withAddedHeader('Server', 'HWS/1.1');
-	}
+        if (! $response instanceof ResponseInterface) {
+            $response = $this->transferToResponse($response, $request);
+        }
+        return $response->withAddedHeader('Server', 'HWS/1.1');
+    }
 
     /**
      * Handle the response when found.
      *
-     * @param Dispatched $dispatched
-     * @param ServerRequestInterface $request
      * @return array|Arrayable|mixed|ResponseInterface|string
      */
     protected function handleFound(Dispatched $dispatched, ServerRequestInterface $request)
@@ -89,7 +87,6 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
     /**
      * Handle the response when cannot found any routes.
      *
-     * @param ServerRequestInterface $request
      * @return array|Arrayable|mixed|ResponseInterface|string
      */
     protected function handleNotFound(ServerRequestInterface $request)
@@ -100,8 +97,6 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
     /**
      * Handle the response when the routes found but doesn't match any available methods.
      *
-     * @param array $methods
-     * @param ServerRequestInterface $request
      * @return array|Arrayable|mixed|ResponseInterface|string
      */
     protected function handleMethodNotAllowed(array $methods, ServerRequestInterface $request)
@@ -110,32 +105,32 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
         throw new MethodNotAllowedException(implode(', ', $methods) . ' ');
     }
 
-	/**
-	 * Transfer the non-standard response content to a standard response object.
-	 *
-	 * @param array|Arrayable|Jsonable|string $response
-	 */
-	protected function transferToResponse($response, ServerRequestInterface $request): ResponseInterface
-	{
-		if (is_string($response)) {
-			return $this->response()->withAddedHeader('content-type', 'application/json')->withBody(new SwooleStream($response));
-		}
+    /**
+     * Transfer the non-standard response content to a standard response object.
+     *
+     * @param array|Arrayable|Jsonable|string $response
+     */
+    protected function transferToResponse($response, ServerRequestInterface $request): ResponseInterface
+    {
+        if (is_string($response)) {
+            return $this->response()->withAddedHeader('content-type', 'application/json')->withBody(new SwooleStream($response));
+        }
 
-		if (is_array($response) || $response instanceof Arrayable) {
-			if ($response instanceof Arrayable) {
-				$response = $response->toArray();
-			}
-			return $this->response()
-				->withAddedHeader('content-type', 'application/json')
-				->withBody(new SwooleStream(json_encode($response, JSON_UNESCAPED_UNICODE)));
-		}
+        if (is_array($response) || $response instanceof Arrayable) {
+            if ($response instanceof Arrayable) {
+                $response = $response->toArray();
+            }
+            return $this->response()
+                ->withAddedHeader('content-type', 'application/json')
+                ->withBody(new SwooleStream(json_encode($response, JSON_UNESCAPED_UNICODE)));
+        }
 
-		if ($response instanceof Jsonable) {
-			return $this->response()
-				->withAddedHeader('content-type', 'application/json')
-				->withBody(new SwooleStream((string) $response));
-		}
+        if ($response instanceof Jsonable) {
+            return $this->response()
+                ->withAddedHeader('content-type', 'application/json')
+                ->withBody(new SwooleStream((string) $response));
+        }
 
-		return $this->response()->withAddedHeader('content-type', 'application/json')->withBody(new SwooleStream((string) $response));
-	}
+        return $this->response()->withAddedHeader('content-type', 'application/json')->withBody(new SwooleStream((string) $response));
+    }
 }

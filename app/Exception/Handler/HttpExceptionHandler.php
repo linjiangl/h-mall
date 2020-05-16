@@ -1,19 +1,29 @@
 <?php
+
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
+ */
+
 namespace App\Exception\Handler;
 
 use App\Exception\HttpException;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
+use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
-use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 
-class HttpExceptionHandler extends  ExceptionHandler
+class HttpExceptionHandler extends ExceptionHandler
 {
-	/**
-	 * @var HttpResponse
-	 */
-	protected $response;
+    /**
+     * @var HttpResponse
+     */
+    protected $response;
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
@@ -30,11 +40,9 @@ class HttpExceptionHandler extends  ExceptionHandler
         return $response;
     }
 
-	/**
-	 * 判断该异常处理器是否要对该异常进行处理
-	 * @param Throwable $throwable
-	 * @return bool
-	 */
+    /**
+     * 判断该异常处理器是否要对该异常进行处理.
+     */
     public function isValid(Throwable $throwable): bool
     {
         return true;

@@ -26,7 +26,7 @@ use Phper666\JWTAuth\JWT;
 class AuthController extends AbstractController
 {
     /**
-     * @Inject()
+     * @Inject
      * @var Jwt
      */
     protected $jwt;
