@@ -52,10 +52,9 @@ class IndexController extends AbstractController
         ];
     }
 
-    public function test()
+    public function test(UserRequest $request)
     {
-    	// $validated = $request->validated();
-        return 100;
+		return $request->validated();
     }
 
     public function show(RequestInterface $request, $id)
