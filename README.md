@@ -28,5 +28,6 @@ $ composer start-dev
 
 配置示例：
 
-![image](./docs/images/96A72416-B066-4D14-ABCD-2465E0E5472D.png)
+![image](./docs/images/QQ20200516-194336@2x.png)
+![image](./docs/images/QQ20200516-194431@2x.png)
 
