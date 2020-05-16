@@ -48,7 +48,7 @@ class ModelCommand extends HyperfCommand
     ];
 
     protected $specifyTables = [
-        'customer_service'
+        // 'customer_service'
     ];
 
     public function __construct(ContainerInterface $container)
