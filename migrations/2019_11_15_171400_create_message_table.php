@@ -1,8 +1,17 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
+ */
+
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
 
 class CreateMessageTable extends Migration
 {
@@ -21,7 +30,7 @@ class CreateMessageTable extends Migration
             $table->string('module', 30)->default('')->comment('模块');
             $table->integer('module_id', false, true)->default(0);
             $table->string('module_url', 255)->default('');
-            $table->tinyInteger('status', false, true)->default(2)->comment("状态 0:删除, 1:已读, 2:未读");
+            $table->tinyInteger('status', false, true)->default(2)->comment('状态 0:删除, 1:已读, 2:未读');
             $table->timestamps();
 
             $table->index(['sender_id'], 'sender_id');

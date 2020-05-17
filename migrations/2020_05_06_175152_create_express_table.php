@@ -1,8 +1,17 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
+ */
+
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
 
 class CreateExpressTable extends Migration
 {
@@ -12,11 +21,11 @@ class CreateExpressTable extends Migration
     public function up(): void
     {
         Schema::create('express', function (Blueprint $table) {
-			$table->smallIncrements('id');
-			$table->string('name', 50)->comment('公司名称');
-			$table->string('code', 50)->comment('公司编码');
-			$table->smallInteger('position')->default(0)->comment('排序');
-			$table->timestamps();
+            $table->smallIncrements('id');
+            $table->string('name', 50)->comment('公司名称');
+            $table->string('code', 50)->comment('公司编码');
+            $table->smallInteger('position')->default(0)->comment('排序');
+            $table->timestamps();
         });
     }
 

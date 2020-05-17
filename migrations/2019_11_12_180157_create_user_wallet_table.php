@@ -1,8 +1,17 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
+ */
+
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
 
 class CreateUserWalletTable extends Migration
 {
@@ -24,7 +33,6 @@ class CreateUserWalletTable extends Migration
             $table->index(['integral'], 'integral');
             $table->index(['balance'], 'balance');
         });
-
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户钱包'");
     }
