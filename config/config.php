@@ -22,7 +22,7 @@ return [
             // LogLevel::DEBUG,
             LogLevel::EMERGENCY,
             LogLevel::ERROR,
-            // LogLevel::INFO,
+            LogLevel::INFO,
             LogLevel::NOTICE,
             LogLevel::WARNING,
         ],

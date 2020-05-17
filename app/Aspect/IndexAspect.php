@@ -22,8 +22,9 @@ class IndexAspect extends AbstractAspect
     ];
 
     /**
-     * @throws Exception
+     * @param ProceedingJoinPoint $proceedingJoinPoint
      * @return mixed return the value from process method of ProceedingJoinPoint, or the value that you handled
+     * @throws Exception
      */
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
