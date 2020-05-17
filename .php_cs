@@ -86,6 +86,7 @@ return PhpCsFixer\Config::create()
         'object_operator_without_whitespace' => true,
         'ternary_operator_spaces' => true,
         'binary_operator_spaces' => true,
+        'no_blank_lines_before_namespace' => true,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
