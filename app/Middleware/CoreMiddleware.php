@@ -30,6 +30,9 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
     /**
      * Process an incoming server request and return a response, optionally delegating
      * response creation to a handler.
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -63,6 +66,8 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
     /**
      * Handle the response when found.
      *
+     * @param Dispatched $dispatched
+     * @param ServerRequestInterface $request
      * @return array|Arrayable|mixed|ResponseInterface|string
      */
     protected function handleFound(Dispatched $dispatched, ServerRequestInterface $request)

@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace  App\Service;
+namespace App\Service;
 
 use App\Dao\InterfaceDao;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
@@ -54,7 +54,7 @@ abstract class AbstractService implements InterfaceService
      */
     public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
     {
-        $this->handleQueryLimit($limit);
+        $this->handleQueryLimit((int)$limit);
 
         /** @var InterfaceDao $dao */
         $dao = new $this->dao();
@@ -120,8 +120,15 @@ abstract class AbstractService implements InterfaceService
         return [];
     }
 
+    public function setMaxLimit(int $limit)
+    {
+        $this->maxLimit = $limit;
+    }
+
     protected function handleQueryLimit(int $limit)
     {
+        $this->limit = $limit;
+        // 最大条数限制
         if ($limit && $limit > $this->maxLimit) {
             $this->limit = $this->maxLimit;
         }

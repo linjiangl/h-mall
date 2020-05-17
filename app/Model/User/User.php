@@ -32,10 +32,6 @@ use Hyperf\DbConnection\Model\Model;
  */
 class User extends Model
 {
-    const STATUS_OPEN = 1;
-
-    const STATUS_CLOSE = 0;
-
     /**
      * The table associated with the model.
      *
@@ -56,11 +52,6 @@ class User extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'role' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
-
-    public static function getStatusLabel()
-    {
-        return [self::STATUS_CLOSE => '关闭', self::STATUS_OPEN => '开启'];
-    }
 
     public function vipCard()
     {

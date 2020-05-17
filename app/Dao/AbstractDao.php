@@ -17,6 +17,7 @@ use App\Exception\HttpException;
 use App\Exception\NotFoundException;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Model;
+use Throwable;
 
 class AbstractDao implements InterfaceDao
 {
@@ -125,7 +126,7 @@ class AbstractDao implements InterfaceDao
             $this->removeCache($id);
 
             throw new DeletedException();
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
@@ -141,7 +142,6 @@ class AbstractDao implements InterfaceDao
      */
     public function checkAllowWithModel(array $with)
     {
-        // TODO 检测待处理
         $this->with = $with;
     }
 

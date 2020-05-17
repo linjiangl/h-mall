@@ -20,6 +20,8 @@ class RateLimitExceptionHandler extends ExceptionHandler
 {
     /**
      * Handle the exception, and return the specified result.
+     * @param Throwable $throwable
+     * @param ResponseInterface $response
      * @return ResponseInterface
      */
     public function handle(Throwable $throwable, ResponseInterface $response)
@@ -41,6 +43,7 @@ class RateLimitExceptionHandler extends ExceptionHandler
     /**
      * Determine if the current exception handler should handle the exception,.
      *
+     * @param Throwable $throwable
      * @return bool
      *              If return true, then this exception handler will handle the exception,
      *              If return false, then delegate to next handler

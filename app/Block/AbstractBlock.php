@@ -13,6 +13,7 @@ namespace App\Block;
 use App\Exception\HttpException;
 use App\Service\InterfaceService;
 use Hyperf\HttpServer\Contract\RequestInterface;
+use Throwable;
 
 abstract class AbstractBlock implements InterfaceBlock
 {
@@ -58,6 +59,8 @@ abstract class AbstractBlock implements InterfaceBlock
         // '=' => ['name', 'title', 'status'],
         // 'between' => ['created_at'], // 支持数组,字符串(,)
         // 'in' => ['user_id']
+        // 'like' => ['title'] // 模糊查询('title%')
+        // 'like_all' => ['title'] // 模糊查询
     ];
 
     /**
@@ -99,7 +102,7 @@ abstract class AbstractBlock implements InterfaceBlock
             /** @var InterfaceService $service */
             $service = new $this->service();
             return $service->lists($this->condition, $page, $limit, $this->orderBy, $this->groupBy, $this->with);
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
@@ -116,7 +119,7 @@ abstract class AbstractBlock implements InterfaceBlock
             /** @var InterfaceService $service */
             $service = new $this->service();
             return $service->info(intval($id), $this->with);
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
@@ -127,7 +130,7 @@ abstract class AbstractBlock implements InterfaceBlock
             /** @var InterfaceService $service */
             $service = new $this->service();
             return $service->create($this->data);
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
@@ -138,7 +141,7 @@ abstract class AbstractBlock implements InterfaceBlock
             /** @var InterfaceService $service */
             $service = new $this->service();
             return $service->update($id, $this->data);
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
@@ -149,7 +152,7 @@ abstract class AbstractBlock implements InterfaceBlock
             /** @var InterfaceService $service */
             $service = new $this->service();
             return $service->remove($id);
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
@@ -197,7 +200,7 @@ abstract class AbstractBlock implements InterfaceBlock
                         case 'like':
                             $queryValue = "{$queryValue}%";
                             break;
-                        case 'likeAll':
+                        case 'like_all':
                             $queryValue = "%{$queryValue}%";
                             break;
                     }

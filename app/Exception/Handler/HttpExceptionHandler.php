@@ -27,13 +27,14 @@ class HttpExceptionHandler extends ExceptionHandler
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
         if ($throwable instanceof HttpException) {
+            $code = $throwable->getCode() ?: 500;
             $data = json_encode([
-                'code' => $throwable->getCode(),
+                'code' => $code,
                 'message' => $throwable->getMessage(),
             ], JSON_UNESCAPED_UNICODE);
 
             $this->stopPropagation();
-            return $response->withAddedHeader('Content-Type', 'application/json')->withStatus($throwable->getCode())->withBody(new SwooleStream($data));
+            return $response->withAddedHeader('Content-Type', 'application/json')->withStatus($code)->withBody(new SwooleStream($data));
         }
 
         return $response;

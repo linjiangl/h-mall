@@ -15,5 +15,11 @@ use App\Service\User\UserService;
 
 class UserBlock extends AbstractBlock
 {
+    protected $with = [];
+
+    protected $query = [
+        'like' => ['username']
+    ];
+
     protected $service = UserService::class;
 }

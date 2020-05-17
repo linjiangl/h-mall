@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace  App\Controller\Frontend\Auth;
 
 use App\Controller\AbstractController;
-use App\Service\AuthService;
+use App\Service\Auth\AuthService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\RateLimit\Annotation\RateLimit;

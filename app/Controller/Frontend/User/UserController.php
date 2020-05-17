@@ -12,6 +12,7 @@ namespace App\Controller\Frontend\User;
 
 use App\Block\Frontend\User\UserBlock;
 use App\Controller\RestController;
+use Hyperf\HttpServer\Contract\RequestInterface;
 
 class UserController extends RestController
 {
