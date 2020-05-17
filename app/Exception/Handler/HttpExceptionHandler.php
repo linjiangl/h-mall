@@ -8,8 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-
-namespace App\Exception\Handler;
+namespace  App\Exception\Handler;
 
 use App\Exception\HttpException;
 use Hyperf\ExceptionHandler\ExceptionHandler;

@@ -12,9 +12,6 @@ return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@PSR2' => true,
-        '@Symfony' => true,
-        '@DoctrineAnnotation' => true,
-        '@PhpCsFixer' => true,
         'header_comment' => [
             'commentType' => 'PHPDoc',
             'header' => $header,
@@ -77,6 +74,18 @@ return PhpCsFixer\Config::create()
         'single_quote' => true,
         'standardize_not_equals' => true,
         'multiline_comment_opening_closing' => true,
+        'no_singleline_whitespace_before_semicolons' => true,
+        'no_empty_statement' => true,
+        'no_extra_consecutive_blank_lines' => true,
+        'no_blank_lines_after_class_opening' => true,
+        'no_trailing_comma_in_list_call' => true,
+        'no_leading_namespace_whitespace' => true,
+        'blank_line_after_opening_tag' => true,
+        'indentation_type' => true,
+        'no_multiline_whitespace_around_double_arrow' => true,
+        'object_operator_without_whitespace' => true,
+        'ternary_operator_spaces' => true,
+        'binary_operator_spaces' => true,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()

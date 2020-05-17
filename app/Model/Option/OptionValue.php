@@ -8,8 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-
-namespace App\Model\Option;
+namespace  App\Model\Option;
 
 use Hyperf\DbConnection\Model\Model;
 

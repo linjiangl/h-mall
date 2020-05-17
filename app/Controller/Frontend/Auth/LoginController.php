@@ -8,8 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-
-namespace App\Controller\Frontend\Auth;
+namespace  App\Controller\Frontend\Auth;
 
 use App\Controller\AbstractController;
 use App\Service\AuthService;

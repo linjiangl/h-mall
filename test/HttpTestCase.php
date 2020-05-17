@@ -8,9 +8,7 @@ declare(strict_types=1);
  * @document https://doc.hyperf.io
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
- */
-
-namespace HyperfTest;
+ */namespace  HyperfTest;
 
 use Hyperf\Testing\Client;
 use PHPUnit\Framework\TestCase;

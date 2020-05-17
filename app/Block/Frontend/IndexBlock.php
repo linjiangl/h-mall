@@ -8,8 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-
-namespace App\Block\Frontend;
+namespace  App\Block\Frontend;
 
 use App\Block\AbstractBlock;
 use Hyperf\HttpServer\Contract\RequestInterface;

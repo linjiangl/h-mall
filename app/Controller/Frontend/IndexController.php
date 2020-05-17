@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-
 namespace App\Controller\Frontend;
 
 use App\Block\Frontend\IndexBlock;
@@ -59,6 +58,8 @@ class IndexController extends AbstractController
 
     public function show(RequestInterface $request, $id)
     {
-        return $id;
+        $aa = [
+            'ff' => 11,
+        ];
     }
 }
