@@ -23,4 +23,6 @@ interface InterfaceBlock
     public function update(RequestInterface $request, $id);
 
     public function destroy(RequestInterface $request, $id);
+
+    public function getCondition(RequestInterface $request);
 }

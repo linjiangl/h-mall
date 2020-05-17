@@ -10,9 +10,28 @@ declare(strict_types=1);
  */
 namespace  App\Service;
 
+use App\Dao\InterfaceDao;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
+use Hyperf\Database\Model\Model;
+
 abstract class AbstractService implements InterfaceService
 {
-    protected $age = 1;
+    /**
+     * @var InterfaceDao
+     */
+    protected $dao;
+
+    /**
+     * 默认每页条数
+     * @var int
+     */
+    protected $limit = 20;
+
+    /**
+     * 每页最大条数
+     * @var int
+     */
+    protected $maxLimit = 100;
 
     /**
      * 列表
@@ -22,8 +41,9 @@ abstract class AbstractService implements InterfaceService
      * @param int $limit
      * @param string $orderBy
      * @param array $groupBy
-     * @param string $with
+     * @param array $with
      * @param string[] $columns
+     * @return LengthAwarePaginatorInterface
      *
      * 举例:
      * $condition = [
@@ -32,53 +52,78 @@ abstract class AbstractService implements InterfaceService
      *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
      * ]
      */
-    public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = '', $columns = ['*'])
+    public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
     {
-        // TODO: Implement lists() method.
+        $this->handleQueryLimit($limit);
+
+        /** @var InterfaceDao $dao */
+        $dao = new $this->dao();
+        return $dao->lists($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
     }
 
     /**
      * 详情
      * @param $id
+     * @param array $with
+     * @return mixed|Model
      */
-    public function info($id)
+    public function info($id, $with = [])
     {
-        // TODO: Implement info() method.
+        /** @var InterfaceDao $dao */
+        $dao = new $this->dao();
+        return $dao->info($id, $with);
     }
 
     /**
      * 创建
      * @param array $data
+     * @return mixed|int
      */
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        /** @var InterfaceDao $dao */
+        $dao = new $this->dao();
+        return $dao->create($data);
     }
 
     /**
      * 修改
      * @param $id
      * @param array $data
+     * @return Model
      */
     public function update($id, array $data)
     {
-        // TODO: Implement update() method.
+        /** @var InterfaceDao $dao */
+        $dao = new $this->dao();
+        return $dao->update($id, $data);
     }
 
     /**
      * 删除
      * @param $id
+     * @return string
      */
     public function remove($id)
     {
-        // TODO: Implement remove() method.
+        /** @var InterfaceDao $dao */
+        $dao = new $this->dao();
+        return $dao->remove($id);
     }
 
     /**
      * 获取定义的条件
+     * @return array
      */
     public function getCondition()
     {
-        // TODO: Implement getCondition() method.
+        return [];
+    }
+
+    protected function handleQueryLimit(int $limit)
+    {
+        if ($limit && $limit > $this->maxLimit) {
+            $this->limit = $this->maxLimit;
+        }
     }
 }

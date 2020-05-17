@@ -9,16 +9,18 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-use Hyperf\HttpServer\Router\Router;
 use App\Middleware\JWTAuthMiddleware;
+use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/v1', function () {
     Router::get('/login', 'App\Controller\Frontend\Auth\LoginController::index');
     Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\Frontend\IndexController::index');
     Router::get('/test', 'App\Controller\Frontend\IndexController::test');
     Router::get('/info/{id:\d+}', 'App\Controller\Frontend\IndexController::show');
+    Router::get('/user', 'App\Controller\Frontend\User\UserController::index');
+    Router::get('/user/{id:\d+}', 'App\Controller\Frontend\User\UserController::show');
 });
 
 Router::addGroup('/v1', function () {
-	Router::post('/auth/user', 'App\Controller\Frontend\Auth\UserController::index');
+    // Router::get('/user', 'App\Controller\Frontend\User\UserController::index');
 }, ['middleware' => [JWTAuthMiddleware::class]]);

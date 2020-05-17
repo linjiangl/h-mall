@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Block;
 
 use App\Exception\HttpException;
-use App\Service\AbstractService;
 use App\Service\InterfaceService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
@@ -107,26 +106,78 @@ abstract class AbstractBlock implements InterfaceBlock
 
     public function show(RequestInterface $request, $id)
     {
-        // TODO: Implement show() method.
+        try {
+            // 当前执行的方法
+            $this->action = 'show';
+
+            // 查询前业务处理
+            $this->beforeBuildQuery($request);
+
+            /** @var InterfaceService $service */
+            $service = new $this->service();
+            return $service->info(intval($id), $this->with);
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode());
+        }
     }
 
     public function store(RequestInterface $request)
     {
-        // TODO: Implement store() method.
+        try {
+            /** @var InterfaceService $service */
+            $service = new $this->service();
+            return $service->create($this->data);
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode());
+        }
     }
 
     public function update(RequestInterface $request, $id)
     {
-        // TODO: Implement update() method.
+        try {
+            /** @var InterfaceService $service */
+            $service = new $this->service();
+            return $service->update($id, $this->data);
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode());
+        }
     }
 
     public function destroy(RequestInterface $request, $id)
     {
-        // TODO: Implement destroy() method.
+        try {
+            /** @var InterfaceService $service */
+            $service = new $this->service();
+            return $service->remove($id);
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function getCondition(RequestInterface $request)
+    {
+        /** @var InterfaceService $service */
+        $service = new $this->service();
+        return $service->getCondition();
     }
 
     /**
-     * 处理查询条件.
+     * 构建查询之前条件
+     * @param RequestInterface $request
+     */
+    protected function beforeBuildQuery(RequestInterface $request)
+    {
+        $with = $request->query('with');
+        if ($with) {
+            $this->with = $with;
+        }
+        $this->condition = $this->handleCondition($request);
+        $this->groupBy = [];
+    }
+
+    /**
+     * 处理查询条件
+     * @param RequestInterface $request
      * @return array
      */
     protected function handleCondition(RequestInterface $request)
@@ -157,18 +208,10 @@ abstract class AbstractBlock implements InterfaceBlock
         return $condition;
     }
 
-    protected function beforeBuildQuery(RequestInterface $request)
-    {
-        $with = $request->query('with');
-        if ($with) {
-            $this->with = $with;
-        }
-        $this->condition = $this->handleCondition($request);
-        $this->groupBy = [];
-    }
-
     /**
-     * 处理参数类型.
+     * 处理参数类型
+     * @param RequestInterface $request
+     * @param string $param
      * @return float|int|string
      */
     protected function handleParamType(RequestInterface $request, string $param)
