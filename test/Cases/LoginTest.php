@@ -35,16 +35,10 @@ class LoginTest extends HttpTestCase
     {
         $this->assertTrue(true);
 
-        //		$res = $this->client->get('/');
-//
-//
-        //		$this->assertSame('Hello Hyperf.', $res['message']);
-        //		$this->assertSame('GET', $res['method']);
+        $res = $this->client->get('/');
 
-        redis()->select(0);
-        redis()->set('aa', 11, 120);
-        $value = redis()->get('aa');
-        var_dump($value);
+        $this->assertSame('Hello Hyperf.', $res['message']);
+        $this->assertSame('POST', $res['method']);
 
         $res = $this->client->get('/', ['user' => 'developer']);
 //
