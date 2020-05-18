@@ -6,11 +6,11 @@ $projectEnvPath = $dir . '/../../.env';
 $envContent = file_get_contents($projectEnvPath);
 
 // 备份项目的.env文件
-$envBackupPath = $dir . '/.env';
-if (file_exists($envBackupPath)) {
-    unlink($envBackupPath);
-}
-file_put_contents($envBackupPath, $envContent);
+//$envBackupPath = $dir . '/.env';
+//if (file_exists($envBackupPath)) {
+//    unlink($envBackupPath);
+//}
+//file_put_contents($envBackupPath, $envContent);
 
 // 替换成测试配置
 preg_match('/DB_DATABASE=([^\s]+)?/', $envContent, $data);
@@ -19,10 +19,13 @@ $testEnvContent = preg_replace('/DB_DATABASE=([^\s]+)?/', 'DB_DATABASE=' . $data
 file_put_contents($projectEnvPath, $testEnvContent);
 
 // 执行单元测试
-exec("sh {$dir}/test.sh", $output);
+exec('docker exec dhyperf bash -c "
+cd /hyperf-skeleton/h-mall
+rm -rf runtime/container
+bin/hyperf.php migrate:fresh --seed
+vendor/bin/co-phpunit -c phpunit.xml --colors=always"', $output);
 echo implode("\n", $output);
 
 // 还原配置
 file_put_contents($projectEnvPath, $envContent);
-unlink($envBackupPath);
 
