@@ -46,7 +46,7 @@ class LoginTest extends HttpTestCase
         $value = redis()->get('aa');
         var_dump($value);
 
-        //		$res = $this->client->get('/', ['user' => 'developer']);
+        $res = $this->client->get('/', ['user' => 'developer']);
 //
 //		$this->assertSame(0, $res['code']);
 //		$this->assertSame('developer', $res['data']['user']);
