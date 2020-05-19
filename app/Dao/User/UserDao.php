@@ -12,6 +12,7 @@ namespace  App\Dao\User;
 
 use App\Dao\AbstractDao;
 use App\Model\User\User;
+use Hyperf\Utils\Str;
 
 class UserDao extends AbstractDao
 {
@@ -30,5 +31,28 @@ class UserDao extends AbstractDao
             self::STATUS_ENABLED => '已启用',
             self::STATUS_DISABLED => '已禁用',
         ];
+    }
+
+    public function generateSalt()
+    {
+        return Str::random(10);
+    }
+
+    public function generatePasswordHash($password, $salt = '')
+    {
+        if ($salt == '') {
+            $salt = $this->generateSalt();
+        }
+        return sha1(substr(md5($password), 0, 16) . $salt);
+    }
+
+    public function getInfoByUsername($username)
+    {
+        return $this->getInfoByCondition([['username', '=', $username]]);
+    }
+
+    public function getInfoByMobile($mobile)
+    {
+        return $this->getInfoByCondition([['mobile', '=', $mobile]]);
     }
 }

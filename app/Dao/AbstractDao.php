@@ -15,7 +15,9 @@ use App\Exception\CreatedException;
 use App\Exception\DeletedException;
 use App\Exception\HttpException;
 use App\Exception\NotFoundException;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
+use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
 use Throwable;
 
@@ -63,6 +65,23 @@ class AbstractDao implements InterfaceDao
         return $this->model;
     }
 
+    /**
+     * 列表
+     * @param array $condition
+     * @param int $page
+     * @param int $limit
+     * @param string $orderBy
+     * @param array $groupBy
+     * @param array $with
+     * @param string[] $columns
+     * @return LengthAwarePaginatorInterface
+     *
+     * $condition 格式:
+     * [
+     *  ['user_id', 'in', [1,2]],
+     *  ['title', '=', 'title']
+     * ]
+     */
     public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
     {
         $query = $this->model::query();
@@ -71,7 +90,7 @@ class AbstractDao implements InterfaceDao
             $query->with($this->with);
         }
         if ($condition) {
-            $this->handleListsCondition($query, $condition);
+            $this->handleQueryCondition($query, $condition);
         }
         if ($groupBy) {
             $query->groupBy($groupBy);
@@ -82,6 +101,12 @@ class AbstractDao implements InterfaceDao
         return $query->paginate($limit, $columns, '', $page);
     }
 
+    /**
+     * 详情
+     * @param $id
+     * @param array $with
+     * @return Builder|Collection|Model
+     */
     public function info($id, $with = [])
     {
         $query = $this->model::query();
@@ -97,6 +122,7 @@ class AbstractDao implements InterfaceDao
     }
 
     /**
+     * 创建
      * @param array $data
      * @return int|string
      */
@@ -116,6 +142,12 @@ class AbstractDao implements InterfaceDao
         return $id;
     }
 
+    /**
+     * 编辑
+     * @param $id
+     * @param array $data
+     * @return Model
+     */
     public function update($id, array $data)
     {
         $this->actionIsAllow('update');
@@ -129,6 +161,11 @@ class AbstractDao implements InterfaceDao
         return $model;
     }
 
+    /**
+     * 删除
+     * @param $id
+     * @return bool
+     */
     public function remove($id)
     {
         try {
@@ -143,16 +180,35 @@ class AbstractDao implements InterfaceDao
         }
     }
 
+    /**
+     * 清除缓存
+     * @param $id
+     * @return bool
+     */
     public function removeCache($id)
     {
         return true;
     }
 
     /**
+     * 通过条件查询详情
+     * @param array $condition
+     * @return Builder|Model|object|null
+     */
+    public function getInfoByCondition($condition = [])
+    {
+        $query = $this->model::query();
+        if ($condition) {
+            $this->handleQueryCondition($query, $condition);
+        }
+        return $query->first();
+    }
+
+    /**
      * 检查模型中是否存在对应的关联模型
      * @param array $with
      */
-    public function checkAllowWithModel(array $with)
+    protected function checkAllowWithModel(array $with)
     {
         $this->with = $with;
     }
@@ -162,7 +218,7 @@ class AbstractDao implements InterfaceDao
      * @param Builder $query
      * @param array $condition
      */
-    protected function handleListsCondition(Builder $query, array $condition)
+    protected function handleQueryCondition(Builder $query, array $condition)
     {
         foreach ($condition as $where) {
             switch ($where[1]) {

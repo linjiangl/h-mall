@@ -14,6 +14,7 @@ use App\Controller\AbstractController;
 use App\Service\Auth\AuthService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
 use Phper666\JWTAuth\JWT;
 
@@ -29,7 +30,7 @@ class LoginController extends AbstractController
      */
     protected $jwt;
 
-    public function index()
+    public function index(RequestInterface $request)
     {
         $authService = new AuthService($this->jwt);
         return $authService->login();
