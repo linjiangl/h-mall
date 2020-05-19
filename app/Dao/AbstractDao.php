@@ -19,6 +19,20 @@ use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Model;
 use Throwable;
 
+/**
+ * Class AbstractDao
+ * @package App\Dao
+ *
+ * 常用状态:
+ *  - STATUS_PROCESSED  // 待处理
+ *  - STATUS_ENABLED    // 已启用
+ *  - STATUS_DISABLED   // 已禁用
+ *  - STATUS_REFUSED    // 已拒绝
+ *  - STATUS_CLOSED     // 已关闭
+ *  - STATUS_TRASHED    // 回收站
+ *  - STATUS_DELETED    // 已删除
+ *  - STATUS_APPLIED    // 已申请
+ */
 class AbstractDao implements InterfaceDao
 {
     /**
@@ -99,8 +113,7 @@ class AbstractDao implements InterfaceDao
         $pk = $model->getKeyName();
         $id = $model->$pk;
         $this->removeCache($id);
-
-        throw new CreatedException($id);
+        return $id;
     }
 
     public function update($id, array $data)
@@ -124,8 +137,7 @@ class AbstractDao implements InterfaceDao
             $model = $this->info($id);
             $model->delete();
             $this->removeCache($id);
-
-            throw new DeletedException();
+            return true;
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

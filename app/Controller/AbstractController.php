@@ -34,4 +34,14 @@ abstract class AbstractController
      * @var ResponseInterface
      */
     protected $response;
+
+    protected function created($id)
+    {
+        return $this->response->json($id)->withStatus(201);
+    }
+
+    protected function deleted()
+    {
+        return $this->response->json([])->withStatus(204);
+    }
 }

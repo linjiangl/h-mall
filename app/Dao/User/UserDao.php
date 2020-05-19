@@ -15,18 +15,20 @@ use App\Model\User\User;
 
 class UserDao extends AbstractDao
 {
-    // 状态
-    const STATUS_OPEN = 1;
-    const STATUS_CLOSE = 0;
+    const STATUS_PROCESSED = 0;
+    const STATUS_ENABLED = 1;
+    const STATUS_DISABLED = 2;
 
     protected $model = User::class;
+
+    protected $noAllowActions = [];
 
     public static function getStatusLabel()
     {
         return [
-            self::STATUS_CLOSE => '关闭',
-            self::STATUS_OPEN => '开启'
+            self::STATUS_PROCESSED => '待审核',
+            self::STATUS_ENABLED => '已启用',
+            self::STATUS_DISABLED => '已禁用',
         ];
     }
-
 }
