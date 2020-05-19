@@ -34,6 +34,8 @@ class CreateOrderCommentReplyTable extends Migration
 
             $table->index(['comment_id'], 'comment_id');
             $table->index(['product_id', 'top'], 'product_id_top');
+
+            $table->foreign('comment_id')->references('id')->on('order_comment');
         });
     }
 

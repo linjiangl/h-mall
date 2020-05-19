@@ -34,6 +34,8 @@ class CreateProductSkuTable extends Migration
 
             $table->index(['shop_id'], 'shop_id');
             $table->index(['product_id'], 'product_id');
+
+            $table->foreign('product_id')->references('id')->on('product');
         });
     }
 

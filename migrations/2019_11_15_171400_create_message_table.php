@@ -26,6 +26,7 @@ class CreateMessageTable extends Migration
             $table->integerIncrements('id');
             $table->integer('sender_id', false, true)->comment('发送消息用户');
             $table->integer('receiver_id', false, true)->default(0)->comment('接收消息用户 0:用户都能接收');
+            $table->integer('text_id', false, true);
             $table->string('type', 30)->comment('类型 announce:系统公告 remind:系统通知');
             $table->string('module', 30)->default('')->comment('模块');
             $table->integer('module_id', false, true)->default(0);

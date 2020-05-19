@@ -24,9 +24,11 @@ class CreateCategoryOptionTable extends Migration
             $table->integerIncrements('id');
             $table->integer('category_id', false, true);
             $table->integer('option_id', false, true);
-            $table->timestamps();
 
             $table->unique(['category_id', 'option_id'], 'category_id_option_id');
+
+            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('option_id')->references('id')->on('option');
         });
     }
 

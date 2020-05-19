@@ -24,9 +24,11 @@ class CreateProductSkuOptionValueTable extends Migration
             $table->integerIncrements('id');
             $table->integer('product_sku_id', false, true);
             $table->integer('option_value_id', false, true);
-            $table->timestamps();
 
             $table->unique(['product_sku_id', 'option_value_id'], 'sku_id_option_value_id');
+
+            $table->foreign('product_sku_id')->references('id')->on('product_sku');
+            $table->foreign('option_value_id')->references('id')->on('option_value');
         });
     }
 

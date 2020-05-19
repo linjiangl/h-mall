@@ -54,6 +54,8 @@ class CreateRefundTable extends Migration
             $table->index(['order_sn'], 'order_sn');
             $table->index(['status'], 'status');
             $table->index(['created_at'], 'created_at');
+
+            $table->foreign('order_id')->references('id')->on('order');
         });
     }
 

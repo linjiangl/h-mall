@@ -33,6 +33,8 @@ class CreateShopTable extends Migration
             $table->unique(['user_id'], 'user_id');
             $table->index(['status'], 'status');
             $table->index(['created_at'], 'created_at');
+
+            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

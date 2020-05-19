@@ -29,6 +29,8 @@ class CreateShopFinanceTable extends Migration
             $table->unique(['shop_id'], 'shop_id');
             $table->index(['balance'], 'balance');
             $table->index(['freeze_balance'], 'freeze_balance');
+
+            $table->foreign('shop_id')->references('id')->on('shop');
         });
     }
 

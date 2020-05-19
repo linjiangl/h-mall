@@ -40,6 +40,8 @@ class CreateOrderInvoiceTable extends Migration
             $table->index(['user_id', 'status'], 'user_id_status');
             $table->index(['order_id'], 'order_id');
             $table->index(['order_sn'], 'order_sn');
+
+            $table->foreign('order_id')->references('id')->on('order');
         });
     }
 

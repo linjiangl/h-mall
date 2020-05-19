@@ -63,6 +63,8 @@ class CreateOrderTable extends Migration
             $table->index(['total_amount', 'status'], 'total_amount_status');
             $table->index(['status'], 'status');
             $table->index(['created_at'], 'created_at');
+
+            $table->foreign('buyer_id')->references('id')->on('user');
         });
     }
 

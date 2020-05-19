@@ -39,6 +39,8 @@ class CreateUserInvoiceTable extends Migration
             $table->timestamps();
 
             $table->index(['user_id'], 'user_id');
+
+            $table->foreign('user_id')->references('id')->on('user');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-发票'");

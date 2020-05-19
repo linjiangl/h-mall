@@ -24,7 +24,7 @@ class CreateOrderExpressTable extends Migration
             $table->integerIncrements('id');
             $table->integer('order_id', false, true)->default(0);
             $table->integer('refund_id', false, true)->default(0);
-            $table->integer('express_id', false, true);
+            $table->smallInteger('express_id', false, true);
             $table->string('express_name', 20)->comment('快递名称');
             $table->string('express_no', 64)->comment('快递单号');
             $table->decimal('amount', 6, 2)->unsigned()->default(0)->comment('快递费');
@@ -36,6 +36,8 @@ class CreateOrderExpressTable extends Migration
             $table->index(['refund_id'], 'refund_id');
             $table->index(['express_id'], 'express_id');
             $table->index(['express_no'], 'express_no');
+
+            $table->foreign('express_id')->references('id')->on('express');
         });
     }
 

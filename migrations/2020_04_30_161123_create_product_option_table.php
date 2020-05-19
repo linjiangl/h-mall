@@ -24,9 +24,11 @@ class CreateProductOptionTable extends Migration
             $table->integerIncrements('id');
             $table->integer('product_id', false, true);
             $table->integer('option_id', false, true);
-            $table->timestamps();
 
             $table->unique(['product_id', 'option_id'], 'product_id_option_id');
+
+            $table->foreign('product_id')->references('id')->on('product');
+            $table->foreign('option_id')->references('id')->on('option');
         });
     }
 

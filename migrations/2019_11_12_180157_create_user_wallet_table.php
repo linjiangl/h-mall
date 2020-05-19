@@ -32,6 +32,8 @@ class CreateUserWalletTable extends Migration
             $table->unique(['user_id'], 'user_id');
             $table->index(['integral'], 'integral');
             $table->index(['balance'], 'balance');
+
+            $table->foreign('user_id')->references('id')->on('user');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户钱包'");

@@ -29,6 +29,8 @@ class CreateUserHistoryTable extends Migration
             $table->timestamps();
 
             $table->unique(['user_id', 'product_id'], 'user_id_product_id');
+
+            $table->foreign('user_id')->references('id')->on('user');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-浏览记录'");

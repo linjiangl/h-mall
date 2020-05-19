@@ -33,6 +33,8 @@ class CreateCustomerServiceTable extends Migration
             $table->timestamps();
 
             $table->index(['shop_id'], 'shop_id');
+
+            $table->foreign('shop_id')->references('id')->on('shop');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '客服'");

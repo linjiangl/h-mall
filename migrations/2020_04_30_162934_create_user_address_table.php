@@ -42,6 +42,8 @@ class CreateUserAddressTable extends Migration
             $table->index(['mobile'], 'mobile');
             $table->index(['province_id'], 'province_id');
             $table->index(['city_id'], 'city_id');
+
+            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

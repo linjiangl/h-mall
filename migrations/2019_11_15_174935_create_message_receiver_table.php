@@ -32,6 +32,8 @@ class CreateMessageReceiverTable extends Migration
 
             $table->unique(['message_id'], 'message_id');
             $table->unique(['user_id', 'status'], 'user_id_status');
+
+            $table->foreign('message_id')->references('id')->on('message');
         });
     }
 

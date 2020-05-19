@@ -34,6 +34,8 @@ class CreateShopFinanceLogTable extends Migration
 
             $table->index(['shop_id', 'amount'], 'shop_id_amount');
             $table->index(['amount'], 'amount');
+
+            $table->foreign('shop_id')->references('id')->on('shop');
         });
     }
 

@@ -30,6 +30,8 @@ class CreateSlideTable extends Migration
             $table->timestamps();
 
             $table->index(['shop_id'], 'shop_id');
+
+            $table->foreign('shop_id')->references('id')->on('shop');
         });
     }
 

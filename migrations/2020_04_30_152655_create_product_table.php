@@ -47,6 +47,8 @@ class CreateProductTable extends Migration
             $table->index(['user_id', 'status'], 'user_id_status');
             $table->index(['category_id', 'status'], 'category_id_status');
             $table->index(['created_at', 'status'], 'created_at_status');
+
+            $table->foreign('shop_id')->references('id')->on('shop');
         });
     }
 

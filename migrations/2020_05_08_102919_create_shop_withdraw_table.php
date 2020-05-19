@@ -22,7 +22,7 @@ class CreateShopWithdrawTable extends Migration
     {
         Schema::create('shop_withdraw', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->mediumInteger('shop_id', false, true);
+            $table->integer('shop_id', false, true);
             $table->integer('user_id', false, true);
             $table->decimal('amount', 10, 2)->unsigned();
             $table->tinyInteger('status', false, true)->default(0);
@@ -32,6 +32,8 @@ class CreateShopWithdrawTable extends Migration
 
             $table->index(['shop_id', 'amount'], 'shop_id_amount');
             $table->index(['amount'], 'amount');
+
+            $table->foreign('shop_id')->references('id')->on('shop');
         });
     }
 

@@ -42,6 +42,8 @@ class CreateUserVipCardTable extends Migration
             $table->index(['total_exp'], 'total_exp');
             $table->index(['id_card'], 'id_card');
             $table->index(['created_at'], 'created_at');
+
+            $table->foreign('user_id')->references('id')->on('user');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-会员卡'");
