@@ -17,7 +17,7 @@
         "ext-json": "*",
         "ext-bcmath": "*",
         "ext-openssl": "*",
-		"ext-redis": "*",
+        "ext-redis": "*",
         "ext-pdo": "*",
         "hyperf/cache": "~1.1.0",
         "hyperf/command": "~1.1.0",
@@ -86,9 +86,9 @@
         "psr-4": {
             "App\\": "app/"
         },
-		"files": [
-			"app/Helper/Functions.php"
-		]
+        "files": [
+            "app/Helper/Functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
