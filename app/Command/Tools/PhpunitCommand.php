@@ -34,7 +34,7 @@ class PhpunitCommand extends HyperfCommand
         $filter = $this->input->getOption('filter');
         $testExec = 'vendor/bin/co-phpunit -c phpunit.xml --colors=always';
         if ($filter != 'all') {
-            $testExec = $testExec . ' -- --filter=' . $filter;
+            $testExec = $testExec . ' --filter ' . $filter;
         }
         exec("rm -rf runtime/container");
         exec($testExec, $output);

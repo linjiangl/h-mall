@@ -12,5 +12,5 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/v1', function () {
     // 首页
-    Router::get('/home', 'App\Controller\Mobile\v1\IndexController::index');
+    Router::get('/home', 'App\Controller\Mobile\v1\HomeController::index');
 });

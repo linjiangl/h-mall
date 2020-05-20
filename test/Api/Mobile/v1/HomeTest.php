@@ -12,12 +12,14 @@ namespace HyperfTest\Api\Mobile\v1;
 
 use HyperfTest\HttpTestCase;
 
-class IndexTest extends HttpTestCase
+class HomeTest extends HttpTestCase
 {
-    public function testIndexHome()
+    public function testMobileHome()
     {
         $this->assertTrue(true);
         $result = $this->client->get('/v1/home');
-        var_dump($result);
+
+        $this->assertSame(200, $result['code']);
+        $this->assertSame('rest_v1', $result['data']);
     }
 }

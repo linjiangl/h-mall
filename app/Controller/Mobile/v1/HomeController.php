@@ -19,7 +19,7 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  * @Controller(prefix="rate-limit")
  * @RateLimit
  */
-class IndexController extends AbstractController
+class HomeController extends AbstractController
 {
     public function index(RequestInterface $request)
     {
