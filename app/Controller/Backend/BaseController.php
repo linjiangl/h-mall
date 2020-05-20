@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace  App\Controller\Backend;
+namespace App\Controller\Backend;
 
 use App\Controller\AbstractController;
 

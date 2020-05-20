@@ -10,15 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Controller\Mobile\v1;
 
-use App\Block\Frontend\IndexBlock;
 use App\Controller\AbstractController;
-use App\Request\UserRequest;
-use Carbon\Carbon;
-use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
-use Hyperf\Snowflake\IdGenerator;
 
 /**
  * @Controller(prefix="rate-limit")
@@ -26,9 +21,10 @@ use Hyperf\Snowflake\IdGenerator;
  */
 class IndexController extends AbstractController
 {
-    public function index(UserRequest $request)
+    public function index(RequestInterface $request)
     {
-        return 'v1版接口';
+        return [
+            'http' => 'v1'
+        ];
     }
-
 }

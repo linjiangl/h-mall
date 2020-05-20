@@ -8,12 +8,11 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace  App\Command\Common;
+namespace App\Command\Tools;
 
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Hyperf\DB\DB;
-use Psr\Container\ContainerInterface;
 
 /**
  * @Command
@@ -22,11 +21,12 @@ use Psr\Container\ContainerInterface;
  */
 class ModelCommand extends HyperfCommand
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
+    protected $name = 'tools:gen-model';
 
+    /**
+     * 迁移表的表名
+     * @var string
+     */
     protected $migrateTable = 'migrations';
 
     /**
@@ -46,21 +46,18 @@ class ModelCommand extends HyperfCommand
         'statistics',
     ];
 
+    /**
+     * 指定的数据表
+     * @var array
+     */
     protected $specifyTables = [
         // 'customer_service'
     ];
 
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-
-        parent::__construct('custom:gen-model');
-    }
-
     public function configure()
     {
         parent::configure();
-        $this->setDescription('Model classes that generate all tables');
+        $this->setDescription('根据表名生成对应的模型类文件');
     }
 
     public function handle()

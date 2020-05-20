@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * Multi-user mall
  *
@@ -9,6 +11,6 @@
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/v1', function () {
-	// 首页
-	Router::get('/', 'App\Controller\Mobile\v1\IndexController::index');
+    // 首页
+    Router::get('/home', 'App\Controller\Mobile\v1\IndexController::index');
 });
