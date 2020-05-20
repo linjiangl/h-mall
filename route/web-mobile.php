@@ -6,5 +6,9 @@
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
+use Hyperf\HttpServer\Router\Router;
 
-// 移动端路由
+Router::addGroup('/v1', function () {
+	// 首页
+	Router::get('/', 'App\Controller\Mobile\v1\IndexController::index');
+});

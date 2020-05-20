@@ -10,7 +10,11 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Tests">
+            <file>test/Api/Frontend/Auth/RegisterTest.php</file>
+            <file>test/Api/Frontend/Auth/LoginTest.php</file>
+            <file>test/Api/Frontend/Auth/AuthTest.php</file>
             <directory suffix="Test.php">./test</directory>
+            <exclude>test/Api/Frontend/Auth</exclude>
         </testsuite>
     </testsuites>
     <filter>

@@ -10,11 +10,11 @@ declare(strict_types=1);
  */
 namespace  App\Controller\Frontend\Auth;
 
+use App\Block\Frontend\Auth\LoginBlock;
 use App\Controller\AbstractController;
-use App\Service\Auth\AuthService;
+use App\Request\Frontend\Auth\LoginRequest;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
 use Phper666\JWTAuth\JWT;
 
@@ -30,9 +30,9 @@ class LoginController extends AbstractController
      */
     protected $jwt;
 
-    public function index(RequestInterface $request)
+    public function index(LoginRequest $request)
     {
-        $authService = new AuthService($this->jwt);
-        return $authService->login();
+        $block = new LoginBlock($this->jwt);
+        return $block->index($request);
     }
 }

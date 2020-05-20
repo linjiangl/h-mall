@@ -46,9 +46,9 @@ class UserDao extends AbstractDao
         return sha1(substr(md5($password), 0, 16) . $salt);
     }
 
-    public function getInfoByUsername($username)
+    public function getInfoByUsername($username, $symbol = '=')
     {
-        return $this->getInfoByCondition([['username', '=', $username]]);
+        return $this->getInfoByCondition([['username', $symbol, $username]]);
     }
 
     public function getInfoByMobile($mobile)

@@ -16,6 +16,7 @@ use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
 use App\Model\User\User;
+use Carbon\Carbon;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
@@ -54,24 +55,13 @@ class AuthService
      * 账号登录
      * @param $account
      * @param $password
-     * @param string $scene
      * @return array
      */
-    public function login($account, $password, $scene = 'username')
+    public function login($account, $password)
     {
-        $sceneMap = [
-            'username', 'mobile'
-        ];
-        if (!in_array($scene, $sceneMap)) {
-            throw new InternalException('仅支持用户名/手机号登录');
-        }
         $userDao = new UserDao();
-        if ($scene == 'username') {
-            $user = $userDao->getInfoByUsername($account);
-        } else {
-            $user = $userDao->getInfoByMobile($account);
-        }
-        if (!$user) {
+        $user = $userDao->getInfoByUsername($account);
+        if (! $user) {
             throw new InternalException('该账号不存在');
         }
         /** @var User $user */
@@ -92,6 +82,9 @@ class AuthService
                 'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
                 'exp' => $this->jwt->getTTL(),
             ];
+
+            $user->lasted_login_at = Carbon::now()->toDateTimeString();
+            $user->save();
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
         }
@@ -103,23 +96,32 @@ class AuthService
      * 注册
      * @param $username
      * @param $password
+     * @param $confirmPassword
      * @param array $extend
      * @return array
      */
-    public function register($username, $password, $extend = [])
+    public function register($username, $password, $confirmPassword, $extend = [])
     {
+        if (mb_strlen($password) < 6) {
+            throw new InternalException('密码不能少于6位');
+        }
+        if ($password != $confirmPassword) {
+            throw new InternalException('两次输入的密码不一样');
+        }
+
         try {
             $userDao = new UserDao();
             $salt = $userDao->generateSalt();
             $passwordHash = $userDao->generatePasswordHash($password, $salt);
             $userDao->create([
                 'username' => $username,
-                'nickname' => '商城用户',
+                'nickname' => '新手用户',
                 'password' => $passwordHash,
                 'salt' => $salt,
                 'avatar' => $extend['avatar'] ?? '',
                 'mobile' => $extend['mobile'] ?? '',
                 'email' => $extend['email'] ?? '',
+                'lasted_login_at' => Carbon::now()->toDateTimeString()
             ]);
 
             return $this->login($username, $password);
