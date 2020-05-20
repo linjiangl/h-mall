@@ -22,10 +22,6 @@ class ValidationExceptionHandler extends \Hyperf\Validation\ValidationExceptionH
         $this->stopPropagation();
         /** @var ValidationException $throwable */
         $body = $throwable->validator->errors()->first();
-        $data = json_encode([
-            'code' => $throwable->status,
-            'message' => $body,
-        ], JSON_UNESCAPED_UNICODE);
-        return $response->withStatus($throwable->status)->withBody(new SwooleStream($data));
+        return response_json('', $body, $throwable->status);
     }
 }

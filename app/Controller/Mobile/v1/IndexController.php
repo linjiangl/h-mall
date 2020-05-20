@@ -23,8 +23,6 @@ class IndexController extends AbstractController
 {
     public function index(RequestInterface $request)
     {
-        return [
-            'http' => 'v1'
-        ];
+        return 'rest_v1';
     }
 }

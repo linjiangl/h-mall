@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 
 use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Server\ServerFactory;
@@ -109,5 +110,18 @@ if (! function_exists('response')) {
     function response()
     {
         return container()->get(ResponseInterface::class);
+    }
+}
+
+if (! function_exists('response_json')) {
+    function response_json($data, $message = 'ok', $code = 200)
+    {
+        $code = $code ?: 500;
+        $data = json_encode([
+            'code' => $code,
+            'message' => $message,
+            'data' => $data,
+        ], JSON_UNESCAPED_UNICODE);
+        return response()->withAddedHeader('Content-Type', 'application/json')->withStatus($code)->withBody(new SwooleStream($data));
     }
 }

@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Exception\Handler;
 
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -33,11 +32,7 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
-        $data = json_encode([
-            'code' => 500,
-            'message' => $throwable->getMessage(),
-        ], JSON_UNESCAPED_UNICODE);
-        return $response->withAddedHeader('Content-Type', 'application/json')->withStatus(500)->withBody(new SwooleStream($data));
+        return response_json('', $throwable->getMessage(), 500);
     }
 
     public function isValid(Throwable $throwable): bool

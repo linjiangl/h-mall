@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Exception\Handler;
 
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\RateLimit\Exception\RateLimitException;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -27,14 +26,8 @@ class RateLimitExceptionHandler extends ExceptionHandler
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
         if ($throwable instanceof RateLimitException) {
-            $code = 429;
-            $data = json_encode([
-                'code' => $code,
-                'message' => 'Too Many Requests',
-            ], JSON_UNESCAPED_UNICODE);
-
             $this->stopPropagation();
-            return $response->withStatus($code)->withBody(new SwooleStream($data));
+            return response_json('', 'Too Many Requests', 429);
         }
 
         return $response;

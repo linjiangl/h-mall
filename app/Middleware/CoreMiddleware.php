@@ -15,7 +15,6 @@ use App\Exception\MethodNotAllowedException;
 use App\Exception\NotFoundException;
 use Closure;
 use FastRoute\Dispatcher;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\Server\Exception\ServerException;
 use Hyperf\Utils\Context;
@@ -101,11 +100,12 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
     /**
      * Handle the response when the routes found but doesn't match any available methods.
      *
+     * @param array $methods
+     * @param ServerRequestInterface $request
      * @return array|Arrayable|mixed|ResponseInterface|string
      */
     protected function handleMethodNotAllowed(array $methods, ServerRequestInterface $request)
     {
-        $this->response()->withStatus(405)->withAddedHeader('Allow', implode(', ', $methods));
         throw new MethodNotAllowedException(implode(', ', $methods) . ' ');
     }
 
@@ -113,28 +113,19 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
      * Transfer the non-standard response content to a standard response object.
      *
      * @param array|Arrayable|Jsonable|string $response
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
      */
     protected function transferToResponse($response, ServerRequestInterface $request): ResponseInterface
     {
-        if (is_string($response)) {
-            return $this->response()->withAddedHeader('content-type', 'application/json')->withBody(new SwooleStream($response));
-        }
-
         if (is_array($response) || $response instanceof Arrayable) {
             if ($response instanceof Arrayable) {
                 $response = $response->toArray();
             }
-            return $this->response()
-                ->withAddedHeader('content-type', 'application/json')
-                ->withBody(new SwooleStream(json_encode($response, JSON_UNESCAPED_UNICODE)));
         }
-
         if ($response instanceof Jsonable) {
-            return $this->response()
-                ->withAddedHeader('content-type', 'application/json')
-                ->withBody(new SwooleStream((string) $response));
+            $response = (string) $response;
         }
-
-        return $this->response()->withAddedHeader('content-type', 'application/json')->withBody(new SwooleStream((string) $response));
+        return response_json($response);
     }
 }
