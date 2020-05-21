@@ -13,6 +13,7 @@ namespace App\Dao;
 use App\Exception\BadRequestException;
 use App\Exception\HttpException;
 use App\Exception\NotFoundException;
+use Carbon\CarbonInterface;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
@@ -122,22 +123,26 @@ class AbstractDao implements InterfaceDao
     /**
      * 创建
      * @param array $data
-     * @return int|string
+     * @return bool|CarbonInterface|float|\Hyperf\Utils\Collection|int|mixed|string|null
      */
     public function create(array $data)
     {
-        $this->actionIsAllow('create');
+        try {
+            $this->actionIsAllow('create');
 
-        /** @var Model $model */
-        $model = new $this->model($data);
-        if (! $model->save()) {
-            throw new BadRequestException('创建失败');
+            /** @var Model $model */
+            $model = new $this->model($data);
+            if (! $model->save()) {
+                throw new BadRequestException('创建失败');
+            }
+
+            $pk = $model->getKeyName();
+            $id = $model->$pk;
+            $this->removeCache($id);
+            return $id;
+        } catch (Throwable $e) {
+            throw new HttpException($e->getMessage(), $e->getCode());
         }
-
-        $pk = $model->getKeyName();
-        $id = $model->$pk;
-        $this->removeCache($id);
-        return $id;
     }
 
     /**
@@ -148,15 +153,19 @@ class AbstractDao implements InterfaceDao
      */
     public function update($id, array $data)
     {
-        $this->actionIsAllow('update');
+        try {
+            $this->actionIsAllow('update');
 
-        /** @var Model $model */
-        $model = $this->info($id);
-        if (! $model->update($data)) {
-            throw new BadRequestException('保存失败');
+            /** @var Model $model */
+            $model = $this->info($id);
+            if (! $model->update($data)) {
+                throw new BadRequestException('保存失败');
+            }
+            $this->removeCache($id);
+            return $model;
+        } catch (Throwable $e) {
+            throw new HttpException($e->getMessage(), $e->getCode());
         }
-        $this->removeCache($id);
-        return $model;
     }
 
     /**

@@ -35,6 +35,8 @@ class HttpExceptionHandler extends ExceptionHandler
 
     /**
      * 判断该异常处理器是否要对该异常进行处理.
+     * @param Throwable $throwable
+     * @return bool
      */
     public function isValid(Throwable $throwable): bool
     {
