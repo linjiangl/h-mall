@@ -27,10 +27,24 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'username' => 'required|max:20',
-            'age' => 'required|integer',
-        ];
+        $rules = [];
+        switch ($this->getMethod()) {
+            case 'POST':
+                $rules = [
+                    'username' => 'required|max:20',
+                    'age' => 'required|integer',
+                ];
+                break;
+            case 'PUT':
+            case 'PATCH':
+                $rules = [
+                    'id' => 'required|integer|gt:0',
+                    'username' => 'required|max:20',
+                    'age' => 'required|integer',
+                ];
+                break;
+        }
+        return $rules;
     }
 
     public function attributes(): array

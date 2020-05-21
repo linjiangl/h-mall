@@ -11,8 +11,6 @@ declare(strict_types=1);
 namespace App\Dao;
 
 use App\Exception\BadRequestException;
-use App\Exception\CreatedException;
-use App\Exception\DeletedException;
 use App\Exception\HttpException;
 use App\Exception\NotFoundException;
 use Hyperf\Contract\LengthAwarePaginatorInterface;

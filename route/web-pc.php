@@ -14,7 +14,7 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/frontend', function () {
     // 首页
-    Router::get('/', 'App\Controller\Frontend\IndexController::index');
+    Router::addRoute(['GET', 'POST', 'PUT'], '/', 'App\Controller\Frontend\IndexController::index');
 
     // 登录/退出
     Router::post('/login', 'App\Controller\Frontend\Auth\LoginController::index');
