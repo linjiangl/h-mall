@@ -31,10 +31,13 @@ class CreateUserTable extends Migration
             $table->tinyInteger('sex', false, true)->default(0)->comment('性别 1:男, 2:女, 3:保密');
             $table->string('email', 50)->default('')->comment('邮箱');
             $table->string('password', 64)->comment('密码');
+            $table->string('remember_token', 64)->default('');
             $table->string('salt', 24)->default('')->comment('加密盐');
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 1:正常, 2:禁用');
             $table->tinyInteger('role', false, true)->default(0)->comment('角色 0:普通用户 1:管理员');
             $table->timestamp('lasted_login_at')->comment('最后登录时间');
+            $table->timestamp('mobile_verified_at')->comment('手机验证时间');
+            $table->timestamp('email_verified_at')->comment('邮箱验证时间');
             $table->timestamps();
 
             $table->unique(['username'], 'username');

@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 
 use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\DB\DB;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Logger\LoggerFactory;

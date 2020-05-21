@@ -101,7 +101,9 @@ class ModelCommand extends HyperfCommand
     protected function getAllTables()
     {
         if (empty($this->specifyTables)) {
-            $tables = DB::query('show tables');
+            /** @var DB $db */
+            $db = container()->get(DB::class);
+            $tables = $db->query('show tables');
             $tables = array_column($tables, 'Tables_in_hyperf-mall');
             $index = array_search($this->migrateTable, $tables);
             unset($tables[$index]);

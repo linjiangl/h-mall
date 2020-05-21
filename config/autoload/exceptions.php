@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * Multi-user mall
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
  */
 
 return [
@@ -15,7 +14,7 @@ return [
         'http' => [
             \App\Exception\Handler\HttpExceptionHandler::class,
             \App\Exception\Handler\AppExceptionHandler::class,
-			\App\Exception\Handler\RateLimitExceptionHandler::class,
+            \App\Exception\Handler\RateLimitExceptionHandler::class,
             \Hyperf\Validation\ValidationExceptionHandler::class,
         ],
     ],
