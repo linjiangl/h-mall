@@ -37,11 +37,11 @@ abstract class AbstractController
 
     protected function created($id)
     {
-        return $this->response->json($id)->withStatus(201);
+        return response_json($id, '', 201);
     }
 
     protected function deleted()
     {
-        return $this->response->json([])->withStatus(204);
+        return response_json(true, '', 204);
     }
 }

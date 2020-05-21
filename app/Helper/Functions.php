@@ -114,9 +114,10 @@ if (! function_exists('response')) {
 }
 
 if (! function_exists('response_json')) {
-    function response_json($data, $message = 'ok', $code = 200)
+    function response_json($data, $message = '', $code = 200)
     {
         $code = $code ?: 500;
+        $message = $message ?: 'ok';
         $data = json_encode([
             'code' => $code,
             'message' => $message,

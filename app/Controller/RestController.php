@@ -16,7 +16,7 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class RestController extends AbstractController
 {
     /**
-     * @var InterfaceBlock;
+     * @var InterfaceBlock
      */
     protected $block;
 

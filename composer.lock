@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0f89eb655fe2850883794f897b6d664",
+    "content-hash": "e5c09613ba8149ee125b25e7026b182b",
     "packages": [
         {
             "name": "bandwidth-throttle/token-bucket",
@@ -1632,16 +1632,16 @@
         },
         {
             "name": "hyperf/database",
-            "version": "v1.1.30",
+            "version": "v1.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/database.git",
-                "reference": "f2d125ca49908e89e79806e299ecfa8811e83e03"
+                "reference": "00708c8166cab6bbbf52fcde85f1d0f98969b3b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/database/zipball/f2d125ca49908e89e79806e299ecfa8811e83e03",
-                "reference": "f2d125ca49908e89e79806e299ecfa8811e83e03",
+                "url": "https://api.github.com/repos/hyperf/database/zipball/00708c8166cab6bbbf52fcde85f1d0f98969b3b2",
+                "reference": "00708c8166cab6bbbf52fcde85f1d0f98969b3b2",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1690,7 +1690,7 @@
                 "hyperf",
                 "php"
             ],
-            "time": "2020-05-03T05:29:33+00:00"
+            "time": "2020-05-14T04:03:27+00:00"
         },
         {
             "name": "hyperf/db",
@@ -1812,16 +1812,16 @@
         },
         {
             "name": "hyperf/devtool",
-            "version": "v1.1.30",
+            "version": "v1.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/devtool.git",
-                "reference": "98442d683fc6f60437eb61a5fe6b385ea4252ff6"
+                "reference": "8e9e6e1c2fa43cd29abdde2545219e899d65ea44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/devtool/zipball/98442d683fc6f60437eb61a5fe6b385ea4252ff6",
-                "reference": "98442d683fc6f60437eb61a5fe6b385ea4252ff6",
+                "url": "https://api.github.com/repos/hyperf/devtool/zipball/8e9e6e1c2fa43cd29abdde2545219e899d65ea44",
+                "reference": "8e9e6e1c2fa43cd29abdde2545219e899d65ea44",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1869,7 +1869,7 @@
                 "php",
                 "swoole"
             ],
-            "time": "2020-05-01T09:04:40+00:00"
+            "time": "2020-05-04T03:59:11+00:00"
         },
         {
             "name": "hyperf/di",
@@ -2127,16 +2127,16 @@
         },
         {
             "name": "hyperf/exception-handler",
-            "version": "v1.1.26",
+            "version": "v1.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/exception-handler.git",
-                "reference": "4c5299013a76fd74112308a870e1e5cef89fcb9a"
+                "reference": "17cdfb50071adfcb0c84851523033edef2b874c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/exception-handler/zipball/4c5299013a76fd74112308a870e1e5cef89fcb9a",
-                "reference": "4c5299013a76fd74112308a870e1e5cef89fcb9a",
+                "url": "https://api.github.com/repos/hyperf/exception-handler/zipball/17cdfb50071adfcb0c84851523033edef2b874c1",
+                "reference": "17cdfb50071adfcb0c84851523033edef2b874c1",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2183,7 +2183,7 @@
                 "php",
                 "swoole"
             ],
-            "time": "2020-04-16T03:41:10+00:00"
+            "time": "2020-05-13T13:04:42+00:00"
         },
         {
             "name": "hyperf/framework",
@@ -3337,16 +3337,16 @@
         },
         {
             "name": "hyperf/server",
-            "version": "v1.1.26",
+            "version": "v1.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/server.git",
-                "reference": "ca348e07e7aa35b63cf52230261c068dbdcbb0f9"
+                "reference": "abff33b07902ad8cab62663d0f76d294ec1d27aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/server/zipball/ca348e07e7aa35b63cf52230261c068dbdcbb0f9",
-                "reference": "ca348e07e7aa35b63cf52230261c068dbdcbb0f9",
+                "url": "https://api.github.com/repos/hyperf/server/zipball/abff33b07902ad8cab62663d0f76d294ec1d27aa",
+                "reference": "abff33b07902ad8cab62663d0f76d294ec1d27aa",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3400,7 +3400,7 @@
                 "server",
                 "swoole"
             ],
-            "time": "2020-04-16T03:41:10+00:00"
+            "time": "2020-05-09T10:14:50+00:00"
         },
         {
             "name": "hyperf/service-governance",
@@ -3656,16 +3656,16 @@
         },
         {
             "name": "hyperf/utils",
-            "version": "v1.1.27",
+            "version": "v1.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/utils.git",
-                "reference": "aa152d3d707e8ccd0fc0585b3f73140a97695c1f"
+                "reference": "5cbe38b7c114d3384ec16dfbf8c903074b0c3ba7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/utils/zipball/aa152d3d707e8ccd0fc0585b3f73140a97695c1f",
-                "reference": "aa152d3d707e8ccd0fc0585b3f73140a97695c1f",
+                "url": "https://api.github.com/repos/hyperf/utils/zipball/5cbe38b7c114d3384ec16dfbf8c903074b0c3ba7",
+                "reference": "5cbe38b7c114d3384ec16dfbf8c903074b0c3ba7",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3724,7 +3724,7 @@
                 "swoole",
                 "utils"
             ],
-            "time": "2020-04-23T04:10:45+00:00"
+            "time": "2020-05-08T03:00:06+00:00"
         },
         {
             "name": "hyperf/validation",
@@ -3797,16 +3797,16 @@
         },
         {
             "name": "jcchavezs/zipkin-opentracing",
-            "version": "0.1.4",
+            "version": "0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jcchavezs/zipkin-php-opentracing.git",
-                "reference": "d2c05915c3628610eeed4d2acec14e96d56ff056"
+                "reference": "565f3bed0fef52d7004b0faba2439e3cac992837"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jcchavezs/zipkin-php-opentracing/zipball/d2c05915c3628610eeed4d2acec14e96d56ff056",
-                "reference": "d2c05915c3628610eeed4d2acec14e96d56ff056",
+                "url": "https://api.github.com/repos/jcchavezs/zipkin-php-opentracing/zipball/565f3bed0fef52d7004b0faba2439e3cac992837",
+                "reference": "565f3bed0fef52d7004b0faba2439e3cac992837",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3816,8 +3816,8 @@
                 ]
             },
             "require": {
-                "opentracing/opentracing": "^1@beta",
-                "openzipkin/zipkin": "^1.3.4",
+                "opentracing/opentracing": "1.0.0-beta5",
+                "openzipkin/zipkin": "^1.3.6",
                 "php": "~5.6 || ~7.0"
             },
             "provide": {
@@ -3844,7 +3844,7 @@
                 }
             ],
             "description": "A Zipkin bridge with OpenTracing",
-            "time": "2020-01-02T14:00:00+00:00"
+            "time": "2020-05-19T15:56:43+00:00"
         },
         {
             "name": "jetbrains/phpstorm-stubs",
@@ -4014,16 +4014,16 @@
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "bfbbdb6c998d50dbf69d2187cb78a5f1fa36e1e9"
+                "reference": "fcd87520e4943d968557803919523772475e8ea3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/bfbbdb6c998d50dbf69d2187cb78a5f1fa36e1e9",
-                "reference": "bfbbdb6c998d50dbf69d2187cb78a5f1fa36e1e9",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/fcd87520e4943d968557803919523772475e8ea3",
+                "reference": "fcd87520e4943d968557803919523772475e8ea3",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4074,7 +4074,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-04-03T16:01:00+00:00"
+            "time": "2020-05-20T16:45:56+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -4381,16 +4381,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.33.0",
+            "version": "2.34.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "4d93cb95a80d9ffbff4018fe58ae3b7dd7f4b99b"
+                "reference": "3e87404329b8072295ea11d548b47a1eefe5a162"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4d93cb95a80d9ffbff4018fe58ae3b7dd7f4b99b",
-                "reference": "4d93cb95a80d9ffbff4018fe58ae3b7dd7f4b99b",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/3e87404329b8072295ea11d548b47a1eefe5a162",
+                "reference": "3e87404329b8072295ea11d548b47a1eefe5a162",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4420,7 +4420,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "2.x-dev",
+                    "dev-3.x": "3.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -4465,7 +4466,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-20T15:05:43+00:00"
+            "time": "2020-05-19T22:14:16+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -4579,16 +4580,16 @@
         },
         {
             "name": "opentracing/opentracing",
-            "version": "1.0.0-beta6",
+            "version": "1.0.0-beta5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentracing/opentracing-php.git",
-                "reference": "42eb0e58c68054fd7c994b58831ea4cc207e8a0e"
+                "reference": "19591d4084e32eaea061eebd9448b62e5ee3ec19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentracing/opentracing-php/zipball/42eb0e58c68054fd7c994b58831ea4cc207e8a0e",
-                "reference": "42eb0e58c68054fd7c994b58831ea4cc207e8a0e",
+                "url": "https://api.github.com/repos/opentracing/opentracing-php/zipball/19591d4084e32eaea061eebd9448b62e5ee3ec19",
+                "reference": "19591d4084e32eaea061eebd9448b62e5ee3ec19",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4598,25 +4599,25 @@
                 ]
             },
             "require": {
-                "php": "^7.1"
+                "php": "^5.6||^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.5.8",
+                "phpunit/phpunit": "~5.7.19",
                 "squizlabs/php_codesniffer": "3.*"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "OpenTracing\\": "src/OpenTracing/"
+                    "OpenTracing\\": "./src/OpenTracing/"
                 },
                 "files": [
-                    "src/OpenTracing/Tags.php",
-                    "src/OpenTracing/Formats.php"
+                    "./src/OpenTracing/Tags.php",
+                    "./src/OpenTracing/Formats.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "authors": [
                 {
@@ -4625,20 +4626,20 @@
                 }
             ],
             "description": "OpenTracing API for PHP",
-            "time": "2019-04-10T07:57:39+00:00"
+            "time": "2018-04-13T13:38:46+00:00"
         },
         {
             "name": "openzipkin/zipkin",
-            "version": "1.3.5",
+            "version": "1.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openzipkin/zipkin-php.git",
-                "reference": "7df3e2b5aead71711dd496eae300c6ff861ee690"
+                "reference": "4e49ac5f4088c52fa01ab2eb09e72e2af6d62a05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openzipkin/zipkin-php/zipball/7df3e2b5aead71711dd496eae300c6ff861ee690",
-                "reference": "7df3e2b5aead71711dd496eae300c6ff861ee690",
+                "url": "https://api.github.com/repos/openzipkin/zipkin-php/zipball/4e49ac5f4088c52fa01ab2eb09e72e2af6d62a05",
+                "reference": "4e49ac5f4088c52fa01ab2eb09e72e2af6d62a05",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4688,7 +4689,7 @@
                 "tracing",
                 "zipkin"
             ],
-            "time": "2020-04-24T10:54:22+00:00"
+            "time": "2020-05-18T22:20:46+00:00"
         },
         {
             "name": "overtrue/socialite",
@@ -4900,16 +4901,16 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v2.11.2",
+            "version": "v2.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "bd1c7b976d1ec19a542ad89d9a3d155a8f9f7687"
+                "reference": "6353c5d2d3021a301914bc6566e695c99cfeb742"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/bd1c7b976d1ec19a542ad89d9a3d155a8f9f7687",
-                "reference": "bd1c7b976d1ec19a542ad89d9a3d155a8f9f7687",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/6353c5d2d3021a301914bc6566e695c99cfeb742",
+                "reference": "6353c5d2d3021a301914bc6566e695c99cfeb742",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4957,11 +4958,6 @@
                     "role": "Original Maintainer"
                 },
                 {
-                    "name": "John Kelly",
-                    "email": "johnmkelly86@gmail.com",
-                    "role": "Maintainer"
-                },
-                {
                     "name": "Raúl Araya",
                     "email": "nubeiro@gmail.com",
                     "role": "Maintainer"
@@ -4969,6 +4965,11 @@
                 {
                     "name": "Luke Bakken",
                     "email": "luke@bakken.io",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Ramūnas Dronga",
+                    "email": "github@ramuno.lt",
                     "role": "Maintainer"
                 }
             ],
@@ -4979,7 +4980,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2020-04-30T13:18:50+00:00"
+            "time": "2020-05-13T13:56:11+00:00"
         },
         {
             "name": "php-di/phpdoc-reader",
@@ -8278,16 +8279,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "2.12.0",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "2053eafdf60c2172ee1373d1b9289ba1db7f1fc6"
+                "reference": "308728eae8d90412d850c155d40b1cfbede549da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/2053eafdf60c2172ee1373d1b9289ba1db7f1fc6",
-                "reference": "2053eafdf60c2172ee1373d1b9289ba1db7f1fc6",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/308728eae8d90412d850c155d40b1cfbede549da",
+                "reference": "308728eae8d90412d850c155d40b1cfbede549da",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -8303,7 +8304,7 @@
                 "doctrine/event-manager": "^1.0",
                 "doctrine/inflector": "^1.0",
                 "doctrine/lexer": "^1.0",
-                "doctrine/persistence": "^1.1",
+                "doctrine/persistence": "^1.3.3",
                 "doctrine/reflection": "^1.0",
                 "php": "^7.1"
             },
@@ -8363,7 +8364,21 @@
                 "doctrine",
                 "php"
             ],
-            "time": "2020-01-10T15:49:25+00:00"
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fcommon",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-15T05:51:54+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -9238,16 +9253,16 @@
         },
         {
             "name": "nette/di",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/di.git",
-                "reference": "77d69061cbf8f9cfb7363dd983136f51213d3e41"
+                "reference": "34d3e47ebe96229b7671664893a3b1128c102213"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/di/zipball/77d69061cbf8f9cfb7363dd983136f51213d3e41",
-                "reference": "77d69061cbf8f9cfb7363dd983136f51213d3e41",
+                "url": "https://api.github.com/repos/nette/di/zipball/34d3e47ebe96229b7671664893a3b1128c102213",
+                "reference": "34d3e47ebe96229b7671664893a3b1128c102213",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -9311,7 +9326,7 @@
                 "nette",
                 "static"
             ],
-            "time": "2020-01-20T12:14:54+00:00"
+            "time": "2020-05-14T10:29:59+00:00"
         },
         {
             "name": "nette/finder",
@@ -12017,7 +12032,8 @@
         "ext-json": "*",
         "ext-bcmath": "*",
         "ext-openssl": "*",
-        "ext-redis": "*"
+        "ext-redis": "*",
+        "ext-pdo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
