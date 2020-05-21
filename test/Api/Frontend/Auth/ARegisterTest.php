@@ -13,7 +13,7 @@ namespace HyperfTest\Api\Frontend\Auth;
 use Hyperf\Testing\Client;
 use HyperfTest\HttpTestCase;
 
-class RegisterTest extends HttpTestCase
+class ARegisterTest extends HttpTestCase
 {
 	/**
 	 * @var Client
@@ -26,7 +26,7 @@ class RegisterTest extends HttpTestCase
 		$this->client = make(Client::class);
 	}
 
-	public function testExample()
+	public function testFrontendRegister()
 	{
 		$this->assertTrue(true);
 

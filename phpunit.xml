@@ -9,12 +9,14 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Tests">
-            <file>test/Api/Frontend/Auth/RegisterTest.php</file>
-            <file>test/Api/Frontend/Auth/LoginTest.php</file>
-            <file>test/Api/Frontend/Auth/AuthTest.php</file>
-            <directory suffix="Test.php">./test</directory>
-            <exclude>test/Api/Frontend/Auth</exclude>
+        <testsuite name="Frontend">
+            <directory suffix="Test.php">./test/Api/Frontend/Auth</directory>
+        </testsuite>
+        <testsuite name="Mobile">
+            <directory suffix="Test.php">./test/Api/Mobile</directory>
+        </testsuite>
+        <testsuite name="Cases">
+            <directory suffix="Test.php">./test/Cases</directory>
         </testsuite>
     </testsuites>
     <filter>
