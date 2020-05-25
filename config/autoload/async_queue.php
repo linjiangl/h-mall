@@ -17,6 +17,6 @@ return [
         'timeout' => 2,
         'retry_seconds' => 5,
         'handle_timeout' => 10,
-        'processes' => 1,
+        'processes' => env('APP_ENV', 'prod') == 'dev' ? 1 : 0,
     ],
 ];
