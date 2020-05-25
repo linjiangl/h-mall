@@ -17,6 +17,10 @@ class HttpException extends ServerException
 {
     public function __construct($message = 'ok', $code = 200, Throwable $previous = null)
     {
+        $code = intval($code);
+        if ($code < 100 || $code > 600) {
+            $code = 500;
+        }
         parent::__construct($message, $code, $previous);
     }
 }
