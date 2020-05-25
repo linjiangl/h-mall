@@ -11,26 +11,30 @@ declare(strict_types=1);
 namespace HyperfTest\Api\Frontend\Auth;
 
 use Hyperf\Testing\Client;
+use HyperfTest\Api\Frontend\TraitAuth;
 use HyperfTest\HttpTestCase;
 
 class CAuthTest extends HttpTestCase
 {
-	/**
-	 * @var Client
-	 */
-	protected $client;
+    use TraitAuth;
 
-	public function __construct($name = null, array $data = [], $dataName = '')
-	{
-		parent::__construct($name, $data, $dataName);
-		$this->client = make(Client::class);
-	}
+    /**
+     * @var Client
+     */
+    protected $client;
 
-	public function testFrontendAuth()
-	{
-		$this->assertTrue(true);
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->client = make(Client::class);
+    }
 
-		echo 'register';
-		$this->assertTrue(is_string($this->get('/')));
-	}
+    public function testFrontendAuth()
+    {
+        $result = $this->client->post('/frontend/authorize', [], $this->getHeaders());
+
+        $this->assertArrayHasKey('id', $result['data']);
+        $this->assertSame('test001', $result['data']['username']);
+        $this->assertArrayNotHasKey('password', $result['data']);
+    }
 }

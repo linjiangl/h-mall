@@ -28,8 +28,6 @@ class ARegisterTest extends HttpTestCase
 
     public function testFrontendRegister()
     {
-        $this->assertTrue(true);
-
         $result = $this->client->post('/frontend/register', [
             'username' => 'test001',
             'password' => '123456',
@@ -37,6 +35,5 @@ class ARegisterTest extends HttpTestCase
         ]);
 
         $this->assertArrayHasKey('token', $result['data']);
-        $this->assertArrayHasKey('exp', $result['data']);
     }
 }

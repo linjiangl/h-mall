@@ -26,18 +26,26 @@ class PhpunitCommand extends HyperfCommand
     {
         parent::configure();
         $this->addOption('filter', 'f',InputOption::VALUE_OPTIONAL, '测试类型,单个指定,默认测试全部', 'all');
+        $this->addOption('reset', 'r',InputOption::VALUE_OPTIONAL, '重建数据库,且跑完整的测试流程', 'no');
         $this->setDescription('单元测试');
     }
 
     public function handle()
     {
         $filter = $this->input->getOption('filter');
+        $reset = $this->input->getOption('reset');
         $testExec = 'vendor/bin/co-phpunit -c phpunit.xml --colors=always';
-        if ($filter != 'all') {
-            $testExec = "{$testExec} '--filter={$filter}'";
+        if ($reset == 'yes') {
+            exec('php bin/hyperf.php migrate:fresh --seed');
+            exec("rm -rf runtime/container");
+            exec($testExec, $output);
+        } else {
+            if ($filter != 'all') {
+                $testExec = "{$testExec} '--filter={$filter}'";
+            }
+            exec("rm -rf runtime/container");
+            exec($testExec, $output);
         }
-        exec("rm -rf runtime/container");
-        exec($testExec, $output);
         foreach ($output as $row) {
             $this->line($row);
         }

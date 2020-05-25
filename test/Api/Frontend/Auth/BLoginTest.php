@@ -11,27 +11,33 @@ declare(strict_types=1);
 namespace HyperfTest\Api\Frontend\Auth;
 
 use Hyperf\Testing\Client;
+use HyperfTest\Api\Frontend\TraitAuth;
 use HyperfTest\HttpTestCase;
 
 class BLoginTest extends HttpTestCase
 {
-	/**
-	 * @var Client
-	 */
-	protected $client;
+    use TraitAuth;
 
-	public function __construct($name = null, array $data = [], $dataName = '')
-	{
-		parent::__construct($name, $data, $dataName);
-		$this->client = make(Client::class);
-	}
+    /**
+     * @var Client
+     */
+    protected $client;
 
-	public function testFrontendLogin()
-	{
-		$this->assertTrue(true);
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->client = make(Client::class);
+    }
 
-		$res = $this->client->get('/');
+    public function testFrontendLogin()
+    {
+        $result = $this->client->post('/frontend/login', [
+            'username' => 'test001',
+            'password' => '123456'
+        ]);
 
-		$this->assertTrue(is_string($this->get('/')));
-	}
+        $this->assertArrayHasKey('token', $result['data']);
+
+        $this->setToken($result['data']['token']);
+    }
 }

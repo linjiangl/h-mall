@@ -16,7 +16,6 @@ class HomeTest extends HttpTestCase
 {
     public function testMobileHome()
     {
-        $this->assertTrue(true);
         $result = $this->client->get('/v1/home');
 
         $this->assertSame(200, $result['code']);
