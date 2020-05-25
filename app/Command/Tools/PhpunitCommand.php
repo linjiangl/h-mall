@@ -34,6 +34,10 @@ class PhpunitCommand extends HyperfCommand
     {
         $filter = $this->input->getOption('filter');
         $reset = $this->input->getOption('reset');
+        if (!in_array($reset, ['yes', 'no'])) {
+            $this->output->error('--reset yes/no');
+            return;
+        }
         $testExec = 'vendor/bin/co-phpunit -c phpunit.xml --colors=always';
         if ($reset == 'yes') {
             exec('php bin/hyperf.php migrate:fresh --seed');
