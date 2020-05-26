@@ -15,7 +15,7 @@ return [
             'class' => Monolog\Handler\StreamHandler::class,
             'constructor' => [
                 'stream' => BASE_PATH . '/runtime/logs/log-' . date('Y-m-d') . '.log',
-                'level' => Monolog\Logger::DEBUG,
+                'level' => env('APP_ENV') == 'prod' ? Monolog\Logger::ERROR : Monolog\Logger::DEBUG,
             ],
         ],
         'formatter' => [
