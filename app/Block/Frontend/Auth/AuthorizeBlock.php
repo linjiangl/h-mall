@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block\Frontend\Auth;
 
 use App\Exception\HttpException;
-use App\Service\Auth\AuthService;
+use App\Service\Auth\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 class AuthorizeBlock extends AbstractAuthBlock
@@ -19,8 +19,8 @@ class AuthorizeBlock extends AbstractAuthBlock
     public function index(RequestInterface $request)
     {
         try {
-            $service = new AuthService($this->jwt);
-            return $service->user();
+            $service = new UserAuthorizationService($this->jwt);
+            return $service->authorize();
         } catch (\Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

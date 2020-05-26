@@ -12,6 +12,7 @@ namespace App\Middleware;
 
 use App\Exception\CacheErrorException;
 use App\Exception\UnauthorizedException;
+use App\Service\Auth\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Hyperf\Utils\Context;
 use Phper666\JWTAuth\JWT;
@@ -21,7 +22,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 
-class JWTAuthMiddleware implements MiddlewareInterface
+class JWTFrontendMiddleware implements MiddlewareInterface
 {
     /**
      * @var HttpResponse
@@ -66,7 +67,8 @@ class JWTAuthMiddleware implements MiddlewareInterface
                 throw new UnauthorizedException();
             }
 
-            $jwtData = $this->jwt->getParserData();
+            $service = new UserAuthorizationService($this->jwt);
+            $jwtData = $service->getParserData();
             $request = Context::get(ServerRequestInterface::class);
             $request = $request->withAttribute('user_id', $jwtData['user_id']);
             Context::set(ServerRequestInterface::class, $request);

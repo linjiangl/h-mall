@@ -9,6 +9,4 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-require_once BASE_PATH . '/route/backend.php';
-require_once BASE_PATH . '/route/frontend.php';
-require_once BASE_PATH . '/route/api-mobile.php';
+// 后台管理路由

@@ -12,7 +12,7 @@ namespace App\Block\Frontend\Auth;
 
 use App\Exception\HttpException;
 use App\Request\Frontend\Auth\RegisterRequest;
-use App\Service\Auth\AuthService;
+use App\Service\Auth\UserAuthorizationService;
 
 class RegisterBlock extends AbstractAuthBlock
 {
@@ -20,7 +20,7 @@ class RegisterBlock extends AbstractAuthBlock
     {
         $post = $request->validated();
         try {
-            $service = new AuthService($this->jwt);
+            $service = new UserAuthorizationService($this->jwt);
             return $service->register($post['username'], $post['password'], $post['confirm_password']);
         } catch (\Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());

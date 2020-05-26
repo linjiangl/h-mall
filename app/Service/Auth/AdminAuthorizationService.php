@@ -10,45 +10,39 @@ declare(strict_types=1);
  */
 namespace App\Service\Auth;
 
-use App\Dao\User\UserDao;
+use App\Dao\Admin\AdminDao;
 use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
-use App\Model\User\User;
-use Carbon\Carbon;
+use App\Model\Admin;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
 
-class AuthService
+class AdminAuthorizationService extends AbstractAuthorizationService
 {
-    /**
-     * @var JWT
-     */
-    protected $jwt;
-
     public function __construct(Jwt $jwt)
     {
-        $this->jwt = $jwt;
+        parent::__construct($jwt->setScene('admin'));
     }
 
-    public function user()
+    public function authorize()
     {
-        $ssoKey = config('jwt')['sso_key'];
-        $data = $this->getDefaultData();
-        $userId = $data[$ssoKey];
-        if (! $userId) {
+        $ssoKey = config('jwt')['scene']['admin']['sso_key'];
+        $data = $this->getParserData();
+        $adminId = $data[$ssoKey];
+        if (! $adminId) {
             throw new UnauthorizedException();
         }
 
-        $userDao = new UserDao();
-        $user = $userDao->info($userId);
-        if (! $user) {
+        $adminDao = new AdminDao();
+        $admin = $adminDao->info($adminId);
+        if (! $admin) {
             throw new UnauthorizedException();
         }
 
-        return $user;
+        return $admin;
     }
 
     /**
@@ -59,32 +53,31 @@ class AuthService
      */
     public function login($account, $password)
     {
-        $userDao = new UserDao();
-        $user = $userDao->getInfoByUsername($account);
-        if (! $user) {
-            throw new InternalException('该账号不存在');
+        $adminDao = new AdminDao();
+        $admin = $adminDao->getInfoByUsername($account);
+        if (! $admin) {
+            throw new InternalException('该管理员账号不存在');
         }
-        /** @var User $user */
-        $user = $user->makeVisible(['password', 'salt', 'mobile', 'email']);
-        $passwordHash = $userDao->generatePasswordHash($password, $user->salt);
-        if ($passwordHash != $user->password) {
+        /** @var Admin $admin */
+        $admin = $admin->makeVisible(['password', 'salt', 'mobile', 'email']);
+        $passwordHash = $adminDao->generatePasswordHash($password, $admin->salt);
+        if ($passwordHash != $admin->password) {
             throw new InternalException('账号/密码错误');
         }
 
         try {
             $token = $this->jwt->getToken([
-                'user_id' => $user->id,
-                'username' => $user->username,
-                'nickname' => $user->nickname,
-                'avatar' => $user->avatar,
+                'admin_id' => $admin->id,
+                'username' => $admin->username,
+                'name' => $admin->name,
+                'avatar' => $admin->avatar,
             ]);
             $data = [
                 'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
                 'exp' => $this->jwt->getTTL(),
             ];
 
-            $user->lasted_login_at = Carbon::now()->toDateTimeString();
-            $user->save();
+            $admin->save();
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
         }
@@ -110,50 +103,26 @@ class AuthService
         }
 
         try {
-            $userDao = new UserDao();
-            $salt = $userDao->generateSalt();
-            $passwordHash = $userDao->generatePasswordHash($password, $salt);
-            $userDao->create([
+            $adminDao = new AdminDao();
+            if ($adminDao->getInfoByUsername($username)) {
+                throw new InternalException('账号已注册');
+            }
+
+            $salt = $adminDao->generateSalt();
+            $passwordHash = $adminDao->generatePasswordHash($password, $salt);
+            $adminDao->create([
                 'username' => $username,
-                'nickname' => '新手用户',
+                'real_name' => $extend['real_name'] ?? '',
                 'password' => $passwordHash,
                 'salt' => $salt,
                 'avatar' => $extend['avatar'] ?? '',
                 'mobile' => $extend['mobile'] ?? '',
                 'email' => $extend['email'] ?? '',
-                'lasted_login_at' => Carbon::now()->toDateTimeString()
             ]);
 
             return $this->login($username, $password);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
-    }
-
-    public function logout()
-    {
-        try {
-            return $this->jwt->logout();
-        } catch (InvalidArgumentException $e) {
-            throw new CacheErrorException();
-        }
-    }
-
-    public function refreshToken()
-    {
-        try {
-            $token = $this->jwt->refreshToken();
-            return [
-                'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
-                'exp' => $this->jwt->getTTL(),
-            ];
-        } catch (InvalidArgumentException $e) {
-            throw new CacheErrorException();
-        }
-    }
-
-    public function getDefaultData()
-    {
-        return $this->jwt->getParserData();
     }
 }

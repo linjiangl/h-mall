@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-use App\Middleware\JWTAuthMiddleware;
+use App\Middleware\JWTFrontendMiddleware;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/frontend', function () {
@@ -27,4 +27,4 @@ Router::addGroup('/frontend', function () {
 Router::addGroup('/frontend', function () {
     // 登录用户相关
     Router::post('/authorize', 'App\Controller\Frontend\Auth\AuthorizeController::index');
-}, ['middleware' => [JWTAuthMiddleware::class]]);
+}, ['middleware' => [JWTFrontendMiddleware::class]]);

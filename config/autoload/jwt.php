@@ -21,7 +21,7 @@ return [
         'private' => env('JWT_PRIVATE_KEY'), // 私钥，例如：'file:///path/to/private/key'
     ],
 
-    'ttl' => env('JWT_TTL', 86400), // token过期时间，单位为秒
+    'ttl' => env('JWT_TTL', 86400 * 15), // token过期时间，单位为秒
 
     'alg' => env('JWT_ALG', 'HS256'), // jwt的hearder加密算法
 
@@ -87,12 +87,12 @@ return [
      */
     'scene' => [
         'default' => [],
-        'application1' => [
-            'secret' => 'application1', // 非对称加密使用字符串,请使用自己加密的字符串
+        'admin' => [
+            'secret' => 'U2FsdGVkX1/Yrvu0ss0KUQ8PnCWGdSEQ', // 非对称加密使用字符串,请使用自己加密的字符串
             'login_type' => 'sso', //  登录方式，sso为单点登录，mpop为多点登录
-            'sso_key' => 'user_id',
-            'ttl' => env('JWT_TTL', 86400), // token过期时间，单位为秒
-            'blacklist_cache_ttl' => env('JWT_TTL', 86400), // 黑名单缓存token时间，注意：该时间一定要设置比token过期时间要大一点，默认为100秒,最好设置跟过期时间一样
+            'sso_key' => 'admin_id',
+            'ttl' => env('JWT_TTL', 7200), // token过期时间，单位为秒
+            'blacklist_cache_ttl' => env('JWT_TTL', 7200), // 黑名单缓存token时间，注意：该时间一定要设置比token过期时间要大一点，默认为100秒,最好设置跟过期时间一样
         ]
     ],
     'model' => [

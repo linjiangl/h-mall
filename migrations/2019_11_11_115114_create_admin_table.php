@@ -23,14 +23,17 @@ class CreateAdminTable extends Migration
         Schema::create('admin', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->string('username', 100)->comment('用户名');
-            $table->string('mobile', 20)->default('')->comment('手机号');
-            $table->string('name', 20)->default('')->comment('姓名');
             $table->string('avatar', 255)->default('')->comment('头像');
+            $table->string('real_name', 20)->default('')->comment('姓名');
+            $table->string('mobile', 20)->default('')->comment('手机号');
             $table->string('email', 100)->default('')->comment('邮箱');
             $table->string('password', 64);
-            $table->string('salt', 24)->comment('加密盐');
-            $table->tinyInteger('status')->default(1)->comment('状态 0:禁用,1:正常');
+            $table->string('salt', 24);
+            $table->tinyInteger('status')->default(1)->comment('状态');
+            $table->timestamp('lasted_login_at')->comment('最后登录时间');
             $table->timestamps();
+
+            $table->unique(['username'], 'username');
         });
     }
 

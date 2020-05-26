@@ -12,7 +12,7 @@ namespace App\Block\Frontend\Auth;
 
 use App\Exception\HttpException;
 use App\Request\Frontend\Auth\LoginRequest;
-use App\Service\Auth\AuthService;
+use App\Service\Auth\UserAuthorizationService;
 
 class LoginBlock extends AbstractAuthBlock
 {
@@ -20,7 +20,7 @@ class LoginBlock extends AbstractAuthBlock
     {
         $post = $request->validated();
         try {
-            $service = new AuthService($this->jwt);
+            $service = new UserAuthorizationService($this->jwt);
             return $service->login($post['username'], $post['password']);
         } catch (\Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
