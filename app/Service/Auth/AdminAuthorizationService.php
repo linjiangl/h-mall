@@ -16,6 +16,7 @@ use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
 use App\Model\Admin;
+use Carbon\Carbon;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
@@ -77,6 +78,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
                 'exp' => $this->jwt->getTTL(),
             ];
 
+            $admin->lasted_login_at = Carbon::now()->toDateTimeString();
             $admin->save();
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
@@ -118,6 +120,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
                 'avatar' => $extend['avatar'] ?? '',
                 'mobile' => $extend['mobile'] ?? '',
                 'email' => $extend['email'] ?? '',
+                'lasted_login_at' => Carbon::now()->toDateTimeString()
             ]);
 
             return $this->login($username, $password);
