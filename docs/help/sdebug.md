@@ -67,6 +67,8 @@ Zend Engine v3.3.10, Copyright (c) 1998-2018 Zend Technologies
 
 5. 启动debug会报错, 需要进入容器执行如下命令
 
+![image](../images/sdebug/11.png)
+
 ```shell script
 $ export PHP_IDE_CONFIG=serverName=h_mall
 ```
