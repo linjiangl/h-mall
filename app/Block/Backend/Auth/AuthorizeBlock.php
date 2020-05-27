@@ -8,20 +8,19 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Block\Frontend\Auth;
+namespace App\Block\Backend\Auth;
 
 use App\Exception\HttpException;
-use App\Request\Frontend\Auth\RegisterRequest;
 use App\Service\Auth\UserAuthorizationService;
+use Hyperf\HttpServer\Contract\RequestInterface;
 
-class RegisterBlock extends AbstractAuthBlock
+class AuthorizeBlock extends AbstractAuthBlock
 {
-    public function index(RegisterRequest $request)
+    public function index(RequestInterface $request)
     {
-        $post = $request->validated();
         try {
             $service = new UserAuthorizationService($this->jwt);
-            return $service->register($post['username'], $post['password'], $post['confirm_password'], $post);
+            return $service->authorize();
         } catch (\Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
