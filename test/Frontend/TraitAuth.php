@@ -1,7 +1,7 @@
 <?php
 
 
-namespace HyperfTest\Api\Frontend;
+namespace HyperfTest\Frontend;
 
 
 trait TraitAuth
