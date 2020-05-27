@@ -110,8 +110,8 @@ class UserAuthorizationService extends AbstractAuthorizationService
                 throw new InternalException('账号已注册');
             }
 
-            $salt = $userDao->generateSalt();
-            $passwordHash = $userDao->generatePasswordHash($password, $salt);
+            $salt = $this->generateSalt();
+            $passwordHash = $this->generatePasswordHash($password, $salt);
             $userDao->create([
                 'username' => $username,
                 'nickname' => '新手用户',

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Service\Auth;
 
 use App\Exception\CacheErrorException;
+use Hyperf\Utils\Str;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 
@@ -63,5 +64,18 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
     public function getParserData()
     {
         return $this->jwt->getParserData();
+    }
+
+    public function generateSalt($length = 10)
+    {
+        return Str::random($length);
+    }
+
+    public function generatePasswordHash($password, $salt = '')
+    {
+        if ($salt == '') {
+            $salt = $this->generateSalt();
+        }
+        return sha1(substr(md5($password), 0, 16) . $salt);
     }
 }

@@ -110,8 +110,8 @@ class AdminAuthorizationService extends AbstractAuthorizationService
                 throw new InternalException('账号已注册');
             }
 
-            $salt = $adminDao->generateSalt();
-            $passwordHash = $adminDao->generatePasswordHash($password, $salt);
+            $salt = $this->generateSalt();
+            $passwordHash = $this->generatePasswordHash($password, $salt);
             $adminDao->create([
                 'username' => $username,
                 'real_name' => $extend['real_name'] ?? '',
