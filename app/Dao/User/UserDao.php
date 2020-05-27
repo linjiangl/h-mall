@@ -33,19 +33,6 @@ class UserDao extends AbstractDao
         ];
     }
 
-    public function generateSalt()
-    {
-        return Str::random(10);
-    }
-
-    public function generatePasswordHash($password, $salt = '')
-    {
-        if ($salt == '') {
-            $salt = $this->generateSalt();
-        }
-        return sha1(substr(md5($password), 0, 16) . $salt);
-    }
-
     public function getInfoByUsername($username, $symbol = '=')
     {
         return $this->getInfoByCondition([['username', $symbol, $username]]);
