@@ -8,13 +8,16 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Api\Frontend\Auth;
+namespace HyperfTest\Frontend\Auth;
 
 use Hyperf\Testing\Client;
+use HyperfTest\Api\Frontend\TraitAuth;
 use HyperfTest\HttpTestCase;
 
-class ARegisterTest extends HttpTestCase
+class BLoginTest extends HttpTestCase
 {
+    use TraitAuth;
+
     /**
      * @var Client
      */
@@ -26,14 +29,15 @@ class ARegisterTest extends HttpTestCase
         $this->client = make(Client::class);
     }
 
-    public function testFrontendRegister()
+    public function testFrontendLogin()
     {
-        $result = $this->client->post('/frontend/register', [
+        $result = $this->client->post('/frontend/login', [
             'username' => 'test001',
-            'password' => '123456',
-            'confirm_password' => '123456'
+            'password' => '123456'
         ]);
 
         $this->assertArrayHasKey('token', $result['data']);
+
+        $this->setToken($result['data']['token']);
     }
 }
