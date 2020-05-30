@@ -22,10 +22,11 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
      */
     protected $jwt;
 
-    public function __construct(Jwt $jwt)
-    {
-        $this->jwt = $jwt;
-    }
+    protected $scene = 'default';
+
+    protected $prefix = 'Bearer';
+
+    protected $header = 'Authorization';
 
     public function authorize()
     {
@@ -77,5 +78,15 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
             $salt = $this->generateSalt();
         }
         return sha1(substr(md5($password), 0, 16) . $salt);
+    }
+
+    public function getPrefix()
+    {
+        return $this->prefix;
+    }
+
+    public function getHeader()
+    {
+        return $this->header;
     }
 }

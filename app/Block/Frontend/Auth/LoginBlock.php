@@ -14,13 +14,13 @@ use App\Exception\HttpException;
 use App\Request\Frontend\Auth\LoginRequest;
 use App\Service\Auth\UserAuthorizationService;
 
-class LoginBlock extends AbstractAuthBlock
+class LoginBlock
 {
     public function index(LoginRequest $request)
     {
         $post = $request->validated();
         try {
-            $service = new UserAuthorizationService($this->jwt);
+            $service = new UserAuthorizationService();
             return $service->login($post['username'], $post['password']);
         } catch (\Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());

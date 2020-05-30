@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace HyperfTest\Frontend\Auth;
 
 use Hyperf\Testing\Client;
-use HyperfTest\Api\Frontend\TraitAuth;
+use HyperfTest\Frontend\TraitAuth;
 use HyperfTest\HttpTestCase;
 
 class BLoginTest extends HttpTestCase
