@@ -57,7 +57,7 @@ class User extends Model
      */
     protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
-    protected $hidden = ['password', 'salt', 'mobile', 'email'];
+    protected $hidden = ['password', 'salt', 'mobile', 'email', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
 
     public function vipCard()
     {
