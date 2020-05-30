@@ -14,12 +14,12 @@ use App\Exception\HttpException;
 use App\Service\Auth\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-class AuthorizeBlock extends AbstractAuthBlock
+class AuthorizeBlock
 {
     public function index(RequestInterface $request)
     {
         try {
-            $service = new UserAuthorizationService($this->jwt);
+            $service = new UserAuthorizationService();
             return $service->authorize();
         } catch (\Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());

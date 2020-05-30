@@ -14,7 +14,7 @@ use Throwable;
 
 class CacheErrorException extends HttpException
 {
-    public function __construct($message = '缓存服务拒绝访问', $code = 400, Throwable $previous = null)
+    public function __construct($message = 'Cache connection failed', $code = 400, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

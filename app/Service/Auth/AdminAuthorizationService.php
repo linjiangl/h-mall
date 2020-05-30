@@ -23,14 +23,20 @@ use Throwable;
 
 class AdminAuthorizationService extends AbstractAuthorizationService
 {
-    public function __construct(Jwt $jwt)
+    protected $scene = 'admin';
+
+    protected $header = 'Admin-Token';
+
+    public function __construct()
     {
-        parent::__construct($jwt->setScene('admin'));
+        /** @var JWT $jwt */
+        $jwt = container()->get(JWT::class);
+        $this->jwt = $jwt->setScene($this->scene);
     }
 
     public function authorize()
     {
-        $ssoKey = config('jwt')['scene']['admin']['sso_key'];
+        $ssoKey = config('jwt')['scene'][$this->scene]['sso_key'];
         $data = $this->getParserData();
         $adminId = $data[$ssoKey];
         if (! $adminId) {
@@ -70,7 +76,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
             $token = $this->jwt->getToken([
                 'admin_id' => $admin->id,
                 'username' => $admin->username,
-                'name' => $admin->name,
+                'real_name' => $admin->real_name,
                 'avatar' => $admin->avatar,
             ]);
             $data = [

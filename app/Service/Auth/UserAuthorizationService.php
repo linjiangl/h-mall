@@ -23,9 +23,11 @@ use Throwable;
 
 class UserAuthorizationService extends AbstractAuthorizationService
 {
-    public function __construct(Jwt $jwt)
+    public function __construct()
     {
-        parent::__construct($jwt->setScene('default'));
+        /** @var JWT $jwt */
+        $jwt = container()->get(JWT::class);
+        $this->jwt = $jwt->setScene($this->scene);
     }
 
     public function authorize()

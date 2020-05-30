@@ -29,8 +29,6 @@ class JWTBackendMiddleware implements MiddlewareInterface
      */
     protected $response;
 
-    protected $prefix = 'Bearer';
-
     protected $jwt;
 
     public function __construct(HttpResponse $response, JWT $jwt)
@@ -52,11 +50,12 @@ class JWTBackendMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         try {
+            $service = new AdminAuthorizationService();
             $isValidToken = false;
-            $token = $request->getHeaderLine('Authorization') ?? '';
+            $token = $request->getHeaderLine($service->getHeader()) ?? '';
             if (strlen($token) > 0) {
                 $token = ucfirst($token);
-                $arr = explode("{$this->prefix }", $token);
+                $arr = explode("{$service->getPrefix() }", $token);
                 $token = $arr[1] ?? '';
                 if (strlen($token) > 0 && $this->jwt->checkToken()) {
                     $isValidToken = true;
@@ -67,7 +66,6 @@ class JWTBackendMiddleware implements MiddlewareInterface
                 throw new UnauthorizedException();
             }
 
-            $service = new AdminAuthorizationService($this->jwt);
             $jwtData = $service->getParserData();
             $request = Context::get(ServerRequestInterface::class);
             $request = $request->withAttribute('admin_id', $jwtData['admin_id']);
