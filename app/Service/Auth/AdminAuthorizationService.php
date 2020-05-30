@@ -61,7 +61,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         }
         /** @var Admin $admin */
         $admin = $admin->makeVisible(['password', 'salt', 'mobile', 'email']);
-        $passwordHash = $adminDao->generatePasswordHash($password, $admin->salt);
+        $passwordHash = $this->generatePasswordHash($password, $admin->salt);
         if ($passwordHash != $admin->password) {
             throw new InternalException('账号/密码错误');
         }

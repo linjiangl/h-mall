@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 /**
  * @Listener
  */
-class DbQueryExecutedListener implements ListenerInterface
+class DbQueryLogsListener implements ListenerInterface
 {
     /**
      * @var LoggerInterface
@@ -42,7 +42,7 @@ class DbQueryExecutedListener implements ListenerInterface
     }
 
     /**
-     * @param QueryExecuted $event
+     * @param object $event
      */
     public function process(object $event)
     {
@@ -54,7 +54,7 @@ class DbQueryExecutedListener implements ListenerInterface
                 }
             }
 
-            $this->logger->info(sprintf('[%s] %s', $event->time, $sql));
+            $this->logger->info(sprintf('%s; [%ss]', $sql, number_format($event->time / 1000, 5)));
         }
     }
 }
