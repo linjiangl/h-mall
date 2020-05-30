@@ -61,7 +61,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
         }
         /** @var User $user */
         $user = $user->makeVisible(['password', 'salt', 'mobile', 'email']);
-        $passwordHash = $userDao->generatePasswordHash($password, $user->salt);
+        $passwordHash = $this->generatePasswordHash($password, $user->salt);
         if ($passwordHash != $user->password) {
             throw new InternalException('账号/密码错误');
         }
