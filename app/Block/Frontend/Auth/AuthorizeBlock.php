@@ -13,6 +13,7 @@ namespace App\Block\Frontend\Auth;
 use App\Exception\HttpException;
 use App\Service\Auth\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\RequestInterface;
+use Throwable;
 
 class AuthorizeBlock
 {
@@ -21,7 +22,7 @@ class AuthorizeBlock
         try {
             $service = new UserAuthorizationService();
             return $service->authorize();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }

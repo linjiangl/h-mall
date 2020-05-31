@@ -25,8 +25,6 @@ class AdminAuthorizationService extends AbstractAuthorizationService
 {
     protected $scene = 'admin';
 
-    protected $header = 'Admin-Token';
-
     public function __construct()
     {
         /** @var JWT $jwt */

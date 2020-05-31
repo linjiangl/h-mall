@@ -13,6 +13,7 @@ namespace App\Block\Frontend\Auth;
 use App\Exception\HttpException;
 use App\Request\Frontend\Auth\LoginRequest;
 use App\Service\Auth\UserAuthorizationService;
+use Throwable;
 
 class LoginBlock
 {
@@ -22,7 +23,7 @@ class LoginBlock
         try {
             $service = new UserAuthorizationService();
             return $service->login($post['username'], $post['password']);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
