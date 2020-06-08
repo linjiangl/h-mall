@@ -12,21 +12,13 @@ namespace App\Controller\Frontend\Auth;
 
 use App\Block\Frontend\Auth\AuthorizeBlock;
 use App\Controller\AbstractController;
-use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
-use Phper666\JWTAuth\JWT;
 
 class AuthorizeController extends AbstractController
 {
-    /**
-     * @Inject()
-     * @var Jwt
-     */
-    protected $jwt;
-
     public function index(RequestInterface $request)
     {
-        $block = new AuthorizeBlock($this->jwt);
+        $block = new AuthorizeBlock();
         return $block->index($request);
     }
 }

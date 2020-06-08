@@ -13,10 +13,8 @@ namespace App\Controller\Frontend\Auth;
 use App\Block\Frontend\Auth\LoginBlock;
 use App\Controller\AbstractController;
 use App\Request\Frontend\Auth\LoginRequest;
-use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\RateLimit\Annotation\RateLimit;
-use Phper666\JWTAuth\JWT;
 
 /**
  * @Controller(prefix="rate-limit")
@@ -24,15 +22,9 @@ use Phper666\JWTAuth\JWT;
  */
 class LoginController extends AbstractController
 {
-    /**
-     * @Inject
-     * @var Jwt
-     */
-    protected $jwt;
-
     public function index(LoginRequest $request)
     {
-        $block = new LoginBlock($this->jwt);
+        $block = new LoginBlock();
         return $block->index($request);
     }
 }

@@ -65,7 +65,7 @@ class AbstractDao implements InterfaceDao
     }
 
     /**
-     * 列表
+     * 分页列表
      * @param array $condition
      * @param int $page
      * @param int $limit
@@ -81,23 +81,28 @@ class AbstractDao implements InterfaceDao
      *  ['title', '=', 'title']
      * ]
      */
+    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
+    {
+        $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
+        return $query->paginate($limit, $columns, '', $page);
+    }
+
+    /**
+     * 普通列表
+     * @param array $condition
+     * @param int $page
+     * @param int $limit
+     * @param string $orderBy
+     * @param array $groupBy
+     * @param array $with
+     * @param string[] $columns
+     * @return Builder[]|Collection
+     */
     public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
     {
-        $query = $this->model::query();
-        if ($with) {
-            $this->checkAllowWithModel($with);
-            $query->with($this->with);
-        }
-        if ($condition) {
-            $this->handleQueryCondition($query, $condition);
-        }
-        if ($groupBy) {
-            $query->groupBy($groupBy);
-        }
-        if ($orderBy) {
-            $query->orderByRaw($orderBy);
-        }
-        return $query->paginate($limit, $columns, '', $page);
+        $offset = ($page - 1) * $limit;
+        $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
+        return $query->select($columns)->offset($offset)->limit($limit)->get();
     }
 
     /**
@@ -173,7 +178,7 @@ class AbstractDao implements InterfaceDao
      * @param $id
      * @return bool
      */
-    public function remove($id)
+    public function remove($id): bool
     {
         try {
             $this->actionIsAllow('remove');
@@ -192,7 +197,7 @@ class AbstractDao implements InterfaceDao
      * @param $id
      * @return bool
      */
-    public function removeCache($id)
+    public function removeCache($id): bool
     {
         return true;
     }
@@ -209,6 +214,33 @@ class AbstractDao implements InterfaceDao
             $this->handleQueryCondition($query, $condition);
         }
         return $query->first();
+    }
+
+    /**
+     * 生成列表查询器
+     * @param array $condition
+     * @param string $orderBy
+     * @param array $groupBy
+     * @param array $with
+     * @return Builder
+     */
+    protected function generateListQuery(array $condition, string $orderBy, array $groupBy, array $with): Builder
+    {
+        $query = $this->model::query();
+        if ($with) {
+            $this->checkAllowWithModel($with);
+            $query->with($this->with);
+        }
+        if ($condition) {
+            $this->handleQueryCondition($query, $condition);
+        }
+        if ($groupBy) {
+            $query->groupBy($groupBy);
+        }
+        if ($orderBy) {
+            $query->orderByRaw($orderBy);
+        }
+        return $query;
     }
 
     /**
