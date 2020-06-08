@@ -34,7 +34,7 @@ use Throwable;
  *  - STATUS_DELETED    // 已删除
  *  - STATUS_APPLIED    // 已申请
  */
-class AbstractDao implements InterfaceDao
+abstract class AbstractDao implements InterfaceDao
 {
     /**
      * @var Model
@@ -57,7 +57,7 @@ class AbstractDao implements InterfaceDao
      * 对象不存在的错误提示
      * @var string
      */
-    protected $notFoundErrorMessage = '所请求的资源不存在';
+    protected $notFoundMessage = '所请求的资源不存在';
 
     public function getModel()
     {
@@ -120,7 +120,7 @@ class AbstractDao implements InterfaceDao
         }
         $model = $query->find($id);
         if (! $model) {
-            throw new NotFoundException($this->notFoundErrorMessage);
+            throw new NotFoundException($this->notFoundMessage);
         }
         return $model;
     }

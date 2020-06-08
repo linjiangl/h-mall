@@ -17,8 +17,8 @@ Router::addGroup('/frontend', function () {
     Router::addRoute(['GET', 'POST', 'PUT'], '/', 'App\Controller\Frontend\IndexController::index');
 
     // 登录/退出
-    Router::post('/login', 'App\Controller\Frontend\Auth\LoginController::index');
-    Router::post('/register', 'App\Controller\Frontend\Auth\RegisterController::index');
+    Router::post('/login', 'App\Controller\Frontend\Authorize\LoginController::index');
+    Router::post('/register', 'App\Controller\Frontend\Authorize\RegisterController::index');
 
     // 用户
     Router::get('/user/{id:\d+}', 'App\Controller\Frontend\User\UserController::show');
@@ -26,5 +26,5 @@ Router::addGroup('/frontend', function () {
 
 Router::addGroup('/frontend', function () {
     // 登录用户相关
-    Router::post('/authorize', 'App\Controller\Frontend\Auth\AuthorizeController::index');
+    Router::post('/authorize', 'App\Controller\Frontend\Authorize\AuthorizeController::index');
 }, ['middleware' => [JWTFrontendMiddleware::class]]);

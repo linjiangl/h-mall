@@ -12,7 +12,7 @@ namespace App\Block\Frontend\Auth;
 
 use App\Exception\HttpException;
 use App\Request\Frontend\Auth\RegisterRequest;
-use App\Service\Auth\UserAuthorizationService;
+use App\Service\Authorize\UserAuthorizationService;
 use Throwable;
 
 class RegisterBlock

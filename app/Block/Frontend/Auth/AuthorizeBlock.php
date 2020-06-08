@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block\Frontend\Auth;
 
 use App\Exception\HttpException;
-use App\Service\Auth\UserAuthorizationService;
+use App\Service\Authorize\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 

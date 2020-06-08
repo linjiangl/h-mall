@@ -21,8 +21,8 @@ class UserDao extends AbstractDao
     const STATUS_DISABLED = 2;
 
     protected $model = User::class;
-
     protected $noAllowActions = [];
+    protected $notFoundMessage = '用户不存在';
 
     public static function getStatusLabel()
     {
