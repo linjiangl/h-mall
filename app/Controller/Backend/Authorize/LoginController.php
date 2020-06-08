@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Frontend\Authorize;
+namespace App\Controller\Backend\Authorize;
 
-use App\Block\Frontend\Authorize\LoginBlock;
+use App\Block\Backend\Authorize\LoginBlock;
 use App\Controller\AbstractController;
-use App\Request\Frontend\Authorize\LoginRequest;
+use App\Request\Backend\Authorize\LoginRequest;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\RateLimit\Annotation\RateLimit;
 

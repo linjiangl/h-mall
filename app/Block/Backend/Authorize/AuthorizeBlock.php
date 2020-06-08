@@ -8,21 +8,20 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Block\Frontend\Auth;
+namespace App\Block\Backend\Authorize;
 
 use App\Exception\HttpException;
-use App\Request\Frontend\Auth\LoginRequest;
 use App\Service\Authorize\UserAuthorizationService;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
-class LoginBlock
+class AuthorizeBlock
 {
-    public function index(LoginRequest $request)
+    public function index(RequestInterface $request)
     {
-        $post = $request->validated();
         try {
             $service = new UserAuthorizationService();
-            return $service->login($post['username'], $post['password']);
+            return $service->authorize();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

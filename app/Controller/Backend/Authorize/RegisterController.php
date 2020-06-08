@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Frontend\Authorize;
+namespace App\Controller\Backend\Authorize;
 
-use App\Block\Frontend\Authorize\RegisterBlock;
+use App\Block\Backend\Authorize\RegisterBlock;
 use App\Controller\AbstractController;
-use App\Request\Frontend\Authorize\RegisterRequest;
+use App\Request\Backend\Authorize\RegisterRequest;
 
 class RegisterController extends AbstractController
 {

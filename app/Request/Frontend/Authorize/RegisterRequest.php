@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Request\Frontend\Auth;
+namespace App\Request\Frontend\Authorize;
 
 use Hyperf\Validation\Request\FormRequest;
 
-class LoginRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +30,7 @@ class LoginRequest extends FormRequest
         return [
             'username' => 'required|string|max:30',
             'password' => 'required|string|max:30',
+            'confirm_password' => 'required|string|max:30',
         ];
     }
 
@@ -38,6 +39,7 @@ class LoginRequest extends FormRequest
         return [
             'username' => '用户名',
             'password' => '密码',
+            'confirm_password' => '确认密码',
         ];
     }
 }

@@ -8,9 +8,9 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Frontend\Authorize;
+namespace App\Controller\Backend\Authorize;
 
-use App\Block\Frontend\Authorize\AuthorizeBlock;
+use App\Block\Backend\Authorize\AuthorizeBlock;
 use App\Controller\AbstractController;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
