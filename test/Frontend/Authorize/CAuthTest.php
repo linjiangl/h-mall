@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Frontend\Auth;
+namespace HyperfTest\Frontend\Authorize;
 
 use Hyperf\Testing\Client;
 use HyperfTest\Frontend\TraitAuth;

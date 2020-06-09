@@ -8,25 +8,17 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Frontend\Auth;
+namespace App\Controller\Frontend\Authorize;
 
-use App\Block\Frontend\Auth\RegisterBlock;
+use App\Block\Frontend\Authorize\RegisterBlock;
 use App\Controller\AbstractController;
-use App\Request\Frontend\Auth\RegisterRequest;
-use Hyperf\Di\Annotation\Inject;
-use Phper666\JWTAuth\JWT;
+use App\Request\Frontend\Authorize\RegisterRequest;
 
 class RegisterController extends AbstractController
 {
-    /**
-     * @Inject()
-     * @var Jwt
-     */
-    protected $jwt;
-
     public function index(RegisterRequest $request)
     {
-        $block = new RegisterBlock($this->jwt);
+        $block = new RegisterBlock();
         return $block->index($request);
     }
 }

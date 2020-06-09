@@ -9,4 +9,16 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-// 后台管理路由
+use App\Middleware\JWTBackendMiddleware;
+use Hyperf\HttpServer\Router\Router;
+
+Router::addGroup('/backend', function () {
+    // 登录/退出
+    Router::post('/login', 'App\Controller\Backend\Authorize\LoginController::index');
+    Router::post('/register', 'App\Controller\Backend\Authorize\RegisterController::index');
+});
+
+Router::addGroup('/backend', function () {
+    // 登录用户相关
+    Router::post('/authorize', 'App\Controller\Backend\Authorize\AuthorizeController::index');
+}, ['middleware' => [JWTBackendMiddleware::class]]);

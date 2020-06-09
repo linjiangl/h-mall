@@ -10,14 +10,13 @@ declare(strict_types=1);
  */
 
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\DB\DB;
+use Hyperf\Framework\Logger\StdoutLogger;
 use Hyperf\HttpMessage\Stream\SwooleStream;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Logger\LoggerFactory;
-use Hyperf\Server\ServerFactory;
 use Hyperf\Utils\ApplicationContext;
 use Psr\Http\Message\ServerRequestInterface;
-use Swoole\Websocket\Frame;
 use Swoole\WebSocket\Server as WebSocketServer;
 
 /*
@@ -34,6 +33,9 @@ if (! function_exists('container')) {
  * redis 客户端实例
  */
 if (! function_exists('redis')) {
+    /**
+     * @return Redis
+     */
     function redis()
     {
         return container()->get(Redis::class);
@@ -41,29 +43,12 @@ if (! function_exists('redis')) {
 }
 
 /*
- * server 实例 基于 swoole server
- */
-if (! function_exists('server')) {
-    function server()
-    {
-        return container()->get(ServerFactory::class)->getServer()->getServer();
-    }
-}
-
-/*
- * websocket frame 实例
- */
-if (! function_exists('frame')) {
-    function frame()
-    {
-        return container()->get(Frame::class);
-    }
-}
-
-/*
  * websocket 实例
  */
 if (! function_exists('websocket')) {
+    /**
+     * @return Swoole\WebSocket\Server
+     */
     function websocket()
     {
         return container()->get(WebSocketServer::class);
@@ -84,6 +69,9 @@ if (! function_exists('cache')) {
  * 控制台日志
  */
 if (! function_exists('stdLog')) {
+    /**
+     * @return StdoutLogger
+     */
     function stdLog()
     {
         return container()->get(StdoutLoggerInterface::class);
@@ -94,6 +82,9 @@ if (! function_exists('stdLog')) {
  * 文件日志
  */
 if (! function_exists('logger')) {
+    /**
+     * @return LoggerFactory
+     */
     function logger()
     {
         return container()->get(LoggerFactory::class)->make();
@@ -101,6 +92,9 @@ if (! function_exists('logger')) {
 }
 
 if (! function_exists('request')) {
+    /**
+     * @return RequestInterface
+     */
     function request()
     {
         return container()->get(ServerRequestInterface::class);
@@ -108,6 +102,9 @@ if (! function_exists('request')) {
 }
 
 if (! function_exists('response')) {
+    /**
+     * @return ResponseInterface
+     */
     function response()
     {
         return container()->get(ResponseInterface::class);

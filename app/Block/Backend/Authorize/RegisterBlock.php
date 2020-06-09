@@ -8,11 +8,12 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Block\Frontend\Auth;
+namespace App\Block\Backend\Authorize;
 
 use App\Exception\HttpException;
-use App\Request\Frontend\Auth\RegisterRequest;
-use App\Service\Auth\UserAuthorizationService;
+use App\Request\Backend\Authorize\RegisterRequest;
+use App\Service\Authorize\AdminAuthorizationService;
+use Throwable;
 
 class RegisterBlock
 {
@@ -20,9 +21,9 @@ class RegisterBlock
     {
         $post = $request->validated();
         try {
-            $service = new UserAuthorizationService();
+            $service = new AdminAuthorizationService();
             return $service->register($post['username'], $post['password'], $post['confirm_password']);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }

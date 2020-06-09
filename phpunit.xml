@@ -10,7 +10,7 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Frontend">
-            <directory suffix="Test.php">./test/Frontend/Auth</directory>
+            <directory suffix="Test.php">./test/Frontend/Authorize</directory>
         </testsuite>
         <testsuite name="Mobile">
             <directory suffix="Test.php">./test/Api/Mobile</directory>

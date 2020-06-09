@@ -21,8 +21,8 @@ class AdminDao extends AbstractDao
     const STATUS_DISABLED = 2;
 
     protected $model = Admin::class;
-
     protected $noAllowActions = [];
+    protected $notFoundMessage = '管理员不存在';
 
     public static function getStatusLabel()
     {

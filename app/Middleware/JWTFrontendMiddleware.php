@@ -12,7 +12,7 @@ namespace App\Middleware;
 
 use App\Exception\CacheErrorException;
 use App\Exception\UnauthorizedException;
-use App\Service\Auth\UserAuthorizationService;
+use App\Service\Authorize\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Hyperf\Utils\Context;
 use Phper666\JWTAuth\JWT;

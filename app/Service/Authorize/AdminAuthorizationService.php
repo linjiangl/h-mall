@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Service\Auth;
+namespace App\Service\Authorize;
 
 use App\Dao\Admin\AdminDao;
 use App\Exception\CacheErrorException;
@@ -24,8 +24,6 @@ use Throwable;
 class AdminAuthorizationService extends AbstractAuthorizationService
 {
     protected $scene = 'admin';
-
-    protected $header = 'Admin-Token';
 
     public function __construct()
     {
