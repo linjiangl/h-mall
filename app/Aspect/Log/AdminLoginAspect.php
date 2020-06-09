@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Aspect\Log;
 
 use App\Controller\Backend\Authorize\LoginController;
+use App\Controller\Backend\Authorize\RegisterController;
 use App\Service\Log\LogAdminLoginService;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
@@ -20,6 +21,7 @@ class AdminLoginAspect extends AbstractAspect
 {
     public $classes = [
         LoginController::class,
+        RegisterController::class
     ];
 
     /**
