@@ -1,12 +1,17 @@
 <?php
 
-
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://www.doubi.site
+ * @document https://doc.doubi.site
+ * @contact  8257796@qq.com
+ */
 namespace App\Aspect\Log;
 
-
 use App\Controller\Backend\Authorize\LoginController;
-use App\Controller\Backend\Authorize\RegisterController;
-use App\Dao\Log\LogAdminLoginDao;
+use App\Service\Log\LogAdminLoginService;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\Di\Exception\Exception;
@@ -15,7 +20,6 @@ class AdminLoginAspect extends AbstractAspect
 {
     public $classes = [
         LoginController::class,
-        RegisterController::class
     ];
 
     /**
@@ -26,12 +30,10 @@ class AdminLoginAspect extends AbstractAspect
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
         $result = $proceedingJoinPoint->process();
-        $dao = new LogAdminLoginDao();
-        $dao->create([
-            'admin_id' => 1,
-            'client_ip' => '127.0.0.1',
-            'user_agent' => 'chrome',
-        ]);
+        if (isset($result['token'])) {
+            $service = new LogAdminLoginService();
+            $service->createLoginRecord();
+        }
         return $result;
     }
 }

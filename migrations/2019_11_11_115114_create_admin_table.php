@@ -22,7 +22,7 @@ class CreateAdminTable extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->string('username', 100)->comment('用户名');
+            $table->string('username', 30)->comment('用户名');
             $table->string('avatar', 255)->default('')->comment('头像');
             $table->string('real_name', 20)->default('')->comment('姓名');
             $table->string('mobile', 20)->default('')->comment('手机号');

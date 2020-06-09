@@ -14,7 +14,7 @@ use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
- * @property int $admin_id
+ * @property string $username 管理员用户名
  * @property string $client_ip
  * @property string $action
  * @property string $method
@@ -39,12 +39,12 @@ class LogAdminAction extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'admin_id', 'client_ip', 'action', 'method', 'url', 'header', 'query', 'request', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'username', 'client_ip', 'action', 'method', 'url', 'header', 'query', 'request', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }
