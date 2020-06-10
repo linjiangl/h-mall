@@ -28,6 +28,12 @@ class LogAdminActionService extends AbstractService
             return false;
         }
 
+        $url = $request->getUri()->getPath();
+        $query = $request->getUri()->getQuery();
+        if ($query) {
+            $url = $url . '?' . $query;
+        }
+
         $path = str_replace(substr($className, strripos($className, '\\')), '', $className);
         $module = strtolower(substr($path, strripos($path, '\\') + 1));
         $clientId = $request->header('x-real-ip');
@@ -36,7 +42,12 @@ class LogAdminActionService extends AbstractService
             'username' => $admin['username'],
             'client_ip' => $clientId,
             'module' => $module,
-            'action' => $actionName
+            'action' => $actionName,
+            'remark' => [
+                'method' => $request->getMethod(),
+                'url' => $url,
+                'data' => $request->getParsedBody()
+            ]
         ]);
         return true;
     }
