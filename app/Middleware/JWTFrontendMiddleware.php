@@ -12,7 +12,9 @@ namespace App\Middleware;
 
 use App\Service\Authorize\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
+use Hyperf\Utils\Context;
 use Phper666\JWTAuth\JWT;
+use Psr\Http\Message\ServerRequestInterface;
 
 class JWTFrontendMiddleware extends AbstractJWTMiddleware
 {
@@ -20,5 +22,15 @@ class JWTFrontendMiddleware extends AbstractJWTMiddleware
     {
         parent::__construct($response, $jwt);
         $this->service = new UserAuthorizationService();
+    }
+
+    protected function handleWithAttribute($request)
+    {
+        $jwtData = $this->service->getParserData(true);
+        $request = Context::get(ServerRequestInterface::class);
+        $request = $request->withAttribute('user_id', $jwtData['user_id']);
+        $request = $request->withAttribute('user', $jwtData);
+        Context::set(ServerRequestInterface::class, $request);
+        return $request;
     }
 }

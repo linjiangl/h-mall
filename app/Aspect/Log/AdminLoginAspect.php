@@ -13,10 +13,14 @@ namespace App\Aspect\Log;
 use App\Controller\Backend\Authorize\LoginController;
 use App\Controller\Backend\Authorize\RegisterController;
 use App\Service\Log\LogAdminLoginService;
+use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\Di\Exception\Exception;
 
+/**
+ * @Aspect()
+ */
 class AdminLoginAspect extends AbstractAspect
 {
     public $classes = [

@@ -13,7 +13,9 @@ namespace App\Controller;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use Hyperf\Utils\Context;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 abstract class AbstractController
 {
@@ -43,5 +45,12 @@ abstract class AbstractController
     protected function deleted()
     {
         return response_json(true, '', 204);
+    }
+
+    protected function setActionName(string $actionName)
+    {
+        $request = Context::get(ServerRequestInterface::class);
+        $request = $request->withAttribute('action_name', $actionName);
+        Context::set(ServerRequestInterface::class, $request);
     }
 }

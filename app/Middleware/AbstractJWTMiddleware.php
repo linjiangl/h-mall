@@ -14,7 +14,6 @@ use App\Exception\CacheErrorException;
 use App\Exception\UnauthorizedException;
 use App\Service\Authorize\InterfaceAuthorizationService;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
-use Hyperf\Utils\Context;
 use Phper666\JWTAuth\JWT;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -66,19 +65,20 @@ abstract class AbstractJWTMiddleware implements MiddlewareInterface
                 }
             }
 
+            $request = $this->handleWithAttribute($request);
             if (! $isValidToken) {
                 throw new UnauthorizedException();
             }
-
-            $jwtData = $this->service->getParserData();
-            $request = Context::get(ServerRequestInterface::class);
-            $request = $request->withAttribute('admin_id', $jwtData['admin_id']);
-            Context::set(ServerRequestInterface::class, $request);
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
         } catch (\Throwable $e) {
         }
 
         return $handler->handle($request);
+    }
+
+    protected function handleWithAttribute($request)
+    {
+        return $request;
     }
 }
