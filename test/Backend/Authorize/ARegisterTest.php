@@ -8,13 +8,13 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Frontend\Authorize;
+namespace HyperfTest\Backend\Authorize;
 
-use HyperfTest\Frontend\FrontendHttpTestCase;
+use HyperfTest\Backend\BackendHttpTestCase;
 
-class ARegisterTest extends FrontendHttpTestCase
+class ARegisterTest extends BackendHttpTestCase
 {
-    public function testFrontendRegister()
+    public function testBackendRegister()
     {
         $result = $this->request('/register', [
             'username' => 'test001',

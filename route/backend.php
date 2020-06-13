@@ -24,4 +24,7 @@ Router::addGroup('/backend', function () {
 
     // 用户
     Router::post('/user/disabled', 'App\Controller\Backend\User\UserController::disabled');
+
+    // 管理员日志
+    Router::post('/log/adminLogin', 'App\Controller\Backend\Log\LogAdminLoginController::index');
 }, ['middleware' => [JWTBackendMiddleware::class]]);

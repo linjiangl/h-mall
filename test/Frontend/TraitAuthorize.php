@@ -10,20 +10,20 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Frontend;
 
-trait TraitAuth
+trait TraitAuthorize
 {
     protected $token;
 
-    protected $filename = '/runtime/testing_token.txt';
+    protected $tokenCacheIndex = 'testing:frontend:token';
 
     public function setToken($token)
     {
-        file_put_contents(BASE_PATH . $this->filename, $token);
+        redis()->set($this->tokenCacheIndex, $token, 86400);
     }
 
     public function getToken()
     {
-        return file_get_contents(BASE_PATH . $this->filename);
+        return redis()->get($this->tokenCacheIndex);
     }
 
     public function getHeaders()
