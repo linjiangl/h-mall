@@ -101,7 +101,7 @@ abstract class AbstractBlock implements InterfaceBlock
 
             /** @var InterfaceService $service */
             $service = new $this->service();
-            return $service->lists($this->condition, $page, $limit, $this->orderBy, $this->groupBy, $this->with);
+            return $service->paginate($this->condition, $page, $limit, $this->orderBy, $this->groupBy, $this->with);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

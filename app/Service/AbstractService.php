@@ -52,13 +52,13 @@ abstract class AbstractService implements InterfaceService
      *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
      * ]
      */
-    public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
+    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
     {
         $this->handleQueryLimit((int)$limit);
 
         /** @var InterfaceDao $dao */
         $dao = new $this->dao();
-        return $dao->lists($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
+        return $dao->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
     }
 
     /**
