@@ -30,7 +30,7 @@ class CreateAdminTable extends Migration
             $table->string('password', 64);
             $table->string('salt', 24);
             $table->tinyInteger('status')->default(1)->comment('状态');
-            $table->timestamp('lasted_login_at')->comment('最后登录时间');
+            $table->timestamp('lasted_login_at')->nullable()->comment('最后登录时间');
             $table->timestamps();
 
             $table->unique(['username'], 'username');
