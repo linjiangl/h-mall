@@ -20,7 +20,7 @@ class BLoginTest extends BackendHttpTestCase
     public function testBackendLogin()
     {
         $result = $this->request('/login', [
-            'username' => 'test001',
+            'username' => 'admin',
             'password' => '123456'
         ]);
 

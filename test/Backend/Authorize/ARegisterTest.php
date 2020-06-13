@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\Authorize;
 
+use App\Service\Authorize\AdminAuthorizationService;
 use HyperfTest\Backend\BackendHttpTestCase;
 
 class ARegisterTest extends BackendHttpTestCase
@@ -17,11 +18,13 @@ class ARegisterTest extends BackendHttpTestCase
     public function testBackendRegister()
     {
         $result = $this->request('/register', [
-            'username' => 'test001',
+            'username' => 'admin',
             'password' => '123456',
             'confirm_password' => '123456'
         ]);
 
+        $service = new AdminAuthorizationService();
         $this->assertArrayHasKey('token', $result['data']);
+        $this->assertSame($service->getTTL(), $result['data']['exp']);
     }
 }
