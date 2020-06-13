@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Frontend\User;
+namespace App\Controller\Backend\Log;
 
-use App\Block\Frontend\User\UserBlock;
+use App\Block\Backend\Log\LogAdminLoginBlock;
 use App\Controller\AbstractRestController;
 
-class UserController extends AbstractRestController
+class LogAdminLoginController extends AbstractRestController
 {
-    protected $block = UserBlock::class;
+    protected $block = LogAdminLoginBlock::class;
 }

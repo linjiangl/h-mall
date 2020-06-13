@@ -27,10 +27,15 @@ class LogAdminLoginService extends AbstractService
         if (! $username) {
             return false;
         }
+
+        $clientId = $request->header('x-real-ip');
+        $clientId = $clientId ? current($clientId) : '';
+        $userAgent = $request->getHeader('User-Agent');
+        $userAgent = $userAgent ? current($userAgent) : '';
         $this->create([
             'username' => $username,
-            'client_ip' => $request->header('x-real-ip') ?: '',
-            'user_agent' => $request->getHeader('User-Agent') ?: '',
+            'client_ip' => $clientId,
+            'user_agent' => $userAgent,
         ]);
         return true;
     }

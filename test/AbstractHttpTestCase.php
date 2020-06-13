@@ -8,20 +8,19 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Frontend\Authorize;
+namespace HyperfTest;
 
 use Hyperf\Testing\Client;
-use HyperfTest\Frontend\TraitAuth;
 use HyperfTest\HttpTestCase;
 
-class CAuthTest extends HttpTestCase
+abstract class AbstractHttpTestCase extends HttpTestCase
 {
-    use TraitAuth;
-
     /**
      * @var Client
      */
     protected $client;
+
+    protected $apiType = '';
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
@@ -29,12 +28,8 @@ class CAuthTest extends HttpTestCase
         $this->client = make(Client::class);
     }
 
-    public function testFrontendAuth()
+    public function request($url, $data = [], $method = 'post', $header = [])
     {
-        $result = $this->client->post('/frontend/authorize', [], $this->getHeaders());
-
-        $this->assertArrayHasKey('id', $result['data']);
-        $this->assertSame('test001', $result['data']['username']);
-        $this->assertArrayNotHasKey('password', $result['data']);
+        return $this->client->$method($this->apiType . $url, $data, $header);
     }
 }

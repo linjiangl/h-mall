@@ -9,6 +9,9 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
+        <testsuite name="Backend">
+            <directory suffix="Test.php">./test/Backend/Authorize</directory>
+        </testsuite>
         <testsuite name="Frontend">
             <directory suffix="Test.php">./test/Frontend/Authorize</directory>
         </testsuite>

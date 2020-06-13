@@ -15,12 +15,9 @@ class CreateLogAdminActionTable extends Migration
             $table->integerIncrements('id');
             $table->string('username', 30)->comment('管理员用户名');
             $table->string('client_ip', 30);
+            $table->string('module', 50);
             $table->string('action', 255);
-            $table->string('method', 10);
-            $table->string('url', 120);
-            $table->string('header', 255);
-            $table->string('query', 1000);
-            $table->text('request');
+            $table->text('remark');
             $table->timestamps();
 
             $table->index(['username'], 'username');

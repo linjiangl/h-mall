@@ -48,4 +48,6 @@ class Admin extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    protected $hidden = ['password', 'salt', 'mobile', 'email'];
 }

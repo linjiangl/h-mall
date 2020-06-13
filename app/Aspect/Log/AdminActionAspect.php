@@ -8,9 +8,10 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Aspect;
+namespace App\Aspect\Log;
 
-use App\Controller\Frontend\IndexController;
+use App\Controller\Backend\User\UserController;
+use App\Service\Log\LogAdminActionService;
 use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
@@ -19,22 +20,24 @@ use Hyperf\Di\Exception\Exception;
 /**
  * @Aspect()
  */
-class IndexAspect extends AbstractAspect
+class AdminActionAspect extends AbstractAspect
 {
     public $classes = [
-        IndexController::class,
+        UserController::class
     ];
 
     /**
      * @param ProceedingJoinPoint $proceedingJoinPoint
-     * @return mixed return the value from process method of ProceedingJoinPoint, or the value that you handled
+     * @return mixed
      * @throws Exception
      */
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
         $result = $proceedingJoinPoint->process();
-        if (is_string($result)) {
-            $result = $result . 'Aspect !!!';
+        $actionName = request()->getAttribute('action_name', '');
+        if ($actionName) {
+             $service = new LogAdminActionService();
+             $service->createActionRecord($actionName, $proceedingJoinPoint->className);
         }
         return $result;
     }

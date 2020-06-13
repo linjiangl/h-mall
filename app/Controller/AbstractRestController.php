@@ -13,7 +13,7 @@ namespace App\Controller;
 use App\Block\InterfaceBlock;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-class RestController extends AbstractController
+abstract class AbstractRestController extends AbstractController
 {
     /**
      * @var InterfaceBlock

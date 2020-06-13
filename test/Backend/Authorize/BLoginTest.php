@@ -8,19 +8,19 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Frontend\Authorize;
+namespace HyperfTest\Backend\Authorize;
 
-use HyperfTest\Frontend\FrontendHttpTestCase;
-use HyperfTest\Frontend\TraitFrontendAuthorize;
+use HyperfTest\Backend\BackendHttpTestCase;
+use HyperfTest\Backend\TraitBackendAuthorize;
 
-class BLoginTest extends FrontendHttpTestCase
+class BLoginTest extends BackendHttpTestCase
 {
-    use TraitFrontendAuthorize;
+    use TraitBackendAuthorize;
 
-    public function testFrontendLogin()
+    public function testBackendLogin()
     {
         $result = $this->request('/login', [
-            'username' => 'test001',
+            'username' => 'guest',
             'password' => '123456'
         ]);
 

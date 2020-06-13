@@ -8,22 +8,22 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Frontend;
+namespace HyperfTest\Backend;
 
-trait TraitAuth
+trait TraitBackendAuthorize
 {
-    protected $token;
+    protected $tokenCacheIndex = 'testing:backend:token';
 
-    protected $filename = '/runtime/testing_token.txt';
+    protected $token;
 
     public function setToken($token)
     {
-        file_put_contents(BASE_PATH . $this->filename, $token);
+        redis()->set($this->tokenCacheIndex, $token, 86400);
     }
 
     public function getToken()
     {
-        return file_get_contents(BASE_PATH . $this->filename);
+        return redis()->get($this->tokenCacheIndex);
     }
 
     public function getHeaders()

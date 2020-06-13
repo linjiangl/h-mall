@@ -62,9 +62,18 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         }
     }
 
-    public function getParserData()
+    public function getTTL(string $token = null)
     {
-        return $this->jwt->getParserData();
+        return $this->jwt->getTTL($token);
+    }
+
+    public function getParserData($filter = false)
+    {
+        $data = $this->jwt->getParserData();
+        if ($data && $filter) {
+            unset($data['jti'], $data['iat'], $data['nbf'], $data['exp'], $data['jwt_scene']);
+        }
+        return $data;
     }
 
     public function generateSalt($length = 10)

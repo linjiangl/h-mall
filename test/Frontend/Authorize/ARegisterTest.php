@@ -10,25 +10,13 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Frontend\Authorize;
 
-use Hyperf\Testing\Client;
-use HyperfTest\HttpTestCase;
+use HyperfTest\Frontend\FrontendHttpTestCase;
 
-class ARegisterTest extends HttpTestCase
+class ARegisterTest extends FrontendHttpTestCase
 {
-    /**
-     * @var Client
-     */
-    protected $client;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-        $this->client = make(Client::class);
-    }
-
     public function testFrontendRegister()
     {
-        $result = $this->client->post('/frontend/register', [
+        $result = $this->request('/register', [
             'username' => 'test001',
             'password' => '123456',
             'confirm_password' => '123456'
