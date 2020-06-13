@@ -12,7 +12,7 @@ namespace App\Service;
 
 interface InterfaceService
 {
-    public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*']);
+    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*']);
 
     public function info($id, $with = []);
 
