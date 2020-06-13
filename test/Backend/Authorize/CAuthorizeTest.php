@@ -11,18 +11,18 @@ declare(strict_types=1);
 namespace HyperfTest\Backend\Authorize;
 
 use HyperfTest\Backend\BackendHttpTestCase;
-use HyperfTest\Frontend\TraitAuthorize;
+use HyperfTest\Backend\TraitBackendAuthorize;
 
 class CAuthorizeTest extends BackendHttpTestCase
 {
-    use TraitAuthorize;
+    use TraitBackendAuthorize;
 
     public function testBackendAuthorize()
     {
-        $result = $this->request('/frontend/authorize', [], 'post', $this->getHeaders());
+        $result = $this->request('/authorize', [], 'post', $this->getHeaders());
 
         $this->assertArrayHasKey('id', $result['data']);
-        $this->assertSame('admin', $result['data']['username']);
+        $this->assertSame('guest', $result['data']['username']);
         $this->assertArrayNotHasKey('password', $result['data']);
     }
 }

@@ -8,13 +8,13 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Backend;
+namespace HyperfTest\Frontend;
 
-trait TraitAuthorize
+trait TraitFrontendAuthorize
 {
-    protected $token;
+    protected $tokenCacheIndex = 'testing:frontend:token';
 
-    protected $tokenCacheIndex = 'testing:backend:token';
+    protected $token;
 
     public function setToken($token)
     {

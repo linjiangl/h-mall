@@ -18,7 +18,7 @@ class ARegisterTest extends BackendHttpTestCase
     public function testBackendRegister()
     {
         $result = $this->request('/register', [
-            'username' => 'admin',
+            'username' => 'guest',
             'password' => '123456',
             'confirm_password' => '123456'
         ]);

@@ -11,11 +11,11 @@ declare(strict_types=1);
 namespace HyperfTest\Frontend\Authorize;
 
 use HyperfTest\Frontend\FrontendHttpTestCase;
-use HyperfTest\Frontend\TraitAuthorize;
+use HyperfTest\Frontend\TraitFrontendAuthorize;
 
 class CAuthorizeTest extends FrontendHttpTestCase
 {
-    use TraitAuthorize;
+    use TraitFrontendAuthorize;
 
     public function testFrontendAuthorize()
     {

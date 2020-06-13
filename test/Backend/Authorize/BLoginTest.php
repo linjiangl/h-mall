@@ -11,16 +11,16 @@ declare(strict_types=1);
 namespace HyperfTest\Backend\Authorize;
 
 use HyperfTest\Backend\BackendHttpTestCase;
-use HyperfTest\Frontend\TraitAuthorize;
+use HyperfTest\Backend\TraitBackendAuthorize;
 
 class BLoginTest extends BackendHttpTestCase
 {
-    use TraitAuthorize;
+    use TraitBackendAuthorize;
 
     public function testBackendLogin()
     {
         $result = $this->request('/login', [
-            'username' => 'admin',
+            'username' => 'guest',
             'password' => '123456'
         ]);
 
