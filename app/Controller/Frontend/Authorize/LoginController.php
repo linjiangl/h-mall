@@ -24,7 +24,6 @@ class LoginController extends AbstractController
 {
     public function index(LoginRequest $request)
     {
-        $block = new LoginBlock();
-        return $block->index($request);
+        return (new LoginBlock())->index($request);
     }
 }

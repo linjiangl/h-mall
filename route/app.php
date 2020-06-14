@@ -13,5 +13,5 @@ use Hyperf\HttpServer\Router\Router;
 // 手机端接口路由
 Router::addGroup('/v1', function () {
     // 首页
-    Router::get('/home', 'App\Controller\Mobile\v1\HomeController::index');
+    Router::get('/home', 'App\Controller\App\v1\HomeController::index');
 });
