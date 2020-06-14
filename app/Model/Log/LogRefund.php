@@ -24,7 +24,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property float $amount 金额
  * @property int $status 退款状态 0:未处理, 1:已处理
  * @property string $remark
- * @property string $refund_at
+ * @property int $finished_time 退款成功时间
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
@@ -42,12 +42,12 @@ class LogRefund extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'order_id', 'refund_id', 'payment_business_no', 'business_no', 'refund_method', 'trade_no', 'amount', 'status', 'remark', 'refund_at', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'order_id', 'refund_id', 'payment_business_no', 'business_no', 'refund_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'refund_id' => 'integer', 'amount' => 'float', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'refund_id' => 'integer', 'amount' => 'float', 'status' => 'integer', 'finished_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }
