@@ -4778,16 +4778,16 @@
         },
         {
             "name": "overtrue/wechat",
-            "version": "4.2.19",
+            "version": "4.2.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/wechat.git",
-                "reference": "74dec73792e7747109fe115815c9c4dafe41aba2"
+                "reference": "cd74b6c0c13e34d12cc1236f87e4abb4f66469d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/wechat/zipball/74dec73792e7747109fe115815c9c4dafe41aba2",
-                "reference": "74dec73792e7747109fe115815c9c4dafe41aba2",
+                "url": "https://api.github.com/repos/overtrue/wechat/zipball/cd74b6c0c13e34d12cc1236f87e4abb4f66469d8",
+                "reference": "cd74b6c0c13e34d12cc1236f87e4abb4f66469d8",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4861,7 +4861,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-04-27T09:10:12+00:00"
+            "time": "2020-06-08T11:28:08+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -7816,16 +7816,16 @@
         },
         {
             "name": "yurunsoft/phpmailer-swoole",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yurunsoft/PHPMailer-Swoole.git",
-                "reference": "bf10e8cfa854a08572de4e5a989e39e2ece0af20"
+                "reference": "ec09ff66f6e9eb8b94b8574545357dc52e91c0a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yurunsoft/PHPMailer-Swoole/zipball/bf10e8cfa854a08572de4e5a989e39e2ece0af20",
-                "reference": "bf10e8cfa854a08572de4e5a989e39e2ece0af20",
+                "url": "https://api.github.com/repos/Yurunsoft/PHPMailer-Swoole/zipball/ec09ff66f6e9eb8b94b8574545357dc52e91c0a5",
+                "reference": "ec09ff66f6e9eb8b94b8574545357dc52e91c0a5",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -7856,7 +7856,7 @@
                 "LGPL-2.1"
             ],
             "description": "PHPMailer 支持 Swoole 协程环境",
-            "time": "2018-08-23T01:29:45+00:00"
+            "time": "2019-10-24T07:46:26+00:00"
         },
         {
             "name": "yurunsoft/yurun-http",
@@ -8298,16 +8298,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "2.13.0",
+            "version": "2.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "308728eae8d90412d850c155d40b1cfbede549da"
+                "reference": "f3812c026e557892c34ef37f6ab808a6b567da7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/308728eae8d90412d850c155d40b1cfbede549da",
-                "reference": "308728eae8d90412d850c155d40b1cfbede549da",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/f3812c026e557892c34ef37f6ab808a6b567da7f",
+                "reference": "f3812c026e557892c34ef37f6ab808a6b567da7f",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -8325,7 +8325,7 @@
                 "doctrine/lexer": "^1.0",
                 "doctrine/persistence": "^1.3.3",
                 "doctrine/reflection": "^1.0",
-                "php": "^7.1"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^1.0",
@@ -8397,7 +8397,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-15T05:51:54+00:00"
+            "time": "2020-06-05T16:46:05+00:00"
         },
         {
             "name": "doctrine/event-manager",

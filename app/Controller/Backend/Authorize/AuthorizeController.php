@@ -18,7 +18,6 @@ class AuthorizeController extends AbstractController
 {
     public function index(RequestInterface $request)
     {
-        $block = new AuthorizeBlock();
-        return $block->index($request);
+        return (new AuthorizeBlock())->index($request);
     }
 }

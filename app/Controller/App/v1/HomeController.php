@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Mobile\v1;
+namespace App\Controller\App\v1;
 
 use App\Controller\AbstractController;
 use Hyperf\HttpServer\Annotation\Controller;
