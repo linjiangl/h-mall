@@ -11,4 +11,4 @@ declare(strict_types=1);
 
 require_once BASE_PATH . '/route/backend.php';
 require_once BASE_PATH . '/route/frontend.php';
-require_once BASE_PATH . '/route/api-mobile.php';
+require_once BASE_PATH . '/route/app.php';
