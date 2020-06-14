@@ -43,12 +43,12 @@ class CreateOrderTable extends Migration
             $table->tinyInteger('is_comment', false, true)->default(0)->comment('是否评论');
             $table->tinyInteger('is_additional', false, true)->default(0)->comment('是否追加评论');
             $table->tinyInteger('is_credited', false, true)->default(0)->comment('是否入账');
-            $table->timestamp('payment_at')->nullable()->comment('支付时间');
-            $table->timestamp('dispatched_at')->nullable()->comment('发货时间');
-            $table->timestamp('confirmed_at')->nullable()->comment('确认时间');
-            $table->timestamp('canceled_at')->nullable()->comment('取消时间');
-            $table->timestamp('comment_at')->nullable()->comment('评论时间');
-            $table->timestamp('additional_comment_at')->nullable()->comment('追加评论时间');
+            $table->integer('payment_time', false, true)->default(0)->comment('支付时间');
+            $table->integer('dispatched_time', false, true)->default(0)->comment('发货时间');
+            $table->integer('confirmed_time', false, true)->default(0)->comment('确认时间');
+            $table->integer('canceled_time', false, true)->default(0)->comment('取消时间');
+            $table->integer('comment_time', false, true)->default(0)->comment('评论时间');
+            $table->integer('additional_comment_time', false, true)->default(0)->comment('追加评论时间');
             $table->tinyInteger('status', false, true)->comment('订单状态');
             $table->string('buyer_message', 255)->default('')->comment('买家留言');
             $table->string('seller_message', 255)->default('')->comment('买家留言');

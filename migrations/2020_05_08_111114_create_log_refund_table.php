@@ -34,7 +34,7 @@ class CreateLogRefundTable extends Migration
             $table->decimal('amount', 10, 2)->unsigned()->default(0)->comment('金额');
             $table->tinyInteger('status')->default(0)->comment('退款状态 0:未处理, 1:已处理');
             $table->string('remark', 3000)->default('');
-            $table->timestamp('refund_at')->nullable();
+            $table->integer('finished_time', false, true)->default(0)->comment('退款成功时间');
             $table->timestamps();
 
             $table->unique(['business_no'], 'business_no');

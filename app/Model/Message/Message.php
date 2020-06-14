@@ -16,6 +16,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $id
  * @property int $sender_id 发送消息用户
  * @property int $receiver_id 接收消息用户 0:用户都能接收
+ * @property int $text_id
  * @property string $type 类型 announce:系统公告 remind:系统通知
  * @property string $module 模块
  * @property int $module_id
@@ -38,12 +39,12 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'sender_id', 'receiver_id', 'type', 'module', 'module_id', 'module_url', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'sender_id', 'receiver_id', 'text_id', 'type', 'module', 'module_id', 'module_url', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'sender_id' => 'integer', 'receiver_id' => 'integer', 'module_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'sender_id' => 'integer', 'receiver_id' => 'integer', 'text_id' => 'integer', 'module_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

@@ -16,8 +16,6 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $id
  * @property int $category_id
  * @property int $option_id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
  */
 class CategoryOption extends Model
 {
@@ -33,12 +31,12 @@ class CategoryOption extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'category_id', 'option_id', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'category_id', 'option_id'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'category_id' => 'integer', 'option_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'category_id' => 'integer', 'option_id' => 'integer'];
 }
