@@ -32,7 +32,7 @@ class CreateLogPaymentTable extends Migration
             $table->decimal('amount', 10, 2)->unsigned()->default(0)->comment('金额');
             $table->tinyInteger('status')->default(0)->comment('支付状态 0:待支付, 1:支付成功, 2:重复支付退款');
             $table->string('remark', 3000)->default('');
-            $table->timestamp('payment_at')->nullable();
+            $table->integer('finished_time', false, true)->default(0)->comment('支付完成的时间');
             $table->timestamps();
 
             $table->unique(['business_no'], 'business_no');

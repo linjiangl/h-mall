@@ -16,8 +16,6 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $id
  * @property int $product_sku_id
  * @property int $option_value_id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
  */
 class ProductSkuOptionValue extends Model
 {
@@ -33,12 +31,12 @@ class ProductSkuOptionValue extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'product_sku_id', 'option_value_id', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'product_sku_id', 'option_value_id'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'product_sku_id' => 'integer', 'option_value_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'product_sku_id' => 'integer', 'option_value_id' => 'integer'];
 }

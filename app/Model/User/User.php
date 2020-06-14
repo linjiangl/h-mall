@@ -24,11 +24,11 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $remember_token
  * @property string $salt 加密盐
  * @property int $status 状态 1:正常, 2:禁用
- * @property string $lasted_login_at 最后登录时间
- * @property string $mobile_verified_at 手机验证时间
- * @property string $email_verified_at 邮箱验证时间
- * @property string $avatar_updated_at 头像设置时间
- * @property string $username_updated_at 用户名设置时间
+ * @property int $lasted_login_time 最后登录时间
+ * @property int $mobile_verified_time 手机验证时间
+ * @property int $email_verified_time 邮箱验证时间
+ * @property int $avatar_updated_time 头像设置时间
+ * @property int $username_updated_time 用户名设置时间
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\Model\User\UserVipCard $vipCard
@@ -48,14 +48,14 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'lasted_login_at', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'lasted_login_time' => 'integer', 'mobile_verified_time' => 'integer', 'email_verified_time' => 'integer', 'avatar_updated_time' => 'integer', 'username_updated_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     protected $hidden = ['password', 'salt', 'mobile', 'email', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
 

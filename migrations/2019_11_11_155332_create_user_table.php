@@ -34,18 +34,18 @@ class CreateUserTable extends Migration
             $table->string('remember_token', 64)->default('');
             $table->string('salt', 24)->default('')->comment('加密盐');
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 1:正常, 2:禁用');
-            $table->timestamp('lasted_login_at')->comment('最后登录时间');
-            $table->timestamp('mobile_verified_at')->comment('手机验证时间');
-            $table->timestamp('email_verified_at')->comment('邮箱验证时间');
-            $table->timestamp('avatar_updated_at')->comment('头像设置时间');
-            $table->timestamp('username_updated_at')->comment('用户名设置时间');
+            $table->integer('lasted_login_time', false, true)->default(0)->comment('最后登录时间');
+            $table->integer('mobile_verified_time', false, true)->default(0)->comment('手机验证时间');
+            $table->integer('email_verified_time', false, true)->default(0)->comment('邮箱验证时间');
+            $table->integer('avatar_updated_time', false, true)->default(0)->comment('头像设置时间');
+            $table->integer('username_updated_time', false, true)->default(0)->comment('用户名设置时间');
             $table->timestamps();
 
             $table->unique(['username'], 'username');
             $table->index(['mobile'], 'mobile');
             $table->index(['email'], 'email');
             $table->index(['nickname'], 'nickname');
-            $table->index(['lasted_login_at'], 'lasted_login_at');
+            $table->index(['lasted_login_time'], 'lasted_login_time');
             $table->index(['created_at'], 'created_at');
         });
     }

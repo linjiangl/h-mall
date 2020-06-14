@@ -80,7 +80,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
                 'exp' => $this->jwt->getTTL(),
             ];
 
-            $user->lasted_login_at = Carbon::now()->toDateTimeString();
+            $user->lasted_login_time = time();
             $user->save();
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
@@ -122,7 +122,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
                 'avatar' => $extend['avatar'] ?? '',
                 'mobile' => $extend['mobile'] ?? '',
                 'email' => $extend['email'] ?? '',
-                'lasted_login_at' => Carbon::now()->toDateTimeString()
+                'lasted_login_time' => time()
             ]);
 
             return $this->login($username, $password);
