@@ -9,13 +9,13 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Frontend">
-            <directory suffix="Test.php">./test/Frontend/Authorize</directory>
-        </testsuite>
         <testsuite name="Backend">
             <directory suffix="Test.php">./test/Backend/Authorize</directory>
             <directory suffix="Test.php">./test/Backend/Admin</directory>
             <directory suffix="Test.php">./test/Backend/User</directory>
+        </testsuite>
+        <testsuite name="Frontend">
+            <directory suffix="Test.php">./test/Frontend/Authorize</directory>
         </testsuite>
         <testsuite name="Mobile">
             <directory suffix="Test.php">./test/Api/Mobile</directory>
