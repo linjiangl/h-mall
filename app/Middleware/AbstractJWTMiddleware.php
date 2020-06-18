@@ -72,6 +72,7 @@ abstract class AbstractJWTMiddleware implements MiddlewareInterface
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
         } catch (\Throwable $e) {
+            throw new UnauthorizedException();
         }
 
         return $handler->handle($request);
