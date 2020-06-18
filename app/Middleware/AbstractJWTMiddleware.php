@@ -20,6 +20,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\SimpleCache\InvalidArgumentException;
+use Throwable;
 
 abstract class AbstractJWTMiddleware implements MiddlewareInterface
 {
@@ -71,7 +72,7 @@ abstract class AbstractJWTMiddleware implements MiddlewareInterface
             }
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             throw new UnauthorizedException($e->getMessage());
         }
 
