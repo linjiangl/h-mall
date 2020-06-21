@@ -25,6 +25,7 @@ class CreateRoleTable extends Migration
             $table->integer('parent_id')->default(0);
             $table->string('name', 50);
             $table->string('identifier', 50)->comment('标识');
+            $table->tinyInteger('is_super', false, true)->default(0)->comment('是否超管');
             $table->tinyInteger('status', false, true)->default(0);
             $table->timestamps();
 

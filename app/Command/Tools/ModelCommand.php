@@ -52,7 +52,7 @@ class ModelCommand extends HyperfCommand
      * @var array
      */
     protected $specifyTables = [
-        'role', 'role_admin', 'role_menu'
+        'role'
     ];
 
     public function configure()

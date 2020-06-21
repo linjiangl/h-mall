@@ -17,6 +17,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $parent_id
  * @property string $name
  * @property string $identifier 标识
+ * @property int $is_super 是否超管
  * @property int $status
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -35,12 +36,12 @@ class Role extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'name', 'identifier', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'parent_id', 'name', 'identifier', 'is_super', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'is_super' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }
