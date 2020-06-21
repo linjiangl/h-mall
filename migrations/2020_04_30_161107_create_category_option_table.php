@@ -21,7 +21,6 @@ class CreateCategoryOptionTable extends Migration
     public function up(): void
     {
         Schema::create('category_option', function (Blueprint $table) {
-            $table->integerIncrements('id');
             $table->integer('category_id', false, true);
             $table->integer('option_id', false, true);
 

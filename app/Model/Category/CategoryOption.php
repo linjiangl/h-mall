@@ -13,7 +13,6 @@ namespace App\Model\Category;
 use Hyperf\DbConnection\Model\Model;
 
 /**
- * @property int $id
  * @property int $category_id
  * @property int $option_id
  */
@@ -31,12 +30,12 @@ class CategoryOption extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'category_id', 'option_id'];
+    protected $fillable = ['category_id', 'option_id'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'category_id' => 'integer', 'option_id' => 'integer'];
+    protected $casts = ['category_id' => 'integer', 'option_id' => 'integer'];
 }
