@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba6b6a72204f75abe78ba98853bd29d7",
+    "content-hash": "3f7b56741dcd11dce6b19f7c41bdba97",
     "packages": [
         {
             "name": "bandwidth-throttle/token-bucket",
@@ -727,6 +727,73 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "hyperf/async-queue",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/async-queue.git",
+                "reference": "677bb0bd0c513ac8c1b6c2b379eb79fd68183738"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hyperf/async-queue/zipball/677bb0bd0c513ac8c1b6c2b379eb79fd68183738",
+                "reference": "677bb0bd0c513ac8c1b6c2b379eb79fd68183738",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "hyperf/command": "~2.0.0",
+                "hyperf/contract": "~2.0.0",
+                "hyperf/utils": "~2.0.0",
+                "php": ">=7.2",
+                "psr/container": "^1.0",
+                "psr/event-dispatcher": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.9",
+                "hyperf/process": "~2.0.0",
+                "malukenho/docheader": "^0.1.6",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^7.0.0"
+            },
+            "suggest": {
+                "hyperf/di": "Required to use annotations.",
+                "hyperf/event": "Required to dispatch a event.",
+                "hyperf/process": "Auto register the consumer process for server."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                },
+                "hyperf": {
+                    "config": "Hyperf\\AsyncQueue\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hyperf\\AsyncQueue\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A async queue component for hyperf.",
+            "homepage": "https://hyperf.io",
+            "keywords": [
+                "async-queue",
+                "hyperf",
+                "php"
+            ],
+            "time": "2020-06-19T13:11:07+00:00"
         },
         {
             "name": "hyperf/cache",

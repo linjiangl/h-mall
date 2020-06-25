@@ -39,6 +39,7 @@
         "hyperf/paginator": "~v2.0.0",
         "hyperf/translation": "~v2.0.0",
         "hyperf/crontab": "~v2.0.0",
+        "hyperf/async-queue": "~v2.0.0",
         "phper666/jwt-auth": "^3.0"
     },
     "require-dev": {
@@ -64,6 +65,7 @@
             "Installer\\": "installer/"
         },
         "files": [
+            "app/Helper/Functions.php"
         ]
     },
     "autoload-dev": {
