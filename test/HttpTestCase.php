@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 /**
- * Multi-user mall
+ * This file is part of Hyperf.
  *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
- * @contact  8257796@qq.com
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-namespace  HyperfTest;
+namespace HyperfTest;
 
 use Hyperf\Testing\Client;
 use PHPUnit\Framework\TestCase;
