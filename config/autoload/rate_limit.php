@@ -10,6 +10,9 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 return [
-    Hyperf\HttpServer\CoreMiddleware::class => App\Middleware\CoreMiddleware::class,
-    Hyperf\Validation\ValidationExceptionHandler::class => App\Exception\Handler\ValidationExceptionHandler::class
+    'create' => 100,
+    'consume' => 1,
+    'capacity' => 10000,
+    'limitCallback' => [],
+    'waitTimeout' => 3,
 ];

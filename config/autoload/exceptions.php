@@ -14,6 +14,9 @@ return [
         'http' => [
             Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler::class,
             App\Exception\Handler\AppExceptionHandler::class,
+            App\Exception\Handler\HttpExceptionHandler::class,
+            App\Exception\Handler\RateLimitExceptionHandler::class,
+            Hyperf\Validation\ValidationExceptionHandler::class,
         ],
     ],
 ];

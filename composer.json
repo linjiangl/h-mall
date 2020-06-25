@@ -32,15 +32,14 @@
         "hyperf/redis": "~2.0.0",
         "hyperf/db": "~2.0.0",
         "hyperf/snowflake": "~2.0.0",
-        "hyperf/event": "~2.0.0",
-        "hyperf/crontab": "~2.0.0",
         "hyperf/rate-limit": "~2.0.0",
         "hyperf/validation": "~2.0.0",
         "hyperf/model-cache": "~2.0.0",
-        "phper666/jwt-auth": "^3.0",
         "hyperf/constants": "~v2.0.0",
         "hyperf/paginator": "~v2.0.0",
-        "hyperf/contract": "~v2.0.0"
+        "hyperf/translation": "~v2.0.0",
+        "hyperf/crontab": "~v2.0.0",
+        "phper666/jwt-auth": "^3.0"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",
