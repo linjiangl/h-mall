@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 /**
- * Multi-user mall
+ * This file is part of Hyperf.
  *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
- * @contact  8257796@qq.com
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 return [
     'default' => [
         'handler' => [
             'class' => Monolog\Handler\StreamHandler::class,
             'constructor' => [
-                'stream' => BASE_PATH . '/runtime/logs/log-' . date('Y-m-d') . '.log',
-                'level' => env('APP_ENV') == 'prod' ? Monolog\Logger::ERROR : Monolog\Logger::DEBUG,
+                'stream' => BASE_PATH . '/runtime/logs/hyperf.log',
+                'level' => Monolog\Logger::DEBUG,
             ],
         ],
         'formatter' => [
             'class' => Monolog\Formatter\LineFormatter::class,
             'constructor' => [
                 'format' => null,
-                'dateFormat' => null,
+                'dateFormat' => 'Y-m-d H:i:s',
                 'allowInlineLineBreaks' => true,
             ],
         ],

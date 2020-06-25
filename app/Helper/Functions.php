@@ -117,7 +117,7 @@ if (! function_exists('response_json')) {
         $code = $code ?: 500;
         $message = $message ?: 'ok';
         $data = json_encode([
-            'status' => $code,
+            'code' => $code,
             'message' => $message,
             'data' => $data,
         ], JSON_UNESCAPED_UNICODE);

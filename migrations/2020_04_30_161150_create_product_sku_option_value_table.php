@@ -21,7 +21,6 @@ class CreateProductSkuOptionValueTable extends Migration
     public function up(): void
     {
         Schema::create('product_sku_option_value', function (Blueprint $table) {
-            $table->integerIncrements('id');
             $table->integer('product_sku_id', false, true);
             $table->integer('option_value_id', false, true);
 

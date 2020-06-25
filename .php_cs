@@ -58,6 +58,9 @@ return PhpCsFixer\Config::create()
         'multiline_whitespace_before_semicolons' => [
             'strategy' => 'no_multi_line',
         ],
+        'constant_case' => [
+            'case' => 'lower',
+        ],
         'class_attributes_separation' => [
             'elements' => ['method', 'property']
         ],

@@ -21,6 +21,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $remark
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property  $remark
  */
 class LogAdminAction extends Model
 {

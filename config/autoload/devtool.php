@@ -37,11 +37,8 @@ return [
         'middleware' => [
             'namespace' => 'App\\Middleware',
         ],
-        'process' => [
-            'namespace' => 'App\\Process',
-        ],
-        'request' => [
-            'namespace' => 'App\\Request',
+        'Process' => [
+            'namespace' => 'App\\Processes',
         ],
     ],
 ];

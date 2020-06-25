@@ -10,29 +10,28 @@ declare(strict_types=1);
  */
 namespace App\Exception\Handler;
 
+use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\Logger\LoggerFactory;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Log\LoggerInterface;
 use Throwable;
 
 class AppExceptionHandler extends ExceptionHandler
 {
     /**
-     * @var LoggerInterface
+     * @var StdoutLoggerInterface
      */
     protected $logger;
 
-    public function __construct(LoggerFactory $loggerFactory)
+    public function __construct(StdoutLoggerInterface $logger)
     {
-        $this->logger = $loggerFactory->get('ServerError', 'default');
+        $this->logger = $logger;
     }
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
-        return response_json('', $throwable->getMessage(), 500);
+        return response_json('', 'Internal Server Error.', 500);
     }
 
     public function isValid(Throwable $throwable): bool
