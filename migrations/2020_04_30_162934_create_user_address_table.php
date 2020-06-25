@@ -37,6 +37,7 @@ class CreateUserAddressTable extends Migration
             $table->string('zip_code', 20)->comment('邮政编码');
             $table->tinyInteger('is_default')->default(0)->comment('是否默认 0:否, 1:是');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['user_id', 'is_default'], 'user_id_is_default');
             $table->index(['mobile'], 'mobile');

@@ -30,8 +30,6 @@ class CreateUserFavoriteTable extends Migration
             $table->timestamps();
 
             $table->unique(['user_id', 'module', 'module_id'], 'user_id_module_id');
-
-            $table->foreign('user_id')->references('id')->on('user');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-收藏'");

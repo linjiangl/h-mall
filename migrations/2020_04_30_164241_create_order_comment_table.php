@@ -39,13 +39,12 @@ class CreateOrderCommentTable extends Migration
             $table->string('images', 1000)->default('')->comment('评论图片');
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 0:待审核, 1:已通过, 2:未通过');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['order_item_id'], 'order_item_id');
             $table->index(['order_id'], 'order_id');
             $table->index(['user_id', 'status'], 'user_id_status');
             $table->index(['product_id', 'top'], 'product_id_top');
-
-            $table->foreign('order_id')->references('id')->on('order');
         });
     }
 

@@ -37,8 +37,6 @@ class CreateUserWalletLogTable extends Migration
 
             $table->index(['user_id', 'type'], 'user_id_type');
             $table->index(['created_at'], 'created_at');
-
-            $table->foreign('user_id')->references('id')->on('user');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户钱包-日志'");

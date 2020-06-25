@@ -29,8 +29,10 @@ class CreateCategoryTable extends Migration
             $table->tinyInteger('position', false, true)->default(0);
             $table->tinyInteger('status')->default(0)->comment('是否显示 0:删除 0:显示, 1:隐藏');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['parent_id'], 'parent_id');
+            $table->index(['name'], 'name');
         });
     }
 

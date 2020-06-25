@@ -46,6 +46,7 @@ class CreateRefundTable extends Migration
             $table->string('proofs', 1000)->default('')->comment('退款凭证');
             $table->string('remark', 255)->default('');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['refund_sn'], 'refund_sn');
             $table->index(['user_id', 'status'], 'user_id_status');
@@ -54,8 +55,6 @@ class CreateRefundTable extends Migration
             $table->index(['order_sn'], 'order_sn');
             $table->index(['status'], 'status');
             $table->index(['created_at'], 'created_at');
-
-            $table->foreign('order_id')->references('id')->on('order');
         });
     }
 

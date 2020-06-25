@@ -26,8 +26,10 @@ class CreateOptionTable extends Migration
             $table->string('name', 50)->comment('名称');
             $table->tinyInteger('position', false, true)->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['shop_id'], 'shop_id');
+            $table->index(['name'], 'name');
         });
     }
 

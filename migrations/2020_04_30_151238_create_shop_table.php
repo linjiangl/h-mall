@@ -29,12 +29,11 @@ class CreateShopTable extends Migration
             $table->decimal('comment_score', 4, 2)->default(5)->comment('评分');
             $table->tinyInteger('status', false, true)->default(0)->comment('状态 0:待审核, 1:已通过, 2:未通过, 3:已关闭');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['user_id'], 'user_id');
             $table->index(['status'], 'status');
             $table->index(['created_at'], 'created_at');
-
-            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

@@ -31,11 +31,10 @@ class CreateShopFinanceLogTable extends Migration
             $table->string('order_sn', 64)->default('');
             $table->string('remark', 255)->default('');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['shop_id', 'amount'], 'shop_id_amount');
             $table->index(['amount'], 'amount');
-
-            $table->foreign('shop_id')->references('id')->on('shop');
         });
     }
 

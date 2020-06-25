@@ -25,9 +25,7 @@ class CreateProductOptionTable extends Migration
             $table->integer('option_id', false, true);
 
             $table->unique(['product_id', 'option_id'], 'product_id_option_id');
-
-            $table->foreign('product_id')->references('id')->on('product');
-            $table->foreign('option_id')->references('id')->on('option');
+            $table->index(['option_id'], 'option_id');
         });
     }
 

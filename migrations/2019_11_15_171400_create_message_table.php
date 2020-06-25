@@ -33,6 +33,7 @@ class CreateMessageTable extends Migration
             $table->string('module_url', 255)->default('');
             $table->tinyInteger('status', false, true)->default(2)->comment('状态 0:删除, 1:已读, 2:未读');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['sender_id'], 'sender_id');
             $table->index(['receiver_id', 'type', 'status'], 'receiver_id_type_status');

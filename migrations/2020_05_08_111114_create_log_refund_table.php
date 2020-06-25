@@ -36,9 +36,10 @@ class CreateLogRefundTable extends Migration
             $table->string('remark', 3000)->default('');
             $table->integer('finished_time', false, true)->default(0)->comment('退款成功时间');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['business_no'], 'business_no');
-            $table->unique(['trade_no'], 'trade_no');
+            $table->index(['trade_no'], 'trade_no');
             $table->index(['payment_business_no'], 'payment_business_no');
             $table->index(['order_id'], 'order_id');
             $table->index(['refund_id'], 'refund_id');

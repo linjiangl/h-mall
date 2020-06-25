@@ -42,13 +42,13 @@ class CreateProductTable extends Migration
             $table->string('refund_type', 30)->default('')->comment('退款类型 空:无操作,all:退货退款,money:仅退款,refuse:拒绝退款');
             $table->tinyInteger('status')->default(1)->comment('状态 0:删除, 1:正常, 2:下架');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['shop_id', 'status'], 'shop_id_status');
             $table->index(['user_id', 'status'], 'user_id_status');
             $table->index(['category_id', 'status'], 'category_id_status');
             $table->index(['created_at', 'status'], 'created_at_status');
-
-            $table->foreign('shop_id')->references('id')->on('shop');
+            $table->index(['title', 'status'], 'title_status');
         });
     }
 

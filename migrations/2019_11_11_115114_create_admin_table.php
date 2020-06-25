@@ -32,6 +32,7 @@ class CreateAdminTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('状态');
             $table->integer('lasted_login_time', false , true)->default(0)->comment('最后登录时间');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['username'], 'username');
         });

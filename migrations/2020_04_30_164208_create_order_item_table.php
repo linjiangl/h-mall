@@ -40,8 +40,6 @@ class CreateOrderItemTable extends Migration
             $table->unique(['order_id', 'product_sku_id'], 'order_id_product_sku_id');
             $table->index(['product_id'], 'product_id');
             $table->index(['product_name'], 'product_name');
-
-            $table->foreign('order_id')->references('id')->on('order');
         });
     }
 

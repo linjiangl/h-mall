@@ -31,8 +31,6 @@ class CreateRefundItemTable extends Migration
 
             $table->unique(['refund_id', 'order_item_id'], 'refund_id_order_item_id');
             $table->index(['product_id'], 'product_id');
-
-            $table->foreign('refund_id')->references('id')->on('refund');
         });
     }
 

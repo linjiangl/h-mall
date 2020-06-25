@@ -15,12 +15,14 @@ class CreateLogAdminLoginTable extends Migration
     {
         Schema::create('log_admin_login', function (Blueprint $table) {
             $table->integerIncrements('id');
+            $table->integer('admin_id', false, true);
             $table->string('username', 30)->comment('管理员用户名');
             $table->string('client_ip', 30);
             $table->string('user_agent', 255);
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->index(['username'], 'username');
+            $table->index(['admin_id'], 'admin_id');
         });
     }
 

@@ -30,11 +30,10 @@ class CreateShopWithdrawTable extends Migration
             $table->integer('finished_time', false, true)->default(0)->comment('完成时间');
             $table->string('remark', 255)->default('备注');
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->index(['shop_id', 'amount'], 'shop_id_amount');
-            $table->index(['amount'], 'amount');
-
-            $table->foreign('shop_id')->references('id')->on('shop');
+            $table->index(['shop_id', 'status'], 'shop_id_status');
+            $table->index(['amount', 'status'], 'amount_status');
         });
     }
 

@@ -23,6 +23,7 @@ class CreateUserVipCardTable extends Migration
     public function up(): void
     {
         Schema::create($this->table, function (Blueprint $table) {
+            $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->string('serial_no', 20)->comment('会员卡号');
             $table->tinyInteger('grade', false, true)->default(1)->comment('会员等级');
@@ -35,15 +36,13 @@ class CreateUserVipCardTable extends Migration
             $table->tinyInteger('status', false, true)->default(2)->comment('状态 1:已激活 2:未激活');
             $table->timestamps();
 
-            $table->unique(['user_id'], 'user_id');
+            $table->index(['user_id'], 'user_id');
             $table->unique(['serial_no'], 'serial_no');
-            $table->unique(['mobile'], 'mobile');
+            $table->index(['mobile'], 'mobile');
             $table->index(['grade'], 'grade');
             $table->index(['total_exp'], 'total_exp');
             $table->index(['id_card'], 'id_card');
             $table->index(['created_at'], 'created_at');
-
-            $table->foreign('user_id')->references('id')->on('user');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-会员卡'");

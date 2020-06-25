@@ -16,9 +16,7 @@ class CreateRoleMenuTable extends Migration
             $table->integer('menu_id', false, true);
 
             $table->unique(['role_id', 'menu_id'], 'role_menu_id');
-
-            $table->foreign('role_id')->references('id')->on('role');
-            $table->foreign('menu_id')->references('id')->on('menu');
+            $table->index(['menu_id'], 'menu_id');
         });
     }
 

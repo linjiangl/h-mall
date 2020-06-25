@@ -26,9 +26,12 @@ class CreateAdvertisementTable extends Migration
             $table->string('image', 255)->comment('图片');
             $table->string('url', 255)->comment('链接');
             $table->string('position', 30)->comment('位置');
-            $table->tinyInteger('status', false, true)->default(0)->comment('状态 0:不可用, 1:可用');
             $table->integer('clicks', false, true)->default(0)->comment('点击量');
+            $table->tinyInteger('status', false, true)->default(0)->comment('状态 0:不可用, 1:可用');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->index(['status'], 'status');
         });
     }
 
