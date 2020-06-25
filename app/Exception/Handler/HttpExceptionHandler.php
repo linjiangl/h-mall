@@ -8,38 +8,59 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
+
 namespace App\Exception\Handler;
 
-use App\Exception\HttpException;
+use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
+use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
+use Hyperf\HttpMessage\Exception\HttpException;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 class HttpExceptionHandler extends ExceptionHandler
 {
     /**
-     * @var HttpResponse
+     * @var StdoutLoggerInterface
      */
-    protected $response;
+    protected $logger;
 
-    public function handle(Throwable $throwable, ResponseInterface $response)
+    /**
+     * @var FormatterInterface
+     */
+    protected $formatter;
+
+    public function __construct(StdoutLoggerInterface $logger, FormatterInterface $formatter)
     {
-        if ($throwable instanceof HttpException) {
-            $this->stopPropagation();
-            return response_json('', $throwable->getMessage(), $throwable->getCode());
-        }
-
-        return $response;
+        $this->logger = $logger;
+        $this->formatter = $formatter;
     }
 
     /**
-     * 判断该异常处理器是否要对该异常进行处理.
+     * Handle the exception, and return the specified result.
+     * @param Throwable $throwable
+     * @param ResponseInterface $response
+     * @return
+     */
+    public function handle(Throwable $throwable, ResponseInterface $response)
+    {
+        $this->logger->debug($this->formatter->format($throwable));
+
+        $this->stopPropagation();
+
+        return response_json('', $throwable->getMessage(), $throwable->getStatusCode());
+    }
+
+    /**
+     * Determine if the current exception handler should handle the exception,.
+     *
      * @param Throwable $throwable
      * @return bool
+     *              If return true, then this exception handler will handle the exception,
+     *              If return false, then delegate to next handler
      */
     public function isValid(Throwable $throwable): bool
     {
-        return true;
+        return $throwable instanceof HttpException;
     }
 }

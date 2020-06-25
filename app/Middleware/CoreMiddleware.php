@@ -27,42 +27,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
 {
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * response creation to a handler.
-     * @param ServerRequestInterface $request
-     * @param RequestHandlerInterface $handler
-     * @return ResponseInterface
-     */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
-        $request = Context::set(ServerRequestInterface::class, $request);
-
-        /** @var Dispatched $dispatched */
-        $dispatched = $request->getAttribute(Dispatched::class);
-
-        if (! $dispatched instanceof Dispatched) {
-            throw new ServerException(sprintf('The dispatched object is not a %s object.', Dispatched::class));
-        }
-
-        switch ($dispatched->status) {
-            case Dispatcher::NOT_FOUND:
-                $response = $this->handleNotFound($request);
-                break;
-            case Dispatcher::METHOD_NOT_ALLOWED:
-                $response = $this->handleMethodNotAllowed($dispatched->params, $request);
-                break;
-            case Dispatcher::FOUND:
-                $response = $this->handleFound($dispatched, $request);
-                break;
-        }
-
-        if (! $response instanceof ResponseInterface) {
-            $response = $this->transferToResponse($response, $request);
-        }
-        return $response->withAddedHeader('Server', 'HWS/1.1');
-    }
-
-    /**
      * Handle the response when found.
      *
      * @param Dispatched $dispatched
@@ -85,28 +49,6 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
             $response = $controllerInstance->{$action}(...$parameters);
         }
         return $response;
-    }
-
-    /**
-     * Handle the response when cannot found any routes.
-     *
-     * @return array|Arrayable|mixed|ResponseInterface|string
-     */
-    protected function handleNotFound(ServerRequestInterface $request)
-    {
-        throw new NotFoundException();
-    }
-
-    /**
-     * Handle the response when the routes found but doesn't match any available methods.
-     *
-     * @param array $methods
-     * @param ServerRequestInterface $request
-     * @return array|Arrayable|mixed|ResponseInterface|string
-     */
-    protected function handleMethodNotAllowed(array $methods, ServerRequestInterface $request)
-    {
-        throw new MethodNotAllowedException(implode(', ', $methods) . ' ');
     }
 
     /**
