@@ -16,5 +16,6 @@ use App\Model\Log\LogAdminLogin;
 class LogAdminLoginDao extends AbstractDao
 {
     protected $model = LogAdminLogin::class;
+
     protected $noAllowActions = [];
 }

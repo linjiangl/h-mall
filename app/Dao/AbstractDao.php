@@ -25,7 +25,7 @@ use Throwable;
  * @package App\Dao
  *
  * 常用状态:
- *  - STATUS_PROCESSED  // 待处理
+ *  - STATUS_PENDING    // 待处理
  *  - STATUS_ENABLED    // 已启用
  *  - STATUS_DISABLED   // 已禁用
  *  - STATUS_REFUSED    // 已拒绝
@@ -36,6 +36,10 @@ use Throwable;
  */
 abstract class AbstractDao implements InterfaceDao
 {
+    // 数据表中字段通用选项
+    const IS_OPTION_FALSE = 0;
+    const IS_OPTION_TRUE = 1;
+
     /**
      * @var Model
      */
