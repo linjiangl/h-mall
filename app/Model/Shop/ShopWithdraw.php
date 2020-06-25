@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Shop;
 
+use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -23,9 +24,12 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $remark
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class ShopWithdraw extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -38,7 +42,7 @@ class ShopWithdraw extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'status', 'refused_time', 'finished_time', 'remark', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'status', 'refused_time', 'finished_time', 'remark', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

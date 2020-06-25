@@ -13,10 +13,9 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateUserWalletLogTable extends Migration
+class CreateRecordShopFinanceTable extends Migration
 {
-    protected $table = 'user_wallet_log';
-
+    protected $table = 'record_shop_finance';
     /**
      * Run the migrations.
      */
@@ -24,22 +23,20 @@ class CreateUserWalletLogTable extends Migration
     {
         Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
+            $table->integer('shop_id', false, true);
             $table->integer('user_id', false, true);
-            $table->string('type', 30)->comment('类型 recharged:充值 consumed:消费');
-            $table->decimal('amount', 9, 2)->default(0)->comment('金额');
-            $table->integer('integral')->default(0)->comment('积分');
-            $table->string('description', 100)->default('')->comment('描述');
-            $table->string('module', 30)->default('')->comment('模块 order:订单');
+            $table->decimal('amount', 10, 2);
+            $table->string('type', 20)->comment('类别 order:订单, withdraw:提现, refund:退款');
+            $table->string('module', 20)->default('')->comment('关联模型');
             $table->integer('module_id', false, true)->default(0);
+            $table->string('order_sn', 64)->default('');
             $table->string('remark', 255)->default('');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['user_id', 'type'], 'user_id_type');
-            $table->index(['created_at'], 'created_at');
+            $table->index(['shop_id', 'amount'], 'shop_id_amount');
+            $table->index(['amount'], 'amount');
         });
-
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户钱包-日志'");
     }
 
     /**

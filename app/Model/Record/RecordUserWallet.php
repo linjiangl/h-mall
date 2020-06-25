@@ -8,8 +8,9 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Model\User;
+namespace App\Model\Record;
 
+use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -24,16 +25,18 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $remark
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string $deleted_at
+ * @property \Carbon\Carbon $deleted_at
  */
-class UserWalletLog extends Model
+class RecordUserWallet extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'user_wallet_log';
+    protected $table = 'record_user_wallet';
 
     /**
      * The attributes that are mass assignable.

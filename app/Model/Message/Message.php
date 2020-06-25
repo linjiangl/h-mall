@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Message;
 
+use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -24,9 +25,12 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $status 状态 0:删除, 1:已读, 2:未读
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class Message extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -39,7 +43,7 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'sender_id', 'receiver_id', 'text_id', 'type', 'module', 'module_id', 'module_url', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'sender_id', 'receiver_id', 'text_id', 'type', 'module', 'module_id', 'module_url', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

@@ -13,9 +13,9 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateLogRefundTable extends Migration
+class CreateRecordRefundTable extends Migration
 {
-    protected $table = 'log_refund';
+    protected $table = 'record_refund';
 
     /**
      * Run the migrations.

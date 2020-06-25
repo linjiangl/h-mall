@@ -8,8 +8,9 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Model\Log;
+namespace App\Model\Record;
 
+use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -25,22 +26,25 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $finished_time 支付完成的时间
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
-class LogPayment extends Model
+class RecordPayment extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'log_payment';
+    protected $table = 'record_payment';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'order_ids', 'business_no', 'payment_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'order_ids', 'business_no', 'payment_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

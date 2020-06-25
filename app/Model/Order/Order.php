@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Order;
 
+use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -47,9 +48,12 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $refund_type
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class Order extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -62,7 +66,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'buyer_id', 'order_sn', 'payment_method', 'payment_no', 'product_amount', 'total_amount', 'express_amount', 'discount_amount', 'consignee', 'mobile', 'province', 'city', 'district', 'street', 'address', 'zip_code', 'is_dispatched', 'is_comment', 'is_additional', 'is_credited', 'payment_time', 'dispatched_time', 'confirmed_time', 'canceled_time', 'comment_time', 'additional_comment_time', 'status', 'buyer_message', 'seller_message', 'refund_type', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'buyer_id', 'order_sn', 'payment_method', 'payment_no', 'product_amount', 'total_amount', 'express_amount', 'discount_amount', 'consignee', 'mobile', 'province', 'city', 'district', 'street', 'address', 'zip_code', 'is_dispatched', 'is_comment', 'is_additional', 'is_credited', 'payment_time', 'dispatched_time', 'confirmed_time', 'canceled_time', 'comment_time', 'additional_comment_time', 'status', 'buyer_message', 'seller_message', 'refund_type', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
