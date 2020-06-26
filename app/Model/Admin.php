@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
+use App\Model\Role\Role;
 use Hyperf\Database\Model\SoftDeletes;
-use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
@@ -54,4 +54,9 @@ class Admin extends Model
     protected $casts = ['id' => 'integer', 'status' => 'integer', 'lasted_login_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     protected $hidden = ['password', 'salt', 'mobile', 'email'];
+
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'id', 'id');
+    }
 }

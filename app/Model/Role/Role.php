@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\Role;
 
+use App\Model\Model;
 use Hyperf\Database\Model\SoftDeletes;
-use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id

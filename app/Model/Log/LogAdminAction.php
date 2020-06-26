@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Log;
 
 use Hyperf\Database\Model\SoftDeletes;
-use Hyperf\DbConnection\Model\Model;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -52,7 +52,7 @@ class LogAdminAction extends Model
 
     public function getRemarkAttribute($value)
     {
-        return json_decode($value, true);
+        return $value ? json_decode($value, true) : '';
     }
 
     public function setRemarkAttribute($value)

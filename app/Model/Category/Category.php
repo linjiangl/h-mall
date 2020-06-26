@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Category;
 
 use Hyperf\Database\Model\SoftDeletes;
-use Hyperf\DbConnection\Model\Model;
+use App\Model\Model;
 
 /**
  * @property int $id
