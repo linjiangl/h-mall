@@ -17,7 +17,7 @@ use Throwable;
 
 class LoginBlock
 {
-    public function index(LoginRequest $request)
+    public function index(LoginRequest $request): array
     {
         $post = $request->validated();
         try {
