@@ -106,7 +106,7 @@ abstract class AbstractBlock implements InterfaceBlock
         }
     }
 
-    public function show(RequestInterface $request, $id): array
+    public function show(RequestInterface $request, $id)
     {
         try {
             // 当前执行的方法
@@ -121,7 +121,7 @@ abstract class AbstractBlock implements InterfaceBlock
         }
     }
 
-    public function store(RequestInterface $request): int
+    public function store(RequestInterface $request)
     {
         try {
             return $this->service()->create($this->data);
@@ -130,7 +130,7 @@ abstract class AbstractBlock implements InterfaceBlock
         }
     }
 
-    public function update(RequestInterface $request, $id): array
+    public function update(RequestInterface $request, $id)
     {
         try {
             return $this->service()->update($id, $this->data)->toArray();
@@ -139,7 +139,7 @@ abstract class AbstractBlock implements InterfaceBlock
         }
     }
 
-    public function destroy(RequestInterface $request, $id): bool
+    public function destroy(RequestInterface $request, $id)
     {
         try {
             return $this->service()->remove($id);
