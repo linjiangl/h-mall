@@ -33,6 +33,7 @@ class LogAdminLoginService extends AbstractService
         $userAgent = $request->getHeader('User-Agent');
         $userAgent = $userAgent ? current($userAgent) : '';
         $this->create([
+            'admin_id' => 0,
             'username' => $username,
             'client_ip' => $clientId,
             'user_agent' => $userAgent,

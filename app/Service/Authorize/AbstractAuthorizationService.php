@@ -28,19 +28,19 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
 
     protected $header = 'Authorization';
 
-    public function authorize()
+    public function authorize(): array
     {
     }
 
-    public function login($account, $password)
+    public function login($account, $password): array
     {
     }
 
-    public function register($username, $password, $confirmPassword, $extend = [])
+    public function register($username, $password, $confirmPassword, $extend = []): array
     {
     }
 
-    public function logout()
+    public function logout(): bool
     {
         try {
             return $this->jwt->logout();
@@ -49,7 +49,7 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         }
     }
 
-    public function refreshToken()
+    public function refreshToken(): array
     {
         try {
             $token = $this->jwt->refreshToken();
@@ -62,12 +62,12 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         }
     }
 
-    public function getTTL(string $token = null)
+    public function getTTL(string $token = null): int
     {
-        return $this->jwt->getTTL($token);
+        return (int)$this->jwt->getTTL($token);
     }
 
-    public function getParserData($filter = false)
+    public function getParserData($filter = false): array
     {
         $data = $this->jwt->getParserData();
         if ($data && $filter) {
@@ -76,12 +76,12 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         return $data;
     }
 
-    public function generateSalt($length = 10)
+    public function generateSalt($length = 10): string
     {
         return Str::random($length);
     }
 
-    public function generatePasswordHash($password, $salt = '')
+    public function generatePasswordHash($password, $salt = ''): string
     {
         if ($salt == '') {
             $salt = $this->generateSalt();
@@ -89,12 +89,12 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         return sha1(substr(md5($password), 0, 16) . $salt);
     }
 
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return $this->prefix;
     }
 
-    public function getHeader()
+    public function getHeader(): string
     {
         return $this->header;
     }

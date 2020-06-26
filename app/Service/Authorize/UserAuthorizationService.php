@@ -30,7 +30,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
         $this->jwt = $jwt->setScene($this->scene);
     }
 
-    public function authorize()
+    public function authorize(): array
     {
         $ssoKey = config('jwt')['sso_key'];
         $data = $this->getParserData();
@@ -45,7 +45,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
             throw new UnauthorizedException();
         }
 
-        return $user;
+        return $user->toArray();
     }
 
     /**
@@ -54,7 +54,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
      * @param $password
      * @return array
      */
-    public function login($account, $password)
+    public function login($account, $password): array
     {
         $userDao = new UserDao();
         $user = $userDao->getInfoByUsername($account);
@@ -75,18 +75,15 @@ class UserAuthorizationService extends AbstractAuthorizationService
                 'nickname' => $user->nickname,
                 'avatar' => $user->avatar,
             ]);
-            $data = [
+            $user->lasted_login_time = time();
+            $user->save();
+            return [
                 'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
                 'exp' => $this->jwt->getTTL(),
             ];
-
-            $user->lasted_login_time = time();
-            $user->save();
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
         }
-
-        return $data;
     }
 
     /**
@@ -97,7 +94,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
      * @param array $extend
      * @return array
      */
-    public function register($username, $password, $confirmPassword, $extend = [])
+    public function register($username, $password, $confirmPassword, $extend = []): array
     {
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');

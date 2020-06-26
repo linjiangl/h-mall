@@ -52,38 +52,31 @@ abstract class AbstractService implements InterfaceService
      *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
      * ]
      */
-    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
+    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*']): LengthAwarePaginatorInterface
     {
         $this->handleQueryLimit((int)$limit);
-
-        /** @var InterfaceDao $dao */
-        $dao = new $this->dao();
-        return $dao->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
+        return $this->dao()->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
     }
 
     /**
      * 详情
      * @param $id
      * @param array $with
-     * @return mixed|Model
+     * @return Model
      */
-    public function info($id, $with = [])
+    public function info($id, $with = []): Model
     {
-        /** @var InterfaceDao $dao */
-        $dao = new $this->dao();
-        return $dao->info($id, $with);
+        return $this->dao()->info($id, $with);
     }
 
     /**
      * 创建
      * @param array $data
-     * @return mixed|int
+     * @return int
      */
-    public function create(array $data)
+    public function create(array $data): int
     {
-        /** @var InterfaceDao $dao */
-        $dao = new $this->dao();
-        return $dao->create($data);
+        return $this->dao()->create($data);
     }
 
     /**
@@ -92,30 +85,26 @@ abstract class AbstractService implements InterfaceService
      * @param array $data
      * @return Model
      */
-    public function update($id, array $data)
+    public function update($id, array $data): Model
     {
-        /** @var InterfaceDao $dao */
-        $dao = new $this->dao();
-        return $dao->update($id, $data);
+        return $this->dao()->update($id, $data);
     }
 
     /**
      * 删除
      * @param $id
-     * @return string
+     * @return bool
      */
-    public function remove($id)
+    public function remove($id): bool
     {
-        /** @var InterfaceDao $dao */
-        $dao = new $this->dao();
-        return $dao->remove($id);
+        return $this->dao()->remove($id);
     }
 
     /**
      * 获取定义的条件
      * @return array
      */
-    public function getCondition()
+    public function getCondition(): array
     {
         return [];
     }
@@ -132,5 +121,10 @@ abstract class AbstractService implements InterfaceService
         if ($limit && $limit > $this->maxLimit) {
             $this->limit = $this->maxLimit;
         }
+    }
+
+    protected function dao(): InterfaceDao
+    {
+        return new $this->dao();
     }
 }

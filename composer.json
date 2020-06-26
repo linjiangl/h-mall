@@ -40,7 +40,8 @@
         "hyperf/translation": "~v2.0.0",
         "hyperf/crontab": "~v2.0.0",
         "hyperf/async-queue": "~v2.0.0",
-        "phper666/jwt-auth": "^3.0"
+        "phper666/jwt-auth": "^3.0",
+        "gregwar/captcha": "^1.1"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",

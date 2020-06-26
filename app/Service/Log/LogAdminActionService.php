@@ -16,7 +16,7 @@ use App\Service\AbstractService;
 class LogAdminActionService extends AbstractService
 {
     protected $dao = LogAdminAction::class;
-    
+
     public function createActionRecord($actionName, $className): bool
     {
         $request = request();
@@ -39,6 +39,7 @@ class LogAdminActionService extends AbstractService
         $clientId = $request->header('x-real-ip');
         $clientId = $clientId ? current($clientId) : '';
         $this->create([
+            'admin_id' => 0,
             'username' => $admin['username'],
             'client_ip' => $clientId,
             'module' => $module,
