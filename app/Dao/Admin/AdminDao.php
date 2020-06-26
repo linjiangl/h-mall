@@ -25,7 +25,7 @@ class AdminDao extends AbstractDao
 
     protected $notFoundMessage = '管理员不存在';
 
-    public static function getStatusLabel()
+    public static function getStatusLabel(): array
     {
         return [
             self::STATUS_PENDING => '待审核',

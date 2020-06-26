@@ -10,19 +10,22 @@ declare(strict_types=1);
  */
 namespace App\Dao;
 
+use Hyperf\Database\Model\Model;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
+
 interface InterfaceDao
 {
-    public function getModel();
+    public function getModel(): Model;
 
-    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*']);
+    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*']): LengthAwarePaginatorInterface;
 
     public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*']);
 
-    public function info($id, $with = []);
+    public function info($id, $with = []): Model;
 
-    public function create(array $data);
+    public function create(array $data): int;
 
-    public function update($id, array $data);
+    public function update($id, array $data): Model;
 
     public function remove($id): bool;
 

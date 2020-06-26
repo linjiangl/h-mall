@@ -24,7 +24,7 @@ class RoleDao extends AbstractDao
 
     protected $notFoundMessage = '角色不存在';
 
-    public static function getStatusLabel()
+    public static function getStatusLabel(): array
     {
         return [
             self::STATUS_DISABLED => '已禁用',
