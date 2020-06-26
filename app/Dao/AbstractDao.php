@@ -207,9 +207,9 @@ abstract class AbstractDao implements InterfaceDao
     /**
      * 通过条件查询详情
      * @param array $condition
-     * @return Model
+     * @return Builder|Model|object|null
      */
-    public function getInfoByCondition($condition = []): Model
+    public function getInfoByCondition($condition = [])
     {
         $query = $this->model::query();
         if ($condition) {

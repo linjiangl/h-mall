@@ -21,6 +21,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Swoole\WebSocket\Server as WebSocketServer;
 use Psr\SimpleCache\CacheInterface;
+use Hyperf\Redis\Redis;
 
 /*
  * 容器实例
