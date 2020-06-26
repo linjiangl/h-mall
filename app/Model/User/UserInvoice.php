@@ -10,7 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\User;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -28,9 +29,12 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $address 收票人地址
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class UserInvoice extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -43,7 +47,7 @@ class UserInvoice extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'open_type', 'type', 'title', 'taxpayer_id', 'register_address', 'register_phone', 'bank_name', 'bank_account', 'content_type', 'email', 'address', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'open_type', 'type', 'title', 'taxpayer_id', 'register_address', 'register_phone', 'bank_name', 'bank_account', 'content_type', 'email', 'address', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

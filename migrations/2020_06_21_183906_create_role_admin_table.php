@@ -16,9 +16,7 @@ class CreateRoleAdminTable extends Migration
             $table->integer('admin_id', false, true);
 
             $table->unique(['role_id', 'admin_id'], 'role_admin_id');
-
-            $table->foreign('role_id')->references('id')->on('role');
-            $table->foreign('admin_id')->references('id')->on('admin');
+            $table->index(['admin_id'], 'admin_id');
         });
     }
 

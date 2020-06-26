@@ -31,7 +31,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         $this->jwt = $jwt->setScene($this->scene);
     }
 
-    public function authorize()
+    public function authorize(): array
     {
         $ssoKey = config('jwt')['scene'][$this->scene]['sso_key'];
         $data = $this->getParserData();
@@ -46,7 +46,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
             throw new UnauthorizedException();
         }
 
-        return $admin;
+        return $admin->toArray();
     }
 
     /**
@@ -55,7 +55,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
      * @param $password
      * @return array
      */
-    public function login($account, $password)
+    public function login($account, $password): array
     {
         $adminDao = new AdminDao();
         $admin = $adminDao->getInfoByUsername($account);
@@ -76,18 +76,17 @@ class AdminAuthorizationService extends AbstractAuthorizationService
                 'real_name' => $admin->real_name,
                 'avatar' => $admin->avatar,
             ]);
-            $data = [
-                'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
-                'exp' => $this->jwt->getTTL(),
-            ];
 
             $admin->lasted_login_time = time();
             $admin->save();
+
+            return [
+                'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
+                'exp' => $this->jwt->getTTL(),
+            ];
         } catch (InvalidArgumentException $e) {
             throw new CacheErrorException();
         }
-
-        return $data;
     }
 
     /**
@@ -98,7 +97,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
      * @param array $extend
      * @return array
      */
-    public function register($username, $password, $confirmPassword, $extend = [])
+    public function register($username, $password, $confirmPassword, $extend = []): array
     {
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');

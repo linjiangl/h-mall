@@ -31,10 +31,9 @@ class CreateCustomerServiceTable extends Migration
             $table->string('remark', 255)->default('')->comment('备注');
             $table->tinyInteger('status')->default(0)->comment('状态 0:关闭, 1:开启');
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->index(['shop_id'], 'shop_id');
-
-            $table->foreign('shop_id')->references('id')->on('shop');
+            $table->index(['shop_id', 'status'], 'shop_id_status');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '客服'");

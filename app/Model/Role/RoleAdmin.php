@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Role;
 
-use Hyperf\DbConnection\Model\Model;
+use App\Model\Model;
 
 /**
  * @property int $role_id

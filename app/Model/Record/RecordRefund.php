@@ -8,9 +8,10 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Model\Log;
+namespace App\Model\Record;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -27,22 +28,25 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $finished_time 退款成功时间
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
-class LogRefund extends Model
+class RecordRefund extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'log_refund';
+    protected $table = 'record_refund';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'order_id', 'refund_id', 'payment_business_no', 'business_no', 'refund_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'order_id', 'refund_id', 'payment_business_no', 'business_no', 'refund_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

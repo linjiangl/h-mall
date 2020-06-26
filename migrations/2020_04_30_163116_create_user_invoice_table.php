@@ -37,10 +37,9 @@ class CreateUserInvoiceTable extends Migration
             $table->string('email', 50)->default('')->comment('邮箱');
             $table->string('address', 1500)->default('')->comment('收票人地址');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['user_id'], 'user_id');
-
-            $table->foreign('user_id')->references('id')->on('user');
         });
 
         \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-发票'");

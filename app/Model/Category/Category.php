@@ -10,7 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\Category;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -22,9 +23,12 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $status 是否显示 0:删除 0:显示, 1:隐藏
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class Category extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -37,7 +41,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'name', 'icon', 'cover', 'position', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'parent_id', 'name', 'icon', 'cover', 'position', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

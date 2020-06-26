@@ -10,7 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\Order;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -32,9 +33,12 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $status 状态 0:待审核, 1:已通过, 2:未通过
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class OrderComment extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -47,7 +51,7 @@ class OrderComment extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'order_id', 'order_item_id', 'product_id', 'product_sku_id', 'score', 'top', 'reply_num', 'additional_num', 'additional_comment_id', 'is_additional', 'is_image', 'is_anonymous', 'content', 'images', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'order_id', 'order_item_id', 'product_id', 'product_sku_id', 'score', 'top', 'reply_num', 'additional_num', 'additional_comment_id', 'is_additional', 'is_image', 'is_anonymous', 'content', 'images', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Category;
 
-use Hyperf\DbConnection\Model\Model;
+use App\Model\Model;
 
 /**
  * @property int $category_id

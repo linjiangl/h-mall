@@ -40,6 +40,7 @@ class CreateUserTable extends Migration
             $table->integer('avatar_updated_time', false, true)->default(0)->comment('头像设置时间');
             $table->integer('username_updated_time', false, true)->default(0)->comment('用户名设置时间');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['username'], 'username');
             $table->index(['mobile'], 'mobile');

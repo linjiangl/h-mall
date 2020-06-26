@@ -10,7 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\Product;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -33,9 +34,12 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $status 状态 0:删除, 1:正常, 2:下架
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class Product extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -48,7 +52,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'type', 'shop_id', 'user_id', 'category_id', 'text_id', 'title', 'description', 'sales', 'clicks', 'buy_limit', 'buy_limit_total', 'min_price', 'max_price', 'images', 'is_show', 'refund_type', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'type', 'shop_id', 'user_id', 'category_id', 'text_id', 'title', 'description', 'sales', 'clicks', 'buy_limit', 'buy_limit_total', 'min_price', 'max_price', 'images', 'is_show', 'refund_type', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

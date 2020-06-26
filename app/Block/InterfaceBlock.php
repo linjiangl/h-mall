@@ -16,13 +16,13 @@ interface InterfaceBlock
 {
     public function index(RequestInterface $request);
 
-    public function show(RequestInterface $request, $id);
+    public function show(RequestInterface $request, $id): array;
 
-    public function store(RequestInterface $request);
+    public function store(RequestInterface $request): int;
 
-    public function update(RequestInterface $request, $id);
+    public function update(RequestInterface $request, $id): array;
 
-    public function destroy(RequestInterface $request, $id);
+    public function destroy(RequestInterface $request, $id): bool;
 
-    public function getCondition(RequestInterface $request);
+    public function getCondition(RequestInterface $request): array;
 }

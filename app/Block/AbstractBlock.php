@@ -12,6 +12,7 @@ namespace App\Block;
 
 use App\Exception\HttpException;
 use App\Service\InterfaceService;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
@@ -99,15 +100,13 @@ abstract class AbstractBlock implements InterfaceBlock
             // 查询前业务处理
             $this->beforeBuildQuery($request);
 
-            /** @var InterfaceService $service */
-            $service = new $this->service();
-            return $service->paginate($this->condition, $page, $limit, $this->orderBy, $this->groupBy, $this->with);
+            return $this->service()->paginate($this->condition, $page, $limit, $this->orderBy, $this->groupBy, $this->with);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function show(RequestInterface $request, $id)
+    public function show(RequestInterface $request, $id): array
     {
         try {
             // 当前执行的方法
@@ -116,52 +115,42 @@ abstract class AbstractBlock implements InterfaceBlock
             // 查询前业务处理
             $this->beforeBuildQuery($request);
 
-            /** @var InterfaceService $service */
-            $service = new $this->service();
-            return $service->info(intval($id), $this->with);
+            return $this->service()->info(intval($id), $this->with)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function store(RequestInterface $request)
+    public function store(RequestInterface $request): int
     {
         try {
-            /** @var InterfaceService $service */
-            $service = new $this->service();
-            return $service->create($this->data);
+            return $this->service()->create($this->data);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function update(RequestInterface $request, $id)
+    public function update(RequestInterface $request, $id): array
     {
         try {
-            /** @var InterfaceService $service */
-            $service = new $this->service();
-            return $service->update($id, $this->data);
+            return $this->service()->update($id, $this->data)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function destroy(RequestInterface $request, $id)
+    public function destroy(RequestInterface $request, $id): bool
     {
         try {
-            /** @var InterfaceService $service */
-            $service = new $this->service();
-            return $service->remove($id);
+            return $this->service()->remove($id);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function getCondition(RequestInterface $request)
+    public function getCondition(RequestInterface $request): array
     {
-        /** @var InterfaceService $service */
-        $service = new $this->service();
-        return $service->getCondition();
+        return $this->service()->getCondition();
     }
 
     /**
@@ -183,7 +172,7 @@ abstract class AbstractBlock implements InterfaceBlock
      * @param RequestInterface $request
      * @return array
      */
-    protected function handleCondition(RequestInterface $request)
+    protected function handleCondition(RequestInterface $request): array
     {
         $condition = [];
         foreach ($this->query as $symbol => $symbolValue) {
@@ -233,5 +222,10 @@ abstract class AbstractBlock implements InterfaceBlock
                 break;
         }
         return $value;
+    }
+
+    protected function service(): InterfaceService
+    {
+        return new $this->service();
     }
 }

@@ -10,9 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Model\User;
 
-use Hyperf\DbConnection\Model\Model;
+use App\Model\Model;
 
 /**
+ * @property int $id
  * @property int $user_id
  * @property string $serial_no 会员卡号
  * @property int $grade 会员等级
@@ -40,12 +41,12 @@ class UserVipCard extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'serial_no', 'grade', 'total_exp', 'current_exp', 'real_name', 'mobile', 'id_card', 'password', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'serial_no', 'grade', 'total_exp', 'current_exp', 'real_name', 'mobile', 'id_card', 'password', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['user_id' => 'integer', 'grade' => 'integer', 'total_exp' => 'integer', 'current_exp' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'grade' => 'integer', 'total_exp' => 'integer', 'current_exp' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

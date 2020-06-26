@@ -25,6 +25,8 @@ class CreateSettingTable extends Migration
             $table->string('key', 50);
             $table->mediumText('value');
             $table->timestamps();
+
+            $table->unique(['key'], 'key');
         });
     }
 

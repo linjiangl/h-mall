@@ -31,8 +31,6 @@ class CreateRefundActionTable extends Migration
             $table->timestamps();
 
             $table->index(['refund_id'], 'refund_id');
-
-            $table->foreign('refund_id')->references('id')->on('refund');
         });
     }
 

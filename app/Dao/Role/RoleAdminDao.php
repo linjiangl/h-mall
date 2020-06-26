@@ -8,14 +8,14 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Dao\Log;
+namespace App\Dao\Role;
 
 use App\Dao\AbstractDao;
-use App\Model\Log\LogAdminAction;
+use App\Model\Role\RoleAdmin;
 
-class LogAdminActionDao extends AbstractDao
+class RoleAdminDao extends AbstractDao
 {
-    protected $model = LogAdminAction::class;
+    protected $model = RoleAdmin::class;
 
     protected $noAllowActions = [];
 }

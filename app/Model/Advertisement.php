@@ -10,7 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -18,13 +19,16 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $image 图片
  * @property string $url 链接
  * @property string $position 位置
- * @property int $status 状态 0:不可用, 1:可用
  * @property int $clicks 点击量
+ * @property int $status 状态 0:不可用, 1:可用
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class Advertisement extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -37,12 +41,12 @@ class Advertisement extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'title', 'image', 'url', 'position', 'status', 'clicks', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'title', 'image', 'url', 'position', 'clicks', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'status' => 'integer', 'clicks' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'clicks' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

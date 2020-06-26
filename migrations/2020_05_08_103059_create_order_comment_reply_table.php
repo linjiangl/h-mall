@@ -31,11 +31,10 @@ class CreateOrderCommentReplyTable extends Migration
             $table->string('content', 255)->comment('评论内容');
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 0:待审核, 1:已通过, 2:未通过');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['comment_id'], 'comment_id');
             $table->index(['product_id', 'top'], 'product_id_top');
-
-            $table->foreign('comment_id')->references('id')->on('order_comment');
         });
     }
 

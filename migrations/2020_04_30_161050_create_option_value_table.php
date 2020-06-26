@@ -28,8 +28,6 @@ class CreateOptionValueTable extends Migration
             $table->timestamps();
 
             $table->index(['option_id'], 'option_id');
-
-            $table->foreign('option_id')->references('id')->on('option');
         });
     }
 

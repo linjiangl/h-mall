@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Exception\Handler;
 
+use App\Exception\HttpException;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\RateLimit\Exception\RateLimitException;
@@ -32,6 +33,9 @@ class AppExceptionHandler extends ExceptionHandler
     {
         if ($throwable instanceof RateLimitException) {
             return response_json('', 'Too Many Requests', 429);
+        }
+        if ($throwable instanceof HttpException) {
+            return response_json('', $throwable->getMessage(), $throwable->getCode());
         }
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());

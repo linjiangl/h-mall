@@ -8,14 +8,15 @@ declare(strict_types=1);
  * @document https://doc.doubi.site
  * @contact  8257796@qq.com
  */
-namespace App\Dao\Log;
+namespace App\Dao;
 
-use App\Dao\AbstractDao;
-use App\Model\Log\LogAdminAction;
+use App\Model\Menu;
 
-class LogAdminActionDao extends AbstractDao
+class MenuDao extends AbstractDao
 {
-    protected $model = LogAdminAction::class;
+    protected $model = Menu::class;
 
     protected $noAllowActions = [];
+
+    protected $notFoundMessage = '菜单不存在';
 }

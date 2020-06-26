@@ -28,6 +28,7 @@ class CreateRoleTable extends Migration
             $table->tinyInteger('is_super', false, true)->default(0)->comment('是否超管');
             $table->tinyInteger('status', false, true)->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['identifier'], 'identifier');
         });

@@ -36,8 +36,6 @@ class CreateOrderExpressTable extends Migration
             $table->index(['refund_id'], 'refund_id');
             $table->index(['express_id'], 'express_id');
             $table->index(['express_no'], 'express_no');
-
-            $table->foreign('express_id')->references('id')->on('express');
         });
     }
 

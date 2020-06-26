@@ -31,11 +31,10 @@ class CreateProductSkuTable extends Migration
             $table->integer('clicks', false, true)->default(0)->comment('点击量');
             $table->string('image', 255)->default('')->comment('图片');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['shop_id'], 'shop_id');
             $table->index(['product_id'], 'product_id');
-
-            $table->foreign('product_id')->references('id')->on('product');
         });
     }
 

@@ -10,7 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\User;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -31,11 +32,14 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $username_updated_time 用户名设置时间
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  * @property-read \App\Model\User\UserVipCard $vipCard
  * @property-read \App\Model\User\UserWallet $wallet
  */
 class User extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -48,7 +52,7 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

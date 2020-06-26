@@ -17,7 +17,7 @@ use Throwable;
 
 class RegisterBlock
 {
-    public function index(RegisterRequest $request)
+    public function index(RegisterRequest $request): array
     {
         $post = $request->validated();
         try {

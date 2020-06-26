@@ -33,7 +33,7 @@ class CaptchaService
      * 生成
      * @return array
      */
-    public function generate()
+    public function generate(): array
     {
         $builder = new CaptchaBuilder($this->length);
         $builder->setBackgroundColor($this->color[0], $this->color[1], $this->color[2]);
@@ -57,7 +57,7 @@ class CaptchaService
      * @param $code
      * @return bool
      */
-    public function validate($key, $code)
+    public function validate($key, $code): bool
     {
         $cacheKey = $this->getCacheKey($key);
         $cacheCode = redis()->get($cacheKey);
@@ -72,7 +72,7 @@ class CaptchaService
         return false;
     }
 
-    private function getCacheKey($key)
+    private function getCacheKey($key): string
     {
         return 'captcha_code_' . md5($key);
     }

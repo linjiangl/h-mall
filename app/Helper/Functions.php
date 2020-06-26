@@ -16,14 +16,18 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Utils\ApplicationContext;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use Swoole\WebSocket\Server as WebSocketServer;
+use Psr\SimpleCache\CacheInterface;
+use Hyperf\Redis\Redis;
 
 /*
  * 容器实例
  */
 if (! function_exists('container')) {
-    function container()
+    function container(): ContainerInterface
     {
         return ApplicationContext::getContainer();
     }
@@ -33,10 +37,7 @@ if (! function_exists('container')) {
  * redis 客户端实例
  */
 if (! function_exists('redis')) {
-    /**
-     * @return Redis
-     */
-    function redis()
+    function redis(): Redis
     {
         return container()->get(Redis::class);
     }
@@ -46,10 +47,7 @@ if (! function_exists('redis')) {
  * websocket 实例
  */
 if (! function_exists('websocket')) {
-    /**
-     * @return Swoole\WebSocket\Server
-     */
-    function websocket()
+    function websocket(): WebSocketServer
     {
         return container()->get(WebSocketServer::class);
     }
@@ -59,9 +57,9 @@ if (! function_exists('websocket')) {
  * 缓存实例 简单的缓存
  */
 if (! function_exists('cache')) {
-    function cache()
+    function cache(): CacheInterface
     {
-        return container()->get(Psr\SimpleCache\CacheInterface::class);
+        return container()->get(CacheInterface::class);
     }
 }
 
@@ -69,10 +67,7 @@ if (! function_exists('cache')) {
  * 控制台日志
  */
 if (! function_exists('stdLog')) {
-    /**
-     * @return StdoutLogger
-     */
-    function stdLog()
+    function stdLog(): StdoutLogger
     {
         return container()->get(StdoutLoggerInterface::class);
     }
@@ -82,37 +77,28 @@ if (! function_exists('stdLog')) {
  * 文件日志
  */
 if (! function_exists('logger')) {
-    /**
-     * @return LoggerFactory
-     */
-    function logger()
+    function logger(): LoggerInterface
     {
         return container()->get(LoggerFactory::class)->make();
     }
 }
 
 if (! function_exists('request')) {
-    /**
-     * @return RequestInterface
-     */
-    function request()
+    function request(): RequestInterface
     {
         return container()->get(ServerRequestInterface::class);
     }
 }
 
 if (! function_exists('response')) {
-    /**
-     * @return ResponseInterface
-     */
-    function response()
+    function response(): ResponseInterface
     {
         return container()->get(ResponseInterface::class);
     }
 }
 
 if (! function_exists('response_json')) {
-    function response_json($data, $message = '', $code = 200)
+    function response_json($data, $message = '', $code = 200): ResponseInterface
     {
         $code = $code ?: 500;
         $message = $message ?: 'ok';

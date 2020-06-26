@@ -13,7 +13,6 @@ namespace App\Dao;
 use App\Exception\BadRequestException;
 use App\Exception\HttpException;
 use App\Exception\NotFoundException;
-use Carbon\CarbonInterface;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
@@ -25,7 +24,7 @@ use Throwable;
  * @package App\Dao
  *
  * 常用状态:
- *  - STATUS_PROCESSED  // 待处理
+ *  - STATUS_PENDING    // 待处理
  *  - STATUS_ENABLED    // 已启用
  *  - STATUS_DISABLED   // 已禁用
  *  - STATUS_REFUSED    // 已拒绝
@@ -36,6 +35,10 @@ use Throwable;
  */
 abstract class AbstractDao implements InterfaceDao
 {
+    // 数据表中字段通用选项
+    const IS_OPTION_FALSE = 0;
+    const IS_OPTION_TRUE = 1;
+
     /**
      * @var Model
      */
@@ -59,7 +62,7 @@ abstract class AbstractDao implements InterfaceDao
      */
     protected $notFoundMessage = '所请求的资源不存在';
 
-    public function getModel()
+    public function getModel(): Model
     {
         return $this->model;
     }
@@ -81,7 +84,7 @@ abstract class AbstractDao implements InterfaceDao
      *  ['title', '=', 'title']
      * ]
      */
-    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
+    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*']): LengthAwarePaginatorInterface
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->paginate($limit, $columns, '', $page);
@@ -109,9 +112,9 @@ abstract class AbstractDao implements InterfaceDao
      * 详情
      * @param $id
      * @param array $with
-     * @return Builder|Collection|Model
+     * @return Model
      */
-    public function info($id, $with = [])
+    public function info($id, $with = []): Model
     {
         $query = $this->model::query();
         if ($with) {
@@ -128,9 +131,9 @@ abstract class AbstractDao implements InterfaceDao
     /**
      * 创建
      * @param array $data
-     * @return bool|CarbonInterface|float|\Hyperf\Utils\Collection|int|mixed|string|null
+     * @return int
      */
-    public function create(array $data)
+    public function create(array $data): int
     {
         try {
             $this->actionIsAllow('create');
@@ -156,12 +159,11 @@ abstract class AbstractDao implements InterfaceDao
      * @param array $data
      * @return Model
      */
-    public function update($id, array $data)
+    public function update($id, array $data): Model
     {
         try {
             $this->actionIsAllow('update');
 
-            /** @var Model $model */
             $model = $this->info($id);
             if (! $model->update($data)) {
                 throw new BadRequestException('保存失败');

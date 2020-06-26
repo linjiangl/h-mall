@@ -17,7 +17,7 @@ use Throwable;
 
 class AuthorizeBlock
 {
-    public function index(RequestInterface $request)
+    public function index(RequestInterface $request): array
     {
         try {
             $service = new UserAuthorizationService();

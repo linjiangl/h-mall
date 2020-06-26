@@ -13,9 +13,9 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateLogPaymentTable extends Migration
+class CreateRecordPaymentTable extends Migration
 {
-    protected $table = 'log_payment';
+    protected $table = 'record_payment';
 
     /**
      * Run the migrations.
@@ -34,9 +34,10 @@ class CreateLogPaymentTable extends Migration
             $table->string('remark', 3000)->default('');
             $table->integer('finished_time', false, true)->default(0)->comment('支付完成的时间');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['business_no'], 'business_no');
-            $table->unique(['trade_no'], 'trade_no');
+            $table->index(['trade_no'], 'trade_no');
             $table->index(['order_ids'], 'order_ids');
         });
 

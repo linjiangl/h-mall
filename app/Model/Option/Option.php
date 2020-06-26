@@ -10,7 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\Option;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
+use App\Model\Model;
 
 /**
  * @property int $id
@@ -19,9 +20,12 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $position
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  */
 class Option extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -34,7 +38,7 @@ class Option extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'name', 'position', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'name', 'position', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

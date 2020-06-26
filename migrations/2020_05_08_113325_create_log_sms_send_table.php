@@ -33,6 +33,7 @@ class CreateLogSmsSendTable extends Migration
             $table->smallInteger('status')->default(0)->comment('状态');
             $table->string('remark', 1000)->default('');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index(['mobile', 'type'], 'mobile_type');
             $table->index(['module'], 'module');

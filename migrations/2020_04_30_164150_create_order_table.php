@@ -54,6 +54,7 @@ class CreateOrderTable extends Migration
             $table->string('seller_message', 255)->default('')->comment('买家留言');
             $table->string('refund_type', 30)->default('');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['order_sn'], 'order_sn');
             $table->index(['mobile'], 'mobile');
@@ -63,8 +64,6 @@ class CreateOrderTable extends Migration
             $table->index(['total_amount', 'status'], 'total_amount_status');
             $table->index(['status'], 'status');
             $table->index(['created_at'], 'created_at');
-
-            $table->foreign('buyer_id')->references('id')->on('user');
         });
     }
 

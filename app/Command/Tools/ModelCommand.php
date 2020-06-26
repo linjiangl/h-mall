@@ -44,7 +44,8 @@ class ModelCommand extends HyperfCommand
         'message',
         'log',
         'statistics',
-        'role'
+        'role',
+        'record'
     ];
 
     /**
@@ -52,7 +53,7 @@ class ModelCommand extends HyperfCommand
      * @var array
      */
     protected $specifyTables = [
-        'role'
+
     ];
 
     public function configure()
@@ -84,7 +85,7 @@ class ModelCommand extends HyperfCommand
     protected function genModelExec($table, $path = '')
     {
         $config = config('databases');
-        $basePath = $config['default']['commands']['db:model']['path'];
+        $basePath = $config['default']['commands']['gen:model']['path'];
         $path = $path ? $basePath . '/' . $path : $basePath;
         $genModelExec = "php bin/hyperf.php gen:model {$table} --path={$path} --with-comments --force-casts --refresh-fillable";
         exec($genModelExec);
