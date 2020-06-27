@@ -51,7 +51,8 @@
         "phpstan/phpstan": "^0.12",
         "hyperf/devtool": "~2.0.0",
         "hyperf/testing": "~2.0.0",
-        "phpmd/phpmd": "^2.8"
+        "phpmd/phpmd": "^2.8",
+        "fzaninotto/faker": "^1.9"
     },
     "suggest": {
         "ext-openssl": "Required to use HTTPS.",

@@ -9,10 +9,13 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-use App\Service\Authorize\AdminAuthorizationService;
 use Hyperf\Database\Seeders\Seeder;
 
-class AdminSeeder extends Seeder
+require_once "factories/DistrictFactory.php";
+require_once "factories/UserFactory.php";
+require_once "factories/AdminFactory.php";
+
+class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,10 +24,8 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $service = new AdminAuthorizationService();
-        $service->register('admin', '123456', '123456', [
-            'real_name' => '姓名',
-            'email' => 'admin@doubi.site'
-        ]);
+        DistrictFactory::run();
+        UserFactory::run();
+        AdminFactory::run();
     }
 }

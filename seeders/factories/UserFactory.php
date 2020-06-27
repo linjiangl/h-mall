@@ -10,24 +10,20 @@ declare(strict_types=1);
  */
 
 use App\Dao\User\UserDao;
-use App\Service\Authorize\UserAuthorizationService;
-use Hyperf\Database\Seeders\Seeder;
+use Faker\Factory;
 
-class UserSeeder extends Seeder
+class UserFactory
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public static function run()
     {
+        $faker = Factory::create();
         $userDao = new UserDao();
         $userDao->create([
             'id' => 1,
             'username' => 'hmallgf',
             'nickname' => '系统官方',
             'password' => '',
+            'email' => $faker->unique()->safeEmail,
             'lasted_login_time' => time()
         ]);
 
@@ -36,6 +32,7 @@ class UserSeeder extends Seeder
             'username' => 'hmallkf',
             'nickname' => '系统客服',
             'password' => '',
+            'email' => $faker->unique()->safeEmail,
             'lasted_login_time' => time()
         ]);
     }

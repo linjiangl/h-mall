@@ -10,17 +10,11 @@ declare(strict_types=1);
  */
 
 use Carbon\Carbon;
-use Hyperf\Database\Seeders\Seeder;
 use Hyperf\DbConnection\Db;
 
-class DistrictSeeder extends Seeder
+class DistrictFactory
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public static function run()
     {
         $path = BASE_PATH . '/seeders/data/district.json';
         $data = json_decode(file_get_contents($path), true);
