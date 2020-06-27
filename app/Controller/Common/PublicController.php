@@ -12,7 +12,7 @@ namespace App\Controller\Common;
 
 use App\Controller\AbstractController;
 use App\Exception\HttpException;
-use App\Service\ThirdParty\CaptchaService;
+use App\Service\Utils\CaptchaService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 class PublicController extends AbstractController
