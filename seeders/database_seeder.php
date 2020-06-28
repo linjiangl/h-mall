@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // 系统配置相关
+        // 系统相关
         // DistrictFactory::run();
 
         // 管理相关
