@@ -8,18 +8,21 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Constants;
+namespace App\Constants\Message;
 
+use App\Constants\TraitConstants;
 use Hyperf\Constants\AbstractConstants;
 use Hyperf\Constants\Annotation\Constants;
 
 /**
- * @Constants
+ * @Constants()
  */
-class ErrorCode extends AbstractConstants
+class OrderMessage extends AbstractConstants
 {
+    use TraitConstants;
+
     /**
-     * @Message("Server Error！")
+     * @Message("订单支付成功,祝你购物愉快!")
      */
-    const SERVER_ERROR = 500;
+    const PAYMENT_SUCCESS = 'payment_success';
 }
