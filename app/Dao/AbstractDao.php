@@ -35,10 +35,6 @@ use Throwable;
  */
 abstract class AbstractDao implements InterfaceDao
 {
-    // 数据表中字段通用选项
-    const IS_OPTION_FALSE = 0;
-    const IS_OPTION_TRUE = 1;
-
     /**
      * @var Model
      */

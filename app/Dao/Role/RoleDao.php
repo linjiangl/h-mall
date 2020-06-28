@@ -15,20 +15,9 @@ use App\Model\Role\Role;
 
 class RoleDao extends AbstractDao
 {
-    const STATUS_DISABLED = 0;
-    const STATUS_ENABLED = 1;
-
     protected $model = Role::class;
 
     protected $noAllowActions = [];
 
     protected $notFoundMessage = '角色不存在';
-
-    public static function getStatusLabel(): array
-    {
-        return [
-            self::STATUS_DISABLED => '已禁用',
-            self::STATUS_ENABLED => '已启用',
-        ];
-    }
 }
