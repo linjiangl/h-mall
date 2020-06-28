@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace App\Model\User;
 
 use App\Constants\State\UserState;
-use Hyperf\Database\Model\SoftDeletes;
 use App\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -64,9 +64,9 @@ class User extends Model
 
     protected $hidden = ['password', 'salt', 'mobile', 'email', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
 
-    protected $appends = ['labels'];
+    protected $appends = ['extend'];
 
-    public function getLabelsAttribute()
+    public function getExtendAttribute()
     {
         return UserState::handleLabels([
             'status' => $this->status
