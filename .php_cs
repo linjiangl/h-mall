@@ -3,8 +3,8 @@
 $header = <<<'EOF'
 Multi-user mall
 
-@link     https://www.doubi.site
-@document https://doc.doubi.site
+@link     https://store.yii.red
+@document https://document.store.yii.red
 @contact  8257796@qq.com
 EOF;
 
