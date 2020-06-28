@@ -66,7 +66,7 @@ class User extends Model
 
     protected $appends = ['extend'];
 
-    public function getExtendAttribute()
+    public function getExtendAttribute(): array
     {
         return UserState::handleLabels([
             'status' => $this->status
