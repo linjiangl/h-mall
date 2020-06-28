@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Constants\State;
 
-class UserState implements InterfaceState
+class UserState extends AbstractState
 {
     // 状态
     const STATUS_PENDING = 0;

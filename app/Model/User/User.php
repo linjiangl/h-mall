@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\User;
 
+use App\Constants\State\UserState;
 use Hyperf\Database\Model\SoftDeletes;
 use App\Model\Model;
 
@@ -62,6 +63,15 @@ class User extends Model
     protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'lasted_login_time' => 'integer', 'mobile_verified_time' => 'integer', 'email_verified_time' => 'integer', 'avatar_updated_time' => 'integer', 'username_updated_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     protected $hidden = ['password', 'salt', 'mobile', 'email', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
+
+    protected $appends = ['labels'];
+
+    public function getLabelsAttribute()
+    {
+        return UserState::handleLabels([
+            'status' => $this->status
+        ]);
+    }
 
     public function vipCard()
     {

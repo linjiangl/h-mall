@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Constants\State;
 
-class RoleState implements InterfaceState
+class RoleState extends AbstractState
 {
     const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
