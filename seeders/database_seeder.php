@@ -14,6 +14,7 @@ use Hyperf\Database\Seeders\Seeder;
 require_once "factories/DistrictFactory.php";
 require_once "factories/UserFactory.php";
 require_once "factories/AdminFactory.php";
+require_once "factories/RoleFactory.php";
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,8 +25,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DistrictFactory::run();
-        UserFactory::run();
+        // 系统配置相关
+        // DistrictFactory::run();
+
+        // 管理相关
+        RoleFactory::run();
         AdminFactory::run();
+
+        // 用户相关
+        UserFactory::run();
     }
 }

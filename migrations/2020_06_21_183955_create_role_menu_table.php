@@ -1,8 +1,8 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
 
 class CreateRoleMenuTable extends Migration
 {
@@ -12,6 +12,7 @@ class CreateRoleMenuTable extends Migration
     public function up(): void
     {
         Schema::create('role_menu', function (Blueprint $table) {
+            $table->integerIncrements('id');
             $table->integer('role_id', false, true);
             $table->integer('menu_id', false, true);
 

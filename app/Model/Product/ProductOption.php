@@ -13,11 +13,14 @@ namespace App\Model\Product;
 use App\Model\Model;
 
 /**
+ * @property int $id
  * @property int $product_id
  * @property int $option_id
  */
 class ProductOption extends Model
 {
+    public $timestamps = false;
+
     /**
      * The table associated with the model.
      *
@@ -30,12 +33,12 @@ class ProductOption extends Model
      *
      * @var array
      */
-    protected $fillable = ['product_id', 'option_id'];
+    protected $fillable = ['id', 'product_id', 'option_id'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['product_id' => 'integer', 'option_id' => 'integer'];
+    protected $casts = ['id' => 'integer', 'product_id' => 'integer', 'option_id' => 'integer'];
 }

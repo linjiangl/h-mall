@@ -21,6 +21,7 @@ class CreateProductOptionTable extends Migration
     public function up(): void
     {
         Schema::create('product_option', function (Blueprint $table) {
+            $table->integerIncrements('id');
             $table->integer('product_id', false, true);
             $table->integer('option_id', false, true);
 

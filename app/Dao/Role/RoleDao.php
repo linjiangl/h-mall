@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Dao\Role;
 
+use App\Constants\State\RoleState;
 use App\Dao\AbstractDao;
 use App\Model\Role\Role;
 
@@ -20,4 +21,9 @@ class RoleDao extends AbstractDao
     protected $noAllowActions = [];
 
     protected $notFoundMessage = '角色不存在';
+
+    public function getInfoByIdentifier($identifier = RoleState::IDENTIFIER_GUEST)
+    {
+        return $this->getInfoByCondition([['identifier', '=', $identifier]]);
+    }
 }

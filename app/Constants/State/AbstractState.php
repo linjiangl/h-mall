@@ -16,16 +16,22 @@ abstract class AbstractState implements InterfaceState
     {
         $data = [];
         foreach ($options as $key => $value) {
-            $arg = explode('_', $key);
-            $method = 'get';
-            foreach ($arg as $item) {
-                $method = $method . ucfirst($item);
-            }
-            $data[$key] = $default;
-            if (method_exists(static::class, $method)) {
-                $data[$key] = static::$method()[$value] ?? $default;
-            }
+            $data[$key] = static::getOptionLabel($value, $key, $default);
         }
         return $data;
+    }
+
+    public static function getOptionLabel($optionValue, $optionKey = 'status', $default = ''): string
+    {
+        $arg = explode('_', $optionKey);
+        $method = 'get';
+        foreach ($arg as $item) {
+            $method = $method . ucfirst($item);
+        }
+        $value = $default;
+        if (method_exists(static::class, $method)) {
+            $value = static::$method()[$optionValue] ?? $default;
+        }
+        return $value;
     }
 }

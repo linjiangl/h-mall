@@ -201,7 +201,7 @@ abstract class AbstractDao implements InterfaceDao
     }
 
     /**
-     * 通过条件查询详情
+     * 自定义条件查询详情
      * @param array $condition
      * @return Builder|Model|object|null
      */
@@ -212,6 +212,15 @@ abstract class AbstractDao implements InterfaceDao
             $this->handleQueryCondition($query, $condition);
         }
         return $query->first();
+    }
+
+    /**
+     * 获取资源不存在消息
+     * @return string
+     */
+    public function getNotFoundMessage(): string
+    {
+        return $this->notFoundMessage;
     }
 
     /**
