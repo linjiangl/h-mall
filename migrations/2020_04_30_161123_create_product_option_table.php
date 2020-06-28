@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
 
@@ -21,6 +21,7 @@ class CreateProductOptionTable extends Migration
     public function up(): void
     {
         Schema::create('product_option', function (Blueprint $table) {
+            $table->integerIncrements('id');
             $table->integer('product_id', false, true);
             $table->integer('option_id', false, true);
 

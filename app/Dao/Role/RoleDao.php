@@ -4,31 +4,26 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
 namespace App\Dao\Role;
 
+use App\Constants\State\RoleState;
 use App\Dao\AbstractDao;
 use App\Model\Role\Role;
 
 class RoleDao extends AbstractDao
 {
-    const STATUS_DISABLED = 0;
-    const STATUS_ENABLED = 1;
-
     protected $model = Role::class;
 
     protected $noAllowActions = [];
 
     protected $notFoundMessage = '角色不存在';
 
-    public static function getStatusLabel(): array
+    public function getInfoByIdentifier($identifier = RoleState::IDENTIFIER_GUEST)
     {
-        return [
-            self::STATUS_DISABLED => '已禁用',
-            self::STATUS_ENABLED => '已启用',
-        ];
+        return $this->getInfoByCondition([['identifier', '=', $identifier]]);
     }
 }

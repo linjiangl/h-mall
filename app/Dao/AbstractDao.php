@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
 namespace App\Dao;
@@ -35,10 +35,6 @@ use Throwable;
  */
 abstract class AbstractDao implements InterfaceDao
 {
-    // 数据表中字段通用选项
-    const IS_OPTION_FALSE = 0;
-    const IS_OPTION_TRUE = 1;
-
     /**
      * @var Model
      */
@@ -205,7 +201,7 @@ abstract class AbstractDao implements InterfaceDao
     }
 
     /**
-     * 通过条件查询详情
+     * 自定义条件查询详情
      * @param array $condition
      * @return Builder|Model|object|null
      */
@@ -216,6 +212,15 @@ abstract class AbstractDao implements InterfaceDao
             $this->handleQueryCondition($query, $condition);
         }
         return $query->first();
+    }
+
+    /**
+     * 获取资源不存在消息
+     * @return string
+     */
+    public function getNotFoundMessage(): string
+    {
+        return $this->notFoundMessage;
     }
 
     /**

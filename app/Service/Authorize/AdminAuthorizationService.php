@@ -4,18 +4,20 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
 namespace App\Service\Authorize;
 
+use App\Constants\State\RoleState;
 use App\Dao\Admin\AdminDao;
 use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
 use App\Model\Admin;
+use App\Service\Admin\AdminService;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
@@ -105,24 +107,23 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         if ($password != $confirmPassword) {
             throw new InternalException('两次输入的密码不一样');
         }
+        $adminDao = new AdminDao();
+        if ($adminDao->getInfoByUsername($username)) {
+            throw new InternalException('账号已注册');
+        }
 
         try {
-            $adminDao = new AdminDao();
-            if ($adminDao->getInfoByUsername($username)) {
-                throw new InternalException('账号已注册');
-            }
-
             $salt = $this->generateSalt();
             $passwordHash = $this->generatePasswordHash($password, $salt);
-            $adminDao->create([
-                'username' => $username,
+
+            $service = new AdminService();
+            $service->createAccount($username, $passwordHash, [
                 'real_name' => $extend['real_name'] ?? '',
-                'password' => $passwordHash,
                 'salt' => $salt,
                 'avatar' => $extend['avatar'] ?? '',
                 'mobile' => $extend['mobile'] ?? '',
                 'email' => $extend['email'] ?? '',
-                'lasted_login_time' => time()
+                'role' => $extend['role'] ?? RoleState::IDENTIFIER_GUEST
             ]);
 
             return $this->login($username, $password);

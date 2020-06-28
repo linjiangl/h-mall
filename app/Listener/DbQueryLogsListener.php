@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
 namespace App\Listener;
@@ -31,7 +31,7 @@ class DbQueryLogsListener implements ListenerInterface
 
     public function __construct(ContainerInterface $container)
     {
-        $this->logger = $container->get(LoggerFactory::class)->get('sql');
+        $this->logger = $container->get(LoggerFactory::class)->get('SQL');
     }
 
     public function listen(): array

@@ -4,14 +4,15 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://www.doubi.site
- * @document https://doc.doubi.site
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
 namespace App\Model\User;
 
-use Hyperf\Database\Model\SoftDeletes;
+use App\Constants\State\UserState;
 use App\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -62,6 +63,15 @@ class User extends Model
     protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'lasted_login_time' => 'integer', 'mobile_verified_time' => 'integer', 'email_verified_time' => 'integer', 'avatar_updated_time' => 'integer', 'username_updated_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     protected $hidden = ['password', 'salt', 'mobile', 'email', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
+
+    protected $appends = ['extend'];
+
+    public function getExtendAttribute(): array
+    {
+        return UserState::handleLabels([
+            'status' => $this->status
+        ]);
+    }
 
     public function vipCard()
     {
