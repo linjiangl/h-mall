@@ -12,12 +12,15 @@ namespace App\Constants\State;
 
 abstract class AbstractState implements InterfaceState
 {
-    public static function handleLabels(array $options): array
+    public static function handleLabels(array $options, string $default = ''): array
     {
         $data = [];
         foreach ($options as $key => $value) {
             $method = 'get' . ucfirst($key);
-            $data[$key] = self::$method()[$value] ?? '';
+            $data[$key] = $default;
+            if (method_exists(static::class, $method)) {
+                $data[$key] = static::$method()[$value] ?? $default;
+            }
         }
         return $data;
     }

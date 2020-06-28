@@ -11,22 +11,24 @@ declare(strict_types=1);
 namespace App\Exception\Handler;
 
 use App\Exception\HttpException;
-use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
+use Hyperf\Logger\LoggerFactory;
 use Hyperf\RateLimit\Exception\RateLimitException;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class AppExceptionHandler extends ExceptionHandler
 {
     /**
-     * @var StdoutLoggerInterface
+     * @var LoggerInterface
      */
-    protected $logger;
+    private $logger;
 
-    public function __construct(StdoutLoggerInterface $logger)
+    public function __construct(ContainerInterface $container)
     {
-        $this->logger = $logger;
+        $this->logger = $container->get(LoggerFactory::class)->get('logs');
     }
 
     public function handle(Throwable $throwable, ResponseInterface $response)
