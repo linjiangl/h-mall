@@ -11,28 +11,30 @@ declare(strict_types=1);
 
 namespace App\Exception\Handler;
 
-use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
 use Hyperf\HttpMessage\Exception\HttpException;
+use Hyperf\Logger\LoggerFactory;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class HttpExceptionHandler extends ExceptionHandler
 {
     /**
-     * @var StdoutLoggerInterface
+     * @var LoggerInterface
      */
-    protected $logger;
+    private $logger;
 
     /**
      * @var FormatterInterface
      */
     protected $formatter;
 
-    public function __construct(StdoutLoggerInterface $logger, FormatterInterface $formatter)
+    public function __construct(ContainerInterface $container, FormatterInterface $formatter)
     {
-        $this->logger = $logger;
+        $this->logger = $container->get(LoggerFactory::class)->get('HTTP');
         $this->formatter = $formatter;
     }
 
@@ -48,7 +50,7 @@ class HttpExceptionHandler extends ExceptionHandler
 
         $this->stopPropagation();
 
-        return response_json('', $throwable->getMessage(), $throwable->getStatusCode());
+        return response_json('', $throwable->getMessage(), $throwable->getCode());
     }
 
     /**

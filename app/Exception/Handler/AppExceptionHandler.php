@@ -28,7 +28,7 @@ class AppExceptionHandler extends ExceptionHandler
 
     public function __construct(ContainerInterface $container)
     {
-        $this->logger = $container->get(LoggerFactory::class)->get('logs');
+        $this->logger = $container->get(LoggerFactory::class)->get('APP');
     }
 
     public function handle(Throwable $throwable, ResponseInterface $response)
