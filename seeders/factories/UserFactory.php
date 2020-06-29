@@ -9,31 +9,32 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
-use App\Dao\User\UserDao;
+use App\Constants\State\UserState;
+use App\Model\User\User;
+use App\Service\Authorize\UserAuthorizationService;
 use Faker\Factory;
+use Hyperf\DbConnection\Db;
 
 class UserFactory
 {
     public static function run()
     {
         $faker = Factory::create();
-        $userDao = new UserDao();
-        $userDao->create([
-            'id' => 1,
-            'username' => 'hmallgf',
+        $service = new UserAuthorizationService();
+        $password = 'yii.red';
+        $service->register('hmallgf', $password, $password, [
             'nickname' => '系统官方',
-            'password' => '',
             'email' => $faker->unique()->safeEmail,
-            'lasted_login_time' => time()
+            'is_system' => UserState::IS_SYSTEM_TRUE
         ]);
 
-        $userDao->create([
-            'id' => 10000,
-            'username' => 'hmallkf',
+        $user = new User();
+        Db::statement("ALTER TABLE `{$user->getTable()}` AUTO_INCREMENT = 10000");
+
+        $service->register('hmallkf', $password, $password, [
             'nickname' => '系统客服',
-            'password' => '',
             'email' => $faker->unique()->safeEmail,
-            'lasted_login_time' => time()
+            'is_system' => UserState::IS_SYSTEM_TRUE
         ]);
     }
 }

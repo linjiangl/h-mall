@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Service\Admin;
 
+use App\Constants\State\AdminState;
 use App\Dao\Admin\AdminDao;
 use App\Dao\Role\RoleDao;
 use App\Service\AbstractService;
@@ -42,6 +43,7 @@ class AdminService extends AbstractService
             'avatar' => $extend['avatar'] ?? '',
             'mobile' => $extend['mobile'] ?? '',
             'email' => $extend['email'] ?? '',
+            'status' => $extend['status'] ?? AdminState::STATUS_PENDING,
             'lasted_login_time' => time()
         ]);
 

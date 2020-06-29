@@ -15,6 +15,7 @@ use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
+use App\Service\User\UserService;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
@@ -88,24 +89,24 @@ class UserAuthorizationService extends AbstractAuthorizationService
         }
         try {
             $userDao = new UserDao();
-            $userDao->getInfoByUsername($username);
+            if ($userDao->getInfoByUsername($username)) {
+                throw new InternalException('账号已注册');
+            }
         } catch (Throwable $e) {
-            throw new InternalException('账号已注册');
+            if ($e->getCode() != 404) {
+                throw new InternalException($e->getMessage());
+            }
         }
 
         try {
             $salt = $this->generateSalt();
             $passwordHash = $this->generatePasswordHash($password, $salt);
-            $userDao->create([
-                'username' => $username,
-                'nickname' => '新手用户',
-                'password' => $passwordHash,
+            $extend = array_merge($extend, [
                 'salt' => $salt,
-                'avatar' => $extend['avatar'] ?? '',
-                'mobile' => $extend['mobile'] ?? '',
-                'email' => $extend['email'] ?? '',
-                'lasted_login_time' => time()
             ]);
+
+            $service = new UserService();
+            $service->createAccount($username, $passwordHash, $extend);
 
             return $this->login($username, $password);
         } catch (Throwable $e) {

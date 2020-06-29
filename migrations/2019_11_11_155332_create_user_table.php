@@ -34,6 +34,7 @@ class CreateUserTable extends Migration
             $table->string('remember_token', 64)->default('');
             $table->string('salt', 24)->default('')->comment('加密盐');
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 1:正常, 2:禁用');
+            $table->tinyInteger('is_system', false, true)->default(0)->comment('是否系统用户');
             $table->integer('lasted_login_time', false, true)->default(0)->comment('最后登录时间');
             $table->integer('mobile_verified_time', false, true)->default(0)->comment('手机验证时间');
             $table->integer('email_verified_time', false, true)->default(0)->comment('邮箱验证时间');

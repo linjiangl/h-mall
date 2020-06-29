@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
+use App\Constants\State\AdminState;
 use App\Constants\State\RoleState;
 use App\Service\Authorize\AdminAuthorizationService;
 
@@ -17,10 +18,12 @@ class AdminFactory
     public static function run()
     {
         $service = new AdminAuthorizationService();
-        $service->register('admin', '123456', '123456', [
+        $password = 'yii.red';
+        $service->register('admin', $password, $password, [
             'real_name' => '姓名',
-            'email' => 'admin@doubi.site',
-            'role' => RoleState::IDENTIFIER_SYSTEM_ADMINISTRATOR
+            'email' => 'admin@yii.red',
+            'role' => RoleState::IDENTIFIER_SYSTEM_ADMINISTRATOR,
+            'status' => AdminState::STATUS_ENABLED
         ]);
     }
 }

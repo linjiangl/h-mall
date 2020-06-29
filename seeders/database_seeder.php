@@ -43,8 +43,11 @@ class DatabaseSeeder extends Seeder
 
     protected function handleImportClass()
     {
-        $filesystem = new Filesystem();
+        $filesystem = container()->get(Filesystem::class);
         $directory = BASE_PATH . '/seeders/factories';
-        $files = $filesystem->files($directory);
+        $files = $filesystem->allFiles($directory);
+        foreach ($files as $file) {
+            require_once "{$file->getPathname()}";
+        }
     }
 }

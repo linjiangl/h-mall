@@ -17,6 +17,10 @@ class UserState extends AbstractState
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 2;
 
+    // 是否系统用户
+    const IS_SYSTEM_FALSE = 0;
+    const IS_SYSTEM_TRUE = 1;
+
     public static function getStatus(): array
     {
         return [

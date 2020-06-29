@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Service\Authorize;
 
-use App\Constants\State\RoleState;
 use App\Dao\Admin\AdminDao;
 use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
@@ -95,24 +94,24 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         }
         try {
             $adminDao = new AdminDao();
-            $adminDao->getInfoByUsername($username);
+            if ($adminDao->getInfoByUsername($username)) {
+                throw new InternalException('账号已注册');
+            }
         } catch (Throwable $e) {
-            throw new InternalException('账号已注册');
+            if ($e->getCode() != 404) {
+                throw new InternalException($e->getMessage());
+            }
         }
 
         try {
             $salt = $this->generateSalt();
             $passwordHash = $this->generatePasswordHash($password, $salt);
+            $extend = array_merge($extend, [
+                'salt' => $salt,
+            ]);
 
             $service = new AdminService();
-            $service->createAccount($username, $passwordHash, [
-                'real_name' => $extend['real_name'] ?? '',
-                'salt' => $salt,
-                'avatar' => $extend['avatar'] ?? '',
-                'mobile' => $extend['mobile'] ?? '',
-                'email' => $extend['email'] ?? '',
-                'role' => $extend['role'] ?? RoleState::IDENTIFIER_GUEST
-            ]);
+            $service->createAccount($username, $passwordHash, $extend);
 
             return $this->login($username, $password);
         } catch (Throwable $e) {
