@@ -12,8 +12,6 @@ namespace App\Service\Admin;
 
 use App\Dao\Admin\AdminDao;
 use App\Dao\Role\RoleDao;
-use App\Exception\InternalException;
-use App\Model\Role\Role;
 use App\Service\AbstractService;
 use App\Service\Role\RoleAdminService;
 
@@ -30,9 +28,11 @@ class AdminService extends AbstractService
      */
     public function createAccount(string $username, string $password, array $extend = []): int
     {
+        // 获取权限
         $roleDao = new RoleDao();
         $role = $roleDao->getInfoByIdentifier($extend['role']);
 
+        // 创建账号
         $adminDao = new AdminDao();
         $id = $adminDao->create([
             'username' => $username,
@@ -45,6 +45,7 @@ class AdminService extends AbstractService
             'lasted_login_time' => time()
         ]);
 
+        // 账号绑定权限
         $roleAdminService = new RoleAdminService();
         $roleAdminService->create([
             'admin_id' => $id,

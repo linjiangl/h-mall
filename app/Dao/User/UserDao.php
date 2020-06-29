@@ -21,6 +21,11 @@ class UserDao extends AbstractDao
 
     protected $notFoundMessage = '用户不存在';
 
+    public function info(int $id, $with = []): User
+    {
+        return parent::info($id, $with);
+    }
+
     public function getInfoByUsername($username, $symbol = '='): User
     {
         return $this->getInfoByCondition([['username', $symbol, $username]]);
