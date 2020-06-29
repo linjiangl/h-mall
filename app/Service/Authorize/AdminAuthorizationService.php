@@ -51,20 +51,15 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         return $admin->toArray();
     }
 
-    /**
-     * 账号登录
-     * @param $account
-     * @param $password
-     * @return array
-     */
-    public function login($account, $password): array
+    public function login(string $account, string $password): array
     {
         $adminDao = new AdminDao();
+        /** @var Admin $admin */
         $admin = $adminDao->getInfoByUsername($account);
         if (! $admin) {
             throw new InternalException('该管理员账号不存在');
         }
-        /** @var Admin $admin */
+
         $admin = $admin->makeVisible(['password', 'salt', 'mobile', 'email']);
         $passwordHash = $this->generatePasswordHash($password, $admin->salt);
         if ($passwordHash != $admin->password) {
@@ -91,15 +86,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         }
     }
 
-    /**
-     * 注册
-     * @param $username
-     * @param $password
-     * @param $confirmPassword
-     * @param array $extend
-     * @return array
-     */
-    public function register($username, $password, $confirmPassword, $extend = []): array
+    public function register(string $username, string $password, string $confirmPassword, array $extend = []): array
     {
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');

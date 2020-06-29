@@ -21,7 +21,7 @@ class RoleFactory
         $dao->create([
             'id' => 1,
             'parent_id' => 0,
-            'name' => RoleState::getOptionLabel(RoleState::IDENTIFIER_SYSTEM_ADMINISTRATOR, 'identifier', '超级管理员'),
+            'name' => RoleState::getMessage(RoleState::IDENTIFIER_SYSTEM_ADMINISTRATOR, 'identifier', '超级管理员'),
             'identifier' => RoleState::IDENTIFIER_SYSTEM_ADMINISTRATOR,
             'is_super' => RoleState::IS_SUPER_TRUE,
             'status' => RoleState::STATUS_ENABLED
@@ -30,7 +30,7 @@ class RoleFactory
         $dao->create([
             'id' => 2,
             'parent_id' => 0,
-            'name' => RoleState::getOptionLabel(RoleState::IDENTIFIER_ADMINISTRATOR, 'identifier', '管理员'),
+            'name' => RoleState::getMessage(RoleState::IDENTIFIER_ADMINISTRATOR, 'identifier', '管理员'),
             'identifier' => RoleState::IDENTIFIER_ADMINISTRATOR,
             'is_super' => RoleState::IS_SUPER_FALSE,
             'status' => RoleState::STATUS_ENABLED
@@ -39,7 +39,7 @@ class RoleFactory
         $dao->create([
             'id' => 3,
             'parent_id' => 0,
-            'name' => RoleState::getOptionLabel(RoleState::IDENTIFIER_GUEST, 'identifier', '游客'),
+            'name' => RoleState::getMessage(RoleState::IDENTIFIER_GUEST, 'identifier', '游客'),
             'identifier' => RoleState::IDENTIFIER_GUEST,
             'is_super' => RoleState::IS_SUPER_FALSE,
             'status' => RoleState::STATUS_ENABLED

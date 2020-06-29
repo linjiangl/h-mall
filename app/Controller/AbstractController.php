@@ -47,6 +47,10 @@ abstract class AbstractController
         return response_json(true, '', 204);
     }
 
+    /**
+     * 设置方法的执行名称
+     * @param string $actionName
+     */
     protected function setActionName(string $actionName)
     {
         $request = Context::get(ServerRequestInterface::class);

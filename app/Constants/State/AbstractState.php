@@ -12,16 +12,29 @@ namespace App\Constants\State;
 
 abstract class AbstractState implements InterfaceState
 {
-    public static function handleLabels(array $options, string $default = ''): array
+    /**
+     * 处理自定义的消息
+     * @param array $options 选项
+     * @param string $default 默认消息
+     * @return array
+     */
+    public static function handleMessages(array $options, string $default = ''): array
     {
         $data = [];
         foreach ($options as $key => $value) {
-            $data[$key] = static::getOptionLabel($value, $key, $default);
+            $data[$key] = static::getMessage($value, $key, $default);
         }
         return $data;
     }
 
-    public static function getOptionLabel($optionValue, $optionKey = 'status', $default = ''): string
+    /**
+     * 获取自定义的消息
+     * @param mixed $optionValue 选项值
+     * @param string $optionKey 选项
+     * @param string $default 默认消息
+     * @return string
+     */
+    public static function getMessage($optionValue, $optionKey = 'status', $default = ''): string
     {
         $arg = explode('_', $optionKey);
         $method = 'get';

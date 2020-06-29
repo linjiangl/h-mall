@@ -33,7 +33,7 @@ class AdminService extends AbstractService
         $roleDao = new RoleDao();
         /** @var Role $role */
         $role = $roleDao->getInfoByIdentifier($extend['role']);
-        if (!$role) {
+        if (! $role) {
             throw new InternalException($roleDao->getNotFoundMessage());
         }
 

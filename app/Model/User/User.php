@@ -68,7 +68,7 @@ class User extends Model
 
     public function getExtendAttribute(): array
     {
-        return UserState::handleLabels([
+        return UserState::handleMessages([
             'status' => $this->status
         ]);
     }

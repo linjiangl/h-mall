@@ -15,7 +15,6 @@ use App\Exception\HttpException;
 use App\Exception\NotFoundException;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
-use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
 use Throwable;
 
@@ -63,54 +62,20 @@ abstract class AbstractDao implements InterfaceDao
         return $this->model;
     }
 
-    /**
-     * 分页列表
-     * @param array $condition
-     * @param int $page
-     * @param int $limit
-     * @param string $orderBy
-     * @param array $groupBy
-     * @param array $with
-     * @param string[] $columns
-     * @return LengthAwarePaginatorInterface
-     *
-     * $condition 格式:
-     * [
-     *  ['user_id', 'in', [1,2]],
-     *  ['title', '=', 'title']
-     * ]
-     */
-    public function paginate($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*']): LengthAwarePaginatorInterface
+    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): LengthAwarePaginatorInterface
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->paginate($limit, $columns, '', $page);
     }
 
-    /**
-     * 普通列表
-     * @param array $condition
-     * @param int $page
-     * @param int $limit
-     * @param string $orderBy
-     * @param array $groupBy
-     * @param array $with
-     * @param string[] $columns
-     * @return Builder[]|Collection
-     */
-    public function lists($condition = [], $page = 1, $limit = 20, $orderBy = '', $groupBy = [], $with = [], $columns = ['*'])
+    public function lists(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*'])
     {
         $offset = ($page - 1) * $limit;
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->select($columns)->offset($offset)->limit($limit)->get();
     }
 
-    /**
-     * 详情
-     * @param $id
-     * @param array $with
-     * @return Model
-     */
-    public function info($id, $with = []): Model
+    public function info(int $id, $with = []): Model
     {
         $query = $this->model::query();
         if ($with) {
@@ -124,11 +89,6 @@ abstract class AbstractDao implements InterfaceDao
         return $model;
     }
 
-    /**
-     * 创建
-     * @param array $data
-     * @return int
-     */
     public function create(array $data): int
     {
         try {
@@ -149,13 +109,7 @@ abstract class AbstractDao implements InterfaceDao
         }
     }
 
-    /**
-     * 编辑
-     * @param $id
-     * @param array $data
-     * @return Model
-     */
-    public function update($id, array $data): Model
+    public function update(int $id, array $data): Model
     {
         try {
             $this->actionIsAllow('update');
@@ -171,12 +125,7 @@ abstract class AbstractDao implements InterfaceDao
         }
     }
 
-    /**
-     * 删除
-     * @param $id
-     * @return bool
-     */
-    public function remove($id): bool
+    public function remove(int $id): bool
     {
         try {
             $this->actionIsAllow('remove');
@@ -190,14 +139,8 @@ abstract class AbstractDao implements InterfaceDao
         }
     }
 
-    /**
-     * 清除缓存
-     * @param $id
-     * @return bool
-     */
-    public function removeCache($id): bool
+    public function removeCache(int $id): void
     {
-        return true;
     }
 
     /**

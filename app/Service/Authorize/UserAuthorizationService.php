@@ -48,20 +48,14 @@ class UserAuthorizationService extends AbstractAuthorizationService
         return $user->toArray();
     }
 
-    /**
-     * 账号登录
-     * @param $account
-     * @param $password
-     * @return array
-     */
-    public function login($account, $password): array
+    public function login(string $account, string $password): array
     {
         $userDao = new UserDao();
+        /** @var User $user */
         $user = $userDao->getInfoByUsername($account);
         if (! $user) {
             throw new InternalException('该账号不存在');
         }
-        /** @var User $user */
         $user = $user->makeVisible(['password', 'salt', 'mobile', 'email']);
         $passwordHash = $this->generatePasswordHash($password, $user->salt);
         if ($passwordHash != $user->password) {
@@ -86,15 +80,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
         }
     }
 
-    /**
-     * 注册
-     * @param $username
-     * @param $password
-     * @param $confirmPassword
-     * @param array $extend
-     * @return array
-     */
-    public function register($username, $password, $confirmPassword, $extend = []): array
+    public function register(string $username, string $password, string $confirmPassword, array $extend = []): array
     {
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');
