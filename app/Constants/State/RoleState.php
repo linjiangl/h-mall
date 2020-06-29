@@ -25,6 +25,10 @@ class RoleState extends AbstractState
     const IDENTIFIER_ADMINISTRATOR = 'administrator';
     const IDENTIFIER_GUEST = 'guest';
 
+    // 是否系统权限
+    const IS_SYSTEM_FALSE = 0;
+    const IS_SYSTEM_TRUE = 1;
+
     public static function getStatus(): array
     {
         return [

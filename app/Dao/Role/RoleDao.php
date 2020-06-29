@@ -22,7 +22,12 @@ class RoleDao extends AbstractDao
 
     protected $notFoundMessage = '角色不存在';
 
-    public function getInfoByIdentifier($identifier = RoleState::IDENTIFIER_GUEST)
+    public function info(int $id, array $with = []): Role
+    {
+        return parent::info($id, $with);
+    }
+
+    public function getInfoByIdentifier(string $identifier = RoleState::IDENTIFIER_GUEST): Role
     {
         return $this->getInfoByCondition([['identifier', '=', $identifier]]);
     }

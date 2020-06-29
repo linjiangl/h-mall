@@ -28,18 +28,6 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
 
     protected $header = 'Authorization';
 
-    public function authorize(): array
-    {
-    }
-
-    public function login($account, $password): array
-    {
-    }
-
-    public function register($username, $password, $confirmPassword, $extend = []): array
-    {
-    }
-
     public function logout(): bool
     {
         try {

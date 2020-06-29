@@ -47,6 +47,6 @@ abstract class AbstractRestController extends AbstractController
 
     public function condition(RequestInterface $request)
     {
-        return (new $this->block())->getCondition();
+        return (new $this->block())->getCondition($request);
     }
 }

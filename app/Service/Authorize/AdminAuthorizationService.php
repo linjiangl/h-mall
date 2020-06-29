@@ -10,13 +10,11 @@ declare(strict_types=1);
  */
 namespace App\Service\Authorize;
 
-use App\Constants\State\RoleState;
 use App\Dao\Admin\AdminDao;
 use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
-use App\Model\Admin;
 use App\Service\Admin\AdminService;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
@@ -51,20 +49,15 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         return $admin->toArray();
     }
 
-    /**
-     * 账号登录
-     * @param $account
-     * @param $password
-     * @return array
-     */
-    public function login($account, $password): array
+    public function login(string $account, string $password): array
     {
-        $adminDao = new AdminDao();
-        $admin = $adminDao->getInfoByUsername($account);
-        if (! $admin) {
+        try {
+            $adminDao = new AdminDao();
+            $admin = $adminDao->getInfoByUsername($account);
+        } catch (Throwable $e) {
             throw new InternalException('该管理员账号不存在');
         }
-        /** @var Admin $admin */
+
         $admin = $admin->makeVisible(['password', 'salt', 'mobile', 'email']);
         $passwordHash = $this->generatePasswordHash($password, $admin->salt);
         if ($passwordHash != $admin->password) {
@@ -91,15 +84,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         }
     }
 
-    /**
-     * 注册
-     * @param $username
-     * @param $password
-     * @param $confirmPassword
-     * @param array $extend
-     * @return array
-     */
-    public function register($username, $password, $confirmPassword, $extend = []): array
+    public function register(string $username, string $password, string $confirmPassword, array $extend = []): array
     {
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');
@@ -107,24 +92,26 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         if ($password != $confirmPassword) {
             throw new InternalException('两次输入的密码不一样');
         }
-        $adminDao = new AdminDao();
-        if ($adminDao->getInfoByUsername($username)) {
-            throw new InternalException('账号已注册');
+        try {
+            $adminDao = new AdminDao();
+            if ($adminDao->getInfoByUsername($username)) {
+                throw new InternalException('账号已注册');
+            }
+        } catch (Throwable $e) {
+            if ($e->getCode() != 404) {
+                throw new InternalException($e->getMessage());
+            }
         }
 
         try {
             $salt = $this->generateSalt();
             $passwordHash = $this->generatePasswordHash($password, $salt);
+            $extend = array_merge($extend, [
+                'salt' => $salt,
+            ]);
 
             $service = new AdminService();
-            $service->createAccount($username, $passwordHash, [
-                'real_name' => $extend['real_name'] ?? '',
-                'salt' => $salt,
-                'avatar' => $extend['avatar'] ?? '',
-                'mobile' => $extend['mobile'] ?? '',
-                'email' => $extend['email'] ?? '',
-                'role' => $extend['role'] ?? RoleState::IDENTIFIER_GUEST
-            ]);
+            $service->createAccount($username, $passwordHash, $extend);
 
             return $this->login($username, $password);
         } catch (Throwable $e) {

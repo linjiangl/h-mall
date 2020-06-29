@@ -15,8 +15,7 @@ use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
-use App\Model\User\User;
-use Carbon\Carbon;
+use App\Service\User\UserService;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
@@ -48,20 +47,14 @@ class UserAuthorizationService extends AbstractAuthorizationService
         return $user->toArray();
     }
 
-    /**
-     * 账号登录
-     * @param $account
-     * @param $password
-     * @return array
-     */
-    public function login($account, $password): array
+    public function login(string $account, string $password): array
     {
-        $userDao = new UserDao();
-        $user = $userDao->getInfoByUsername($account);
-        if (! $user) {
+        try {
+            $userDao = new UserDao();
+            $user = $userDao->getInfoByUsername($account);
+        } catch (Throwable $e) {
             throw new InternalException('该账号不存在');
         }
-        /** @var User $user */
         $user = $user->makeVisible(['password', 'salt', 'mobile', 'email']);
         $passwordHash = $this->generatePasswordHash($password, $user->salt);
         if ($passwordHash != $user->password) {
@@ -86,15 +79,7 @@ class UserAuthorizationService extends AbstractAuthorizationService
         }
     }
 
-    /**
-     * 注册
-     * @param $username
-     * @param $password
-     * @param $confirmPassword
-     * @param array $extend
-     * @return array
-     */
-    public function register($username, $password, $confirmPassword, $extend = []): array
+    public function register(string $username, string $password, string $confirmPassword, array $extend = []): array
     {
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');
@@ -102,25 +87,26 @@ class UserAuthorizationService extends AbstractAuthorizationService
         if ($password != $confirmPassword) {
             throw new InternalException('两次输入的密码不一样');
         }
-
         try {
             $userDao = new UserDao();
             if ($userDao->getInfoByUsername($username)) {
                 throw new InternalException('账号已注册');
             }
+        } catch (Throwable $e) {
+            if ($e->getCode() != 404) {
+                throw new InternalException($e->getMessage());
+            }
+        }
 
+        try {
             $salt = $this->generateSalt();
             $passwordHash = $this->generatePasswordHash($password, $salt);
-            $userDao->create([
-                'username' => $username,
-                'nickname' => '新手用户',
-                'password' => $passwordHash,
+            $extend = array_merge($extend, [
                 'salt' => $salt,
-                'avatar' => $extend['avatar'] ?? '',
-                'mobile' => $extend['mobile'] ?? '',
-                'email' => $extend['email'] ?? '',
-                'lasted_login_time' => time()
             ]);
+
+            $service = new UserService();
+            $service->createAccount($username, $passwordHash, $extend);
 
             return $this->login($username, $password);
         } catch (Throwable $e) {

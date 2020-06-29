@@ -10,10 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Service\Admin;
 
+use App\Constants\State\AdminState;
 use App\Dao\Admin\AdminDao;
 use App\Dao\Role\RoleDao;
-use App\Exception\InternalException;
-use App\Model\Role\Role;
 use App\Service\AbstractService;
 use App\Service\Role\RoleAdminService;
 
@@ -23,20 +22,18 @@ class AdminService extends AbstractService
 
     /**
      * 创建管理员账号
-     * @param string $username
-     * @param string $password
-     * @param array $extend
+     * @param string $username 用户名
+     * @param string $password 密码
+     * @param array $extend 其他数据,如:头像,邮箱等
      * @return int
      */
     public function createAccount(string $username, string $password, array $extend = []): int
     {
+        // 获取权限
         $roleDao = new RoleDao();
-        /** @var Role $role */
         $role = $roleDao->getInfoByIdentifier($extend['role']);
-        if (!$role) {
-            throw new InternalException($roleDao->getNotFoundMessage());
-        }
 
+        // 创建账号
         $adminDao = new AdminDao();
         $id = $adminDao->create([
             'username' => $username,
@@ -46,9 +43,11 @@ class AdminService extends AbstractService
             'avatar' => $extend['avatar'] ?? '',
             'mobile' => $extend['mobile'] ?? '',
             'email' => $extend['email'] ?? '',
+            'status' => $extend['status'] ?? AdminState::STATUS_PENDING,
             'lasted_login_time' => time()
         ]);
 
+        // 账号绑定权限
         $roleAdminService = new RoleAdminService();
         $roleAdminService->create([
             'admin_id' => $id,

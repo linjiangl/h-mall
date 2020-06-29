@@ -10,23 +10,17 @@ declare(strict_types=1);
  */
 namespace App\Constants\State;
 
-class UserState extends AbstractState
+class MenuState extends AbstractState
 {
     // 状态
-    const STATUS_PENDING = 0;
+    const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 2;
-
-    // 是否系统用户
-    const IS_SYSTEM_FALSE = 0;
-    const IS_SYSTEM_TRUE = 1;
 
     public static function getStatus(): array
     {
         return [
-            self::STATUS_PENDING => '待审核',
-            self::STATUS_ENABLED => '已启用',
             self::STATUS_DISABLED => '已禁用',
+            self::STATUS_ENABLED => '已启用',
         ];
     }
 }
