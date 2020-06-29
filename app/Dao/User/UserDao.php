@@ -21,12 +21,12 @@ class UserDao extends AbstractDao
 
     protected $notFoundMessage = '用户不存在';
 
-    public function getInfoByUsername($username, $symbol = '=')
+    public function getInfoByUsername($username, $symbol = '='): User
     {
         return $this->getInfoByCondition([['username', $symbol, $username]]);
     }
 
-    public function getInfoByMobile($mobile)
+    public function getInfoByMobile($mobile): User
     {
         return $this->getInfoByCondition([['mobile', '=', $mobile]]);
     }

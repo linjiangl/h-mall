@@ -50,10 +50,10 @@ class UserAuthorizationService extends AbstractAuthorizationService
 
     public function login(string $account, string $password): array
     {
-        $userDao = new UserDao();
-        /** @var User $user */
-        $user = $userDao->getInfoByUsername($account);
-        if (! $user) {
+        try {
+            $userDao = new UserDao();
+            $user = $userDao->getInfoByUsername($account);
+        } catch (Throwable $e) {
             throw new InternalException('该账号不存在');
         }
         $user = $user->makeVisible(['password', 'salt', 'mobile', 'email']);
@@ -88,13 +88,14 @@ class UserAuthorizationService extends AbstractAuthorizationService
         if ($password != $confirmPassword) {
             throw new InternalException('两次输入的密码不一样');
         }
-
         try {
             $userDao = new UserDao();
-            if ($userDao->getInfoByUsername($username)) {
-                throw new InternalException('账号已注册');
-            }
+            $userDao->getInfoByUsername($username);
+        } catch (Throwable $e) {
+            throw new InternalException('账号已注册');
+        }
 
+        try {
             $salt = $this->generateSalt();
             $passwordHash = $this->generatePasswordHash($password, $salt);
             $userDao->create([

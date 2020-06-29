@@ -21,12 +21,12 @@ class AdminDao extends AbstractDao
 
     protected $notFoundMessage = '管理员不存在';
 
-    public function getInfoByUsername($username, $symbol = '=')
+    public function getInfoByUsername($username, $symbol = '='): Admin
     {
         return $this->getInfoByCondition([['username', $symbol, $username]]);
     }
 
-    public function getInfoByMobile($mobile)
+    public function getInfoByMobile($mobile): Admin
     {
         return $this->getInfoByCondition([['mobile', '=', $mobile]]);
     }

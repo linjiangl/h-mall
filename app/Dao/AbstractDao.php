@@ -15,6 +15,7 @@ use App\Exception\HttpException;
 use App\Exception\NotFoundException;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
+use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
 use Throwable;
 
@@ -75,7 +76,7 @@ abstract class AbstractDao implements InterfaceDao
         return $query->select($columns)->offset($offset)->limit($limit)->get();
     }
 
-    public function info(int $id, $with = []): Model
+    public function info(int $id, $with = [])
     {
         $query = $this->model::query();
         if ($with) {
@@ -109,7 +110,7 @@ abstract class AbstractDao implements InterfaceDao
         }
     }
 
-    public function update(int $id, array $data): Model
+    public function update(int $id, array $data)
     {
         try {
             $this->actionIsAllow('update');
@@ -146,7 +147,7 @@ abstract class AbstractDao implements InterfaceDao
     /**
      * 自定义条件查询详情
      * @param array $condition
-     * @return Builder|Model|object|null
+     * @return Model|Collection|mixed
      */
     public function getInfoByCondition($condition = [])
     {
@@ -154,7 +155,11 @@ abstract class AbstractDao implements InterfaceDao
         if ($condition) {
             $this->handleQueryCondition($query, $condition);
         }
-        return $query->first();
+        $model = $query->first();
+        if (! $model) {
+            throw new NotFoundException($this->notFoundMessage);
+        }
+        return $model;
     }
 
     /**

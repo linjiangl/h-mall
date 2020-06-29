@@ -53,9 +53,9 @@ interface InterfaceDao
      * 详情
      * @param int $id 主键
      * @param array $with 关联模型
-     * @return Model
+     * @return Model|Collection|mixed
      */
-    public function info(int $id, $with = []): Model;
+    public function info(int $id, $with = []);
 
     /**
      * 创建
@@ -68,9 +68,9 @@ interface InterfaceDao
      * 修改
      * @param int $id 主键
      * @param array $data 修改的数据
-     * @return Model
+     * @return Model|mixed
      */
-    public function update(int $id, array $data): Model;
+    public function update(int $id, array $data);
 
     /**
      * 删除

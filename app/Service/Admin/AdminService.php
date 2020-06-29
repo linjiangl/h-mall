@@ -31,11 +31,7 @@ class AdminService extends AbstractService
     public function createAccount(string $username, string $password, array $extend = []): int
     {
         $roleDao = new RoleDao();
-        /** @var Role $role */
         $role = $roleDao->getInfoByIdentifier($extend['role']);
-        if (! $role) {
-            throw new InternalException($roleDao->getNotFoundMessage());
-        }
 
         $adminDao = new AdminDao();
         $id = $adminDao->create([

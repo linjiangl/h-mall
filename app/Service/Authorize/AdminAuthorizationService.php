@@ -53,10 +53,10 @@ class AdminAuthorizationService extends AbstractAuthorizationService
 
     public function login(string $account, string $password): array
     {
-        $adminDao = new AdminDao();
-        /** @var Admin $admin */
-        $admin = $adminDao->getInfoByUsername($account);
-        if (! $admin) {
+        try {
+            $adminDao = new AdminDao();
+            $admin = $adminDao->getInfoByUsername($account);
+        } catch (Throwable $e) {
             throw new InternalException('该管理员账号不存在');
         }
 
@@ -94,8 +94,10 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         if ($password != $confirmPassword) {
             throw new InternalException('两次输入的密码不一样');
         }
-        $adminDao = new AdminDao();
-        if ($adminDao->getInfoByUsername($username)) {
+        try {
+            $adminDao = new AdminDao();
+            $adminDao->getInfoByUsername($username);
+        } catch (Throwable $e) {
             throw new InternalException('账号已注册');
         }
 
