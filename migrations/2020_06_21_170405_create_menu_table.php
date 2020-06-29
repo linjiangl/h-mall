@@ -20,9 +20,8 @@ class CreateMenuTable extends Migration
             $table->string('path', 100)->default('');
             $table->tinyInteger('status', false, true)->default(0);
             $table->timestamps();
-            $table->softDeletes();
 
-            $table->index(['name'], 'name');
+            $table->index(['parent_id'], 'parent_id');
         });
     }
 
