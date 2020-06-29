@@ -47,7 +47,10 @@ class DatabaseSeeder extends Seeder
         $directory = BASE_PATH . '/seeders/factories';
         $files = $filesystem->allFiles($directory);
         foreach ($files as $file) {
-            require_once "{$file->getPathname()}";
+            $realPath = $file->getRealPath();
+            if ($realPath) {
+                require_once "{$realPath}";
+            }
         }
     }
 }
