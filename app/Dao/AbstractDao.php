@@ -76,7 +76,7 @@ abstract class AbstractDao implements InterfaceDao
         return $query->select($columns)->offset($offset)->limit($limit)->get();
     }
 
-    public function info(int $id, $with = [])
+    public function info(int $id, array $with = [])
     {
         $query = $this->model::query();
         if ($with) {
@@ -149,7 +149,7 @@ abstract class AbstractDao implements InterfaceDao
      * @param array $condition
      * @return Model|Collection|mixed
      */
-    public function getInfoByCondition($condition = [])
+    public function getInfoByCondition(array $condition = [])
     {
         $query = $this->model::query();
         if ($condition) {
@@ -228,7 +228,7 @@ abstract class AbstractDao implements InterfaceDao
         }
     }
 
-    protected function actionIsAllow($action)
+    protected function actionIsAllow(string $action)
     {
         if (in_array($action, $this->noAllowActions)) {
             throw new BadRequestException('不允许执行该方法: ' . $action);

@@ -55,7 +55,7 @@ interface InterfaceDao
      * @param array $with 关联模型
      * @return Model|Collection|mixed
      */
-    public function info(int $id, $with = []);
+    public function info(int $id, array $with = []);
 
     /**
      * 创建

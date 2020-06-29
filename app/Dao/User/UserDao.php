@@ -21,17 +21,17 @@ class UserDao extends AbstractDao
 
     protected $notFoundMessage = '用户不存在';
 
-    public function info(int $id, $with = []): User
+    public function info(int $id, array $with = []): User
     {
         return parent::info($id, $with);
     }
 
-    public function getInfoByUsername($username, $symbol = '='): User
+    public function getInfoByUsername(string $username, string $symbol = '='): User
     {
         return $this->getInfoByCondition([['username', $symbol, $username]]);
     }
 
-    public function getInfoByMobile($mobile): User
+    public function getInfoByMobile(string $mobile): User
     {
         return $this->getInfoByCondition([['mobile', '=', $mobile]]);
     }

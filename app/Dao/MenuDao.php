@@ -20,7 +20,7 @@ class MenuDao extends AbstractDao
 
     protected $notFoundMessage = '菜单不存在';
 
-    public function info(int $id, $with = []): Menu
+    public function info(int $id, array $with = []): Menu
     {
         return parent::info($id, $with);
     }

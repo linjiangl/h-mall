@@ -19,7 +19,7 @@ class LogAdminLoginDao extends AbstractDao
 
     protected $noAllowActions = [];
 
-    public function info(int $id, $with = []): LogAdminLogin
+    public function info(int $id, array $with = []): LogAdminLogin
     {
         return parent::info($id, $with);
     }
