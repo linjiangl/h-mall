@@ -22,9 +22,9 @@ class AdminService extends AbstractService
 
     /**
      * 创建管理员账号
-     * @param string $username
-     * @param string $password
-     * @param array $extend
+     * @param string $username 用户名
+     * @param string $password 密码
+     * @param array $extend 其他数据,如:头像,邮箱等
      * @return int
      */
     public function createAccount(string $username, string $password, array $extend = []): int
