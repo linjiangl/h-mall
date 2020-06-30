@@ -16,7 +16,7 @@ class MenuService extends AbstractService
 {
     protected $dao = MenuDao::class;
 
-    protected $menuLevelData = [];
+    protected $levelMenus = [];
 
     /**
      * 获取树形菜单
@@ -77,10 +77,10 @@ class MenuService extends AbstractService
         foreach ($allMenus as $k => $v) {
             if ($v['parent_id'] == $parentId) {
                 $v['level'] = $level;
-                $this->menuLevelData[] = $v;
+                $this->levelMenus[] = $v;
                 $this->handleMenusToLevel($allMenus, $v['id'], $level + 1);
             }
         }
-        return $this->menuLevelData;
+        return $this->levelMenus;
     }
 }
