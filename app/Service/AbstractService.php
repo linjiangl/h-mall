@@ -36,27 +36,27 @@ abstract class AbstractService implements InterfaceService
     public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): LengthAwarePaginatorInterface
     {
         $this->handleQueryLimit($limit);
-        return $this->dao()->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
+        return $this->service()->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
     }
 
     public function info(int $id, $with = []): Model
     {
-        return $this->dao()->info($id, $with);
+        return $this->service()->info($id, $with);
     }
 
     public function create(array $data): int
     {
-        return $this->dao()->create($data);
+        return $this->service()->create($data);
     }
 
     public function update(int $id, array $data): Model
     {
-        return $this->dao()->update($id, $data);
+        return $this->service()->update($id, $data);
     }
 
     public function remove(int $id): bool
     {
-        return $this->dao()->remove($id);
+        return $this->service()->remove($id);
     }
 
     public function getCondition(): array
@@ -82,7 +82,7 @@ abstract class AbstractService implements InterfaceService
         }
     }
 
-    protected function dao(): InterfaceDao
+    protected function service(): InterfaceDao
     {
         return new $this->dao();
     }

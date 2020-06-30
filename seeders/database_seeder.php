@@ -12,12 +12,6 @@ declare(strict_types=1);
 use Hyperf\Database\Seeders\Seeder;
 use Hyperf\Utils\Filesystem\Filesystem;
 
-//require_once "factories/DistrictFactory.php";
-//require_once "factories/UserFactory.php";
-//require_once "factories/AdminFactory.php";
-//require_once "factories/RoleFactory.php";
-//require_once "factories/MenuFactory.php";
-
 class DatabaseSeeder extends Seeder
 {
     /**

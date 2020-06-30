@@ -146,20 +146,34 @@ abstract class AbstractDao implements InterfaceDao
 
     /**
      * 自定义条件查询详情
-     * @param array $condition
+     * @param array $condition 查询条件
+     * @param array $with 关联模型
+     * @param string $select 字段
      * @return Model|Collection|mixed
      */
-    public function getInfoByCondition(array $condition = [])
+    public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*')
     {
-        $query = $this->model::query();
-        if ($condition) {
-            $this->handleQueryCondition($query, $condition);
-        }
-        $model = $query->first();
+        $query = $this->generateListQuery($condition, '', [], $with);
+        $model = $query->selectRaw($select)->first();
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
         }
         return $model;
+    }
+
+    /**
+     * 自定义条件查询列表
+     * @param array $condition 查询条件
+     * @param array $with 管理模型
+     * @param string $select 字段
+     * @param string $orderBy 排序
+     * @param array $groupBy 分组
+     * @return array
+     */
+    public function getListBuyCondition(array $condition = [], array $with = [], string $select = '*', string $orderBy = '', array $groupBy = []): array
+    {
+        $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
+        return $query->selectRaw($select)->get()->toArray();
     }
 
     /**
@@ -173,26 +187,26 @@ abstract class AbstractDao implements InterfaceDao
 
     /**
      * 生成列表查询器
-     * @param array $condition
-     * @param string $orderBy
-     * @param array $groupBy
-     * @param array $with
+     * @param array $condition 查询条件
+     * @param string $orderBy 排序
+     * @param array $groupBy 分组
+     * @param array $with 关联模型
      * @return Builder
      */
-    protected function generateListQuery(array $condition, string $orderBy, array $groupBy, array $with): Builder
+    protected function generateListQuery(array $condition = [], string $orderBy = '', array $groupBy = [], array $with = []): Builder
     {
         $query = $this->model::query();
-        if ($with) {
+        if (! empty($with)) {
             $this->checkAllowWithModel($with);
             $query->with($this->with);
         }
-        if ($condition) {
-            $this->handleQueryCondition($query, $condition);
+        if (! empty($condition)) {
+            $query = $this->handleQueryCondition($query, $condition);
         }
-        if ($groupBy) {
+        if (! empty($groupBy)) {
             $query->groupBy($groupBy);
         }
-        if ($orderBy) {
+        if (! empty($orderBy)) {
             $query->orderByRaw($orderBy);
         }
         return $query;
@@ -211,8 +225,9 @@ abstract class AbstractDao implements InterfaceDao
      * 处理查询条件
      * @param Builder $query
      * @param array $condition
+     * @return Builder
      */
-    protected function handleQueryCondition(Builder $query, array $condition)
+    protected function handleQueryCondition(Builder $query, array $condition): Builder
     {
         foreach ($condition as $where) {
             switch ($where[1]) {
@@ -226,6 +241,7 @@ abstract class AbstractDao implements InterfaceDao
                     $query->where($where[0], $where[1], $where[2]);
             }
         }
+        return $query;
     }
 
     protected function actionIsAllow(string $action)
