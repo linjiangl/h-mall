@@ -37,6 +37,6 @@ class MenuDao extends AbstractDao
         if ($status != null) {
             $condition[] = ['status', '=', $status];
         }
-        return $this->getListBuyCondition($condition, [], $select);
+        return $this->getListByCondition($condition, [], $select);
     }
 }

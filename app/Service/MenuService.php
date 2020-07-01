@@ -11,12 +11,30 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Dao\MenuDao;
+use App\Dao\Role\RoleAdminDao;
+use App\Dao\Role\RoleMenuDao;
 
 class MenuService extends AbstractService
 {
     protected $dao = MenuDao::class;
 
     protected $levelMenus = [];
+
+    /**
+     * 获取管理员菜单
+     * @param int $adminId 管理员id
+     * @return array
+     */
+    public function getAdminMenus(int $adminId): array
+    {
+        $roleAdminDao = new RoleAdminDao();
+        $roleId = $roleAdminDao->getAdminRoleId($adminId);
+        $roleMenuDao = new RoleMenuDao();
+        $menuIds = $roleMenuDao->getRoleMenuIds($roleId);
+        $menuDao = new MenuDao();
+        $menus = $menuDao->getListByPrimaryKeys($menuIds);
+        return $this->handleMenusToChildren($menus);
+    }
 
     /**
      * 获取树形菜单

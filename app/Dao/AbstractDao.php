@@ -17,6 +17,7 @@ use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
+use Hyperf\ModelCache\CacheableInterface;
 use Throwable;
 
 /**
@@ -140,10 +141,6 @@ abstract class AbstractDao implements InterfaceDao
         }
     }
 
-    public function removeCache(int $id): void
-    {
-    }
-
     /**
      * 自定义条件查询详情
      * @param array $condition 查询条件
@@ -170,10 +167,61 @@ abstract class AbstractDao implements InterfaceDao
      * @param array $groupBy 分组
      * @return array
      */
-    public function getListBuyCondition(array $condition = [], array $with = [], string $select = '*', string $orderBy = '', array $groupBy = []): array
+    public function getListByCondition(array $condition = [], array $with = [], string $select = '*', string $orderBy = '', array $groupBy = []): array
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->selectRaw($select)->get()->toArray();
+    }
+
+    /**
+     * 通过主键集合获取数据
+     * @param array $primaryKeys
+     * @return array
+     */
+    public function getListByPrimaryKeys(array $primaryKeys): array
+    {
+        /** @var Model $model */
+        $model = new $this->model();
+        $primaryKey = $model->getKeyName();
+        return $this->getListByCondition([$primaryKey, 'in', $primaryKeys]);
+    }
+
+    /**
+     * 通过主键查询单个缓存数据
+     * @param int $id
+     * @return array
+     */
+    public function findFromCache(int $id): array
+    {
+        /** @var CacheableInterface $model */
+        $model = $this->model;
+        $model = $model::findFromCache($id);
+        if (!$model) {
+            return [];
+        } else {
+            return $model->toArray();
+        }
+    }
+
+    /**
+     * 通过主键获取缓存列表数据
+     * @param array $ids
+     * @return array
+     */
+    public function findManyFromCache(array $ids): array
+    {
+        /** @var CacheableInterface $model */
+        $model = $this->model;
+        $model = $model::findFromCache($ids);
+        if (!$model) {
+            return [];
+        } else {
+            return $model->toArray();
+        }
+    }
+
+    public function removeCache(int $id): void
+    {
     }
 
     /**
