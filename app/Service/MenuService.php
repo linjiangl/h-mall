@@ -26,8 +26,8 @@ class MenuService extends AbstractService
     public function getTreeMenus($status = null): array
     {
         $dao = new MenuDao();
-        $allMenus = $dao->getListByStatus($status, 'id,parent_id,title,name,icon,path');
-        return $this->handleMenusToChildren($allMenus);
+        $menus = $dao->getListByStatus($status, 'id,parent_id,title,name,icon,path');
+        return $this->handleMenusToChildren($menus);
     }
 
     /**
@@ -38,24 +38,24 @@ class MenuService extends AbstractService
     public function getLevelMenus($status = null): array
     {
         $dao = new MenuDao();
-        $allMenus = $dao->getListByStatus($status, 'id,parent_id,title,name,icon,path');
-        return $this->handleMenusToLevel($allMenus);
+        $menus = $dao->getListByStatus($status, 'id,parent_id,title,name,icon,path');
+        return $this->handleMenusToLevel($menus);
     }
 
     /**
      * 把菜单转成子菜单
-     * @param array $allMenus 全部菜单数据
+     * @param array $menus 菜单数据
      * @param int $parentId 父级
      * @param int $level 层级
      * @return array
      */
-    protected function handleMenusToChildren(array $allMenus, int $parentId = 0, int $level = 1): array
+    public function handleMenusToChildren(array $menus, int $parentId = 0, int $level = 1): array
     {
         $list = [];
-        foreach ($allMenus as $item) {
+        foreach ($menus as $item) {
             if ($item['parent_id'] == $parentId) {
                 $item['level'] = $level;
-                $children = $this->handleMenusToChildren($allMenus, $item['id'], $level + 1);
+                $children = $this->handleMenusToChildren($menus, $item['id'], $level + 1);
                 if ($children) {
                     $item['children'] = $children;
                 }
@@ -67,18 +67,18 @@ class MenuService extends AbstractService
 
     /**
      * 把菜单分层
-     * @param array $allMenus
+     * @param array $menus 菜单数据
      * @param int $parentId
      * @param int $level
      * @return array
      */
-    protected function handleMenusToLevel(array $allMenus, int $parentId = 0, int $level = 1)
+    public function handleMenusToLevel(array $menus, int $parentId = 0, int $level = 1)
     {
-        foreach ($allMenus as $k => $v) {
+        foreach ($menus as $k => $v) {
             if ($v['parent_id'] == $parentId) {
                 $v['level'] = $level;
                 $this->levelMenus[] = $v;
-                $this->handleMenusToLevel($allMenus, $v['id'], $level + 1);
+                $this->handleMenusToLevel($menus, $v['id'], $level + 1);
             }
         }
         return $this->levelMenus;
