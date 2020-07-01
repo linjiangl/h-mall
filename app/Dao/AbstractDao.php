@@ -187,6 +187,18 @@ abstract class AbstractDao implements InterfaceDao
     }
 
     /**
+     * 删除多条记录
+     * @param array $primaryKeys
+     */
+    public function deleteByPrimaryKeys(array $primaryKeys): void
+    {
+        /** @var Model $model */
+        $model = new $this->model();
+        $primaryKey = $model->getKeyName();
+        $this->model::query()->whereIn($primaryKey, $primaryKeys)->delete();
+    }
+
+    /**
      * 通过主键查询单个缓存数据
      * @param int $id
      * @return array
@@ -196,11 +208,10 @@ abstract class AbstractDao implements InterfaceDao
         /** @var CacheableInterface $model */
         $model = $this->model;
         $model = $model::findFromCache($id);
-        if (!$model) {
+        if (! $model) {
             return [];
-        } else {
-            return $model->toArray();
         }
+        return $model->toArray();
     }
 
     /**
@@ -213,11 +224,10 @@ abstract class AbstractDao implements InterfaceDao
         /** @var CacheableInterface $model */
         $model = $this->model;
         $model = $model::findFromCache($ids);
-        if (!$model) {
+        if (! $model) {
             return [];
-        } else {
-            return $model->toArray();
         }
+        return $model->toArray();
     }
 
     public function removeCache(int $id): void
