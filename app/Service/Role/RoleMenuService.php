@@ -19,6 +19,12 @@ class RoleMenuService extends AbstractService
 {
     protected $dao = RoleMenuDao::class;
 
+    /**
+     * 创建权限菜单
+     * @param int $roleId
+     * @param int $menuId
+     * @return int
+     */
     public function createRoleMenu(int $roleId, int $menuId): int
     {
         $roleDao = new RoleDao();

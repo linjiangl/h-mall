@@ -20,6 +20,20 @@ class RoleMenuDao extends AbstractDao
     protected $noAllowActions = [];
 
     /**
+     * 获取信息
+     * @param int $roleId
+     * @param int $menuId
+     * @return RoleMenu
+     */
+    public function getInfoByRoleMenuId(int $roleId, int $menuId): RoleMenu
+    {
+        return $this->getInfoByCondition([
+            ['role_id', '=', $roleId],
+            ['menu_id', '=', $menuId],
+        ]);
+    }
+
+    /**
      * 获取权限所有菜单
      * @param int $roleId
      * @return array
