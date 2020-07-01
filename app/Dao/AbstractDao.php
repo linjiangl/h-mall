@@ -17,7 +17,6 @@ use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
-use Hyperf\ModelCache\CacheableInterface;
 use Throwable;
 
 /**
@@ -58,11 +57,6 @@ abstract class AbstractDao implements InterfaceDao
      * @var string
      */
     protected $notFoundMessage = '所请求的资源不存在';
-
-    public function getModel(): Model
-    {
-        return $this->model;
-    }
 
     public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): LengthAwarePaginatorInterface
     {
@@ -196,38 +190,6 @@ abstract class AbstractDao implements InterfaceDao
         $model = new $this->model();
         $primaryKey = $model->getKeyName();
         $this->model::query()->whereIn($primaryKey, $primaryKeys)->delete();
-    }
-
-    /**
-     * 通过主键查询单个缓存数据
-     * @param int $id
-     * @return array
-     */
-    public function findFromCache(int $id): array
-    {
-        /** @var CacheableInterface $model */
-        $model = $this->model;
-        $model = $model::findFromCache($id);
-        if (! $model) {
-            return [];
-        }
-        return $model->toArray();
-    }
-
-    /**
-     * 通过主键获取缓存列表数据
-     * @param array $ids
-     * @return array
-     */
-    public function findManyFromCache(array $ids): array
-    {
-        /** @var CacheableInterface $model */
-        $model = $this->model;
-        $model = $model::findFromCache($ids);
-        if (! $model) {
-            return [];
-        }
-        return $model->toArray();
     }
 
     public function removeCache(int $id): void

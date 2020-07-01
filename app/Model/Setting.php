@@ -10,8 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use App\Model\Model;
-
 /**
  * @property int $id
  * @property string $key

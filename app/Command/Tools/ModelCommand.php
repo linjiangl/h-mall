@@ -53,7 +53,7 @@ class ModelCommand extends HyperfCommand
      * @var array
      */
     protected $specifyTables = [
-
+        'menu'
     ];
 
     public function configure()

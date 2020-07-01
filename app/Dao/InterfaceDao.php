@@ -18,12 +18,6 @@ use Hyperf\Database\Model\Model;
 interface InterfaceDao
 {
     /**
-     * 获取模型类
-     * @return Model
-     */
-    public function getModel(): Model;
-
-    /**
      * 分页列表
      * @param array $condition
      * @param int $page

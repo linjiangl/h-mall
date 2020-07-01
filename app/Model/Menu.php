@@ -17,6 +17,7 @@ namespace App\Model;
  * @property string $name 菜单名称
  * @property string $icon
  * @property string $path
+ * @property int $order
  * @property int $status
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -35,12 +36,12 @@ class Menu extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'title', 'name', 'icon', 'path', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'parent_id', 'title', 'name', 'icon', 'path', 'order', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'order' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

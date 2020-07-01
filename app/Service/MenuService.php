@@ -10,8 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Service;
 
+use App\Constants\State\RoleState;
 use App\Dao\MenuDao;
 use App\Dao\Role\RoleAdminDao;
+use App\Dao\Role\RoleDao;
 use App\Dao\Role\RoleMenuDao;
 
 class MenuService extends AbstractService
@@ -29,6 +31,23 @@ class MenuService extends AbstractService
     {
         $roleAdminDao = new RoleAdminDao();
         $roleId = $roleAdminDao->getAdminRoleId($adminId);
+        return $this->getRoleMenus($roleId);
+    }
+
+    /**
+     * 获取权限菜单
+     * @param int $roleId
+     * @return array
+     */
+    public function getRoleMenus(int $roleId): array
+    {
+        $roleDao = new RoleDao();
+        $role = $roleDao->info($roleId);
+        // 超级管理员返回所有菜单
+        if ($role->is_super == RoleState::IS_SUPER_TRUE) {
+            return $this->getTreeMenus(RoleState::STATUS_ENABLED);
+        }
+        // 其他返回对应权限菜单
         $roleMenuDao = new RoleMenuDao();
         $menuIds = $roleMenuDao->getRoleMenuIds($roleId);
         $menuDao = new MenuDao();
