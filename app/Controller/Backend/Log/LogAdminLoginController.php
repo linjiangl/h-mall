@@ -12,8 +12,12 @@ namespace App\Controller\Backend\Log;
 
 use App\Block\Backend\Log\LogAdminLoginBlock;
 use App\Controller\AbstractController;
+use Hyperf\HttpServer\Contract\RequestInterface;
 
 class LogAdminLoginController extends AbstractController
 {
-    protected $block = LogAdminLoginBlock::class;
+    public function index(RequestInterface $request)
+    {
+        return (new LogAdminLoginBlock)->index($request);
+    }
 }

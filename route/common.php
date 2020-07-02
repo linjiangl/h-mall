@@ -9,13 +9,14 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
+use App\Controller\Common\PublicController;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/public', function () {
     // 系统配置
-    Router::addRoute(['POST', 'OPTION'], '/config', 'App\Controller\Common\PublicController::config');
+    Router::addRoute(['POST', 'OPTION'], '/config', [PublicController::class, 'config']);
     // 验证码
-    Router::addRoute(['POST', 'OPTION'], '/captcha', 'App\Controller\Common\PublicController::captcha');
+    Router::addRoute(['POST', 'OPTION'], '/captcha', [PublicController::class, 'captcha']);
     // 文件上传
-    Router::addRoute(['POST', 'OPTION'], '/upload', 'App\Controller\Common\PublicController::upload');
+    Router::addRoute(['POST', 'OPTION'], '/upload', [PublicController::class, 'upload']);
 });

@@ -16,12 +16,19 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 
 class UserController extends AbstractController
 {
-    protected $block = UserBlock::class;
+    public function index(RequestInterface $request)
+    {
+        return (new UserBlock())->index($request);
+    }
+
+    public function show(RequestInterface $request, $id)
+    {
+        return (new UserBlock())->show($request, $id);
+    }
 
     public function disabled(RequestInterface $request)
     {
         $this->setActionName('禁用用户');
-        
         return $request->getAttribute('admin');
     }
 }
