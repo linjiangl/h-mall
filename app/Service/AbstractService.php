@@ -59,7 +59,7 @@ abstract class AbstractService implements InterfaceService
         return $this->service()->remove($id);
     }
 
-    public function getCondition(): array
+    public function getCondition(array $params): array
     {
         return [];
     }

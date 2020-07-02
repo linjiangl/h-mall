@@ -88,6 +88,11 @@ abstract class AbstractBlock
      */
     protected $data = [];
 
+    /**
+     * 列表
+     * @param RequestInterface $request
+     * @return LengthAwarePaginatorInterface
+     */
     public function index(RequestInterface $request)
     {
         try {
@@ -106,6 +111,12 @@ abstract class AbstractBlock
         }
     }
 
+    /**
+     * 详情
+     * @param RequestInterface $request
+     * @param $id
+     * @return array|mixed
+     */
     public function show(RequestInterface $request, $id)
     {
         try {
@@ -121,38 +132,57 @@ abstract class AbstractBlock
         }
     }
 
-    public function store(RequestInterface $request)
+    /**
+     * 创建
+     * @param array $post
+     * @return int
+     */
+    public function store(array $post)
     {
         try {
-            $post = $request->post();
             return $this->service()->create($post);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function update(RequestInterface $request, $id)
+    /**
+     * 修改
+     * @param array $post
+     * @param $id
+     * @return array
+     */
+    public function update(array $post, $id)
     {
         try {
-            $post = $request->post();
             return $this->service()->update($id, $post)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function destroy(RequestInterface $request, $id)
+    /**
+     * 删除
+     * @param int $id
+     * @return bool
+     */
+    public function destroy(int $id)
     {
         try {
             return $this->service()->remove($id);
         } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
+            throw new HttpException($e->getMessage(), 204);
         }
     }
 
+    /**
+     * 查询条件
+     * @param RequestInterface $request
+     * @return array
+     */
     public function getCondition(RequestInterface $request): array
     {
-        return $this->service()->getCondition();
+        return $this->service()->getCondition($request->post());
     }
 
     /**
@@ -226,6 +256,10 @@ abstract class AbstractBlock
         return $value;
     }
 
+    /**
+     * 业务服务接口类
+     * @return InterfaceService
+     */
     protected function service(): InterfaceService
     {
         return new $this->service();
