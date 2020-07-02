@@ -22,12 +22,6 @@ class MenuService extends AbstractService
 
     protected $levelMenus = [];
 
-    public function create(array $data): int
-    {
-        $dao = new MenuDao();
-        return $dao->create($data);
-    }
-
     /**
      * 获取管理员菜单
      * @param int $adminId 管理员id

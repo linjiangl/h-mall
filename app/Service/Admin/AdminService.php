@@ -31,13 +31,17 @@ class AdminService extends AbstractService
     {
         // 获取权限
         $roleDao = new RoleDao();
-        $role = $roleDao->getInfoByIdentifier($extend['role']);
+        if (empty($extend['role'])) {
+            $role = $roleDao->getInfoByIdentifier();
+        } else {
+            $role = $roleDao->getInfoByIdentifier($extend['role']);
+        }
 
         // 创建账号
         $adminDao = new AdminDao();
         $id = $adminDao->create([
             'username' => $username,
-            'real_name' => $extend['real_name'],
+            'real_name' => $extend['real_name'] ?? '',
             'password' => $password,
             'salt' => $extend['salt'],
             'avatar' => $extend['avatar'] ?? '',

@@ -22,6 +22,11 @@ class MenuController extends AbstractController
         return (new MenuBlock())->index($request);
     }
 
+    public function show(RequestInterface $request, $id)
+    {
+        return (new MenuBlock())->show($request, $id);
+    }
+
     public function store(MenuRequest $request)
     {
         $post = $request->validated();

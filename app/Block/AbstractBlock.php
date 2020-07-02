@@ -155,7 +155,7 @@ abstract class AbstractBlock
     public function update(array $post, $id)
     {
         try {
-            return $this->service()->update($id, $post)->toArray();
+            return $this->service()->update(intval($id), $post)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -163,15 +163,15 @@ abstract class AbstractBlock
 
     /**
      * 删除
-     * @param int $id
+     * @param $id
      * @return bool
      */
-    public function destroy(int $id)
+    public function destroy($id)
     {
         try {
-            return $this->service()->remove($id);
+            return $this->service()->remove(intval($id));
         } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), 204);
+            throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 

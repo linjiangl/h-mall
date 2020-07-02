@@ -31,7 +31,7 @@ class MenuRequest extends FormRequest
             'parent_id' => 'required|integer',
             'title' => 'required|string|min:3|max:50',
             'name' => 'required|string|min:3|max:100',
-            'icon' => 'required|string|min:1|max:50',
+            'icon' => 'string|min:1|max:50',
             'path' => 'required|string|min:3|max:255',
             'position' => 'integer|max:10000',
         ];

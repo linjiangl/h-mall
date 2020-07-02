@@ -11,6 +11,7 @@
     <testsuites>
         <testsuite name="Backend">
             <directory suffix="Test.php">./test/Backend/Authorize</directory>
+            <directory suffix="Test.php">./test/Backend/System</directory>
             <directory suffix="Test.php">./test/Backend/Admin</directory>
             <directory suffix="Test.php">./test/Backend/User</directory>
         </testsuite>

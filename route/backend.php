@@ -32,7 +32,8 @@ Router::addGroup('/backend', function () {
 
     // 系统-菜单
     Router::get('/menu', [MenuController::class, 'index']);
-    Router::post('/menu/{id:\d+}', [MenuController::class, 'store']);
+    Router::get('/menu/{id:\d+}', [MenuController::class, 'show']);
+    Router::post('/menu', [MenuController::class, 'store']);
     Router::put('/menu/{id:\d+}', [MenuController::class, 'update']);
     Router::delete('/menu/{id:\d+}', [MenuController::class, 'destroy']);
 
