@@ -24,4 +24,19 @@ class MenuDao extends AbstractDao
     {
         return parent::info($id, $with);
     }
+
+    /**
+     * 根据状态获取菜单
+     * @param mixed $status 状态
+     * @param string $select
+     * @return array
+     */
+    public function getListByStatus($status = null, string $select = '*'): array
+    {
+        $condition = [];
+        if ($status != null) {
+            $condition[] = ['status', '=', $status];
+        }
+        return $this->getListByCondition($condition, [], $select, 'parent_id asc, position asc');
+    }
 }

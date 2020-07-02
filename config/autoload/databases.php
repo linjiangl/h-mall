@@ -33,8 +33,9 @@ return [
             'cache_key' => 'mc:%s:m:%s:%s:%s',
             'prefix' => 'default',
             'ttl' => 3600 * 24,
-            'empty_model_ttl' => 600,
+            'empty_model_ttl' => 60,
             'load_script' => true,
+            'use_default_value' => true
         ],
         'commands' => [
             'gen:model' => [

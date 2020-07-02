@@ -12,8 +12,14 @@ namespace App\Controller\Frontend\Authorize;
 
 use App\Block\Frontend\Authorize\AuthorizeBlock;
 use App\Controller\AbstractController;
+use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\RateLimit\Annotation\RateLimit;
 
+/**
+ * @Controller(prefix="rate-limit")
+ * @RateLimit()
+ */
 class AuthorizeController extends AbstractController
 {
     public function index(RequestInterface $request)

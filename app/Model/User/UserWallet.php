@@ -22,6 +22,7 @@ use App\Model\Model;
 class UserWallet extends Model
 {
     public $primaryKey = 'user_id';
+
     public $timestamps = false;
 
     /**

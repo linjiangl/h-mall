@@ -11,9 +11,19 @@ declare(strict_types=1);
 namespace App\Controller\Frontend\User;
 
 use App\Block\Frontend\User\UserBlock;
-use App\Controller\AbstractRestController;
+use App\Controller\AbstractController;
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\RateLimit\Annotation\RateLimit;
 
-class UserController extends AbstractRestController
+/**
+ * @Controller(prefix="rate-limit")
+ * @RateLimit()
+ */
+class UserController extends AbstractController
 {
-    protected $block = UserBlock::class;
+    public function show(RequestInterface $request, $id)
+    {
+        return (new UserBlock())->show($request, $id);
+    }
 }

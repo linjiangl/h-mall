@@ -11,17 +11,24 @@ declare(strict_types=1);
 namespace App\Controller\Backend\User;
 
 use App\Block\Backend\User\UserBlock;
-use App\Controller\AbstractRestController;
+use App\Controller\AbstractController;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-class UserController extends AbstractRestController
+class UserController extends AbstractController
 {
-    protected $block = UserBlock::class;
+    public function index(RequestInterface $request)
+    {
+        return (new UserBlock())->index($request);
+    }
+
+    public function show(RequestInterface $request, $id)
+    {
+        return (new UserBlock())->show($request, $id);
+    }
 
     public function disabled(RequestInterface $request)
     {
         $this->setActionName('禁用用户');
-        
         return $request->getAttribute('admin');
     }
 }

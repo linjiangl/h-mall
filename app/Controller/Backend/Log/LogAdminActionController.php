@@ -11,9 +11,13 @@ declare(strict_types=1);
 namespace App\Controller\Backend\Log;
 
 use App\Block\Backend\Log\LogAdminActionBlock;
-use App\Controller\AbstractRestController;
+use App\Controller\AbstractController;
+use Hyperf\HttpServer\Contract\RequestInterface;
 
-class LogAdminActionController extends AbstractRestController
+class LogAdminActionController extends AbstractController
 {
-    protected $block = LogAdminActionBlock::class;
+    public function index(RequestInterface $request)
+    {
+        return (new LogAdminActionBlock)->index($request);
+    }
 }

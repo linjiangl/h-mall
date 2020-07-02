@@ -18,7 +18,7 @@ use Hyperf\RateLimit\Annotation\RateLimit;
 
 /**
  * @Controller(prefix="rate-limit")
- * @RateLimit
+ * @RateLimit()
  */
 class LoginController extends AbstractController
 {

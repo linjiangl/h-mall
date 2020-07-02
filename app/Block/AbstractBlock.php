@@ -16,7 +16,7 @@ use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
-abstract class AbstractBlock implements InterfaceBlock
+abstract class AbstractBlock
 {
     /**
      * @var InterfaceService
@@ -88,6 +88,11 @@ abstract class AbstractBlock implements InterfaceBlock
      */
     protected $data = [];
 
+    /**
+     * 列表
+     * @param RequestInterface $request
+     * @return LengthAwarePaginatorInterface
+     */
     public function index(RequestInterface $request)
     {
         try {
@@ -106,6 +111,12 @@ abstract class AbstractBlock implements InterfaceBlock
         }
     }
 
+    /**
+     * 详情
+     * @param RequestInterface $request
+     * @param $id
+     * @return array|mixed
+     */
     public function show(RequestInterface $request, $id)
     {
         try {
@@ -121,36 +132,57 @@ abstract class AbstractBlock implements InterfaceBlock
         }
     }
 
-    public function store(RequestInterface $request)
+    /**
+     * 创建
+     * @param array $post
+     * @return int
+     */
+    public function store(array $post)
     {
         try {
-            return $this->service()->create($this->data);
+            return $this->service()->create($post);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function update(RequestInterface $request, $id)
+    /**
+     * 修改
+     * @param array $post
+     * @param $id
+     * @return array
+     */
+    public function update(array $post, $id)
     {
         try {
-            return $this->service()->update($id, $this->data)->toArray();
+            return $this->service()->update(intval($id), $post)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
-    public function destroy(RequestInterface $request, $id)
+    /**
+     * 删除
+     * @param $id
+     * @return bool
+     */
+    public function destroy($id)
     {
         try {
-            return $this->service()->remove($id);
+            return $this->service()->remove(intval($id));
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
+    /**
+     * 查询条件
+     * @param RequestInterface $request
+     * @return array
+     */
     public function getCondition(RequestInterface $request): array
     {
-        return $this->service()->getCondition();
+        return $this->service()->getCondition($request->post());
     }
 
     /**
@@ -224,6 +256,10 @@ abstract class AbstractBlock implements InterfaceBlock
         return $value;
     }
 
+    /**
+     * 业务服务接口类
+     * @return InterfaceService
+     */
     protected function service(): InterfaceService
     {
         return new $this->service();

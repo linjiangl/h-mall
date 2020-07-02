@@ -67,7 +67,8 @@ interface InterfaceService
 
     /**
      * 获取列表的查询条件
+     * @param array $params
      * @return array
      */
-    public function getCondition(): array;
+    public function getCondition(array $params): array;
 }
