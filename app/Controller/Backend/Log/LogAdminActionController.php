@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Controller\Backend\Log;
 
 use App\Block\Backend\Log\LogAdminActionBlock;
-use App\Controller\AbstractRestController;
+use App\Controller\AbstractController;
 
-class LogAdminActionController extends AbstractRestController
+class LogAdminActionController extends AbstractController
 {
     protected $block = LogAdminActionBlock::class;
 }

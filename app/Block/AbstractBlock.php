@@ -16,7 +16,7 @@ use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
-abstract class AbstractBlock implements InterfaceBlock
+abstract class AbstractBlock
 {
     /**
      * @var InterfaceService
@@ -124,7 +124,8 @@ abstract class AbstractBlock implements InterfaceBlock
     public function store(RequestInterface $request)
     {
         try {
-            return $this->service()->create($this->data);
+            $post = $request->post();
+            return $this->service()->create($post);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -133,7 +134,8 @@ abstract class AbstractBlock implements InterfaceBlock
     public function update(RequestInterface $request, $id)
     {
         try {
-            return $this->service()->update($id, $this->data)->toArray();
+            $post = $request->post();
+            return $this->service()->update($id, $post)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

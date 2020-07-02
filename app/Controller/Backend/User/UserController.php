@@ -11,10 +11,10 @@ declare(strict_types=1);
 namespace App\Controller\Backend\User;
 
 use App\Block\Backend\User\UserBlock;
-use App\Controller\AbstractRestController;
+use App\Controller\AbstractController;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-class UserController extends AbstractRestController
+class UserController extends AbstractController
 {
     protected $block = UserBlock::class;
 

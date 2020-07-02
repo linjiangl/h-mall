@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Controller\Backend\Admin;
 
 use App\Block\Backend\Admin\AdminBlock;
-use App\Controller\AbstractRestController;
+use App\Controller\AbstractController;
 
-class AdminController extends AbstractRestController
+class AdminController extends AbstractController
 {
     protected $block = AdminBlock::class;
 }
