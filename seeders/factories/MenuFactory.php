@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 use App\Constants\State\MenuState;
-use App\Dao\MenuDao;
+use App\Service\MenuService;
 
 /**
  * Multi-user mall
@@ -69,9 +69,9 @@ class MenuFactory
                 'status' => MenuState::STATUS_ENABLED,
             ],
         ];
-        $dao = new MenuDao();
+        $service = new MenuService();
         foreach ($data as $item) {
-            $dao->create($item);
+            $service->create($item);
         }
     }
 }
