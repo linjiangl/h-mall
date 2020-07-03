@@ -23,7 +23,18 @@ trait TraitBackendAuthorize
 
     public function getToken()
     {
-        return redis()->get($this->tokenCacheIndex);
+        $token = redis()->get($this->tokenCacheIndex);
+        if (! $token) {
+            $result = $this->request('/login', [
+                'username' => 'admin',
+                'password' => 'yii.red'
+            ]);
+
+            $this->assertArrayHasKey('token', $result['data']);
+            $this->setToken($result['data']['token']);
+            $token = $result['data']['token'];
+        }
+        return $token;
     }
 
     public function getHeaders()
