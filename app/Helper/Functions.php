@@ -99,7 +99,7 @@ if (! function_exists('response')) {
 }
 
 if (! function_exists('response_json')) {
-    function response_json($data, string $message = '', int $code = 200): ResponseInterface
+    function response_json($data, string $message = '', int $code = 200)
     {
         $code = $code ?: 500;
         $message = $message ?: 'ok';

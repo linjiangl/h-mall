@@ -14,7 +14,6 @@ class MethodNotAllowedException extends HttpException
 {
     public function __construct($message = '', $code = 405, \Throwable $previous = null)
     {
-        $message = $message ? $message . 'Method Not Allowed' : 'Method Not Allowed';
         parent::__construct($message, $code, $previous);
     }
 }

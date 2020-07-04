@@ -46,7 +46,7 @@ class AdminController extends AbstractController
      */
     public function store(AdminRequest $request)
     {
-        return (new AdminBlock())->store($request->all());
+        return (new AdminBlock())->store($request->post());
     }
 
     /**
@@ -58,6 +58,6 @@ class AdminController extends AbstractController
     public function update(AdminRequest $request, $id)
     {
         $request->validated();
-        return (new AdminBlock())->update($request->all(), $id);
+        return (new AdminBlock())->update($request->post(), $id);
     }
 }

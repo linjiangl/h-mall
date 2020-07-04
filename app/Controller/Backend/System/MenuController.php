@@ -47,7 +47,7 @@ class MenuController extends AbstractController
     public function store(MenuRequest $request)
     {
         $request->validated();
-        return (new MenuBlock())->store($request->all());
+        return (new MenuBlock())->store($request->post());
     }
 
     /**
@@ -59,7 +59,7 @@ class MenuController extends AbstractController
     public function update(MenuRequest $request, $id)
     {
         $request->validated();
-        return (new MenuBlock())->update($request->all(), $id);
+        return (new MenuBlock())->update($request->post(), $id);
     }
 
     /**

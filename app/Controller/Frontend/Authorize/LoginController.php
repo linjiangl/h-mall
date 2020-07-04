@@ -30,6 +30,6 @@ class LoginController extends AbstractController
     public function index(LoginRequest $request)
     {
         $request->validated();
-        return (new LoginBlock())->index($request->all());
+        return (new LoginBlock())->index($request->post());
     }
 }

@@ -14,15 +14,11 @@ use App\Exception\HttpException;
 use App\Exception\MethodNotAllowedException;
 use App\Exception\NotFoundException;
 use Closure;
-use FastRoute\Dispatcher;
 use Hyperf\HttpServer\Router\Dispatched;
-use Hyperf\Server\Exception\ServerException;
-use Hyperf\Utils\Context;
 use Hyperf\Utils\Contracts\Arrayable;
 use Hyperf\Utils\Contracts\Jsonable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
 {
@@ -49,6 +45,16 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
             $response = $controllerInstance->{$action}(...$parameters);
         }
         return $response;
+    }
+
+    protected function handleNotFound(ServerRequestInterface $request)
+    {
+        throw new NotFoundException();
+    }
+
+    protected function handleMethodNotAllowed(array $methods, ServerRequestInterface $request)
+    {
+        throw new MethodNotAllowedException('Allow: ' . implode(', ', $methods));
     }
 
     /**
