@@ -34,7 +34,7 @@ class AdminController extends AbstractController
      * @param $id
      * @return array
      */
-    public function show(RequestInterface $request, $id)
+    public function show(RequestInterface $request, int $id)
     {
         return (new AdminBlock())->show($request, $id);
     }

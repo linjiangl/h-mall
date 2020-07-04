@@ -112,30 +112,24 @@ if (! function_exists('response_json')) {
     }
 }
 
-if (! function_exists('get_action_name')) {
-    function get_action_name(string $path): string
-    {
-        $name = substr(strchr($path, '/'), 1);
-        return $name ?: 'index';
-    }
-}
-
-if (! function_exists('get_validated_regex')) {
+if (! function_exists('general_regex')) {
     /**
-     * 获取验证规则正则表达式
+     * 通用正则表达式
      * @param string $option 选项
-     * @param string $prefix 前缀
      * @return string
      */
-    function get_validated_regex(string $option = 'mobile', string $prefix = 'regex:'): string
+    function general_regex(string $option = 'mobile'): string
     {
         switch ($option) {
             case 'mobile':
                 $regex = '/^1\d{10}$/';
                 break;
+            case 'ids':
+                $regex = '/^\d+(,\d+)*$/';
+                break;
             default:
                 throw new InternalException("{$option}未定义表达式");
         }
-        return $prefix . $regex;
+        return $regex;
     }
 }

@@ -31,10 +31,10 @@ class MenuController extends AbstractController
     /**
      * 菜单详情
      * @param RequestInterface $request
-     * @param $id
+     * @param int $id
      * @return array
      */
-    public function show(RequestInterface $request, $id)
+    public function show(RequestInterface $request, int $id)
     {
         return (new MenuBlock())->show($request, $id);
     }
@@ -53,10 +53,10 @@ class MenuController extends AbstractController
     /**
      * 修改菜单
      * @param MenuRequest $request
-     * @param $id
+     * @param int $id
      * @return array
      */
-    public function update(MenuRequest $request, $id)
+    public function update(MenuRequest $request, int $id)
     {
         $request->validated();
         return (new MenuBlock())->update($request->post(), $id);
@@ -65,10 +65,10 @@ class MenuController extends AbstractController
     /**
      * 删除菜单
      * @param RequestInterface $request
-     * @param $id
+     * @param int $id
      * @return bool
      */
-    public function destroy(RequestInterface $request, $id)
+    public function destroy(RequestInterface $request, int $id)
     {
         return (new MenuBlock())->destroy($id);
     }

@@ -30,10 +30,10 @@ class UserController extends AbstractController
     /**
      * 用户信息
      * @param RequestInterface $request
-     * @param $id
+     * @param int $id
      * @return array
      */
-    public function show(RequestInterface $request, $id)
+    public function show(RequestInterface $request, int $id)
     {
         return (new UserBlock())->show($request, $id);
     }
