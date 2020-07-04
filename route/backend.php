@@ -40,6 +40,8 @@ Router::addGroup('/backend', function () {
     // 管理员
     Router::get('/admin', [AdminController::class, 'index']);
     Router::get('/admin/{id:\d+}', [AdminController::class, 'show']);
+    Router::post('/admin', [AdminController::class, 'store']);
+    Router::put('/admin/{id:\d+}', [AdminController::class, 'update']);
 
     // 管理员日志
     Router::get('/log/adminLogin', [LogAdminLoginController::class, 'index']);
@@ -48,5 +50,4 @@ Router::addGroup('/backend', function () {
     // 用户
     Router::get('/user', [UserController::class, 'index']);
     Router::get('/user/{id:\d+}', [UserController::class, 'show']);
-    Router::post('/user/disabled', [UserController::class, 'disabled']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

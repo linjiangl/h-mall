@@ -22,6 +22,12 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class UserController extends AbstractController
 {
+    /**
+     * 用户信息
+     * @param RequestInterface $request
+     * @param $id
+     * @return array
+     */
     public function show(RequestInterface $request, $id)
     {
         return (new UserBlock())->show($request, $id);

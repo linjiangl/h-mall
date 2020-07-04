@@ -29,8 +29,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'username' => 'required|string|max:30',
-            'password' => 'required|string|max:30',
-            'confirm_password' => 'required|string|max:30',
+            'password' => 'required|string|max:30|confirmed',
         ];
     }
 
@@ -39,7 +38,6 @@ class RegisterRequest extends FormRequest
         return [
             'username' => '用户名',
             'password' => '密码',
-            'confirm_password' => '确认密码',
         ];
     }
 }

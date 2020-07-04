@@ -115,7 +115,7 @@ abstract class AbstractBlock
      * 详情
      * @param RequestInterface $request
      * @param $id
-     * @return array|mixed
+     * @return array
      */
     public function show(RequestInterface $request, $id)
     {

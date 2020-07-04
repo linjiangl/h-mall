@@ -16,6 +16,11 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 
 class AuthorizeController extends AbstractController
 {
+    /**
+     * 获取管理员信息
+     * @param RequestInterface $request
+     * @return array
+     */
     public function index(RequestInterface $request)
     {
         return (new AuthorizeBlock())->index($request);

@@ -22,8 +22,14 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class LoginController extends AbstractController
 {
+    /**
+     * 登录
+     * @param LoginRequest $request
+     * @return array
+     */
     public function index(LoginRequest $request)
     {
-        return (new LoginBlock())->index($request);
+        $request->validated();
+        return (new LoginBlock())->index($request->all());
     }
 }

@@ -12,23 +12,29 @@ namespace App\Controller\Backend\User;
 
 use App\Block\Backend\User\UserBlock;
 use App\Controller\AbstractController;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 class UserController extends AbstractController
 {
+    /**
+     * 用户列表
+     * @param RequestInterface $request
+     * @return LengthAwarePaginatorInterface
+     */
     public function index(RequestInterface $request)
     {
         return (new UserBlock())->index($request);
     }
 
+    /**
+     * 用户信息
+     * @param RequestInterface $request
+     * @param $id
+     * @return array
+     */
     public function show(RequestInterface $request, $id)
     {
         return (new UserBlock())->show($request, $id);
-    }
-
-    public function disabled(RequestInterface $request)
-    {
-        $this->setActionName('禁用用户');
-        return $request->getAttribute('admin');
     }
 }
