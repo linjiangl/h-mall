@@ -22,6 +22,11 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class AuthorizeController extends AbstractController
 {
+    /**
+     * 登录用户信息
+     * @param RequestInterface $request
+     * @return array
+     */
     public function index(RequestInterface $request)
     {
         return (new AuthorizeBlock())->index($request);

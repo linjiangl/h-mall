@@ -20,7 +20,7 @@ class ARegisterTest extends BackendHttpTestCase
         $result = $this->request('/register', [
             'username' => 'guest',
             'password' => '123456',
-            'confirm_password' => '123456'
+            'password_confirmation' => '123456'
         ]);
 
         $service = new AdminAuthorizationService();

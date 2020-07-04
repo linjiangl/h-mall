@@ -19,7 +19,7 @@ class ARegisterTest extends FrontendHttpTestCase
         $result = $this->request('/register', [
             'username' => 'test001',
             'password' => '123456',
-            'confirm_password' => '123456'
+            'password_confirmation' => '123456'
         ]);
 
         $this->assertArrayHasKey('token', $result['data']);

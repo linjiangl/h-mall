@@ -11,18 +11,16 @@ declare(strict_types=1);
 namespace App\Block\Frontend\Authorize;
 
 use App\Exception\HttpException;
-use App\Request\Frontend\Authorize\RegisterRequest;
 use App\Service\Authorize\UserAuthorizationService;
 use Throwable;
 
 class RegisterBlock
 {
-    public function index(RegisterRequest $request): array
+    public function index(array $data): array
     {
-        $post = $request->validated();
         try {
             $service = new UserAuthorizationService();
-            return $service->register($post['username'], $post['password'], $post['confirm_password']);
+            return $service->register($data['username'], $data['password'], $data['password_confirmation']);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

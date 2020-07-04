@@ -12,8 +12,8 @@ namespace App\Controller\Frontend;
 
 use App\Block\Frontend\IndexBlock;
 use App\Controller\AbstractController;
-use App\Request\UserRequest;
 use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
 
 /**
@@ -22,9 +22,8 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class IndexController extends AbstractController
 {
-    public function index(UserRequest $request)
+    public function index(RequestInterface $request)
     {
-        $request->validated();
         return (new IndexBlock())->index($request);
     }
 }

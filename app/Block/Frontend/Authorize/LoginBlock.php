@@ -11,18 +11,16 @@ declare(strict_types=1);
 namespace App\Block\Frontend\Authorize;
 
 use App\Exception\HttpException;
-use App\Request\Frontend\Authorize\LoginRequest;
 use App\Service\Authorize\UserAuthorizationService;
 use Throwable;
 
 class LoginBlock
 {
-    public function index(LoginRequest $request): array
+    public function index(array $data): array
     {
-        $post = $request->validated();
         try {
             $service = new UserAuthorizationService();
-            return $service->login($post['username'], $post['password']);
+            return $service->login($data['username'], $data['password']);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

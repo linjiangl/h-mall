@@ -24,6 +24,7 @@ class RegisterController extends AbstractController
 {
     public function index(RegisterRequest $request)
     {
-        return (new RegisterBlock())->index($request);
+        $request->validated();
+        return (new RegisterBlock())->index($request->post());
     }
 }

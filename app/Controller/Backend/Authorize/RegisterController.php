@@ -16,8 +16,14 @@ use App\Request\Backend\Authorize\RegisterRequest;
 
 class RegisterController extends AbstractController
 {
+    /**
+     * 注册
+     * @param RegisterRequest $request
+     * @return array
+     */
     public function index(RegisterRequest $request)
     {
-        return (new RegisterBlock())->index($request);
+        $request->validated();
+        return (new RegisterBlock())->index($request->post());
     }
 }

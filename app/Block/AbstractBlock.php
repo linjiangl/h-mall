@@ -114,10 +114,10 @@ abstract class AbstractBlock
     /**
      * 详情
      * @param RequestInterface $request
-     * @param $id
-     * @return array|mixed
+     * @param int $id
+     * @return array
      */
-    public function show(RequestInterface $request, $id)
+    public function show(RequestInterface $request, int $id)
     {
         try {
             // 当前执行的方法
@@ -126,7 +126,7 @@ abstract class AbstractBlock
             // 查询前业务处理
             $this->beforeBuildQuery($request);
 
-            return $this->service()->info(intval($id), $this->with)->toArray();
+            return $this->service()->info($id, $this->with)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -149,13 +149,13 @@ abstract class AbstractBlock
     /**
      * 修改
      * @param array $post
-     * @param $id
+     * @param int $id
      * @return array
      */
-    public function update(array $post, $id)
+    public function update(array $post, int $id)
     {
         try {
-            return $this->service()->update(intval($id), $post)->toArray();
+            return $this->service()->update($id, $post)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -163,13 +163,13 @@ abstract class AbstractBlock
 
     /**
      * 删除
-     * @param $id
+     * @param int $id
      * @return bool
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         try {
-            return $this->service()->remove(intval($id));
+            return $this->service()->remove($id);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

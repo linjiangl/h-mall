@@ -9,19 +9,20 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 
+use App\Exception\InternalException;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Framework\Logger\StdoutLogger;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Logger\LoggerFactory;
+use Hyperf\Redis\Redis;
 use Hyperf\Utils\ApplicationContext;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use Swoole\WebSocket\Server as WebSocketServer;
 use Psr\SimpleCache\CacheInterface;
-use Hyperf\Redis\Redis;
+use Swoole\WebSocket\Server as WebSocketServer;
 
 /*
  * 容器实例
@@ -98,7 +99,7 @@ if (! function_exists('response')) {
 }
 
 if (! function_exists('response_json')) {
-    function response_json($data, $message = '', $code = 200): ResponseInterface
+    function response_json($data, string $message = '', int $code = 200)
     {
         $code = $code ?: 500;
         $message = $message ?: 'ok';
@@ -108,5 +109,27 @@ if (! function_exists('response_json')) {
             'data' => $data,
         ], JSON_UNESCAPED_UNICODE);
         return response()->withAddedHeader('Content-Type', 'application/json')->withStatus($code)->withBody(new SwooleStream($data));
+    }
+}
+
+if (! function_exists('general_regex')) {
+    /**
+     * 通用正则表达式
+     * @param string $option 选项
+     * @return string
+     */
+    function general_regex(string $option = 'mobile'): string
+    {
+        switch ($option) {
+            case 'mobile':
+                $regex = '/^1\d{10}$/';
+                break;
+            case 'ids':
+                $regex = '/^\d+(,\d+)*$/';
+                break;
+            default:
+                throw new InternalException("{$option}未定义表达式");
+        }
+        return $regex;
     }
 }
