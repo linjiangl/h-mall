@@ -46,6 +46,8 @@ class AdminController extends AbstractController
      */
     public function store(AdminRequest $request)
     {
+        $request->validated();
+        $this->setActionName('创建管理员账号');
         return (new AdminBlock())->store($request->post());
     }
 
@@ -58,6 +60,7 @@ class AdminController extends AbstractController
     public function update(AdminRequest $request, int $id)
     {
         $request->validated();
+        $this->setActionName('修改管理员信息');
         return (new AdminBlock())->update($request->post(), $id);
     }
 }

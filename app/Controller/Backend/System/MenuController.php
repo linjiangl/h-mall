@@ -47,6 +47,7 @@ class MenuController extends AbstractController
     public function store(MenuRequest $request)
     {
         $request->validated();
+        $this->setActionName('创建菜单');
         return (new MenuBlock())->store($request->post());
     }
 
@@ -59,6 +60,7 @@ class MenuController extends AbstractController
     public function update(MenuRequest $request, int $id)
     {
         $request->validated();
+        $this->setActionName('修改菜单');
         return (new MenuBlock())->update($request->post(), $id);
     }
 
@@ -70,6 +72,7 @@ class MenuController extends AbstractController
      */
     public function destroy(RequestInterface $request, int $id)
     {
+        $this->setActionName('删除菜单');
         return (new MenuBlock())->destroy($id);
     }
 }
