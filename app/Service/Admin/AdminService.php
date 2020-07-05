@@ -12,6 +12,7 @@ namespace App\Service\Admin;
 
 use App\Constants\State\AdminState;
 use App\Dao\Admin\AdminDao;
+use App\Dao\Role\RoleAdminDao;
 use App\Dao\Role\RoleDao;
 use App\Service\AbstractService;
 use App\Service\Role\RoleAdminService;
@@ -26,15 +27,20 @@ class AdminService extends AbstractService
      * @param string $password 密码
      * @param array $extend 其他数据,如:头像,邮箱等
      * @return int
+     *
+     * $extend = [
+     *  ...$admin,
+     *  role_id
+     * ]
      */
     public function createAccount(string $username, string $password, array $extend = []): int
     {
         // 获取权限
         $roleDao = new RoleDao();
-        if (empty($extend['role'])) {
+        if (empty($extend['role_id'])) {
             $role = $roleDao->getInfoByIdentifier();
         } else {
-            $role = $roleDao->getInfoByIdentifier($extend['role']);
+            $role = $roleDao->info($extend['role_id']);
         }
 
         // 创建账号
@@ -59,5 +65,24 @@ class AdminService extends AbstractService
         ]);
 
         return $id;
+    }
+
+    /**
+     * 更新账号信息
+     * @param int $adminId
+     * @param array $data
+     * @return array
+     */
+    public function updateAccount(int $adminId, array $data): array
+    {
+        $admin = $this->update($adminId, $data);
+
+        // 更新权限
+        if (isset($data['role_id'])) {
+            $roleAdminDao = new RoleAdminDao();
+            $roleAdminDao->resetAdminRoleId($adminId, (int)$data['role_id']);
+        }
+
+        return $admin;
     }
 }

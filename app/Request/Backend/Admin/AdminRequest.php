@@ -22,18 +22,20 @@ class AdminRequest extends AbstractRequest
             'post:store' => [
                 'username' => 'required|string|max:30|unique:admin',
                 'password' => 'required|string|max:30|confirmed',
-                'avatar' => 'string|url',
+                'avatar' => 'url',
                 'real_name' => 'string|max:20',
                 'mobile' => $mobileRegex . '|unique:admin',
                 'email' => 'email|unique:admin',
+                'role_id' => 'required|integer'
             ],
             'put:update' => $rules = [
                 'username' => 'string|max:30',
                 'password' => 'string|max:30',
-                'avatar' => 'string|url',
+                'avatar' => 'url',
                 'real_name' => 'string|max:20',
                 'mobile' => $mobileRegex,
                 'email' => 'email',
+                'role_id' => 'integer',
             ]
         ];
         return $rules[$scene] ?? [];
@@ -44,10 +46,11 @@ class AdminRequest extends AbstractRequest
         return [
             'username' => '用户名',
             'password' => '密码',
-            'avatar' => '头像',
+            'avatar' => '头像地址',
             'real_name' => '姓名',
             'mobile' => '手机号',
             'email' => '邮箱',
+            'role_id' => '权限',
         ];
     }
 }
