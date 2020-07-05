@@ -40,8 +40,8 @@ class AdminActionAspect extends AbstractAspect
         $result = $proceedingJoinPoint->process();
         $actionName = request()->getAttribute('action_name', '');
         if ($actionName) {
-             $service = new LogAdminActionService();
-             $service->createActionRecord($actionName, $proceedingJoinPoint->className);
+            $service = new LogAdminActionService();
+            $service->createActionRecord($actionName, $proceedingJoinPoint->className);
         }
         return $result;
     }
