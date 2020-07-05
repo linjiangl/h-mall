@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Backend\Admin;
 
 use App\Block\Backend\Admin\AdminBlock;
+use App\Constants\Message\AdminActionMessage;
 use App\Controller\AbstractController;
 use App\Request\Backend\Admin\AdminRequest;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
@@ -47,7 +48,7 @@ class AdminController extends AbstractController
     public function store(AdminRequest $request)
     {
         $request->validated();
-        $this->setActionName('创建管理员账号');
+        $this->setActionName(AdminActionMessage::ADMIN_CREATE);
         return (new AdminBlock())->store($request->post());
     }
 
@@ -60,7 +61,7 @@ class AdminController extends AbstractController
     public function update(AdminRequest $request, int $id)
     {
         $request->validated();
-        $this->setActionName('修改管理员信息');
+        $this->setActionName(AdminActionMessage::ADMIN_UPDATE);
         return (new AdminBlock())->update($request->post(), $id);
     }
 }

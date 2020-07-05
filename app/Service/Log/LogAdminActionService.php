@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Service\Log;
 
+use App\Constants\Message\AdminActionMessage;
 use App\Dao\Log\LogAdminActionDao;
 use App\Service\AbstractService;
 
@@ -36,19 +37,16 @@ class LogAdminActionService extends AbstractService
 
         $path = str_replace(substr($className, strripos($className, '\\')), '', $className);
         $module = strtolower(substr($path, strripos($path, '\\') + 1));
-        $clientId = $request->header('x-real-ip');
-        $clientId = $clientId ? current($clientId) : '';
-
         $this->create([
             'admin_id' => $admin['admin_id'],
             'username' => $admin['username'],
-            'client_ip' => $clientId,
+            'client_ip' => get_client_ip(),
             'module' => $module,
-            'action' => $actionName,
+            'action' => AdminActionMessage::getMessage($actionName),
             'remark' => [
                 'method' => $request->getMethod(),
                 'url' => $url,
-                'data' => $request->getParsedBody()
+                'data' => check_production() ? '' : $request->getParsedBody()
             ]
         ]);
         return true;
