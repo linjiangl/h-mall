@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 
 use App\Constants\State\AdminState;
-use App\Constants\State\RoleState;
 use App\Service\Authorize\AdminAuthorizationService;
 
 class AdminFactory
@@ -22,8 +21,8 @@ class AdminFactory
         $service->register('admin', $password, $password, [
             'real_name' => '姓名',
             'email' => 'admin@yii.red',
-            'role' => RoleState::IDENTIFIER_SYSTEM_ADMINISTRATOR,
-            'status' => AdminState::STATUS_ENABLED
+            'status' => AdminState::STATUS_ENABLED,
+            'role_id' => 1,
         ]);
     }
 }

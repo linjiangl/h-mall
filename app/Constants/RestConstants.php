@@ -34,4 +34,9 @@ class RestConstants extends AbstractConstants
      * @Message("删除成功")
      */
     const HTTP_DELETED = 204;
+
+    /**
+     * @Message("NOT FOUND")
+     */
+    const HTTP_NOT_FOUND = 404;
 }

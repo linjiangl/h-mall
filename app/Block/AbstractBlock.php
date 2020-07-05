@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block;
 
 use App\Exception\HttpException;
-use App\Service\InterfaceService;
+use App\Service\AbstractService;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
@@ -19,7 +19,7 @@ use Throwable;
 abstract class AbstractBlock
 {
     /**
-     * @var InterfaceService
+     * @var AbstractService
      */
     protected $service;
 
@@ -155,7 +155,7 @@ abstract class AbstractBlock
     public function update(array $post, int $id)
     {
         try {
-            return $this->service()->update($id, $post)->toArray();
+            return $this->service()->update($id, $post);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -258,9 +258,9 @@ abstract class AbstractBlock
 
     /**
      * 业务服务接口类
-     * @return InterfaceService
+     * @return AbstractService
      */
-    protected function service(): InterfaceService
+    protected function service(): AbstractService
     {
         return new $this->service();
     }

@@ -33,7 +33,7 @@ use Throwable;
  *  - STATUS_DELETED    // 已删除
  *  - STATUS_APPLIED    // 已申请
  */
-abstract class AbstractDao implements InterfaceDao
+abstract class AbstractDao
 {
     /**
      * @var Model
@@ -58,19 +58,54 @@ abstract class AbstractDao implements InterfaceDao
      */
     protected $notFoundMessage = '所请求的资源不存在';
 
+    /**
+     * 分页列表
+     * @param array $condition
+     * @param int $page
+     * @param int $limit
+     * @param string $orderBy
+     * @param array $groupBy
+     * @param array $with
+     * @param string[] $columns
+     * @return LengthAwarePaginatorInterface
+     *
+     * 举例:
+     * $condition = [
+     *  ['name', '=', 'xx'], // where
+     *  ['id', 'in', [1,2,3]], // whereIn
+     *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
+     * ]
+     */
     public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): LengthAwarePaginatorInterface
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->paginate($limit, $columns, '', $page);
     }
 
-    public function lists(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*'])
+    /**
+     * 普通列表
+     * @param array $condition
+     * @param int $page
+     * @param int $limit
+     * @param string $orderBy
+     * @param array $groupBy
+     * @param array $with
+     * @param string[] $columns
+     * @return array
+     */
+    public function lists(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
     {
         $offset = ($page - 1) * $limit;
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
-        return $query->select($columns)->offset($offset)->limit($limit)->get();
+        return $query->select($columns)->offset($offset)->limit($limit)->get()->toArray();
     }
 
+    /**
+     * 详情
+     * @param int $id 主键
+     * @param array $with 关联模型
+     * @return Model|Collection|mixed
+     */
     public function info(int $id, array $with = [])
     {
         $query = $this->model::query();
@@ -85,6 +120,11 @@ abstract class AbstractDao implements InterfaceDao
         return $model;
     }
 
+    /**
+     * 创建
+     * @param array $data 创建的数据
+     * @return int
+     */
     public function create(array $data): int
     {
         try {
@@ -105,7 +145,13 @@ abstract class AbstractDao implements InterfaceDao
         }
     }
 
-    public function update(int $id, array $data)
+    /**
+     * 修改
+     * @param int $id 主键
+     * @param array $data 修改的数据
+     * @return array
+     */
+    public function update(int $id, array $data): array
     {
         try {
             $this->actionIsAllow('update');
@@ -115,12 +161,17 @@ abstract class AbstractDao implements InterfaceDao
                 throw new BadRequestException('保存失败');
             }
             $this->removeCache($id);
-            return $model;
+            return $model->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
 
+    /**
+     * 删除
+     * @param int $id 主键
+     * @return bool
+     */
     public function remove(int $id): bool
     {
         try {
@@ -192,6 +243,23 @@ abstract class AbstractDao implements InterfaceDao
         $this->model::query()->whereIn($primaryKey, $primaryKeys)->delete();
     }
 
+    /**
+     * 根据条件删除
+     * @param array $condition
+     * @return bool
+     */
+    public function deleteByCondition(array $condition): bool
+    {
+        $query = $this->model::query();
+        $query = $this->handleQueryCondition($query, $condition);
+        $query->delete();
+        return true;
+    }
+
+    /**
+     * 删除缓存
+     * @param int $id 主键
+     */
     public function removeCache(int $id): void
     {
     }
