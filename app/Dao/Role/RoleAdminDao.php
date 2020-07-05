@@ -62,6 +62,6 @@ class RoleAdminDao extends AbstractDao
     {
         $roleDao = new RoleDao();
         $role = $roleDao->getInfoByIdentifier();
-        $this->updateByCondition([['role_id', '=', $roleId]], ['role_id', $role->id]);
+        $this->updateByCondition([['role_id', '=', $roleId]], ['role_id' => $role->id]);
     }
 }

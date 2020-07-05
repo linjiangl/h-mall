@@ -31,7 +31,7 @@ class RoleRequest extends AbstractRequest
             'put:update' => $rules = [
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:50',
-                'identifier' => "required|in:{$identifier}|unique:role",
+                'identifier' => "required|in:{$identifier}",
                 'is_super' => 'integer|in:' . $boolean,
             ]
         ];

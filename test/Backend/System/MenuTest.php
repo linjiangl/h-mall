@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\System;
 
+use App\Dao\MenuDao;
+use App\Model\Menu;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
@@ -33,9 +35,8 @@ class MenuTest extends BackendHttpTestCase
         $this->assertArrayHasKey('id', $result['data']);
     }
 
-    public function testBackendMenuAction()
+    public function testBackendMenuCreate()
     {
-        // 创建
         $data = [
             'parent_id' => '0',
             'title' => '订单管理',
@@ -47,9 +48,14 @@ class MenuTest extends BackendHttpTestCase
         $result = $this->request('/menu', $data, 'post', $this->getHeaders());
         $this->assertSame(200, $result['code']);
         $this->assertIsInt($result['data']);
-        $id = $result['data'];
+    }
 
-        // 修改
+    public function testBackendMenuUpdate()
+    {
+        $dao = new MenuDao();
+        /** @var Menu $info */
+        $info = $dao->getInfoByCondition([['name', '=', 'order']]);
+
         $data = [
             'parent_id' => '0',
             'title' => '订单管理',
@@ -58,12 +64,18 @@ class MenuTest extends BackendHttpTestCase
             'path' => '/order',
             'position' => '0',
         ];
-        $result = $this->request('/menu/' . $id, $data, 'put', $this->getHeaders());
+        $result = $this->request('/menu/' . $info->id, $data, 'put', $this->getHeaders());
         $this->assertSame(200, $result['code']);
         $this->assertArrayHasKey('id', $result['data']);
+    }
 
-        // 删除
-        $result = $this->request('/menu/' . $id, [], 'delete', $this->getHeaders());
+    public function testBackendMenuDelete()
+    {
+        $dao = new MenuDao();
+        /** @var Menu $info */
+        $info = $dao->getInfoByCondition([['name', '=', 'order']]);
+
+        $result = $this->request('/menu/' . $info->id, [], 'delete', $this->getHeaders());
         $this->assertSame(200, $result['code']);
     }
 }

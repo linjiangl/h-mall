@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Role;
 
 use App\Model\Model;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -23,12 +22,9 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $status
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
  */
 class Role extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -41,7 +37,7 @@ class Role extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'name', 'identifier', 'is_super', 'is_system', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'parent_id', 'name', 'identifier', 'is_super', 'is_system', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

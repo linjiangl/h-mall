@@ -37,6 +37,11 @@ trait TraitBackendAuthorize
         return $token;
     }
 
+    public function removeToken()
+    {
+        redis()->del($this->tokenCacheIndex);
+    }
+
     public function getHeaders()
     {
         return [

@@ -20,10 +20,11 @@ class RoleState extends AbstractState
     const IS_SUPER_FALSE = 0;
     const IS_SUPER_TRUE = 1;
 
-    // 角色
+    // 权限
     const IDENTIFIER_SYSTEM_ADMINISTRATOR = 'system_administrator';
     const IDENTIFIER_ADMINISTRATOR = 'administrator';
     const IDENTIFIER_GUEST = 'guest';
+    const IDENTIFIER_OPERATORS = 'operators';
 
     // 是否系统权限
     const IS_SYSTEM_FALSE = 0;
@@ -43,6 +44,7 @@ class RoleState extends AbstractState
             self::IDENTIFIER_SYSTEM_ADMINISTRATOR => '超级管理员',
             self::IDENTIFIER_ADMINISTRATOR => '管理员',
             self::IDENTIFIER_GUEST => '游客',
+            self::IDENTIFIER_OPERATORS => '运营人员',
         ];
     }
 }
