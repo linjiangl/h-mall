@@ -187,6 +187,19 @@ abstract class AbstractDao
     }
 
     /**
+     * 通过主键集合获取数据
+     * @param array $primaryKeys
+     * @return array
+     */
+    public function getListByPrimaryKeys(array $primaryKeys): array
+    {
+        /** @var Model $model */
+        $model = new $this->model();
+        $primaryKey = $model->getKeyName();
+        return $this->getListByCondition([$primaryKey, 'in', $primaryKeys]);
+    }
+
+    /**
      * 自定义条件查询详情
      * @param array $condition 查询条件
      * @param array $with 关联模型
@@ -219,16 +232,38 @@ abstract class AbstractDao
     }
 
     /**
-     * 通过主键集合获取数据
-     * @param array $primaryKeys
-     * @return array
+     * 根据条件统计
+     * @param array $condition
+     * @return int
      */
-    public function getListByPrimaryKeys(array $primaryKeys): array
+    public function getCountByCondition(array $condition): int
     {
-        /** @var Model $model */
-        $model = new $this->model();
-        $primaryKey = $model->getKeyName();
-        return $this->getListByCondition([$primaryKey, 'in', $primaryKeys]);
+        $query = $this->model::query();
+        $query = $this->handleQueryCondition($query, $condition);
+        return $query->count();
+    }
+
+    /**
+     * 根据条件更新
+     * @param array $condition
+     * @param array $update
+     */
+    public function updateByCondition(array $condition, array $update): void
+    {
+        $query = $this->model::query();
+        $query = $this->handleQueryCondition($query, $condition);
+        $query->update($update);
+    }
+
+    /**
+     * 根据条件删除
+     * @param array $condition
+     */
+    public function deleteByCondition(array $condition): void
+    {
+        $query = $this->model::query();
+        $query = $this->handleQueryCondition($query, $condition);
+        $query->delete();
     }
 
     /**
@@ -241,19 +276,6 @@ abstract class AbstractDao
         $model = new $this->model();
         $primaryKey = $model->getKeyName();
         $this->model::query()->whereIn($primaryKey, $primaryKeys)->delete();
-    }
-
-    /**
-     * 根据条件删除
-     * @param array $condition
-     * @return bool
-     */
-    public function deleteByCondition(array $condition): bool
-    {
-        $query = $this->model::query();
-        $query = $this->handleQueryCondition($query, $condition);
-        $query->delete();
-        return true;
     }
 
     /**

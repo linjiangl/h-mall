@@ -41,18 +41,27 @@ class RoleAdminDao extends AbstractDao
     }
 
     /**
-     * 删除关联数据,创建新的关联数据
+     * 修改管理员权限
      * @param int $adminId
      * @param int $newRoleId
-     * @return bool
      */
-    public function resetAdminRoleId(int $adminId, int $newRoleId): bool
+    public function changeAdminRoleId(int $adminId, int $newRoleId): void
     {
         $adminRole = $this->getAdminRole($adminId);
         if ($adminRole->role_id != $newRoleId) {
             $adminRole->role_id = $newRoleId;
             $adminRole->save();
         }
-        return true;
+    }
+
+    /**
+     * 重置管理员权限
+     * @param int $roleId
+     */
+    public function resetAdminRoleId(int $roleId): void
+    {
+        $roleDao = new RoleDao();
+        $role = $roleDao->getInfoByIdentifier();
+        $this->updateByCondition([['role_id', '=', $roleId]], ['role_id' => $role->id]);
     }
 }

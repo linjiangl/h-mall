@@ -20,7 +20,7 @@ class RoleDao extends AbstractDao
 
     protected $noAllowActions = [];
 
-    protected $notFoundMessage = '角色不存在';
+    protected $notFoundMessage = '权限不存在';
 
     public function info(int $id, array $with = []): Role
     {

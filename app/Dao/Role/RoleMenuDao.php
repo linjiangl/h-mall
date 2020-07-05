@@ -47,4 +47,13 @@ class RoleMenuDao extends AbstractDao
         }
         return $data;
     }
+
+    /**
+     * 根据权限删除菜单
+     * @param int $roleId
+     */
+    public function deleteMenusByRoleId(int $roleId): void
+    {
+        $this->deleteByCondition([['role_id', '=', $roleId]]);
+    }
 }
