@@ -144,3 +144,20 @@ if (! function_exists('check_production')) {
         return config('app_env') == 'prod';
     }
 }
+
+if (! function_exists('get_client_ip')) {
+    /**
+     * 获取客户端IP地址
+     * @return string
+     */
+    function get_client_ip(): string
+    {
+        $request = request();
+        $ip = '127.0.0.1';
+        if ($request) {
+            $ip = $request->header('x-real-ip');
+            $ip = $ip ? current($ip) : '127.0.0.1';
+        }
+        return $ip;
+    }
+}
