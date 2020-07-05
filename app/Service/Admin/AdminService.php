@@ -102,7 +102,7 @@ class AdminService extends AbstractService
         // 更新权限
         if (isset($data['role_id'])) {
             $roleAdminDao = new RoleAdminDao();
-            $roleAdminDao->resetAdminRoleId($adminId, (int)$data['role_id']);
+            $roleAdminDao->changeAdminRoleId($adminId, (int)$data['role_id']);
         }
 
         return $admin;
