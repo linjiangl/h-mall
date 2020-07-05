@@ -10,14 +10,14 @@ declare(strict_types=1);
  */
 namespace App\Service\Log;
 
-use App\Model\Log\LogAdminAction;
+use App\Dao\Log\LogAdminActionDao;
 use App\Service\AbstractService;
 
 class LogAdminActionService extends AbstractService
 {
-    protected $dao = LogAdminAction::class;
+    protected $dao = LogAdminActionDao::class;
 
-    public function createActionRecord($actionName, $className): bool
+    public function createActionRecord(string $actionName, string $className): bool
     {
         $request = request();
         if (! $request) {
@@ -38,8 +38,9 @@ class LogAdminActionService extends AbstractService
         $module = strtolower(substr($path, strripos($path, '\\') + 1));
         $clientId = $request->header('x-real-ip');
         $clientId = $clientId ? current($clientId) : '';
+
         $this->create([
-            'admin_id' => $admin['id'],
+            'admin_id' => $admin['admin_id'],
             'username' => $admin['username'],
             'client_ip' => $clientId,
             'module' => $module,

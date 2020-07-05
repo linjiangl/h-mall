@@ -13,6 +13,7 @@ namespace App\Service\Log;
 use App\Dao\Admin\AdminDao;
 use App\Dao\Log\LogAdminLoginDao;
 use App\Service\AbstractService;
+use Throwable;
 
 class LogAdminLoginService extends AbstractService
 {
@@ -41,7 +42,8 @@ class LogAdminLoginService extends AbstractService
                 'client_ip' => $clientId,
                 'user_agent' => $userAgent,
             ]);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
+            return false;
         }
         return true;
     }

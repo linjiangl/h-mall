@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Aspect\Log;
 
+use App\Controller\Backend\Admin\AdminController;
+use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\User\UserController;
 use App\Service\Log\LogAdminActionService;
 use Hyperf\Di\Annotation\Aspect;
@@ -23,7 +25,9 @@ use Hyperf\Di\Exception\Exception;
 class AdminActionAspect extends AbstractAspect
 {
     public $classes = [
-        UserController::class
+        UserController::class,
+        AdminController::class,
+        MenuController::class
     ];
 
     /**
