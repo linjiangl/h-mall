@@ -33,7 +33,7 @@ class AdminBlock extends AbstractBlock
     {
         try {
             $service = new AdminService();
-            return $service->update($id, $post);
+            return $service->updateAccount($id, $post);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

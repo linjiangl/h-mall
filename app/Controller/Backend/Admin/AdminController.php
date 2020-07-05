@@ -52,10 +52,10 @@ class AdminController extends AbstractController
     /**
      * 修改管理员信息
      * @param AdminRequest $request
-     * @param $id
+     * @param int $id
      * @return array
      */
-    public function update(AdminRequest $request, $id)
+    public function update(AdminRequest $request, int $id)
     {
         $request->validated();
         return (new AdminBlock())->update($request->post(), $id);

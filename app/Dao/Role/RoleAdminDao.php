@@ -20,14 +20,23 @@ class RoleAdminDao extends AbstractDao
     protected $noAllowActions = [];
 
     /**
-     * 获取管理员权限
+     * 获取管理权限
+     * @param int $adminId
+     * @return RoleAdmin
+     */
+    public function getAdminRole(int $adminId): RoleAdmin
+    {
+        return $this->getInfoByCondition([['admin_id', '=', $adminId]]);
+    }
+
+    /**
+     * 获取管理员权限ID
      * @param int $adminId
      * @return int
      */
     public function getAdminRoleId(int $adminId): int
     {
-        /** @var RoleAdmin $info */
-        $info = $this->getInfoByCondition([['admin_id', '=', $adminId]]);
+        $info = $this->getAdminRole($adminId);
         return $info->role_id;
     }
 
@@ -39,12 +48,10 @@ class RoleAdminDao extends AbstractDao
      */
     public function resetAdminRoleId(int $adminId, int $newRoleId): bool
     {
-        $oldRoleId = $this->getAdminRoleId($adminId);
-        if ($oldRoleId != $newRoleId) {
-            $this->deleteByCondition([
-                ['admin_id', '=', $adminId],
-                ['role_id', '=', $newRoleId],
-            ]);
+        $adminRole = $this->getAdminRole($adminId);
+        if ($adminRole->role_id != $newRoleId) {
+            $adminRole->role_id = $newRoleId;
+            $adminRole->save();
         }
         return true;
     }

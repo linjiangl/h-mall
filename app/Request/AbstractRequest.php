@@ -56,4 +56,14 @@ abstract class AbstractRequest extends FormRequest
         }
         return "{$method}:{$scene}";
     }
+
+    /**
+     * 获取验证规则正则表达式
+     * @param string $regex
+     * @return string
+     */
+    public function getRegex(string $regex): string
+    {
+        return 'regex:' . $regex;
+    }
 }

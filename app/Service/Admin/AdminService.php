@@ -10,12 +10,16 @@ declare(strict_types=1);
  */
 namespace App\Service\Admin;
 
+use App\Constants\RestConstants;
 use App\Constants\State\AdminState;
 use App\Dao\Admin\AdminDao;
 use App\Dao\Role\RoleAdminDao;
 use App\Dao\Role\RoleDao;
+use App\Exception\InternalException;
 use App\Service\AbstractService;
+use App\Service\Authorize\AdminAuthorizationService;
 use App\Service\Role\RoleAdminService;
+use Throwable;
 
 class AdminService extends AbstractService
 {
@@ -35,21 +39,39 @@ class AdminService extends AbstractService
      */
     public function createAccount(string $username, string $password, array $extend = []): int
     {
+        if (mb_strlen($password) < 6) {
+            throw new InternalException('密码不能少于6位');
+        }
+        $adminDao = new AdminDao();
+        try {
+            if ($adminDao->getInfoByUsername($username)) {
+                throw new InternalException('账号已注册');
+            }
+        } catch (Throwable $e) {
+            if ($e->getCode() != RestConstants::HTTP_NOT_FOUND) {
+                throw new InternalException($e->getMessage());
+            }
+        }
+
+        // 生成密码
+        $adminAuthorizationService = new AdminAuthorizationService();
+        $salt = $adminAuthorizationService->generateSalt();
+        $passwordHash = $adminAuthorizationService->generatePasswordHash($password, $salt);
+
         // 获取权限
         $roleDao = new RoleDao();
         if (empty($extend['role_id'])) {
             $role = $roleDao->getInfoByIdentifier();
         } else {
-            $role = $roleDao->info($extend['role_id']);
+            $role = $roleDao->info((int)$extend['role_id']);
         }
 
         // 创建账号
-        $adminDao = new AdminDao();
         $id = $adminDao->create([
             'username' => $username,
             'real_name' => $extend['real_name'] ?? '',
-            'password' => $password,
-            'salt' => $extend['salt'],
+            'password' => $passwordHash,
+            'salt' => $salt,
             'avatar' => $extend['avatar'] ?? '',
             'mobile' => $extend['mobile'] ?? '',
             'email' => $extend['email'] ?? '',
