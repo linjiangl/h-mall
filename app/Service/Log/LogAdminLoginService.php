@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Service\Log;
 
+use App\Dao\Admin\AdminDao;
 use App\Dao\Log\LogAdminLoginDao;
 use App\Service\AbstractService;
 
@@ -27,17 +28,21 @@ class LogAdminLoginService extends AbstractService
         if (! $username) {
             return false;
         }
-
         $clientId = $request->header('x-real-ip');
         $clientId = $clientId ? current($clientId) : '';
         $userAgent = $request->getHeader('User-Agent');
         $userAgent = $userAgent ? current($userAgent) : '';
-        $this->create([
-            'admin_id' => 0,
-            'username' => $username,
-            'client_ip' => $clientId,
-            'user_agent' => $userAgent,
-        ]);
+        try {
+            $adminDao = new AdminDao();
+            $admin = $adminDao->getInfoByUsername($username);
+            $this->create([
+                'admin_id' => $admin['id'],
+                'username' => $admin['username'],
+                'client_ip' => $clientId,
+                'user_agent' => $userAgent,
+            ]);
+        } catch (\Throwable $e) {
+        }
         return true;
     }
 }

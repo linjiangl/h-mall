@@ -39,7 +39,7 @@ class LogAdminActionService extends AbstractService
         $clientId = $request->header('x-real-ip');
         $clientId = $clientId ? current($clientId) : '';
         $this->create([
-            'admin_id' => 0,
+            'admin_id' => $admin['id'],
             'username' => $admin['username'],
             'client_ip' => $clientId,
             'module' => $module,
