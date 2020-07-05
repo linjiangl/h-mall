@@ -54,9 +54,9 @@ class AdminService extends AbstractService
         }
 
         // 生成密码
-        $adminAuthorizationService = new AdminAuthorizationService();
-        $salt = $adminAuthorizationService->generateSalt();
-        $passwordHash = $adminAuthorizationService->generatePasswordHash($password, $salt);
+        $authorizationService = new AdminAuthorizationService();
+        $salt = $authorizationService->generateSalt();
+        $passwordHash = $authorizationService->generatePasswordHash($password, $salt);
 
         // 获取权限
         $roleDao = new RoleDao();

@@ -57,7 +57,7 @@ class AdminTest extends BackendHttpTestCase
         $data = [
             'avatar' => 'https://up.enterdesk.com/edpic/31/c3/fd/31c3fdc63511cabedd6415d121fa2d58.jpg',
             'real_name' => '小米22',
-            'role_id' => 3
+            'role_id' => 2
         ];
         $result = $this->request('/admin/' . $admin->id, $data, 'put', $this->getHeaders());
         $this->assertSame(200, $result['code']);

@@ -10,10 +10,13 @@ declare(strict_types=1);
  */
 namespace App\Service\User;
 
+use App\Constants\RestConstants;
 use App\Constants\State\UserState;
 use App\Dao\User\UserDao;
 use App\Exception\BadRequestException;
+use App\Exception\InternalException;
 use App\Service\AbstractService;
+use App\Service\Authorize\UserAuthorizationService;
 use Hyperf\DbConnection\Db;
 use Throwable;
 
@@ -32,6 +35,25 @@ class UserService extends AbstractService
      */
     public function createAccount(string $username, string $password, array $extend = []): int
     {
+        if (mb_strlen($password) < 6) {
+            throw new InternalException('密码不能少于6位');
+        }
+        try {
+            $userDao = new UserDao();
+            if ($userDao->getInfoByUsername($username)) {
+                throw new InternalException('账号已注册');
+            }
+        } catch (Throwable $e) {
+            if ($e->getCode() != RestConstants::HTTP_NOT_FOUND) {
+                throw new InternalException($e->getMessage());
+            }
+        }
+
+        // 生成密码
+        $authorizationService = new UserAuthorizationService();
+        $salt = $authorizationService->generateSalt();
+        $passwordHash = $authorizationService->generatePasswordHash($password, $salt);
+
         Db::beginTransaction();
         try {
             // 创建账号
@@ -39,8 +61,8 @@ class UserService extends AbstractService
             $id = $userDao->create([
                 'username' => $username,
                 'nickname' => $extend['nickname'] ?? $this->defaultUsername,
-                'password' => $password,
-                'salt' => $extend['salt'],
+                'password' => $passwordHash,
+                'salt' => $salt,
                 'avatar' => $extend['avatar'] ?? '',
                 'mobile' => $extend['mobile'] ?? '',
                 'email' => $extend['email'] ?? '',

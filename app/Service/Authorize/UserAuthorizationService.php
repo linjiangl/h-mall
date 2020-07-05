@@ -81,32 +81,13 @@ class UserAuthorizationService extends AbstractAuthorizationService
 
     public function register(string $username, string $password, string $confirmPassword, array $extend = []): array
     {
-        if (mb_strlen($password) < 6) {
-            throw new InternalException('密码不能少于6位');
-        }
         if ($password != $confirmPassword) {
             throw new InternalException('两次输入的密码不一样');
         }
-        try {
-            $userDao = new UserDao();
-            if ($userDao->getInfoByUsername($username)) {
-                throw new InternalException('账号已注册');
-            }
-        } catch (Throwable $e) {
-            if ($e->getCode() != 404) {
-                throw new InternalException($e->getMessage());
-            }
-        }
 
         try {
-            $salt = $this->generateSalt();
-            $passwordHash = $this->generatePasswordHash($password, $salt);
-            $extend = array_merge($extend, [
-                'salt' => $salt,
-            ]);
-
             $service = new UserService();
-            $service->createAccount($username, $passwordHash, $extend);
+            $service->createAccount($username, $password, $extend);
 
             return $this->login($username, $password);
         } catch (Throwable $e) {
