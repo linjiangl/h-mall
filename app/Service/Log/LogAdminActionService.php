@@ -38,7 +38,6 @@ class LogAdminActionService extends AbstractService
         $module = strtolower(substr($path, strripos($path, '\\') + 1));
         $clientId = $request->header('x-real-ip');
         $clientId = $clientId ? current($clientId) : '';
-
         $this->create([
             'admin_id' => $admin['admin_id'],
             'username' => $admin['username'],
@@ -48,7 +47,7 @@ class LogAdminActionService extends AbstractService
             'remark' => [
                 'method' => $request->getMethod(),
                 'url' => $url,
-                'data' => $request->getParsedBody()
+                'data' => check_production() ? '' : $request->getParsedBody()
             ]
         ]);
         return true;

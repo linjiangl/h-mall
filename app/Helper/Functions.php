@@ -133,3 +133,14 @@ if (! function_exists('general_regex')) {
         return $regex;
     }
 }
+
+if (! function_exists('check_production')) {
+    /**
+     * 检测是否生产环境
+     * @return bool
+     */
+    function check_production(): bool
+    {
+        return config('app_env') == 'prod';
+    }
+}
