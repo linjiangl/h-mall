@@ -47,4 +47,14 @@ abstract class AbstractState implements InterfaceState
         }
         return $value;
     }
+
+    /**
+     * 获取验证器(IN)规则
+     * @param array $option
+     * @return string
+     */
+    public static function getValidatedInRule(array $option): string
+    {
+        return implode(',', array_keys($option));
+    }
 }

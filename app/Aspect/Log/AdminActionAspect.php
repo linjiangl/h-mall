@@ -12,6 +12,7 @@ namespace App\Aspect\Log;
 
 use App\Controller\Backend\Admin\AdminController;
 use App\Controller\Backend\System\MenuController;
+use App\Controller\Backend\System\RoleController;
 use App\Controller\Backend\User\UserController;
 use App\Service\Log\LogAdminActionService;
 use Hyperf\Di\Annotation\Aspect;
@@ -27,7 +28,8 @@ class AdminActionAspect extends AbstractAspect
     public $classes = [
         UserController::class,
         AdminController::class,
-        MenuController::class
+        MenuController::class,
+        RoleController::class
     ];
 
     /**

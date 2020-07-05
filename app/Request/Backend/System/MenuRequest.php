@@ -16,14 +16,26 @@ class MenuRequest extends AbstractRequest
 {
     public function rules(): array
     {
-        return [
-            'parent_id' => 'required|integer',
-            'title' => 'required|string|min:3|max:50',
-            'name' => 'required|string|min:3|max:100',
-            'icon' => 'string|min:1|max:50',
-            'path' => 'required|string|min:3|max:255',
-            'position' => 'integer|max:10000',
+        $scene = $this->getScene();
+        $rules = [
+            'post:store' => [
+                'parent_id' => 'required|integer',
+                'title' => 'required|string|max:50',
+                'name' => 'required|string|max:100',
+                'icon' => 'string|max:50',
+                'path' => 'required|string|max:255',
+                'position' => 'integer|max:100',
+            ],
+            'put:update' => $rules = [
+                'parent_id' => 'integer',
+                'title' => 'string|max:50',
+                'name' => 'string|max:100',
+                'icon' => 'string|max:50',
+                'path' => 'string|max:255',
+                'position' => 'integer|max:100',
+            ]
         ];
+        return $rules[$scene] ?? [];
     }
 
     public function attributes(): array

@@ -16,6 +16,7 @@ use App\Controller\Backend\Authorize\RegisterController;
 use App\Controller\Backend\Log\LogAdminActionController;
 use App\Controller\Backend\Log\LogAdminLoginController;
 use App\Controller\Backend\System\MenuController;
+use App\Controller\Backend\System\RoleController;
 use App\Controller\Backend\User\UserController;
 use App\Middleware\JWTBackendMiddleware;
 use Hyperf\HttpServer\Router\Router;
@@ -36,6 +37,12 @@ Router::addGroup('/backend', function () {
     Router::post('/menu', [MenuController::class, 'store']);
     Router::put('/menu/{id:\d+}', [MenuController::class, 'update']);
     Router::delete('/menu/{id:\d+}', [MenuController::class, 'destroy']);
+
+    Router::get('/role', [RoleController::class, 'index']);
+    Router::get('/role/{id:\d+}', [RoleController::class, 'show']);
+    Router::post('/role', [RoleController::class, 'store']);
+    Router::put('/role/{id:\d+}', [RoleController::class, 'update']);
+    Router::delete('/role/{id:\d+}', [RoleController::class, 'destroy']);
 
     // 管理员
     Router::get('/admin', [AdminController::class, 'index']);
