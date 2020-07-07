@@ -31,7 +31,7 @@ class RoleMenuService extends AbstractService
     public function changeRoleMenu(int $roleId, int $menuId, bool $check = false)
     {
         if ($check) {
-            // 选中添加
+            // 选中菜单
             $roleDao = new RoleDao();
             $role = $roleDao->info($roleId);
             $menuDao = new MenuDao();
@@ -52,7 +52,7 @@ class RoleMenuService extends AbstractService
                 }
             }
         } else {
-            // 未选中删除
+            // 删除菜单
             $model = new RoleMenuDao();
             $roleMenu = $model->getInfoByRoleMenuId($roleId, $menuId);
             $model->remove($roleMenu->id);
