@@ -76,4 +76,16 @@ class RoleController extends AbstractController
         $this->setActionName(AdminActionMessage::ROLE_DELETE);
         return (new RoleBlock())->destroy($id);
     }
+
+    /**
+     * 设置权限菜单
+     * @param RoleRequest $request
+     * @return bool
+     */
+    public function changeMenu(RoleRequest $request)
+    {
+        $request->validated();
+        $this->setActionName(AdminActionMessage::ROLE_MENU_CHANGE);
+        return (new RoleBlock())->changeRoleMenu($request->post());
+    }
 }

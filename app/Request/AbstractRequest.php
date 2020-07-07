@@ -38,7 +38,7 @@ abstract class AbstractRequest extends FormRequest
     public function getScene(): string
     {
         $method = strtolower($this->getMethod());
-        $scene = strrchr($this->path(), '/');
+        $scene = strrchr($this->url(), '/');
         $scene = $scene ? substr($scene, 1) : '';
         switch ($method) {
             case 'post':

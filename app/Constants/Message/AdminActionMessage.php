@@ -60,4 +60,9 @@ class AdminActionMessage extends AbstractConstants
      * @Message("删除权限")
      */
     const ROLE_DELETE = 'role_delete';
+
+    /**
+     * @Message("设置权限菜单")
+     */
+    const ROLE_MENU_CHANGE = 'ROLE_MENU_CHANGE';
 }
