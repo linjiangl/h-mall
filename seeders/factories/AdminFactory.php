@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 
 use App\Constants\State\AdminState;
-use App\Service\Authorize\AdminAuthorizationService;
+use App\Core\Service\Authorize\AdminAuthorizationService;
 
 class AdminFactory
 {

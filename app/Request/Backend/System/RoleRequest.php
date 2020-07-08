@@ -33,7 +33,12 @@ class RoleRequest extends AbstractRequest
                 'name' => 'required|string|max:50',
                 'identifier' => "required|in:{$identifier}",
                 'is_super' => 'integer|in:' . $boolean,
-            ]
+            ],
+            'post:changeMenu' => [
+                'role_id' => 'required|integer|gt:0',
+                'menu_id' => 'required|integer|gt:0',
+                'check' => 'required|integer|in:' . $boolean,
+            ],
         ];
         return $rules[$scene] ?? [];
     }
@@ -45,6 +50,9 @@ class RoleRequest extends AbstractRequest
             'name' => '权限名称',
             'identifier' => '权限标识',
             'is_super' => '是否超级管理员',
+            'role_id' => '权限',
+            'menu_id' => '菜单',
+            'check' => '是否选中',
         ];
     }
 }

@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend\Authorize;
 
-use App\Block\Frontend\Authorize\RegisterBlock;
+use App\Core\Block\Frontend\Authorize\RegisterBlock;
 use App\Controller\AbstractController;
 use App\Request\Frontend\Authorize\RegisterRequest;
 use Hyperf\HttpServer\Annotation\Controller;

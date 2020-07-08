@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\System;
 
-use App\Block\Backend\System\RoleBlock;
+use App\Core\Block\Backend\System\RoleBlock;
 use App\Constants\Message\AdminActionMessage;
 use App\Controller\AbstractController;
 use App\Request\Backend\System\RoleRequest;
@@ -75,5 +75,17 @@ class RoleController extends AbstractController
     {
         $this->setActionName(AdminActionMessage::ROLE_DELETE);
         return (new RoleBlock())->destroy($id);
+    }
+
+    /**
+     * 设置权限菜单
+     * @param RoleRequest $request
+     * @return bool
+     */
+    public function changeMenu(RoleRequest $request)
+    {
+        $request->validated();
+        $this->setActionName(AdminActionMessage::ROLE_MENU_CHANGE);
+        return (new RoleBlock())->changeRoleMenu($request->post());
     }
 }

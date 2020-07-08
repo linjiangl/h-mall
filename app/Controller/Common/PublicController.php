@@ -11,11 +11,12 @@ declare(strict_types=1);
 namespace App\Controller\Common;
 
 use App\Controller\AbstractController;
+use App\Core\Plugins\Captcha;
 use App\Exception\HttpException;
-use App\Service\Utils\CaptchaService;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
+use Throwable;
 
 /**
  * @Controller(prefix="rate-limit")
@@ -41,9 +42,9 @@ class PublicController extends AbstractController
     public function captcha()
     {
         try {
-            $service = new CaptchaService();
-            return $service->generate();
-        } catch (\Exception $e) {
+            $captcha = new Captcha();
+            return $captcha->generate();
+        } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }

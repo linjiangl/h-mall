@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend\Authorize;
 
-use App\Block\Frontend\Authorize\AuthorizeBlock;
+use App\Core\Block\Frontend\Authorize\AuthorizeBlock;
 use App\Controller\AbstractController;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;

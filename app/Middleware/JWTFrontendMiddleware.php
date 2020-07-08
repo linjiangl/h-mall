@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Middleware;
 
-use App\Service\Authorize\UserAuthorizationService;
+use App\Core\Service\Authorize\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Hyperf\Utils\Context;
 use Phper666\JWTAuth\JWT;

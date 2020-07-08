@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\User;
 
-use App\Block\Backend\User\UserBlock;
+use App\Core\Block\Backend\User\UserBlock;
 use App\Controller\AbstractController;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;

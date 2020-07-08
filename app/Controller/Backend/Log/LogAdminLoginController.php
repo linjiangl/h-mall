@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Log;
 
-use App\Block\Backend\Log\LogAdminLoginBlock;
+use App\Core\Block\Backend\Log\LogAdminLoginBlock;
 use App\Controller\AbstractController;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;

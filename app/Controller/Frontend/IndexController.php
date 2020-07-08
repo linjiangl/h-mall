@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend;
 
-use App\Block\Frontend\IndexBlock;
+use App\Core\Block\Frontend\IndexBlock;
 use App\Controller\AbstractController;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;

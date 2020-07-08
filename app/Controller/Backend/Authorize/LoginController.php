@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Authorize;
 
-use App\Block\Backend\Authorize\LoginBlock;
+use App\Core\Block\Backend\Authorize\LoginBlock;
 use App\Controller\AbstractController;
 use App\Request\Backend\Authorize\LoginRequest;
 use Hyperf\HttpServer\Annotation\Controller;

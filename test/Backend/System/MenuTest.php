@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\System;
 
-use App\Dao\MenuDao;
+use App\Core\Dao\MenuDao;
 use App\Model\Menu;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;

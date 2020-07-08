@@ -43,6 +43,7 @@ Router::addGroup('/backend', function () {
     Router::post('/role', [RoleController::class, 'store']);
     Router::put('/role/{id:\d+}', [RoleController::class, 'update']);
     Router::delete('/role/{id:\d+}', [RoleController::class, 'destroy']);
+    Router::post('/role/changeMenu', [RoleController::class, 'changeMenu']);
 
     // 管理员
     Router::get('/admin', [AdminController::class, 'index']);

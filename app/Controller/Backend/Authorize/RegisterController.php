@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Authorize;
 
-use App\Block\Backend\Authorize\RegisterBlock;
+use App\Core\Block\Backend\Authorize\RegisterBlock;
 use App\Controller\AbstractController;
 use App\Request\Backend\Authorize\RegisterRequest;
 
