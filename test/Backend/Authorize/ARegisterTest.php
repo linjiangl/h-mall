@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\Authorize;
 
-use App\Service\Authorize\AdminAuthorizationService;
+use App\Core\Service\Authorize\AdminAuthorizationService;
 use HyperfTest\Backend\BackendHttpTestCase;
 
 class ARegisterTest extends BackendHttpTestCase

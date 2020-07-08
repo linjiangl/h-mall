@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Service;
+namespace App\Core\Service;
 
 use App\Constants\State\RoleState;
 use App\Core\Dao\MenuDao;

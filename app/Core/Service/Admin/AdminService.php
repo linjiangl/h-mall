@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Service\Admin;
+namespace App\Core\Service\Admin;
 
 use App\Constants\RestConstants;
 use App\Constants\State\AdminState;
@@ -16,9 +16,9 @@ use App\Core\Dao\Admin\AdminDao;
 use App\Core\Dao\Role\RoleAdminDao;
 use App\Core\Dao\Role\RoleDao;
 use App\Exception\InternalException;
-use App\Service\AbstractService;
-use App\Service\Authorize\AdminAuthorizationService;
-use App\Service\Role\RoleAdminService;
+use App\Core\Service\AbstractService;
+use App\Core\Service\Authorize\AdminAuthorizationService;
+use App\Core\Service\Role\RoleAdminService;
 use Throwable;
 
 class AdminService extends AbstractService

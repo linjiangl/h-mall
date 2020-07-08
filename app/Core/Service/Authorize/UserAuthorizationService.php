@@ -8,22 +8,20 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Service\Authorize;
+namespace App\Core\Service\Authorize;
 
-use App\Core\Dao\Admin\AdminDao;
+use App\Core\Dao\User\UserDao;
 use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
-use App\Service\Admin\AdminService;
+use App\Core\Service\User\UserService;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
 
-class AdminAuthorizationService extends AbstractAuthorizationService
+class UserAuthorizationService extends AbstractAuthorizationService
 {
-    protected $scene = 'admin';
-
     public function __construct()
     {
         /** @var JWT $jwt */
@@ -33,48 +31,45 @@ class AdminAuthorizationService extends AbstractAuthorizationService
 
     public function authorize(): array
     {
-        $ssoKey = config('jwt')['scene'][$this->scene]['sso_key'];
+        $ssoKey = config('jwt')['sso_key'];
         $data = $this->getParserData();
-        $adminId = $data[$ssoKey];
-        if (! $adminId) {
+        $userId = $data[$ssoKey];
+        if (! $userId) {
             throw new UnauthorizedException();
         }
 
-        $adminDao = new AdminDao();
-        $admin = $adminDao->info($adminId);
-        if (! $admin) {
+        $userDao = new UserDao();
+        $user = $userDao->info($userId);
+        if (! $user) {
             throw new UnauthorizedException();
         }
 
-        return $admin->toArray();
+        return $user->toArray();
     }
 
     public function login(string $account, string $password): array
     {
         try {
-            $adminDao = new AdminDao();
-            $admin = $adminDao->getInfoByUsername($account);
+            $userDao = new UserDao();
+            $user = $userDao->getInfoByUsername($account);
         } catch (Throwable $e) {
-            throw new InternalException('该管理员账号不存在');
+            throw new InternalException('该账号不存在');
         }
-
-        $admin = $admin->makeVisible(['password', 'salt', 'mobile', 'email']);
-        $passwordHash = $this->generatePasswordHash($password, $admin->salt);
-        if ($passwordHash != $admin->password) {
+        $user = $user->makeVisible(['password', 'salt', 'mobile', 'email']);
+        $passwordHash = $this->generatePasswordHash($password, $user->salt);
+        if ($passwordHash != $user->password) {
             throw new InternalException('账号/密码错误');
         }
 
         try {
             $token = $this->jwt->getToken([
-                'admin_id' => $admin->id,
-                'username' => $admin->username,
-                'real_name' => $admin->real_name,
-                'avatar' => $admin->avatar,
+                'user_id' => $user->id,
+                'username' => $user->username,
+                'nickname' => $user->nickname,
+                'avatar' => $user->avatar,
             ]);
-
-            $admin->lasted_login_time = time();
-            $admin->save();
-
+            $user->lasted_login_time = time();
+            $user->save();
             return [
                 'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
                 'exp' => $this->jwt->getTTL(),
@@ -91,7 +86,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         }
 
         try {
-            $service = new AdminService();
+            $service = new UserService();
             $service->createAccount($username, $password, $extend);
 
             return $this->login($username, $password);

@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block\Frontend\Authorize;
 
 use App\Exception\HttpException;
-use App\Service\Authorize\UserAuthorizationService;
+use App\Core\Service\Authorize\UserAuthorizationService;
 use Throwable;
 
 class LoginBlock

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 use App\Constants\State\UserState;
 use App\Model\User\User;
-use App\Service\Authorize\UserAuthorizationService;
+use App\Core\Service\Authorize\UserAuthorizationService;
 use Faker\Factory;
 use Hyperf\DbConnection\Db;
 

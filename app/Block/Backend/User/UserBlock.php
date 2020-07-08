@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block\Backend\User;
 
 use App\Block\AbstractBlock;
-use App\Service\User\UserService;
+use App\Core\Service\User\UserService;
 
 class UserBlock extends AbstractBlock
 {

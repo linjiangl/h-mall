@@ -12,8 +12,8 @@ namespace App\Block\Backend\System;
 
 use App\Block\AbstractBlock;
 use App\Exception\HttpException;
-use App\Service\Role\RoleMenuService;
-use App\Service\Role\RoleService;
+use App\Core\Service\Role\RoleMenuService;
+use App\Core\Service\Role\RoleService;
 use Throwable;
 
 class RoleBlock extends AbstractBlock

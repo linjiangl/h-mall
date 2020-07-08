@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Service\Role;
+namespace App\Core\Service\Role;
 
 use App\Core\Dao\Role\RoleAdminDao;
 use App\Core\Dao\Role\RoleDao;
 use App\Core\Dao\Role\RoleMenuDao;
-use App\Service\AbstractService;
+use App\Core\Service\AbstractService;
 
 class RoleService extends AbstractService
 {

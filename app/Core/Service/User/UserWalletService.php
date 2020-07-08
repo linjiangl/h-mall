@@ -8,10 +8,10 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Service\User;
+namespace App\Core\Service\User;
 
 use App\Core\Dao\User\UserWalletDao;
-use App\Service\AbstractService;
+use App\Core\Service\AbstractService;
 
 class UserWalletService extends AbstractService
 {

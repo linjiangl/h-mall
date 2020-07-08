@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block;
 
 use App\Exception\HttpException;
-use App\Service\AbstractService;
+use App\Core\Service\AbstractService;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;

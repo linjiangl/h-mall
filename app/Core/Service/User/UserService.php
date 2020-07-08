@@ -8,15 +8,15 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Service\User;
+namespace App\Core\Service\User;
 
 use App\Constants\RestConstants;
 use App\Constants\State\UserState;
 use App\Core\Dao\User\UserDao;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
-use App\Service\AbstractService;
-use App\Service\Authorize\UserAuthorizationService;
+use App\Core\Service\AbstractService;
+use App\Core\Service\Authorize\UserAuthorizationService;
 use Hyperf\DbConnection\Db;
 use Throwable;
 

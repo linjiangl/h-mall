@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block\Backend\Authorize;
 
 use App\Exception\HttpException;
-use App\Service\Authorize\AdminAuthorizationService;
+use App\Core\Service\Authorize\AdminAuthorizationService;
 use Throwable;
 
 class RegisterBlock

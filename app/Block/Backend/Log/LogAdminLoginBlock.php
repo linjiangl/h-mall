@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block\Backend\Log;
 
 use App\Block\AbstractBlock;
-use App\Service\Log\LogAdminLoginService;
+use App\Core\Service\Log\LogAdminLoginService;
 
 class LogAdminLoginBlock extends AbstractBlock
 {

@@ -14,7 +14,7 @@ use App\Controller\Backend\Admin\AdminController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\System\RoleController;
 use App\Controller\Backend\User\UserController;
-use App\Service\Log\LogAdminActionService;
+use App\Core\Service\Log\LogAdminActionService;
 use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;

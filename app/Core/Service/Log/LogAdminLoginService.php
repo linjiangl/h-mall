@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Service\Log;
+namespace App\Core\Service\Log;
 
 use App\Core\Dao\Admin\AdminDao;
 use App\Core\Dao\Log\LogAdminLoginDao;
-use App\Service\AbstractService;
+use App\Core\Service\AbstractService;
 use Throwable;
 
 class LogAdminLoginService extends AbstractService

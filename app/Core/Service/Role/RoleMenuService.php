@@ -8,14 +8,14 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Service\Role;
+namespace App\Core\Service\Role;
 
 use App\Constants\RestConstants;
 use App\Core\Dao\MenuDao;
 use App\Core\Dao\Role\RoleDao;
 use App\Core\Dao\Role\RoleMenuDao;
 use App\Exception\BadRequestException;
-use App\Service\AbstractService;
+use App\Core\Service\AbstractService;
 
 class RoleMenuService extends AbstractService
 {

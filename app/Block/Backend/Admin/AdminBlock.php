@@ -12,7 +12,7 @@ namespace App\Block\Backend\Admin;
 
 use App\Block\AbstractBlock;
 use App\Exception\HttpException;
-use App\Service\Admin\AdminService;
+use App\Core\Service\Admin\AdminService;
 use Throwable;
 
 class AdminBlock extends AbstractBlock

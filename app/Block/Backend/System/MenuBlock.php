@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Block\Backend\System;
 
 use App\Block\AbstractBlock;
-use App\Service\MenuService;
+use App\Core\Service\MenuService;
 
 class MenuBlock extends AbstractBlock
 {

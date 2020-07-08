@@ -12,7 +12,7 @@ namespace App\Controller\Common;
 
 use App\Controller\AbstractController;
 use App\Exception\HttpException;
-use App\Service\Utils\CaptchaService;
+use App\Core\Service\Utils\CaptchaService;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
