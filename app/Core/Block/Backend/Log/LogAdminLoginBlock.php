@@ -8,9 +8,9 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Block\Backend\Log;
+namespace App\Core\Block\Backend\Log;
 
-use App\Block\AbstractBlock;
+use App\Core\Block\AbstractBlock;
 use App\Core\Service\Log\LogAdminLoginService;
 
 class LogAdminLoginBlock extends AbstractBlock

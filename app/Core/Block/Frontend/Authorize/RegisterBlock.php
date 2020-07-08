@@ -8,20 +8,19 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Block\Backend\Authorize;
+namespace App\Core\Block\Frontend\Authorize;
 
 use App\Exception\HttpException;
-use App\Core\Service\Authorize\AdminAuthorizationService;
-use Hyperf\HttpServer\Contract\RequestInterface;
+use App\Core\Service\Authorize\UserAuthorizationService;
 use Throwable;
 
-class AuthorizeBlock
+class RegisterBlock
 {
-    public function index(RequestInterface $request): array
+    public function index(array $data): array
     {
         try {
-            $service = new AdminAuthorizationService();
-            return $service->authorize();
+            $service = new UserAuthorizationService();
+            return $service->register($data['username'], $data['password'], $data['password_confirmation']);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

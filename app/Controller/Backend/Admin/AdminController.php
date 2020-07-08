@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Admin;
 
-use App\Block\Backend\Admin\AdminBlock;
+use App\Core\Block\Backend\Admin\AdminBlock;
 use App\Constants\Message\AdminActionMessage;
 use App\Controller\AbstractController;
 use App\Request\Backend\Admin\AdminRequest;

@@ -8,9 +8,9 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Block\Backend\Admin;
+namespace App\Core\Block\Backend\Admin;
 
-use App\Block\AbstractBlock;
+use App\Core\Block\AbstractBlock;
 use App\Exception\HttpException;
 use App\Core\Service\Admin\AdminService;
 use Throwable;

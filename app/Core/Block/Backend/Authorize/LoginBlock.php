@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Block\Backend\Authorize;
+namespace App\Core\Block\Backend\Authorize;
 
 use App\Exception\HttpException;
 use App\Core\Service\Authorize\AdminAuthorizationService;

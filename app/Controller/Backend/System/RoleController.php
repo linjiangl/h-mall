@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\System;
 
-use App\Block\Backend\System\RoleBlock;
+use App\Core\Block\Backend\System\RoleBlock;
 use App\Constants\Message\AdminActionMessage;
 use App\Controller\AbstractController;
 use App\Request\Backend\System\RoleRequest;

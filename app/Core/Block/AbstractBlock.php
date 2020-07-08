@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Block;
+namespace App\Core\Block;
 
 use App\Exception\HttpException;
 use App\Core\Service\AbstractService;

@@ -8,15 +8,13 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Block\Frontend\User;
+namespace App\Core\Block\Backend\User;
 
-use App\Block\AbstractBlock;
+use App\Core\Block\AbstractBlock;
 use App\Core\Service\User\UserService;
 
 class UserBlock extends AbstractBlock
 {
-    protected $with = [];
-
     protected $query = [
         'like' => ['username']
     ];
