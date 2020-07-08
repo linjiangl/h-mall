@@ -67,7 +67,7 @@
             "Installer\\": "installer/"
         },
         "files": [
-            "app/Helper/Functions.php"
+          "app/Core/Helper/Functions.php"
         ]
     },
     "autoload-dev": {
