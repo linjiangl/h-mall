@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Utils;
+namespace App\Core\Plugins;
 
 use App\Exception\BadRequestException;
 use Gregwar\Captcha\CaptchaBuilder;
@@ -16,10 +16,10 @@ use Throwable;
 
 /**
  * 图片验证码
- * Class CaptchaService
- * @package W7\App\Model\Service
+ * Class Captcha
+ * @package App\Core\Plugins
  */
-class CaptchaService
+class Captcha
 {
     public $length = 4; // 验证码长度
 
