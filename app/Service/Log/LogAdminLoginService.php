@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Service\Log;
 
-use App\Dao\Admin\AdminDao;
-use App\Dao\Log\LogAdminLoginDao;
+use App\Core\Dao\Admin\AdminDao;
+use App\Core\Dao\Log\LogAdminLoginDao;
 use App\Service\AbstractService;
 use Throwable;
 

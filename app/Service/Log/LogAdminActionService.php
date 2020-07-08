@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Service\Log;
 
 use App\Constants\Message\AdminActionMessage;
-use App\Dao\Log\LogAdminActionDao;
+use App\Core\Dao\Log\LogAdminActionDao;
 use App\Service\AbstractService;
 
 class LogAdminActionService extends AbstractService

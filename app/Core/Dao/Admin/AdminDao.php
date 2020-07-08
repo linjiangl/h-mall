@@ -8,9 +8,9 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Dao\Admin;
+namespace App\Core\Dao\Admin;
 
-use App\Dao\AbstractDao;
+use App\Core\Dao\AbstractDao;
 use App\Model\Admin;
 
 class AdminDao extends AbstractDao

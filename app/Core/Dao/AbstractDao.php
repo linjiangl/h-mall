@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Dao;
+namespace App\Core\Dao;
 
 use App\Exception\BadRequestException;
 use App\Exception\HttpException;

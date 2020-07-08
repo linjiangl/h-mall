@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 use App\Constants\State\RoleState;
-use App\Dao\Role\RoleDao;
+use App\Core\Dao\Role\RoleDao;
 
 /**
  * Multi-user mall

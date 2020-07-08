@@ -8,9 +8,9 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Dao\User;
+namespace App\Core\Dao\User;
 
-use App\Dao\AbstractDao;
+use App\Core\Dao\AbstractDao;
 use App\Model\User\UserWallet;
 
 class UserWalletDao extends AbstractDao

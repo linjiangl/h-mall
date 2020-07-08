@@ -10,9 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Service\Role;
 
-use App\Dao\Role\RoleAdminDao;
-use App\Dao\Role\RoleDao;
-use App\Dao\Role\RoleMenuDao;
+use App\Core\Dao\Role\RoleAdminDao;
+use App\Core\Dao\Role\RoleDao;
+use App\Core\Dao\Role\RoleMenuDao;
 use App\Service\AbstractService;
 
 class RoleService extends AbstractService

@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Service\User;
 
-use App\Dao\User\UserWalletDao;
+use App\Core\Dao\User\UserWalletDao;
 use App\Service\AbstractService;
 
 class UserWalletService extends AbstractService

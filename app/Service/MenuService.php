@@ -11,10 +11,10 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Constants\State\RoleState;
-use App\Dao\MenuDao;
-use App\Dao\Role\RoleAdminDao;
-use App\Dao\Role\RoleDao;
-use App\Dao\Role\RoleMenuDao;
+use App\Core\Dao\MenuDao;
+use App\Core\Dao\Role\RoleAdminDao;
+use App\Core\Dao\Role\RoleDao;
+use App\Core\Dao\Role\RoleMenuDao;
 
 class MenuService extends AbstractService
 {

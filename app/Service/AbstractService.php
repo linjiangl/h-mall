@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Service;
 
-use App\Dao\AbstractDao;
+use App\Core\Dao\AbstractDao;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Model;
 

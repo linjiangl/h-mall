@@ -12,7 +12,7 @@ namespace App\Service\User;
 
 use App\Constants\RestConstants;
 use App\Constants\State\UserState;
-use App\Dao\User\UserDao;
+use App\Core\Dao\User\UserDao;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
 use App\Service\AbstractService;

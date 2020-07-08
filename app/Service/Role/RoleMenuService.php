@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Service\Role;
 
 use App\Constants\RestConstants;
-use App\Dao\MenuDao;
-use App\Dao\Role\RoleDao;
-use App\Dao\Role\RoleMenuDao;
+use App\Core\Dao\MenuDao;
+use App\Core\Dao\Role\RoleDao;
+use App\Core\Dao\Role\RoleMenuDao;
 use App\Exception\BadRequestException;
 use App\Service\AbstractService;
 

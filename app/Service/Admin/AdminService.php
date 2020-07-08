@@ -12,9 +12,9 @@ namespace App\Service\Admin;
 
 use App\Constants\RestConstants;
 use App\Constants\State\AdminState;
-use App\Dao\Admin\AdminDao;
-use App\Dao\Role\RoleAdminDao;
-use App\Dao\Role\RoleDao;
+use App\Core\Dao\Admin\AdminDao;
+use App\Core\Dao\Role\RoleAdminDao;
+use App\Core\Dao\Role\RoleDao;
 use App\Exception\InternalException;
 use App\Service\AbstractService;
 use App\Service\Authorize\AdminAuthorizationService;
