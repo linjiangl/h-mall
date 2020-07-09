@@ -82,10 +82,10 @@ class RoleController extends AbstractController
      * @param RoleRequest $request
      * @return bool
      */
-    public function changeMenu(RoleRequest $request)
+    public function saveMenus(RoleRequest $request)
     {
         $request->validated();
         $this->setActionName(AdminActionMessage::ROLE_MENU_CHANGE);
-        return (new RoleBlock())->changeRoleMenu($request->post());
+        return (new RoleBlock())->saveRoleMenus($request->post());
     }
 }

@@ -20,11 +20,12 @@ class RoleBlock extends AbstractBlock
 {
     protected $service = RoleService::class;
 
-    public function changeRoleMenu(array $data): bool
+    public function saveRoleMenus(array $data): bool
     {
         try {
             $service = new RoleMenuService();
-            return $service->changeRoleMenu((int)$data['role_id'], (int)$data['menu_id'], $data['check'] ? true : false);
+            $service->saveRoleMenus((int)$data['role_id'], explode(',', $data['menu_ids']));
+            return true;
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

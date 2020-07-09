@@ -56,4 +56,21 @@ class RoleMenuDao extends AbstractDao
     {
         $this->deleteByCondition([['role_id', '=', $roleId]]);
     }
+
+    /**
+     * 保存权限菜单
+     * @param int $roleId
+     * @param array $menuIds
+     */
+    public function saveRoleMenus(int $roleId, array $menuIds): void
+    {
+        $data = [];
+        foreach ($menuIds as $item) {
+            $data[] = [
+                'role_id' => $roleId,
+                'menu_id' => $item
+            ];
+        }
+        RoleMenu::query()->insert($data);
+    }
 }

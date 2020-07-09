@@ -20,6 +20,7 @@ class RoleRequest extends AbstractRequest
     {
         $identifier = RoleState::getValidatedInRule(RoleState::getIdentifier());
         $boolean = BooleanState::getValidatedInRule(BooleanState::getStatus());
+        $idsRegex = $this->getRegex(general_regex('ids'));
         $scene = $this->getScene();
         $rules = [
             'post:store' => [
@@ -36,8 +37,7 @@ class RoleRequest extends AbstractRequest
             ],
             'post:changeMenu' => [
                 'role_id' => 'required|integer|gt:0',
-                'menu_id' => 'required|integer|gt:0',
-                'check' => 'required|integer|in:' . $boolean,
+                'menu_ids' => 'required|' . $idsRegex,
             ],
         ];
         return $rules[$scene] ?? [];
@@ -51,8 +51,7 @@ class RoleRequest extends AbstractRequest
             'identifier' => '权限标识',
             'is_super' => '是否超级管理员',
             'role_id' => '权限',
-            'menu_id' => '菜单',
-            'check' => '是否选中',
+            'menu_ids' => '菜单',
         ];
     }
 }
