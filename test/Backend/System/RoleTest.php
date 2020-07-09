@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\System;
 
+use App\Constants\State\MenuState;
 use App\Constants\State\RoleState;
 use App\Core\Dao\MenuDao;
 use App\Core\Dao\Role\RoleDao;
-use App\Model\Menu;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
@@ -77,11 +77,12 @@ class RoleTest extends BackendHttpTestCase
 
     public function testBackendRoleSaveMenus()
     {
+        $this->removeToken();
         $dao = new RoleDao();
         $role = $dao->getInfoByIdentifier(RoleState::IDENTIFIER_ADMINISTRATOR);
 
         $menuDao = new MenuDao();
-        $menuList = $menuDao->getListByStatus();
+        $menuList = $menuDao->getListByStatus(MenuState::STATUS_ENABLED);
 
         $data = [
             'role_id' => $role->id,
@@ -89,6 +90,5 @@ class RoleTest extends BackendHttpTestCase
         ];
         $result = $this->request('/role/saveMenus', $data, 'post', $this->getHeaders());
         $this->assertSame(200, $result['code']);
-
     }
 }

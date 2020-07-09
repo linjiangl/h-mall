@@ -10,12 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Role;
 
-use App\Constants\RestConstants;
 use App\Core\Dao\MenuDao;
 use App\Core\Dao\Role\RoleDao;
 use App\Core\Dao\Role\RoleMenuDao;
 use App\Core\Service\AbstractService;
-use App\Exception\BadRequestException;
 use App\Exception\InternalException;
 
 class RoleMenuService extends AbstractService
@@ -52,11 +50,12 @@ class RoleMenuService extends AbstractService
 
         // 删除未选中的历史数据
         if (! empty($deleteMenuIds)) {
-            $dao->deleteMenusByRoleId($role->id);
+            $dao->deleteMenusByRoleId($role->id, $deleteMenuIds);
         }
 
         // 增加选中的数据
         if (! empty($installMenuIds)) {
+            sort($installMenuIds);
             $dao->saveRoleMenus($roleId, $installMenuIds);
         }
     }
