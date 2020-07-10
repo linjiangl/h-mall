@@ -51,9 +51,31 @@ class RoleMenuDao extends AbstractDao
     /**
      * 根据权限删除菜单
      * @param int $roleId
+     * @param array $menuIds 空数组,删除所有菜单
      */
-    public function deleteMenusByRoleId(int $roleId): void
+    public function deleteMenusByRoleId(int $roleId, array $menuIds = []): void
     {
-        $this->deleteByCondition([['role_id', '=', $roleId]]);
+        if (empty($menuIds)) {
+            $this->deleteByCondition([['role_id', '=', $roleId]]);
+        } else {
+            $this->deleteByCondition([['role_id', '=', $roleId], ['menu_id', 'in', $menuIds]]);
+        }
+    }
+
+    /**
+     * 保存权限菜单
+     * @param int $roleId
+     * @param array $menuIds
+     */
+    public function saveRoleMenus(int $roleId, array $menuIds): void
+    {
+        $data = [];
+        foreach ($menuIds as $item) {
+            $data[] = [
+                'role_id' => $roleId,
+                'menu_id' => $item
+            ];
+        }
+        RoleMenu::query()->insert($data);
     }
 }

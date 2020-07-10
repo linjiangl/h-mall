@@ -10,53 +10,53 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Role;
 
-use App\Constants\RestConstants;
 use App\Core\Dao\MenuDao;
 use App\Core\Dao\Role\RoleDao;
 use App\Core\Dao\Role\RoleMenuDao;
-use App\Exception\BadRequestException;
 use App\Core\Service\AbstractService;
+use App\Exception\InternalException;
 
 class RoleMenuService extends AbstractService
 {
     protected $dao = RoleMenuDao::class;
 
     /**
-     * 修改权限菜单
+     * 更新权限菜单
      * @param int $roleId
-     * @param int $menuId
-     * @param bool $check 是否选中
-     * @return bool
+     * @param array $menuIds
      */
-    public function changeRoleMenu(int $roleId, int $menuId, bool $check = false)
+    public function saveRoleMenus(int $roleId, array $menuIds): void
     {
-        if ($check) {
-            // 选中菜单
-            $roleDao = new RoleDao();
-            $role = $roleDao->info($roleId);
-            $menuDao = new MenuDao();
-            $menu = $menuDao->info($menuId);
-            try {
-                $dao = new RoleMenuDao();
-                if ($dao->getInfoByRoleMenuId($roleId, $menuId)) {
-                    throw new BadRequestException('权限菜单已存在');
-                }
-            } catch (\Throwable $e) {
-                if ($e->getCode() == RestConstants::HTTP_NOT_FOUND) {
-                    $this->create([
-                        'role_id' => $role->id,
-                        'menu_id' => $menu->id
-                    ]);
-                } else {
-                    throw new BadRequestException($e->getMessage());
-                }
-            }
-        } else {
-            // 删除菜单
-            $model = new RoleMenuDao();
-            $roleMenu = $model->getInfoByRoleMenuId($roleId, $menuId);
-            $model->remove($roleMenu->id);
+        // 选中菜单
+        $roleDao = new RoleDao();
+        $role = $roleDao->info($roleId);
+
+        $menuDao = new MenuDao();
+        $menuCount = $menuDao->getCountByCondition([['id', 'in', $menuIds]]);
+        if ($menuCount != count($menuIds)) {
+            throw new InternalException('菜单数据有误');
         }
-        return true;
+
+        // 菜单数据处理
+        $dao = new RoleMenuDao();
+        $roleMenus = $dao->getListByCondition([['role_id', '=', $role->id]]);
+        $deleteMenuIds = [];
+        $installMenuIds = $menuIds;
+        if (! empty($roleMenus)) {
+            $oldMenuIds = array_column($roleMenus, 'menu_id');
+            $deleteMenuIds = array_diff($oldMenuIds, $menuIds);
+            $installMenuIds = array_diff($menuIds, $oldMenuIds);
+        }
+
+        // 删除未选中的历史数据
+        if (! empty($deleteMenuIds)) {
+            $dao->deleteMenusByRoleId($role->id, $deleteMenuIds);
+        }
+
+        // 增加选中的数据
+        if (! empty($installMenuIds)) {
+            sort($installMenuIds);
+            $dao->saveRoleMenus($roleId, $installMenuIds);
+        }
     }
 }

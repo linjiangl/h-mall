@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\System;
 
+use App\Constants\State\MenuState;
 use App\Constants\State\RoleState;
 use App\Core\Dao\MenuDao;
 use App\Core\Dao\Role\RoleDao;
-use App\Model\Menu;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
@@ -75,27 +75,20 @@ class RoleTest extends BackendHttpTestCase
         $this->assertSame(200, $result['code']);
     }
 
-    public function testBackendRoleChangeMenu()
+    public function testBackendRoleSaveMenus()
     {
+        $this->removeToken();
         $dao = new RoleDao();
         $role = $dao->getInfoByIdentifier(RoleState::IDENTIFIER_ADMINISTRATOR);
 
         $menuDao = new MenuDao();
-        /** @var Menu $menu */
-        $menu = $menuDao->getInfoByCondition([['name', '=', 'dashboard']]);
+        $menuList = $menuDao->getListByStatus(MenuState::STATUS_ENABLED);
 
-        // 选中菜单
         $data = [
             'role_id' => $role->id,
-            'menu_id' => $menu->id,
-            'check' => 1,
+            'menu_ids' => implode(',', array_column($menuList, 'id')),
         ];
-        $result = $this->request('/role/changeMenu', $data, 'post', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
-
-        // 取消菜单
-        $data['check'] = 0;
-        $result = $this->request('/role/changeMenu', $data, 'post', $this->getHeaders());
+        $result = $this->request('/role/saveMenus', $data, 'post', $this->getHeaders());
         $this->assertSame(200, $result['code']);
     }
 }
