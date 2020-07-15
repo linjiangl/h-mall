@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Backend\Log;
 
-use App\Core\Block\AbstractBlock;
+use App\Core\Block\Backend\BackendBlock;
 use App\Core\Service\Log\LogAdminLoginService;
 
-class LogAdminLoginBlock extends AbstractBlock
+class LogAdminLoginBlock extends BackendBlock
 {
     protected $service = LogAdminLoginService::class;
 }
