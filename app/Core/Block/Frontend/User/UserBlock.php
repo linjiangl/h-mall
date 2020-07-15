@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Frontend\User;
 
-use App\Core\Block\AbstractBlock;
+use App\Core\Block\Frontend\FrontendBlock;
 use App\Core\Service\User\UserService;
 
-class UserBlock extends AbstractBlock
+class UserBlock extends FrontendBlock
 {
     protected $with = [];
 
