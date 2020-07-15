@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 
 use App\Constants\State\UserState;
-use App\Model\User\User;
 use App\Core\Service\Authorize\UserAuthorizationService;
+use App\Model\User\User;
 use Faker\Factory;
 use Hyperf\DbConnection\Db;
 
@@ -36,5 +36,15 @@ class UserFactory
             'email' => $faker->unique()->safeEmail,
             'is_system' => UserState::IS_SYSTEM_TRUE
         ]);
+
+        $num = 100;
+        while ($num > 0) {
+            $service->register($faker->userName, $password, $password, [
+                'nickname' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'is_system' => UserState::IS_SYSTEM_FALSE
+            ]);
+            $num--;
+        }
     }
 }
