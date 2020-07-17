@@ -16,8 +16,12 @@ use App\Core\Service\User\UserService;
 class UserBlock extends BackendBlock
 {
     protected $query = [
-        'like' => ['username']
+        'like' => ['username'],
+        'in' => ['status'],
+        'between' => ['created_at']
     ];
+
+    protected $paramType = [];
 
     protected $service = UserService::class;
 }

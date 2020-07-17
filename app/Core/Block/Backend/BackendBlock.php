@@ -19,5 +19,15 @@ class BackendBlock extends AbstractBlock
     {
         $this->page = intval($request->query('current', $this->page));
         $this->limit = intval($request->query('pageSize', $this->limit));
+        $sort = $request->query('sort', '');
+        if ($sort) {
+            $sort = json_decode($sort, true);
+            $orderBy = '';
+            foreach ($sort as $key => $value) {
+                $value = str_replace('end', '', $value);
+                $orderBy = $orderBy . "{$key} {$value}";
+            }
+            $this->orderBy = $orderBy;
+        }
     }
 }
