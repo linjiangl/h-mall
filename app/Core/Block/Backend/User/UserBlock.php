@@ -16,6 +16,7 @@ use App\Core\Service\User\UserService;
 class UserBlock extends BackendBlock
 {
     protected $query = [
+        '=' => ['id'],
         'like' => ['username'],
         'in' => ['status'],
         'between' => ['created_at']
