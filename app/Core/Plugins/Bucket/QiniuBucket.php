@@ -10,10 +10,11 @@ declare(strict_types=1);
  */
 namespace App\Core\Plugins\Bucket;
 
+use App\Exception\BadRequestException;
+use Exception;
 use Hyperf\HttpMessage\Upload\UploadedFile;
 use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
-
 
 class QiniuBucket extends AbstractBucket
 {
@@ -45,17 +46,17 @@ class QiniuBucket extends AbstractBucket
     public function save(UploadedFile $file, string $key = '')
     {
         try {
-            if (!$key) {
-                $key = $this->generateFilepath($file, 'editor');
+            if (! $key) {
+                $key = $this->generateFilepath($file, 'images');
             }
             $uploadMgr = new UploadManager();
-            list($ret, $err) = $uploadMgr->putFile($this->getToken(), $key, $file->getRealPath());
+            [$ret, $err] = $uploadMgr->putFile($this->getToken(), $key, $file->getRealPath());
             if ($err !== null) {
-                return $err;
-            } else {
-                return $ret;
+                throw new BadRequestException($err);
             }
-        } catch (\Exception $e) {
+            return $ret;
+        } catch (Exception $e) {
+            throw new BadRequestException('上传错误: ' . $e->getMessage());
         }
     }
 
