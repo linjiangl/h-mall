@@ -42,10 +42,13 @@ class QiniuBucket extends AbstractBucket
         return $this->config['domain'] . $hash;
     }
 
-    public function save(UploadedFile $file, string $key)
+    public function save(UploadedFile $file, string $key = '')
     {
-        $uploadMgr = new UploadManager();
         try {
+            if (!$key) {
+                $key = $this->generateFilepath($file, 'editor');
+            }
+            $uploadMgr = new UploadManager();
             list($ret, $err) = $uploadMgr->putFile($this->getToken(), $key, $file->getRealPath());
             if ($err !== null) {
                 return $err;
@@ -56,13 +59,9 @@ class QiniuBucket extends AbstractBucket
         }
     }
 
-    public function generateFilepath($fileName = '', $type = 'public')
+    public function generateFilepath(UploadedFile $file, $type = 'public')
     {
-        $suffix = '.jpg';
-        if ($fileName) {
-            $path = pathinfo($fileName);
-            $suffix = isset($path['extension']) ? '.' . $path['extension'] : $suffix;
-        }
+        $suffix = '.' . $file->getExtension();
         $key = floor(microtime(true) * 1000);
         return $type . DIRECTORY_SEPARATOR . date('Ymd') . DIRECTORY_SEPARATOR . $key . $suffix;
     }
