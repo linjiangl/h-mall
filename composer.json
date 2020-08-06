@@ -19,6 +19,7 @@
         "ext-openssl": "*",
         "ext-redis": "*",
         "ext-pdo": "*",
+        "ext-iconv": "*",
         "hyperf/cache": "~2.0.0",
         "hyperf/command": "~2.0.0",
         "hyperf/config": "~2.0.0",
@@ -41,7 +42,8 @@
         "hyperf/crontab": "~v2.0.0",
         "hyperf/async-queue": "~v2.0.0",
         "phper666/jwt-auth": "^3.0",
-        "gregwar/captcha": "^1.1"
+        "gregwar/captcha": "^1.1",
+        "qiniu/php-sdk": "^7.2"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",
