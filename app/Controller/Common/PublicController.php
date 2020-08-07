@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Common;
 
 use App\Controller\AbstractController;
+use App\Core\Plugins\Bucket\QiniuBucket;
 use App\Core\Plugins\Captcha;
 use App\Exception\HttpException;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -57,6 +58,7 @@ class PublicController extends AbstractController
     public function upload(RequestInterface $request)
     {
         $file = $request->file('file');
-        return $file->toArray();
+        $bucket = new QiniuBucket();
+        return $bucket->upload($file);
     }
 }

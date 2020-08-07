@@ -161,17 +161,3 @@ if (! function_exists('get_client_ip')) {
         return $ip;
     }
 }
-
-if (!function_exists('cdn_host')) {
-    function cdn_host()
-    {
-        return '';
-    }
-}
-
-if (!function_exists('cdn')) {
-    function cdn($path)
-    {
-        return cdn_host() . $path;
-    }
-}

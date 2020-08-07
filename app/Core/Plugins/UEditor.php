@@ -145,8 +145,8 @@ class UEditor
 
         try {
             $bucket = new QiniuBucket();
-            $result = $bucket->save($uploadFile);
-            $this->fullName = $bucket->getFullPath($result['key']);
+            $result = $bucket->upload($uploadFile);
+            $this->fullName = $bucket->getFullPath($result['full_path']);
             $this->stateInfo = $this->stateMap[0];
         } catch (\Exception $e) {
             $this->stateInfo = $this->getStateInfo('ERROR_FILE_MOVE');

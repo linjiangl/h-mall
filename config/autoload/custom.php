@@ -14,7 +14,7 @@ return [
         'access_key' => env('QN_ACCESS_KEY'),
         'secret_key' => env('QN_SECRET_KEY'),
         'bucket_name' => env('QN_BUCKET_NAME'),
-        'domain' => env('QN_DOMAIN'),
+        'cdn' => env('QN_CDN'),
         'pipeline' => env('QN_PIPELINE'),
     ]
 ];

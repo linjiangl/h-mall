@@ -18,8 +18,6 @@ use Qiniu\Storage\UploadManager;
 
 class QiniuBucket extends AbstractBucket
 {
-    protected $config;
-
     protected $auth;
 
     public function __construct()
@@ -33,37 +31,26 @@ class QiniuBucket extends AbstractBucket
         return $this->auth->uploadToken($this->config['bucket_name']);
     }
 
-    public function getDomain()
+    public function generateKey(string $filename, $dir = 'public')
     {
-        return $this->config['domain'];
+        $key = parent::generateKey($filename, $dir);
+        return substr($key, 1);
     }
 
-    public function getFullPath(string $hash)
-    {
-        return $this->config['domain'] . $hash;
-    }
-
-    public function save(UploadedFile $file, string $key = '')
+    public function upload(UploadedFile $file, string $key = '')
     {
         try {
             if (! $key) {
-                $key = $this->generateFilepath($file, 'images');
+                $key = $this->generateKey($file->getClientFilename(), 'images');
             }
             $uploadMgr = new UploadManager();
             [$ret, $err] = $uploadMgr->putFile($this->getToken(), $key, $file->getRealPath());
             if ($err !== null) {
                 throw new BadRequestException($err);
             }
-            return $ret;
+            return $this->handleResult($ret['hash'], $ret['key']);
         } catch (Exception $e) {
             throw new BadRequestException('上传错误: ' . $e->getMessage());
         }
-    }
-
-    public function generateFilepath(UploadedFile $file, $type = 'public')
-    {
-        $suffix = '.' . $file->getExtension();
-        $key = floor(microtime(true) * 1000);
-        return $type . DIRECTORY_SEPARATOR . date('Ymd') . DIRECTORY_SEPARATOR . $key . $suffix;
     }
 }
