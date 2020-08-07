@@ -13,6 +13,8 @@ namespace App\Controller\Common;
 use App\Controller\AbstractController;
 use App\Core\Plugins\Bucket\QiniuBucket;
 use App\Core\Plugins\Captcha;
+use App\Core\Plugins\UEditor;
+use App\Exception\BadRequestException;
 use App\Exception\HttpException;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -25,10 +27,7 @@ use Throwable;
  */
 class PublicController extends AbstractController
 {
-    /**
-     * 系统配置
-     * @return string[]
-     */
+    // 系统配置
     public function config()
     {
         return [
@@ -36,10 +35,7 @@ class PublicController extends AbstractController
         ];
     }
 
-    /**
-     * 图形验证码
-     * @return array
-     */
+    // 图形验证码
     public function captcha()
     {
         try {
@@ -50,15 +46,34 @@ class PublicController extends AbstractController
         }
     }
 
-    /**
-     * 文件上传
-     * @param RequestInterface $request
-     * @return array
-     */
+    // 文件上传
     public function upload(RequestInterface $request)
     {
         $file = $request->file('file');
         $bucket = new QiniuBucket();
         return $bucket->upload($file);
+    }
+
+    // 百度编辑器
+    public function ueditor(RequestInterface $request)
+    {
+        $action = $request->input('action', 'config');
+        $config = config('custom')['ueditor'];
+        switch ($action) {
+            case 'config':
+                return $config;
+            /* 上传图片 */
+            case 'uploadimage':
+                $uploadConfig = array(
+                    'pathFormat' => $config['imagePathFormat'],
+                    'maxSize' => $config['imageMaxSize'],
+                    'allowFiles' => $config['imageAllowFiles']
+                );
+                $fieldName = $config['imageFieldName'];
+                $up = new UEditor($fieldName, $uploadConfig, 'upload');
+                return $up->getFileInfo();
+            default:
+                throw new BadRequestException('不支持的操作');
+        }
     }
 }
