@@ -61,7 +61,7 @@ class PublicController extends AbstractController
         $config = config('custom')['ueditor'];
         switch ($action) {
             case 'config':
-                return $config;
+                return $this->response->json($config);
             /* 上传图片 */
             case 'uploadimage':
                 $uploadConfig = array(
@@ -71,7 +71,7 @@ class PublicController extends AbstractController
                 );
                 $fieldName = $config['imageFieldName'];
                 $up = new UEditor($fieldName, $uploadConfig, 'upload');
-                return $up->getFileInfo();
+                return $this->response->json($up->getFileInfo());
             default:
                 throw new BadRequestException('不支持的操作');
         }
