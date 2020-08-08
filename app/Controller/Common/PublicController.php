@@ -16,6 +16,8 @@ use App\Core\Plugins\Captcha;
 use App\Core\Plugins\UEditor;
 use App\Exception\BadRequestException;
 use App\Exception\HttpException;
+use App\Exception\InternalException;
+use Hyperf\HttpMessage\Upload\UploadedFile;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
@@ -50,8 +52,11 @@ class PublicController extends AbstractController
     public function upload(RequestInterface $request)
     {
         $file = $request->file('file');
-        $bucket = new QiniuBucket();
-        return $bucket->upload($file);
+        if ($file instanceof UploadedFile) {
+            $bucket = new QiniuBucket();
+            return $this->response->json($bucket->upload($file));
+        }
+        throw new InternalException('上传文件错误');
     }
 
     // 百度编辑器
