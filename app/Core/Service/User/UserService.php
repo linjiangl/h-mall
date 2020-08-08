@@ -13,10 +13,10 @@ namespace App\Core\Service\User;
 use App\Constants\RestConstants;
 use App\Constants\State\UserState;
 use App\Core\Dao\User\UserDao;
-use App\Exception\BadRequestException;
-use App\Exception\InternalException;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Authorize\UserAuthorizationService;
+use App\Exception\BadRequestException;
+use App\Exception\InternalException;
 use Hyperf\DbConnection\Db;
 use Throwable;
 
@@ -66,7 +66,7 @@ class UserService extends AbstractService
                 'avatar' => $extend['avatar'] ?? '',
                 'mobile' => $extend['mobile'] ?? '',
                 'email' => $extend['email'] ?? '',
-                'status' => $extend['status'] ?? UserState::STATUS_PENDING,
+                'status' => $extend['status'] ?? UserState::STATUS_ENABLED,
                 'is_system' => $extend['is_system'] ?? UserState::IS_SYSTEM_FALSE,
                 'lasted_login_time' => time()
             ]);
