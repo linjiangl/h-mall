@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Log;
 
-use App\Constants\Message\AdminActionMessage;
+use App\Constants\Action\AdminAction;
 use App\Core\Dao\Log\LogAdminActionDao;
 use App\Core\Service\AbstractService;
 
@@ -42,7 +42,7 @@ class LogAdminActionService extends AbstractService
             'username' => $admin['username'],
             'client_ip' => get_client_ip(),
             'module' => $module,
-            'action' => AdminActionMessage::getMessage($actionName),
+            'action' => AdminAction::getMessage($actionName),
             'remark' => [
                 'method' => $request->getMethod(),
                 'url' => $url,

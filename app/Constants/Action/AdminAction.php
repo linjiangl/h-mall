@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Constants\Message;
+namespace App\Constants\Action;
 
 use App\Constants\TraitConstants;
 use Hyperf\Constants\AbstractConstants;
@@ -17,7 +17,7 @@ use Hyperf\Constants\Annotation\Constants;
 /**
  * @Constants()
  */
-class AdminActionMessage extends AbstractConstants
+class AdminAction extends AbstractConstants
 {
     use TraitConstants;
 
