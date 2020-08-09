@@ -17,8 +17,7 @@ class BackendBlock extends AbstractBlock
 {
     protected function handleQueryParams(RequestInterface $request)
     {
-        $this->page = intval($request->query('current', $this->page));
-        $this->limit = intval($request->query('pageSize', $this->limit));
+        parent::handleQueryParams($request);
         $sort = $request->query('sort', '');
         if ($sort) {
             $sort = json_decode($sort, true);
