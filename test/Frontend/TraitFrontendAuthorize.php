@@ -16,6 +16,12 @@ trait TraitFrontendAuthorize
 
     protected $token;
 
+    protected $url;
+
+    protected $params = [];
+
+    protected $data = [];
+
     public function setToken($token)
     {
         redis()->set($this->tokenCacheIndex, $token, 86400);
@@ -26,8 +32,8 @@ trait TraitFrontendAuthorize
         $token = redis()->get($this->tokenCacheIndex);
         if (! $token) {
             $result = $this->request('/login', [
-                'username' => 'test001',
-                'password' => '123456'
+                'username' => 'admin',
+                'password' => 'yii.red'
             ]);
 
             $this->assertArrayHasKey('token', $result['data']);
@@ -37,10 +43,51 @@ trait TraitFrontendAuthorize
         return $token;
     }
 
+    public function removeToken()
+    {
+        redis()->del($this->tokenCacheIndex);
+    }
+
     public function getHeaders()
     {
         return [
             'Authorization' => $this->getToken()
         ];
+    }
+
+    protected function handleHttpIndex()
+    {
+        $result = $this->request($this->url, $this->params, 'get', $this->getHeaders());
+
+        $this->handelError($result);
+        $this->assertArrayHasKey('current_page', $result);
+    }
+
+    protected function handleHttpShow()
+    {
+        $result = $this->request($this->url, $this->params, 'get', $this->getHeaders());
+
+        $this->handelError($result);
+        $this->assertArrayHasKey('id', $result);
+    }
+
+    protected function handleHttpCreate()
+    {
+        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $this->handelError($result);
+        $this->assertIsInt($result);
+    }
+
+    protected function handleHttpUpdate()
+    {
+        $result = $this->request($this->url, $this->data, 'put', $this->getHeaders());
+        $this->handelError($result);
+        $this->assertArrayHasKey('id', $result);
+    }
+
+    protected function handleHttpDelete()
+    {
+        $result = $this->request($this->url, $this->params, 'delete', $this->getHeaders());
+        $this->handelError($result);
     }
 }

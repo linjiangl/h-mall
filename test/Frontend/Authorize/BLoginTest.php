@@ -24,8 +24,8 @@ class BLoginTest extends FrontendHttpTestCase
             'password' => '123456'
         ]);
 
-        $this->assertArrayHasKey('token', $result['data']);
-
-        $this->setToken($result['data']['token']);
+        $this->handelError($result);
+        $this->assertArrayHasKey('token', $result);
+        $this->setToken($result['token']);
     }
 }

@@ -21,8 +21,9 @@ class CAuthorizeTest extends BackendHttpTestCase
     {
         $result = $this->request('/authorize', [], 'post', $this->getHeaders());
 
-        $this->assertArrayHasKey('id', $result['data']);
-        $this->assertSame('guest', $result['data']['username']);
-        $this->assertArrayNotHasKey('password', $result['data']);
+        $this->handelError($result);
+        $this->assertArrayHasKey('id', $result);
+        $this->assertSame('guest', $result['username']);
+        $this->assertArrayNotHasKey('password', $result);
     }
 }

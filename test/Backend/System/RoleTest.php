@@ -23,18 +23,14 @@ class RoleTest extends BackendHttpTestCase
 
     public function testBackendRoleIndex()
     {
-        $result = $this->request('/role', [], 'get', $this->getHeaders());
-
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('current_page', $result['data']);
+        $this->url = '/role';
+        $this->handleHttpIndex();
     }
 
     public function testBackendRoleShow()
     {
-        $result = $this->request('/role/1', [], 'get', $this->getHeaders());
-
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('id', $result['data']);
+        $this->url = '/role/1';
+        $this->handleHttpShow();
     }
 
     public function testBackendRoleCreate()
@@ -45,9 +41,10 @@ class RoleTest extends BackendHttpTestCase
             'identifier' => RoleState::IDENTIFIER_OPERATORS,
             'is_super' => RoleState::IS_SUPER_TRUE,
         ];
-        $result = $this->request('/role', $data, 'post', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
-        $this->assertIsInt($result['data']);
+
+        $this->url = '/role';
+        $this->data = $data;
+        $this->handleHttpCreate();
     }
 
     public function testBackendRoleUpdate()
@@ -61,9 +58,10 @@ class RoleTest extends BackendHttpTestCase
             'identifier' => RoleState::IDENTIFIER_OPERATORS,
             'is_super' => RoleState::IS_SUPER_FALSE,
         ];
-        $result = $this->request('/role/' . $info->id, $data, 'put', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('id', $result['data']);
+
+        $this->url = '/role/' . $info->id;
+        $this->data = $data;
+        $this->handleHttpUpdate();
     }
 
     public function testBackendRoleDelete()
@@ -71,8 +69,8 @@ class RoleTest extends BackendHttpTestCase
         $dao = new RoleDao();
         $info = $dao->getInfoByIdentifier(RoleState::IDENTIFIER_OPERATORS);
 
-        $result = $this->request('/role/' . $info->id, [], 'delete', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
+        $this->url = '/role/' . $info->id;
+        $this->handleHttpDelete();
     }
 
     public function testBackendRoleSaveMenus()
@@ -89,6 +87,6 @@ class RoleTest extends BackendHttpTestCase
             'menu_ids' => implode(',', array_column($menuList, 'id')),
         ];
         $result = $this->request('/role/saveMenus', $data, 'post', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
+        $this->handelError($result);
     }
 }

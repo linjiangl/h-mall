@@ -20,18 +20,14 @@ class AdminTest extends BackendHttpTestCase
 
     public function testBackendAdminIndex()
     {
-        $result = $this->request('/admin', [], 'get', $this->getHeaders());
-
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('current_page', $result['data']);
+        $this->url = '/admin';
+        $this->handleHttpIndex();
     }
 
     public function testBackendAdminShow()
     {
-        $result = $this->request('/admin/2', [], 'get', $this->getHeaders());
-
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('id', $result['data']);
+        $this->url = '/admin/2';
+        $this->handleHttpShow();
     }
 
     public function testBackendAdminStore()
@@ -45,9 +41,9 @@ class AdminTest extends BackendHttpTestCase
             'mobile' => '18600001111',
             'email' => 'xiaomi@qq.com',
         ];
-        $result = $this->request('/admin', $data, 'post', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
-        $this->assertIsInt($result['data']);
+        $this->url = '/admin';
+        $this->data = $data;
+        $this->handleHttpCreate();
     }
 
     public function testBackendAdminUpdate()
@@ -59,8 +55,8 @@ class AdminTest extends BackendHttpTestCase
             'real_name' => '小米22',
             'role_id' => 2
         ];
-        $result = $this->request('/admin/' . $admin->id, $data, 'put', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('id', $result['data']);
+        $this->url = '/admin/' . $admin->id;
+        $this->data = $data;
+        $this->handleHttpUpdate();
     }
 }

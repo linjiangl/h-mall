@@ -22,6 +22,7 @@ class ARegisterTest extends FrontendHttpTestCase
             'password_confirmation' => '123456'
         ]);
 
-        $this->assertArrayHasKey('token', $result['data']);
+        $this->handelError($result);
+        $this->assertArrayHasKey('token', $result);
     }
 }

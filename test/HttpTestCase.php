@@ -38,4 +38,11 @@ abstract class HttpTestCase extends TestCase
     {
         return $this->client->{$name}(...$arguments);
     }
+
+    public function handelError($response)
+    {
+        if (is_array($response)) {
+            $this->assertArrayNotHasKey('error', $response);
+        }
+    }
 }

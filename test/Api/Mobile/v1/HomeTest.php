@@ -18,7 +18,7 @@ class HomeTest extends HttpTestCase
     {
         $result = $this->client->get('/v1/home');
 
-        $this->assertSame(200, $result['code']);
-        $this->assertSame('rest_v1', $result['data']);
+        $this->handelError($result);
+        $this->assertSame('rest_v1', $result);
     }
 }
