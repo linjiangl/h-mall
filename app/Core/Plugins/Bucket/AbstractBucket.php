@@ -10,7 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Core\Plugins\Bucket;
 
+use App\Core\Dao\AttachmentDao;
 use Hyperf\HttpMessage\Upload\UploadedFile;
+use Throwable;
 
 abstract class AbstractBucket
 {
@@ -67,21 +69,47 @@ abstract class AbstractBucket
      */
     public function upload(UploadedFile $file, string $key = '')
     {
-        return $this->handleResult('', '');
+        return $this->handleResult($file, '', '');
     }
 
     /**
      * 返回结果
+     * @param UploadedFile $file
      * @param string $hash 目标资源的hash值，可用于 ETag 头部。
      * @param string $key 目标资源的最终名字。
      * @return array
      */
-    protected function handleResult(string $hash, string $key)
+    protected function handleResult(UploadedFile $file, string $hash, string $key)
     {
+        // 删除上传文件
+        if (file_exists($file->getRealPath())) {
+            unlink($file->getRealPath());
+        }
+
         return [
             'hash' => $hash,
             'path' => $key,
             'full_path' => $this->getFullPath($key)
         ];
+    }
+
+    /**
+     * 检查文件是否上传
+     * @param UploadedFile $file
+     * @return array|bool
+     */
+    protected function checkFileExists(UploadedFile $file)
+    {
+        try {
+            $config = config('custom')['attachment'];
+            if ($file->getSize() <= $config['check_md5']) {
+                $md5 = md5_file($file->getRealPath());
+                $dao = new AttachmentDao();
+                $info = $dao->getInfoByMd5($md5);
+                return $this->handleResult($file, $info->hash, $info->key);
+            }
+        } catch (Throwable $e) {
+        }
+        return false;
     }
 }

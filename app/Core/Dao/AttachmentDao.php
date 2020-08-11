@@ -26,4 +26,11 @@ class AttachmentDao extends AbstractDao
             ['index', '=', $index]
         ]);
     }
+
+    public function getInfoByMd5(string $md5): Attachment
+    {
+        return $this->getInfoByCondition([
+            ['md5', '=', $md5]
+        ]);
+    }
 }

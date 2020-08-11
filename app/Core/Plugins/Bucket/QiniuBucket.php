@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Plugins\Bucket;
 
+use App\Core\Service\AttachmentService;
 use App\Exception\BadRequestException;
 use Exception;
 use Hyperf\HttpMessage\Upload\UploadedFile;
@@ -39,6 +40,11 @@ class QiniuBucket extends AbstractBucket
 
     public function upload(UploadedFile $file, string $key = '')
     {
+        $ret = $this->checkFileExists($file);
+        if ($ret != false) {
+            return $ret;
+        }
+
         try {
             if (! $key) {
                 $key = $this->generateKey($file->getClientFilename(), 'images');
@@ -48,7 +54,11 @@ class QiniuBucket extends AbstractBucket
             if ($err !== null) {
                 throw new BadRequestException($err);
             }
-            return $this->handleResult($ret['hash'], $ret['key']);
+
+            $service = new AttachmentService();
+            $service->createUpload($file->toArray(), $ret['hash'], $ret['key']);
+
+            return $this->handleResult($file, $ret['hash'], $ret['key']);
         } catch (Exception $e) {
             throw new BadRequestException('上传错误: ' . $e->getMessage());
         }

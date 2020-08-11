@@ -27,6 +27,12 @@ class AttachmentService extends AbstractService
      */
     public function createUpload(array $fileData, string $hash, string $key, string $system = AttachmentState::SYSTEM_QINIU)
     {
+        $config = config('custom')['attachment'];
+        $md5 = '';
+        if ($fileData['size'] <= $config['check_md5'] && file_exists($fileData['tmp_file'])) {
+            $md5 = md5_file($fileData['tmp_file']);
+        }
+
         $data = [
             'system' => $system,
             'type' => $fileData['type'],
@@ -34,6 +40,7 @@ class AttachmentService extends AbstractService
             'hash' => $hash,
             'key' => $key,
             'index' => $this->generateIndex($key),
+            'md5' => $md5,
             'status' => AttachmentState::STATUS_ENABLED
         ];
         return $this->create($data);
@@ -59,7 +66,7 @@ class AttachmentService extends AbstractService
     public function batchFailure(array $oldKeys, array $newKeys)
     {
         $diff = array_diff($oldKeys, $newKeys);
-        if (!empty($diff)) {
+        if (! empty($diff)) {
             $diffIndex = [];
             foreach ($diff as $item) {
                 $diffIndex[] = $this->generateIndex($item);

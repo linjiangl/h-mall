@@ -9,6 +9,10 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 return [
+    // 附件配置
+    'attachment' => [
+        'check_md5' => 1024 * 1024 * 2, // 小于等于该值时,检查文件的 MD5 散列值
+    ],
     // 七牛存储配置
     'qn' => [
         'access_key' => env('QN_ACCESS_KEY'),
