@@ -15,6 +15,7 @@ use App\Exception\BadRequestException;
 use Exception;
 use Hyperf\HttpMessage\Upload\UploadedFile;
 use Qiniu\Auth;
+use Qiniu\Config;
 use Qiniu\Storage\UploadManager;
 
 class QiniuBucket extends AbstractBucket
@@ -49,7 +50,8 @@ class QiniuBucket extends AbstractBucket
             if (! $key) {
                 $key = $this->generateKey($file->getClientFilename(), 'images');
             }
-            $uploadMgr = new UploadManager();
+            $config = new Config();
+            $uploadMgr = new UploadManager($config);
             [$ret, $err] = $uploadMgr->putFile($this->getToken(), $key, $file->getRealPath());
             if ($err !== null) {
                 throw new BadRequestException($err);
