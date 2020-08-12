@@ -16,29 +16,23 @@ use Exception;
 use Hyperf\HttpMessage\Upload\UploadedFile;
 use Qiniu\Auth;
 use Qiniu\Config;
+use Qiniu\Storage\BucketManager;
 use Qiniu\Storage\UploadManager;
+use Qiniu\Zone;
 
 class QiniuBucket extends AbstractBucket
 {
-    protected $auth;
-
     public function __construct()
     {
         $this->config = config('custom')['qn'];
-        $this->auth = new Auth($this->config['access_key'], $this->config['secret_key']);
     }
 
-    public function getToken()
-    {
-        return $this->auth->uploadToken($this->config['bucket_name']);
-    }
-
-    public function generateKey(string $filename, $dir = 'public')
-    {
-        $key = parent::generateKey($filename, $dir);
-        return substr($key, 1);
-    }
-
+    /**
+     * 文件上传
+     * @param UploadedFile $file
+     * @param string $key
+     * @return array|bool
+     */
     public function upload(UploadedFile $file, string $key = '')
     {
         $ret = $this->checkFileExists($file);
@@ -50,11 +44,11 @@ class QiniuBucket extends AbstractBucket
             if (! $key) {
                 $key = $this->generateKey($file->getClientFilename(), 'images');
             }
-            $config = new Config();
-            $uploadMgr = new UploadManager($config);
+            $uploadMgr = new UploadManager($this->getConfig());
             [$ret, $err] = $uploadMgr->putFile($this->getToken(), $key, $file->getRealPath());
             if ($err !== null) {
-                throw new BadRequestException($err);
+                write_logs('上传失败', 'QiniuBucketUpload', $err);
+                throw new BadRequestException('上传失败');
             }
 
             $service = new AttachmentService();
@@ -64,5 +58,54 @@ class QiniuBucket extends AbstractBucket
         } catch (Exception $e) {
             throw new BadRequestException('上传错误: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * 批量删除
+     * @param array $keys
+     * @return array ['success' => [...删除成功的key], 'fail' => [...删除失败的key]]
+     */
+    public function batchDelete(array $keys)
+    {
+        $bucketManager = new BucketManager($this->getAuth(), $this->getConfig());
+        $ops = $bucketManager->buildBatchDelete($this->config['bucket_name'], $keys);
+        [$ret, $err] = $bucketManager->batch($ops);
+        if ($err) {
+            write_logs('删除失败', 'QiniuBucketRemove', $err);
+            throw new BadRequestException($err);
+        }
+        $data = [
+            'success' => [],
+            'fail' => []
+        ];
+        foreach ($ret as $k => $v) {
+            if ($v['code'] == 200) {
+                $data['success'][] = $keys[$k];
+            } else {
+                $data['fail'][] = $keys[$k];
+            }
+        }
+        return $data;
+    }
+
+    public function getAuth()
+    {
+        return new Auth($this->config['access_key'], $this->config['secret_key']);
+    }
+
+    public function getToken()
+    {
+        return $this->getAuth()->uploadToken($this->config['bucket_name']);
+    }
+
+    public function getConfig()
+    {
+        return new Config(Zone::zonez2());
+    }
+
+    public function generateKey(string $filename, $dir = 'images')
+    {
+        $key = parent::generateKey($filename, $dir);
+        return substr($key, 1);
     }
 }

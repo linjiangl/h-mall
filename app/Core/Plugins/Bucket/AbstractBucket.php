@@ -10,9 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Core\Plugins\Bucket;
 
-use App\Core\Dao\AttachmentDao;
+use App\Core\Service\AttachmentService;
 use Hyperf\HttpMessage\Upload\UploadedFile;
-use Throwable;
 
 abstract class AbstractBucket
 {
@@ -50,7 +49,7 @@ abstract class AbstractBucket
      * @param string $dir 存在目录
      * @return string
      */
-    public function generateKey(string $filename, $dir = 'public')
+    public function generateKey(string $filename, $dir = 'images')
     {
         $suffix = '.jpg';
         if ($filename) {
@@ -100,15 +99,14 @@ abstract class AbstractBucket
      */
     protected function checkFileExists(UploadedFile $file)
     {
-        try {
-            $config = config('custom')['attachment'];
-            if ($file->getSize() <= $config['check_md5']) {
-                $md5 = md5_file($file->getRealPath());
-                $dao = new AttachmentDao();
-                $info = $dao->getInfoByMd5($md5);
+        $config = config('custom')['attachment'];
+        if ($file->getSize() <= $config['check_md5']) {
+            $md5 = md5_file($file->getRealPath());
+            $service = new AttachmentService();
+            $info = $service->getInfoByMd5($md5);
+            if ($info != null) {
                 return $this->handleResult($file, $info->hash, $info->key);
             }
-        } catch (Throwable $e) {
         }
         return false;
     }

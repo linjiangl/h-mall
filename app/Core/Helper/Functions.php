@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use App\Exception\InternalException;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Framework\Logger\StdoutLogger;
@@ -161,5 +160,22 @@ if (! function_exists('get_client_ip')) {
             $ip = $ip ? current($ip) : '127.0.0.1';
         }
         return $ip;
+    }
+}
+
+if (! function_exists('write_logs')) {
+    /**
+     * 记录日志
+     * @param string $message 日志说明
+     * @param string $flag 标记
+     * @param null $remark 备注
+     * @param string $level 日志级别
+     */
+    function write_logs(string $message, string $flag, $remark = null, string $level = 'error')
+    {
+        logger()->log($level, $message, [
+            'flag' => $flag,
+            'remark' => $remark
+        ]);
     }
 }

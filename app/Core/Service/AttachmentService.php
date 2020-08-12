@@ -12,10 +12,21 @@ namespace App\Core\Service;
 
 use App\Constants\State\AttachmentState;
 use App\Core\Dao\AttachmentDao;
+use App\Core\Plugins\Bucket\QiniuBucket;
 
 class AttachmentService extends AbstractService
 {
     protected $dao = AttachmentDao::class;
+
+    public function getInfoByMd5(string $md5)
+    {
+        try {
+            $dao = new AttachmentDao();
+            return $dao->getInfoByMd5($md5);
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
 
     /**
      * 保存上传文件信息
@@ -44,6 +55,38 @@ class AttachmentService extends AbstractService
             'status' => AttachmentState::STATUS_ENABLED
         ];
         return $this->create($data);
+    }
+
+    /**
+     * 批量删除附件
+     * @param array $ids
+     * @param string $system
+     * @return bool
+     */
+    public function batchDelete(array $ids, string $system = AttachmentState::SYSTEM_QINIU)
+    {
+        $dao = new AttachmentDao();
+        $keys = $dao->getColumnByCondition([
+            ['id', 'in', $ids],
+            ['system', '=', $system]
+        ], 'key');
+
+        if (! empty($keys)) {
+            $bucket = new QiniuBucket();
+            $result = $bucket->batchDelete($keys);
+
+            // 成功删除的资源,
+            if (! empty($result['success'])) {
+                $index = [];
+                foreach ($result['success'] as $key) {
+                    $index[] = $this->generateIndex($key);
+                }
+                $dao->deleteByCondition([
+                    ['index', 'in', $index],
+                ]);
+            }
+        }
+        return true;
     }
 
     /**
