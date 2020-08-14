@@ -8,16 +8,16 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao\Comment;
+namespace App\Core\Dao\Evaluation;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Order\OrderComment;
+use App\Model\Order\OrderCommentReply;
 
-class CommentDao extends AbstractDao
+class EvaluationReplyDao extends AbstractDao
 {
-    protected $model = OrderComment::class;
+    protected $model = OrderCommentReply::class;
 
     protected $noAllowActions = [];
 
-    protected $notFoundMessage = '评价不存在或已删除';
+    protected $notFoundMessage = '评价回复不存在或已删除';
 }
