@@ -10,13 +10,13 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Api\Mobile\v1;
 
-use HyperfTest\HttpTestCase;
+use HyperfTest\AbstractHttpTestCase;
 
-class HomeTest extends HttpTestCase
+class HomeTest extends AbstractHttpTestCase
 {
     public function testMobileHome()
     {
-        $result = $this->client->get('/v1/home');
+        $result = $this->request('/v1/home', [], 'get');
 
         $this->handelError($result);
         $this->assertSame('rest_v1', $result);
