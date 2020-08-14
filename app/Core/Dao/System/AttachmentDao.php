@@ -8,8 +8,9 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao;
+namespace App\Core\Dao\System;
 
+use App\Core\Dao\AbstractDao;
 use App\Model\Attachment;
 
 class AttachmentDao extends AbstractDao

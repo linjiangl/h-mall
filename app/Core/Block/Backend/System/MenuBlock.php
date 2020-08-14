@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Block\Backend\System;
 
 use App\Core\Block\Backend\BackendBlock;
-use App\Core\Service\MenuService;
+use App\Core\Service\System\MenuService;
 
 class MenuBlock extends BackendBlock
 {

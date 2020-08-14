@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Plugins\Bucket;
 
-use App\Core\Service\AttachmentService;
+use App\Core\Service\System\AttachmentService;
 use Hyperf\HttpMessage\Upload\UploadedFile;
 
 abstract class AbstractBucket

@@ -8,11 +8,12 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service;
+namespace App\Core\Service\System;
 
 use App\Constants\State\AttachmentState;
-use App\Core\Dao\AttachmentDao;
+use App\Core\Dao\System\AttachmentDao;
 use App\Core\Plugins\Bucket\SamplesBucket;
+use App\Core\Service\AbstractService;
 use App\Exception\NotFoundException;
 
 class AttachmentService extends AbstractService

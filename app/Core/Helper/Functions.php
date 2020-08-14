@@ -179,3 +179,19 @@ if (! function_exists('write_logs')) {
         ]);
     }
 }
+
+if (! function_exists('database_text')) {
+    /**
+     * 数据库文本数据
+     * @param $data
+     * @param string $schema
+     * @return array|false|mixed|string
+     */
+    function database_text($data, string $schema = 'en')
+    {
+        if ($schema == 'en') {
+            return empty($data) ? '' : json_encode($data, JSON_UNESCAPED_UNICODE);
+        }
+        return empty($data) ? [] : json_decode($data);
+    }
+}
