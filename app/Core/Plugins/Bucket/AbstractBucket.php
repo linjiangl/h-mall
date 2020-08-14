@@ -72,6 +72,19 @@ abstract class AbstractBucket
     }
 
     /**
+     * 批量删除
+     * @param array $keys
+     * @return array ['success' => [...删除成功的key], 'fail' => [...删除失败的key]]
+     */
+    public function batchDelete(array $keys)
+    {
+        return [
+            'success' => [],
+            'fail' => []
+        ];
+    }
+
+    /**
      * 返回结果
      * @param UploadedFile $file
      * @param string $hash 目标资源的hash值，可用于 ETag 头部。

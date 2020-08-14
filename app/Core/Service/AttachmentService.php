@@ -12,7 +12,8 @@ namespace App\Core\Service;
 
 use App\Constants\State\AttachmentState;
 use App\Core\Dao\AttachmentDao;
-use App\Core\Plugins\Bucket\QiniuBucket;
+use App\Core\Plugins\Bucket\SamplesBucket;
+use App\Exception\NotFoundException;
 
 class AttachmentService extends AbstractService
 {
@@ -71,20 +72,21 @@ class AttachmentService extends AbstractService
             ['system', '=', $system]
         ], 'key');
 
-        if (! empty($keys)) {
-            $bucket = new QiniuBucket();
-            $result = $bucket->batchDelete($keys);
+        if (empty($keys)) {
+            throw new NotFoundException('资源不存在');
+        }
 
-            // 成功删除的资源,
-            if (! empty($result['success'])) {
-                $index = [];
-                foreach ($result['success'] as $key) {
-                    $index[] = $this->generateIndex($key);
-                }
-                $dao->deleteByCondition([
-                    ['index', 'in', $index],
-                ]);
+        // 成功删除的资源
+        $bucket = (new SamplesBucket())->make($system);
+        $result = $bucket->batchDelete($keys);
+        if (! empty($result['success'])) {
+            $index = [];
+            foreach ($result['success'] as $key) {
+                $index[] = $this->generateIndex($key);
             }
+            $dao->deleteByCondition([
+                ['index', 'in', $index],
+            ]);
         }
         return true;
     }

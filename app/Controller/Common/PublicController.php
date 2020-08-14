@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Common;
 
 use App\Controller\AbstractController;
-use App\Core\Plugins\Bucket\QiniuBucket;
+use App\Core\Plugins\Bucket\SamplesBucket;
 use App\Core\Plugins\Captcha;
 use App\Core\Plugins\UEditor;
 use App\Exception\BadRequestException;
@@ -53,7 +53,7 @@ class PublicController extends AbstractController
     {
         $file = $request->file('file');
         if ($file instanceof UploadedFile) {
-            $bucket = new QiniuBucket();
+            $bucket = (new SamplesBucket())->make();
             return $bucket->upload($file);
         }
         throw new InternalException('上传文件错误');
@@ -69,11 +69,11 @@ class PublicController extends AbstractController
                 return $config;
             /* 上传图片 */
             case 'uploadimage':
-                $uploadConfig = array(
+                $uploadConfig = [
                     'pathFormat' => $config['imagePathFormat'],
                     'maxSize' => $config['imageMaxSize'],
                     'allowFiles' => $config['imageAllowFiles']
-                );
+                ];
                 $fieldName = $config['imageFieldName'];
                 $up = new UEditor($fieldName, $uploadConfig, 'upload');
                 return $up->getFileInfo();

@@ -27,12 +27,6 @@ class QiniuBucket extends AbstractBucket
         $this->config = config('custom')['qn'];
     }
 
-    /**
-     * 文件上传
-     * @param UploadedFile $file
-     * @param string $key
-     * @return array|bool
-     */
     public function upload(UploadedFile $file, string $key = '')
     {
         $ret = $this->checkFileExists($file);
@@ -60,11 +54,6 @@ class QiniuBucket extends AbstractBucket
         }
     }
 
-    /**
-     * 批量删除
-     * @param array $keys
-     * @return array ['success' => [...删除成功的key], 'fail' => [...删除失败的key]]
-     */
     public function batchDelete(array $keys)
     {
         $bucketManager = new BucketManager($this->getAuth(), $this->getConfig());
