@@ -23,15 +23,11 @@ class AttachmentDao extends AbstractDao
 
     public function getInfoByIndex(string $index): Attachment
     {
-        return $this->getInfoByCondition([
-            ['index', '=', $index]
-        ]);
+        return $this->getInfoByCondition([['index', '=', $index]]);
     }
 
     public function getInfoByMd5(string $md5): Attachment
     {
-        return $this->getInfoByCondition([
-            ['md5', '=', $md5]
-        ]);
+        return $this->getInfoByCondition([['md5', '=', $md5]]);
     }
 }

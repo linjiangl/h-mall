@@ -27,10 +27,7 @@ class RoleMenuDao extends AbstractDao
      */
     public function getInfoByRoleMenuId(int $roleId, int $menuId): RoleMenu
     {
-        return $this->getInfoByCondition([
-            ['role_id', '=', $roleId],
-            ['menu_id', '=', $menuId],
-        ]);
+        return $this->getInfoByCondition([['role_id', '=', $roleId], ['menu_id', '=', $menuId]]);
     }
 
     /**
