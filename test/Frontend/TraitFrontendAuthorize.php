@@ -36,9 +36,9 @@ trait TraitFrontendAuthorize
                 'password' => 'yii.red'
             ]);
 
-            $this->assertArrayHasKey('token', $result['data']);
-            $this->setToken($result['data']['token']);
-            $token = $result['data']['token'];
+            $this->assertArrayHasKey('token', $result);
+            $this->setToken($result['token']);
+            $token = $result['token'];
         }
         return $token;
     }

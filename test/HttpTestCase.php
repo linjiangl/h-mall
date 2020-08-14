@@ -44,5 +44,6 @@ abstract class HttpTestCase extends TestCase
         if (is_array($response)) {
             $this->assertArrayNotHasKey('error', $response);
         }
+        $this->assertTrue(true);
     }
 }

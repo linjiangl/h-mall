@@ -75,7 +75,6 @@ class RoleTest extends BackendHttpTestCase
 
     public function testBackendRoleSaveMenus()
     {
-        $this->removeToken();
         $dao = new RoleDao();
         $role = $dao->getInfoByIdentifier(RoleState::IDENTIFIER_ADMINISTRATOR);
 
