@@ -13,14 +13,14 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateOrderCommentTable extends Migration
+class CreateEvaluationTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('order_comment', function (Blueprint $table) {
+        Schema::create('evaluation', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->integer('order_id', false, true);
@@ -32,7 +32,7 @@ class CreateOrderCommentTable extends Migration
             $table->integer('reply_num', false, true)->default(0)->comment('回复数量');
             $table->integer('additional_num', false, true)->default(0)->comment('追评数量');
             $table->integer('additional_comment_id', false, true)->default(0)->comment('追评ID');
-            $table->tinyInteger('is_additional', false, true)->default(0)->comment('是否追加评论 0:否,1:是');
+            $table->tinyInteger('is_additional', false, true)->default(0)->comment('是否追加评价 0:否,1:是');
             $table->tinyInteger('is_image', false, true)->default(0)->comment('是否带图 0:否,1:是');
             $table->tinyInteger('is_anonymous', false, true)->default(0)->comment('是否匿名 0:否,1:是');
             $table->string('content', 255)->comment('评论内容');
@@ -53,6 +53,6 @@ class CreateOrderCommentTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_comment');
+        Schema::dropIfExists('evaluation');
     }
 }

@@ -8,10 +8,10 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Model\Order;
+namespace App\Model\Evaluation;
 
-use App\Model\Model;
 use Hyperf\Database\Model\SoftDeletes;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
@@ -25,7 +25,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $reply_num 回复数量
  * @property int $additional_num 追评数量
  * @property int $additional_comment_id 追评ID
- * @property int $is_additional 是否追加评论 0:否,1:是
+ * @property int $is_additional 是否追加评价 0:否,1:是
  * @property int $is_image 是否带图 0:否,1:是
  * @property int $is_anonymous 是否匿名 0:否,1:是
  * @property string $content 评论内容
@@ -35,7 +35,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
  */
-class OrderComment extends Model
+class Evaluation extends Model
 {
     use SoftDeletes;
 
@@ -44,7 +44,7 @@ class OrderComment extends Model
      *
      * @var string
      */
-    protected $table = 'order_comment';
+    protected $table = 'evaluation';
 
     /**
      * The attributes that are mass assignable.

@@ -40,6 +40,7 @@ class ModelCommand extends HyperfCommand
         'option',
         'product',
         'order',
+        'evaluation',
         'refund',
         'message',
         'log',
@@ -53,7 +54,7 @@ class ModelCommand extends HyperfCommand
      * @var array
      */
     protected $specifyTables = [
-        'menu'
+        'evaluation', 'evaluation_reply'
     ];
 
     public function configure()

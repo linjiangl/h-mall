@@ -11,11 +11,11 @@ declare(strict_types=1);
 namespace App\Core\Dao\Evaluation;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Order\OrderCommentReply;
+use App\Model\Evaluation\EvaluationReply;
 
 class EvaluationReplyDao extends AbstractDao
 {
-    protected $model = OrderCommentReply::class;
+    protected $model = EvaluationReply::class;
 
     protected $noAllowActions = [];
 
