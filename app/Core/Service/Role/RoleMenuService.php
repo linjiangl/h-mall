@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Role;
 
-use App\Core\Dao\MenuDao;
+use App\Core\Dao\System\MenuDao;
 use App\Core\Dao\Role\RoleDao;
 use App\Core\Dao\Role\RoleMenuDao;
 use App\Core\Service\AbstractService;

@@ -16,6 +16,12 @@ trait TraitBackendAuthorize
 
     protected $token;
 
+    protected $url;
+
+    protected $params = [];
+
+    protected $data = [];
+
     public function setToken($token)
     {
         redis()->set($this->tokenCacheIndex, $token, 86400);
@@ -30,9 +36,9 @@ trait TraitBackendAuthorize
                 'password' => 'yii.red'
             ]);
 
-            $this->assertArrayHasKey('token', $result['data']);
-            $this->setToken($result['data']['token']);
-            $token = $result['data']['token'];
+            $this->assertArrayHasKey('token', $result);
+            $this->setToken($result['token']);
+            $token = $result['token'];
         }
         return $token;
     }
@@ -47,5 +53,41 @@ trait TraitBackendAuthorize
         return [
             'Authorization' => $this->getToken()
         ];
+    }
+
+    protected function handleHttpIndex()
+    {
+        $result = $this->request($this->url, $this->params, 'get', $this->getHeaders());
+
+        $this->handelError($result);
+        $this->assertArrayHasKey('current_page', $result);
+    }
+
+    protected function handleHttpShow()
+    {
+        $result = $this->request($this->url, $this->params, 'get', $this->getHeaders());
+
+        $this->handelError($result);
+        $this->assertArrayHasKey('id', $result);
+    }
+
+    protected function handleHttpCreate()
+    {
+        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $this->handelError($result);
+        $this->assertIsInt($result);
+    }
+
+    protected function handleHttpUpdate()
+    {
+        $result = $this->request($this->url, $this->data, 'put', $this->getHeaders());
+        $this->handelError($result);
+        $this->assertArrayHasKey('id', $result);
+    }
+
+    protected function handleHttpDelete()
+    {
+        $result = $this->request($this->url, $this->params, 'delete', $this->getHeaders());
+        $this->handelError($result);
     }
 }

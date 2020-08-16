@@ -19,17 +19,13 @@ class UserTest extends BackendHttpTestCase
 
     public function testBackendUserIndex()
     {
-        $result = $this->request('/user', [], 'get', $this->getHeaders());
-
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('current_page', $result['data']);
+        $this->url = '/user';
+        $this->handleHttpIndex();
     }
 
     public function testBackendUserShow()
     {
-        $result = $this->request('/user/1', [], 'get', $this->getHeaders());
-
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('id', $result['data']);
+        $this->url = '/user/1';
+        $this->handleHttpShow();
     }
 }

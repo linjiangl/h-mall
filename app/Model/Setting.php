@@ -39,4 +39,14 @@ class Setting extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function getValueAttribute($value)
+    {
+        return database_text($value, 'de');
+    }
+
+    public function setValueAttribute($value)
+    {
+        $this->attributes['value'] = database_text($value);
+    }
 }

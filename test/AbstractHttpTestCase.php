@@ -32,4 +32,12 @@ abstract class AbstractHttpTestCase extends HttpTestCase
     {
         return $this->client->$method($this->apiType . $url, $data, $header);
     }
+
+    public function handelError($response)
+    {
+        if (is_array($response)) {
+            $this->assertArrayNotHasKey('error', $response);
+        }
+        $this->assertTrue(true);
+    }
 }

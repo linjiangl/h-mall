@@ -10,9 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Admin;
 
-use App\Core\Block\Backend\Admin\AdminBlock;
-use App\Constants\Message\AdminActionMessage;
+use App\Constants\Action\AdminAction;
 use App\Controller\AbstractController;
+use App\Core\Block\Backend\Admin\AdminBlock;
 use App\Request\Backend\Admin\AdminRequest;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -48,7 +48,7 @@ class AdminController extends AbstractController
     public function store(AdminRequest $request)
     {
         $request->validated();
-        $this->setActionName(AdminActionMessage::ADMIN_CREATE);
+        $this->setActionName(AdminAction::ADMIN_CREATE);
         return (new AdminBlock())->store($request->post());
     }
 
@@ -61,7 +61,7 @@ class AdminController extends AbstractController
     public function update(AdminRequest $request, int $id)
     {
         $request->validated();
-        $this->setActionName(AdminActionMessage::ADMIN_UPDATE);
+        $this->setActionName(AdminAction::ADMIN_UPDATE);
         return (new AdminBlock())->update($request->post(), $id);
     }
 }

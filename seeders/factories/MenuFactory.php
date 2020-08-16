@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 use App\Constants\State\MenuState;
-use App\Core\Service\MenuService;
+use App\Core\Service\System\MenuService;
 
 /**
  * Multi-user mall

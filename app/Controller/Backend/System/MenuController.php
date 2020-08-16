@@ -10,9 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\System;
 
-use App\Core\Block\Backend\System\MenuBlock;
-use App\Constants\Message\AdminActionMessage;
+use App\Constants\Action\AdminAction;
 use App\Controller\AbstractController;
+use App\Core\Block\Backend\System\MenuBlock;
 use App\Request\Backend\System\MenuRequest;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -48,7 +48,7 @@ class MenuController extends AbstractController
     public function store(MenuRequest $request)
     {
         $request->validated();
-        $this->setActionName(AdminActionMessage::MENU_CREATE);
+        $this->setActionName(AdminAction::MENU_CREATE);
         return (new MenuBlock())->store($request->post());
     }
 
@@ -61,7 +61,7 @@ class MenuController extends AbstractController
     public function update(MenuRequest $request, int $id)
     {
         $request->validated();
-        $this->setActionName(AdminActionMessage::MENU_UPDATE);
+        $this->setActionName(AdminAction::MENU_UPDATE);
         return (new MenuBlock())->update($request->post(), $id);
     }
 
@@ -73,7 +73,7 @@ class MenuController extends AbstractController
      */
     public function destroy(RequestInterface $request, int $id)
     {
-        $this->setActionName(AdminActionMessage::MENU_DELETE);
+        $this->setActionName(AdminAction::MENU_DELETE);
         return (new MenuBlock())->destroy($id);
     }
 }

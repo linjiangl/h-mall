@@ -10,14 +10,19 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Backend\User;
 
-use App\Core\Block\AbstractBlock;
+use App\Core\Block\Backend\BackendBlock;
 use App\Core\Service\User\UserService;
 
-class UserBlock extends AbstractBlock
+class UserBlock extends BackendBlock
 {
     protected $query = [
-        'like' => ['username']
+        '=' => ['id'],
+        'like' => ['username'],
+        'in' => ['status'],
+        'between' => ['created_at']
     ];
+
+    protected $paramType = [];
 
     protected $service = UserService::class;
 }

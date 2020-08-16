@@ -36,16 +36,31 @@ abstract class AbstractBlock
     protected $condition = [];
 
     /**
+     * 当前页数
+     * @var int
+     */
+    protected $page = 1;
+
+    /**
+     * 查询条数
+     * @var int
+     */
+    protected $limit = 20;
+
+    /**
+     * 分组
      * @var array
      */
     protected $groupBy = [];
 
     /**
+     * 排序
      * @var string
      */
     protected $orderBy = 'id desc';
 
     /**
+     * 关联模型
      * @var array
      *
      * 格式: ['option', 'category']
@@ -77,12 +92,6 @@ abstract class AbstractBlock
     protected $action = '';
 
     /**
-     * 默认分页条数.
-     * @var int
-     */
-    protected $limit = 20;
-
-    /**
      * 请求的数据.
      * @var array
      */
@@ -96,16 +105,16 @@ abstract class AbstractBlock
     public function index(RequestInterface $request)
     {
         try {
-            $page = $request->query('page', 1);
-            $limit = $request->query('limit', $this->limit);
-
             // 当前执行的方法
             $this->action = 'index';
+
+            // 处理查询参数
+            $this->handleQueryParams($request);
 
             // 查询前业务处理
             $this->beforeBuildQuery($request);
 
-            return $this->service()->paginate($this->condition, $page, $limit, $this->orderBy, $this->groupBy, $this->with);
+            return $this->service()->paginate($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -183,6 +192,16 @@ abstract class AbstractBlock
     public function getCondition(RequestInterface $request): array
     {
         return $this->service()->getCondition($request->post());
+    }
+
+    /**
+     * 处理查询参数
+     * @param RequestInterface $request
+     */
+    protected function handleQueryParams(RequestInterface $request)
+    {
+        $this->page = intval($request->query('page', $this->page));
+        $this->limit = intval($request->query('limit', $this->limit));
     }
 
     /**

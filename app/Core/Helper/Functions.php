@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use App\Exception\InternalException;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Framework\Logger\StdoutLogger;
@@ -102,12 +101,14 @@ if (! function_exists('response_json')) {
     function response_json($data, string $message = '', int $code = 200)
     {
         $code = $code ?: 500;
-        $message = $message ?: 'ok';
-        $data = json_encode([
-            'code' => $code,
-            'message' => $message,
-            'data' => $data,
-        ], JSON_UNESCAPED_UNICODE);
+        if ($code >= 200 && $code < 300) {
+            $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        } else {
+            $data = json_encode([
+                'code' => $code,
+                'error' => $message,
+            ], JSON_UNESCAPED_UNICODE);
+        }
         return response()->withAddedHeader('Content-Type', 'application/json')->withStatus($code)->withBody(new SwooleStream($data));
     }
 }
@@ -159,5 +160,38 @@ if (! function_exists('get_client_ip')) {
             $ip = $ip ? current($ip) : '127.0.0.1';
         }
         return $ip;
+    }
+}
+
+if (! function_exists('write_logs')) {
+    /**
+     * 记录日志
+     * @param string $message 日志说明
+     * @param string $flag 标记
+     * @param null $remark 备注
+     * @param string $level 日志级别
+     */
+    function write_logs(string $message, string $flag, $remark = null, string $level = 'error')
+    {
+        logger()->log($level, $message, [
+            'flag' => $flag,
+            'remark' => $remark
+        ]);
+    }
+}
+
+if (! function_exists('database_text')) {
+    /**
+     * 数据库文本数据
+     * @param $data
+     * @param string $schema
+     * @return array|false|mixed|string
+     */
+    function database_text($data, string $schema = 'en')
+    {
+        if ($schema == 'en') {
+            return empty($data) ? '' : json_encode($data, JSON_UNESCAPED_UNICODE);
+        }
+        return empty($data) ? [] : json_decode($data);
     }
 }

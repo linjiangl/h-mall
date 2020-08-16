@@ -58,4 +58,5 @@ Router::addGroup('/backend', function () {
     // 用户
     Router::get('/user', [UserController::class, 'index']);
     Router::get('/user/{id:\d+}', [UserController::class, 'show']);
+    Router::put('/user/{id:\d+}', [UserController::class, 'update']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

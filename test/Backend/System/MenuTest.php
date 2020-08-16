@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\System;
 
-use App\Core\Dao\MenuDao;
+use App\Core\Dao\System\MenuDao;
 use App\Model\Menu;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
@@ -21,18 +21,14 @@ class MenuTest extends BackendHttpTestCase
 
     public function testBackendMenuIndex()
     {
-        $result = $this->request('/menu', [], 'get', $this->getHeaders());
-
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('current_page', $result['data']);
+        $this->url = '/menu';
+        $this->handleHttpIndex();
     }
 
     public function testBackendMenuShow()
     {
-        $result = $this->request('/menu/1', [], 'get', $this->getHeaders());
-
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('id', $result['data']);
+        $this->url = '/menu/1';
+        $this->handleHttpShow();
     }
 
     public function testBackendMenuCreate()
@@ -45,9 +41,10 @@ class MenuTest extends BackendHttpTestCase
             'path' => '/order',
             'position' => '0',
         ];
-        $result = $this->request('/menu', $data, 'post', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
-        $this->assertIsInt($result['data']);
+
+        $this->url = '/menu';
+        $this->data = $data;
+        $this->handleHttpCreate();
     }
 
     public function testBackendMenuUpdate()
@@ -64,9 +61,10 @@ class MenuTest extends BackendHttpTestCase
             'path' => '/order',
             'position' => '0',
         ];
-        $result = $this->request('/menu/' . $info->id, $data, 'put', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
-        $this->assertArrayHasKey('id', $result['data']);
+
+        $this->url = '/menu/' . $info->id;
+        $this->data = $data;
+        $this->handleHttpUpdate();
     }
 
     public function testBackendMenuDelete()
@@ -75,7 +73,7 @@ class MenuTest extends BackendHttpTestCase
         /** @var Menu $info */
         $info = $dao->getInfoByCondition([['name', '=', 'order']]);
 
-        $result = $this->request('/menu/' . $info->id, [], 'delete', $this->getHeaders());
-        $this->assertSame(200, $result['code']);
+        $this->url = '/menu/' . $info->id;
+        $this->handleHttpDelete();
     }
 }

@@ -244,6 +244,19 @@ abstract class AbstractDao
     }
 
     /**
+     * 根据条件获取对应字段集合
+     * @param array $condition
+     * @param string $column
+     * @return array
+     */
+    public function getColumnByCondition(array $condition, string $column = 'id'): array
+    {
+        $query = $this->model::query();
+        $list = $this->handleQueryCondition($query, $condition)->get()->toArray();
+        return array_unique(array_column($list, $column));
+    }
+
+    /**
      * 根据条件更新
      * @param array $condition
      * @param array $update
