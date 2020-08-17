@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Core\Block;
 
-use App\Exception\HttpException;
 use App\Core\Service\AbstractService;
+use App\Exception\HttpException;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;

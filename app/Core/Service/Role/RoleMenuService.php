@@ -10,9 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Role;
 
-use App\Core\Dao\System\MenuDao;
 use App\Core\Dao\Role\RoleDao;
 use App\Core\Dao\Role\RoleMenuDao;
+use App\Core\Dao\System\MenuDao;
 use App\Core\Service\AbstractService;
 use App\Exception\InternalException;
 

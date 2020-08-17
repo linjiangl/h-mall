@@ -10,9 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Middleware;
 
+use App\Core\Service\Authorize\InterfaceAuthorizationService;
 use App\Exception\CacheErrorException;
 use App\Exception\UnauthorizedException;
-use App\Core\Service\Authorize\InterfaceAuthorizationService;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Phper666\JWTAuth\JWT;
 use Psr\Http\Message\ResponseInterface;

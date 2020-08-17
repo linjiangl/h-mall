@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Frontend\Authorize;
 
-use App\Exception\HttpException;
 use App\Core\Service\Authorize\UserAuthorizationService;
+use App\Exception\HttpException;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
