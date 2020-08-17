@@ -93,6 +93,7 @@
         "cs-fix": "php-cs-fixer fix $1",
         "analyse": "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./app ./config",
         "start": "php ./bin/hyperf.php start",
-        "start-dev": "rm -rf runtime/container && php ./bin/hyperf.php start"
+        "start-dev": "rm -rf runtime/container && php ./bin/hyperf.php start",
+        "format": "./script/php-cs-fixer.sh"
     }
 }
