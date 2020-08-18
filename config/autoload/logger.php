@@ -9,13 +9,32 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
+$level = env('APP_ENV') == 'prod' ? Monolog\Logger::ERROR : Monolog\Logger::DEBUG;
 return [
     'default' => [
         'handler' => [
             'class' => Monolog\Handler\StreamHandler::class,
             'constructor' => [
                 'stream' => BASE_PATH . '/runtime/logs/log-' . date('Y-m-d') . '.log',
-                'level' => env('APP_ENV') == 'prod' ? Monolog\Logger::ERROR : Monolog\Logger::DEBUG,
+                'level' => $level,
+            ],
+        ],
+        'formatter' => [
+            'class' => Monolog\Formatter\LineFormatter::class,
+            'constructor' => [
+                'format' => null,
+                'dateFormat' => 'Y-m-d H:i:s',
+                'allowInlineLineBreaks' => true,
+            ],
+        ],
+    ],
+    'sql' => [
+        'handler' => [
+            'class' => Monolog\Handler\StreamHandler::class,
+            'constructor' => [
+                'stream' => BASE_PATH . '/runtime/logs/sql-' . date('Y-m-d') . '.log',
+                'level' => $level,
             ],
         ],
         'formatter' => [
