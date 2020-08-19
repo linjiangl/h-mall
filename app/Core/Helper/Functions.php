@@ -171,9 +171,9 @@ if (! function_exists('write_logs')) {
      * @param null $remark 备注
      * @param string $level 日志级别
      */
-    function write_logs(string $message, string $flag, $remark = null, string $level = 'error')
+    function write_logs(string $message, string $flag = '', $remark = null, string $level = 'error')
     {
-        logger()->log($level, $message, [
+        container()->get(LoggerFactory::class)->make('Customize', 'customize')->log($level, $message, [
             'flag' => $flag,
             'remark' => $remark
         ]);
