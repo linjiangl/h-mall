@@ -29,12 +29,12 @@ return [
             ],
         ],
     ],
-    // 记录sql日志
-    'sql' => [
+    // 记录db日志
+    'db' => [
         'handler' => [
             'class' => Monolog\Handler\StreamHandler::class,
             'constructor' => [
-                'stream' => BASE_PATH . '/runtime/logs/sql-' . date('Y-m-d') . '.log',
+                'stream' => BASE_PATH . '/runtime/logs/db.log',
                 'level' => $level,
             ],
         ],
@@ -52,7 +52,7 @@ return [
         'handler' => [
             'class' => Monolog\Handler\StreamHandler::class,
             'constructor' => [
-                'stream' => BASE_PATH . '/runtime/logs/customize-' . date('Y-m-d') . '.log',
+                'stream' => BASE_PATH . '/runtime/logs/customize/log-' . date('Y-m') . '-01.log',
                 'level' => $level,
             ],
         ],
