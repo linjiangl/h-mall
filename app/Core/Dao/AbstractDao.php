@@ -114,10 +114,20 @@ abstract class AbstractDao
             $query->with($this->with);
         }
         $model = $query->find($id);
+        $this->checkIsOperational($model->toArray());
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
         }
         return $model;
+    }
+
+    /**
+     * 检查是否可以操作
+     * @param array $detail
+     */
+    public function checkIsOperational(array $detail)
+    {
+
     }
 
     /**
