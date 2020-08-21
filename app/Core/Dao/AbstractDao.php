@@ -59,6 +59,18 @@ abstract class AbstractDao
     protected $notFoundMessage = '所请求的资源不存在';
 
     /**
+     * 登录用户
+     * @var array
+     */
+    protected $authorize = [];
+
+    /**
+     * 登录用户在对象中字段
+     * @var string
+     */
+    protected $authorizeColumn = 'user_id';
+
+    /**
      * 分页列表
      * @param array $condition
      * @param int $page
@@ -119,15 +131,6 @@ abstract class AbstractDao
             throw new NotFoundException($this->notFoundMessage);
         }
         return $model;
-    }
-
-    /**
-     * 检查是否可以操作
-     * @param array $detail
-     */
-    public function checkIsOperational(array $detail)
-    {
-
     }
 
     /**
@@ -319,6 +322,17 @@ abstract class AbstractDao
     }
 
     /**
+     * 设置登录用户信息
+     * @param array $user
+     * @return $this
+     */
+    public function withAuthorize(array $user)
+    {
+        $this->authorize = $user;
+        return $this;
+    }
+
+    /**
      * 生成列表查询器
      * @param array $condition 查询条件
      * @param string $orderBy 排序
@@ -377,10 +391,27 @@ abstract class AbstractDao
         return $query;
     }
 
+    /**
+     * 方法是可以执行
+     * @param string $action
+     */
     protected function actionIsAllow(string $action)
     {
         if (in_array($action, $this->noAllowActions)) {
             throw new BadRequestException('不允许执行该方法: ' . $action);
+        }
+    }
+
+    /**
+     * 检查对象是否可以操作
+     * @param array $detail
+     */
+    protected function checkIsOperational(array $detail)
+    {
+        if (!empty($this->authorize)) {
+            if ($this->authorize['user_id'] != $detail[$this->authorizeColumn]) {
+                throw new BadRequestException('资源没有权限查阅/操作');
+            }
         }
     }
 }
