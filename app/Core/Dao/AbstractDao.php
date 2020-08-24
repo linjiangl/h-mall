@@ -126,10 +126,10 @@ abstract class AbstractDao
             $query->with($this->with);
         }
         $model = $query->find($id);
-        $this->checkIsOperational($model->toArray());
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
         }
+        $this->checkIsOperational($model->toArray());
         return $model;
     }
 
@@ -410,7 +410,7 @@ abstract class AbstractDao
     {
         if (!empty($this->authorize)) {
             if ($this->authorize['user_id'] != $detail[$this->authorizeColumn]) {
-                throw new BadRequestException('资源没有权限查阅/操作');
+                throw new BadRequestException('权限不足');
             }
         }
     }

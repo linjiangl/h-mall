@@ -36,7 +36,7 @@ class AppExceptionHandler extends ExceptionHandler
         if ($throwable instanceof RateLimitException) {
             return response_json('', 'Too Many Requests', 429);
         }
-        if ($throwable instanceof HttpException) {
+        if ($throwable instanceof HttpException && $throwable->getCode() < 500) {
             return response_json('', $throwable->getMessage(), $throwable->getCode());
         }
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
