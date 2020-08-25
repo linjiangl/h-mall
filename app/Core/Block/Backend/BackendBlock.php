@@ -18,7 +18,7 @@ class BackendBlock extends AbstractBlock
     protected function handleQueryParams(RequestInterface $request)
     {
         parent::handleQueryParams($request);
-        $sort = $request->query('sort', '');
+        $sort = $request->query('sorter', '');
         if ($sort) {
             $sort = json_decode($sort, true);
             $orderBy = '';
