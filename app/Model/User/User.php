@@ -37,6 +37,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property \Carbon\Carbon $deleted_at
  * @property-read \App\Model\User\UserVipCard $vipCard
  * @property-read \App\Model\User\UserWallet $wallet
+ * @property-read \App\Model\User\UserAddress $address
  */
 class User extends Model
 {
@@ -65,9 +66,9 @@ class User extends Model
 
     protected $hidden = ['password', 'salt', 'mobile', 'email', 'is_system', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
 
-    protected $appends = ['extend'];
+    protected $appends = ['appends'];
 
-    public function getExtendAttribute(): array
+    public function getAppendsAttribute(): array
     {
         return UserState::handleMessages([
             'status' => $this->status
@@ -76,11 +77,16 @@ class User extends Model
 
     public function vipCard()
     {
-        return $this->hasOne(UserVipCard::class, 'user_id', 'id');
+        return $this->hasOne(UserVipCard::class);
     }
 
     public function wallet()
     {
-        return $this->hasOne(UserWallet::class, 'user_id', 'id');
+        return $this->hasOne(UserWallet::class);
+    }
+
+    public function address()
+    {
+        return $this->hasMany(UserAddress::class);
     }
 }
