@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
@@ -30,7 +29,7 @@ class CreateAdminTable extends Migration
             $table->string('password', 64);
             $table->string('salt', 24);
             $table->tinyInteger('status')->default(1)->comment('状态');
-            $table->integer('lasted_login_time', false , true)->default(0)->comment('最后登录时间');
+            $table->integer('lasted_login_time', false, true)->default(0)->comment('最后登录时间');
             $table->timestamps();
             $table->softDeletes();
 

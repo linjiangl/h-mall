@@ -1,16 +1,12 @@
 <?php
-/**
- * Initialize a dependency injection container that implemented PSR-11 and return the container.
- */
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * Multi-user mall
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
+ * @contact  8257796@qq.com
  */
 use Hyperf\Di\Container;
 use Hyperf\Di\Definition\DefinitionSourceFactory;

@@ -1,6 +1,13 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
+ * @contact  8257796@qq.com
+ */
 return [
     'login_type' => env('JWT_LOGIN_TYPE', 'sso'), //  登录方式，sso为单点登录，mpop为多点登录
 

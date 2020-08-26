@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
@@ -16,6 +15,7 @@ use Hyperf\Database\Schema\Schema;
 class CreateRecordShopFinanceTable extends Migration
 {
     protected $table = 'record_shop_finance';
+
     /**
      * Run the migrations.
      */

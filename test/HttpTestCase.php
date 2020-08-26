@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * Multi-user mall
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
+ * @contact  8257796@qq.com
  */
 namespace HyperfTest;
 
