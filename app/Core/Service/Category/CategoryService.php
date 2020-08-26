@@ -42,10 +42,10 @@ class CategoryService extends AbstractService
     {
         $list = [];
         foreach ($categories as $item) {
-            if ($item['parent_id'] == $parentId) {
+            if ($item['parent_id'] === $parentId) {
                 $item['level'] = $level;
                 $children = $this->convertCategoriesToChildren($categories, $item['id'], $level + 1);
-                if ($children) {
+                if (!empty($children)) {
                     $item['children'] = $children;
                 }
                 $list[] = $item;
