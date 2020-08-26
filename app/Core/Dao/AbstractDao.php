@@ -53,6 +53,12 @@ abstract class AbstractDao
     protected $with = [];
 
     /**
+     * 排序
+     * @var string
+     */
+    protected $orderBy = 'id desc';
+
+    /**
      * 对象不存在的错误提示
      * @var string
      */
@@ -240,6 +246,7 @@ abstract class AbstractDao
      */
     public function getListByCondition(array $condition = [], array $with = [], string $select = '*', string $orderBy = '', array $groupBy = []): array
     {
+        $orderBy = $orderBy ?: $this->orderBy;
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->selectRaw($select)->get()->toArray();
     }
