@@ -20,10 +20,10 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $client_ip
  * @property string $module
  * @property string $action
- * @property string $remark
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property string $deleted_at
+ * @property string $remark
  */
 class LogAdminAction extends Model
 {

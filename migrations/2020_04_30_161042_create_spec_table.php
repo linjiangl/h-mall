@@ -12,24 +12,28 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateOptionTable extends Migration
+class CreateSpecTable extends Migration
 {
+    protected $table = 'spec';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('option', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->integer('shop_id', false, true);
+            $table->integer('shop_id', false, true)->default(0)->comment('店铺id 0:系统');
             $table->string('name', 50)->comment('名称');
-            $table->tinyInteger('position', false, true)->default(0);
+            $table->tinyInteger('sorting', false, true)->default(0)->comment('排序');
             $table->timestamps();
             $table->softDeletes();
 
             $table->index(['shop_id'], 'shop_id');
             $table->index(['name'], 'name');
+            $table->index(['sorting'], 'sorting');
         });
+
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '商品规格'");
     }
 
     /**
@@ -37,6 +41,6 @@ class CreateOptionTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('option');
+        Schema::dropIfExists($this->table);
     }
 }

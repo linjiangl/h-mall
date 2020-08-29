@@ -19,7 +19,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $name 名称
  * @property string $icon 图标
  * @property string $cover 封面图
- * @property int $position
+ * @property int $sorting
  * @property int $status 是否显示 0:删除 0:显示, 1:隐藏
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -41,12 +41,12 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'name', 'icon', 'cover', 'position', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'parent_id', 'name', 'icon', 'cover', 'sorting', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'position' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

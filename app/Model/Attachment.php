@@ -16,7 +16,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $id
  * @property string $system 云存储系统
  * @property string $type 文件类型
- * @property int $size 文件大小(字节) 1024 = 1kb
+ * @property int $size 文件大小(字节)
  * @property string $hash
  * @property string $key
  * @property string $index 索引

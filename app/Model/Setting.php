@@ -13,9 +13,9 @@ namespace App\Model;
 /**
  * @property int $id
  * @property string $key
- * @property string $value
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property string $value
  */
 class Setting extends Model
 {

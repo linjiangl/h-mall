@@ -13,6 +13,7 @@ namespace App\Model\Role;
 use App\Model\Model;
 
 /**
+ * @property int $id
  * @property int $role_id
  * @property int $admin_id
  */
