@@ -8,26 +8,26 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Model\Record;
+namespace App\Model\Bill;
 
-use App\Model\Model;
 use Hyperf\Database\Model\SoftDeletes;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
+ * @property int $shop_id
  * @property int $user_id
- * @property string $type 类型 recharged:充值 consumed:消费
- * @property float $amount 金额
- * @property int $integral 积分
- * @property string $description 描述
- * @property string $module 模块 order:订单
+ * @property float $amount
+ * @property string $type 类别 order:订单, withdraw:提现, refund:退款
+ * @property string $module 关联模型
  * @property int $module_id
+ * @property string $order_sn
  * @property string $remark
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
  */
-class RecordUserWallet extends Model
+class BillShop extends Model
 {
     use SoftDeletes;
 
@@ -36,19 +36,19 @@ class RecordUserWallet extends Model
      *
      * @var string
      */
-    protected $table = 'record_user_wallet';
+    protected $table = 'bill_shop';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'type', 'amount', 'integral', 'description', 'module', 'module_id', 'remark', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'type', 'module', 'module_id', 'order_sn', 'remark', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'amount' => 'float', 'integral' => 'integer', 'module_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'amount' => 'float', 'module_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

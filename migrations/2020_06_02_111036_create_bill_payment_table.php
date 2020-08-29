@@ -12,9 +12,9 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateRecordPaymentTable extends Migration
+class CreateBillPaymentTable extends Migration
 {
-    protected $table = 'record_payment';
+    protected $table = 'bill_payment';
 
     /**
      * Run the migrations.
@@ -40,7 +40,7 @@ class CreateRecordPaymentTable extends Migration
             $table->index(['order_ids'], 'order_ids');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '支付日志'");
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-支付记录'");
     }
 
     /**

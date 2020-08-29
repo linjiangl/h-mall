@@ -46,7 +46,7 @@ class ModelCommand extends HyperfCommand
         'log',
         'statistics',
         'role',
-        'record'
+        'bill'
     ];
 
     /**
@@ -54,7 +54,7 @@ class ModelCommand extends HyperfCommand
      * @var array
      */
     protected $specifyTables = [
-        'admin'
+        'bill_payment', 'bill_refund', 'bill_shop', 'bill_user'
     ];
 
     public function configure()
