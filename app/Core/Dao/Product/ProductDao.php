@@ -20,4 +20,14 @@ class ProductDao extends AbstractDao
     protected $noAllowActions = [];
 
     protected $notFoundMessage = '商品不存在或已删除';
+
+    /**
+     * 检查分类下是否有商品
+     * @param int $categoryId
+     * @return bool
+     */
+    public function checkCategoryIdHasProduct(int $categoryId): bool
+    {
+        return Product::query()->where('category_id', $categoryId)->count() ? true : false;
+    }
 }

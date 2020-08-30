@@ -106,6 +106,15 @@ abstract class AbstractService
     }
 
     /**
+     * 批量插入
+     * @param array $data
+     */
+    public function batchInsert(array $data): void
+    {
+        $this->service()->batchInsert($data);
+    }
+
+    /**
      * 获取列表的查询条件
      * @param array $params
      * @return array

@@ -28,11 +28,6 @@ class ProductSpecDao extends AbstractDao
      */
     public function checkSpecIdHasProduct(int $specId): bool
     {
-        $result = false;
-        if (ProductSpec::query()->where('spec_id', $specId)->count()) {
-            $result = true;
-        }
-
-        return $result;
+        return ProductSpec::query()->where('spec_id', $specId)->count() ? true : false;
     }
 }

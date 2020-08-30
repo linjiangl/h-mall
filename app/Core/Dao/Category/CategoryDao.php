@@ -21,7 +21,7 @@ class CategoryDao extends AbstractDao
 
     protected $notFoundMessage = '分类不存在';
 
-    protected $orderBy = 'position asc';
+    protected $orderBy = 'sorting asc';
 
     public function getListByStatus($status = null, string $select = '*'): array
     {

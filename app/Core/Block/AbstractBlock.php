@@ -76,7 +76,7 @@ abstract class AbstractBlock
         // 'between' => ['created_at'], // 支持数组,字符串(,)
         // 'in' => ['user_id']
         // 'like' => ['title'] // 模糊查询('title%')
-        // 'like_all' => ['title'] // 模糊查询
+        // 'like_all' => ['title'] // 模糊查询('%title%')
     ];
 
     /**

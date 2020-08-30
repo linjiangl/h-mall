@@ -28,11 +28,6 @@ class ProductSkuSpecValueDao extends AbstractDao
      */
     public function checkSpecValueIdHasProduct(int $specValueId): bool
     {
-        $result = false;
-        if (ProductSkuSpecValue::query()->where('spec_value_id', $specValueId)->count()) {
-            $result = true;
-        }
-
-        return $result;
+        return ProductSkuSpecValue::query()->where('spec_value_id', $specValueId)->count() ? true : false;
     }
 }

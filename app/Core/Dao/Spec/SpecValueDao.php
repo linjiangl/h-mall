@@ -25,9 +25,4 @@ class SpecValueDao extends AbstractDao
     {
         return $this->getListByCondition([['spec_id', '=', $specId]]);
     }
-
-    public function batchInsert(array $data)
-    {
-        SpecValue::query()->insert($data);
-    }
 }

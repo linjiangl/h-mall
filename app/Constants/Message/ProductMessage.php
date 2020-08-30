@@ -22,6 +22,11 @@ class ProductMessage extends AbstractConstants
     use TraitConstants;
 
     /**
+     * @Message("该分类下存在分类")
+     */
+    const CHECK_CATEGORY_ID_HAS_CATEGORY = 'check_category_id_has_category';
+
+    /**
      * @Message("该规格下存在分类")
      */
     const CHECK_SPEC_ID_HAS_CATEGORY = 'check_spec_id_has_category';

@@ -41,22 +41,22 @@ class RoleMenuService extends AbstractService
         $dao = new RoleMenuDao();
         $roleMenus = $dao->getListByCondition([['role_id', '=', $role->id]]);
         $deleteMenuIds = [];
-        $installMenuIds = $menuIds;
-        if (! empty($roleMenus)) {
+        $insertMenuIds = $menuIds;
+        if (count($roleMenus)) {
             $oldMenuIds = array_column($roleMenus, 'menu_id');
             $deleteMenuIds = array_diff($oldMenuIds, $menuIds);
-            $installMenuIds = array_diff($menuIds, $oldMenuIds);
+            $insertMenuIds = array_diff($menuIds, $oldMenuIds);
         }
 
         // 删除未选中的历史数据
-        if (! empty($deleteMenuIds)) {
+        if (count($deleteMenuIds)) {
             $dao->deleteMenusByRoleId($role->id, $deleteMenuIds);
         }
 
         // 增加选中的数据
-        if (! empty($installMenuIds)) {
-            sort($installMenuIds);
-            $dao->saveRoleMenus($roleId, $installMenuIds);
+        if (count($insertMenuIds)) {
+            sort($insertMenuIds);
+            $dao->saveRoleMenus($roleId, $insertMenuIds);
         }
     }
 }

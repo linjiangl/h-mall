@@ -17,6 +17,7 @@ use App\Core\Dao\Spec\SpecDao;
 use App\Core\Service\AbstractService;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
+use Throwable;
 
 class SpecService extends AbstractService
 {
@@ -30,14 +31,14 @@ class SpecService extends AbstractService
 
             // 保存规格值
             if (empty($data['spec_values'])) {
-                $optionValues = is_array($data['spec_values']) ? $data['spec_values'] : explode(',', $data['spec_values']);
+                $specValues = is_array($data['spec_values']) ? $data['spec_values'] : explode(',', $data['spec_values']);
                 $specValueService = new SpecValueService();
-                $specValueService->createSpecValues($id, $optionValues);
+                $specValueService->createSpecValues($id, $specValues);
             }
 
             return $id;
-        } catch (\Throwable $e) {
-            write_logs('规格创建失败', $data);
+        } catch (Throwable $e) {
+            write_logs('创建失败', $data);
             throw new BadRequestException($e->getMessage(), $e->getCode());
         }
     }
@@ -46,18 +47,18 @@ class SpecService extends AbstractService
     {
         try {
             // 修改规格
-            $option = parent::update($id, $data);
+            $spec = parent::update($id, $data);
 
             // 保存规格值
             if (empty($data['spec_values'])) {
-                $optionValues = is_array($data['spec_values']) ? $data['spec_values'] : explode(',', $data['spec_values']);
+                $specValues = is_array($data['spec_values']) ? $data['spec_values'] : explode(',', $data['spec_values']);
                 $specValueService = new SpecValueService();
-                $specValueService->updateSpecValues($id, $optionValues);
+                $specValueService->updateSpecValues($spec, $specValues);
             }
 
-            return $option;
-        } catch (\Throwable $e) {
-            write_logs('规格保存失败', $data);
+            return $spec;
+        } catch (Throwable $e) {
+            write_logs('保存失败', $data);
             throw new BadRequestException($e->getMessage(), $e->getCode());
         }
     }
@@ -81,7 +82,7 @@ class SpecService extends AbstractService
 
             // 删除规格
             return parent::remove($id);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             throw new BadRequestException($e->getMessage(), $e->getCode());
         }
     }

@@ -39,33 +39,32 @@ class SpecValueService extends AbstractService
     public function createSpecValues(int $specId, array $specValues): void
     {
         $now = Carbon::now()->toDateTimeString();
-        $install = [];
+        $insert = [];
         foreach ($specValues as $item) {
-            $install[] = [
+            $insert[] = [
                 'spec_id' => $specId,
                 'value' => $item,
                 'created_at' => $now,
                 'updated_at' => $now
             ];
         }
-        $dao = new SpecValueDao();
-        $dao->batchInsert($install);
+        $this->batchInsert($insert);
     }
 
     /**
      * 更新规格值
-     * @param int $specId
+     * @param array $spec
      * @param array $specValues
      */
-    public function updateSpecValues(int $specId, array $specValues)
+    public function updateSpecValues(array $spec, array $specValues)
     {
         $dao = new SpecValueDao();
-        $oldSpecValues = $dao->getListBySpecId($specId);
+        $oldSpecValues = $dao->getListBySpecId($spec['id']);
         $oldValues = array_column($oldSpecValues, 'value');
 
         // 删除规格值
         $deleteValues = array_diff($oldValues, $specValues);
-        if (! empty($deleteValues)) {
+        if (count($deleteValues)) {
             $oldSpecValuesData = array_column($oldSpecValues, 'value', 'id');
             $deleteSpecValue = array_filter($oldSpecValuesData, function ($val) use ($deleteValues) {
                 return in_array($val, $deleteValues);
@@ -74,9 +73,9 @@ class SpecValueService extends AbstractService
         }
 
         // 新增规格值
-        $installValues = array_diff($specValues, $oldValues);
-        if (! empty($installValues)) {
-            $this->createSpecValues($specId, $installValues);
+        $insertValues = array_diff($specValues, $oldValues);
+        if (count($insertValues)) {
+            $this->createSpecValues($spec['id'], $insertValues);
         }
     }
 

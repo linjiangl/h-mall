@@ -21,6 +21,11 @@ class CategorySpecDao extends AbstractDao
 
     protected $notFoundMessage = '分类规格不存在';
 
+    public function getListByCategoryId(int $categoryId): array
+    {
+        return $this->getListByCondition([['category_id', '=', $categoryId]]);
+    }
+
     /**
      * 检查规格下是否有分类
      * @param int $specId

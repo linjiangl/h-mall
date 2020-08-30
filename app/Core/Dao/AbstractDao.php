@@ -177,7 +177,7 @@ abstract class AbstractDao
 
             $model = $this->info($id);
             if (! $model->update($data)) {
-                throw new BadRequestException('保存失败');
+                throw new BadRequestException('更新失败');
             }
             $this->removeCache($id);
             return $model->toArray();
@@ -203,6 +203,15 @@ abstract class AbstractDao
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
+    }
+
+    /**
+     * 批量插入数据
+     * @param array $data
+     */
+    public function batchInsert(array $data): void
+    {
+        $this->model::query()->insert($data);
     }
 
     /**
