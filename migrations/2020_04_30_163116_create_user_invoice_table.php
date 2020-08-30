@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateUserInvoiceTable extends Migration
 {
@@ -41,7 +42,7 @@ class CreateUserInvoiceTable extends Migration
             $table->index(['user_id'], 'user_id');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-发票'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-发票'");
     }
 
     /**

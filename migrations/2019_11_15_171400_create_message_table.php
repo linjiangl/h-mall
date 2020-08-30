@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateMessageTable extends Migration
 {
@@ -39,7 +40,7 @@ class CreateMessageTable extends Migration
             $table->index(['created_at'], 'created_at');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '消息'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '消息'");
     }
 
     /**

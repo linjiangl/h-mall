@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateRefundTable extends Migration
 {
@@ -55,6 +56,8 @@ class CreateRefundTable extends Migration
             $table->index(['status'], 'status');
             $table->index(['created_at'], 'created_at');
         });
+
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '退款'");
     }
 
     /**

@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateCustomerServiceTable extends Migration
 {
@@ -35,7 +36,7 @@ class CreateCustomerServiceTable extends Migration
             $table->index(['shop_id', 'status'], 'shop_id_status');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '客服'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '客服'");
     }
 
     /**

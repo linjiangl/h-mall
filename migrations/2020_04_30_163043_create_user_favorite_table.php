@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateUserFavoriteTable extends Migration
 {
@@ -31,7 +32,7 @@ class CreateUserFavoriteTable extends Migration
             $table->unique(['user_id', 'module', 'module_id'], 'user_id_module_id');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-收藏'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-收藏'");
     }
 
     /**

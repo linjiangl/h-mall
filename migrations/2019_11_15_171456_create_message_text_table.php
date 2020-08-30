@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateMessageTextTable extends Migration
 {
@@ -27,7 +28,7 @@ class CreateMessageTextTable extends Migration
             $table->text('content')->comment('消息内容');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '文本内容'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '文本内容'");
     }
 
     /**

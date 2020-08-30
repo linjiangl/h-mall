@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateAttachmentTable extends Migration
 {
@@ -35,6 +36,8 @@ class CreateAttachmentTable extends Migration
             $table->index(['md5'], 'md5');
             $table->index(['status'], 'status');
         });
+
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '附件'");
     }
 
     /**

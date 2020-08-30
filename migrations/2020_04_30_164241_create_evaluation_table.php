@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateEvaluationTable extends Migration
 {
@@ -45,6 +46,8 @@ class CreateEvaluationTable extends Migration
             $table->index(['user_id', 'status'], 'user_id_status');
             $table->index(['product_id', 'top'], 'product_id_top');
         });
+
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '评价'");
     }
 
     /**

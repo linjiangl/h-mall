@@ -18,7 +18,8 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $shop_id
  * @property int $user_id
  * @property int $category_id
- * @property int $text_id
+ * @property int $brand_id 品牌
+ * @property int $text_id 商品详情ID
  * @property string $type 商品类型
  * @property string $title 标题
  * @property string $sub_title 副标题
@@ -52,12 +53,12 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'text_id', 'type', 'title', 'sub_title', 'sales', 'clicks', 'min_price', 'max_price', 'status', 'is_show', 'refund_type', 'buy_limit', 'buy_limit_total', 'images', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'text_id', 'type', 'title', 'sub_title', 'sales', 'clicks', 'min_price', 'max_price', 'status', 'is_show', 'refund_type', 'buy_limit', 'buy_limit_total', 'images', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'text_id' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'min_price' => 'float', 'max_price' => 'float', 'status' => 'integer', 'is_show' => 'integer', 'buy_limit' => 'integer', 'buy_limit_total' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'text_id' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'min_price' => 'float', 'max_price' => 'float', 'status' => 'integer', 'is_show' => 'integer', 'buy_limit' => 'integer', 'buy_limit_total' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

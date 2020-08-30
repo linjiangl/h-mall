@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateDistrictTable extends Migration
 {
@@ -28,6 +29,8 @@ class CreateDistrictTable extends Migration
             $table->index(['parent_id'], 'parent_id');
             $table->index(['name'], 'name');
         });
+
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '地区'");
     }
 
     /**

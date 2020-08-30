@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateExpressTable extends Migration
 {
@@ -31,6 +32,8 @@ class CreateExpressTable extends Migration
             $table->index(['name'], 'name');
             $table->index(['sorting'], 'sorting');
         });
+
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '地区'");
     }
 
     /**

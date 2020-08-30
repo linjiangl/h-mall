@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateBillRefundTable extends Migration
 {
@@ -44,7 +45,7 @@ class CreateBillRefundTable extends Migration
             $table->index(['refund_id'], 'refund_id');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-退款记录'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-退款记录'");
     }
 
     /**

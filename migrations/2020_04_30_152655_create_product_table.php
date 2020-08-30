@@ -26,7 +26,8 @@ class CreateProductTable extends Migration
             $table->integer('shop_id', false, true);
             $table->integer('user_id', false, true);
             $table->integer('category_id', false, true);
-            $table->integer('text_id', false, true);
+            $table->integer('brand_id', false, true)->default(0)->comment('品牌');
+            $table->integer('text_id', false, true)->comment('商品详情ID');
             $table->string('type', 30)->default('general')->comment('商品类型');
             $table->string('title', 100)->comment('标题');
             $table->string('sub_title', 255)->default('')->comment('副标题');
@@ -46,7 +47,12 @@ class CreateProductTable extends Migration
             $table->index(['shop_id'], 'shop_id');
             $table->index(['user_id'], 'user_id');
             $table->index(['category_id'], 'category_id');
+            $table->index(['brand_id'], 'brand_id');
             $table->index(['title'], 'title');
+            $table->index(['sales'], 'sales');
+            $table->index(['clicks'], 'clicks');
+            $table->index(['min_price'], 'min_price');
+            $table->index(['max_price'], 'max_price');
             $table->index(['status'], 'status');
             $table->index(['created_at'], 'created_at');
         });

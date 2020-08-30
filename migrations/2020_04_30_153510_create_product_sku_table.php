@@ -23,6 +23,7 @@ class CreateProductSkuTable extends Migration
             $table->integerIncrements('id');
             $table->integer('shop_id', false, true);
             $table->integer('product_id', false, true);
+            $table->integer('coupon_id', false, true)->default(0)->comment('优惠券ID');
             $table->decimal('price', 10, 2)->unsigned()->default(0)->comment('金额');
             $table->decimal('original_price', 10, 2)->unsigned()->default(0)->comment('原价');
             $table->integer('stock', false, true)->default(0)->comment('库存');
@@ -34,6 +35,10 @@ class CreateProductSkuTable extends Migration
 
             $table->index(['shop_id'], 'shop_id');
             $table->index(['product_id'], 'product_id');
+            $table->index(['coupon_id'], 'coupon_id');
+            $table->index(['price'], 'price');
+            $table->index(['stock'], 'stock');
+            $table->index(['sales'], 'sales');
         });
     }
 

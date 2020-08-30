@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateBillPaymentTable extends Migration
 {
@@ -40,7 +41,7 @@ class CreateBillPaymentTable extends Migration
             $table->index(['order_ids'], 'order_ids');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-支付记录'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-支付记录'");
     }
 
     /**

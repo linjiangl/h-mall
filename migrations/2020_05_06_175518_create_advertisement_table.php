@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateAdvertisementTable extends Migration
 {
@@ -32,6 +33,8 @@ class CreateAdvertisementTable extends Migration
 
             $table->index(['status'], 'status');
         });
+
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '广告'");
     }
 
     /**

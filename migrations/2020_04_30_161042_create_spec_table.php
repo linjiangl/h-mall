@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateSpecTable extends Migration
 {
@@ -33,7 +34,7 @@ class CreateSpecTable extends Migration
             $table->index(['sorting'], 'sorting');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '商品规格'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '商品规格'");
     }
 
     /**

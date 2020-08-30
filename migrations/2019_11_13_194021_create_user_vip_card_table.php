@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateUserVipCardTable extends Migration
 {
@@ -44,7 +45,7 @@ class CreateUserVipCardTable extends Migration
             $table->index(['created_at'], 'created_at');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-会员卡'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-会员卡'");
     }
 
     /**

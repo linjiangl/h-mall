@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateUserHistoryTable extends Migration
 {
@@ -30,7 +31,7 @@ class CreateUserHistoryTable extends Migration
             $table->unique(['user_id', 'product_id'], 'user_id_product_id');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-浏览记录'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-浏览记录'");
     }
 
     /**

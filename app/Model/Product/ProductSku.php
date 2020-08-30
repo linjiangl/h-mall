@@ -17,6 +17,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $id
  * @property int $shop_id
  * @property int $product_id
+ * @property int $coupon_id
  * @property float $price 金额
  * @property float $original_price 原价
  * @property int $stock 库存
@@ -43,12 +44,12 @@ class ProductSku extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'product_id', 'price', 'original_price', 'stock', 'sales', 'clicks', 'image', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'shop_id', 'product_id', 'coupon_id', 'price', 'original_price', 'stock', 'sales', 'clicks', 'image', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'product_id' => 'integer', 'price' => 'float', 'original_price' => 'float', 'stock' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'product_id' => 'integer', 'coupon_id' => 'integer', 'price' => 'float', 'original_price' => 'float', 'stock' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

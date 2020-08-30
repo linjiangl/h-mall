@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateUserWalletTable extends Migration
 {
@@ -33,7 +34,7 @@ class CreateUserWalletTable extends Migration
             $table->index(['balance'], 'balance');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户钱包'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户钱包'");
     }
 
     /**

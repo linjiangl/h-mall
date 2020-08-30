@@ -11,6 +11,7 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateSlideTable extends Migration
 {
@@ -34,6 +35,8 @@ class CreateSlideTable extends Migration
             $table->index(['shop_id', 'status'], 'shop_id_status');
             $table->index(['sorting'], 'sorting');
         });
+
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '幻灯片'");
     }
 
     /**
