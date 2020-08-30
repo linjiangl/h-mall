@@ -43,4 +43,9 @@ class Spec extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'sorting' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function values()
+    {
+        return $this->hasMany(SpecValue::class)->orderBy('sorting', 'asc');
+    }
 }

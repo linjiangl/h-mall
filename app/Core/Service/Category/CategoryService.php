@@ -45,7 +45,7 @@ class CategoryService extends AbstractService
             if ($item['parent_id'] === $parentId) {
                 $item['level'] = $level;
                 $children = $this->convertCategoriesToChildren($categories, $item['id'], $level + 1);
-                if (!empty($children)) {
+                if (! empty($children)) {
                     $item['children'] = $children;
                 }
                 $list[] = $item;
