@@ -67,10 +67,10 @@ class SpecValueService extends AbstractService
         $deleteValues = array_diff($oldValues, $specValues);
         if (! empty($deleteValues)) {
             $oldSpecValuesData = array_column($oldSpecValues, 'value', 'id');
-            $deleteSpecValueIds = array_filter($oldSpecValuesData, function ($val) use ($deleteValues) {
+            $deleteSpecValue = array_filter($oldSpecValuesData, function ($val) use ($deleteValues) {
                 return in_array($val, $deleteValues);
             });
-            $dao->deleteByPrimaryKeys($deleteSpecValueIds);
+            $dao->deleteByPrimaryKeys(array_keys($deleteSpecValue));
         }
 
         // 新增规格值

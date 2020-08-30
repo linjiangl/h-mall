@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Service\Spec;
 
 use App\Constants\Message\ProductMessage;
+use App\Core\Dao\Category\CategorySpecDao;
 use App\Core\Dao\Product\ProductSpecDao;
 use App\Core\Dao\Spec\SpecDao;
 use App\Core\Service\AbstractService;
@@ -63,6 +64,11 @@ class SpecService extends AbstractService
 
     public function remove(int $id): bool
     {
+        $categorySpecDao = new CategorySpecDao();
+        if ($categorySpecDao->checkSpecIdHasCategory($id)) {
+            throw new InternalException(ProductMessage::getMessage(ProductMessage::CHECK_SPEC_ID_HAS_PRODUCT));
+        }
+
         $productSpecDao = new ProductSpecDao();
         if ($productSpecDao->checkSpecIdHasProduct($id)) {
             throw new InternalException(ProductMessage::getMessage(ProductMessage::CHECK_SPEC_ID_HAS_PRODUCT));
