@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\Admin;
 
-use App\Core\Dao\Admin\AdminDao;
+use App\Core\Dao\AdminDao;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 

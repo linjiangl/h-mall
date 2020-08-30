@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Authorize;
 
-use App\Core\Dao\Admin\AdminDao;
+use App\Core\Dao\AdminDao;
 use App\Core\Service\Admin\AdminService;
 use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
