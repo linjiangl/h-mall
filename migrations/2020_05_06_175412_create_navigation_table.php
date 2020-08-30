@@ -28,7 +28,7 @@ class CreateNavigationTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['sorting', 'sorting']);
+            $table->index(['sorting'], 'sorting');
         });
     }
 
