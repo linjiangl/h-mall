@@ -24,7 +24,7 @@ class MenuRequest extends AbstractRequest
                 'name' => 'required|string|max:100',
                 'icon' => 'string|max:50',
                 'path' => 'required|string|max:255',
-                'position' => 'integer|max:100',
+                'sorting' => 'integer|max:100',
             ],
             'put:update' => $rules = [
                 'parent_id' => 'integer',
@@ -32,7 +32,7 @@ class MenuRequest extends AbstractRequest
                 'name' => 'string|max:100',
                 'icon' => 'string|max:50',
                 'path' => 'string|max:255',
-                'position' => 'integer|max:100',
+                'sorting' => 'integer|max:100',
             ]
         ];
         return $rules[$scene] ?? [];
@@ -46,7 +46,7 @@ class MenuRequest extends AbstractRequest
             'name' => '菜单标识',
             'icon' => '菜单图标',
             'path' => '菜单路由',
-            'position' => '排序',
+            'sorting' => '排序',
         ];
     }
 }

@@ -26,12 +26,13 @@ class CreateSlideTable extends Migration
             $table->string('image', 255)->default('')->comment('背景图');
             $table->string('url', 255)->default('');
             $table->integer('clicks', false, true)->default(0)->comment('点击量');
-            $table->smallInteger('position', false, true)->default(0)->comment('排序 倒叙');
+            $table->smallInteger('sorting', false, true)->default(0)->comment('排序');
             $table->tinyInteger('status', false, true)->default(0);
             $table->timestamps();
             $table->softDeletes();
 
             $table->index(['shop_id', 'status'], 'shop_id_status');
+            $table->index(['sorting'], 'sorting');
         });
     }
 

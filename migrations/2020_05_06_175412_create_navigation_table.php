@@ -24,9 +24,11 @@ class CreateNavigationTable extends Migration
             $table->string('title', 50);
             $table->string('url', 255)->default('');
             $table->tinyInteger('status')->default(0)->comment('状态 0:关闭, 1:开启');
-            $table->smallInteger('position')->default(0)->comment('排序');
+            $table->smallInteger('sorting')->default(0)->comment('排序');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['sorting', 'sorting']);
         });
     }
 

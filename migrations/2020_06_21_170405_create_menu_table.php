@@ -26,7 +26,7 @@ class CreateMenuTable extends Migration
             $table->string('name', 100)->comment('菜单名称');
             $table->string('icon', 50)->default('');
             $table->string('path', 255)->default('');
-            $table->smallInteger('position', false, true)->default(0)->comment('排序');
+            $table->smallInteger('sorting', false, true)->default(0)->comment('排序');
             $table->tinyInteger('status', false, true)->default(0);
             $table->timestamps();
 

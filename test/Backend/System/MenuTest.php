@@ -39,7 +39,7 @@ class MenuTest extends BackendHttpTestCase
             'name' => 'order',
             'icon' => 'order',
             'path' => '/order',
-            'position' => '0',
+            'sorting' => '0',
         ];
 
         $this->url = '/menu';
@@ -59,7 +59,7 @@ class MenuTest extends BackendHttpTestCase
             'name' => 'order',
             'icon' => 'user',
             'path' => '/order',
-            'position' => '0',
+            'sorting' => '0',
         ];
 
         $this->url = '/menu/' . $info->id;

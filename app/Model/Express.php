@@ -16,7 +16,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $id
  * @property string $name 公司名称
  * @property string $code 公司编码
- * @property int $position 排序
+ * @property int $sorting 排序
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
@@ -37,12 +37,12 @@ class Express extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'code', 'position', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'name', 'code', 'sorting', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'position' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'sorting' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

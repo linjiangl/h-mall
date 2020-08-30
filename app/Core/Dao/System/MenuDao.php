@@ -38,6 +38,6 @@ class MenuDao extends AbstractDao
         if ($status != null) {
             $condition[] = ['status', '=', $status];
         }
-        return $this->getListByCondition($condition, [], $select, 'parent_id asc, position asc');
+        return $this->getListByCondition($condition, [], $select, 'parent_id asc, sorting asc');
     }
 }
