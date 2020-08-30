@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Backend\Authorize;
 
-use App\Exception\HttpException;
 use App\Core\Service\Authorize\AdminAuthorizationService;
+use App\Exception\HttpException;
 use Throwable;
 
 class LoginBlock

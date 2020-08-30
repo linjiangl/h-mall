@@ -22,7 +22,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $status 状态 0:不可用, 1:可用
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property string $deleted_at
  */
 class Advertisement extends Model
 {

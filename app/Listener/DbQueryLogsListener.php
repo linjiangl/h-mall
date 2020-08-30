@@ -31,7 +31,7 @@ class DbQueryLogsListener implements ListenerInterface
 
     public function __construct(ContainerInterface $container)
     {
-        $this->logger = $container->get(LoggerFactory::class)->get('SQL');
+        $this->logger = $container->get(LoggerFactory::class)->get('SQL', 'db');
     }
 
     public function listen(): array

@@ -53,10 +53,28 @@ abstract class AbstractDao
     protected $with = [];
 
     /**
+     * 排序
+     * @var string
+     */
+    protected $orderBy = 'id desc';
+
+    /**
      * 对象不存在的错误提示
      * @var string
      */
     protected $notFoundMessage = '所请求的资源不存在';
+
+    /**
+     * 登录用户
+     * @var array
+     */
+    protected $authorize = [];
+
+    /**
+     * 登录用户在对象中字段
+     * @var string
+     */
+    protected $authorizeColumn = 'user_id';
 
     /**
      * 分页列表
@@ -117,6 +135,7 @@ abstract class AbstractDao
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
         }
+        $this->checkIsOperational($model->toArray());
         return $model;
     }
 
@@ -227,6 +246,7 @@ abstract class AbstractDao
      */
     public function getListByCondition(array $condition = [], array $with = [], string $select = '*', string $orderBy = '', array $groupBy = []): array
     {
+        $orderBy = $orderBy ?: $this->orderBy;
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->selectRaw($select)->get()->toArray();
     }
@@ -309,6 +329,17 @@ abstract class AbstractDao
     }
 
     /**
+     * 设置登录用户信息
+     * @param array $user
+     * @return $this
+     */
+    public function withAuthorize(array $user)
+    {
+        $this->authorize = $user;
+        return $this;
+    }
+
+    /**
      * 生成列表查询器
      * @param array $condition 查询条件
      * @param string $orderBy 排序
@@ -367,10 +398,27 @@ abstract class AbstractDao
         return $query;
     }
 
+    /**
+     * 方法是可以执行
+     * @param string $action
+     */
     protected function actionIsAllow(string $action)
     {
         if (in_array($action, $this->noAllowActions)) {
             throw new BadRequestException('不允许执行该方法: ' . $action);
+        }
+    }
+
+    /**
+     * 检查对象是否可以操作
+     * @param array $detail
+     */
+    protected function checkIsOperational(array $detail)
+    {
+        if (! empty($this->authorize)) {
+            if ($this->authorize['user_id'] != $detail[$this->authorizeColumn]) {
+                throw new BadRequestException('权限不足');
+            }
         }
     }
 }

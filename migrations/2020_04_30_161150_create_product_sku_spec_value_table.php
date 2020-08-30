@@ -8,25 +8,24 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateCategoryOptionTable extends Migration
+class CreateProductSkuSpecValueTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('category_option', function (Blueprint $table) {
+        Schema::create('product_sku_spec_value', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->integer('category_id', false, true);
-            $table->integer('option_id', false, true);
+            $table->integer('product_sku_id', false, true);
+            $table->integer('spec_value_id', false, true);
 
-            $table->unique(['category_id', 'option_id'], 'category_id_option_id');
-            $table->index(['option_id'], 'option_id');
+            $table->unique(['product_sku_id', 'spec_value_id'], 'product_sku_spec_value_id');
+            $table->index(['spec_value_id'], 'spec_value_id');
         });
     }
 
@@ -35,6 +34,6 @@ class CreateCategoryOptionTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category_option');
+        Schema::dropIfExists('product_sku_spec_value');
     }
 }

@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 namespace App\Exception\Handler;
 
 use Hyperf\ExceptionHandler\ExceptionHandler;
@@ -23,14 +22,14 @@ use Throwable;
 class HttpExceptionHandler extends ExceptionHandler
 {
     /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @var FormatterInterface
      */
     protected $formatter;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     public function __construct(ContainerInterface $container, FormatterInterface $formatter)
     {

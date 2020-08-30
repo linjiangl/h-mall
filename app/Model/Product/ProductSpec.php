@@ -10,35 +10,33 @@ declare(strict_types=1);
  */
 namespace App\Model\Product;
 
-use App\Model\Model;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
  * @property int $product_id
- * @property int $option_id
+ * @property int $spec_id
  */
-class ProductOption extends Model
+class ProductSpec extends Model
 {
-    public $timestamps = false;
-
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'product_option';
+    protected $table = 'product_spec';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'product_id', 'option_id'];
+    protected $fillable = ['id', 'product_id', 'spec_id'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'product_id' => 'integer', 'option_id' => 'integer'];
+    protected $casts = ['id' => 'integer', 'product_id' => 'integer', 'spec_id' => 'integer'];
 }

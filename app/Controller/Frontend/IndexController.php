@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend;
 
-use App\Core\Block\Frontend\IndexBlock;
 use App\Controller\AbstractController;
+use App\Core\Block\Frontend\IndexBlock;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;

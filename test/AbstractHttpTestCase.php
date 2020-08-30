@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace HyperfTest;
 
 use Hyperf\Testing\Client;
-use HyperfTest\HttpTestCase;
 
 abstract class AbstractHttpTestCase extends HttpTestCase
 {

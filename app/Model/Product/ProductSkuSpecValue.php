@@ -8,37 +8,35 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Model\Category;
+namespace App\Model\Product;
 
-use App\Model\Model;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
- * @property int $category_id
- * @property int $option_id
+ * @property int $product_sku_id
+ * @property int $spec_value_id
  */
-class CategoryOption extends Model
+class ProductSkuSpecValue extends Model
 {
-    public $timestamps = false;
-
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'category_option';
+    protected $table = 'product_sku_spec_value';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'category_id', 'option_id'];
+    protected $fillable = ['id', 'product_sku_id', 'spec_value_id'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'category_id' => 'integer', 'option_id' => 'integer'];
+    protected $casts = ['id' => 'integer', 'product_sku_id' => 'integer', 'spec_value_id' => 'integer'];
 }

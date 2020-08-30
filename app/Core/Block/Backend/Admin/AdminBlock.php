@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace App\Core\Block\Backend\Admin;
 
 use App\Core\Block\Backend\BackendBlock;
-use App\Exception\HttpException;
 use App\Core\Service\Admin\AdminService;
+use App\Exception\HttpException;
 use Throwable;
 
 class AdminBlock extends BackendBlock

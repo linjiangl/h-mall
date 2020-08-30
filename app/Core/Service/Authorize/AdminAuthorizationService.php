@@ -11,11 +11,11 @@ declare(strict_types=1);
 namespace App\Core\Service\Authorize;
 
 use App\Core\Dao\Admin\AdminDao;
+use App\Core\Service\Admin\AdminService;
 use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
-use App\Core\Service\Admin\AdminService;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;

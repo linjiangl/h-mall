@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use Hyperf\Database\Seeders\Seeder;
 use Hyperf\Utils\Filesystem\Filesystem;
 

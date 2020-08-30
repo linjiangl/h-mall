@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend\Authorize;
 
-use App\Core\Block\Frontend\Authorize\LoginBlock;
 use App\Controller\AbstractController;
+use App\Core\Block\Frontend\Authorize\LoginBlock;
 use App\Request\Frontend\Authorize\LoginRequest;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\RateLimit\Annotation\RateLimit;

@@ -20,4 +20,15 @@ class CategoryDao extends AbstractDao
     protected $noAllowActions = [];
 
     protected $notFoundMessage = '分类不存在';
+
+    protected $orderBy = 'position asc';
+
+    public function getListByStatus($status = null, string $select = '*'): array
+    {
+        $condition = [];
+        if ($status !== null) {
+            $condition[] = [$status, 'in', $status];
+        }
+        return $this->getListByCondition($condition, [], $select);
+    }
 }

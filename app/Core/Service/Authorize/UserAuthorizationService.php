@@ -11,11 +11,11 @@ declare(strict_types=1);
 namespace App\Core\Service\Authorize;
 
 use App\Core\Dao\User\UserDao;
+use App\Core\Service\User\UserService;
 use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
-use App\Core\Service\User\UserService;
 use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;

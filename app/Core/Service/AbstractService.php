@@ -34,6 +34,12 @@ abstract class AbstractService
     protected $maxLimit = 100;
 
     /**
+     * 登录用户
+     * @var array
+     */
+    protected $authorize = [];
+
+    /**
      * 获取分页列表
      * @param array $condition 查询条件
      * @param int $page 当前页
@@ -65,7 +71,7 @@ abstract class AbstractService
      */
     public function info(int $id, $with = [])
     {
-        return $this->service()->info($id, $with);
+        return $this->service()->withAuthorize($this->authorize)->info($id, $with);
     }
 
     /**
@@ -75,7 +81,7 @@ abstract class AbstractService
      */
     public function create(array $data): int
     {
-        return $this->service()->create($data);
+        return $this->service()->withAuthorize($this->authorize)->create($data);
     }
 
     /**
@@ -86,7 +92,7 @@ abstract class AbstractService
      */
     public function update(int $id, array $data): array
     {
-        return $this->service()->update($id, $data);
+        return $this->service()->withAuthorize($this->authorize)->update($id, $data);
     }
 
     /**
@@ -96,7 +102,7 @@ abstract class AbstractService
      */
     public function remove(int $id): bool
     {
-        return $this->service()->remove($id);
+        return $this->service()->withAuthorize($this->authorize)->remove($id);
     }
 
     /**
@@ -107,6 +113,17 @@ abstract class AbstractService
     public function getCondition(array $params): array
     {
         return [];
+    }
+
+    /**
+     * 设置登录用户信息
+     * @param array $user
+     * @return $this
+     */
+    public function withAuthorize(array $user)
+    {
+        $this->authorize = $user;
+        return $this;
     }
 
     /**

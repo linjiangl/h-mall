@@ -8,38 +8,38 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Model\Option;
+namespace App\Model\Spec;
 
-use App\Model\Model;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
- * @property int $option_id
+ * @property int $spec_id
  * @property string $value
- * @property int $position
+ * @property int $sorting
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class OptionValue extends Model
+class SpecValue extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'option_value';
+    protected $table = 'spec_value';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'option_id', 'value', 'position', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'spec_id', 'value', 'sorting', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'option_id' => 'integer', 'position' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'spec_id' => 'integer', 'sorting' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

@@ -8,16 +8,16 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao\Option;
+namespace App\Core\Dao\Shop;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Option\OptionValue;
+use App\Model\Shop\ShopWithdraw;
 
-class OptionValueDao extends AbstractDao
+class ShopWithdrawDao extends AbstractDao
 {
-    protected $model = OptionValue::class;
+    protected $model = ShopWithdraw::class;
 
     protected $noAllowActions = [];
 
-    protected $notFoundMessage = '规格值不存在或已删除';
+    protected $notFoundMessage = '提现记录不存在';
 }

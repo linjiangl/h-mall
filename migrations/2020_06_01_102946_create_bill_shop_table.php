@@ -8,14 +8,14 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateRecordShopFinanceTable extends Migration
+class CreateBillShopTable extends Migration
 {
-    protected $table = 'record_shop_finance';
+    protected $table = 'bill_shop';
+
     /**
      * Run the migrations.
      */
@@ -37,6 +37,8 @@ class CreateRecordShopFinanceTable extends Migration
             $table->index(['shop_id', 'amount'], 'shop_id_amount');
             $table->index(['amount'], 'amount');
         });
+
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-商家流水记录'");
     }
 
     /**

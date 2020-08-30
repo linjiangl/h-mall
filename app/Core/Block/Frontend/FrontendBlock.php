@@ -11,7 +11,15 @@ declare(strict_types=1);
 namespace App\Core\Block\Frontend;
 
 use App\Core\Block\AbstractBlock;
+use App\Core\Service\AbstractService;
 
 class FrontendBlock extends AbstractBlock
 {
+    protected function service(): AbstractService
+    {
+        $service = parent::service();
+        $authorize = request()->getAttribute('user');
+        $authorize = $authorize ?: [];
+        return $service->withAuthorize($authorize);
+    }
 }

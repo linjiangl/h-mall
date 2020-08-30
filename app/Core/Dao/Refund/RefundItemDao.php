@@ -8,16 +8,16 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao\Category;
+namespace App\Core\Dao\Refund;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Category\CategoryOption;
+use App\Model\Refund\RefundItem;
 
-class CategoryOptionDao extends AbstractDao
+class RefundItemDao extends AbstractDao
 {
-    protected $model = CategoryOption::class;
+    protected $model = RefundItem::class;
 
     protected $noAllowActions = [];
 
-    protected $notFoundMessage = '分类规格不存在或已删除';
+    protected $notFoundMessage = '退款的商品不存在';
 }

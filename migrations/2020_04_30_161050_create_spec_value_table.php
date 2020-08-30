@@ -8,27 +8,30 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateOptionValueTable extends Migration
+class CreateSpecValueTable extends Migration
 {
+    protected $table = 'spec_value';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('option_value', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->integer('option_id', false, true);
+            $table->integer('spec_id', false, true);
             $table->string('value', 100);
-            $table->tinyInteger('position', false, true)->default(0);
+            $table->tinyInteger('sorting', false, true)->default(0);
             $table->timestamps();
 
-            $table->index(['option_id'], 'option_id');
+            $table->index(['spec_id'], 'spec_id');
+            $table->index(['sorting'], 'sorting');
         });
+
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '商品规格值'");
     }
 
     /**
@@ -36,6 +39,6 @@ class CreateOptionValueTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('option_value');
+        Schema::dropIfExists($this->table);
     }
 }

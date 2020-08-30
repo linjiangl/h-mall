@@ -8,14 +8,13 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateRecordUserWalletTable extends Migration
+class CreateBillUserTable extends Migration
 {
-    protected $table = 'record_user_wallet';
+    protected $table = 'bill_user';
 
     /**
      * Run the migrations.
@@ -39,7 +38,7 @@ class CreateRecordUserWalletTable extends Migration
             $table->index(['created_at'], 'created_at');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '日志-用户流水记录'");
+        \Hyperf\DbConnection\Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-用户流水记录'");
     }
 
     /**

@@ -1,8 +1,16 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
+ * @contact  8257796@qq.com
+ */
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
 
 class CreateLogAdminActionTable extends Migration
 {
@@ -23,7 +31,6 @@ class CreateLogAdminActionTable extends Migration
             $table->softDeletes();
 
             $table->index(['admin_id'], 'admin_id');
-
         });
     }
 

@@ -8,10 +8,10 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Model\Record;
+namespace App\Model\Bill;
 
-use App\Model\Model;
 use Hyperf\Database\Model\SoftDeletes;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
@@ -28,7 +28,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
  */
-class RecordPayment extends Model
+class BillPayment extends Model
 {
     use SoftDeletes;
 
@@ -37,7 +37,7 @@ class RecordPayment extends Model
      *
      * @var string
      */
-    protected $table = 'record_payment';
+    protected $table = 'bill_payment';
 
     /**
      * The attributes that are mass assignable.

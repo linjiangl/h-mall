@@ -15,10 +15,10 @@ use App\Constants\State\AdminState;
 use App\Core\Dao\Admin\AdminDao;
 use App\Core\Dao\Role\RoleAdminDao;
 use App\Core\Dao\Role\RoleDao;
-use App\Exception\InternalException;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Authorize\AdminAuthorizationService;
 use App\Core\Service\Role\RoleAdminService;
+use App\Exception\InternalException;
 use Throwable;
 
 class AdminService extends AbstractService
