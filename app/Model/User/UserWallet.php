@@ -18,6 +18,7 @@ use App\Model\Model;
  * @property float $balance 余额
  * @property int $freeze_integral 冻结的积分
  * @property float $freeze_balance 冻结的余额
+ * @property-read User $user
  */
 class UserWallet extends Model
 {
@@ -45,4 +46,9 @@ class UserWallet extends Model
      * @var array
      */
     protected $casts = ['user_id' => 'integer', 'integral' => 'integer', 'balance' => 'float', 'freeze_integral' => 'integer', 'freeze_balance' => 'float'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

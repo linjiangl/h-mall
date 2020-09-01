@@ -20,4 +20,9 @@ class UserWalletDao extends AbstractDao
     protected $noAllowActions = [];
 
     protected $notFoundMessage = '用户钱包异常';
+
+    public function info(int $id, array $with = []): UserWallet
+    {
+        return parent::info($id, $with);
+    }
 }

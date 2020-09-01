@@ -10,12 +10,14 @@ declare(strict_types=1);
  */
 namespace App\Model\Category;
 
+use App\Model\Spec\Spec;
 use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
  * @property int $category_id
  * @property int $spec_id
+ * @property-read Spec $spec
  */
 class CategorySpec extends Model
 {
@@ -39,4 +41,9 @@ class CategorySpec extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'category_id' => 'integer', 'spec_id' => 'integer'];
+
+    public function spec()
+    {
+        return $this->belongsTo(Spec::class);
+    }
 }

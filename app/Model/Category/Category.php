@@ -12,6 +12,7 @@ namespace App\Model\Category;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
+use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -22,9 +23,10 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $cover 封面图
  * @property int $sorting
  * @property int $status 是否显示 0:删除 0:显示, 1:隐藏
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
+ * @property-read Spec[] $specs
  */
 class Category extends Model
 {

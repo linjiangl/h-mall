@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Spec;
 
+use Carbon\Carbon;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -17,8 +18,9 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $spec_id
  * @property string $value
  * @property int $sorting
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property-read Spec $spec
  */
 class SpecValue extends Model
 {

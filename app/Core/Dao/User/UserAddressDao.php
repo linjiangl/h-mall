@@ -20,4 +20,9 @@ class UserAddressDao extends AbstractDao
     protected $noAllowActions = [];
 
     protected $notFoundMessage = '收货地址不存在';
+
+    public function info(int $id, array $with = []): UserAddress
+    {
+        return parent::info($id, $with);
+    }
 }
