@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Shop;
 
 use App\Model\Model;
+use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -21,9 +22,9 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $logo 店铺名称
  * @property float $comment_score 评分
  * @property int $status 状态 0:待审核, 1:已通过, 2:未通过, 3:已关闭
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  */
 class Shop extends Model
 {

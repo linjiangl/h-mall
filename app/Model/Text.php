@@ -10,12 +10,14 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
+use Carbon\Carbon;
+
 /**
  * @property int $id
  * @property string $module 模块 product:商品, shop:店铺
  * @property string $content
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Text extends Model
 {

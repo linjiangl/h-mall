@@ -13,9 +13,9 @@ use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 use Hyperf\DbConnection\Db;
 
-class CreateBillPaymentTable extends Migration
+class CreateStatementPaymentTable extends Migration
 {
-    protected $table = 'bill_payment';
+    protected $table = 'statement_payment';
 
     /**
      * Run the migrations.

@@ -8,8 +8,9 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Model\Bill;
+namespace App\Model\Statement;
 
+use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
@@ -26,11 +27,11 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $status 退款状态 0:未处理, 1:已处理
  * @property string $remark
  * @property int $finished_time 退款成功时间
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  */
-class BillRefund extends Model
+class StatementRefund extends Model
 {
     use SoftDeletes;
 
@@ -39,7 +40,7 @@ class BillRefund extends Model
      *
      * @var string
      */
-    protected $table = 'bill_refund';
+    protected $table = 'statement_refund';
 
     /**
      * The attributes that are mass assignable.

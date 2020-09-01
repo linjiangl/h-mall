@@ -8,8 +8,9 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Model\Bill;
+namespace App\Model\Statement;
 
+use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
@@ -24,11 +25,11 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $status 支付状态 0:待支付, 1:支付成功, 2:重复支付退款
  * @property string $remark
  * @property int $finished_time 支付完成的时间
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  */
-class BillPayment extends Model
+class StatementPayment extends Model
 {
     use SoftDeletes;
 
@@ -37,7 +38,7 @@ class BillPayment extends Model
      *
      * @var string
      */
-    protected $table = 'bill_payment';
+    protected $table = 'statement_payment';
 
     /**
      * The attributes that are mass assignable.

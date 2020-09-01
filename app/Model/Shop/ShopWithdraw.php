@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Shop;
 
 use App\Model\Model;
+use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -22,9 +23,9 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $refused_time 拒绝时间
  * @property int $finished_time 完成时间
  * @property string $remark
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  */
 class ShopWithdraw extends Model
 {

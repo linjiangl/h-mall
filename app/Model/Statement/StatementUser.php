@@ -8,8 +8,9 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Model\Bill;
+namespace App\Model\Statement;
 
+use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
@@ -23,11 +24,11 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $module 模块 order:订单
  * @property int $module_id
  * @property string $remark
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  */
-class BillUser extends Model
+class StatementUser extends Model
 {
     use SoftDeletes;
 
@@ -36,7 +37,7 @@ class BillUser extends Model
      *
      * @var string
      */
-    protected $table = 'bill_user';
+    protected $table = 'statement_user';
 
     /**
      * The attributes that are mass assignable.

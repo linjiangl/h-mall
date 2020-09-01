@@ -13,9 +13,9 @@ use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 use Hyperf\DbConnection\Db;
 
-class CreateBillShopTable extends Migration
+class CreateStatementUserTable extends Migration
 {
-    protected $table = 'bill_shop';
+    protected $table = 'statement_user';
 
     /**
      * Run the migrations.
@@ -24,22 +24,22 @@ class CreateBillShopTable extends Migration
     {
         Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->integer('shop_id', false, true);
             $table->integer('user_id', false, true);
-            $table->decimal('amount', 10, 2);
-            $table->string('type', 20)->comment('类别 order:订单, withdraw:提现, refund:退款');
-            $table->string('module', 20)->default('')->comment('关联模型');
+            $table->string('type', 30)->comment('类型 recharged:充值 consumed:消费');
+            $table->decimal('amount', 9, 2)->default(0)->comment('金额');
+            $table->integer('integral')->default(0)->comment('积分');
+            $table->string('description', 100)->default('')->comment('描述');
+            $table->string('module', 30)->default('')->comment('模块 order:订单');
             $table->integer('module_id', false, true)->default(0);
-            $table->string('order_sn', 64)->default('');
             $table->string('remark', 255)->default('');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['shop_id', 'amount'], 'shop_id_amount');
-            $table->index(['amount'], 'amount');
+            $table->index(['user_id', 'type'], 'user_id_type');
+            $table->index(['created_at'], 'created_at');
         });
 
-        Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-商家流水记录'");
+        Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-用户流水记录'");
     }
 
     /**

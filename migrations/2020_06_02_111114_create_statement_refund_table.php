@@ -13,9 +13,9 @@ use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 use Hyperf\DbConnection\Db;
 
-class CreateBillRefundTable extends Migration
+class CreateStatementRefundTable extends Migration
 {
-    protected $table = 'bill_refund';
+    protected $table = 'statement_refund';
 
     /**
      * Run the migrations.
