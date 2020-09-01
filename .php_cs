@@ -92,6 +92,7 @@ return PhpCsFixer\Config::create()
         'ternary_operator_spaces' => true,
         'binary_operator_spaces' => true,
         'no_blank_lines_before_namespace' => true,
+        'fully_qualified_strict_types' => true,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
