@@ -15,12 +15,13 @@ use Hyperf\DbConnection\Db;
 
 class CreateEvaluationTable extends Migration
 {
+    protected $table = 'evaluation';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('evaluation', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->integer('order_id', false, true);
@@ -55,6 +56,6 @@ class CreateEvaluationTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('evaluation');
+        Schema::dropIfExists($this->table);
     }
 }

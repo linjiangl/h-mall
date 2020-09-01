@@ -20,13 +20,5 @@ class GeneralService extends AbstractTypesService
         parent::__construct($data, $id);
     }
 
-    public function create(): int
-    {
-        return $this->productId;
-    }
 
-    public function update(): array
-    {
-        return $this->product;
-    }
 }

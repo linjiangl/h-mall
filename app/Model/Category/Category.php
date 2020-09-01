@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Category;
 
 use App\Model\Model;
+use App\Model\Spec\Spec;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -49,4 +50,9 @@ class Category extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function specs()
+    {
+        return $this->belongsToMany(Spec::class, (new CategorySpec())->getTable(), 'category_id', 'spec_id');
+    }
 }

@@ -15,12 +15,13 @@ use Hyperf\DbConnection\Db;
 
 class CreateDistrictTable extends Migration
 {
+    protected $table = 'district';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('district', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('parent_id', false, true)->default(0);
             $table->string('name', 50);
@@ -38,6 +39,6 @@ class CreateDistrictTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('district');
+        Schema::dropIfExists($this->table);
     }
 }

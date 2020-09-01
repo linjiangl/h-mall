@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Product;
 
 use App\Model\Model;
+use App\Model\Spec\Spec;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -61,4 +62,9 @@ class Product extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'text_id' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'min_price' => 'float', 'max_price' => 'float', 'status' => 'integer', 'is_show' => 'integer', 'buy_limit' => 'integer', 'buy_limit_total' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function specs()
+    {
+        return $this->belongsToMany(Spec::class, (new ProductSpec())->getTable(), 'product_id', 'spec_id');
+    }
 }

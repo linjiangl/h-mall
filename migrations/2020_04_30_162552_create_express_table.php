@@ -15,12 +15,13 @@ use Hyperf\DbConnection\Db;
 
 class CreateExpressTable extends Migration
 {
+    protected $table = 'express';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('express', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->string('name', 50)->comment('公司名称');
             $table->string('code', 50)->comment('公司编码');
@@ -41,6 +42,6 @@ class CreateExpressTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('express');
+        Schema::dropIfExists($this->table);
     }
 }

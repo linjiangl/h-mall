@@ -15,12 +15,14 @@ use Hyperf\DbConnection\Db;
 
 class CreateSlideTable extends Migration
 {
+    protected $table = 'slide';
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('slide', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('shop_id', false, true);
             $table->string('title', 50);
@@ -44,6 +46,6 @@ class CreateSlideTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('slide');
+        Schema::dropIfExists($this->table);
     }
 }

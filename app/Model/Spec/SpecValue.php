@@ -42,4 +42,9 @@ class SpecValue extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'spec_id' => 'integer', 'sorting' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function spec()
+    {
+        return $this->belongsTo(Spec::class);
+    }
 }

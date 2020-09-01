@@ -15,12 +15,14 @@ use Hyperf\DbConnection\Db;
 
 class CreateRefundTable extends Migration
 {
+    protected $table = 'refund';
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('refund', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->integer('shop_id', false, true);
@@ -65,6 +67,6 @@ class CreateRefundTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('refund');
+        Schema::dropIfExists($this->table);
     }
 }

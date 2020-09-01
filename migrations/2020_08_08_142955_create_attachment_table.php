@@ -15,12 +15,14 @@ use Hyperf\DbConnection\Db;
 
 class CreateAttachmentTable extends Migration
 {
+    protected $table = 'attachment';
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('attachment', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->string('system', 50)->comment('云存储系统');
             $table->string('type', 50)->comment('文件类型');
@@ -45,6 +47,6 @@ class CreateAttachmentTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attachment');
+        Schema::dropIfExists($this->table);
     }
 }

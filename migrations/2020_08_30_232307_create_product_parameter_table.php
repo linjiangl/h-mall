@@ -1,13 +1,22 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://store.yii.red
+ * @document https://document.store.yii.red
+ * @contact  8257796@qq.com
+ */
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
 use Hyperf\DbConnection\Db;
 
 class CreateProductParameterTable extends Migration
 {
     protected $table = 'product_parameter';
+
     /**
      * Run the migrations.
      */

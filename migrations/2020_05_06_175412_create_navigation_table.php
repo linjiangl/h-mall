@@ -15,12 +15,14 @@ use Hyperf\DbConnection\Db;
 
 class CreateNavigationTable extends Migration
 {
+    protected $table = 'navigation';
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('navigation', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->string('title', 50);
             $table->string('url', 255)->default('');
@@ -41,6 +43,6 @@ class CreateNavigationTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('navigation');
+        Schema::dropIfExists($this->table);
     }
 }

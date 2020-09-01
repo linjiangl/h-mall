@@ -15,12 +15,14 @@ use Hyperf\DbConnection\Db;
 
 class CreateAdvertisementTable extends Migration
 {
+    protected $table = 'advertisement';
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('advertisement', function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('title', 30)->comment('标题');
             $table->string('image', 255)->comment('图片');
@@ -42,6 +44,6 @@ class CreateAdvertisementTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('advertisement');
+        Schema::dropIfExists($this->table);
     }
 }

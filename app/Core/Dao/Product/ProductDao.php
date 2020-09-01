@@ -21,6 +21,11 @@ class ProductDao extends AbstractDao
 
     protected $notFoundMessage = '商品不存在或已删除';
 
+    public function info(int $id, array $with = []): Product
+    {
+        return parent::info($id, $with);
+    }
+
     /**
      * 检查分类下是否有商品
      * @param int $categoryId
