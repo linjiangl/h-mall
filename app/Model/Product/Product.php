@@ -12,6 +12,7 @@ namespace App\Model\Product;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
+use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -34,9 +35,10 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $buy_limit 单次购买上限 0:不限制
  * @property int $buy_limit_total 购买上限 0:不限制
  * @property string $images 商品图片
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
+ * @property-read Spec[] $specs
  */
 class Product extends Model
 {
