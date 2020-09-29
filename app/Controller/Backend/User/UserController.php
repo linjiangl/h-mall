@@ -11,8 +11,9 @@ declare(strict_types=1);
 namespace App\Controller\Backend\User;
 
 use App\Constants\Action\UserAction;
+use App\Constants\BlockSinceConstants;
 use App\Controller\AbstractController;
-use App\Core\Block\Backend\User\UserBlock;
+use App\Core\Block\Common\User\UserBlock;
 use App\Request\Backend\User\UserRequest;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -26,7 +27,7 @@ class UserController extends AbstractController
      */
     public function index(RequestInterface $request)
     {
-        return (new UserBlock())->index($request);
+        return (new UserBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->index($request);
     }
 
     /**
@@ -37,7 +38,7 @@ class UserController extends AbstractController
      */
     public function show(RequestInterface $request, int $id)
     {
-        return (new UserBlock())->show($request, $id);
+        return (new UserBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->show($request, $id);
     }
 
     /**
@@ -50,6 +51,6 @@ class UserController extends AbstractController
     {
         $request->validated();
         $this->setActionName(UserAction::USER_UPDATE);
-        return (new UserBlock())->update($request->post(), $id);
+        return (new UserBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->update($request->post(), $id);
     }
 }

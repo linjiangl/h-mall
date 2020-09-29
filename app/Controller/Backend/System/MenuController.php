@@ -11,8 +11,9 @@ declare(strict_types=1);
 namespace App\Controller\Backend\System;
 
 use App\Constants\Action\AdminAction;
+use App\Constants\BlockSinceConstants;
 use App\Controller\AbstractController;
-use App\Core\Block\Backend\System\MenuBlock;
+use App\Core\Block\Common\System\MenuBlock;
 use App\Request\Backend\System\MenuRequest;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -26,7 +27,7 @@ class MenuController extends AbstractController
      */
     public function index(RequestInterface $request)
     {
-        return (new MenuBlock())->index($request);
+        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->index($request);
     }
 
     /**
@@ -37,7 +38,7 @@ class MenuController extends AbstractController
      */
     public function show(RequestInterface $request, int $id)
     {
-        return (new MenuBlock())->show($request, $id);
+        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->show($request, $id);
     }
 
     /**
@@ -49,7 +50,7 @@ class MenuController extends AbstractController
     {
         $request->validated();
         $this->setActionName(AdminAction::MENU_CREATE);
-        return (new MenuBlock())->store($request->post());
+        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->store($request->post());
     }
 
     /**
@@ -62,7 +63,7 @@ class MenuController extends AbstractController
     {
         $request->validated();
         $this->setActionName(AdminAction::MENU_UPDATE);
-        return (new MenuBlock())->update($request->post(), $id);
+        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->update($request->post(), $id);
     }
 
     /**
@@ -74,6 +75,6 @@ class MenuController extends AbstractController
     public function destroy(RequestInterface $request, int $id)
     {
         $this->setActionName(AdminAction::MENU_DELETE);
-        return (new MenuBlock())->destroy($id);
+        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->destroy($id);
     }
 }

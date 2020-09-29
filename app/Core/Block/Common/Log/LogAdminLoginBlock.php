@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Backend\Log;
+namespace App\Core\Block\Common\Log;
 
-use App\Core\Block\Backend\BackendBlock;
+use App\Core\Block\AbstractBlock;
 use App\Core\Service\Log\LogAdminLoginService;
 
-class LogAdminLoginBlock extends BackendBlock
+class LogAdminLoginBlock extends AbstractBlock
 {
     protected $service = LogAdminLoginService::class;
 }

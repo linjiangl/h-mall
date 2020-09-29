@@ -10,8 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Log;
 
+use App\Constants\BlockSinceConstants;
 use App\Controller\AbstractController;
-use App\Core\Block\Backend\Log\LogAdminLoginBlock;
+use App\Core\Block\Common\Log\LogAdminLoginBlock;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
@@ -24,6 +25,6 @@ class LogAdminLoginController extends AbstractController
      */
     public function index(RequestInterface $request)
     {
-        return (new LogAdminLoginBlock)->index($request);
+        return (new LogAdminLoginBlock)->setSince(BlockSinceConstants::SINCE_BACKEND)->index($request);
     }
 }

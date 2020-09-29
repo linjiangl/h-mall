@@ -8,14 +8,14 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Backend\Admin;
+namespace App\Core\Block\Common\Admin;
 
-use App\Core\Block\Backend\BackendBlock;
+use App\Core\Block\AbstractBlock;
 use App\Core\Service\Admin\AdminService;
 use App\Exception\HttpException;
 use Throwable;
 
-class AdminBlock extends BackendBlock
+class AdminBlock extends AbstractBlock
 {
     protected $service = AdminService::class;
 

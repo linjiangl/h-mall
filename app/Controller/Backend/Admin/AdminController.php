@@ -11,8 +11,9 @@ declare(strict_types=1);
 namespace App\Controller\Backend\Admin;
 
 use App\Constants\Action\AdminAction;
+use App\Constants\BlockSinceConstants;
 use App\Controller\AbstractController;
-use App\Core\Block\Backend\Admin\AdminBlock;
+use App\Core\Block\Common\Admin\AdminBlock;
 use App\Request\Backend\Admin\AdminRequest;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -26,7 +27,7 @@ class AdminController extends AbstractController
      */
     public function index(RequestInterface $request)
     {
-        return (new AdminBlock())->index($request);
+        return (new AdminBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->index($request);
     }
 
     /**
@@ -37,7 +38,7 @@ class AdminController extends AbstractController
      */
     public function show(RequestInterface $request, int $id)
     {
-        return (new AdminBlock())->show($request, $id);
+        return (new AdminBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->show($request, $id);
     }
 
     /**
@@ -49,7 +50,7 @@ class AdminController extends AbstractController
     {
         $request->validated();
         $this->setActionName(AdminAction::ADMIN_CREATE);
-        return (new AdminBlock())->store($request->post());
+        return (new AdminBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->store($request->post());
     }
 
     /**
@@ -62,6 +63,6 @@ class AdminController extends AbstractController
     {
         $request->validated();
         $this->setActionName(AdminAction::ADMIN_UPDATE);
-        return (new AdminBlock())->update($request->post(), $id);
+        return (new AdminBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->update($request->post(), $id);
     }
 }

@@ -8,15 +8,15 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Backend\System;
+namespace App\Core\Block\Common\System;
 
-use App\Core\Block\Backend\BackendBlock;
+use App\Core\Block\AbstractBlock;
 use App\Core\Service\Role\RoleMenuService;
 use App\Core\Service\Role\RoleService;
 use App\Exception\HttpException;
 use Throwable;
 
-class RoleBlock extends BackendBlock
+class RoleBlock extends AbstractBlock
 {
     protected $service = RoleService::class;
 

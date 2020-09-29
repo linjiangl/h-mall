@@ -8,18 +8,21 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Frontend\User;
+namespace App\Core\Block\Common\User;
 
-use App\Core\Block\Frontend\FrontendBlock;
+use App\Core\Block\AbstractBlock;
 use App\Core\Service\User\UserService;
 
-class UserBlock extends FrontendBlock
+class UserBlock extends AbstractBlock
 {
-    protected $with = [];
-
     protected $query = [
-        'like' => ['username']
+        '=' => ['id'],
+        'like' => ['username'],
+        'in' => ['status'],
+        'between' => ['created_at']
     ];
+
+    protected $paramType = [];
 
     protected $service = UserService::class;
 }

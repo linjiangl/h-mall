@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Block;
 
+use App\Constants\BlockSinceConstants;
 use App\Core\Service\AbstractService;
 use App\Exception\HttpException;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
@@ -18,6 +19,12 @@ use Throwable;
 
 abstract class AbstractBlock
 {
+    /**
+     * 场景
+     * @var string
+     */
+    protected $since = BlockSinceConstants::SINCE_FRONTEND;
+
     /**
      * @var AbstractService
      */
@@ -96,6 +103,17 @@ abstract class AbstractBlock
      * @var array
      */
     protected $data = [];
+
+    /**
+     * 设置场景
+     * @param string $since
+     * @return $this
+     */
+    public function setSince($since = BlockSinceConstants::SINCE_FRONTEND)
+    {
+        $this->since = $since;
+        return $this;
+    }
 
     /**
      * 列表
@@ -202,6 +220,21 @@ abstract class AbstractBlock
     {
         $this->page = intval($request->query('page', $this->page));
         $this->limit = intval($request->query('limit', $this->limit));
+
+        switch ($this->since) {
+            case 'backend':
+                $sort = $request->query('sorter', '');
+                if ($sort) {
+                    $sort = json_decode($sort, true);
+                    $orderBy = '';
+                    foreach ($sort as $key => $value) {
+                        $value = str_replace('end', '', $value);
+                        $orderBy = $orderBy . "{$key} {$value}";
+                    }
+                    $this->orderBy = $orderBy;
+                }
+                break;
+        }
     }
 
     /**
@@ -281,6 +314,16 @@ abstract class AbstractBlock
      */
     protected function service(): AbstractService
     {
-        return new $this->service();
+        /** @var AbstractService $service */
+        $service = new $this->service();
+
+        switch ($this->since) {
+            case 'frontend':
+                $authorize = request()->getAttribute('user');
+                $authorize = $authorize ?: [];
+                $service = $service->withAuthorize($authorize);
+                break;
+        }
+        return $service;
     }
 }
