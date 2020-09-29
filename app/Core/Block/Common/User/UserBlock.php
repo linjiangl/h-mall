@@ -15,14 +15,12 @@ use App\Core\Service\User\UserService;
 
 class UserBlock extends AbstractBlock
 {
+    protected $service = UserService::class;
+
     protected $query = [
         '=' => ['id'],
         'like' => ['username'],
         'in' => ['status'],
         'between' => ['created_at']
     ];
-
-    protected $paramType = [];
-
-    protected $service = UserService::class;
 }

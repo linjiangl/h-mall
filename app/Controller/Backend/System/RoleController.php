@@ -13,7 +13,7 @@ namespace App\Controller\Backend\System;
 use App\Constants\Action\AdminAction;
 use App\Constants\BlockSinceConstants;
 use App\Controller\AbstractController;
-use App\Core\Block\Common\System\RoleBlock;
+use App\Core\Block\Common\Role\RoleBlock;
 use App\Request\Backend\System\RoleRequest;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;

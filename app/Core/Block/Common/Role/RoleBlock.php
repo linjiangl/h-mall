@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Common\System;
+namespace App\Core\Block\Common\Role;
 
 use App\Core\Block\AbstractBlock;
 use App\Core\Service\Role\RoleMenuService;
