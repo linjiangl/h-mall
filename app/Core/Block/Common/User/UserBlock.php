@@ -24,7 +24,7 @@ class UserBlock extends AbstractBlock
         'between' => ['created_at']
     ];
 
-    protected $defaultSinceWiths = [
+    protected $defaultSinceWith = [
         'backend' => [
             'index' => ['wallet'],
             'show' => ['wallet', 'vipCard'],

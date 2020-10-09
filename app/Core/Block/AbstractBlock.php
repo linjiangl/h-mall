@@ -78,7 +78,7 @@ abstract class AbstractBlock
      * 默认关联模型
      * @var array
      */
-    protected $defaultSinceWiths = [];
+    protected $defaultSinceWith = [];
 
     /**
      * 需要查询的条件.
@@ -249,7 +249,7 @@ abstract class AbstractBlock
      */
     protected function beforeBuildQuery(RequestInterface $request)
     {
-        $this->with = isset($this->defaultSinceWiths[$this->since][$this->action]) ? $this->defaultSinceWiths[$this->since][$this->action] : [];
+        $this->with = isset($this->defaultSinceWith[$this->since][$this->action]) ? $this->defaultSinceWith[$this->since][$this->action] : [];
         $this->condition = $this->handleCondition($request);
         $this->groupBy = [];
     }
