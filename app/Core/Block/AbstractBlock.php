@@ -77,6 +77,12 @@ abstract class AbstractBlock
     /**
      * 默认关联模型
      * @var array
+     *
+     * 格式: [
+     *   'since name' => [
+     *      'action name' => ['user']
+     *   ]
+     * ]
      */
     protected $defaultSinceWith = [];
 
