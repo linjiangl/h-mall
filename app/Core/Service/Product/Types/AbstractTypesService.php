@@ -68,13 +68,9 @@ abstract class AbstractTypesService implements InterfaceTypesService
     {
         $sku = $this->product['sku'];
         $skuPrice = array_column($sku, 'price');
-        $skuCash = array_column($sku, 'cash');
         sort($skuPrice);
-        sort($skuCash);
         $minPrice = $skuPrice[0];
         $maxPrice = end($skuPrice);
-        $minCash = $skuCash[0];
-        $maxCash = end($skuCash);
 
         return [
             'shop_id' => $this->product['shop_id'],
@@ -82,17 +78,11 @@ abstract class AbstractTypesService implements InterfaceTypesService
             'sub_title' => $this->product['sub_title'],
             'images' => $this->product['images'] ? json_encode(explode(',', $this->product['images'])) : '',
             'description_id' => $this->product['description_id'] ?? 0,
-            'delivery_method_id' => $this->product['delivery_method_id'] ?? 0,
-            'position' => 0,
             'shipping_required' => $this->product['shipping_required'],
             'category_id' => $this->product['category_id'],
-            'stock_type' => 0,
             'min_price' => $minPrice,
             'max_price' => $maxPrice,
-            'min_cash' => $minCash,
-            'max_cash' => $maxCash,
             'type' => ProductState::TYPE_GENERAL,
-            'buy_type' => $this->product['buy_type'],
             'buy_limit' => $this->product['buy_limit'],
             'buy_limit_total' => $this->product['buy_limit_total'],
         ];
