@@ -28,9 +28,9 @@ class CreateOrderInvoiceTable extends Migration
             $table->tinyInteger('open_type', false, true)->comment('开具类型');
             $table->tinyInteger('type', false, true)->comment('发票类型');
             $table->string('title', 150)->comment('发票抬头');
-            $table->string('taxpayer_id', 30)->comment('纳税人识别号');
+            $table->string('taxpayer_no', 30)->comment('纳税人识别号');
             $table->tinyInteger('status', false, true)->default(0)->comment('状态 0:已申请, 1:待处理, 2:已处理');
-            $table->string('invoice_src', 255)->comment('发票地址');
+            $table->string('invoice_url', 255)->comment('发票地址');
             $table->string('refused_reason', 255)->default('')->comment('拒绝理由');
             $table->text('invoice')->comment('发票内容');
             $table->timestamps();

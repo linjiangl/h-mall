@@ -21,9 +21,9 @@ use App\Model\Model;
  * @property int $open_type 开具类型
  * @property int $type 发票类型
  * @property string $title 发票抬头
- * @property string $taxpayer_id 纳税人识别号
+ * @property string $taxpayer_no 纳税人识别号
  * @property int $status 状态 0:已申请, 1:待处理, 2:已处理
- * @property string $invoice_src 发票地址
+ * @property string $invoice_url 发票地址
  * @property string $refused_reason 拒绝理由
  * @property string $invoice 发票内容
  * @property \Carbon\Carbon $created_at
@@ -43,7 +43,7 @@ class OrderInvoice extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'order_id', 'order_sn', 'open_type', 'type', 'title', 'taxpayer_id', 'status', 'invoice_src', 'refused_reason', 'invoice', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'order_id', 'order_sn', 'open_type', 'type', 'title', 'taxpayer_no', 'status', 'invoice_url', 'refused_reason', 'invoice', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

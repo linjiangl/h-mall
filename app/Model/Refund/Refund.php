@@ -20,7 +20,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $order_id
  * @property string $refund_sn
  * @property string $order_sn
- * @property string $order_status
+ * @property int $order_status
  * @property string $service_type 服务类型 money:仅退款, all:退货退款
  * @property int $express_status 物流状态 1:未收货, 2:已收货
  * @property float $amount 退款金额
@@ -65,5 +65,5 @@ class Refund extends Model
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'order_id' => 'integer', 'express_status' => 'integer', 'amount' => 'float', 'status' => 'integer', 'applied_time' => 'integer', 'edited_time' => 'integer', 'canceled_time' => 'integer', 'refused_time' => 'integer', 'agreed_time' => 'integer', 'shipped_time' => 'integer', 'received_time' => 'integer', 'finished_time' => 'integer', 'failed_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'order_id' => 'integer', 'order_status' => 'integer', 'express_status' => 'integer', 'amount' => 'float', 'status' => 'integer', 'applied_time' => 'integer', 'edited_time' => 'integer', 'canceled_time' => 'integer', 'refused_time' => 'integer', 'agreed_time' => 'integer', 'shipped_time' => 'integer', 'received_time' => 'integer', 'finished_time' => 'integer', 'failed_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

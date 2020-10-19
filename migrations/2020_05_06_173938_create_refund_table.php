@@ -29,7 +29,7 @@ class CreateRefundTable extends Migration
             $table->integer('order_id', false, true);
             $table->string('refund_sn', 32);
             $table->string('order_sn', 32);
-            $table->string('order_status', 30);
+            $table->tinyInteger('order_status', false, true);
             $table->string('service_type', 30)->comment('服务类型 money:仅退款, all:退货退款');
             $table->tinyInteger('express_status')->default(1)->comment('物流状态 1:未收货, 2:已收货');
             $table->decimal('amount', 10, 2)->unsigned()->default(0)->comment('退款金额');
