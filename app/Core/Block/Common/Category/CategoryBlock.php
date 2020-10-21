@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Category;
 
-use App\Core\Block\AbstractBlock;
+use App\Core\Block\RestBlock;
 use App\Core\Service\Category\CategoryService;
 
-class CategoryBlock extends AbstractBlock
+class CategoryBlock extends RestBlock
 {
     protected $service = CategoryService::class;
 }

@@ -10,13 +10,14 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Frontend\Authorize;
 
+use App\Core\Block\RestBlock;
 use App\Core\Service\Authorize\UserAuthorizationService;
 use App\Exception\HttpException;
 use Throwable;
 
-class LoginBlock
+class LoginBlock extends RestBlock
 {
-    public function index(array $data): array
+    public function login(array $data): array
     {
         try {
             $service = new UserAuthorizationService();

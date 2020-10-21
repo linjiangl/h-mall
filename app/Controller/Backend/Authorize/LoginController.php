@@ -27,7 +27,7 @@ class LoginController extends BackendController
         $request->validated();
         /** @var LoginBlock $service */
         $service = $this->service();
-        return $service->index($request->post());
+        return $service->login($request->post());
     }
 
     protected function block()

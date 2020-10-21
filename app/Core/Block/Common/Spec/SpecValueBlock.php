@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Spec;
 
-use App\Core\Block\AbstractBlock;
+use App\Core\Block\RestBlock;
 use App\Core\Service\Spec\SpecValueService;
 
-class SpecValueBlock extends AbstractBlock
+class SpecValueBlock extends RestBlock
 {
     protected $service = SpecValueService::class;
 }

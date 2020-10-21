@@ -29,7 +29,7 @@ Router::addGroup('/backend', function () {
 
 Router::addGroup('/backend', function () {
     // user
-    Router::post('/authorize', [AuthorizeController::class, 'index']);
+    Router::post('/authorize', [AuthorizeController::class, 'info']);
     Router::get('/user', [UserController::class, 'index']);
     Router::get('/user/{id:\d+}', [UserController::class, 'show']);
     Router::put('/user/{id:\d+}', [UserController::class, 'updateRequest']);

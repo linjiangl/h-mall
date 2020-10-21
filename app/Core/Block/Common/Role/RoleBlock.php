@@ -10,13 +10,13 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Role;
 
-use App\Core\Block\AbstractBlock;
+use App\Core\Block\RestBlock;
 use App\Core\Service\Role\RoleMenuService;
 use App\Core\Service\Role\RoleService;
 use App\Exception\HttpException;
 use Throwable;
 
-class RoleBlock extends AbstractBlock
+class RoleBlock extends RestBlock
 {
     protected $service = RoleService::class;
 

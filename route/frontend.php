@@ -30,5 +30,5 @@ Router::addGroup('/frontend', function () {
 
 Router::addGroup('/frontend', function () {
     // 登录用户相关
-    Router::post('/authorize', [AuthorizeController::class, 'index']);
+    Router::post('/authorize', [AuthorizeController::class, 'info']);
 }, ['middleware' => [JWTFrontendMiddleware::class]]);

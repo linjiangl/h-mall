@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\System;
 
-use App\Core\Block\AbstractBlock;
+use App\Core\Block\RestBlock;
 use App\Core\Service\System\MenuService;
 
-class MenuBlock extends AbstractBlock
+class MenuBlock extends RestBlock
 {
     protected $service = MenuService::class;
 }

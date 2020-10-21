@@ -27,7 +27,7 @@ class RegisterController extends FrontendController
         $request->validated();
         /** @var RegisterBlock $service */
         $service = $this->service();
-        return $service->index($request->post());
+        return $service->register($request->post());
     }
 
     protected function block()

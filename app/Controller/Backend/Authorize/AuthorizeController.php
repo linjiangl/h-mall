@@ -21,11 +21,11 @@ class AuthorizeController extends BackendController
      * @param RequestInterface $request
      * @return array
      */
-    public function index(RequestInterface $request)
+    public function info(RequestInterface $request)
     {
         /** @var AuthorizeBlock $service */
         $service = $this->service();
-        return $service->index($request);
+        return $service->info($request);
     }
 
     protected function block()

@@ -10,12 +10,12 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Admin;
 
-use App\Core\Block\AbstractBlock;
+use App\Core\Block\RestBlock;
 use App\Core\Service\Admin\AdminService;
 use App\Exception\HttpException;
 use Throwable;
 
-class AdminBlock extends AbstractBlock
+class AdminBlock extends RestBlock
 {
     protected $service = AdminService::class;
 
