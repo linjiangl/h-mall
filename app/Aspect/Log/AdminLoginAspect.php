@@ -36,7 +36,7 @@ class AdminLoginAspect extends AbstractAspect
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
         $result = $proceedingJoinPoint->process();
-        if (isset($result['token'])) {
+        if (is_array($result) && isset($result['token'])) {
             $service = new LogAdminLoginService();
             $service->createLoginRecord();
         }
