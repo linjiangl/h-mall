@@ -21,8 +21,8 @@ Router::addGroup('/frontend', function () {
     Router::addRoute(['GET', 'POST', 'PUT'], '/', [IndexController::class, 'index']);
 
     // 登录/退出
-    Router::post('/login', [LoginController::class, 'index']);
-    Router::post('/register', [RegisterController::class, 'index']);
+    Router::post('/login', [LoginController::class, 'login']);
+    Router::post('/register', [RegisterController::class, 'register']);
 
     // 用户
     Router::get('/user/{id:\d+}', [UserController::class, 'show']);

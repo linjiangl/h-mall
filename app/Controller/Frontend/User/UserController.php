@@ -10,26 +10,19 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend\User;
 
-use App\Controller\AbstractController;
+use App\Controller\FrontendController;
 use App\Core\Block\Common\User\UserBlock;
 use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
 
 /**
  * @Controller(prefix="rate-limit")
  * @RateLimit()
  */
-class UserController extends AbstractController
+class UserController extends FrontendController
 {
-    /**
-     * 用户信息
-     * @param RequestInterface $request
-     * @param int $id
-     * @return array
-     */
-    public function show(RequestInterface $request, int $id)
+    protected function block()
     {
-        return (new UserBlock())->show($request, $id);
+        return new UserBlock();
     }
 }

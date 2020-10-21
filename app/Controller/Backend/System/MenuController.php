@@ -11,70 +11,28 @@ declare(strict_types=1);
 namespace App\Controller\Backend\System;
 
 use App\Constants\Action\AdminAction;
-use App\Constants\BlockSinceConstants;
-use App\Controller\AbstractController;
+use App\Controller\BackendController;
 use App\Core\Block\Common\System\MenuBlock;
 use App\Request\Backend\System\MenuRequest;
-use Hyperf\Contract\LengthAwarePaginatorInterface;
-use Hyperf\HttpServer\Contract\RequestInterface;
 
-class MenuController extends AbstractController
+class MenuController extends BackendController
 {
-    /**
-     * 菜单列表
-     * @param RequestInterface $request
-     * @return LengthAwarePaginatorInterface
-     */
-    public function index(RequestInterface $request)
-    {
-        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->index($request);
-    }
-
-    /**
-     * 菜单详情
-     * @param RequestInterface $request
-     * @param int $id
-     * @return array
-     */
-    public function show(RequestInterface $request, int $id)
-    {
-        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->show($request, $id);
-    }
-
-    /**
-     * 创建菜单
-     * @param MenuRequest $request
-     * @return int
-     */
-    public function store(MenuRequest $request)
+    public function storeRequest(MenuRequest $request)
     {
         $request->validated();
         $this->setActionName(AdminAction::MENU_CREATE);
-        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->store($request->post());
+        return $this->store($request);
     }
 
-    /**
-     * 修改菜单
-     * @param MenuRequest $request
-     * @param int $id
-     * @return array
-     */
-    public function update(MenuRequest $request, int $id)
+    public function updateRequest(MenuRequest $request, int $id)
     {
         $request->validated();
         $this->setActionName(AdminAction::MENU_UPDATE);
-        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->update($request->post(), $id);
+        return $this->update($request, $id);
     }
 
-    /**
-     * 删除菜单
-     * @param RequestInterface $request
-     * @param int $id
-     * @return bool
-     */
-    public function destroy(RequestInterface $request, int $id)
+    protected function block()
     {
-        $this->setActionName(AdminAction::MENU_DELETE);
-        return (new MenuBlock())->setSince(BlockSinceConstants::SINCE_BACKEND)->destroy($id);
+        return new MenuBlock();
     }
 }

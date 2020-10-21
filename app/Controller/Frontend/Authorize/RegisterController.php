@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend\Authorize;
 
-use App\Controller\AbstractController;
+use App\Controller\FrontendController;
 use App\Core\Block\Frontend\Authorize\RegisterBlock;
 use App\Request\Frontend\Authorize\RegisterRequest;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -20,11 +20,18 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  * @Controller(prefix="rate-limit")
  * @RateLimit()
  */
-class RegisterController extends AbstractController
+class RegisterController extends FrontendController
 {
-    public function index(RegisterRequest $request)
+    public function register(RegisterRequest $request)
     {
         $request->validated();
-        return (new RegisterBlock())->index($request->post());
+        /** @var RegisterBlock $service */
+        $service = $this->service();
+        return $service->index($request->post());
+    }
+
+    protected function block()
+    {
+        return new RegisterBlock();
     }
 }

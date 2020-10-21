@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend\Authorize;
 
-use App\Controller\AbstractController;
+use App\Controller\FrontendController;
 use App\Core\Block\Frontend\Authorize\LoginBlock;
 use App\Request\Frontend\Authorize\LoginRequest;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -20,16 +20,23 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  * @Controller(prefix="rate-limit")
  * @RateLimit()
  */
-class LoginController extends AbstractController
+class LoginController extends FrontendController
 {
     /**
      * 登录
      * @param LoginRequest $request
      * @return array
      */
-    public function index(LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         $request->validated();
-        return (new LoginBlock())->index($request->post());
+        /** @var LoginBlock $service */
+        $service = $this->service();
+        return $service->index($request->post());
+    }
+
+    protected function block()
+    {
+        return new LoginBlock();
     }
 }

@@ -22,8 +22,8 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/backend', function () {
     // 登录/退出
-    Router::post('/login', [LoginController::class, 'index']);
-    Router::post('/register', [RegisterController::class, 'index']);
+    Router::post('/login', [LoginController::class, 'login']);
+    Router::post('/register', [RegisterController::class, 'register']);
 });
 
 Router::addGroup('/backend', function () {
@@ -33,22 +33,22 @@ Router::addGroup('/backend', function () {
     // 系统-菜单
     Router::get('/menu', [MenuController::class, 'index']);
     Router::get('/menu/{id:\d+}', [MenuController::class, 'show']);
-    Router::post('/menu', [MenuController::class, 'store']);
-    Router::put('/menu/{id:\d+}', [MenuController::class, 'update']);
+    Router::post('/menu', [MenuController::class, 'storeRequest']);
+    Router::put('/menu/{id:\d+}', [MenuController::class, 'updateRequest']);
     Router::delete('/menu/{id:\d+}', [MenuController::class, 'destroy']);
 
     Router::get('/role', [RoleController::class, 'index']);
     Router::get('/role/{id:\d+}', [RoleController::class, 'show']);
-    Router::post('/role', [RoleController::class, 'store']);
-    Router::put('/role/{id:\d+}', [RoleController::class, 'update']);
+    Router::post('/role', [RoleController::class, 'storeRequest']);
+    Router::put('/role/{id:\d+}', [RoleController::class, 'updateRequest']);
     Router::delete('/role/{id:\d+}', [RoleController::class, 'destroy']);
     Router::post('/role/saveMenus', [RoleController::class, 'saveMenus']);
 
     // 管理员
     Router::get('/admin', [AdminController::class, 'index']);
     Router::get('/admin/{id:\d+}', [AdminController::class, 'show']);
-    Router::post('/admin', [AdminController::class, 'store']);
-    Router::put('/admin/{id:\d+}', [AdminController::class, 'update']);
+    Router::post('/admin', [AdminController::class, 'storeRequest']);
+    Router::put('/admin/{id:\d+}', [AdminController::class, 'updateRequest']);
 
     // 管理员日志
     Router::get('/log/adminLogin', [LogAdminLoginController::class, 'index']);
@@ -57,5 +57,5 @@ Router::addGroup('/backend', function () {
     // 用户
     Router::get('/user', [UserController::class, 'index']);
     Router::get('/user/{id:\d+}', [UserController::class, 'show']);
-    Router::put('/user/{id:\d+}', [UserController::class, 'update']);
+    Router::put('/user/{id:\d+}', [UserController::class, 'updateRequest']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

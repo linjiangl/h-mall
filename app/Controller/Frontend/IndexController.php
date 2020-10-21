@@ -10,20 +10,19 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend;
 
-use App\Controller\AbstractController;
+use App\Controller\FrontendController;
 use App\Core\Block\Frontend\IndexBlock;
 use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
 
 /**
  * @Controller(prefix="rate-limit")
  * @RateLimit
  */
-class IndexController extends AbstractController
+class IndexController extends FrontendController
 {
-    public function index(RequestInterface $request)
+    protected function block()
     {
-        return (new IndexBlock())->index($request);
+        return new IndexBlock();
     }
 }

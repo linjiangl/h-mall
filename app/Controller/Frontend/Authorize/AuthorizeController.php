@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Frontend\Authorize;
 
-use App\Controller\AbstractController;
+use App\Controller\FrontendController;
 use App\Core\Block\Frontend\Authorize\AuthorizeBlock;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -20,7 +20,7 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  * @Controller(prefix="rate-limit")
  * @RateLimit()
  */
-class AuthorizeController extends AbstractController
+class AuthorizeController extends FrontendController
 {
     /**
      * 登录用户信息
@@ -29,6 +29,13 @@ class AuthorizeController extends AbstractController
      */
     public function index(RequestInterface $request)
     {
-        return (new AuthorizeBlock())->index($request);
+        /** @var AuthorizeBlock $service */
+        $service = $this->service();
+        return $service->index($request);
+    }
+
+    protected function block()
+    {
+        return new AuthorizeBlock();
     }
 }

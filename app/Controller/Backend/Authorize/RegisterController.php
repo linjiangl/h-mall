@@ -10,20 +10,27 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Authorize;
 
-use App\Controller\AbstractController;
+use App\Controller\BackendController;
 use App\Core\Block\Backend\Authorize\RegisterBlock;
 use App\Request\Backend\Authorize\RegisterRequest;
 
-class RegisterController extends AbstractController
+class RegisterController extends BackendController
 {
     /**
      * 注册
      * @param RegisterRequest $request
      * @return array
      */
-    public function index(RegisterRequest $request)
+    public function register(RegisterRequest $request)
     {
         $request->validated();
-        return (new RegisterBlock())->index($request->post());
+        /** @var RegisterBlock $service */
+        $service = $this->service();
+        return $service->index($request->post());
+    }
+
+    protected function block()
+    {
+        return new RegisterBlock();
     }
 }
