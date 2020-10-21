@@ -19,5 +19,4 @@ class CouponService extends AbstractTypesService
     {
         parent::__construct($data, $id);
     }
-
 }

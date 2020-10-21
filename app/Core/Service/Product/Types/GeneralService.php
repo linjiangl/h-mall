@@ -19,6 +19,4 @@ class GeneralService extends AbstractTypesService
     {
         parent::__construct($data, $id);
     }
-
-
 }
