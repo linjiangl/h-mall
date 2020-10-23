@@ -65,4 +65,4 @@ Router::addGroup('/backend', function () {
     Router::post('/spec/create', [SpecController::class, 'storeRequest']);
     Router::post('/spec/update', [SpecController::class, 'update']);
     Router::post('/spec/delete', [SpecController::class, 'destroy']);
-}, ['middleware' => []]);
+}, ['middleware' => [JWTBackendMiddleware::class]]);
