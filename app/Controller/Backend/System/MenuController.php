@@ -24,11 +24,11 @@ class MenuController extends BackendController
         return $this->store($request);
     }
 
-    public function updateRequest(MenuRequest $request, int $id)
+    public function updateRequest(MenuRequest $request)
     {
         $request->validated();
         $this->setActionName(AdminAction::MENU_UPDATE);
-        return $this->update($request, $id);
+        return $this->update($request);
     }
 
     protected function block()

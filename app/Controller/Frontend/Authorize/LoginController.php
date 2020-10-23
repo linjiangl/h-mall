@@ -32,7 +32,7 @@ class LoginController extends FrontendController
         $request->validated();
         /** @var LoginBlock $service */
         $service = $this->service();
-        return $service->login($request->post());
+        return $service->login($request);
     }
 
     protected function block()

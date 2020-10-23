@@ -24,11 +24,11 @@ class RoleController extends BackendController
         return $this->store($request);
     }
 
-    public function updateRequest(RoleRequest $request, int $id)
+    public function updateRequest(RoleRequest $request)
     {
         $request->validated();
         $this->setActionName(AdminAction::ROLE_UPDATE);
-        return $this->update($request, $id);
+        return $this->update($request);
     }
 
     /**
@@ -42,7 +42,7 @@ class RoleController extends BackendController
         $this->setActionName(AdminAction::ROLE_MENU_CHANGE);
         /** @var RoleBlock $service */
         $service = $this->service();
-        return $service->saveRoleMenus($request->post());
+        return $service->saveRoleMenus($request);
     }
 
     protected function block()

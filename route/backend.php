@@ -29,40 +29,40 @@ Router::addGroup('/backend', function () {
 
 Router::addGroup('/backend', function () {
     // user
-    Router::post('/authorize', [AuthorizeController::class, 'info']);
-    Router::get('/user', [UserController::class, 'index']);
-    Router::get('/user/{id:\d+}', [UserController::class, 'show']);
-    Router::put('/user/{id:\d+}', [UserController::class, 'updateRequest']);
+    Router::post('/authorize', [AuthorizeController::class, 'show']);
+    Router::post('/user/list', [UserController::class, 'index']);
+    Router::post('/user/detail', [UserController::class, 'show']);
+    Router::post('/user/update', [UserController::class, 'updateRequest']);
 
     // admin
-    Router::get('/admin', [AdminController::class, 'index']);
-    Router::get('/admin/{id:\d+}', [AdminController::class, 'show']);
-    Router::post('/admin', [AdminController::class, 'storeRequest']);
-    Router::put('/admin/{id:\d+}', [AdminController::class, 'updateRequest']);
+    Router::post('/admin/list', [AdminController::class, 'index']);
+    Router::post('/admin/detail', [AdminController::class, 'show']);
+    Router::post('/admin/create', [AdminController::class, 'storeRequest']);
+    Router::post('/admin/update', [AdminController::class, 'updateRequest']);
 
     // log-admin
-    Router::get('/log/adminLogin', [LogAdminLoginController::class, 'index']);
-    Router::get('/log/adminAction', [LogAdminActionController::class, 'index']);
+    Router::post('/log/adminLogin/list', [LogAdminLoginController::class, 'index']);
+    Router::post('/log/adminAction/list', [LogAdminActionController::class, 'index']);
 
     // role
-    Router::get('/role', [RoleController::class, 'index']);
-    Router::get('/role/{id:\d+}', [RoleController::class, 'show']);
-    Router::post('/role', [RoleController::class, 'storeRequest']);
-    Router::put('/role/{id:\d+}', [RoleController::class, 'updateRequest']);
-    Router::delete('/role/{id:\d+}', [RoleController::class, 'destroy']);
+    Router::post('/role/list', [RoleController::class, 'index']);
+    Router::post('/role/detail', [RoleController::class, 'show']);
+    Router::post('/role/create', [RoleController::class, 'storeRequest']);
+    Router::post('/role/update', [RoleController::class, 'updateRequest']);
+    Router::post('/role/delete', [RoleController::class, 'destroy']);
     Router::post('/role/saveMenus', [RoleController::class, 'saveMenus']);
 
     // menu
-    Router::get('/menu', [MenuController::class, 'index']);
-    Router::get('/menu/{id:\d+}', [MenuController::class, 'show']);
-    Router::post('/menu', [MenuController::class, 'storeRequest']);
-    Router::put('/menu/{id:\d+}', [MenuController::class, 'updateRequest']);
-    Router::delete('/menu/{id:\d+}', [MenuController::class, 'destroy']);
+    Router::post('/menu/list', [MenuController::class, 'index']);
+    Router::post('/menu/detail', [MenuController::class, 'show']);
+    Router::post('/menu/create', [MenuController::class, 'storeRequest']);
+    Router::post('/menu/update', [MenuController::class, 'updateRequest']);
+    Router::post('/menu/delete', [MenuController::class, 'destroy']);
 
     // spec
-    Router::get('/spec', [SpecController::class, 'index']);
-    Router::get('/spec/{id:\d+}', [SpecController::class, 'show']);
-    Router::post('/spec', [SpecController::class, 'store']);
-    Router::put('/spec/{id:\d+}', [SpecController::class, 'update']);
-    Router::delete('/spec/{id:\d+}', [SpecController::class, 'destroy']);
+    Router::post('/spec/list', [SpecController::class, 'index']);
+    Router::post('/spec/detail', [SpecController::class, 'show']);
+    Router::post('/spec/create', [SpecController::class, 'storeRequest']);
+    Router::post('/spec/update', [SpecController::class, 'update']);
+    Router::post('/spec/delete', [SpecController::class, 'destroy']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

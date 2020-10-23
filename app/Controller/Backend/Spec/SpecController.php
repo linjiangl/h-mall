@@ -12,9 +12,16 @@ namespace App\Controller\Backend\Spec;
 
 use App\Controller\BackendController;
 use App\Core\Block\Common\Spec\SpecBlock;
+use App\Request\Backend\Spec\SpecRequest;
 
 class SpecController extends BackendController
 {
+    public function storeRequest(SpecRequest $request)
+    {
+        $request->validated();
+        return $this->store($request);
+    }
+
     protected function block()
     {
         return new SpecBlock();

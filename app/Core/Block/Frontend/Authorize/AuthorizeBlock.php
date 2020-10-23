@@ -18,7 +18,7 @@ use Throwable;
 
 class AuthorizeBlock extends RestBlock
 {
-    public function info(RequestInterface $request): array
+    public function show(RequestInterface $request): array
     {
         try {
             $service = new UserAuthorizationService();

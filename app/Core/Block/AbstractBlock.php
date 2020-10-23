@@ -117,14 +117,19 @@ abstract class AbstractBlock
     protected $data = [];
 
     /**
-     * 设置场景
-     * @param string $since
-     * @return $this
+     * 主键
+     * @var string
      */
-    public function setSince($since = BlockSinceConstants::SINCE_FRONTEND)
+    protected $primaryKey = 'id';
+
+    /**
+     * @var RequestInterface
+     */
+    protected $request;
+
+    public function __construct()
     {
-        $this->since = $since;
-        return $this;
+        $this->request = request();
     }
 
     /**
@@ -139,10 +144,10 @@ abstract class AbstractBlock
             $this->action = 'index';
 
             // 处理查询参数
-            $this->handleQueryParams($request);
+            $this->handleQueryParams();
 
             // 查询前业务处理
-            $this->beforeBuildQuery($request);
+            $this->beforeBuildQuery();
 
             return $this->service()->paginate($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
         } catch (Throwable $e) {
@@ -153,19 +158,18 @@ abstract class AbstractBlock
     /**
      * 详情
      * @param RequestInterface $request
-     * @param int $id
      * @return array
      */
-    public function show(RequestInterface $request, int $id)
+    public function show(RequestInterface $request)
     {
         try {
             // 当前执行的方法
             $this->action = 'show';
 
             // 查询前业务处理
-            $this->beforeBuildQuery($request);
+            $this->beforeBuildQuery();
 
-            return $this->service()->info($id, $this->with)->toArray();
+            return $this->service()->info($this->getPrimaryKey(), $this->with)->toArray();
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -173,13 +177,13 @@ abstract class AbstractBlock
 
     /**
      * 创建
-     * @param array $post
+     * @param RequestInterface $request
      * @return int
      */
-    public function store(array $post)
+    public function store(RequestInterface $request)
     {
         try {
-            return $this->service()->create($post);
+            return $this->service()->create($this->request->post());
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -187,14 +191,13 @@ abstract class AbstractBlock
 
     /**
      * 修改
-     * @param array $post
-     * @param int $id
+     * @param RequestInterface $request
      * @return array
      */
-    public function update(array $post, int $id)
+    public function update(RequestInterface $request)
     {
         try {
-            return $this->service()->update($id, $post);
+            return $this->service()->update($this->getPrimaryKey(), $this->request->post());
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -202,13 +205,13 @@ abstract class AbstractBlock
 
     /**
      * 删除
-     * @param int $id
+     * @param RequestInterface $request
      * @return bool
      */
-    public function destroy(int $id)
+    public function destroy(RequestInterface $request)
     {
         try {
-            return $this->service()->remove($id);
+            return $this->service()->remove($this->getPrimaryKey());
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -216,26 +219,62 @@ abstract class AbstractBlock
 
     /**
      * 查询条件
-     * @param RequestInterface $request
      * @return array
      */
-    public function getCondition(RequestInterface $request): array
+    public function getCondition(): array
     {
-        return $this->service()->getCondition($request->post());
+        return $this->service()->getCondition($this->request->post());
+    }
+
+    /**
+     * 设置场景
+     * @param string $since
+     * @return $this
+     */
+    public function setSince($since = BlockSinceConstants::SINCE_FRONTEND)
+    {
+        $this->since = $since;
+        return $this;
+    }
+
+    /**
+     * 设置主键
+     * @param string $primaryKey
+     */
+    public function setPrimaryKey($primaryKey = 'id')
+    {
+        $this->primaryKey = $primaryKey;
+    }
+
+    /**
+     * 查询主键
+     * @return int
+     */
+    public function getPrimaryKey()
+    {
+        return intval($this->request->post($this->primaryKey));
+    }
+
+    /**
+     * 获取数据
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->request->post();
     }
 
     /**
      * 处理查询参数
-     * @param RequestInterface $request
      */
-    protected function handleQueryParams(RequestInterface $request)
+    protected function handleQueryParams()
     {
-        $this->page = intval($request->query('page', $this->page));
-        $this->limit = intval($request->query('limit', $this->limit));
+        $this->page = intval($this->request->post('page', $this->page));
+        $this->limit = intval($this->request->post('limit', $this->limit));
 
         switch ($this->since) {
             case 'backend':
-                $sort = $request->query('sorter', '');
+                $sort = $this->request->post('sorter', '');
                 if ($sort) {
                     $sort = json_decode($sort, true);
                     $orderBy = '';
@@ -251,26 +290,24 @@ abstract class AbstractBlock
 
     /**
      * 构建查询之前条件
-     * @param RequestInterface $request
      */
-    protected function beforeBuildQuery(RequestInterface $request)
+    protected function beforeBuildQuery()
     {
         $this->with = isset($this->defaultSinceWith[$this->since][$this->action]) ? $this->defaultSinceWith[$this->since][$this->action] : [];
-        $this->condition = $this->handleCondition($request);
+        $this->condition = $this->handleCondition();
         $this->groupBy = [];
     }
 
     /**
      * 处理查询条件
-     * @param RequestInterface $request
      * @return array
      */
-    protected function handleCondition(RequestInterface $request): array
+    protected function handleCondition(): array
     {
         $condition = [];
         foreach ($this->query as $symbol => $symbolValue) {
             foreach ($symbolValue as $query) {
-                $queryValue = $this->paramType ? $this->handleParamType($request, $query) : $request->query($query);
+                $queryValue = $this->paramType ? $this->handleParamType($query) : $this->request->post($query);
                 if ($queryValue != '') {
                     switch ($symbol) {
                         case 'in':
@@ -295,14 +332,13 @@ abstract class AbstractBlock
 
     /**
      * 处理参数类型
-     * @param RequestInterface $request
      * @param string $param
      * @return float|int|string
      */
-    protected function handleParamType(RequestInterface $request, string $param)
+    protected function handleParamType(string $param)
     {
         // 如果没有指定字符串类型直接返回请求值，没有请求值返回空字符串
-        $value = trim($request->query($param, ''));
+        $value = trim($this->request->post($param, ''));
         if (! isset($this->paramType[$param])) {
             return $value;
         }

@@ -13,15 +13,17 @@ namespace App\Core\Block\Common\Admin;
 use App\Core\Block\RestBlock;
 use App\Core\Service\Admin\AdminService;
 use App\Exception\HttpException;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
 class AdminBlock extends RestBlock
 {
     protected $service = AdminService::class;
 
-    public function store(array $post)
+    public function store(RequestInterface $request)
     {
         try {
+            $post = $request->post();
             $service = new AdminService();
             return $service->createAccount($post['username'], $post['password'], $post);
         } catch (Throwable $e) {
@@ -29,11 +31,11 @@ class AdminBlock extends RestBlock
         }
     }
 
-    public function update(array $post, int $id)
+    public function update(RequestInterface $request)
     {
         try {
             $service = new AdminService();
-            return $service->updateAccount($id, $post);
+            return $service->updateAccount($this->getPrimaryKey(), $request->post());
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }

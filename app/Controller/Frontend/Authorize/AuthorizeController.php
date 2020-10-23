@@ -27,11 +27,11 @@ class AuthorizeController extends FrontendController
      * @param RequestInterface $request
      * @return array
      */
-    public function info(RequestInterface $request)
+    public function show(RequestInterface $request)
     {
         /** @var AuthorizeBlock $service */
         $service = $this->service();
-        return $service->info($request);
+        return $service->show($request);
     }
 
     protected function block()

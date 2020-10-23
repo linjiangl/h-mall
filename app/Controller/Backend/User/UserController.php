@@ -17,11 +17,11 @@ use App\Request\Backend\User\UserRequest;
 
 class UserController extends BackendController
 {
-    public function updateRequest(UserRequest $request, int $id)
+    public function updateRequest(UserRequest $request)
     {
         $request->validated();
         $this->setActionName(UserAction::USER_UPDATE);
-        return $this->update($request, $id);
+        return $this->update($request);
     }
 
     protected function block()

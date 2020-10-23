@@ -25,10 +25,10 @@ Router::addGroup('/frontend', function () {
     Router::post('/register', [RegisterController::class, 'register']);
 
     // 用户
-    Router::get('/user/{id:\d+}', [UserController::class, 'show']);
+    Router::post('/user/detail', [UserController::class, 'show']);
 });
 
 Router::addGroup('/frontend', function () {
     // 登录用户相关
-    Router::post('/authorize', [AuthorizeController::class, 'info']);
+    Router::post('/authorize', [AuthorizeController::class, 'show']);
 }, ['middleware' => [JWTFrontendMiddleware::class]]);

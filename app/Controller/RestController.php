@@ -30,12 +30,11 @@ class RestController extends AbstractController
     /**
      * 详情
      * @param RequestInterface $request
-     * @param int $id
      * @return array
      */
-    public function show(RequestInterface $request, int $id)
+    public function show(RequestInterface $request)
     {
-        return $this->service()->show($request, $id);
+        return $this->service()->show($request);
     }
 
     /**
@@ -45,29 +44,27 @@ class RestController extends AbstractController
      */
     public function store(RequestInterface $request)
     {
-        return $this->service()->store($request->post());
+        return $this->service()->store($request);
     }
 
     /**
      * 修改
      * @param RequestInterface $request
-     * @param int $id
      * @return array
      */
-    public function update(RequestInterface $request, int $id)
+    public function update(RequestInterface $request)
     {
-        return $this->service()->update($request->post(), $id);
+        return $this->service()->update($request);
     }
 
     /**
      * 删除
      * @param RequestInterface $request
-     * @param int $id
      * @return bool
      */
-    public function destroy(RequestInterface $request, int $id)
+    public function destroy(RequestInterface $request)
     {
-        return $this->service()->destroy($id);
+        return $this->service()->destroy($request);
     }
 
     protected function block()

@@ -14,15 +14,17 @@ use App\Core\Block\RestBlock;
 use App\Core\Service\Role\RoleMenuService;
 use App\Core\Service\Role\RoleService;
 use App\Exception\HttpException;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
 class RoleBlock extends RestBlock
 {
     protected $service = RoleService::class;
 
-    public function saveRoleMenus(array $data): bool
+    public function saveRoleMenus(RequestInterface $request): bool
     {
         try {
+            $data = $request->post();
             $service = new RoleMenuService();
             $service->saveRoleMenus((int)$data['role_id'], explode(',', $data['menu_ids']));
             return true;

@@ -19,7 +19,7 @@ class IndexBlock extends RestBlock
 
     public function index(RequestInterface $request)
     {
-        $page = $request->query('page', 1);
+        $page = $request->post('page', 1);
         $this->page = $this->page + $page;
 
         return $this->page;

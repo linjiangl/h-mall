@@ -29,7 +29,9 @@ class SpecTest extends BackendHttpTestCase
 
         $this->url = '/spec';
         $this->data = $data;
-        $this->handleHttpCreate();
+        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        var_dump($result);
+        // $this->handleHttpCreate();
     }
 
     public function testBackendSpecUpdate()

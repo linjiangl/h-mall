@@ -23,16 +23,16 @@ class AdminController extends BackendController
         $this->setActionName(AdminAction::ADMIN_CREATE);
         /** @var AdminBlock $service */
         $service = $this->service();
-        return $service->store($request->post());
+        return $service->store($request);
     }
 
-    public function updateRequest(AdminRequest $request, int $id)
+    public function updateRequest(AdminRequest $request)
     {
         $request->validated();
         $this->setActionName(AdminAction::ADMIN_UPDATE);
         /** @var AdminBlock $service */
         $service = $this->service();
-        return $service->update($request->post(), $id);
+        return $service->update($request);
     }
 
     protected function block()
