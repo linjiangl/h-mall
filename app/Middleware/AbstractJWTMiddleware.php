@@ -59,7 +59,7 @@ abstract class AbstractJWTMiddleware implements MiddlewareInterface
             $token = $request->getHeaderLine($this->service->getHeader()) ?? '';
             if (strlen($token) > 0) {
                 $token = ucfirst($token);
-                $arr = explode("{$this->service->getPrefix() }", $token);
+                $arr = explode("{$this->service->getPrefix()} ", $token);
                 $token = $arr[1] ?? '';
                 if (strlen($token) > 0 && $this->jwt->checkToken()) {
                     $isValidToken = true;
