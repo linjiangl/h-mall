@@ -25,7 +25,6 @@ class SpecService extends AbstractService
 
     public function create(array $data): int
     {
-        print_r($data);
         try {
             // 创建规格
             $id = parent::create($data);

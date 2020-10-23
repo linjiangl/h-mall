@@ -17,12 +17,12 @@ class SpecRequest extends AbstractRequest
     public function rules(): array
     {
         $rules = [
-            'post:store' => [
+            'post:create' => [
                 'shop_id' => 'integer',
                 'name' => 'required|string|max:30',
                 'sorting' => 'integer|max:100'
             ],
-            'put:update' => $rules = [
+            'post:update' => $rules = [
                 'shop_id' => 'integer',
                 'name' => 'required|string|max:30',
                 'sorting' => 'integer|max:100'

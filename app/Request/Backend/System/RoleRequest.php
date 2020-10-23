@@ -23,13 +23,13 @@ class RoleRequest extends AbstractRequest
         $idsRegex = $this->getRegex(general_regex('ids'));
         $scene = $this->getScene();
         $rules = [
-            'post:store' => [
+            'post:create' => [
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:50',
                 'identifier' => "required|in:{$identifier}|unique:role",
                 'is_super' => 'integer|in:' . $boolean,
             ],
-            'put:update' => $rules = [
+            'post:update' => $rules = [
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:50',
                 'identifier' => "required|in:{$identifier}",

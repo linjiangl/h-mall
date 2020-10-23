@@ -38,25 +38,7 @@ abstract class AbstractRequest extends FormRequest
     {
         $method = strtolower($this->getMethod());
         $parseUrl = parse_url($this->url());
-        if (substr_count($parseUrl['path'], '/') < 3) {
-            $scene = '';
-        } else {
-            $scene = substr(strrchr($parseUrl['path'], '/'), 1);
-        }
-        switch ($method) {
-            case 'post':
-                $scene = $scene ?: 'store';
-                break;
-            case 'put':
-                $scene = 'update';
-                break;
-            case 'delete':
-                $scene = 'destroy';
-                break;
-            case 'get':
-                $scene = 'index';
-                break;
-        }
+        $scene = substr(strrchr($parseUrl['path'], '/'), 1);
         return "{$method}:{$scene}";
     }
 

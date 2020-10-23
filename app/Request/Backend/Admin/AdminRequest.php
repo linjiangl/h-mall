@@ -19,7 +19,7 @@ class AdminRequest extends AbstractRequest
         $scene = $this->getScene();
         $mobileRegex = $this->getRegex(general_regex('mobile'));
         $rules = [
-            'post:store' => [
+            'post:create' => [
                 'username' => 'required|string|max:30|unique:admin',
                 'password' => 'required|string|max:30|confirmed',
                 'avatar' => 'url',
@@ -28,7 +28,7 @@ class AdminRequest extends AbstractRequest
                 'email' => 'email|unique:admin',
                 'role_id' => 'integer'
             ],
-            'put:update' => $rules = [
+            'post:update' => $rules = [
                 'username' => 'string|max:30',
                 'password' => 'string|max:30',
                 'avatar' => 'url',

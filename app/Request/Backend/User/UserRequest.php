@@ -20,7 +20,7 @@ class UserRequest extends AbstractRequest
         $scene = $this->getScene();
         $status = UserState::getValidatedInRule(UserState::getStatus());
         $rules = [
-            'put:update' => $rules = [
+            'post:update' => $rules = [
                 'nickname' => 'string|max:30',
                 'avatar' => 'string|max:255',
                 'status' => "in:{$status}",

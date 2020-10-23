@@ -18,7 +18,7 @@ class MenuRequest extends AbstractRequest
     {
         $scene = $this->getScene();
         $rules = [
-            'post:store' => [
+            'post:create' => [
                 'parent_id' => 'required|integer',
                 'title' => 'required|string|max:50',
                 'name' => 'required|string|max:100',
@@ -26,7 +26,7 @@ class MenuRequest extends AbstractRequest
                 'path' => 'required|string|max:255',
                 'sorting' => 'integer|max:100',
             ],
-            'put:update' => $rules = [
+            'post:update' => $rules = [
                 'parent_id' => 'integer',
                 'title' => 'string|max:50',
                 'name' => 'string|max:100',
