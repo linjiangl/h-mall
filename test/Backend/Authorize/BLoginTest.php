@@ -24,7 +24,7 @@ class BLoginTest extends BackendHttpTestCase
             'password' => '123456'
         ]);
 
-        $this->handelError($result);
+        $this->handleError($result);
         $this->assertArrayHasKey('token', $result);
         $this->setToken($result['token']);
     }

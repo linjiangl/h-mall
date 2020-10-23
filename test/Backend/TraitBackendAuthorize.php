@@ -57,37 +57,37 @@ trait TraitBackendAuthorize
 
     protected function handleHttpIndex()
     {
-        $result = $this->request($this->url, $this->params, 'get', $this->getHeaders());
+        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
 
-        $this->handelError($result);
+        $this->handleError($result);
         $this->assertArrayHasKey('current_page', $result);
     }
 
     protected function handleHttpShow()
     {
-        $result = $this->request($this->url, $this->params, 'get', $this->getHeaders());
+        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
 
-        $this->handelError($result);
+        $this->handleError($result);
         $this->assertArrayHasKey('id', $result);
     }
 
     protected function handleHttpCreate()
     {
         $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
-        $this->handelError($result);
+        $this->handleError($result);
         $this->assertIsInt($result);
     }
 
     protected function handleHttpUpdate()
     {
-        $result = $this->request($this->url, $this->data, 'put', $this->getHeaders());
-        $this->handelError($result);
+        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $this->handleError($result);
         $this->assertArrayHasKey('id', $result);
     }
 
     protected function handleHttpDelete()
     {
-        $result = $this->request($this->url, $this->params, 'delete', $this->getHeaders());
-        $this->handelError($result);
+        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $this->handleError($result);
     }
 }

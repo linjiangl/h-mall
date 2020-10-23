@@ -21,17 +21,13 @@ class SpecTest extends BackendHttpTestCase
 
     public function testBackendSpecCreate()
     {
-        $data = [
+        $this->url = '/spec/list';
+        $this->data = [
             'shop_id' => '0',
             'name' => '颜色',
             'sorting' => '0',
         ];
-
-        $this->url = '/spec';
-        $this->data = $data;
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
-        var_dump($result);
-        // $this->handleHttpCreate();
+        $this->handleHttpCreate();
     }
 
     public function testBackendSpecUpdate()
@@ -40,13 +36,12 @@ class SpecTest extends BackendHttpTestCase
         /** @var Spec $info */
         $info = $dao->getInfoByCondition([['name', '=', '颜色']]);
 
-        $data = [
+        $this->url = '/spec/update';
+        $this->data = [
+            'id' => $info->id,
             'shop_id' => '0',
             'name' => '颜色1',
         ];
-
-        $this->url = '/spec/' . $info->id;
-        $this->data = $data;
         $this->handleHttpUpdate();
     }
 

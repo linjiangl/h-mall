@@ -21,19 +21,23 @@ class MenuTest extends BackendHttpTestCase
 
     public function testBackendMenuIndex()
     {
-        $this->url = '/menu';
+        $this->url = '/menu/list';
         $this->handleHttpIndex();
     }
 
     public function testBackendMenuShow()
     {
-        $this->url = '/menu/1';
+        $this->url = '/menu/detail';
+        $this->data = [
+            'id' => 1
+        ];
         $this->handleHttpShow();
     }
 
     public function testBackendMenuCreate()
     {
-        $data = [
+        $this->url = '/menu/create';
+        $this->data = [
             'parent_id' => '0',
             'title' => '订单管理',
             'name' => 'order',
@@ -41,9 +45,6 @@ class MenuTest extends BackendHttpTestCase
             'path' => '/order',
             'sorting' => '0',
         ];
-
-        $this->url = '/menu';
-        $this->data = $data;
         $this->handleHttpCreate();
     }
 
@@ -53,7 +54,9 @@ class MenuTest extends BackendHttpTestCase
         /** @var Menu $info */
         $info = $dao->getInfoByCondition([['name', '=', 'order']]);
 
-        $data = [
+        $this->url = '/menu/update';
+        $this->data = [
+            'id' => $info->id,
             'parent_id' => '0',
             'title' => '订单管理',
             'name' => 'order',
@@ -61,9 +64,6 @@ class MenuTest extends BackendHttpTestCase
             'path' => '/order',
             'sorting' => '0',
         ];
-
-        $this->url = '/menu/' . $info->id;
-        $this->data = $data;
         $this->handleHttpUpdate();
     }
 
@@ -73,7 +73,10 @@ class MenuTest extends BackendHttpTestCase
         /** @var Menu $info */
         $info = $dao->getInfoByCondition([['name', '=', 'order']]);
 
-        $this->url = '/menu/' . $info->id;
+        $this->url = '/menu/delete';
+        $this->data = [
+            'id' => $info->id
+        ];
         $this->handleHttpDelete();
     }
 }

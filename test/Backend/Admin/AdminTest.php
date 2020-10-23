@@ -20,19 +20,23 @@ class AdminTest extends BackendHttpTestCase
 
     public function testBackendAdminIndex()
     {
-        $this->url = '/admin';
+        $this->url = '/admin/list';
         $this->handleHttpIndex();
     }
 
     public function testBackendAdminShow()
     {
-        $this->url = '/admin/2';
+        $this->url = '/admin/detail';
+        $this->data = [
+            'id' => 2
+        ];
         $this->handleHttpShow();
     }
 
     public function testBackendAdminStore()
     {
-        $data = [
+        $this->url = '/admin/create';
+        $this->data = [
             'username' => 'xiaomi',
             'password' => 'xiaomi',
             'password_confirmation' => 'xiaomi',
@@ -41,8 +45,6 @@ class AdminTest extends BackendHttpTestCase
             'mobile' => '18600001111',
             'email' => 'xiaomi@qq.com',
         ];
-        $this->url = '/admin';
-        $this->data = $data;
         $this->handleHttpCreate();
     }
 
@@ -50,13 +52,14 @@ class AdminTest extends BackendHttpTestCase
     {
         $adminDao = new AdminDao();
         $admin = $adminDao->getInfoByUsername('xiaomi');
-        $data = [
+
+        $this->url = '/admin/update';
+        $this->data = [
+            'id' => $admin->id,
             'avatar' => 'https://up.enterdesk.com/edpic/31/c3/fd/31c3fdc63511cabedd6415d121fa2d58.jpg',
             'real_name' => '小米22',
             'role_id' => 2
         ];
-        $this->url = '/admin/' . $admin->id;
-        $this->data = $data;
         $this->handleHttpUpdate();
     }
 }

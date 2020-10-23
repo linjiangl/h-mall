@@ -24,7 +24,7 @@ class ARegisterTest extends BackendHttpTestCase
         ]);
 
         $service = new AdminAuthorizationService();
-        $this->handelError($result);
+        $this->handleError($result);
         $this->assertSame($service->getTTL(), $result['exp']);
     }
 }

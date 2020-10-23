@@ -23,27 +23,28 @@ class RoleTest extends BackendHttpTestCase
 
     public function testBackendRoleIndex()
     {
-        $this->url = '/role';
+        $this->url = '/role/list';
         $this->handleHttpIndex();
     }
 
     public function testBackendRoleShow()
     {
-        $this->url = '/role/1';
+        $this->url = '/role/detail';
+        $this->data = [
+            'id' => 1
+        ];
         $this->handleHttpShow();
     }
 
     public function testBackendRoleCreate()
     {
-        $data = [
+        $this->url = '/role/create';
+        $this->data = [
             'parent_id' => '0',
             'name' => '运营',
             'identifier' => RoleState::IDENTIFIER_OPERATORS,
             'is_super' => RoleState::IS_SUPER_TRUE,
         ];
-
-        $this->url = '/role';
-        $this->data = $data;
         $this->handleHttpCreate();
     }
 
@@ -52,15 +53,14 @@ class RoleTest extends BackendHttpTestCase
         $dao = new RoleDao();
         $info = $dao->getInfoByIdentifier(RoleState::IDENTIFIER_OPERATORS);
 
-        $data = [
+        $this->url = '/role/update';
+        $this->data = [
+            'id' => $info->id,
             'parent_id' => '0',
             'name' => '站点运营',
             'identifier' => RoleState::IDENTIFIER_OPERATORS,
             'is_super' => RoleState::IS_SUPER_FALSE,
         ];
-
-        $this->url = '/role/' . $info->id;
-        $this->data = $data;
         $this->handleHttpUpdate();
     }
 
@@ -69,7 +69,10 @@ class RoleTest extends BackendHttpTestCase
         $dao = new RoleDao();
         $info = $dao->getInfoByIdentifier(RoleState::IDENTIFIER_OPERATORS);
 
-        $this->url = '/role/' . $info->id;
+        $this->url = '/role/delete';
+        $this->data = [
+            'id' => $info->id
+        ];
         $this->handleHttpDelete();
     }
 
@@ -86,6 +89,6 @@ class RoleTest extends BackendHttpTestCase
             'menu_ids' => implode(',', array_column($menuList, 'id')),
         ];
         $result = $this->request('/role/saveMenus', $data, 'post', $this->getHeaders());
-        $this->handelError($result);
+        $this->handleError($result);
     }
 }

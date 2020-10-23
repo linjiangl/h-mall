@@ -18,7 +18,7 @@ class HomeTest extends AbstractHttpTestCase
     {
         $result = $this->request('/v1/home', [], 'get');
 
-        $this->handelError($result);
+        $this->handleError($result);
         $this->assertSame('rest_v1', $result);
     }
 }
