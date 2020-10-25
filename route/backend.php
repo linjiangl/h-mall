@@ -12,6 +12,7 @@ use App\Controller\Backend\Admin\AdminController;
 use App\Controller\Backend\Authorize\AuthorizeController;
 use App\Controller\Backend\Authorize\LoginController;
 use App\Controller\Backend\Authorize\RegisterController;
+use App\Controller\Backend\Category\CategoryController;
 use App\Controller\Backend\Log\LogAdminActionController;
 use App\Controller\Backend\Log\LogAdminLoginController;
 use App\Controller\Backend\Spec\SpecController;
@@ -65,4 +66,11 @@ Router::addGroup('/backend', function () {
     Router::post('/spec/create', [SpecController::class, 'storeRequest']);
     Router::post('/spec/update', [SpecController::class, 'update']);
     Router::post('/spec/delete', [SpecController::class, 'destroy']);
+
+    // category
+    Router::post('/category/list', [CategoryController::class, 'index']);
+    Router::post('/category/detail', [CategoryController::class, 'show']);
+    Router::post('/category/create', [CategoryController::class, 'storeRequest']);
+    Router::post('/category/update', [CategoryController::class, 'update']);
+    Router::post('/category/delete', [CategoryController::class, 'destroy']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

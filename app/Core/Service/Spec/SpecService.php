@@ -30,7 +30,7 @@ class SpecService extends AbstractService
             $id = parent::create($data);
 
             // 保存规格值
-            if (!empty($data['spec_values'])) {
+            if (! empty($data['spec_values'])) {
                 $specValues = is_array($data['spec_values']) ? $data['spec_values'] : explode(',', $data['spec_values']);
                 $specValueService = new SpecValueService();
                 $specValueService->createSpecValues($id, $specValues);
@@ -50,7 +50,7 @@ class SpecService extends AbstractService
             $spec = parent::update($id, $data);
 
             // 保存规格值
-            if (!empty($data['spec_values'])) {
+            if (! empty($data['spec_values'])) {
                 $specValues = is_array($data['spec_values']) ? $data['spec_values'] : explode(',', $data['spec_values']);
                 $specValueService = new SpecValueService();
                 $specValueService->updateSpecValues($spec, $specValues);

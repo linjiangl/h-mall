@@ -90,7 +90,7 @@
             "rm -rf runtime/container"
         ],
         "test": "co-phpunit -c phpunit.xml --colors=always",
-        "cs-fix": "./script/php-cs-fixer.sh",
+        "fixer": "./script/php-cs-fixer.sh",
         "analyse": "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./app ./config",
         "start": "php ./bin/hyperf.php start",
         "start-dev": "rm -rf runtime/container && php ./bin/hyperf.php start",
