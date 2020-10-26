@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\User;
 
-use App\Core\Block\RestBlock;
+use App\Core\Block\BaseBlock;
 use App\Core\Service\User\UserService;
 
-class UserBlock extends RestBlock
+class UserBlock extends BaseBlock
 {
     protected $service = UserService::class;
 

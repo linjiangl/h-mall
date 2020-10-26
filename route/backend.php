@@ -16,6 +16,7 @@ use App\Controller\Backend\Category\CategoryController;
 use App\Controller\Backend\Log\LogAdminActionController;
 use App\Controller\Backend\Log\LogAdminLoginController;
 use App\Controller\Backend\Spec\SpecController;
+use App\Controller\Backend\Spec\SpecValueController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\System\RoleController;
 use App\Controller\Backend\User\UserController;
@@ -66,6 +67,13 @@ Router::addGroup('/backend', function () {
     Router::post('/spec/create', [SpecController::class, 'storeRequest']);
     Router::post('/spec/update', [SpecController::class, 'update']);
     Router::post('/spec/delete', [SpecController::class, 'destroy']);
+
+    // specValue
+    Router::post('/specValue/list', [SpecValueController::class, 'index']);
+    Router::post('/specValue/detail', [SpecValueController::class, 'show']);
+    Router::post('/specValue/create', [SpecValueController::class, 'store']);
+    Router::post('/specValue/update', [SpecValueController::class, 'update']);
+    Router::post('/specValue/delete', [SpecValueController::class, 'destroy']);
 
     // category
     Router::post('/category/list', [CategoryController::class, 'index']);

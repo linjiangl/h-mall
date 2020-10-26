@@ -10,6 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Core\Block;
 
-class RestBlock extends AbstractBlock
+class BaseBlock extends AbstractBlock
 {
 }

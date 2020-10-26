@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Product;
 
-use App\Core\Block\RestBlock;
+use App\Core\Block\BaseBlock;
 use App\Core\Service\Product\ProductService;
 
-class ProductBlock extends RestBlock
+class ProductBlock extends BaseBlock
 {
     protected $service = ProductService::class;
 }

@@ -11,11 +11,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Constants\BlockSinceConstants;
-use App\Core\Block\RestBlock;
+use App\Core\Block\BaseBlock;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-class RestController extends AbstractController
+class BaseController extends AbstractController
 {
     /**
      * 列表
@@ -69,7 +69,7 @@ class RestController extends AbstractController
 
     protected function block()
     {
-        return new RestBlock();
+        return new BaseBlock();
     }
 
     protected function service()

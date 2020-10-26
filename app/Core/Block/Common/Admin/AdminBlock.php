@@ -10,13 +10,13 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Admin;
 
-use App\Core\Block\RestBlock;
+use App\Core\Block\BaseBlock;
 use App\Core\Service\Admin\AdminService;
 use App\Exception\HttpException;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
-class AdminBlock extends RestBlock
+class AdminBlock extends BaseBlock
 {
     protected $service = AdminService::class;
 

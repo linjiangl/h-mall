@@ -10,13 +10,13 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Backend\Authorize;
 
-use App\Core\Block\RestBlock;
+use App\Core\Block\BaseBlock;
 use App\Core\Service\Authorize\AdminAuthorizationService;
 use App\Exception\HttpException;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
-class RegisterBlock extends RestBlock
+class RegisterBlock extends BaseBlock
 {
     public function register(RequestInterface $request): array
     {

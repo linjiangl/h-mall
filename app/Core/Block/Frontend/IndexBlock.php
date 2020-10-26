@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Frontend;
 
-use App\Core\Block\RestBlock;
+use App\Core\Block\BaseBlock;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-class IndexBlock extends RestBlock
+class IndexBlock extends BaseBlock
 {
     protected $page = 1;
 

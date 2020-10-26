@@ -12,7 +12,7 @@ namespace App\Controller;
 
 use App\Constants\BlockSinceConstants;
 
-class FrontendController extends RestController
+class FrontendController extends BaseController
 {
     protected function service()
     {
