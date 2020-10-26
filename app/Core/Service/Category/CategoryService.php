@@ -31,7 +31,7 @@ class CategoryService extends AbstractService
             $id = parent::create($data);
 
             // 保存规格
-            if (empty($data['spec_ids'])) {
+            if (! empty($data['spec_ids'])) {
                 $specIds = is_array($data['spec_ids']) ? $data['spec_ids'] : explode(',', $data['spec_ids']);
                 $categorySpecService = new CategorySpecService();
                 $categorySpecService->createCategorySpecs($id, $specIds);
@@ -50,7 +50,7 @@ class CategoryService extends AbstractService
             $category = parent::update($id, $data);
 
             // 保存规格
-            if (empty($data['spec_ids'])) {
+            if (! empty($data['spec_ids'])) {
                 $specIds = is_array($data['spec_ids']) ? $data['spec_ids'] : explode(',', $data['spec_ids']);
                 $categorySpecService = new CategorySpecService();
                 $categorySpecService->updateCategorySpecs($category, $specIds);

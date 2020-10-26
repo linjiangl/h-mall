@@ -11,9 +11,13 @@ declare(strict_types=1);
 namespace App\Core\Block\Common\Category;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Category\BrandService;
+use App\Core\Service\Category\CategoryService;
 
 class CategoryBlock extends BaseBlock
 {
-    protected $service = BrandService::class;
+    protected $service = CategoryService::class;
+
+    protected $query = [
+        '=' => ['status']
+    ];
 }

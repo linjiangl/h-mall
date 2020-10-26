@@ -22,6 +22,12 @@ class CategoryController extends BackendController
         return $this->store($request);
     }
 
+    public function updateRequest(CategoryRequest $request)
+    {
+        $request->validated();
+        return $this->update($request);
+    }
+
     protected function block()
     {
         return new CategoryBlock();

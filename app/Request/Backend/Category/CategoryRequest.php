@@ -20,8 +20,8 @@ class CategoryRequest extends AbstractRequest
             'post:create' => [
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:30',
-                'icon' => 'required|string|max:255',
-                'cover' => 'required|string|max:255',
+                'icon' => 'string|max:255',
+                'cover' => 'string|max:255',
                 'sorting' => 'integer|max:100',
                 'status' => 'integer'
             ],
@@ -29,8 +29,8 @@ class CategoryRequest extends AbstractRequest
                 'id' => 'required|integer|gt:0',
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:30',
-                'icon' => 'required|string|max:255',
-                'cover' => 'required|string|max:255',
+                'icon' => 'string|max:255',
+                'cover' => 'string|max:255',
                 'sorting' => 'integer|max:100',
                 'status' => 'integer'
             ],
