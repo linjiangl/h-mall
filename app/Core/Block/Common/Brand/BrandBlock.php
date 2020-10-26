@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Common\Category;
+namespace App\Core\Block\Common\Brand;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Category\BrandService;
+use App\Core\Service\Brand\BrandService;
 
-class CategoryBlock extends BaseBlock
+class BrandBlock extends BaseBlock
 {
     protected $service = BrandService::class;
 }

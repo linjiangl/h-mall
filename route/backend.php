@@ -12,13 +12,14 @@ use App\Controller\Backend\Admin\AdminController;
 use App\Controller\Backend\Authorize\AuthorizeController;
 use App\Controller\Backend\Authorize\LoginController;
 use App\Controller\Backend\Authorize\RegisterController;
+use App\Controller\Backend\Brand\BrandController;
 use App\Controller\Backend\Category\CategoryController;
 use App\Controller\Backend\Log\LogAdminActionController;
 use App\Controller\Backend\Log\LogAdminLoginController;
 use App\Controller\Backend\Spec\SpecController;
 use App\Controller\Backend\Spec\SpecValueController;
 use App\Controller\Backend\System\MenuController;
-use App\Controller\Backend\System\RoleController;
+use App\Controller\Backend\Role\RoleController;
 use App\Controller\Backend\User\UserController;
 use App\Middleware\JWTBackendMiddleware;
 use Hyperf\HttpServer\Router\Router;
@@ -81,4 +82,11 @@ Router::addGroup('/backend', function () {
     Router::post('/category/create', [CategoryController::class, 'storeRequest']);
     Router::post('/category/update', [CategoryController::class, 'update']);
     Router::post('/category/delete', [CategoryController::class, 'destroy']);
+
+    // brand
+    Router::post('/brand/list', [BrandController::class, 'index']);
+    Router::post('/brand/detail', [BrandController::class, 'show']);
+    Router::post('/brand/create', [BrandController::class, 'store']);
+    Router::post('/brand/update', [BrandController::class, 'update']);
+    Router::post('/brand/delete', [BrandController::class, 'destroy']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

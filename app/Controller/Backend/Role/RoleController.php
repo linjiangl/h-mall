@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Backend\System;
+namespace App\Controller\Backend\Role;
 
 use App\Constants\Action\AdminAction;
 use App\Controller\BackendController;
