@@ -16,6 +16,7 @@ use App\Controller\Backend\Brand\BrandController;
 use App\Controller\Backend\Category\CategoryController;
 use App\Controller\Backend\Log\LogAdminActionController;
 use App\Controller\Backend\Log\LogAdminLoginController;
+use App\Controller\Backend\Product\ProductController;
 use App\Controller\Backend\Spec\SpecController;
 use App\Controller\Backend\Spec\SpecValueController;
 use App\Controller\Backend\System\MenuController;
@@ -89,4 +90,11 @@ Router::addGroup('/backend', function () {
     Router::post('/brand/create', [BrandController::class, 'store']);
     Router::post('/brand/update', [BrandController::class, 'update']);
     Router::post('/brand/delete', [BrandController::class, 'destroy']);
+
+    // product
+    Router::post('/product/list', [ProductController::class, 'index']);
+    Router::post('/product/detail', [ProductController::class, 'show']);
+    Router::post('/product/create', [ProductController::class, 'store']);
+    Router::post('/product/update', [ProductController::class, 'update']);
+    Router::post('/product/delete', [ProductController::class, 'destroy']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);
