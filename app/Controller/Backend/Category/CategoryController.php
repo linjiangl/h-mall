@@ -28,6 +28,13 @@ class CategoryController extends BackendController
         return $this->update($request);
     }
 
+    public function parent()
+    {
+        /** @var CategoryBlock $service */
+        $service = $this->service();
+        return $service->parent();
+    }
+
     protected function block()
     {
         return new CategoryBlock();

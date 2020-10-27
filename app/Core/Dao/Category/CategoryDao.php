@@ -27,8 +27,17 @@ class CategoryDao extends AbstractDao
     {
         $condition = [];
         if ($status !== null) {
-            $condition[] = [$status, 'in', $status];
+            $condition[] = ['status', '=', $status];
         }
         return $this->getListByCondition($condition, [], $select);
+    }
+
+    public function getListByParentId(int $parentId = 0, $status = null)
+    {
+        $condition = [['parent_id', '=', $parentId]];
+        if ($status !== null) {
+            $condition[] = ['status', '=', $status];
+        }
+        return $this->getListByCondition($condition, [], 'id,parent_id,name', $this->orderBy);
     }
 }

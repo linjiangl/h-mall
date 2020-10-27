@@ -20,4 +20,10 @@ class CategoryBlock extends BaseBlock
     protected $query = [
         '=' => ['status']
     ];
+
+    public function parent()
+    {
+        $service = new CategoryService();
+        return $service->getListByParentId(0);
+    }
 }

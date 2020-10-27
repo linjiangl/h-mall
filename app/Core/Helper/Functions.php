@@ -174,8 +174,8 @@ if (! function_exists('write_logs')) {
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
         container()->get(LoggerFactory::class)->make('Customize', 'customize')->log($level, $message, [
+            'remark' => $remark ?: '',
             'trace' => count($backtrace) === 2 ? $backtrace[1]['class'] . '::' . $backtrace[1]['function'] . ' ' . $backtrace[0]['line'] : '',
-            'remark' => $remark ?: ''
         ]);
     }
 }

@@ -93,6 +93,18 @@ class CategoryService extends AbstractService
     }
 
     /**
+     * 根据分类获取分类
+     * @param int $parentId
+     * @param mixed $status
+     * @return array
+     */
+    public function getListByParentId(int $parentId = 0, $status = null)
+    {
+        $dao = new CategoryDao();
+        return $dao->getListByParentId($parentId, $status);
+    }
+
+    /**
      * 分类数据归类
      * @param array $categories
      * @param int $parentId
