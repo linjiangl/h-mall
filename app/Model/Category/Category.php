@@ -57,4 +57,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Spec::class, (new CategorySpec())->getTable(), 'category_id', 'spec_id');
     }
+
+    public function parent()
+    {
+        return $this->hasOne(Category::class, 'id', 'parent_id');
+    }
 }
