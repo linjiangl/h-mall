@@ -19,6 +19,7 @@ use App\Controller\Backend\Log\LogAdminLoginController;
 use App\Controller\Backend\Product\ProductController;
 use App\Controller\Backend\Spec\SpecController;
 use App\Controller\Backend\Spec\SpecValueController;
+use App\Controller\Backend\System\DistrictController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\Role\RoleController;
 use App\Controller\Backend\User\UserController;
@@ -44,7 +45,7 @@ Router::addGroup('/backend', function () {
     Router::post('/admin/create', [AdminController::class, 'storeRequest']);
     Router::post('/admin/update', [AdminController::class, 'updateRequest']);
 
-    // log-admin
+    // log admin
     Router::post('/log/adminLogin/list', [LogAdminLoginController::class, 'index']);
     Router::post('/log/adminAction/list', [LogAdminActionController::class, 'index']);
 
@@ -62,6 +63,9 @@ Router::addGroup('/backend', function () {
     Router::post('/menu/create', [MenuController::class, 'storeRequest']);
     Router::post('/menu/update', [MenuController::class, 'updateRequest']);
     Router::post('/menu/delete', [MenuController::class, 'destroy']);
+
+    // district
+    Router::post('/district/list', [DistrictController::class, 'index']);
 
     // spec
     Router::post('/spec/list', [SpecController::class, 'index']);
