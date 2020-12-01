@@ -26,8 +26,8 @@ use App\Model\Model;
  * @property string $invoice_url 发票地址
  * @property string $refused_reason 拒绝理由
  * @property string $invoice 发票内容
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class OrderInvoice extends Model
 {
@@ -43,12 +43,12 @@ class OrderInvoice extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'order_id', 'order_sn', 'open_type', 'type', 'title', 'taxpayer_no', 'status', 'invoice_url', 'refused_reason', 'invoice', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'order_id', 'order_sn', 'open_type', 'type', 'title', 'taxpayer_no', 'status', 'invoice_url', 'refused_reason', 'invoice', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'open_type' => 'integer', 'type' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'open_type' => 'integer', 'type' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Product;
 
 use App\Model\Model;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -24,13 +23,11 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $sales 销量
  * @property int $clicks 点击量
  * @property string $image 图片
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class ProductSku extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -43,12 +40,12 @@ class ProductSku extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'product_id', 'coupon_id', 'price', 'original_price', 'stock', 'sales', 'clicks', 'image', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'product_id', 'coupon_id', 'price', 'original_price', 'stock', 'sales', 'clicks', 'image', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'product_id' => 'integer', 'coupon_id' => 'integer', 'price' => 'float', 'original_price' => 'float', 'stock' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'product_id' => 'integer', 'coupon_id' => 'integer', 'price' => 'float', 'original_price' => 'float', 'stock' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

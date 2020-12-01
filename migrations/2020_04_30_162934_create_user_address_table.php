@@ -35,8 +35,8 @@ class CreateUserAddressTable extends Migration
             $table->string('address', 150)->comment('地址');
             $table->string('zip_code', 20)->comment('邮政编码');
             $table->tinyInteger('is_default')->default(0)->comment('是否默认 0:否, 1:是');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['mobile'], 'mobile');
             $table->index(['user_id', 'is_default'], 'user_id_is_default');

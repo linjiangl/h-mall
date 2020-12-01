@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Refund;
 
 use App\Model\Model;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -38,13 +37,11 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $address 收货地址
  * @property string $proofs 退款凭证
  * @property string $remark
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class Refund extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -57,12 +54,12 @@ class Refund extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'shop_id', 'order_id', 'refund_sn', 'order_sn', 'order_status', 'service_type', 'express_status', 'amount', 'reason', 'status', 'applied_time', 'edited_time', 'canceled_time', 'refused_time', 'agreed_time', 'shipped_time', 'received_time', 'finished_time', 'failed_time', 'address', 'proofs', 'remark', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'shop_id', 'order_id', 'refund_sn', 'order_sn', 'order_status', 'service_type', 'express_status', 'amount', 'reason', 'status', 'applied_time', 'edited_time', 'canceled_time', 'refused_time', 'agreed_time', 'shipped_time', 'received_time', 'finished_time', 'failed_time', 'address', 'proofs', 'remark', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'order_id' => 'integer', 'order_status' => 'integer', 'express_status' => 'integer', 'amount' => 'float', 'status' => 'integer', 'applied_time' => 'integer', 'edited_time' => 'integer', 'canceled_time' => 'integer', 'refused_time' => 'integer', 'agreed_time' => 'integer', 'shipped_time' => 'integer', 'received_time' => 'integer', 'finished_time' => 'integer', 'failed_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'order_id' => 'integer', 'order_status' => 'integer', 'express_status' => 'integer', 'amount' => 'float', 'status' => 'integer', 'applied_time' => 'integer', 'edited_time' => 'integer', 'canceled_time' => 'integer', 'refused_time' => 'integer', 'agreed_time' => 'integer', 'shipped_time' => 'integer', 'received_time' => 'integer', 'finished_time' => 'integer', 'failed_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model\Statement;
 
-use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -24,13 +23,11 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $status 支付状态 -1:已删除, 0:待支付, 1:支付成功, 2:重复支付退款
  * @property string $remark
  * @property int $finished_time 支付完成的时间
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class StatementPayment extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -43,12 +40,12 @@ class StatementPayment extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'order_ids', 'business_no', 'payment_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'order_ids', 'business_no', 'payment_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'amount' => 'float', 'status' => 'integer', 'finished_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'amount' => 'float', 'status' => 'integer', 'finished_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

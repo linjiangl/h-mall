@@ -17,21 +17,4 @@ use Hyperf\ModelCache\CacheableInterface;
 abstract class Model extends BaseModel implements CacheableInterface
 {
     use Cacheable;
-
-    public const CREATED_AT = '';
-
-    public function freshTimestamp()
-    {
-        return time();
-    }
-
-    public function fromDateTime($value)
-    {
-        return (string)$value;
-    }
-
-    public function getDateFormat()
-    {
-        return 'U';
-    }
 }

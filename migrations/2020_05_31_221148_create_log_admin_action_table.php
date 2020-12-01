@@ -28,8 +28,8 @@ class CreateLogAdminActionTable extends Migration
             $table->string('action', 255);
             $table->tinyInteger('status')->default(0)->comment('状态 -1:已删除');
             $table->text('remark');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['admin_id', 'status'], 'admin_id');
         });

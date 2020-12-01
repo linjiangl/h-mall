@@ -32,8 +32,8 @@ class CreateStatementShopTable extends Migration
             $table->integer('module_id', false, true)->default(0);
             $table->string('order_sn', 64)->default('');
             $table->string('remark', 255)->default('');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['shop_id', 'amount'], 'shop_id_amount');
             $table->index(['amount'], 'amount');

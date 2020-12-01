@@ -14,8 +14,8 @@ namespace App\Model;
  * @property int $id
  * @property string $module 模块 product:商品, shop:店铺
  * @property string $content
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class Text extends Model
 {
@@ -31,12 +31,12 @@ class Text extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'module', 'content', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'module', 'content', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

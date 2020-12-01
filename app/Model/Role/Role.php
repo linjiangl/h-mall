@@ -20,8 +20,8 @@ use App\Model\Model;
  * @property int $is_super 是否超管
  * @property int $is_system 是否系统权限
  * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class Role extends Model
 {
@@ -37,12 +37,12 @@ class Role extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'name', 'identifier', 'is_super', 'is_system', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'parent_id', 'name', 'identifier', 'is_super', 'is_system', 'status', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'is_super' => 'integer', 'is_system' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'is_super' => 'integer', 'is_system' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

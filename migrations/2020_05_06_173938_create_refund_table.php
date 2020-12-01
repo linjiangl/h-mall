@@ -47,15 +47,15 @@ class CreateRefundTable extends Migration
             $table->string('address', 1000)->default('')->comment('收货地址');
             $table->string('proofs', 1000)->default('')->comment('退款凭证');
             $table->string('remark', 255)->default('');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['refund_sn'], 'refund_sn');
             $table->index(['user_id', 'status'], 'user_id_status');
             $table->index(['shop_id', 'status'], 'shop_id_status');
             $table->index(['order_id'], 'order_id');
             $table->index(['order_sn'], 'order_sn');
-            $table->index(['created_at', 'status'], 'created_at');
+            $table->index(['created_time', 'status'], 'created_time');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '退款'");

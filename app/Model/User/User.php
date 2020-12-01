@@ -12,7 +12,6 @@ namespace App\Model\User;
 
 use App\Constants\State\UserState;
 use App\Model\Model;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -32,8 +31,8 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $email_verified_time 邮箱验证时间
  * @property int $avatar_updated_time 头像设置时间
  * @property int $username_updated_time 用户名设置时间
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  * @property-read \Hyperf\Database\Model\Collection|\App\Model\User\UserAddress[] $address
  * @property-read  $appends
  * @property-read \App\Model\User\UserVipCard $vipCard
@@ -41,8 +40,6 @@ use Hyperf\Database\Model\SoftDeletes;
  */
 class User extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -55,14 +52,14 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'is_system', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'is_system', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'is_system' => 'integer', 'lasted_login_time' => 'integer', 'mobile_verified_time' => 'integer', 'email_verified_time' => 'integer', 'avatar_updated_time' => 'integer', 'username_updated_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'is_system' => 'integer', 'lasted_login_time' => 'integer', 'mobile_verified_time' => 'integer', 'email_verified_time' => 'integer', 'avatar_updated_time' => 'integer', 'username_updated_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     protected $hidden = ['password', 'salt', 'mobile', 'email', 'is_system', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
 

@@ -41,8 +41,8 @@ class CreateProductTable extends Migration
             $table->smallInteger('buy_limit', false, true)->default(0)->comment('单次购买上限 0:不限制');
             $table->smallInteger('buy_limit_total', false, true)->default(0)->comment('购买上限 0:不限制');
             $table->string('images', 1000)->comment('商品图片');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['shop_id'], 'shop_id');
             $table->index(['user_id'], 'user_id');
@@ -53,7 +53,7 @@ class CreateProductTable extends Migration
             $table->index(['clicks', 'status'], 'clicks');
             $table->index(['min_price', 'status'], 'min_price');
             $table->index(['max_price', 'status'], 'max_price');
-            $table->index(['created_at', 'status'], 'created_at');
+            $table->index(['created_time', 'status'], 'created_time');
         });
     }
 

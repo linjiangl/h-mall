@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Shop;
 
 use App\Model\Model;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -21,13 +20,11 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $logo 店铺名称
  * @property float $comment_score 评分
  * @property int $status 状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过, 3:已关闭
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class Shop extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -40,12 +37,12 @@ class Shop extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'intro_text_id', 'name', 'logo', 'comment_score', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'intro_text_id', 'name', 'logo', 'comment_score', 'status', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'intro_text_id' => 'integer', 'comment_score' => 'float', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'intro_text_id' => 'integer', 'comment_score' => 'float', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

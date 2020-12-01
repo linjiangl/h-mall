@@ -23,8 +23,8 @@ class CreateRoleMenuTable extends Migration
             $table->integerIncrements('id');
             $table->integer('role_id', false, true);
             $table->integer('menu_id', false, true);
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['role_id', 'menu_id'], 'role_menu_id');
             $table->index(['menu_id'], 'menu_id');

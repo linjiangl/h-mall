@@ -12,7 +12,6 @@ namespace App\Model\Category;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -22,15 +21,13 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $cover 封面图
  * @property int $sorting
  * @property int $status 是否显示 -1:已删除 0:已禁用, 1:已启用
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  * @property-read \App\Model\Category\Category $parent
  * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\Spec[] $specs
  */
 class Category extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -43,14 +40,14 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'name', 'icon', 'cover', 'sorting', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'parent_id', 'name', 'icon', 'cover', 'sorting', 'status', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     public function specs()
     {

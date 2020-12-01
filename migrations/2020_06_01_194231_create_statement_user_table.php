@@ -32,11 +32,11 @@ class CreateStatementUserTable extends Migration
             $table->string('module', 30)->default('')->comment('模块 order:订单');
             $table->integer('module_id', false, true)->default(0);
             $table->string('remark', 255)->default('');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['user_id', 'type'], 'user_id_type');
-            $table->index(['created_at'], 'created_at');
+            $table->index(['created_time'], 'created_time');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-用户流水记录'");

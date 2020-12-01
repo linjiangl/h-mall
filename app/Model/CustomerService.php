@@ -10,8 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use Hyperf\Database\Model\SoftDeletes;
-
 /**
  * @property int $id
  * @property int $shop_id 店铺 0:系统
@@ -21,13 +19,11 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $name
  * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
  * @property string $remark 备注
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class CustomerService extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -40,12 +36,12 @@ class CustomerService extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'type', 'qq', 'wechat', 'name', 'status', 'remark', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'type', 'qq', 'wechat', 'name', 'status', 'remark', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'type' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'type' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

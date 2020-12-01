@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model\Evaluation;
 
-use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -31,13 +30,11 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $content 评论内容
  * @property string $images 评论图片
  * @property int $status 状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class Evaluation extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -50,12 +47,12 @@ class Evaluation extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'order_id', 'order_item_id', 'product_id', 'product_sku_id', 'score', 'top', 'reply_num', 'additional_num', 'additional_comment_id', 'is_additional', 'is_image', 'is_anonymous', 'content', 'images', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'order_id', 'order_item_id', 'product_id', 'product_sku_id', 'score', 'top', 'reply_num', 'additional_num', 'additional_comment_id', 'is_additional', 'is_image', 'is_anonymous', 'content', 'images', 'status', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'order_item_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'score' => 'integer', 'top' => 'integer', 'reply_num' => 'integer', 'additional_num' => 'integer', 'additional_comment_id' => 'integer', 'is_additional' => 'integer', 'is_image' => 'integer', 'is_anonymous' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'order_item_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'score' => 'integer', 'top' => 'integer', 'reply_num' => 'integer', 'additional_num' => 'integer', 'additional_comment_id' => 'integer', 'is_additional' => 'integer', 'is_image' => 'integer', 'is_anonymous' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

@@ -13,8 +13,8 @@ namespace App\Model;
 /**
  * @property int $id
  * @property string $key
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  * @property  $value
  */
 class Setting extends Model
@@ -31,14 +31,14 @@ class Setting extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'key', 'value', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'key', 'value', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     public function getValueAttribute($value)
     {

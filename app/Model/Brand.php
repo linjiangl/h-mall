@@ -17,8 +17,8 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $name
  * @property string $logo
  * @property int $status 状态 -1:已删除, 0:已失效, 1:已启用
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class Brand extends Model
 {
@@ -34,12 +34,12 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'logo', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'name', 'logo', 'status', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

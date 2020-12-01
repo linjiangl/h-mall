@@ -27,12 +27,12 @@ class CreateShopTable extends Migration
             $table->string('logo', 255)->comment('店铺名称');
             $table->decimal('comment_score', 4, 2)->default(5)->comment('评分');
             $table->tinyInteger('status')->default(0)->comment('状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过, 3:已关闭');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['user_id'], 'user_id');
             $table->index(['comment_score', 'status'], 'comment_score');
-            $table->index(['created_at', 'status'], 'created_at');
+            $table->index(['created_time', 'status'], 'created_time');
         });
     }
 

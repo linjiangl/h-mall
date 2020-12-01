@@ -32,12 +32,12 @@ class CreateAttachmentTable extends Migration
             $table->string('index', 64)->comment('索引');
             $table->string('encrypt', 64)->default('')->comment('文件的 MD5 散列值');
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 -1:已删除, 0:已失效, 1:已启用');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['index'], 'index');
             $table->index(['encrypt'], 'encrypt');
-            $table->index(['created_at', 'status'], 'md5');
+            $table->index(['created_time', 'status'], 'md5');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '附件'");

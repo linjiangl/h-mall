@@ -17,8 +17,8 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $id
  * @property int $category_id
  * @property int $spec_id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  * @property-read \App\Model\Spec\Spec $spec
  */
 class CategorySpec extends Model
@@ -35,14 +35,14 @@ class CategorySpec extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'category_id', 'spec_id', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'category_id', 'spec_id', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'category_id' => 'integer', 'spec_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'category_id' => 'integer', 'spec_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     public function spec()
     {

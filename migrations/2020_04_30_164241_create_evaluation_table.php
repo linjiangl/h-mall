@@ -39,8 +39,8 @@ class CreateEvaluationTable extends Migration
             $table->string('content', 255)->comment('评论内容');
             $table->string('images', 1000)->default('')->comment('评论图片');
             $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['order_item_id', 'status'], 'order_item_id');
             $table->index(['order_id', 'status'], 'order_id');

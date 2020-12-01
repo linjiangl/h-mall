@@ -30,11 +30,11 @@ class CreateAdminTable extends Migration
             $table->string('salt', 24);
             $table->tinyInteger('status')->default(1)->comment('状态');
             $table->integer('lasted_login_time', false, true)->default(0)->comment('最后登录时间');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['username', 'status'], 'username');
-            $table->unique(['created_at', 'status'], 'created_at');
+            $table->unique(['created_time', 'status'], 'created_time');
         });
     }
 

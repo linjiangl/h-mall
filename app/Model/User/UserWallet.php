@@ -18,8 +18,8 @@ use App\Model\Model;
  * @property float $balance 余额
  * @property int $freeze_integral 冻结的积分
  * @property float $freeze_balance 冻结的余额
- * @property int $created_at
- * @property int $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  * @property-read \App\Model\User\User $user
  */
 class UserWallet extends Model
@@ -40,14 +40,14 @@ class UserWallet extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'integral', 'balance', 'freeze_integral', 'freeze_balance', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'integral', 'balance', 'freeze_integral', 'freeze_balance', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['user_id' => 'integer', 'integral' => 'integer', 'balance' => 'float', 'freeze_integral' => 'integer', 'freeze_balance' => 'float', 'created_at' => 'integer', 'updated_at' => 'integer'];
+    protected $casts = ['user_id' => 'integer', 'integral' => 'integer', 'balance' => 'float', 'freeze_integral' => 'integer', 'freeze_balance' => 'float', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     public function user()
     {

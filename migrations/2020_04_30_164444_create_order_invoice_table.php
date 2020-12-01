@@ -33,8 +33,8 @@ class CreateOrderInvoiceTable extends Migration
             $table->string('invoice_url', 255)->comment('发票地址');
             $table->string('refused_reason', 255)->default('')->comment('拒绝理由');
             $table->text('invoice')->comment('发票内容');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['shop_id', 'status'], 'shop_id');
             $table->index(['user_id', 'status'], 'user_id');

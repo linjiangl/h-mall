@@ -27,8 +27,8 @@ class CreateRefundItemTable extends Migration
             $table->integer('product_id', false, true);
             $table->integer('product_sku_id', false, true);
             $table->decimal('amount', 10, 2)->unsigned()->default(0);
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['refund_id', 'order_item_id'], 'refund_id_order_item_id');
             $table->index(['product_id'], 'product_id');

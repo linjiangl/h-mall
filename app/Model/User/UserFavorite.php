@@ -17,8 +17,8 @@ use App\Model\Model;
  * @property int $user_id
  * @property string $module 模块 product:商品, shop:店铺
  * @property int $module_id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class UserFavorite extends Model
 {
@@ -34,12 +34,12 @@ class UserFavorite extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'module', 'module_id', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'module', 'module_id', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'module_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'module_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

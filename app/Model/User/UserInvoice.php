@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\User;
 
 use App\Model\Model;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -28,13 +27,11 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $content_type 发票内容 0:商品明细
  * @property string $email 邮箱
  * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class UserInvoice extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -47,12 +44,12 @@ class UserInvoice extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'shop_id', 'open_type', 'type', 'title', 'taxpayer_no', 'register_address', 'register_phone', 'bank_name', 'bank_account', 'content_type', 'email', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'shop_id', 'open_type', 'type', 'title', 'taxpayer_no', 'register_address', 'register_phone', 'bank_name', 'bank_account', 'content_type', 'email', 'status', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'open_type' => 'integer', 'type' => 'integer', 'content_type' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'open_type' => 'integer', 'type' => 'integer', 'content_type' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

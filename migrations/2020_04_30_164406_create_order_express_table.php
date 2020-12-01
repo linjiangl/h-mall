@@ -29,8 +29,8 @@ class CreateOrderExpressTable extends Migration
             $table->decimal('amount', 6, 2)->unsigned()->default(0)->comment('快递费');
             $table->integer('text_id')->default(0);
             $table->string('remark', 255)->default('');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['order_id'], 'order_id');
             $table->index(['refund_id'], 'refund_id');

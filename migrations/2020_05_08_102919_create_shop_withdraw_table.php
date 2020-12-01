@@ -28,12 +28,12 @@ class CreateShopWithdrawTable extends Migration
             $table->integer('finished_time', false, true)->default(0)->comment('完成时间');
             $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除');
             $table->string('remark', 255)->default('备注');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['shop_id', 'status'], 'shop_id');
             $table->index(['amount', 'status'], 'amount');
-            $table->index(['created_at', 'status'], 'created_at');
+            $table->index(['created_time', 'status'], 'created_time');
         });
     }
 

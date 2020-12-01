@@ -32,12 +32,12 @@ class CreateMessageTable extends Migration
             $table->integer('module_id', false, true)->default(0);
             $table->string('module_url', 255)->default('');
             $table->tinyInteger('status')->default(0)->comment('状态 -1:删除, 0:未读, 1:已读');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['sender_id', 'status', 'type'], 'sender_id');
             $table->index(['receiver_id', 'status', 'type'], 'receiver_id_type');
-            $table->index(['created_at', 'status'], 'created_at');
+            $table->index(['created_time', 'status'], 'created_time');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '消息'");

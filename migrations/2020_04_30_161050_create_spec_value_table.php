@@ -27,8 +27,8 @@ class CreateSpecValueTable extends Migration
             $table->string('value', 100);
             $table->tinyInteger('sorting', false, true)->default(0);
             $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['spec_id', 'status'], 'spec_id');
         });

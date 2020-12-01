@@ -16,8 +16,8 @@ use App\Model\Model;
  * @property int $id
  * @property int $role_id
  * @property int $admin_id
- * @property int $created_at
- * @property int $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class RoleAdmin extends Model
 {
@@ -35,12 +35,12 @@ class RoleAdmin extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'role_id', 'admin_id', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'role_id', 'admin_id', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'role_id' => 'integer', 'admin_id' => 'integer', 'created_at' => 'integer', 'updated_at' => 'integer'];
+    protected $casts = ['id' => 'integer', 'role_id' => 'integer', 'admin_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

@@ -23,8 +23,8 @@ class CreateProductSkuSpecValueTable extends Migration
             $table->integerIncrements('id');
             $table->integer('product_sku_id', false, true);
             $table->integer('spec_value_id', false, true);
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['product_sku_id', 'spec_value_id'], 'product_sku_spec_value_id');
             $table->index(['spec_value_id'], 'spec_value_id');

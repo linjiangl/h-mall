@@ -21,8 +21,8 @@ namespace App\Model;
  * @property string $salt
  * @property int $status 状态
  * @property int $lasted_login_time 最后登录时间
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class Admin extends Model
 {
@@ -38,14 +38,14 @@ class Admin extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'username', 'avatar', 'real_name', 'mobile', 'email', 'password', 'salt', 'status', 'lasted_login_time', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'username', 'avatar', 'real_name', 'mobile', 'email', 'password', 'salt', 'status', 'lasted_login_time', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'status' => 'integer', 'lasted_login_time' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'status' => 'integer', 'lasted_login_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     protected $hidden = ['password', 'salt', 'mobile', 'email'];
 }

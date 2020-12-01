@@ -27,8 +27,8 @@ class CreateBrandTable extends Migration
             $table->string('name', 50);
             $table->string('logo', 255);
             $table->tinyInteger('status', false, true)->default(1)->comment('状态 -1:已删除, 0:已失效, 1:已启用');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '品牌'");

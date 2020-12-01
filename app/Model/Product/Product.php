@@ -12,7 +12,6 @@ namespace App\Model\Product;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -34,14 +33,12 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $buy_limit 单次购买上限 0:不限制
  * @property int $buy_limit_total 购买上限 0:不限制
  * @property string $images 商品图片
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\Spec[] $specs
  */
 class Product extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -54,14 +51,14 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'text_id', 'type', 'title', 'sub_title', 'sales', 'clicks', 'min_price', 'max_price', 'status', 'is_show', 'refund_type', 'buy_limit', 'buy_limit_total', 'images', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'text_id', 'type', 'title', 'sub_title', 'sales', 'clicks', 'min_price', 'max_price', 'status', 'is_show', 'refund_type', 'buy_limit', 'buy_limit_total', 'images', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'text_id' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'min_price' => 'float', 'max_price' => 'float', 'status' => 'integer', 'is_show' => 'integer', 'buy_limit' => 'integer', 'buy_limit_total' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'text_id' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'min_price' => 'float', 'max_price' => 'float', 'status' => 'integer', 'is_show' => 'integer', 'buy_limit' => 'integer', 'buy_limit_total' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     public function specs()
     {

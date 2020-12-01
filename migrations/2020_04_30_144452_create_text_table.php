@@ -23,8 +23,8 @@ class CreateTextTable extends Migration
             $table->integerIncrements('id');
             $table->string('module', 50)->default('product')->comment('模块 product:商品, shop:店铺');
             $table->mediumText('content');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
         });
     }
 

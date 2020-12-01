@@ -52,8 +52,8 @@ class CreateStatisticsOrderTable extends Migration
             $table->integer('order_unpaid_sku', false, true)->default(0)->comment('已支付商品属性件数');
             $table->integer('order_canceled_sku', false, true)->default(0)->comment('已取消商品属性件数');
             $table->integer('order_finished_sku', false, true)->default(0)->comment('已完成商品属性件数');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['date'], 'date');
         });

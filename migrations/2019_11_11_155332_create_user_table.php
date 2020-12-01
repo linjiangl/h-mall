@@ -39,15 +39,15 @@ class CreateUserTable extends Migration
             $table->integer('email_verified_time', false, true)->default(0)->comment('邮箱验证时间');
             $table->integer('avatar_updated_time', false, true)->default(0)->comment('头像设置时间');
             $table->integer('username_updated_time', false, true)->default(0)->comment('用户名设置时间');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['mobile'], 'mobile');
             $table->index(['email'], 'email');
             $table->unique(['username', 'status'], 'username');
             $table->index(['nickname', 'status'], 'nickname');
             $table->index(['lasted_login_time', 'status'], 'lasted_login_time');
-            $table->index(['created_at', 'status'], 'created_at');
+            $table->index(['created_time', 'status'], 'created_time');
         });
     }
 

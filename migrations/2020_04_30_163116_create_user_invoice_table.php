@@ -37,8 +37,8 @@ class CreateUserInvoiceTable extends Migration
             $table->tinyInteger('content_type', false, true)->default(0)->comment('发票内容 0:商品明细');
             $table->string('email', 50)->default('')->comment('邮箱');
             $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['user_id', 'status'], 'user_id');
         });

@@ -27,8 +27,8 @@ use App\Model\Model;
  * @property int $refund_status
  * @property string $refund_type
  * @property string $remark 备注
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class OrderItem extends Model
 {
@@ -44,12 +44,12 @@ class OrderItem extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'order_id', 'product_id', 'product_sku_id', 'product_name', 'product_sku_name', 'quantity', 'total_amount', 'discount_amount', 'refund_id', 'refund_item_id', 'refund_status', 'refund_type', 'remark', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'order_id', 'product_id', 'product_sku_id', 'product_name', 'product_sku_name', 'quantity', 'total_amount', 'discount_amount', 'refund_id', 'refund_item_id', 'refund_status', 'refund_type', 'remark', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'order_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'quantity' => 'integer', 'total_amount' => 'float', 'discount_amount' => 'float', 'refund_id' => 'integer', 'refund_item_id' => 'integer', 'refund_status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'order_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'quantity' => 'integer', 'total_amount' => 'float', 'discount_amount' => 'float', 'refund_id' => 'integer', 'refund_item_id' => 'integer', 'refund_status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

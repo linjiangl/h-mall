@@ -28,8 +28,8 @@ class CreateMenuTable extends Migration
             $table->string('path', 255)->default('');
             $table->smallInteger('sorting', false, true)->default(0)->comment('排序');
             $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['parent_id'], 'parent_id');
         });

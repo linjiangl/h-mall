@@ -24,8 +24,8 @@ use App\Model\Model;
  * @property string $id_card 身份证号码
  * @property string $password 会员卡密码
  * @property int $status 状态 -1:已删除, 0:未激活, 1:已激活
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class UserVipCard extends Model
 {
@@ -41,12 +41,12 @@ class UserVipCard extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'serial_no', 'grade', 'total_exp', 'current_exp', 'real_name', 'mobile', 'id_card', 'password', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'serial_no', 'grade', 'total_exp', 'current_exp', 'real_name', 'mobile', 'id_card', 'password', 'status', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'grade' => 'integer', 'total_exp' => 'integer', 'current_exp' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'grade' => 'integer', 'total_exp' => 'integer', 'current_exp' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

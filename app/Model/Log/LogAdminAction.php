@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Log;
 
 use App\Model\Model;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -21,14 +20,12 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $module
  * @property string $action
  * @property int $status 状态 -1:已删除
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  * @property  $remark
  */
 class LogAdminAction extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -41,14 +38,14 @@ class LogAdminAction extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'admin_id', 'username', 'client_ip', 'module', 'action', 'status', 'remark', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'admin_id', 'username', 'client_ip', 'module', 'action', 'status', 'remark', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     public function getRemarkAttribute($value)
     {

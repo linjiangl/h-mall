@@ -33,8 +33,8 @@ class CreateStatementPaymentTable extends Migration
             $table->tinyInteger('status')->default(0)->comment('支付状态 -1:已删除, 0:待支付, 1:支付成功, 2:重复支付退款');
             $table->string('remark', 3000)->default('');
             $table->integer('finished_time', false, true)->default(0)->comment('支付完成的时间');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['business_no'], 'business_no');
             $table->index(['trade_no'], 'trade_no');

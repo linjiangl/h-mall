@@ -35,8 +35,8 @@ class CreateStatementRefundTable extends Migration
             $table->tinyInteger('status')->default(0)->comment('退款状态 -1:已删除, 0:未处理, 1:已处理');
             $table->string('remark', 3000)->default('');
             $table->integer('finished_time', false, true)->default(0)->comment('退款成功时间');
-            $table->integer('created_at', false, true)->default(0);
-            $table->integer('updated_at', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
 
             $table->unique(['business_no'], 'business_no');
             $table->index(['trade_no'], 'trade_no');

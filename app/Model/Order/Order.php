@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Order;
 
 use App\Model\Model;
-use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -46,13 +45,11 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $buyer_message 买家留言
  * @property string $seller_message 买家留言
  * @property string $refund_type
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class Order extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -65,12 +62,12 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'buyer_id', 'order_sn', 'payment_method', 'payment_no', 'product_amount', 'total_amount', 'express_amount', 'discount_amount', 'consignee', 'mobile', 'province', 'city', 'district', 'street', 'address', 'zip_code', 'is_dispatched', 'is_comment', 'is_additional', 'is_credited', 'payment_time', 'dispatched_time', 'confirmed_time', 'canceled_time', 'comment_time', 'additional_comment_time', 'status', 'buyer_message', 'seller_message', 'refund_type', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'shop_id', 'buyer_id', 'order_sn', 'payment_method', 'payment_no', 'product_amount', 'total_amount', 'express_amount', 'discount_amount', 'consignee', 'mobile', 'province', 'city', 'district', 'street', 'address', 'zip_code', 'is_dispatched', 'is_comment', 'is_additional', 'is_credited', 'payment_time', 'dispatched_time', 'confirmed_time', 'canceled_time', 'comment_time', 'additional_comment_time', 'status', 'buyer_message', 'seller_message', 'refund_type', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'buyer_id' => 'integer', 'product_amount' => 'float', 'total_amount' => 'float', 'express_amount' => 'float', 'discount_amount' => 'float', 'is_dispatched' => 'integer', 'is_comment' => 'integer', 'is_additional' => 'integer', 'is_credited' => 'integer', 'payment_time' => 'integer', 'dispatched_time' => 'integer', 'confirmed_time' => 'integer', 'canceled_time' => 'integer', 'comment_time' => 'integer', 'additional_comment_time' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'buyer_id' => 'integer', 'product_amount' => 'float', 'total_amount' => 'float', 'express_amount' => 'float', 'discount_amount' => 'float', 'is_dispatched' => 'integer', 'is_comment' => 'integer', 'is_additional' => 'integer', 'is_credited' => 'integer', 'payment_time' => 'integer', 'dispatched_time' => 'integer', 'confirmed_time' => 'integer', 'canceled_time' => 'integer', 'comment_time' => 'integer', 'additional_comment_time' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

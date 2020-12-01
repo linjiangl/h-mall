@@ -45,8 +45,8 @@ use App\Model\Model;
  * @property int $order_unpaid_sku 已支付商品属性件数
  * @property int $order_canceled_sku 已取消商品属性件数
  * @property int $order_finished_sku 已完成商品属性件数
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int $created_time
+ * @property int $updated_time
  */
 class StatisticsOrder extends Model
 {
@@ -62,12 +62,12 @@ class StatisticsOrder extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'date', 'order_total_amount', 'order_paid_amount', 'order_unpaid_amount', 'order_canceled_amount', 'order_finished_amount', 'order_total_user', 'order_paid_user', 'order_unpaid_user', 'order_canceled_user', 'order_finished_user', 'order_total_number', 'order_paid_number', 'order_unpaid_number', 'order_canceled_number', 'order_finished_number', 'order_total_quantity', 'order_paid_quantity', 'order_unpaid_quantity', 'order_canceled_quantity', 'order_finished_quantity', 'order_total_spu', 'order_paid_spu', 'order_unpaid_spu', 'order_canceled_spu', 'order_finished_spu', 'order_total_sku', 'order_paid_sku', 'order_unpaid_sku', 'order_canceled_sku', 'order_finished_sku', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'date', 'order_total_amount', 'order_paid_amount', 'order_unpaid_amount', 'order_canceled_amount', 'order_finished_amount', 'order_total_user', 'order_paid_user', 'order_unpaid_user', 'order_canceled_user', 'order_finished_user', 'order_total_number', 'order_paid_number', 'order_unpaid_number', 'order_canceled_number', 'order_finished_number', 'order_total_quantity', 'order_paid_quantity', 'order_unpaid_quantity', 'order_canceled_quantity', 'order_finished_quantity', 'order_total_spu', 'order_paid_spu', 'order_unpaid_spu', 'order_canceled_spu', 'order_finished_spu', 'order_total_sku', 'order_paid_sku', 'order_unpaid_sku', 'order_canceled_sku', 'order_finished_sku', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'date' => 'integer', 'order_total_amount' => 'float', 'order_paid_amount' => 'float', 'order_unpaid_amount' => 'float', 'order_canceled_amount' => 'float', 'order_finished_amount' => 'float', 'order_total_user' => 'integer', 'order_paid_user' => 'integer', 'order_unpaid_user' => 'integer', 'order_canceled_user' => 'integer', 'order_finished_user' => 'integer', 'order_total_number' => 'integer', 'order_paid_number' => 'integer', 'order_unpaid_number' => 'integer', 'order_canceled_number' => 'integer', 'order_finished_number' => 'integer', 'order_total_quantity' => 'integer', 'order_paid_quantity' => 'integer', 'order_unpaid_quantity' => 'integer', 'order_canceled_quantity' => 'integer', 'order_finished_quantity' => 'integer', 'order_total_spu' => 'integer', 'order_paid_spu' => 'integer', 'order_unpaid_spu' => 'integer', 'order_canceled_spu' => 'integer', 'order_finished_spu' => 'integer', 'order_total_sku' => 'integer', 'order_paid_sku' => 'integer', 'order_unpaid_sku' => 'integer', 'order_canceled_sku' => 'integer', 'order_finished_sku' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'date' => 'integer', 'order_total_amount' => 'float', 'order_paid_amount' => 'float', 'order_unpaid_amount' => 'float', 'order_canceled_amount' => 'float', 'order_finished_amount' => 'float', 'order_total_user' => 'integer', 'order_paid_user' => 'integer', 'order_unpaid_user' => 'integer', 'order_canceled_user' => 'integer', 'order_finished_user' => 'integer', 'order_total_number' => 'integer', 'order_paid_number' => 'integer', 'order_unpaid_number' => 'integer', 'order_canceled_number' => 'integer', 'order_finished_number' => 'integer', 'order_total_quantity' => 'integer', 'order_paid_quantity' => 'integer', 'order_unpaid_quantity' => 'integer', 'order_canceled_quantity' => 'integer', 'order_finished_quantity' => 'integer', 'order_total_spu' => 'integer', 'order_paid_spu' => 'integer', 'order_unpaid_spu' => 'integer', 'order_canceled_spu' => 'integer', 'order_finished_spu' => 'integer', 'order_total_sku' => 'integer', 'order_paid_sku' => 'integer', 'order_unpaid_sku' => 'integer', 'order_canceled_sku' => 'integer', 'order_finished_sku' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }
