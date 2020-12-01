@@ -38,14 +38,14 @@ class CreateEvaluationTable extends Migration
             $table->tinyInteger('is_anonymous', false, true)->default(0)->comment('是否匿名 0:否,1:是');
             $table->string('content', 255)->comment('评论内容');
             $table->string('images', 1000)->default('')->comment('评论图片');
-            $table->tinyInteger('status', false, true)->default(1)->comment('状态 0:待审核, 1:已通过, 2:未通过');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->unique(['order_item_id'], 'order_item_id');
-            $table->index(['order_id'], 'order_id');
-            $table->index(['user_id', 'status'], 'user_id_status');
-            $table->index(['product_id', 'top'], 'product_id_top');
+            $table->unique(['order_item_id', 'status'], 'order_item_id');
+            $table->index(['order_id', 'status'], 'order_id');
+            $table->index(['user_id', 'status'], 'user_id');
+            $table->index(['product_id', 'top', 'status'], 'product_id_top');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '评价'");

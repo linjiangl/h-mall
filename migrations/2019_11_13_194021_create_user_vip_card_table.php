@@ -33,16 +33,17 @@ class CreateUserVipCardTable extends Migration
             $table->string('mobile', 20)->comment('手机号码');
             $table->string('id_card', 20)->default('')->comment('身份证号码');
             $table->string('password', 32)->default('')->comment('会员卡密码');
-            $table->tinyInteger('status', false, true)->default(2)->comment('状态 1:已激活 2:未激活');
-            $table->timestamps();
+            $table->tinyInteger('status')->default(0)->comment('状态 -1:已删除, 0:未激活, 1:已激活');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->index(['user_id'], 'user_id');
             $table->unique(['serial_no'], 'serial_no');
             $table->index(['mobile'], 'mobile');
-            $table->index(['grade'], 'grade');
-            $table->index(['total_exp'], 'total_exp');
             $table->index(['id_card'], 'id_card');
-            $table->index(['created_at'], 'created_at');
+            $table->index(['user_id', 'status'], 'user_id');
+            $table->index(['grade', 'status'], 'grade');
+            $table->index(['total_exp', 'status'], 'total_exp');
+            $table->index(['created_at', 'status'], 'created_at');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-会员卡'");

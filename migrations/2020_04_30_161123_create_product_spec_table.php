@@ -23,6 +23,8 @@ class CreateProductSpecTable extends Migration
             $table->integerIncrements('id');
             $table->integer('product_id', false, true);
             $table->integer('spec_id', false, true);
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['product_id', 'spec_id'], 'product_spec_id');
             $table->index(['spec_id'], 'spec_id');

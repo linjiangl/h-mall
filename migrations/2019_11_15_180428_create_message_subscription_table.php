@@ -22,7 +22,8 @@ class CreateMessageSubscriptionTable extends Migration
         Schema::create('message_subscription', function (Blueprint $table) {
             $table->integerIncrements('user_id');
             $table->text('setting');
-            $table->timestamps();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['user_id'], 'user_id');
         });

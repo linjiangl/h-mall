@@ -48,21 +48,20 @@ class CreateOrderTable extends Migration
             $table->integer('canceled_time', false, true)->default(0)->comment('取消时间');
             $table->integer('comment_time', false, true)->default(0)->comment('评论时间');
             $table->integer('additional_comment_time', false, true)->default(0)->comment('追加评论时间');
-            $table->tinyInteger('status', false, true)->comment('订单状态');
+            $table->smallInteger('status')->comment('订单状态 -1:已删除');
             $table->string('buyer_message', 255)->default('')->comment('买家留言');
             $table->string('seller_message', 255)->default('')->comment('买家留言');
             $table->string('refund_type', 30)->default('');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['order_sn'], 'order_sn');
-            $table->index(['mobile'], 'mobile');
             $table->index(['payment_no'], 'payment_no');
+            $table->index(['mobile', 'status'], 'mobile');
             $table->index(['shop_id', 'status'], 'shop_id_status');
             $table->index(['buyer_id', 'status'], 'buyer_id_status');
             $table->index(['total_amount', 'status'], 'total_amount_status');
-            $table->index(['status'], 'status');
-            $table->index(['created_at'], 'created_at');
+            $table->index(['created_at', 'status'], 'created_at');
         });
     }
 

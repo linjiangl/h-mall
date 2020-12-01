@@ -10,8 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use Hyperf\Database\Model\SoftDeletes;
-
 /**
  * @property int $id
  * @property string $username 用户名
@@ -25,12 +23,9 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $lasted_login_time 最后登录时间
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
  */
 class Admin extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -43,7 +38,7 @@ class Admin extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'username', 'avatar', 'real_name', 'mobile', 'email', 'password', 'salt', 'status', 'lasted_login_time', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'username', 'avatar', 'real_name', 'mobile', 'email', 'password', 'salt', 'status', 'lasted_login_time', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

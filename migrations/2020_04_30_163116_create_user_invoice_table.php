@@ -25,6 +25,7 @@ class CreateUserInvoiceTable extends Migration
         Schema::create($this->table, function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
+            $table->integer('shop_id', false, true)->default(0);
             $table->tinyInteger('open_type', false, true)->default(1)->comment('开具类型 0:个人 1:企业');
             $table->tinyInteger('type', false, true)->default(0)->comment('发票类型 0:增值税普通发票 1:增值税专用发票 2:组织(非企业)增值税普通发票');
             $table->string('title', 150)->comment('发票抬头');
@@ -35,10 +36,11 @@ class CreateUserInvoiceTable extends Migration
             $table->string('bank_account', 100)->comment('银行账号');
             $table->tinyInteger('content_type', false, true)->default(0)->comment('发票内容 0:商品明细');
             $table->string('email', 50)->default('')->comment('邮箱');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->index(['user_id'], 'user_id');
+            $table->index(['user_id', 'status'], 'user_id');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '用户-发票'");

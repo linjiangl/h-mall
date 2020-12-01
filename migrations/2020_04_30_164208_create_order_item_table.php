@@ -34,7 +34,8 @@ class CreateOrderItemTable extends Migration
             $table->tinyInteger('refund_status', false, true)->default(0);
             $table->string('refund_type', 30)->default('');
             $table->string('remark', 255)->default('')->comment('备注');
-            $table->timestamps();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['order_id', 'product_sku_id'], 'order_id_product_sku_id');
             $table->index(['product_id'], 'product_id');

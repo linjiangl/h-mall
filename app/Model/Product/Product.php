@@ -12,7 +12,6 @@ namespace App\Model\Product;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
-use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -29,16 +28,15 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $clicks 点击量
  * @property float $min_price 最小金额
  * @property float $max_price 最大金额
- * @property int $status 状态 0:删除, 1:正常, 2:下架
+ * @property int $status 状态 -1:已删除, 0:已下架, 1:已上架
  * @property int $is_show 是否显示 0:不显示, 1:显示
  * @property string $refund_type 退款类型 空:无操作,all:退货退款,money:仅退款,refuse:拒绝退款
  * @property int $buy_limit 单次购买上限 0:不限制
  * @property int $buy_limit_total 购买上限 0:不限制
  * @property string $images 商品图片
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
- * @property-read Spec[] $specs
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\Spec[] $specs
  */
 class Product extends Model
 {
@@ -56,7 +54,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'text_id', 'type', 'title', 'sub_title', 'sales', 'clicks', 'min_price', 'max_price', 'status', 'is_show', 'refund_type', 'buy_limit', 'buy_limit_total', 'images', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'text_id', 'type', 'title', 'sub_title', 'sales', 'clicks', 'min_price', 'max_price', 'status', 'is_show', 'refund_type', 'buy_limit', 'buy_limit_total', 'images', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

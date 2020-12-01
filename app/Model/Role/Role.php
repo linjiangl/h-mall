@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Role;
 
 use App\Model\Model;
-use Carbon\Carbon;
 
 /**
  * @property int $id
@@ -20,9 +19,9 @@ use Carbon\Carbon;
  * @property string $identifier 标识
  * @property int $is_super 是否超管
  * @property int $is_system 是否系统权限
- * @property int $status
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class Role extends Model
 {

@@ -18,7 +18,7 @@ namespace App\Model;
  * @property string $icon
  * @property string $path
  * @property int $sorting 排序
- * @property int $status
+ * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */

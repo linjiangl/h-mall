@@ -10,14 +10,12 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use Carbon\Carbon;
-
 /**
  * @property int $id
  * @property int $parent_id
  * @property string $name
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class District extends Model
 {

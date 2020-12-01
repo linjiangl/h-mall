@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\User;
 
 use App\Model\Model;
-use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -30,10 +29,9 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $address 地址
  * @property string $zip_code 邮政编码
  * @property int $is_default 是否默认 0:否, 1:是
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
- * @property-read User $user
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Model\User\User $user
  */
 class UserAddress extends Model
 {
@@ -51,7 +49,7 @@ class UserAddress extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'name', 'mobile', 'province_id', 'province', 'city_id', 'city', 'district_id', 'district', 'street_id', 'street', 'address', 'zip_code', 'is_default', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'user_id', 'name', 'mobile', 'province_id', 'province', 'city_id', 'city', 'district_id', 'district', 'street_id', 'street', 'address', 'zip_code', 'is_default', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

@@ -30,10 +30,9 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $is_anonymous 是否匿名 0:否,1:是
  * @property string $content 评论内容
  * @property string $images 评论图片
- * @property int $status 状态 0:待审核, 1:已通过, 2:未通过
+ * @property int $status 状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
  */
 class Evaluation extends Model
 {
@@ -51,7 +50,7 @@ class Evaluation extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'order_id', 'order_item_id', 'product_id', 'product_sku_id', 'score', 'top', 'reply_num', 'additional_num', 'additional_comment_id', 'is_additional', 'is_image', 'is_anonymous', 'content', 'images', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'user_id', 'order_id', 'order_item_id', 'product_id', 'product_sku_id', 'score', 'top', 'reply_num', 'additional_num', 'additional_comment_id', 'is_additional', 'is_image', 'is_anonymous', 'content', 'images', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

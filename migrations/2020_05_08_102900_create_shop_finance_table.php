@@ -24,6 +24,8 @@ class CreateShopFinanceTable extends Migration
             $table->integer('user_id', false, true);
             $table->decimal('balance', 11, 2)->default(0)->comment('余额');
             $table->decimal('freeze_balance', 10, 2)->default(0)->comment('冻结余额');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['shop_id'], 'shop_id');
             $table->index(['balance'], 'balance');

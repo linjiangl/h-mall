@@ -16,6 +16,8 @@ use App\Model\Model;
  * @property int $id
  * @property int $role_id
  * @property int $menu_id
+ * @property int $created_at
+ * @property int $updated_at
  */
 class RoleMenu extends Model
 {
@@ -33,12 +35,12 @@ class RoleMenu extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'role_id', 'menu_id'];
+    protected $fillable = ['id', 'role_id', 'menu_id', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'role_id' => 'integer', 'menu_id' => 'integer'];
+    protected $casts = ['id' => 'integer', 'role_id' => 'integer', 'menu_id' => 'integer', 'created_at' => 'integer', 'updated_at' => 'integer'];
 }

@@ -32,8 +32,8 @@ class CreateStatementUserTable extends Migration
             $table->string('module', 30)->default('')->comment('模块 order:订单');
             $table->integer('module_id', false, true)->default(0);
             $table->string('remark', 255)->default('');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->index(['user_id', 'type'], 'user_id_type');
             $table->index(['created_at'], 'created_at');

@@ -25,7 +25,7 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property int $express_status 物流状态 1:未收货, 2:已收货
  * @property float $amount 退款金额
  * @property string $reason 退款原因
- * @property int $status 退款状态
+ * @property int $status 退款状态 -1:已删除
  * @property int $applied_time 用户申请退款时间
  * @property int $edited_time 用户修改退款订单时间
  * @property int $canceled_time 用户撤销退款时间
@@ -40,7 +40,6 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $remark
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
  */
 class Refund extends Model
 {
@@ -58,7 +57,7 @@ class Refund extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'shop_id', 'order_id', 'refund_sn', 'order_sn', 'order_status', 'service_type', 'express_status', 'amount', 'reason', 'status', 'applied_time', 'edited_time', 'canceled_time', 'refused_time', 'agreed_time', 'shipped_time', 'received_time', 'finished_time', 'failed_time', 'address', 'proofs', 'remark', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'user_id', 'shop_id', 'order_id', 'refund_sn', 'order_sn', 'order_status', 'service_type', 'express_status', 'amount', 'reason', 'status', 'applied_time', 'edited_time', 'canceled_time', 'refused_time', 'agreed_time', 'shipped_time', 'received_time', 'finished_time', 'failed_time', 'address', 'proofs', 'remark', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

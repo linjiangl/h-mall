@@ -10,8 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use Hyperf\Database\Model\SoftDeletes;
-
 /**
  * @property int $id
  * @property string $title 标题
@@ -19,15 +17,12 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $url 链接
  * @property string $position 位置
  * @property int $clicks 点击量
- * @property int $status 状态 0:不可用, 1:可用
+ * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string $deleted_at
  */
 class Advertisement extends Model
 {
-    use SoftDeletes;
-
     /**
      * The table associated with the model.
      *
@@ -40,7 +35,7 @@ class Advertisement extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'title', 'image', 'url', 'position', 'clicks', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'title', 'image', 'url', 'position', 'clicks', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

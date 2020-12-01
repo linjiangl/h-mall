@@ -22,10 +22,9 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $module 模块
  * @property int $module_id
  * @property string $module_url
- * @property int $status 状态 0:删除, 1:已读, 2:未读
+ * @property int $status 状态 -1:删除, 0:未读, 1:已读
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
  */
 class Message extends Model
 {
@@ -43,7 +42,7 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'sender_id', 'receiver_id', 'text_id', 'type', 'module', 'module_id', 'module_url', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'sender_id', 'receiver_id', 'text_id', 'type', 'module', 'module_id', 'module_url', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

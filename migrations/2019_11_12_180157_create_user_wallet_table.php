@@ -28,6 +28,8 @@ class CreateUserWalletTable extends Migration
             $table->decimal('balance', 10, 2)->default(0)->comment('余额');
             $table->integer('freeze_integral', false, true)->default(0)->comment('冻结的积分');
             $table->decimal('freeze_balance', 10, 2)->default(0)->comment('冻结的余额');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['user_id'], 'user_id');
             $table->index(['integral'], 'integral');

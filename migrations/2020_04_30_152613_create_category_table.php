@@ -26,13 +26,12 @@ class CreateCategoryTable extends Migration
             $table->string('icon', 255)->default('')->comment('图标');
             $table->string('cover', 255)->default('')->comment('封面图');
             $table->tinyInteger('sorting', false, true)->default(0);
-            $table->tinyInteger('status')->default(0)->comment('是否显示 0:删除 0:显示, 1:隐藏');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->tinyInteger('status')->default(0)->comment('是否显示 -1:已删除 0:已禁用, 1:已启用');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->index(['parent_id'], 'parent_id');
-            $table->index(['name'], 'name');
-            $table->index(['sorting'], 'sorting');
+            $table->index(['parent_id', 'status'], 'parent_id');
+            $table->index(['name', 'status'], 'name');
         });
     }
 

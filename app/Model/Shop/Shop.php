@@ -11,20 +11,18 @@ declare(strict_types=1);
 namespace App\Model\Shop;
 
 use App\Model\Model;
-use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
  * @property int $user_id
- * @property int $text_id
+ * @property int $intro_text_id 店铺简介
  * @property string $name 店铺名称
  * @property string $logo 店铺名称
  * @property float $comment_score 评分
- * @property int $status 状态 0:待审核, 1:已通过, 2:未通过, 3:已关闭
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
+ * @property int $status 状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过, 3:已关闭
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class Shop extends Model
 {
@@ -42,12 +40,12 @@ class Shop extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'text_id', 'name', 'logo', 'comment_score', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'user_id', 'intro_text_id', 'name', 'logo', 'comment_score', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'text_id' => 'integer', 'comment_score' => 'float', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'intro_text_id' => 'integer', 'comment_score' => 'float', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

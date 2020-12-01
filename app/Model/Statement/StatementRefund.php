@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model\Statement;
 
-use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
@@ -24,12 +23,11 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $refund_method 退款方式
  * @property string $trade_no 第三方退款流水号
  * @property float $amount 金额
- * @property int $status 退款状态 0:未处理, 1:已处理
+ * @property int $status 退款状态 -1:已删除, 0:未处理, 1:已处理
  * @property string $remark
  * @property int $finished_time 退款成功时间
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class StatementRefund extends Model
 {
@@ -47,7 +45,7 @@ class StatementRefund extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'order_id', 'refund_id', 'payment_business_no', 'business_no', 'refund_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'user_id', 'order_id', 'refund_id', 'payment_business_no', 'business_no', 'refund_method', 'trade_no', 'amount', 'status', 'remark', 'finished_time', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

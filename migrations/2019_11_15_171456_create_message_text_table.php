@@ -26,6 +26,8 @@ class CreateMessageTextTable extends Migration
             $table->integerIncrements('id');
             $table->string('title', 100)->default('')->comment('标题');
             $table->text('content')->comment('消息内容');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '文本内容'");

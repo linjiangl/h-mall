@@ -26,13 +26,10 @@ class CreateNavigationTable extends Migration
             $table->integerIncrements('id');
             $table->string('title', 50);
             $table->string('url', 255)->default('');
-            $table->tinyInteger('status')->default(0)->comment('状态 0:关闭, 1:开启');
             $table->smallInteger('sorting')->default(0)->comment('排序');
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->index(['status'], 'status');
-            $table->index(['sorting'], 'sorting');
+            $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '导航'");

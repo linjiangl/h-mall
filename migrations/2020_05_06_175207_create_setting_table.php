@@ -23,7 +23,8 @@ class CreateSettingTable extends Migration
             $table->integerIncrements('id');
             $table->string('key', 50);
             $table->mediumText('value');
-            $table->timestamps();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['key'], 'key');
         });

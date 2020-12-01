@@ -26,10 +26,11 @@ class CreateSpecValueTable extends Migration
             $table->integer('spec_id', false, true);
             $table->string('value', 100);
             $table->tinyInteger('sorting', false, true)->default(0);
-            $table->timestamps();
+            $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->index(['spec_id'], 'spec_id');
-            $table->index(['sorting'], 'sorting');
+            $table->index(['spec_id', 'status'], 'spec_id');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '商品规格值'");

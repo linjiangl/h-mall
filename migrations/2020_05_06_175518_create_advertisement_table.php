@@ -29,11 +29,12 @@ class CreateAdvertisementTable extends Migration
             $table->string('url', 255)->comment('链接');
             $table->string('position', 30)->comment('位置');
             $table->integer('clicks', false, true)->default(0)->comment('点击量');
-            $table->tinyInteger('status', false, true)->default(0)->comment('状态 0:不可用, 1:可用');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->index(['status'], 'status');
+            $table->index(['title', 'status'], 'title');
+            $table->index(['clicks', 'status'], 'clicks');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '广告'");

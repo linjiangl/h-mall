@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model\Product;
 
-use Carbon\Carbon;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -18,8 +17,8 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $product_id
  * @property string $option
  * @property string $value
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class ProductParameter extends Model
 {

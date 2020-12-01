@@ -27,10 +27,11 @@ class CreateLogAdminLoginTable extends Migration
             $table->string('username', 30)->comment('管理员用户名');
             $table->string('client_ip', 30);
             $table->string('user_agent', 255);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->tinyInteger('status')->default(0)->comment('状态 -1:已删除');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->index(['admin_id'], 'admin_id');
+            $table->index(['admin_id', 'status'], 'admin_id');
         });
     }
 

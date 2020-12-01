@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model\Spec;
 
-use Carbon\Carbon;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -18,10 +17,10 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $shop_id 店铺id 0:系统
  * @property string $name 名称
  * @property int $sorting 排序
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
- * @property-read SpecValue[] $values
+ * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\SpecValue[] $values
  */
 class Spec extends Model
 {
@@ -37,14 +36,14 @@ class Spec extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'name', 'sorting', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'shop_id', 'name', 'sorting', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'sorting' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     public function values()
     {

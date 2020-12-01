@@ -27,7 +27,8 @@ class CreateRefundActionTable extends Migration
             $table->integer('action_user_id', false, true)->default(0)->comment('操作用户 0:系统');
             $table->tinyInteger('refund_status', false, true)->comment('退款状态');
             $table->string('remark', 255)->default('');
-            $table->timestamps();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->index(['refund_id'], 'refund_id');
         });

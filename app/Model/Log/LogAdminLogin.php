@@ -19,9 +19,9 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $username 管理员用户名
  * @property string $client_ip
  * @property string $user_agent
+ * @property int $status 状态 -1:已删除
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
  */
 class LogAdminLogin extends Model
 {
@@ -39,12 +39,12 @@ class LogAdminLogin extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'admin_id', 'username', 'client_ip', 'user_agent', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'admin_id', 'username', 'client_ip', 'user_agent', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

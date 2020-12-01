@@ -25,7 +25,8 @@ class CreateDistrictTable extends Migration
             $table->integerIncrements('id');
             $table->integer('parent_id', false, true)->default(0);
             $table->string('name', 50);
-            $table->timestamps();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->index(['parent_id'], 'parent_id');
             $table->index(['name'], 'name');

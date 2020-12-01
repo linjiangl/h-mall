@@ -30,11 +30,11 @@ class CreateStatementPaymentTable extends Migration
             $table->string('payment_method', 20)->comment('支付方式');
             $table->string('trade_no', 64)->default('')->comment('第三方支付流水号');
             $table->decimal('amount', 10, 2)->unsigned()->default(0)->comment('金额');
-            $table->tinyInteger('status')->default(0)->comment('支付状态 0:待支付, 1:支付成功, 2:重复支付退款');
+            $table->tinyInteger('status')->default(0)->comment('支付状态 -1:已删除, 0:待支付, 1:支付成功, 2:重复支付退款');
             $table->string('remark', 3000)->default('');
             $table->integer('finished_time', false, true)->default(0)->comment('支付完成的时间');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['business_no'], 'business_no');
             $table->index(['trade_no'], 'trade_no');

@@ -26,8 +26,9 @@ class CreateExpressTable extends Migration
             $table->string('name', 50)->comment('公司名称');
             $table->string('code', 50)->comment('公司编码');
             $table->smallInteger('sorting')->default(0)->comment('排序');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['code'], 'code');
             $table->index(['name'], 'name');

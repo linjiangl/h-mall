@@ -20,8 +20,8 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $hash
  * @property string $key
  * @property string $index 索引
- * @property string $md5 文件的 MD5 散列值
- * @property int $status 状态 0:失效, 1:正常
+ * @property string $encrypt 文件的 MD5 散列值
+ * @property int $status 状态 -1:已删除, 0:已失效, 1:已启用
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
@@ -39,7 +39,7 @@ class Attachment extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'system', 'type', 'size', 'hash', 'key', 'index', 'md5', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'system', 'type', 'size', 'hash', 'key', 'index', 'encrypt', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

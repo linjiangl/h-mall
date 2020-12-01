@@ -22,7 +22,7 @@ use App\Model\Model;
  * @property int $type 发票类型
  * @property string $title 发票抬头
  * @property string $taxpayer_no 纳税人识别号
- * @property int $status 状态 0:已申请, 1:待处理, 2:已处理
+ * @property int $status 状态 -1:已删除, 0:已申请, 1:待处理, 2:已处理
  * @property string $invoice_url 发票地址
  * @property string $refused_reason 拒绝理由
  * @property string $invoice 发票内容

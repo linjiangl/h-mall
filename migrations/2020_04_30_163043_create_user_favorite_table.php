@@ -27,7 +27,8 @@ class CreateUserFavoriteTable extends Migration
             $table->integer('user_id', false, true);
             $table->string('module', 30)->comment('模块 product:商品, shop:店铺');
             $table->integer('module_id', false, true);
-            $table->timestamps();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['user_id', 'module', 'module_id'], 'user_id_module_id');
         });

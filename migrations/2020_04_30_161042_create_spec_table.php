@@ -26,12 +26,12 @@ class CreateSpecTable extends Migration
             $table->integer('shop_id', false, true)->default(0)->comment('店铺id 0:系统');
             $table->string('name', 50)->comment('名称');
             $table->tinyInteger('sorting', false, true)->default(0)->comment('排序');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已禁用, 1:已启用');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->index(['shop_id'], 'shop_id');
-            $table->index(['name'], 'name');
-            $table->index(['sorting'], 'sorting');
+            $table->index(['shop_id', 'status'], 'shop_id');
+            $table->index(['name', 'status'], 'name');
         });
 
         Db::statement("ALTER TABLE `{$this->table}` COMMENT '商品规格'");

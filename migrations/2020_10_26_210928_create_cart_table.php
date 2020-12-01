@@ -20,7 +20,9 @@ class CreateCartTable extends Migration
             $table->integer('product_sku_id', false, true);
             $table->smallInteger('quantity', false, true)->default(1)->comment('数量');
             $table->tinyInteger('is_check', false, true)->default(1)->comment('是否选中 0:否, 1:是');
-            $table->timestamps();
+            $table->tinyInteger('is_show', false, true)->default(1)->comment('是否显示 0:否, 1:是');
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->index(['user_id', 'product_sku_id'], 'user_product_sku_id');
         });

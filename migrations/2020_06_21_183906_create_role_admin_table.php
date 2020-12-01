@@ -23,6 +23,8 @@ class CreateRoleAdminTable extends Migration
             $table->integerIncrements('id');
             $table->integer('role_id', false, true);
             $table->integer('admin_id', false, true);
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['role_id', 'admin_id'], 'role_admin_id');
             $table->index(['admin_id'], 'admin_id');

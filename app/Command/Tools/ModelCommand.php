@@ -54,7 +54,7 @@ class ModelCommand extends HyperfCommand
      * @var array
      */
     protected $specifyTables = [
-        'cart',
+        // 'cart',
     ];
 
     public function configure()

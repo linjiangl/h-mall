@@ -27,7 +27,8 @@ class CreateProductParameterTable extends Migration
             $table->integer('product_id', false, true);
             $table->string('option', 30);
             $table->string('value', 100);
-            $table->timestamps();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->index(['product_id'], 'product_id');
         });

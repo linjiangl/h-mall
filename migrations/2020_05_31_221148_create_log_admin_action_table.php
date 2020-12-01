@@ -26,11 +26,12 @@ class CreateLogAdminActionTable extends Migration
             $table->string('client_ip', 30);
             $table->string('module', 50);
             $table->string('action', 255);
+            $table->tinyInteger('status')->default(0)->comment('状态 -1:已删除');
             $table->text('remark');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
-            $table->index(['admin_id'], 'admin_id');
+            $table->index(['admin_id', 'status'], 'admin_id');
         });
     }
 

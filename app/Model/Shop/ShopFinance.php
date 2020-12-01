@@ -17,6 +17,8 @@ use App\Model\Model;
  * @property int $user_id
  * @property float $balance 余额
  * @property float $freeze_balance 冻结余额
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class ShopFinance extends Model
 {
@@ -32,12 +34,12 @@ class ShopFinance extends Model
      *
      * @var array
      */
-    protected $fillable = ['shop_id', 'user_id', 'balance', 'freeze_balance'];
+    protected $fillable = ['shop_id', 'user_id', 'balance', 'freeze_balance', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['shop_id' => 'integer', 'user_id' => 'integer', 'balance' => 'float', 'freeze_balance' => 'float'];
+    protected $casts = ['shop_id' => 'integer', 'user_id' => 'integer', 'balance' => 'float', 'freeze_balance' => 'float', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

@@ -16,6 +16,8 @@ use App\Model\Model;
  * @property int $id
  * @property string $title 标题
  * @property string $content 消息内容
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class MessageText extends Model
 {
@@ -31,12 +33,12 @@ class MessageText extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'title', 'content'];
+    protected $fillable = ['id', 'title', 'content', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer'];
+    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

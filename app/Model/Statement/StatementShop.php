@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model\Statement;
 
-use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
@@ -24,9 +23,8 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $module_id
  * @property string $order_sn
  * @property string $remark
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class StatementShop extends Model
 {
@@ -44,7 +42,7 @@ class StatementShop extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'type', 'module', 'module_id', 'order_sn', 'remark', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'type', 'module', 'module_id', 'order_sn', 'remark', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

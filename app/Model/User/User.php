@@ -12,7 +12,6 @@ namespace App\Model\User;
 
 use App\Constants\State\UserState;
 use App\Model\Model;
-use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -26,20 +25,19 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $password 密码
  * @property string $remember_token
  * @property string $salt 加密盐
- * @property int $status 状态 1:正常, 2:禁用
+ * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用, 2:待审核
  * @property int $is_system 是否系统用户
  * @property int $lasted_login_time 最后登录时间
  * @property int $mobile_verified_time 手机验证时间
  * @property int $email_verified_time 邮箱验证时间
  * @property int $avatar_updated_time 头像设置时间
  * @property int $username_updated_time 用户名设置时间
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
- * @property-read UserAddress[] $address
- * @property-read UserVipCard $vipCard
- * @property-read UserWallet $wallet
- * @property-read array $appends
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Hyperf\Database\Model\Collection|\App\Model\User\UserAddress[] $address
+ * @property-read  $appends
+ * @property-read \App\Model\User\UserVipCard $vipCard
+ * @property-read \App\Model\User\UserWallet $wallet
  */
 class User extends Model
 {
@@ -57,7 +55,7 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'is_system', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'is_system', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

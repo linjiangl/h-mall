@@ -11,23 +11,21 @@ declare(strict_types=1);
 namespace App\Model\Product;
 
 use App\Model\Model;
-use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
  * @property int $shop_id
  * @property int $product_id
- * @property int $coupon_id
+ * @property int $coupon_id 优惠券ID
  * @property float $price 金额
  * @property float $original_price 原价
  * @property int $stock 库存
  * @property int $sales 销量
  * @property int $clicks 点击量
  * @property string $image 图片
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class ProductSku extends Model
 {
@@ -45,7 +43,7 @@ class ProductSku extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'product_id', 'coupon_id', 'price', 'original_price', 'stock', 'sales', 'clicks', 'image', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'shop_id', 'product_id', 'coupon_id', 'price', 'original_price', 'stock', 'sales', 'clicks', 'image', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

@@ -22,10 +22,9 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $reply_user_id 被回复评价的用户ID
  * @property int $top 点赞
  * @property string $content 评论内容
- * @property int $status 状态 0:待审核, 1:已通过, 2:未通过
+ * @property int $status 状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
  */
 class EvaluationReply extends Model
 {
@@ -43,7 +42,7 @@ class EvaluationReply extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'evaluation_id', 'product_id', 'product_sku_id', 'user_id', 'reply_user_id', 'top', 'content', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'evaluation_id', 'product_id', 'product_sku_id', 'user_id', 'reply_user_id', 'top', 'content', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

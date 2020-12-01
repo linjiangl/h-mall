@@ -20,10 +20,10 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $client_ip
  * @property string $module
  * @property string $action
+ * @property int $status 状态 -1:已删除
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string $deleted_at
- * @property string $remark
+ * @property  $remark
  */
 class LogAdminAction extends Model
 {
@@ -41,14 +41,14 @@ class LogAdminAction extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'admin_id', 'username', 'client_ip', 'module', 'action', 'remark', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'admin_id', 'username', 'client_ip', 'module', 'action', 'status', 'remark', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     public function getRemarkAttribute($value)
     {

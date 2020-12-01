@@ -14,16 +14,15 @@ use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
- * @property int $shop_id
+ * @property int $shop_id 店铺 0:系统
  * @property string $title
  * @property string $image 背景图
  * @property string $url
  * @property int $clicks 点击量
  * @property int $sorting 排序
- * @property int $status
+ * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
  */
 class Slide extends Model
 {
@@ -41,7 +40,7 @@ class Slide extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'title', 'image', 'url', 'clicks', 'sorting', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'shop_id', 'title', 'image', 'url', 'clicks', 'sorting', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

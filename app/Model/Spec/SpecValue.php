@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Model\Spec;
 
-use Carbon\Carbon;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -18,9 +17,10 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $spec_id
  * @property string $value
  * @property int $sorting
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property-read Spec $spec
+ * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Model\Spec\Spec $spec
  */
 class SpecValue extends Model
 {
@@ -36,14 +36,14 @@ class SpecValue extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'spec_id', 'value', 'sorting', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'spec_id', 'value', 'sorting', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'spec_id' => 'integer', 'sorting' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'spec_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     public function spec()
     {

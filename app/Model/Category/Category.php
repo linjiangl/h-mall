@@ -12,7 +12,6 @@ namespace App\Model\Category;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
-use Carbon\Carbon;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -22,11 +21,11 @@ use Hyperf\Database\Model\SoftDeletes;
  * @property string $icon 图标
  * @property string $cover 封面图
  * @property int $sorting
- * @property int $status 是否显示 0:删除 0:显示, 1:隐藏
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
- * @property-read Spec[] $specs
+ * @property int $status 是否显示 -1:已删除 0:已禁用, 1:已启用
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Model\Category\Category $parent
+ * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\Spec[] $specs
  */
 class Category extends Model
 {
@@ -44,7 +43,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'name', 'icon', 'cover', 'sorting', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['id', 'parent_id', 'name', 'icon', 'cover', 'sorting', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.

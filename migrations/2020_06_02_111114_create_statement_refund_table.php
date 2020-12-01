@@ -32,11 +32,11 @@ class CreateStatementRefundTable extends Migration
             $table->string('refund_method', 20)->comment('退款方式');
             $table->string('trade_no', 64)->default('')->comment('第三方退款流水号');
             $table->decimal('amount', 10, 2)->unsigned()->default(0)->comment('金额');
-            $table->tinyInteger('status')->default(0)->comment('退款状态 0:未处理, 1:已处理');
+            $table->tinyInteger('status')->default(0)->comment('退款状态 -1:已删除, 0:未处理, 1:已处理');
             $table->string('remark', 3000)->default('');
             $table->integer('finished_time', false, true)->default(0)->comment('退款成功时间');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('created_at', false, true)->default(0);
+            $table->integer('updated_at', false, true)->default(0);
 
             $table->unique(['business_no'], 'business_no');
             $table->index(['trade_no'], 'trade_no');

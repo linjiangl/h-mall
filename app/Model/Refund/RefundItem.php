@@ -20,6 +20,8 @@ use App\Model\Model;
  * @property int $product_id
  * @property int $product_sku_id
  * @property float $amount
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class RefundItem extends Model
 {
@@ -35,12 +37,12 @@ class RefundItem extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'refund_id', 'order_id', 'order_item_id', 'product_id', 'product_sku_id', 'amount'];
+    protected $fillable = ['id', 'refund_id', 'order_id', 'order_item_id', 'product_id', 'product_sku_id', 'amount', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'refund_id' => 'integer', 'order_id' => 'integer', 'order_item_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'amount' => 'float'];
+    protected $casts = ['id' => 'integer', 'refund_id' => 'integer', 'order_id' => 'integer', 'order_item_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'amount' => 'float', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }
