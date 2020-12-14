@@ -21,7 +21,7 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class UserController extends FrontendController
 {
-    protected function block()
+    protected function block(): UserBlock
     {
         return new UserBlock();
     }

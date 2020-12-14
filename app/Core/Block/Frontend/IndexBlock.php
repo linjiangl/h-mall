@@ -15,13 +15,13 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 
 class IndexBlock extends BaseBlock
 {
-    protected $page = 1;
+    protected int $page = 1;
 
-    public function index(RequestInterface $request)
+    public function index(): array
     {
-        $page = $request->post('page', 1);
+        $page = request()->post('page', 1);
         $this->page = $this->page + $page;
 
-        return $this->page;
+        return [$page];
     }
 }

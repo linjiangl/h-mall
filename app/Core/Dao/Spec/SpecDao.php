@@ -15,9 +15,9 @@ use App\Model\Spec\Spec;
 
 class SpecDao extends AbstractDao
 {
-    protected $model = Spec::class;
+    protected string $model = Spec::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '商品规格不存在';
+    protected string $notFoundMessage = '商品规格不存在';
 }

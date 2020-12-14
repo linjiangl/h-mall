@@ -18,56 +18,52 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class BaseController extends AbstractController
 {
     /**
-     * 列表
-     * @param RequestInterface $request
-     * @return LengthAwarePaginatorInterface
+     *  列表
+     * @return array
      */
-    public function index(RequestInterface $request)
+    public function index(): array
     {
-        return $this->service()->index($request);
+        return $this->service()->index();
     }
 
     /**
      * 详情
-     * @param RequestInterface $request
      * @return array
      */
-    public function show(RequestInterface $request)
+    public function show(): array
     {
-        return $this->service()->show($request);
+        return $this->service()->show();
     }
 
     /**
      * 创建
-     * @param RequestInterface $request
      * @return int
      */
-    public function store(RequestInterface $request)
+    public function store(): int
     {
-        return $this->service()->store($request);
+        return $this->service()->store();
     }
 
     /**
      * 修改
-     * @param RequestInterface $request
+
      * @return array
      */
-    public function update(RequestInterface $request)
+    public function update(): array
     {
-        return $this->service()->update($request);
+        return $this->service()->update();
     }
 
     /**
      * 删除
-     * @param RequestInterface $request
      * @return bool
      */
-    public function destroy(RequestInterface $request)
+    public function destroy(): bool
     {
-        return $this->service()->destroy($request);
+        return $this->service()->destroy();
     }
 
-    protected function block()
+    protected function block(): BaseBlock
     {
         return new BaseBlock();
     }

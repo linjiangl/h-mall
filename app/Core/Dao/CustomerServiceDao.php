@@ -14,9 +14,9 @@ use App\Model\CustomerService;
 
 class CustomerServiceDao extends AbstractDao
 {
-    protected $model = CustomerService::class;
+    protected string $model = CustomerService::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '客服不存在或已删除';
+    protected string $notFoundMessage = '客服不存在或已删除';
 }

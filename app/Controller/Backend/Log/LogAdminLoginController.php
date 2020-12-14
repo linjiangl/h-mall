@@ -15,7 +15,7 @@ use App\Core\Block\Common\Log\LogAdminLoginBlock;
 
 class LogAdminLoginController extends BackendController
 {
-    protected function block()
+    protected function block(): LogAdminLoginBlock
     {
         return new LogAdminLoginBlock();
     }

@@ -15,9 +15,9 @@ use App\Model\Log\LogAdminAction;
 
 class LogAdminActionDao extends AbstractDao
 {
-    protected $model = LogAdminAction::class;
+    protected string $model = LogAdminAction::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
     public function info(int $id, array $with = []): LogAdminAction
     {

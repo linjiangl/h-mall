@@ -17,25 +17,21 @@ use App\Request\Backend\Admin\AdminRequest;
 
 class AdminController extends BackendController
 {
-    public function storeRequest(AdminRequest $request)
+    public function storeRequest(AdminRequest $request): int
     {
         $request->validated();
         $this->setActionName(AdminAction::ADMIN_CREATE);
-        /** @var AdminBlock $service */
-        $service = $this->service();
-        return $service->store($request);
+        return $this->store();
     }
 
-    public function updateRequest(AdminRequest $request)
+    public function updateRequest(AdminRequest $request): array
     {
         $request->validated();
         $this->setActionName(AdminAction::ADMIN_UPDATE);
-        /** @var AdminBlock $service */
-        $service = $this->service();
-        return $service->update($request);
+        return $this->update();
     }
 
-    protected function block()
+    protected function block(): AdminBlock
     {
         return new AdminBlock();
     }

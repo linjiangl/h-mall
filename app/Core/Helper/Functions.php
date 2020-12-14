@@ -98,7 +98,7 @@ if (! function_exists('response')) {
 }
 
 if (! function_exists('response_json')) {
-    function response_json($data, string $message = '', int $code = 200)
+    function response_json($data, string $message = '', int $code = 200): \Psr\Http\Message\ResponseInterface
     {
         $code = $code ?: 500;
         if ($code >= 200 && $code < 300) {

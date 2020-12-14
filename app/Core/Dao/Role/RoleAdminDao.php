@@ -15,9 +15,9 @@ use App\Model\Role\RoleAdmin;
 
 class RoleAdminDao extends AbstractDao
 {
-    protected $model = RoleAdmin::class;
+    protected string $model = RoleAdmin::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
     /**
      * 获取管理权限

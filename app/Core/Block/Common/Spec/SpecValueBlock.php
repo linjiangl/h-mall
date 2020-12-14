@@ -15,5 +15,5 @@ use App\Core\Service\Spec\SpecValueService;
 
 class SpecValueBlock extends BaseBlock
 {
-    protected $service = SpecValueService::class;
+    protected string $service = SpecValueService::class;
 }

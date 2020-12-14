@@ -15,9 +15,9 @@ use App\Model\User\UserInvoice;
 
 class UserInvoiceDao extends AbstractDao
 {
-    protected $model = UserInvoice::class;
+    protected string $model = UserInvoice::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '发票未创建或已删除';
+    protected string $notFoundMessage = '发票未创建或已删除';
 }

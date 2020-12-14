@@ -15,7 +15,7 @@ use App\Core\Service\AbstractService;
 
 class CategorySpecService extends AbstractService
 {
-    protected $dao = CategorySpecDao::class;
+    protected string $dao = CategorySpecDao::class;
 
     /**
      * 创建分类规格

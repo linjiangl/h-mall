@@ -15,5 +15,5 @@ use App\Core\Service\System\MenuService;
 
 class MenuBlock extends BaseBlock
 {
-    protected $service = MenuService::class;
+    protected string $service = MenuService::class;
 }

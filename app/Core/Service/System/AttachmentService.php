@@ -15,17 +15,19 @@ use App\Core\Dao\System\AttachmentDao;
 use App\Core\Plugins\Bucket\SamplesBucket;
 use App\Core\Service\AbstractService;
 use App\Exception\NotFoundException;
+use App\Model\Attachment;
+use Throwable;
 
 class AttachmentService extends AbstractService
 {
-    protected $dao = AttachmentDao::class;
+    protected string $dao = AttachmentDao::class;
 
-    public function getInfoByMd5(string $md5)
+    public function getInfoByMd5(string $md5): ?Attachment
     {
         try {
             $dao = new AttachmentDao();
             return $dao->getInfoByMd5($md5);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return null;
         }
     }
@@ -38,7 +40,7 @@ class AttachmentService extends AbstractService
      * @param string $system
      * @return int
      */
-    public function createUpload(array $fileData, string $hash, string $key, string $system = AttachmentState::SYSTEM_QINIU)
+    public function createUpload(array $fileData, string $hash, string $key, string $system = AttachmentState::SYSTEM_QINIU): int
     {
         $config = config('custom')['attachment'];
         $md5 = '';
@@ -65,7 +67,7 @@ class AttachmentService extends AbstractService
      * @param string $system
      * @return bool
      */
-    public function batchDelete(array $ids, string $system = AttachmentState::SYSTEM_QINIU)
+    public function batchDelete(array $ids, string $system = AttachmentState::SYSTEM_QINIU): bool
     {
         $dao = new AttachmentDao();
         $keys = $dao->getColumnByCondition([

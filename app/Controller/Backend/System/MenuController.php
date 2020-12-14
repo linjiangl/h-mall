@@ -17,21 +17,21 @@ use App\Request\Backend\System\MenuRequest;
 
 class MenuController extends BackendController
 {
-    public function storeRequest(MenuRequest $request)
+    public function storeRequest(MenuRequest $request): int
     {
         $request->validated();
         $this->setActionName(AdminAction::MENU_CREATE);
-        return $this->store($request);
+        return $this->store();
     }
 
-    public function updateRequest(MenuRequest $request)
+    public function updateRequest(MenuRequest $request): array
     {
         $request->validated();
         $this->setActionName(AdminAction::MENU_UPDATE);
-        return $this->update($request);
+        return $this->update();
     }
 
-    protected function block()
+    protected function block(): MenuBlock
     {
         return new MenuBlock();
     }

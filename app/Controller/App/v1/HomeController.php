@@ -21,7 +21,7 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class HomeController extends AbstractController
 {
-    public function index(RequestInterface $request)
+    public function index(RequestInterface $request): string
     {
         return 'rest_v1';
     }

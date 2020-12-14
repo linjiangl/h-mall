@@ -15,11 +15,11 @@ use App\Model\User\UserWallet;
 
 class UserWalletDao extends AbstractDao
 {
-    protected $model = UserWallet::class;
+    protected string $model = UserWallet::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '用户钱包异常';
+    protected string $notFoundMessage = '用户钱包异常';
 
     public function info(int $id, array $with = []): UserWallet
     {

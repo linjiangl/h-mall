@@ -23,12 +23,13 @@ abstract class AbstractBlock
      * 场景
      * @var string
      */
-    protected $since = BlockSinceConstants::SINCE_FRONTEND;
+    protected string $since = BlockSinceConstants::SINCE_FRONTEND;
 
     /**
-     * @var AbstractService
+     * 服务类
+     * @var string
      */
-    protected $service;
+    protected string $service;
 
     /**
      * 查询条件.
@@ -40,31 +41,31 @@ abstract class AbstractBlock
      *  ['title', '=', 'title']
      * ]
      */
-    protected $condition = [];
+    protected array $condition = [];
 
     /**
      * 当前页数
      * @var int
      */
-    protected $page = 1;
+    protected int $page = 1;
 
     /**
      * 查询条数
      * @var int
      */
-    protected $limit = 20;
+    protected int $limit = 20;
 
     /**
      * 分组
      * @var array
      */
-    protected $groupBy = [];
+    protected array $groupBy = [];
 
     /**
      * 排序
      * @var string
      */
-    protected $orderBy = 'id desc';
+    protected string $orderBy = 'id desc';
 
     /**
      * 关联模型
@@ -72,7 +73,7 @@ abstract class AbstractBlock
      *
      * 格式: ['option', 'category']
      */
-    protected $with = [];
+    protected array $with = [];
 
     /**
      * 默认关联模型
@@ -84,13 +85,13 @@ abstract class AbstractBlock
      *   ]
      * ]
      */
-    protected $defaultSinceWith = [];
+    protected array $defaultSinceWith = [];
 
     /**
      * 需要查询的条件.
      * @var array
      */
-    protected $query = [
+    protected array $query = [
         // '=' => ['name', 'title', 'status'],
         // 'between' => ['created_at'], // 支持数组,字符串(,)
         // 'in' => ['user_id']
@@ -102,30 +103,30 @@ abstract class AbstractBlock
      * 参数类型.
      * @var array
      */
-    protected $paramType = [];
+    protected array $paramType = [];
 
     /**
      * 执行的方法.
      * @var string
      */
-    protected $action = '';
+    protected string $action = '';
 
     /**
      * 请求的数据.
      * @var array
      */
-    protected $data = [];
+    protected array $data = [];
 
     /**
      * 主键
      * @var string
      */
-    protected $primaryKey = 'id';
+    protected string $primaryKey = 'id';
 
     /**
      * @var RequestInterface
      */
-    protected $request;
+    protected RequestInterface $request;
 
     public function __construct()
     {
@@ -134,10 +135,9 @@ abstract class AbstractBlock
 
     /**
      * 列表
-     * @param RequestInterface $request
-     * @return LengthAwarePaginatorInterface
+     * @return LengthAwarePaginatorInterface|array
      */
-    public function index(RequestInterface $request)
+    public function index()
     {
         try {
             // 当前执行的方法
@@ -157,10 +157,9 @@ abstract class AbstractBlock
 
     /**
      * 详情
-     * @param RequestInterface $request
      * @return array
      */
-    public function show(RequestInterface $request)
+    public function show(): array
     {
         try {
             // 当前执行的方法
@@ -177,10 +176,9 @@ abstract class AbstractBlock
 
     /**
      * 创建
-     * @param RequestInterface $request
      * @return int
      */
-    public function store(RequestInterface $request)
+    public function store(): int
     {
         try {
             return $this->service()->create($this->request->post());
@@ -191,10 +189,9 @@ abstract class AbstractBlock
 
     /**
      * 修改
-     * @param RequestInterface $request
      * @return array
      */
-    public function update(RequestInterface $request)
+    public function update(): array
     {
         try {
             return $this->service()->update($this->getPrimaryKey(), $this->request->post());
@@ -205,10 +202,9 @@ abstract class AbstractBlock
 
     /**
      * 删除
-     * @param RequestInterface $request
      * @return bool
      */
-    public function destroy(RequestInterface $request)
+    public function destroy(): bool
     {
         try {
             return $this->service()->remove($this->getPrimaryKey());
@@ -231,7 +227,7 @@ abstract class AbstractBlock
      * @param string $since
      * @return $this
      */
-    public function setSince($since = BlockSinceConstants::SINCE_FRONTEND)
+    public function setSince($since = BlockSinceConstants::SINCE_FRONTEND): AbstractBlock
     {
         $this->since = $since;
         return $this;
@@ -250,7 +246,7 @@ abstract class AbstractBlock
      * 查询主键
      * @return int
      */
-    public function getPrimaryKey()
+    public function getPrimaryKey(): int
     {
         return intval($this->request->post($this->primaryKey));
     }

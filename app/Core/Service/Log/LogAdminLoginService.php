@@ -17,7 +17,7 @@ use Throwable;
 
 class LogAdminLoginService extends AbstractService
 {
-    protected $dao = LogAdminLoginDao::class;
+    protected string $dao = LogAdminLoginDao::class;
 
     public function createLoginRecord(): bool
     {

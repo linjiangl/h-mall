@@ -20,13 +20,13 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
     /**
      * @var JWT
      */
-    protected $jwt;
+    protected JWT $jwt;
 
-    protected $scene = 'default';
+    protected string $scene = 'default';
 
-    protected $prefix = 'Bearer';
+    protected string $prefix = 'Bearer';
 
-    protected $header = 'Authorization';
+    protected string $header = 'Authorization';
 
     public function logout(): bool
     {

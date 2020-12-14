@@ -21,13 +21,13 @@ use Throwable;
  */
 class Captcha
 {
-    public $length = 4; // 验证码长度
+    public int $length = 4; // 验证码长度
 
-    public $color = [255, 255, 255]; // 颜色
+    public array $color = [255, 255, 255]; // 颜色
 
-    public $width = 111; // 宽度
+    public int $width = 111; // 宽度
 
-    public $height = 43; // 长度
+    public int $height = 43; // 长度
 
     /**
      * 生成

@@ -15,19 +15,19 @@ use App\Core\Service\Category\CategoryService;
 
 class CategoryBlock extends BaseBlock
 {
-    protected $service = CategoryService::class;
+    protected string $service = CategoryService::class;
 
-    protected $query = [
+    protected array $query = [
         '=' => ['status', 'parent_id']
     ];
 
-    public function parent()
+    public function parent(): array
     {
         $service = new CategoryService();
         return $service->getListByParentId(0);
     }
 
-    public function children()
+    public function children(): array
     {
         $service = new CategoryService();
         $categories = $service->getListByStatus();

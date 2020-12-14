@@ -19,12 +19,12 @@ use Throwable;
 
 class RoleBlock extends BaseBlock
 {
-    protected $service = RoleService::class;
+    protected string $service = RoleService::class;
 
-    public function saveRoleMenus(RequestInterface $request): bool
+    public function saveRoleMenus(): bool
     {
         try {
-            $data = $request->post();
+            $data = $this->request->post();
             $service = new RoleMenuService();
             $service->saveRoleMenus((int)$data['role_id'], explode(',', $data['menu_ids']));
             return true;

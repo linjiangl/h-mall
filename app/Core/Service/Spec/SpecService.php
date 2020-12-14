@@ -21,7 +21,7 @@ use Throwable;
 
 class SpecService extends AbstractService
 {
-    protected $dao = SpecDao::class;
+    protected string $dao = SpecDao::class;
 
     public function create(array $data): int
     {

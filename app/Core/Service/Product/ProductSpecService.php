@@ -15,5 +15,5 @@ use App\Core\Service\AbstractService;
 
 class ProductSpecService extends AbstractService
 {
-    protected $dao = ProductSpecDao::class;
+    protected string $dao = ProductSpecDao::class;
 }

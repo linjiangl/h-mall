@@ -20,7 +20,7 @@ use Throwable;
 
 class CategoryService extends AbstractService
 {
-    protected $dao = CategoryDao::class;
+    protected string $dao = CategoryDao::class;
 
     protected $levelData = [];
 

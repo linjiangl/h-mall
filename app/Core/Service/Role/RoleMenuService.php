@@ -18,7 +18,7 @@ use App\Exception\InternalException;
 
 class RoleMenuService extends AbstractService
 {
-    protected $dao = RoleMenuDao::class;
+    protected string $dao = RoleMenuDao::class;
 
     /**
      * 更新权限菜单

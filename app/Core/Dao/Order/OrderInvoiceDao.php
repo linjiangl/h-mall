@@ -15,9 +15,9 @@ use App\Model\Order\OrderInvoice;
 
 class OrderInvoiceDao extends AbstractDao
 {
-    protected $model = OrderInvoice::class;
+    protected string $model = OrderInvoice::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '订单发票不存在或已删除';
+    protected string $notFoundMessage = '订单发票不存在或已删除';
 }

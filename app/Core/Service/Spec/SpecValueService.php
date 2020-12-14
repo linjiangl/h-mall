@@ -19,7 +19,7 @@ use Carbon\Carbon;
 
 class SpecValueService extends AbstractService
 {
-    protected $dao = SpecValueDao::class;
+    protected string $dao = SpecValueDao::class;
 
     public function remove(int $id): bool
     {

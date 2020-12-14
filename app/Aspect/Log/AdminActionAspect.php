@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace App\Aspect\Log;
 
 use App\Controller\Backend\Admin\AdminController;
+use App\Controller\Backend\Role\RoleController;
 use App\Controller\Backend\System\MenuController;
-use App\Controller\Backend\System\RoleController;
 use App\Controller\Backend\User\UserController;
 use App\Core\Service\Log\LogAdminActionService;
 use Hyperf\Di\Annotation\Aspect;

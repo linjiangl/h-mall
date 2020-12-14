@@ -22,7 +22,7 @@ use Throwable;
 
 class ProductService extends AbstractService
 {
-    protected $dao = ProductDao::class;
+    protected string $dao = ProductDao::class;
 
     protected $mapClass = [
         ProductState::TYPE_GENERAL => GeneralService::class,

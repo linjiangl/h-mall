@@ -22,15 +22,15 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class RegisterController extends FrontendController
 {
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): array
     {
         $request->validated();
         /** @var RegisterBlock $service */
         $service = $this->service();
-        return $service->register($request);
+        return $service->register();
     }
 
-    protected function block()
+    protected function block(): RegisterBlock
     {
         return new RegisterBlock();
     }

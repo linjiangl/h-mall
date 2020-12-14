@@ -15,7 +15,7 @@ use App\Core\Block\Common\Spec\SpecValueBlock;
 
 class SpecValueController extends BackendController
 {
-    protected function block()
+    protected function block(): SpecValueBlock
     {
         return new SpecValueBlock();
     }

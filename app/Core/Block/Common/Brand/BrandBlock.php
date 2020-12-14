@@ -15,5 +15,5 @@ use App\Core\Service\Brand\BrandService;
 
 class BrandBlock extends BaseBlock
 {
-    protected $service = BrandService::class;
+    protected string $service = BrandService::class;
 }

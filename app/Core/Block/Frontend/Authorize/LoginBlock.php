@@ -13,15 +13,14 @@ namespace App\Core\Block\Frontend\Authorize;
 use App\Core\Block\BaseBlock;
 use App\Core\Service\Authorize\UserAuthorizationService;
 use App\Exception\HttpException;
-use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
 class LoginBlock extends BaseBlock
 {
-    public function login(RequestInterface $request): array
+    public function login(): array
     {
         try {
-            $data = $request->post();
+            $data = $this->request->post();
             $service = new UserAuthorizationService();
             return $service->login($data['username'], $data['password']);
         } catch (Throwable $e) {

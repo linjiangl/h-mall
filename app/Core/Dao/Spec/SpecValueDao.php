@@ -15,11 +15,11 @@ use App\Model\Spec\SpecValue;
 
 class SpecValueDao extends AbstractDao
 {
-    protected $model = SpecValue::class;
+    protected string $model = SpecValue::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '商品规格值不存在';
+    protected string $notFoundMessage = '商品规格值不存在';
 
     public function getListBySpecId(int $specId): array
     {

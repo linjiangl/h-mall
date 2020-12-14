@@ -15,7 +15,7 @@ use App\Core\Block\Common\System\DistrictBlock;
 
 class DistrictController extends BackendController
 {
-    protected function block()
+    protected function block(): DistrictBlock
     {
         return new DistrictBlock();
     }

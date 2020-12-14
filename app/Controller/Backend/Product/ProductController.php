@@ -15,7 +15,7 @@ use App\Core\Block\Common\Product\ProductBlock;
 
 class ProductController extends BackendController
 {
-    protected function block()
+    protected function block(): ProductBlock
     {
         return new ProductBlock();
     }

@@ -15,11 +15,11 @@ use App\Model\Product\ProductSpec;
 
 class ProductSpecDao extends AbstractDao
 {
-    protected $model = ProductSpec::class;
+    protected string $model = ProductSpec::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '商品关联规格不存在';
+    protected string $notFoundMessage = '商品关联规格不存在';
 
     /**
      * 检查规格下是否有商品

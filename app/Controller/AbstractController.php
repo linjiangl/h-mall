@@ -23,26 +23,26 @@ abstract class AbstractController
      * @Inject
      * @var ContainerInterface
      */
-    protected $container;
+    protected ContainerInterface $container;
 
     /**
      * @Inject
      * @var RequestInterface
      */
-    protected $request;
+    protected RequestInterface $request;
 
     /**
      * @Inject
      * @var ResponseInterface
      */
-    protected $response;
+    protected ResponseInterface $response;
 
-    protected function created($id)
+    protected function created($id): \Psr\Http\Message\ResponseInterface
     {
         return response_json($id, '', 201);
     }
 
-    protected function deleted()
+    protected function deleted(): \Psr\Http\Message\ResponseInterface
     {
         return response_json(true, '', 204);
     }

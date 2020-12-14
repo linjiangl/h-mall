@@ -14,11 +14,11 @@ use App\Model\Admin;
 
 class AdminDao extends AbstractDao
 {
-    protected $model = Admin::class;
+    protected string $model = Admin::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '管理员不存在';
+    protected string $notFoundMessage = '管理员不存在';
 
     public function info(int $id, array $with = []): Admin
     {

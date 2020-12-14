@@ -15,5 +15,5 @@ use App\Core\Service\AbstractService;
 
 class ProductSkuSpecValueService extends AbstractService
 {
-    protected $dao = ProductSkuSpecValueDao::class;
+    protected string $dao = ProductSkuSpecValueDao::class;
 }

@@ -15,11 +15,11 @@ use App\Model\Attachment;
 
 class AttachmentDao extends AbstractDao
 {
-    protected $model = Attachment::class;
+    protected string $model = Attachment::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '附件不存在';
+    protected string $notFoundMessage = '附件不存在';
 
     public function getInfoByIndex(string $index): Attachment
     {

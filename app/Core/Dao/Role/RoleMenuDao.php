@@ -15,9 +15,9 @@ use App\Model\Role\RoleMenu;
 
 class RoleMenuDao extends AbstractDao
 {
-    protected $model = RoleMenu::class;
+    protected string $model = RoleMenu::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
     /**
      * 获取信息

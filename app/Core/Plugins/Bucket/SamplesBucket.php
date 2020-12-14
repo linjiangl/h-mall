@@ -15,7 +15,7 @@ use App\Exception\BadRequestException;
 
 class SamplesBucket
 {
-    protected $classes = [
+    protected array $classes = [
         AttachmentState::SYSTEM_QINIU => QiniuBucket::class,
     ];
 

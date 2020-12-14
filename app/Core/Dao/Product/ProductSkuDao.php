@@ -15,9 +15,9 @@ use App\Model\Product\ProductSku;
 
 class ProductSkuDao extends AbstractDao
 {
-    protected $model = ProductSku::class;
+    protected string $model = ProductSku::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '商品库存不存在或已删除';
+    protected string $notFoundMessage = '商品库存不存在或已删除';
 }

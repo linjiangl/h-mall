@@ -15,9 +15,9 @@ use App\Model\Express;
 
 class ExpressDao extends AbstractDao
 {
-    protected $model = Express::class;
+    protected string $model = Express::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '快递公司不存在';
+    protected string $notFoundMessage = '快递公司不存在';
 }

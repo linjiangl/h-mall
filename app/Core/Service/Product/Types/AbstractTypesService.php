@@ -22,13 +22,13 @@ abstract class AbstractTypesService implements InterfaceTypesService
      * 商品id
      * @var int
      */
-    protected $productId = 0;
+    protected int $productId = 0;
 
     /**
      * 商品数据
      * @var array
      */
-    protected $product = [];
+    protected array $product = [];
 
     public function __construct(array $data, int $id = 0)
     {
@@ -64,7 +64,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         return $this->product;
     }
 
-    protected function handleProductData()
+    protected function handleProductData(): array
     {
         $sku = $this->product['sku'];
         $skuPrice = array_column($sku, 'price');

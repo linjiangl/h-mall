@@ -19,9 +19,9 @@ use App\Core\Service\AbstractService;
 
 class MenuService extends AbstractService
 {
-    protected $dao = MenuDao::class;
+    protected string $dao = MenuDao::class;
 
-    protected $levelMenus = [];
+    protected array $levelMenus = [];
 
     /**
      * 获取管理员菜单
@@ -110,7 +110,7 @@ class MenuService extends AbstractService
      * @param int $level
      * @return array
      */
-    public function handleMenusToLevel(array $menus, int $parentId = 0, int $level = 1)
+    public function handleMenusToLevel(array $menus, int $parentId = 0, int $level = 1): array
     {
         foreach ($menus as $k => $v) {
             if ($v['parent_id'] == $parentId) {

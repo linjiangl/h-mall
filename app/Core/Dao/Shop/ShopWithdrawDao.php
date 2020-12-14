@@ -15,9 +15,9 @@ use App\Model\Shop\ShopWithdraw;
 
 class ShopWithdrawDao extends AbstractDao
 {
-    protected $model = ShopWithdraw::class;
+    protected string $model = ShopWithdraw::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '提现记录不存在';
+    protected string $notFoundMessage = '提现记录不存在';
 }

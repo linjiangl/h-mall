@@ -14,9 +14,9 @@ use App\Model\Brand;
 
 class BrandDao extends AbstractDao
 {
-    protected $model = Brand::class;
+    protected string $model = Brand::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '品牌不存在';
+    protected string $notFoundMessage = '品牌不存在';
 }

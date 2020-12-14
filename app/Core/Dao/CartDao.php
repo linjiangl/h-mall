@@ -14,7 +14,7 @@ use App\Model\Cart;
 
 class CartDao extends AbstractDao
 {
-    protected $model = Cart::class;
+    protected string $model = Cart::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 }

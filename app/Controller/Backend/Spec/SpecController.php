@@ -16,13 +16,13 @@ use App\Request\Backend\Spec\SpecRequest;
 
 class SpecController extends BackendController
 {
-    public function storeRequest(SpecRequest $request)
+    public function storeRequest(SpecRequest $request): int
     {
         $request->validated();
-        return $this->store($request);
+        return $this->store();
     }
 
-    protected function block()
+    protected function block(): SpecBlock
     {
         return new SpecBlock();
     }

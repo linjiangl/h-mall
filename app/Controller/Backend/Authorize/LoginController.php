@@ -22,15 +22,15 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class LoginController extends BackendController
 {
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): array
     {
         $request->validated();
         /** @var LoginBlock $service */
         $service = $this->service();
-        return $service->login($request);
+        return $service->login();
     }
 
-    protected function block()
+    protected function block(): LoginBlock
     {
         return new LoginBlock();
     }

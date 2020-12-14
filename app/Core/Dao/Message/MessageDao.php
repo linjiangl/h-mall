@@ -15,9 +15,9 @@ use App\Model\Message\Message;
 
 class MessageDao extends AbstractDao
 {
-    protected $model = Message::class;
+    protected string $model = Message::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '消息不存在';
+    protected string $notFoundMessage = '消息不存在';
 }

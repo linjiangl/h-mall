@@ -15,5 +15,5 @@ use App\Core\Service\AbstractService;
 
 class BrandService extends AbstractService
 {
-    protected $dao = BrandDao::class;
+    protected string $dao = BrandDao::class;
 }

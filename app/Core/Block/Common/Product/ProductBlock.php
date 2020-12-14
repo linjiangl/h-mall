@@ -15,5 +15,5 @@ use App\Core\Service\Product\ProductService;
 
 class ProductBlock extends BaseBlock
 {
-    protected $service = ProductService::class;
+    protected string $service = ProductService::class;
 }

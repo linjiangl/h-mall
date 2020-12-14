@@ -15,9 +15,9 @@ use App\Model\Refund\RefundItem;
 
 class RefundItemDao extends AbstractDao
 {
-    protected $model = RefundItem::class;
+    protected string $model = RefundItem::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '退款的商品不存在';
+    protected string $notFoundMessage = '退款的商品不存在';
 }

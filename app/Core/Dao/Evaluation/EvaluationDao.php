@@ -15,9 +15,9 @@ use App\Model\Evaluation\Evaluation;
 
 class EvaluationDao extends AbstractDao
 {
-    protected $model = Evaluation::class;
+    protected string $model = Evaluation::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '评价不存在或已删除';
+    protected string $notFoundMessage = '评价不存在或已删除';
 }

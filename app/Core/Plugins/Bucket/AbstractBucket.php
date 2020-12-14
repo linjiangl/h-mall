@@ -15,7 +15,7 @@ use Hyperf\HttpMessage\Upload\UploadedFile;
 
 abstract class AbstractBucket
 {
-    protected $config;
+    protected array $config;
 
     /**
      * cdn地址
@@ -31,7 +31,7 @@ abstract class AbstractBucket
      * @param string $key
      * @return string
      */
-    public function getFullPath(string $key)
+    public function getFullPath(string $key): string
     {
         $cdn = $this->cdn();
         if (substr(strrchr($cdn, DIRECTORY_SEPARATOR), 0) == DIRECTORY_SEPARATOR) {
@@ -49,7 +49,7 @@ abstract class AbstractBucket
      * @param string $dir 存在目录
      * @return string
      */
-    public function generateKey(string $filename, $dir = 'images')
+    public function generateKey(string $filename, $dir = 'images'): string
     {
         $suffix = '.jpg';
         if ($filename) {
@@ -66,9 +66,9 @@ abstract class AbstractBucket
      * @param string $key
      * @return array
      */
-    public function upload(UploadedFile $file, string $key = '')
+    public function upload(UploadedFile $file, string $key = ''): array
     {
-        return $this->handleResult($file, '', '');
+        return $this->handleResult($file, '', $key);
     }
 
     /**
@@ -76,7 +76,7 @@ abstract class AbstractBucket
      * @param array $keys
      * @return array ['success' => [...删除成功的key], 'fail' => [...删除失败的key]]
      */
-    public function batchDelete(array $keys)
+    public function batchDelete(array $keys): array
     {
         return [
             'success' => [],
@@ -91,7 +91,7 @@ abstract class AbstractBucket
      * @param string $key 目标资源的最终名字。
      * @return array
      */
-    protected function handleResult(UploadedFile $file, string $hash, string $key)
+    protected function handleResult(UploadedFile $file, string $hash, string $key): array
     {
         // 删除上传文件
         if (file_exists($file->getRealPath())) {

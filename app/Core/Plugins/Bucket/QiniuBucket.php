@@ -54,7 +54,7 @@ class QiniuBucket extends AbstractBucket
         }
     }
 
-    public function batchDelete(array $keys)
+    public function batchDelete(array $keys): array
     {
         $bucketManager = new BucketManager($this->getAuth(), $this->getConfig());
         $ops = $bucketManager->buildBatchDelete($this->config['bucket_name'], $keys);

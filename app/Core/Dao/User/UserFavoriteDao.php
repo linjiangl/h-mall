@@ -15,9 +15,9 @@ use App\Model\User\UserFavorite;
 
 class UserFavoriteDao extends AbstractDao
 {
-    protected $model = UserFavorite::class;
+    protected string $model = UserFavorite::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '收藏记录不存在';
+    protected string $notFoundMessage = '收藏记录不存在';
 }

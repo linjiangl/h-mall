@@ -36,45 +36,45 @@ use Throwable;
 abstract class AbstractDao
 {
     /**
-     * @var Model
+     * @var string|Model
      */
-    protected $model;
+    protected string $model;
 
     /**
      * 不允许执行的方法
-     * @var string[]
+     * @var array
      */
-    protected $noAllowActions = ['create', 'update', 'remove'];
+    protected array $noAllowActions = ['create', 'update', 'remove'];
 
     /**
      * 关联模型
      * @var array
      */
-    protected $with = [];
+    protected array $with = [];
 
     /**
      * 排序
      * @var string
      */
-    protected $orderBy = 'id desc';
+    protected string $orderBy = 'id desc';
 
     /**
      * 对象不存在的错误提示
      * @var string
      */
-    protected $notFoundMessage = '所请求的资源不存在';
+    protected string $notFoundMessage = '所请求的资源不存在';
 
     /**
      * 登录用户
      * @var array
      */
-    protected $authorize = [];
+    protected array $authorize = [];
 
     /**
      * 登录用户在对象中字段
      * @var string
      */
-    protected $authorizeColumn = 'user_id';
+    protected string $authorizeColumn = 'user_id';
 
     /**
      * 分页列表
@@ -85,7 +85,7 @@ abstract class AbstractDao
      * @param array $groupBy
      * @param array $with
      * @param string[] $columns
-     * @return LengthAwarePaginatorInterface
+     * @return LengthAwarePaginatorInterface|array
      *
      * 举例:
      * $condition = [
@@ -94,7 +94,7 @@ abstract class AbstractDao
      *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
      * ]
      */
-    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): LengthAwarePaginatorInterface
+    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*'])
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->paginate($limit, $columns, '', $page);
@@ -340,9 +340,9 @@ abstract class AbstractDao
     /**
      * 设置登录用户信息
      * @param array $user
-     * @return $this
+     * @return self
      */
-    public function withAuthorize(array $user)
+    public function withAuthorize(array $user): self
     {
         $this->authorize = $user;
         return $this;

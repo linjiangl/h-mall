@@ -15,11 +15,11 @@ use App\Model\Product\Product;
 
 class ProductDao extends AbstractDao
 {
-    protected $model = Product::class;
+    protected string $model = Product::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '商品不存在或已删除';
+    protected string $notFoundMessage = '商品不存在或已删除';
 
     public function info(int $id, array $with = []): Product
     {

@@ -15,13 +15,13 @@ use App\Model\User\User;
 
 class UserDao extends AbstractDao
 {
-    protected $model = User::class;
+    protected string $model = User::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '用户不存在';
+    protected string $notFoundMessage = '用户不存在';
     
-    protected $authorizeColumn = 'id';
+    protected string $authorizeColumn = 'id';
 
     public function info(int $id, array $with = []): User
     {

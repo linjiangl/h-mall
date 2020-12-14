@@ -15,5 +15,5 @@ use App\Core\Service\Log\LogAdminActionService;
 
 class LogAdminActionBlock extends BaseBlock
 {
-    protected $service = LogAdminActionService::class;
+    protected string $service = LogAdminActionService::class;
 }

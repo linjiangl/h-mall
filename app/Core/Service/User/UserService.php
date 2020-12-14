@@ -22,9 +22,9 @@ use Throwable;
 
 class UserService extends AbstractService
 {
-    protected $dao = UserDao::class;
+    protected string $dao = UserDao::class;
 
-    protected $defaultUsername = '新手用户';
+    protected string $defaultUsername = '新手用户';
 
     /**
      * 创建用户账号

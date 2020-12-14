@@ -16,11 +16,11 @@ use App\Model\Role\Role;
 
 class RoleDao extends AbstractDao
 {
-    protected $model = Role::class;
+    protected string $model = Role::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '权限不存在';
+    protected string $notFoundMessage = '权限不存在';
 
     public function info(int $id, array $with = []): Role
     {

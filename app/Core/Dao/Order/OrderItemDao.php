@@ -15,9 +15,9 @@ use App\Model\Order\OrderItem;
 
 class OrderItemDao extends AbstractDao
 {
-    protected $model = OrderItem::class;
+    protected string $model = OrderItem::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '订单商品不存在或已删除';
+    protected string $notFoundMessage = '订单商品不存在或已删除';
 }

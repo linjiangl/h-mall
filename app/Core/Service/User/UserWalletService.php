@@ -15,7 +15,7 @@ use App\Core\Service\AbstractService;
 
 class UserWalletService extends AbstractService
 {
-    protected $dao = UserWalletDao::class;
+    protected string $dao = UserWalletDao::class;
 
     /**
      * 初始化用户钱包

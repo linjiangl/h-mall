@@ -13,12 +13,11 @@ namespace App\Core\Block\Backend\Authorize;
 use App\Core\Block\BaseBlock;
 use App\Core\Service\Authorize\AdminAuthorizationService;
 use App\Exception\HttpException;
-use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
 class AuthorizeBlock extends BaseBlock
 {
-    public function show(RequestInterface $request): array
+    public function show(): array
     {
         try {
             $service = new AdminAuthorizationService();

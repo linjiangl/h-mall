@@ -15,13 +15,13 @@ use App\Model\Category\Category;
 
 class CategoryDao extends AbstractDao
 {
-    protected $model = Category::class;
+    protected string $model = Category::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '分类不存在';
+    protected string $notFoundMessage = '分类不存在';
 
-    protected $orderBy = 'sorting asc';
+    protected string $orderBy = 'sorting asc';
 
     public function getListByStatus($status = null, string $select = '*'): array
     {

@@ -15,9 +15,9 @@ use App\Model\Navigation;
 
 class NavigationDao extends AbstractDao
 {
-    protected $model = Navigation::class;
+    protected string $model = Navigation::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '导航不存在';
+    protected string $notFoundMessage = '导航不存在';
 }

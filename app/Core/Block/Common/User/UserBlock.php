@@ -15,16 +15,16 @@ use App\Core\Service\User\UserService;
 
 class UserBlock extends BaseBlock
 {
-    protected $service = UserService::class;
+    protected string $service = UserService::class;
 
-    protected $query = [
+    protected array $query = [
         '=' => ['id'],
         'like' => ['username'],
         'in' => ['status'],
         'between' => ['created_at']
     ];
 
-    protected $defaultSinceWith = [
+    protected array $defaultSinceWith = [
         'backend' => [
             'index' => ['wallet'],
             'show' => ['wallet', 'vipCard'],

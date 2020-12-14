@@ -15,9 +15,9 @@ use App\Model\District;
 
 class DistrictDao extends AbstractDao
 {
-    protected $model = District::class;
+    protected string $model = District::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '地区不存在';
+    protected string $notFoundMessage = '地区不存在';
 }

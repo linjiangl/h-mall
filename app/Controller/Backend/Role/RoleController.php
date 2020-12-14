@@ -17,18 +17,18 @@ use App\Request\Backend\System\RoleRequest;
 
 class RoleController extends BackendController
 {
-    public function storeRequest(RoleRequest $request)
+    public function storeRequest(RoleRequest $request): int
     {
         $request->validated();
         $this->setActionName(AdminAction::ROLE_CREATE);
-        return $this->store($request);
+        return $this->store();
     }
 
-    public function updateRequest(RoleRequest $request)
+    public function updateRequest(RoleRequest $request): array
     {
         $request->validated();
         $this->setActionName(AdminAction::ROLE_UPDATE);
-        return $this->update($request);
+        return $this->update();
     }
 
     /**
@@ -36,16 +36,16 @@ class RoleController extends BackendController
      * @param RoleRequest $request
      * @return bool
      */
-    public function saveMenus(RoleRequest $request)
+    public function saveMenus(RoleRequest $request): bool
     {
         $request->validated();
         $this->setActionName(AdminAction::ROLE_MENU_CHANGE);
         /** @var RoleBlock $service */
         $service = $this->service();
-        return $service->saveRoleMenus($request);
+        return $service->saveRoleMenus();
     }
 
-    protected function block()
+    protected function block(): RoleBlock
     {
         return new RoleBlock();
     }

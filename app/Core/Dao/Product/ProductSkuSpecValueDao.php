@@ -15,11 +15,11 @@ use App\Model\Product\ProductSkuSpecValue;
 
 class ProductSkuSpecValueDao extends AbstractDao
 {
-    protected $model = ProductSkuSpecValue::class;
+    protected string $model = ProductSkuSpecValue::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '商品关联规格值不存在';
+    protected string $notFoundMessage = '商品关联规格值不存在';
 
     /**
      * 检查规格值下是否有商品

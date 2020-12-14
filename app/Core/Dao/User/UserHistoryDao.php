@@ -15,9 +15,9 @@ use App\Model\User\UserHistory;
 
 class UserHistoryDao extends AbstractDao
 {
-    protected $model = UserHistory::class;
+    protected string $model = UserHistory::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '浏览记录不存在';
+    protected string $notFoundMessage = '浏览记录不存在';
 }

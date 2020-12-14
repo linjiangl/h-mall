@@ -17,7 +17,7 @@ use App\Core\Service\AbstractService;
 
 class RoleService extends AbstractService
 {
-    protected $dao = RoleDao::class;
+    protected string $dao = RoleDao::class;
 
     public function remove(int $id): bool
     {

@@ -15,5 +15,5 @@ use App\Core\Service\AbstractService;
 
 class DistrictService extends AbstractService
 {
-    protected $dao = DistrictDao::class;
+    protected string $dao = DistrictDao::class;
 }

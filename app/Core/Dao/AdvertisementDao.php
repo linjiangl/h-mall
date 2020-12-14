@@ -14,9 +14,9 @@ use App\Model\Advertisement;
 
 class AdvertisementDao extends AbstractDao
 {
-    protected $model = Advertisement::class;
+    protected string $model = Advertisement::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '广告不存在';
+    protected string $notFoundMessage = '广告不存在';
 }

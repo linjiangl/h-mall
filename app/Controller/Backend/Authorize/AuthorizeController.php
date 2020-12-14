@@ -18,17 +18,16 @@ class AuthorizeController extends BackendController
 {
     /**
      * 获取管理员信息
-     * @param RequestInterface $request
      * @return array
      */
-    public function show(RequestInterface $request)
+    public function show(): array
     {
         /** @var AuthorizeBlock $service */
         $service = $this->service();
-        return $service->show($request);
+        return $service->show();
     }
 
-    protected function block()
+    protected function block(): AuthorizeBlock
     {
         return new AuthorizeBlock();
     }

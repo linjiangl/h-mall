@@ -15,5 +15,5 @@ use App\Core\Service\System\DistrictService;
 
 class DistrictBlock extends BaseBlock
 {
-    protected $service = DistrictService::class;
+    protected string $service = DistrictService::class;
 }

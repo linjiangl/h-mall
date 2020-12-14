@@ -14,9 +14,9 @@ use App\Model\Slide;
 
 class SlideDao extends AbstractDao
 {
-    protected $model = Slide::class;
+    protected string $model = Slide::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '幻灯片不存在或已删除';
+    protected string $notFoundMessage = '幻灯片不存在或已删除';
 }

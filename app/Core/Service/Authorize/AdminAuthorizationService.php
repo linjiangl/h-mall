@@ -22,7 +22,7 @@ use Throwable;
 
 class AdminAuthorizationService extends AbstractAuthorizationService
 {
-    protected $scene = 'admin';
+    protected string $scene = 'admin';
 
     public function __construct()
     {

@@ -15,5 +15,5 @@ use App\Core\Service\AbstractService;
 
 class RoleAdminService extends AbstractService
 {
-    protected $dao = RoleAdminDao::class;
+    protected string $dao = RoleAdminDao::class;
 }

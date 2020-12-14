@@ -15,11 +15,11 @@ use App\Model\Category\CategorySpec;
 
 class CategorySpecDao extends AbstractDao
 {
-    protected $model = CategorySpec::class;
+    protected string $model = CategorySpec::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '分类规格不存在';
+    protected string $notFoundMessage = '分类规格不存在';
 
     public function getListByCategoryId(int $categoryId): array
     {

@@ -17,27 +17,27 @@ use Hyperf\Database\Model\Model;
 abstract class AbstractService
 {
     /**
-     * @var AbstractDao
+     * @var string|AbstractDao
      */
-    protected $dao;
+    protected string $dao;
 
     /**
      * 默认每页条数
      * @var int
      */
-    protected $limit = 20;
+    protected int $limit = 20;
 
     /**
      * 每页最大条数
      * @var int
      */
-    protected $maxLimit = 100;
+    protected int $maxLimit = 100;
 
     /**
      * 登录用户
      * @var array
      */
-    protected $authorize = [];
+    protected array $authorize = [];
 
     /**
      * 获取分页列表
@@ -48,7 +48,7 @@ abstract class AbstractService
      * @param array $groupBy 分组
      * @param array $with 关联模型
      * @param string[] $columns 查询的地段
-     * @return LengthAwarePaginatorInterface
+     * @return array
      *
      * 举例:
      * $condition = [
@@ -57,7 +57,7 @@ abstract class AbstractService
      *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
      * ]
      */
-    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): LengthAwarePaginatorInterface
+    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
     {
         $this->handleQueryLimit($limit);
         return $this->service()->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
@@ -127,9 +127,9 @@ abstract class AbstractService
     /**
      * 设置登录用户信息
      * @param array $user
-     * @return $this
+     * @return self
      */
-    public function withAuthorize(array $user)
+    public function withAuthorize(array $user): self
     {
         $this->authorize = $user;
         return $this;
@@ -159,9 +159,9 @@ abstract class AbstractService
 
     /**
      * 返回数据访问服务抽象类
-     * @return AbstractDao
+     * @return self
      */
-    protected function service(): AbstractDao
+    protected function service(): self
     {
         return new $this->dao();
     }

@@ -27,13 +27,13 @@ class ModelCommand extends HyperfCommand
      * 迁移表的表名
      * @var string
      */
-    protected $migrateTable = 'migrations';
+    protected string $migrateTable = 'migrations';
 
     /**
      * 数据模型的模块.
      * @var string[]
      */
-    protected $module = [
+    protected array $module = [
         'user',
         'shop',
         'category',
@@ -53,7 +53,7 @@ class ModelCommand extends HyperfCommand
      * 指定的数据表
      * @var array
      */
-    protected $specifyTables = [
+    protected array $specifyTables = [
         'cart',
     ];
 
@@ -101,7 +101,7 @@ class ModelCommand extends HyperfCommand
         exec($fixerExec);
     }
 
-    protected function getAllTables()
+    protected function getAllTables(): array
     {
         if (empty($this->specifyTables)) {
             /** @var DB $db */

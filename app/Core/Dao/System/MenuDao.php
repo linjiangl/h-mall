@@ -15,11 +15,11 @@ use App\Model\Menu;
 
 class MenuDao extends AbstractDao
 {
-    protected $model = Menu::class;
+    protected string $model = Menu::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '菜单不存在';
+    protected string $notFoundMessage = '菜单不存在';
 
     public function info(int $id, array $with = []): Menu
     {

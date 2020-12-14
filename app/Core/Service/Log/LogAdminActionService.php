@@ -16,7 +16,7 @@ use App\Core\Service\AbstractService;
 
 class LogAdminActionService extends AbstractService
 {
-    protected $dao = LogAdminActionDao::class;
+    protected string $dao = LogAdminActionDao::class;
 
     public function createActionRecord(string $actionName, string $className): bool
     {

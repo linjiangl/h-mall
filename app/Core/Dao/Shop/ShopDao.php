@@ -15,9 +15,9 @@ use App\Model\Shop\Shop;
 
 class ShopDao extends AbstractDao
 {
-    protected $model = Shop::class;
+    protected string $model = Shop::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '店铺不存在或已删除';
+    protected string $notFoundMessage = '店铺不存在或已删除';
 }

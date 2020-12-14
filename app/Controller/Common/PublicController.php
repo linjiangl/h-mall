@@ -30,7 +30,7 @@ use Throwable;
 class PublicController extends AbstractController
 {
     // 系统配置
-    public function config()
+    public function config(): array
     {
         return [
             'system' => 'h-mall'
@@ -38,7 +38,7 @@ class PublicController extends AbstractController
     }
 
     // 图形验证码
-    public function captcha()
+    public function captcha(): array
     {
         try {
             $captcha = new Captcha();
@@ -49,7 +49,7 @@ class PublicController extends AbstractController
     }
 
     // 文件上传
-    public function upload(RequestInterface $request)
+    public function upload(RequestInterface $request): array
     {
         $file = $request->file('file');
         if ($file instanceof UploadedFile) {
@@ -60,7 +60,7 @@ class PublicController extends AbstractController
     }
 
     // 百度编辑器
-    public function ueditor(RequestInterface $request)
+    public function ueditor(RequestInterface $request): array
     {
         $action = $request->input('action', 'config');
         $config = config('custom')['ueditor'];

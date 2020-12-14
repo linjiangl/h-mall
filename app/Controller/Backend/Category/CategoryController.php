@@ -16,33 +16,33 @@ use App\Request\Backend\Category\CategoryRequest;
 
 class CategoryController extends BackendController
 {
-    public function storeRequest(CategoryRequest $request)
+    public function storeRequest(CategoryRequest $request): int
     {
         $request->validated();
-        return $this->store($request);
+        return $this->store();
     }
 
-    public function updateRequest(CategoryRequest $request)
+    public function updateRequest(CategoryRequest $request): array
     {
         $request->validated();
-        return $this->update($request);
+        return $this->update();
     }
 
-    public function parent()
+    public function parent(): array
     {
         /** @var CategoryBlock $service */
         $service = $this->service();
         return $service->parent();
     }
 
-    public function children()
+    public function children(): array
     {
         /** @var CategoryBlock $service */
         $service = $this->service();
         return $service->children();
     }
 
-    protected function block()
+    protected function block(): CategoryBlock
     {
         return new CategoryBlock();
     }

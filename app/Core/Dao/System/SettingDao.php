@@ -15,11 +15,11 @@ use App\Model\Setting;
 
 class SettingDao extends AbstractDao
 {
-    protected $model = Setting::class;
+    protected string $model = Setting::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '配置不存在';
+    protected string $notFoundMessage = '配置不存在';
 
     public function getInfoByKey(string $key): Setting
     {

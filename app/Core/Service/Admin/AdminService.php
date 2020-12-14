@@ -23,7 +23,7 @@ use Throwable;
 
 class AdminService extends AbstractService
 {
-    protected $dao = AdminDao::class;
+    protected string $dao = AdminDao::class;
 
     /**
      * 创建管理员账号

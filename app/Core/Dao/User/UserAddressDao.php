@@ -15,11 +15,11 @@ use App\Model\User\UserAddress;
 
 class UserAddressDao extends AbstractDao
 {
-    protected $model = UserAddress::class;
+    protected string $model = UserAddress::class;
 
-    protected $noAllowActions = [];
+    protected array $noAllowActions = [];
 
-    protected $notFoundMessage = '收货地址不存在';
+    protected string $notFoundMessage = '收货地址不存在';
 
     public function info(int $id, array $with = []): UserAddress
     {
