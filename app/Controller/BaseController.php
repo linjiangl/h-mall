@@ -12,8 +12,6 @@ namespace App\Controller;
 
 use App\Constants\BlockSinceConstants;
 use App\Core\Block\BaseBlock;
-use Hyperf\Contract\LengthAwarePaginatorInterface;
-use Hyperf\HttpServer\Contract\RequestInterface;
 
 class BaseController extends AbstractController
 {
