@@ -16,7 +16,7 @@ use Throwable;
 
 class ValidationExceptionHandler extends \Hyperf\Validation\ValidationExceptionHandler
 {
-    public function handle(Throwable $throwable, ResponseInterface $response)
+    public function handle(Throwable $throwable, ResponseInterface $response): ResponseInterface
     {
         $this->stopPropagation();
         /** @var ValidationException $throwable */

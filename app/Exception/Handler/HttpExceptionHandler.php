@@ -41,9 +41,9 @@ class HttpExceptionHandler extends ExceptionHandler
      * Handle the exception, and return the specified result.
      * @param Throwable $throwable
      * @param ResponseInterface $response
-     * @return
+     * @return ResponseInterface
      */
-    public function handle(Throwable $throwable, ResponseInterface $response)
+    public function handle(Throwable $throwable, ResponseInterface $response): ResponseInterface
     {
         $this->logger->debug($this->formatter->format($throwable));
 
