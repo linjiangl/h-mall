@@ -21,8 +21,6 @@ use App\Model\Model;
  */
 class RoleAdmin extends Model
 {
-    public $timestamps = false;
-
     /**
      * The table associated with the model.
      *

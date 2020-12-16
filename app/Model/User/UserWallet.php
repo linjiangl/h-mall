@@ -26,8 +26,6 @@ class UserWallet extends Model
 {
     public $primaryKey = 'user_id';
 
-    public $timestamps = false;
-
     /**
      * The table associated with the model.
      *

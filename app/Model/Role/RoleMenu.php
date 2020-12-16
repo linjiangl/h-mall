@@ -21,8 +21,6 @@ use App\Model\Model;
  */
 class RoleMenu extends Model
 {
-    public $timestamps = false;
-
     /**
      * The table associated with the model.
      *

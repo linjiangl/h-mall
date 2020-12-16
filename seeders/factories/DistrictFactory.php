@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-use Carbon\Carbon;
 use Hyperf\DbConnection\Db;
 
 class DistrictFactory
@@ -18,7 +17,7 @@ class DistrictFactory
         $path = BASE_PATH . '/seeders/data/district.json';
         $data = json_decode(file_get_contents($path), true);
         $data = array_chunk($data, 2000);
-        $now = Carbon::now()->toDateTimeString();
+        $now = time();
         foreach ($data as $chunk) {
             $insert = [];
             foreach ($chunk as $item) {

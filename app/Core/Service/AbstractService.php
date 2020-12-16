@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Core\Service;
 
 use App\Core\Dao\AbstractDao;
-use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Model;
 
 abstract class AbstractService
@@ -159,9 +158,9 @@ abstract class AbstractService
 
     /**
      * 返回数据访问服务抽象类
-     * @return self
+     * @return mixed
      */
-    protected function service(): self
+    protected function service()
     {
         return new $this->dao();
     }

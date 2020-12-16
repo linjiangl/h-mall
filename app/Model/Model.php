@@ -17,4 +17,20 @@ use Hyperf\ModelCache\CacheableInterface;
 abstract class Model extends BaseModel implements CacheableInterface
 {
     use Cacheable;
+
+    public function getUpdatedAtColumn(): ?string
+    {
+        return 'updated_time';
+    }
+
+    protected function updateTimestamps()
+    {
+        if (! $this->isDirty('updated_time')) {
+            $this->updated_time = time();
+        }
+
+        if (! $this->exists && ! $this->isDirty('created_time')) {
+            $this->created_time = time();
+        }
+    }
 }

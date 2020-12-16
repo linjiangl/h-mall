@@ -15,7 +15,6 @@ use App\Core\Dao\Product\ProductSkuSpecValueDao;
 use App\Core\Dao\Spec\SpecValueDao;
 use App\Core\Service\AbstractService;
 use App\Exception\InternalException;
-use Carbon\Carbon;
 
 class SpecValueService extends AbstractService
 {
@@ -38,7 +37,7 @@ class SpecValueService extends AbstractService
      */
     public function createSpecValues(int $specId, array $specValues): void
     {
-        $now = Carbon::now()->toDateTimeString();
+        $now = time();
         $insert = [];
         foreach ($specValues as $item) {
             $insert[] = [
