@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 namespace App\Controller\Frontend\Authorize;
@@ -13,7 +13,6 @@ namespace App\Controller\Frontend\Authorize;
 use App\Controller\FrontendController;
 use App\Core\Block\Frontend\Authorize\AuthorizeBlock;
 use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
 
 /**

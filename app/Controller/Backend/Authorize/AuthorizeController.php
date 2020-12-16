@@ -4,15 +4,14 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 namespace App\Controller\Backend\Authorize;
 
 use App\Controller\BackendController;
 use App\Core\Block\Backend\Authorize\AuthorizeBlock;
-use Hyperf\HttpServer\Contract\RequestInterface;
 
 class AuthorizeController extends BackendController
 {

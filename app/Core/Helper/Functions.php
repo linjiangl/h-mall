@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 use App\Exception\InternalException;
@@ -98,7 +98,7 @@ if (! function_exists('response')) {
 }
 
 if (! function_exists('response_json')) {
-    function response_json($data, string $message = '', int $code = 200): \Psr\Http\Message\ResponseInterface
+    function response_json($data, string $message = '', int $code = 200): Psr\Http\Message\ResponseInterface
     {
         $code = $code ?: 500;
         if ($code >= 200 && $code < 300) {
