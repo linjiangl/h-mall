@@ -97,7 +97,7 @@ abstract class AbstractDao
     public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*'])
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
-        return $query->paginate($limit, $columns, '', $page);
+        return $query->paginate($limit, $columns, 'page', $page);
     }
 
     /**
@@ -111,7 +111,7 @@ abstract class AbstractDao
      * @param string[] $columns
      * @return array
      */
-    public function lists(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
+    public function list(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
     {
         $offset = ($page - 1) * $limit;
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
