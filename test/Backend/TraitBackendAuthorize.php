@@ -4,31 +4,29 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 namespace HyperfTest\Backend;
 
+use HyperfTest\TraitAuthorize;
+
 trait TraitBackendAuthorize
 {
-    protected $tokenCacheIndex = 'testing:backend:token';
+    use TraitAuthorize;
 
-    protected $token;
+    protected string $cacheIndex = 'testing:frontend:token';
 
-    protected $url;
-
-    protected $params = [];
-
-    protected $data = [];
-
-    public function setToken($token)
+    public function setToken(string $token)
     {
+        $this->setTokenCacheIndex($this->cacheIndex);
         redis()->set($this->tokenCacheIndex, $token, 86400);
     }
 
-    public function getToken()
+    public function getToken(): string
     {
+        $this->setTokenCacheIndex($this->cacheIndex);
         $token = redis()->get($this->tokenCacheIndex);
         if (! $token) {
             $result = $this->request('/login', [
@@ -41,53 +39,5 @@ trait TraitBackendAuthorize
             $token = $result['token'];
         }
         return $token;
-    }
-
-    public function removeToken()
-    {
-        redis()->del($this->tokenCacheIndex);
-    }
-
-    public function getHeaders()
-    {
-        return [
-            'Authorization' => $this->getToken()
-        ];
-    }
-
-    protected function handleHttpIndex()
-    {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
-
-        $this->handleError($result);
-        $this->assertArrayHasKey('current_page', $result);
-    }
-
-    protected function handleHttpShow()
-    {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
-
-        $this->handleError($result);
-        $this->assertArrayHasKey('id', $result);
-    }
-
-    protected function handleHttpCreate()
-    {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
-        $this->handleError($result);
-        $this->assertIsInt($result);
-    }
-
-    protected function handleHttpUpdate()
-    {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
-        $this->handleError($result);
-        $this->assertArrayHasKey('id', $result);
-    }
-
-    protected function handleHttpDelete()
-    {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
-        $this->handleError($result);
     }
 }

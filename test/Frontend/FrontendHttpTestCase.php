@@ -14,5 +14,5 @@ use HyperfTest\AbstractHttpTestCase;
 
 class FrontendHttpTestCase extends AbstractHttpTestCase
 {
-    protected $apiType = '/frontend';
+    protected string $apiType = '/frontend';
 }

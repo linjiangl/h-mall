@@ -16,7 +16,7 @@ use Hyperf\Database\Model\Model;
 abstract class AbstractService
 {
     /**
-     * @var string|AbstractDao
+     * @var string
      */
     protected string $dao;
 
@@ -158,9 +158,9 @@ abstract class AbstractService
 
     /**
      * 返回数据访问服务抽象类
-     * @return mixed
+     * @return AbstractDao
      */
-    protected function service()
+    protected function service(): AbstractDao
     {
         return new $this->dao();
     }

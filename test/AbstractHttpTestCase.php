@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 namespace HyperfTest;
@@ -19,7 +19,7 @@ abstract class AbstractHttpTestCase extends HttpTestCase
      */
     protected $client;
 
-    protected $apiType = '';
+    protected string $apiType = '';
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {

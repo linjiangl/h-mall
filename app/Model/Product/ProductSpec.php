@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Product;
 
-use Hyperf\DbConnection\Model\Model;
+use App\Model\Model;
 
 /**
  * @property int $id
