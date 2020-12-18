@@ -296,7 +296,7 @@ abstract class AbstractBlock
     {
         if ($this->checkIsRead) {
             $userId = $this->request->getAttribute('user_id');
-            if ($userId && $info[$this->userIdColumnName] != $userId) {
+            if ($info[$this->userIdColumnName] != $userId) {
                 throw new MethodNotAllowedException('没有权限访问该资源');
             }
         }
