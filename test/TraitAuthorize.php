@@ -12,7 +12,7 @@ namespace HyperfTest;
 
 trait TraitAuthorize
 {
-    protected string $tokenCacheIndex = 'testing:common:token';
+    protected string $tokenCacheIndex = 'testing:scene:token';
 
     protected string $token = '';
 
@@ -26,7 +26,7 @@ trait TraitAuthorize
 
     public function setToken(string $token)
     {
-        redis()->set($this->tokenCacheIndex, $token, 86400);
+        redis()->set($this->tokenCacheIndex, $token, 3600);
     }
 
     public function getToken(): string
