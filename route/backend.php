@@ -93,8 +93,8 @@ Router::addGroup('/backend', function () {
     // brand
     Router::post('/brand/list', [BrandController::class, 'index']);
     Router::post('/brand/detail', [BrandController::class, 'show']);
-    Router::post('/brand/create', [BrandController::class, 'store']);
-    Router::post('/brand/update', [BrandController::class, 'update']);
+    Router::post('/brand/create', [BrandController::class, 'storeRequest']);
+    Router::post('/brand/update', [BrandController::class, 'updateRequest']);
     Router::post('/brand/delete', [BrandController::class, 'destroy']);
 
     // product

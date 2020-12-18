@@ -66,7 +66,7 @@ abstract class AbstractService
      * 获取详情
      * @param int $id 主键
      * @param array $with
-     * @return Model|mixed
+     * @return mixed
      */
     public function info(int $id, $with = [])
     {

@@ -85,7 +85,7 @@ abstract class AbstractDao
      * @param array $groupBy
      * @param array $with
      * @param string[] $columns
-     * @return LengthAwarePaginatorInterface|array
+     * @return array
      *
      * 举例:
      * $condition = [
@@ -94,10 +94,10 @@ abstract class AbstractDao
      *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
      * ]
      */
-    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*'])
+    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
-        return $query->paginate($limit, $columns, 'page', $page);
+        return $query->paginate($limit, $columns, 'page', $page)->toArray();
     }
 
     /**

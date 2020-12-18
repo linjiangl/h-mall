@@ -12,11 +12,24 @@ namespace App\Controller\Backend\Brand;
 
 use App\Controller\BackendController;
 use App\Core\Block\Common\Brand\BrandBlock;
+use App\Request\Backend\Brand\BrandRequest;
 
 class BrandController extends BackendController
 {
     protected function block(): BrandBlock
     {
         return new BrandBlock();
+    }
+
+    public function storeRequest(BrandRequest $request): int
+    {
+        $request->validated();
+        return $this->store();
+    }
+
+    public function updateRequest(BrandRequest $request): array
+    {
+        $request->validated();
+        return $this->update();
     }
 }

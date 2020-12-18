@@ -148,9 +148,9 @@ abstract class AbstractBlock
 
     /**
      * 列表
-     * @return LengthAwarePaginatorInterface|array
+     * @return array
      */
-    public function index()
+    public function index(): array
     {
         try {
             // 当前执行的方法

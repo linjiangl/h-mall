@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Backend\Spec;
+namespace HyperfTest\Backend\Product;
 
 use App\Core\Dao\Spec\SpecDao;
 use App\Model\Spec\Spec;
@@ -21,6 +21,7 @@ class SpecTest extends BackendHttpTestCase
 
     public function testBackendSpecCreate()
     {
+        $this->debug = true;
         $this->url = '/spec/create';
         $this->data = [
             'shop_id' => '0',
