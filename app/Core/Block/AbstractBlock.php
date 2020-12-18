@@ -13,6 +13,7 @@ namespace App\Core\Block;
 use App\Constants\BlockSinceConstants;
 use App\Core\Service\AbstractService;
 use App\Exception\HttpException;
+use App\Exception\MethodNotAllowedException;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
@@ -124,6 +125,18 @@ abstract class AbstractBlock
     protected string $primaryKey = 'id';
 
     /**
+     * 检查资源是否可读
+     * @var bool
+     */
+    protected bool $checkIsRead = false;
+
+    /**
+     * 用户ID字段名称
+     * @var string
+     */
+    protected string $userIdColumnName = 'user_id';
+
+    /**
      * @var RequestInterface
      */
     protected RequestInterface $request;
@@ -168,7 +181,11 @@ abstract class AbstractBlock
             // 查询前业务处理
             $this->beforeBuildQuery();
 
-            return $this->service()->info($this->getPrimaryKey(), $this->with)->toArray();
+            $info = $this->service()->info($this->getPrimaryKey(), $this->with)->toArray();
+
+            $this->checkUserIsRead($info);
+
+            return $info;
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -258,6 +275,31 @@ abstract class AbstractBlock
     public function getData()
     {
         return $this->request->post();
+    }
+
+    /**
+     * 设置是否检查用户访问资源权限
+     * @param bool $isRead
+     * @param string $userIdColumnName
+     */
+    public function setUserCheckIsRead(bool $isRead, string $userIdColumnName = 'user_id')
+    {
+        $this->checkIsRead = $isRead;
+        $this->userIdColumnName = $userIdColumnName;
+    }
+
+    /**
+     * 检查用户是否有权限访问对象
+     * @param array $info
+     */
+    protected function checkUserIsRead(array $info)
+    {
+        if ($this->checkIsRead) {
+            $userId = $this->request->getAttribute('user_id');
+            if ($userId && $info[$this->userIdColumnName] != $userId) {
+                throw new MethodNotAllowedException('没有权限访问该资源');
+            }
+        }
     }
 
     /**
