@@ -30,7 +30,7 @@ class AdminLoginAspect extends AbstractAspect
 
     /**
      * @param ProceedingJoinPoint $proceedingJoinPoint
-     * @return mixed|string
+     * @return mixed
      * @throws Exception
      */
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
