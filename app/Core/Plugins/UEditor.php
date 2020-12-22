@@ -11,33 +11,30 @@ declare(strict_types=1);
 namespace App\Core\Plugins;
 
 use App\Core\Plugins\Bucket\QiniuBucket;
+use Exception;
 use Hyperf\HttpMessage\Upload\UploadedFile;
 
 class UEditor
 {
-    private $fileField; //文件域名
+    private string $fileField; //文件域名
 
-    private $file; //文件上传对象
+    private array $config; //配置信息
 
-    private $base64; //文件上传对象
+    private string $oriName; //原始文件名
 
-    private $config; //配置信息
+    private string $fileName; //新文件名
 
-    private $oriName; //原始文件名
+    private string $fullName; //完整文件名,即从当前配置目录开始的URL
 
-    private $fileName; //新文件名
+    private string $filePath; //完整文件名,即从当前配置目录开始的URL
 
-    private $fullName; //完整文件名,即从当前配置目录开始的URL
+    private int $fileSize; //文件大小
 
-    private $filePath; //完整文件名,即从当前配置目录开始的URL
+    private string $fileType; //文件类型
 
-    private $fileSize; //文件大小
+    private string $stateInfo; //上传状态信息,
 
-    private $fileType; //文件类型
-
-    private $stateInfo; //上传状态信息,
-
-    private $stateMap = [ //上传状态映射表，国际化用户需考虑此处数据的国际化
+    private array $stateMap = [ //上传状态映射表，国际化用户需考虑此处数据的国际化
         'SUCCESS', //上传成功标记，在UEditor中内不可改变，否则flash判断会出错
         '文件大小超出 upload_max_filesize 限制',
         '文件大小超出 MAX_FILE_SIZE 限制',
@@ -67,7 +64,7 @@ class UEditor
      * @param array $config 配置项
      * @param string $type 类型
      */
-    public function __construct($fileField, $config, $type = 'upload')
+    public function __construct(string $fileField, array $config, $type = 'upload')
     {
         $this->fileField = $fileField;
         $this->config = $config;
@@ -86,7 +83,7 @@ class UEditor
      * 获取当前上传成功文件的各项信息
      * @return array
      */
-    public function getFileInfo()
+    public function getFileInfo(): array
     {
         return [
             'state' => $this->stateInfo,
@@ -105,9 +102,6 @@ class UEditor
     {
         /** @var UploadedFile $file */
         $file = $uploadFile = request()->getUploadedFiles()[$this->fileField];
-        if ($file instanceof UploadedFile) {
-            $this->file = $file;
-        }
         if (! $file) {
             $this->stateInfo = $this->getStateInfo('ERROR_FILE_NOT_FOUND');
             return;
@@ -123,13 +117,12 @@ class UEditor
             return;
         }
 
-        $this->oriName = $file->getClientFilename();
-        $this->fileSize = $file->getSize();
+        $this->oriName = $file->getClientFilename() ?: '';
+        $this->fileSize = $file->getSize() ?: 0;
         $this->fileType = $this->getFileExt();
         $this->fullName = $this->getFullName();
         $this->filePath = $this->getFilePath();
         $this->fileName = $this->getFileName();
-        dirname($this->filePath);
 
         //检查文件大小是否超出限制
         if (! $this->checkSize()) {
@@ -148,7 +141,7 @@ class UEditor
             $result = $bucket->upload($uploadFile);
             $this->fullName = $bucket->getFullPath($result['full_path']);
             $this->stateInfo = $this->stateMap[0];
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->stateInfo = $this->getStateInfo('ERROR_FILE_MOVE');
         }
     }
@@ -194,7 +187,6 @@ class UEditor
 
     /**
      * 拉取远程图片
-     * @return mixed
      */
     private function saveRemote()
     {
@@ -288,7 +280,7 @@ class UEditor
      * @param $errCode
      * @return string
      */
-    private function getStateInfo($errCode)
+    private function getStateInfo($errCode): string
     {
         return ! $this->stateMap[$errCode] ? $this->stateMap['ERROR_UNKNOWN'] : $this->stateMap[$errCode];
     }
@@ -297,7 +289,7 @@ class UEditor
      * 获取文件扩展名
      * @return string
      */
-    private function getFileExt()
+    private function getFileExt(): string
     {
         return strtolower(strrchr($this->oriName, '.'));
     }
@@ -306,7 +298,7 @@ class UEditor
      * 重命名文件
      * @return string
      */
-    private function getFullName()
+    private function getFullName(): string
     {
         //替换日期事件
         $t = time();
@@ -340,7 +332,7 @@ class UEditor
      * 获取文件名
      * @return string
      */
-    private function getFileName()
+    private function getFileName(): string
     {
         return substr($this->filePath, strrpos($this->filePath, '/') + 1);
     }
@@ -349,7 +341,7 @@ class UEditor
      * 获取文件完整路径
      * @return string
      */
-    private function getFilePath()
+    private function getFilePath(): string
     {
         $fullname = $this->fullName;
         $rootPath = $_SERVER['DOCUMENT_ROOT'];
@@ -365,7 +357,7 @@ class UEditor
      * 文件类型检测
      * @return bool
      */
-    private function checkType()
+    private function checkType(): bool
     {
         return in_array($this->getFileExt(), $this->config['allowFiles']);
     }
@@ -374,7 +366,7 @@ class UEditor
      * 文件大小检测
      * @return bool
      */
-    private function checkSize()
+    private function checkSize(): bool
     {
         return $this->fileSize <= ($this->config['maxSize']);
     }
