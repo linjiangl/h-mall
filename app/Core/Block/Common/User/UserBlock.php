@@ -21,7 +21,7 @@ class UserBlock extends BaseBlock
         '=' => ['id'],
         'like' => ['username'],
         'in' => ['status'],
-        'between' => ['created_at']
+        'between' => ['created_time']
     ];
 
     protected array $defaultSinceWith = [

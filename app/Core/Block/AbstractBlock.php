@@ -312,6 +312,7 @@ abstract class AbstractBlock
 
         switch ($this->since) {
             case 'backend':
+                // 排序
                 $sort = $this->request->post('sorter', '');
                 if ($sort) {
                     $sort = json_decode($sort, true);

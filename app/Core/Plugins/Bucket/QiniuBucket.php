@@ -27,7 +27,7 @@ class QiniuBucket extends AbstractBucket
         $this->config = config('custom')['qn'];
     }
 
-    public function upload(UploadedFile $file, string $key = '')
+    public function upload(UploadedFile $file, string $key = ''): array
     {
         $ret = $this->checkFileExists($file);
         if ($ret != false) {
@@ -77,22 +77,22 @@ class QiniuBucket extends AbstractBucket
         return $data;
     }
 
-    public function getAuth()
+    public function getAuth(): Auth
     {
         return new Auth($this->config['access_key'], $this->config['secret_key']);
     }
 
-    public function getToken()
+    public function getToken(): string
     {
         return $this->getAuth()->uploadToken($this->config['bucket_name']);
     }
 
-    public function getConfig()
+    public function getConfig(): Config
     {
         return new Config(Zone::zonez2());
     }
 
-    public function generateKey(string $filename, $dir = 'images')
+    public function generateKey(string $filename, $dir = 'images'): string
     {
         $key = parent::generateKey($filename, $dir);
         return substr($key, 1);
