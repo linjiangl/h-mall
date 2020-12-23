@@ -19,6 +19,10 @@ class AdminBlock extends BaseBlock
 {
     protected string $service = AdminService::class;
 
+    protected array $query = [
+        '=' => ['username', 'real_name', 'mobile', 'email', 'status'],
+    ];
+
     public function store(): int
     {
         try {
