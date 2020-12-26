@@ -22,7 +22,7 @@ class CategoryService extends AbstractService
 {
     protected string $dao = CategoryDao::class;
 
-    protected $levelData = [];
+    protected array $levelData = [];
 
     public function create(array $data): int
     {

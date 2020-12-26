@@ -96,12 +96,11 @@ abstract class AbstractService
     /**
      * 删除
      * @param int $id
-     * @param bool $softDelete 是否软删除
      * @return bool
      */
-    public function remove(int $id, bool $softDelete = true): bool
+    public function remove(int $id): bool
     {
-        return $this->service()->withAuthorize($this->authorize)->remove($id, $softDelete);
+        return $this->service()->withAuthorize($this->authorize)->remove($id);
     }
 
     /**

@@ -34,7 +34,7 @@ class CategoryBlock extends BaseBlock
         return $service->convertCategoriesToChildren($categories);
     }
 
-    protected function beforeBuildQuery()
+    protected function beforeBuildQuery(): void
     {
         parent::beforeBuildQuery();
 

@@ -92,9 +92,9 @@ abstract class AbstractBlock
      * @var array
      */
     protected array $query = [
-        // '=' => ['name', 'title', 'status'],
-        // 'between' => ['created_at'], // 支持数组,字符串(,)
-        // 'in' => ['user_id']
+        '=' => ['name', 'title'],
+        'between' => ['created_time'], // 支持数组,字符串(,)
+        'in' => ['status']
         // 'like' => ['title'] // 模糊查询('title%')
         // 'like_all' => ['title'] // 模糊查询('%title%')
     ];
