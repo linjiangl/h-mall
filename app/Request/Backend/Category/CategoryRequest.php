@@ -34,6 +34,9 @@ class CategoryRequest extends AbstractRequest
                 'sorting' => 'integer|max:100',
                 'status' => 'integer'
             ],
+            'post:delete' => [
+                'id' => 'required|integer|gt:0',
+            ],
         ];
         return $rules[$this->getScene()] ?? [];
     }

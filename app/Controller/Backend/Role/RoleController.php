@@ -20,14 +20,14 @@ class RoleController extends BackendController
     public function storeRequest(RoleRequest $request): int
     {
         $request->validated();
-        $this->setActionName(AdminAction::ROLE_CREATE);
+        $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_CREATE));
         return $this->store();
     }
 
     public function updateRequest(RoleRequest $request): array
     {
         $request->validated();
-        $this->setActionName(AdminAction::ROLE_UPDATE);
+        $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_UPDATE));
         return $this->update();
     }
 

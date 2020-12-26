@@ -42,7 +42,7 @@ class LogAdminActionService extends AbstractService
             'username' => $admin['username'],
             'client_ip' => get_client_ip(),
             'module' => $module,
-            'action' => AdminAction::getMessage($actionName),
+            'action' => $actionName,
             'remark' => [
                 'method' => $request->getMethod(),
                 'url' => $url,

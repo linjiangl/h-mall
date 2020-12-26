@@ -20,14 +20,14 @@ class MenuController extends BackendController
     public function storeRequest(MenuRequest $request): int
     {
         $request->validated();
-        $this->setActionName(AdminAction::MENU_CREATE);
+        $this->setActionName(AdminAction::getMessage(AdminAction::MENU_CREATE));
         return $this->store();
     }
 
     public function updateRequest(MenuRequest $request): array
     {
         $request->validated();
-        $this->setActionName(AdminAction::MENU_UPDATE);
+        $this->setActionName(AdminAction::getMessage(AdminAction::MENU_UPDATE));
         return $this->update();
     }
 

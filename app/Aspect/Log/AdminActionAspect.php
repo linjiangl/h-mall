@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Aspect\Log;
 
 use App\Controller\Backend\Admin\AdminController;
+use App\Controller\Backend\Category\CategoryController;
 use App\Controller\Backend\Role\RoleController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\User\UserController;
@@ -21,15 +22,16 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\Di\Exception\Exception;
 
 /**
- * @Aspect()
+ * @Aspect
  */
 class AdminActionAspect extends AbstractAspect
 {
     public $classes = [
-        UserController::class,
-        AdminController::class,
-        MenuController::class,
-        RoleController::class
+        UserController::class . '::*Request',
+        AdminController::class . '::*Request',
+        MenuController::class . '::*Request',
+        RoleController::class . '::*Request',
+        CategoryController::class . '::*Request'
     ];
 
     /**

@@ -20,7 +20,7 @@ class UserController extends BackendController
     public function updateRequest(UserRequest $request): array
     {
         $request->validated();
-        $this->setActionName(UserAction::USER_UPDATE);
+        $this->setActionName(UserAction::getMessage(UserAction::USER_UPDATE));
         return $this->update();
     }
 

@@ -37,12 +37,12 @@ abstract class AbstractController
      */
     protected ResponseInterface $response;
 
-    protected function created($id): \Psr\Http\Message\ResponseInterface
+    protected function returnResponseCreate($id): \Psr\Http\Message\ResponseInterface
     {
         return response_json($id, '', 201);
     }
 
-    protected function deleted(): \Psr\Http\Message\ResponseInterface
+    protected function returnResponseDelete(): \Psr\Http\Message\ResponseInterface
     {
         return response_json(true, '', 204);
     }

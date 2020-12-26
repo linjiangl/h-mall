@@ -86,7 +86,7 @@ Router::addGroup('/backend', function () {
     Router::post('/category/detail', [CategoryController::class, 'show']);
     Router::post('/category/create', [CategoryController::class, 'storeRequest']);
     Router::post('/category/update', [CategoryController::class, 'updateRequest']);
-    Router::post('/category/delete', [CategoryController::class, 'destroy']);
+    Router::post('/category/delete', [CategoryController::class, 'destroyRequest']);
     Router::post('/category/parent', [CategoryController::class, 'parent']);
     Router::post('/category/children', [CategoryController::class, 'children']);
 
