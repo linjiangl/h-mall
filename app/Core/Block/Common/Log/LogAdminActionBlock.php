@@ -16,4 +16,10 @@ use App\Core\Service\Log\LogAdminActionService;
 class LogAdminActionBlock extends BaseBlock
 {
     protected string $service = LogAdminActionService::class;
+
+    protected array $query = [
+        '=' => ['username'],
+        'between' => ['created_time'],
+        'in' => ['status']
+    ];
 }
