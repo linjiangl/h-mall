@@ -47,7 +47,9 @@ Router::addGroup('/backend', function () {
 
     // log admin
     Router::post('/log/adminLogin/list', [LogAdminLoginController::class, 'index']);
+    Router::post('/log/adminLogin/delete', [LogAdminLoginController::class, 'batchDestroyRequest']);
     Router::post('/log/adminAction/list', [LogAdminActionController::class, 'index']);
+    Router::post('/log/adminAction/delete', [LogAdminActionController::class, 'batchDestroyRequest']);
 
     // role
     Router::post('/role/list', [RoleController::class, 'index']);

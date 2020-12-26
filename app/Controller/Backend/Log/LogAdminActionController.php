@@ -12,9 +12,16 @@ namespace App\Controller\Backend\Log;
 
 use App\Controller\BackendController;
 use App\Core\Block\Common\Log\LogAdminActionBlock;
+use App\Request\Common\BatchOperationRequest;
 
 class LogAdminActionController extends BackendController
 {
+    public function batchDestroyRequest(BatchOperationRequest $request): bool
+    {
+        $request->validated();
+        return $this->batchDestroy();
+    }
+
     protected function block(): LogAdminActionBlock
     {
         return new LogAdminActionBlock();

@@ -13,7 +13,6 @@ namespace App\Core\Dao;
 use App\Exception\BadRequestException;
 use App\Exception\HttpException;
 use App\Exception\NotFoundException;
-use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
@@ -189,15 +188,23 @@ abstract class AbstractDao
     /**
      * 删除
      * @param int $id 主键
+     * @param bool $softDelete 是否软删除
      * @return bool
      */
-    public function remove(int $id): bool
+    public function remove(int $id, bool $softDelete = true): bool
     {
         try {
             $this->actionIsAllow('remove');
 
             $model = $this->info($id);
-            $model->delete();
+            if ($softDelete) {
+                $tmp = $model->toArray();
+                if (isset($tmp['status'])) {
+                    $model->update(['status' => -1]);
+                }
+            } else {
+                $model->delete();
+            }
             $this->removeCache($id);
             return true;
         } catch (Throwable $e) {
@@ -212,6 +219,22 @@ abstract class AbstractDao
     public function batchInsert(array $data): void
     {
         $this->model::query()->insert($data);
+    }
+
+    /**
+     * 批量删除数据
+     * @param array $selectIds
+     * @param bool $softDelete 是否软删除
+     */
+    public function batchRemove(array $selectIds, bool $softDelete = true): void
+    {
+        $model = new $this->model();
+        $query = $this->model::query()->whereIn($model->getKeyName(), $selectIds);
+        if ($softDelete) {
+            $query->update(['status' => -1]);
+        } else {
+            $query->delete();
+        }
     }
 
     /**
@@ -300,12 +323,17 @@ abstract class AbstractDao
     /**
      * 根据条件删除
      * @param array $condition
+     * @param bool $softDelete
      */
-    public function deleteByCondition(array $condition): void
+    public function deleteByCondition(array $condition, bool $softDelete = true): void
     {
         $query = $this->model::query();
         $query = $this->handleQueryCondition($query, $condition);
-        $query->delete();
+        if ($softDelete) {
+            $query->update(['status' => -1]);
+        } else {
+            $query->delete();
+        }
     }
 
     /**

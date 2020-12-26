@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Log;
 
-use App\Constants\Action\AdminAction;
 use App\Core\Dao\Log\LogAdminActionDao;
 use App\Core\Service\AbstractService;
 

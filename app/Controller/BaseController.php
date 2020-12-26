@@ -61,6 +61,15 @@ class BaseController extends AbstractController
         return $this->service()->destroy();
     }
 
+    /**
+     * 批量删除
+     * @return bool
+     */
+    public function batchDestroy()
+    {
+        return $this->service()->batchDestroy();
+    }
+
     protected function block(): BaseBlock
     {
         return new BaseBlock();

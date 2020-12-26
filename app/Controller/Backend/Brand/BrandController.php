@@ -16,11 +16,6 @@ use App\Request\Backend\Brand\BrandRequest;
 
 class BrandController extends BackendController
 {
-    protected function block(): BrandBlock
-    {
-        return new BrandBlock();
-    }
-
     public function storeRequest(BrandRequest $request): int
     {
         $request->validated();
@@ -31,5 +26,10 @@ class BrandController extends BackendController
     {
         $request->validated();
         return $this->update();
+    }
+
+    protected function block(): BrandBlock
+    {
+        return new BrandBlock();
     }
 }

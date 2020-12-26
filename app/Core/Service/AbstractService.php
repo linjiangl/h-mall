@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Core\Service;
 
 use App\Core\Dao\AbstractDao;
-use Hyperf\Database\Model\Model;
 
 abstract class AbstractService
 {
@@ -96,21 +95,36 @@ abstract class AbstractService
 
     /**
      * 删除
-     * @param int $id 主键
+     * @param int $id
+     * @param bool $softDelete 是否软删除
      * @return bool
      */
-    public function remove(int $id): bool
+    public function remove(int $id, bool $softDelete = true): bool
     {
-        return $this->service()->withAuthorize($this->authorize)->remove($id);
+        return $this->service()->withAuthorize($this->authorize)->remove($id, $softDelete);
     }
 
     /**
      * 批量插入
      * @param array $data
+     * @return bool
      */
-    public function batchInsert(array $data): void
+    public function batchInsert(array $data): bool
     {
         $this->service()->batchInsert($data);
+        return true;
+    }
+
+    /**
+     * 批量删除
+     * @param array $selectIds
+     * @param bool $softDelete
+     * @return bool
+     */
+    public function batchRemove(array $selectIds, bool $softDelete = true): bool
+    {
+        $this->service()->batchRemove($selectIds, $softDelete);
+        return true;
     }
 
     /**

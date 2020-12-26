@@ -14,7 +14,6 @@ use App\Constants\BlockSinceConstants;
 use App\Core\Service\AbstractService;
 use App\Exception\HttpException;
 use App\Exception\MethodNotAllowedException;
-use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 
@@ -162,6 +161,9 @@ abstract class AbstractBlock
             // 查询前业务处理
             $this->beforeBuildQuery();
 
+            // 软删除处理
+            $this->handleSoftDelete();
+
             return $this->service()->paginate($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
@@ -225,6 +227,21 @@ abstract class AbstractBlock
     {
         try {
             return $this->service()->remove($this->getPrimaryKey());
+        } catch (Throwable $e) {
+            throw new HttpException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * 批量删除
+     * @return bool
+     */
+    public function batchDestroy(): bool
+    {
+        try {
+            $selectIds = $this->request->post('select_ids', '');
+            $selectIds = explode(',', $selectIds);
+            return $this->service()->batchRemove($selectIds);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -335,6 +352,14 @@ abstract class AbstractBlock
         $this->with = isset($this->defaultSinceWith[$this->since][$this->action]) ? $this->defaultSinceWith[$this->since][$this->action] : [];
         $this->condition = $this->handleCondition();
         $this->groupBy = [];
+    }
+
+    protected function handleSoftDelete()
+    {
+        $status = $this->request->post('status', '');
+        if (!$status) {
+            $this->condition[] = ['status', '>', -1];
+        }
     }
 
     /**
