@@ -18,6 +18,16 @@ abstract class Model extends BaseModel implements CacheableInterface
 {
     use Cacheable;
 
+    public function freshTimestamp(): string
+    {
+        return (string)time();
+    }
+
+    public function freshTimestampString(): ?string
+    {
+        return $this->freshTimestamp();
+    }
+
     public function getUpdatedAtColumn(): ?string
     {
         return 'updated_time';

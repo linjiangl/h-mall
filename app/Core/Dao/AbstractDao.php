@@ -368,7 +368,7 @@ abstract class AbstractDao
     /**
      * 设置登录用户信息
      * @param array $user
-     * @return self
+     * @return $this
      */
     public function withAuthorize(array $user): self
     {

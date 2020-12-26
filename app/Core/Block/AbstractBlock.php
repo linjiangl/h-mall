@@ -271,7 +271,7 @@ abstract class AbstractBlock
      * 设置主键
      * @param string $primaryKey
      */
-    public function setPrimaryKey($primaryKey = 'id')
+    public function setPrimaryKey($primaryKey = 'id'): void
     {
         $this->primaryKey = $primaryKey;
     }
@@ -299,7 +299,7 @@ abstract class AbstractBlock
      * @param bool $isRead
      * @param string $userIdColumnName
      */
-    public function setUserCheckIsRead(bool $isRead, string $userIdColumnName = 'user_id')
+    public function setUserCheckIsRead(bool $isRead, string $userIdColumnName = 'user_id'): void
     {
         $this->checkIsRead = $isRead;
         $this->userIdColumnName = $userIdColumnName;
@@ -309,7 +309,7 @@ abstract class AbstractBlock
      * 检查用户是否有权限访问对象
      * @param array $info
      */
-    protected function checkUserIsRead(array $info)
+    protected function checkUserIsRead(array $info): void
     {
         if ($this->checkIsRead) {
             $userId = $this->request->getAttribute('user_id');
@@ -322,7 +322,7 @@ abstract class AbstractBlock
     /**
      * 处理查询参数
      */
-    protected function handleQueryParams()
+    protected function handleQueryParams(): void
     {
         $this->page = intval($this->request->post('page', $this->page));
         $this->limit = intval($this->request->post('limit', $this->limit));
@@ -347,14 +347,17 @@ abstract class AbstractBlock
     /**
      * 构建查询之前条件
      */
-    protected function beforeBuildQuery()
+    protected function beforeBuildQuery(): void
     {
         $this->with = isset($this->defaultSinceWith[$this->since][$this->action]) ? $this->defaultSinceWith[$this->since][$this->action] : [];
         $this->condition = $this->handleCondition();
         $this->groupBy = [];
     }
 
-    protected function handleSoftDelete()
+    /**
+     * 处理软删除
+     */
+    protected function handleSoftDelete(): void
     {
         $status = $this->request->post('status', '');
         if (!$status) {
