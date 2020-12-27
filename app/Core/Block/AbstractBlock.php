@@ -360,7 +360,7 @@ abstract class AbstractBlock
     protected function handleSoftDelete(): void
     {
         $status = $this->request->post('status', '');
-        if (!$status) {
+        if (! $status) {
             $this->condition[] = ['status', '>', -1];
         }
     }
