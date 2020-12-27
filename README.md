@@ -1,6 +1,6 @@
 # 介绍
 
-多商户商城系统【项目开发中】
+商城系统【开发中】
 
 ### 开发环境
 
@@ -31,4 +31,5 @@ $ composer start-dev
 ![image](./docs/images/QQ20200516-194336@2x.png)
 ![image](./docs/images/QQ20200516-194431@2x.png)
 ![image](./docs/images/QQ20200516-194826@2x.png)
+
 
