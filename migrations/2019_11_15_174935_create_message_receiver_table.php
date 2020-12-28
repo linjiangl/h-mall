@@ -25,7 +25,7 @@ class CreateMessageReceiverTable extends Migration
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->integer('message_id', false, true);
-            $table->tinyInteger('status', false, true)->default(2)->comment('状态 0:删除, 1:已读, 2:未读');
+            $table->tinyInteger('status')->default(0)->comment('状态 -1:删除, 0:未读, 1:已读');
             $table->integer('created_time', false, true)->default(0);
             $table->integer('updated_time', false, true)->default(0);
 
