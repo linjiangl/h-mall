@@ -1,8 +1,17 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
+ * @contact  8257796@qq.com
+ */
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateRoleTables extends Migration
 {
@@ -47,10 +56,9 @@ class CreateRoleTables extends Migration
             $table->index(['menu_id'], 'menu_id');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `role` COMMENT '权限'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `role_admin` COMMENT '管理员权限'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `role_menu` COMMENT '权限菜单'");
-
+        Db::statement("ALTER TABLE `role` COMMENT '权限'");
+        Db::statement("ALTER TABLE `role_admin` COMMENT '管理员权限'");
+        Db::statement("ALTER TABLE `role_menu` COMMENT '权限菜单'");
     }
 
     /**

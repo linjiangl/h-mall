@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 use Hyperf\Database\Migrations\Migration;
@@ -13,16 +13,33 @@ use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 use Hyperf\DbConnection\Db;
 
-class CreateStatementRefundTable extends Migration
+class CreatePaymentTables extends Migration
 {
-    protected $table = 'statement_refund';
-
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create($this->table, function (Blueprint $table) {
+        Schema::create('payment', function (Blueprint $table) {
+            $table->integerIncrements('id');
+            $table->integer('user_id', false, true);
+            $table->string('order_ids', 255);
+            $table->string('business_no', 64)->comment('支付业务号');
+            $table->string('payment_method', 20)->comment('支付方式');
+            $table->string('trade_no', 64)->default('')->comment('第三方支付流水号');
+            $table->decimal('amount', 10, 2)->unsigned()->default(0)->comment('金额');
+            $table->tinyInteger('status')->default(0)->comment('支付状态 -1:已删除, 0:待支付, 1:支付成功, 2:重复支付退款');
+            $table->string('remark', 3000)->default('');
+            $table->integer('finished_time', false, true)->default(0)->comment('支付完成的时间');
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
+
+            $table->unique(['business_no'], 'business_no');
+            $table->index(['trade_no'], 'trade_no');
+            $table->index(['order_ids'], 'order_ids');
+        });
+
+        Schema::create('payment_refund', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->integer('order_id', false, true);
@@ -45,7 +62,8 @@ class CreateStatementRefundTable extends Migration
             $table->index(['refund_id'], 'refund_id');
         });
 
-        Db::statement("ALTER TABLE `{$this->table}` COMMENT '账单-退款记录'");
+        Db::statement("ALTER TABLE `payment` COMMENT '支付记录'");
+        Db::statement("ALTER TABLE `payment_refund` COMMENT '支付退款记录'");
     }
 
     /**
@@ -53,6 +71,7 @@ class CreateStatementRefundTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists($this->table);
+        Schema::dropIfExists('payment');
+        Schema::dropIfExists('payment_refund');
     }
 }

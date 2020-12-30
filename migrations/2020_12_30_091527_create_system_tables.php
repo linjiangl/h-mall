@@ -1,8 +1,17 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
+ * @contact  8257796@qq.com
+ */
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateSystemTables extends Migration
 {
@@ -143,17 +152,16 @@ class CreateSystemTables extends Migration
             $table->index(['shop_id', 'status'], 'shop_id');
         });
 
-
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `setting` COMMENT '系统设置'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `text` COMMENT '系统文本'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `menu` COMMENT '系统菜单'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `attachment` COMMENT '系统附件'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `district` COMMENT '地区'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `express` COMMENT '物流'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `slide` COMMENT '幻灯片'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `navigation` COMMENT '导航'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `advertisement` COMMENT '广告'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `customer_service` COMMENT '客服'");
+        Db::statement("ALTER TABLE `setting` COMMENT '系统设置'");
+        Db::statement("ALTER TABLE `text` COMMENT '系统文本'");
+        Db::statement("ALTER TABLE `menu` COMMENT '系统菜单'");
+        Db::statement("ALTER TABLE `attachment` COMMENT '系统附件'");
+        Db::statement("ALTER TABLE `district` COMMENT '地区'");
+        Db::statement("ALTER TABLE `express` COMMENT '物流'");
+        Db::statement("ALTER TABLE `slide` COMMENT '幻灯片'");
+        Db::statement("ALTER TABLE `navigation` COMMENT '导航'");
+        Db::statement("ALTER TABLE `advertisement` COMMENT '广告'");
+        Db::statement("ALTER TABLE `customer_service` COMMENT '客服'");
     }
 
     /**

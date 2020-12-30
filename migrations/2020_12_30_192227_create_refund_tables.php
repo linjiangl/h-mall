@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 use Hyperf\Database\Migrations\Migration;
@@ -13,16 +13,14 @@ use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 use Hyperf\DbConnection\Db;
 
-class CreateRefundTable extends Migration
+class CreateRefundTables extends Migration
 {
-    protected $table = 'refund';
-
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create($this->table, function (Blueprint $table) {
+        Schema::create('refund', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->integer('shop_id', false, true);
@@ -58,7 +56,38 @@ class CreateRefundTable extends Migration
             $table->index(['created_time', 'status'], 'created_time');
         });
 
-        Db::statement("ALTER TABLE `{$this->table}` COMMENT '退款'");
+        Schema::create('refund_goods', function (Blueprint $table) {
+            $table->integerIncrements('id');
+            $table->integer('refund_id', false, true);
+            $table->integer('order_id', false, true);
+            $table->integer('order_goods_id', false, true);
+            $table->integer('goods_id', false, true);
+            $table->integer('goods_sku_id', false, true);
+            $table->decimal('amount', 10, 2)->unsigned()->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
+
+            $table->unique(['refund_id', 'order_goods_id'], 'refund_id_order_goods_id');
+            $table->index(['goods_id'], 'goods_id');
+        });
+
+        Schema::create('refund_action', function (Blueprint $table) {
+            $table->integerIncrements('id');
+            $table->integer('refund_id', false, true);
+            $table->integer('order_id', false, true);
+            $table->integer('user_id', false, true);
+            $table->integer('action_user_id', false, true)->default(0)->comment('操作用户 0:系统');
+            $table->tinyInteger('refund_status', false, true)->comment('退款状态');
+            $table->string('remark', 255)->default('');
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
+
+            $table->index(['refund_id'], 'refund_id');
+        });
+
+        Db::statement("ALTER TABLE `refund` COMMENT '退款'");
+        Db::statement("ALTER TABLE `refund_goods` COMMENT '退款商品'");
+        Db::statement("ALTER TABLE `refund_action` COMMENT '退款操作'");
     }
 
     /**
@@ -66,6 +95,8 @@ class CreateRefundTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists($this->table);
+        Schema::dropIfExists('refund');
+        Schema::dropIfExists('refund_goods');
+        Schema::dropIfExists('refund_action');
     }
 }

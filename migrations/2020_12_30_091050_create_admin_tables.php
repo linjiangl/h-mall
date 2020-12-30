@@ -1,8 +1,17 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
+ * @contact  8257796@qq.com
+ */
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateAdminTables extends Migration
 {
@@ -29,7 +38,7 @@ class CreateAdminTables extends Migration
             $table->unique(['created_time', 'status'], 'created_time');
         });
 
-        Schema::create('log_admin_login', function (Blueprint $table) {
+        Schema::create('admin_login', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('admin_id', false, true);
             $table->string('username', 30)->comment('管理员用户名');
@@ -42,7 +51,7 @@ class CreateAdminTables extends Migration
             $table->index(['admin_id', 'status'], 'admin_id');
         });
 
-        Schema::create('log_admin_action', function (Blueprint $table) {
+        Schema::create('admin_action', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('admin_id', false, true);
             $table->string('username', 30)->comment('管理员用户名');
@@ -57,10 +66,9 @@ class CreateAdminTables extends Migration
             $table->index(['admin_id', 'status'], 'admin_id');
         });
 
-
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `template_parameter` COMMENT '管理员'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `log_admin_login` COMMENT '管理员登录日志'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `log_admin_action` COMMENT '管理员操作日志'");
+        Db::statement("ALTER TABLE `admin` COMMENT '管理员'");
+        Db::statement("ALTER TABLE `admin_login` COMMENT '管理员登录日志'");
+        Db::statement("ALTER TABLE `admin_action` COMMENT '管理员操作日志'");
     }
 
     /**
@@ -69,7 +77,7 @@ class CreateAdminTables extends Migration
     public function down(): void
     {
         Schema::dropIfExists('admin');
-        Schema::dropIfExists('log_admin_login');
-        Schema::dropIfExists('log_admin_action');
+        Schema::dropIfExists('admin_login');
+        Schema::dropIfExists('admin_action');
     }
 }

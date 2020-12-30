@@ -1,8 +1,17 @@
 <?php
 
-use Hyperf\Database\Schema\Schema;
-use Hyperf\Database\Schema\Blueprint;
+declare(strict_types=1);
+/**
+ * Multi-user mall
+ *
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
+ * @contact  8257796@qq.com
+ */
 use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
 class CreateUserTables extends Migration
 {
@@ -145,13 +154,31 @@ class CreateUserTables extends Migration
             $table->index(['user_id', 'status'], 'user_id');
         });
 
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `user` COMMENT '用户'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `user_wallet` COMMENT '用户钱包'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `user_vip_card` COMMENT '用户会员卡'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `user_address` COMMENT '用户地址'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `user_history` COMMENT '用户浏览记录'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `user_favorite` COMMENT '用户收藏'");
-        \Hyperf\DbConnection\Db::statement("ALTER TABLE `user_invoice` COMMENT '用户发票'");
+        Schema::create('user_statement', function (Blueprint $table) {
+            $table->integerIncrements('id');
+            $table->integer('user_id', false, true);
+            $table->string('type', 30)->comment('类型 recharged:充值 consumed:消费');
+            $table->decimal('amount', 9, 2)->default(0)->comment('金额');
+            $table->integer('integral')->default(0)->comment('积分');
+            $table->string('description', 100)->default('')->comment('描述');
+            $table->string('module', 30)->default('')->comment('模块 order:订单');
+            $table->integer('module_id', false, true)->default(0);
+            $table->string('remark', 255)->default('');
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
+
+            $table->index(['user_id', 'type'], 'user_id_type');
+            $table->index(['created_time'], 'created_time');
+        });
+
+        Db::statement("ALTER TABLE `user` COMMENT '用户'");
+        Db::statement("ALTER TABLE `user_wallet` COMMENT '用户钱包'");
+        Db::statement("ALTER TABLE `user_vip_card` COMMENT '用户会员卡'");
+        Db::statement("ALTER TABLE `user_address` COMMENT '用户地址'");
+        Db::statement("ALTER TABLE `user_history` COMMENT '用户浏览记录'");
+        Db::statement("ALTER TABLE `user_favorite` COMMENT '用户收藏'");
+        Db::statement("ALTER TABLE `user_invoice` COMMENT '用户发票'");
+        Db::statement("ALTER TABLE `user_statement` COMMENT '用户流水'");
     }
 
     /**
@@ -166,5 +193,6 @@ class CreateUserTables extends Migration
         Schema::dropIfExists('user_history');
         Schema::dropIfExists('user_favorite');
         Schema::dropIfExists('user_invoice');
+        Schema::dropIfExists('user_statement');
     }
 }

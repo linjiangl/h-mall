@@ -4,15 +4,16 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
+use Hyperf\DbConnection\Db;
 
-class CreateStatisticsOrderTable extends Migration
+class CreateStatisticsTables extends Migration
 {
     /**
      * Run the migrations.
@@ -57,6 +58,8 @@ class CreateStatisticsOrderTable extends Migration
 
             $table->index(['date'], 'date');
         });
+
+        Db::statement("ALTER TABLE `statistics_order` COMMENT '统计-订单'");
     }
 
     /**
