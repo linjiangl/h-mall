@@ -29,7 +29,7 @@ class AdminLogin extends Model
      *
      * @var string
      */
-    protected $table = 'log_admin_login';
+    protected $table = 'admin_login';
 
     /**
      * The attributes that are mass assignable.

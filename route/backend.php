@@ -45,11 +45,11 @@ Router::addGroup('/backend', function () {
     Router::post('/admin/create', [AdminController::class, 'storeRequest']);
     Router::post('/admin/update', [AdminController::class, 'updateRequest']);
 
-    // log admin
-    Router::post('/log/adminLogin/list', [AdminLoginController::class, 'index']);
-    Router::post('/log/adminLogin/delete', [AdminLoginController::class, 'batchDestroyRequest']);
-    Router::post('/log/adminAction/list', [AdminActionController::class, 'index']);
-    Router::post('/log/adminAction/delete', [AdminActionController::class, 'batchDestroyRequest']);
+    // admin log
+    Router::post('/adminLogin/list', [AdminLoginController::class, 'index']);
+    Router::post('/adminLogin/delete', [AdminLoginController::class, 'batchDestroyRequest']);
+    Router::post('/adminAction/list', [AdminActionController::class, 'index']);
+    Router::post('/adminAction/delete', [AdminActionController::class, 'batchDestroyRequest']);
 
     // role
     Router::post('/role/list', [RoleController::class, 'index']);

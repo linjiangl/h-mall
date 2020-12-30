@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Aspect\Log;
+namespace App\Aspect\Admin;
 
 use App\Controller\Backend\Authorize\LoginController;
 use App\Controller\Backend\Authorize\RegisterController;

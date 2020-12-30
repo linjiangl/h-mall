@@ -31,7 +31,7 @@ class AdminAction extends Model
      *
      * @var string
      */
-    protected $table = 'log_admin_action';
+    protected $table = 'admin_action';
 
     /**
      * The attributes that are mass assignable.
