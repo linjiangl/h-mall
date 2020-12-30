@@ -12,7 +12,7 @@ namespace App\Model;
 
 /**
  * @property int $id
- * @property string $module 模块 product:商品, shop:店铺
+ * @property string $module 模块 goods:商品, shop:店铺
  * @property string $content
  * @property int $created_time
  * @property int $updated_time

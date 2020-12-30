@@ -10,9 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Category;
 
-use App\Constants\Message\ProductMessage;
+use App\Constants\Message\GoodsMessage;
 use App\Core\Dao\Category\CategoryDao;
-use App\Core\Dao\Product\ProductDao;
+use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
@@ -65,9 +65,9 @@ class CategoryService extends AbstractService
 
     public function remove(int $id): bool
     {
-        $productDao = new ProductDao();
-        if ($productDao->checkCategoryIdHasProduct($id)) {
-            throw new InternalException(ProductMessage::getMessage(ProductMessage::CHECK_CATEGORY_ID_HAS_CATEGORY));
+        $goodsDao = new GoodsDao();
+        if ($goodsDao->checkCategoryIdHasGoods($id)) {
+            throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_CATEGORY_ID_HAS_CATEGORY));
         }
 
         try {

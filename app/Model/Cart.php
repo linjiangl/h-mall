@@ -13,8 +13,8 @@ namespace App\Model;
 /**
  * @property int $id
  * @property int $user_id
- * @property int $product_id
- * @property int $product_sku_id
+ * @property int $goods_id
+ * @property int $goods_sku_id
  * @property int $quantity 数量
  * @property int $is_check 是否选中 0:否, 1:是
  * @property int $is_show 是否显示 0:否, 1:是
@@ -35,12 +35,12 @@ class Cart extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'product_id', 'product_sku_id', 'quantity', 'is_check', 'is_show', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'user_id', 'goods_id', 'goods_sku_id', 'quantity', 'is_check', 'is_show', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'quantity' => 'integer', 'is_check' => 'integer', 'is_show' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'quantity' => 'integer', 'is_check' => 'integer', 'is_show' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

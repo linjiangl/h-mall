@@ -38,15 +38,13 @@ class ModelCommand extends HyperfCommand
         'shop',
         'category',
         'spec',
-        'product',
+        'goods',
         'order',
-        'evaluation',
         'refund',
         'message',
-        'log',
         'statistics',
         'role',
-        'statement'
+        'payment'
     ];
 
     /**

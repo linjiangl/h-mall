@@ -14,9 +14,9 @@ use App\Controller\Backend\Authorize\LoginController;
 use App\Controller\Backend\Authorize\RegisterController;
 use App\Controller\Backend\Brand\BrandController;
 use App\Controller\Backend\Category\CategoryController;
-use App\Controller\Backend\Log\LogAdminActionController;
-use App\Controller\Backend\Log\LogAdminLoginController;
-use App\Controller\Backend\Product\ProductController;
+use App\Controller\Backend\Admin\AdminActionController;
+use App\Controller\Backend\Admin\AdminLoginController;
+use App\Controller\Backend\Goods\GoodsController;
 use App\Controller\Backend\Spec\SpecController;
 use App\Controller\Backend\Spec\SpecValueController;
 use App\Controller\Backend\System\DistrictController;
@@ -46,10 +46,10 @@ Router::addGroup('/backend', function () {
     Router::post('/admin/update', [AdminController::class, 'updateRequest']);
 
     // log admin
-    Router::post('/log/adminLogin/list', [LogAdminLoginController::class, 'index']);
-    Router::post('/log/adminLogin/delete', [LogAdminLoginController::class, 'batchDestroyRequest']);
-    Router::post('/log/adminAction/list', [LogAdminActionController::class, 'index']);
-    Router::post('/log/adminAction/delete', [LogAdminActionController::class, 'batchDestroyRequest']);
+    Router::post('/log/adminLogin/list', [AdminLoginController::class, 'index']);
+    Router::post('/log/adminLogin/delete', [AdminLoginController::class, 'batchDestroyRequest']);
+    Router::post('/log/adminAction/list', [AdminActionController::class, 'index']);
+    Router::post('/log/adminAction/delete', [AdminActionController::class, 'batchDestroyRequest']);
 
     // role
     Router::post('/role/list', [RoleController::class, 'index']);
@@ -99,10 +99,10 @@ Router::addGroup('/backend', function () {
     Router::post('/brand/update', [BrandController::class, 'updateRequest']);
     Router::post('/brand/delete', [BrandController::class, 'destroy']);
 
-    // product
-    Router::post('/product/list', [ProductController::class, 'index']);
-    Router::post('/product/detail', [ProductController::class, 'show']);
-    Router::post('/product/create', [ProductController::class, 'store']);
-    Router::post('/product/update', [ProductController::class, 'update']);
-    Router::post('/product/delete', [ProductController::class, 'destroy']);
+    // goods
+    Router::post('/goods/list', [GoodsController::class, 'index']);
+    Router::post('/goods/detail', [GoodsController::class, 'show']);
+    Router::post('/goods/create', [GoodsController::class, 'store']);
+    Router::post('/goods/update', [GoodsController::class, 'update']);
+    Router::post('/goods/delete', [GoodsController::class, 'destroy']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

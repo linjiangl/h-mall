@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Category;
 
-use App\Constants\Action\ProductAction;
+use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Category\CategoryBlock;
 use App\Request\Backend\Category\CategoryRequest;
@@ -20,21 +20,21 @@ class CategoryController extends BackendController
     public function storeRequest(CategoryRequest $request): int
     {
         $request->validated();
-        $this->setActionName(ProductAction::getMessage(ProductAction::CATEGORY_CREATE));
+        $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_CREATE));
         return $this->store();
     }
 
     public function updateRequest(CategoryRequest $request): array
     {
         $request->validated();
-        $this->setActionName(ProductAction::getMessage(ProductAction::CATEGORY_UPDATE));
+        $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_UPDATE));
         return $this->update();
     }
 
     public function destroyRequest(CategoryRequest $request): bool
     {
         $request->validated();
-        $this->setActionName(ProductAction::getMessage(ProductAction::CATEGORY_DELETE));
+        $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_DELETE));
         return $this->destroy();
     }
 

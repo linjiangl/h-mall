@@ -115,17 +115,17 @@ class CreateUserTables extends Migration
         Schema::create('user_history', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
-            $table->integer('product_id', false, true);
+            $table->integer('goods_id', false, true);
             $table->integer('created_time', false, true)->default(0);
             $table->integer('updated_time', false, true)->default(0);
 
-            $table->unique(['user_id', 'product_id'], 'user_id_product_id');
+            $table->unique(['user_id', 'goods_id'], 'user_id_goods_id');
         });
 
         Schema::create('user_favorite', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
-            $table->string('module', 30)->comment('模块 product:商品, shop:店铺');
+            $table->string('module', 30)->comment('模块 goods:商品, shop:店铺');
             $table->integer('module_id', false, true);
             $table->integer('created_time', false, true)->default(0);
             $table->integer('updated_time', false, true)->default(0);

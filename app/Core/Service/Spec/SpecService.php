@@ -10,9 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Spec;
 
-use App\Constants\Message\ProductMessage;
+use App\Constants\Message\GoodsMessage;
 use App\Core\Dao\Category\CategorySpecDao;
-use App\Core\Dao\Product\ProductSpecDao;
+use App\Core\Dao\Goods\GoodsSpecDao;
 use App\Core\Dao\Spec\SpecDao;
 use App\Core\Service\AbstractService;
 use App\Exception\BadRequestException;
@@ -67,12 +67,12 @@ class SpecService extends AbstractService
     {
         $categorySpecDao = new CategorySpecDao();
         if ($categorySpecDao->checkSpecIdHasCategory($id)) {
-            throw new InternalException(ProductMessage::getMessage(ProductMessage::CHECK_SPEC_ID_HAS_PRODUCT));
+            throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_SPEC_ID_HAS_GOODS));
         }
 
-        $productSpecDao = new ProductSpecDao();
-        if ($productSpecDao->checkSpecIdHasProduct($id)) {
-            throw new InternalException(ProductMessage::getMessage(ProductMessage::CHECK_SPEC_ID_HAS_PRODUCT));
+        $goodsSpecDao = new GoodsSpecDao();
+        if ($goodsSpecDao->checkSpecIdHasGoods($id)) {
+            throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_SPEC_ID_HAS_GOODS));
         }
 
         try {

@@ -12,7 +12,7 @@ namespace App\Core\Service\Admin;
 
 use App\Constants\RestConstants;
 use App\Constants\State\AdminState;
-use App\Core\Dao\AdminDao;
+use App\Core\Dao\Admin\AdminDao;
 use App\Core\Dao\Role\RoleAdminDao;
 use App\Core\Dao\Role\RoleDao;
 use App\Core\Service\AbstractService;

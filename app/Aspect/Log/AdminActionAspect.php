@@ -15,7 +15,7 @@ use App\Controller\Backend\Category\CategoryController;
 use App\Controller\Backend\Role\RoleController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\User\UserController;
-use App\Core\Service\Log\LogAdminActionService;
+use App\Core\Service\Admin\AdminActionService;
 use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
@@ -44,7 +44,7 @@ class AdminActionAspect extends AbstractAspect
         $result = $proceedingJoinPoint->process();
         $actionName = request()->getAttribute('action_name', '');
         if ($actionName) {
-            $service = new LogAdminActionService();
+            $service = new AdminActionService();
             $service->createActionRecord($actionName, $proceedingJoinPoint->className);
         }
         return $result;

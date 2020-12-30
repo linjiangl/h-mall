@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Spec;
 
-use App\Constants\Message\ProductMessage;
-use App\Core\Dao\Product\ProductSkuSpecValueDao;
+use App\Constants\Message\GoodsMessage;
+use App\Core\Dao\Goods\GoodsSkuSpecValueDao;
 use App\Core\Dao\Spec\SpecValueDao;
 use App\Core\Service\AbstractService;
 use App\Exception\InternalException;
@@ -22,9 +22,9 @@ class SpecValueService extends AbstractService
 
     public function remove(int $id): bool
     {
-        $productSkuSpecValueDao = new ProductSkuSpecValueDao();
-        if ($productSkuSpecValueDao->checkSpecValueIdHasProduct($id)) {
-            throw new InternalException(ProductMessage::getMessage(ProductMessage::CHECK_SPEC_VALUE_ID_HAS_PRODUCT));
+        $goodsSkuSpecValueDao = new GoodsSkuSpecValueDao();
+        if ($goodsSkuSpecValueDao->checkSpecValueIdHasGoods($id)) {
+            throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_SPEC_VALUE_ID_HAS_GOODS));
         }
 
         return parent::remove($id);

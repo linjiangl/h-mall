@@ -12,7 +12,7 @@ namespace App\Aspect\Log;
 
 use App\Controller\Backend\Authorize\LoginController;
 use App\Controller\Backend\Authorize\RegisterController;
-use App\Core\Service\Log\LogAdminLoginService;
+use App\Core\Service\Admin\AdminLoginService;
 use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
@@ -37,7 +37,7 @@ class AdminLoginAspect extends AbstractAspect
     {
         $result = $proceedingJoinPoint->process();
         if (is_array($result) && isset($result['token'])) {
-            $service = new LogAdminLoginService();
+            $service = new AdminLoginService();
             $service->createLoginRecord();
         }
         return $result;

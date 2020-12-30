@@ -15,7 +15,7 @@ use App\Model\Model;
 /**
  * @property int $id
  * @property int $user_id
- * @property string $module 模块 product:商品, shop:店铺
+ * @property string $module 模块 goods:商品, shop:店铺
  * @property int $module_id
  * @property int $created_time
  * @property int $updated_time

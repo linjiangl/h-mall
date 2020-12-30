@@ -197,7 +197,7 @@ class CreateGoodsTables extends Migration
             $table->integerIncrements('id');
             $table->integer('user_id', false, true);
             $table->integer('order_id', false, true);
-            $table->integer('order_item_id', false, true);
+            $table->integer('order_goods_id', false, true);
             $table->integer('goods_id', false, true);
             $table->integer('goods_sku_id', false, true);
             $table->tinyInteger('score', false, true)->default(0)->comment('评分');
@@ -214,7 +214,7 @@ class CreateGoodsTables extends Migration
             $table->integer('created_time', false, true)->default(0);
             $table->integer('updated_time', false, true)->default(0);
 
-            $table->unique(['order_item_id', 'status'], 'order_item_id');
+            $table->unique(['order_goods_id', 'status'], 'order_goods_id');
             $table->index(['order_id', 'status'], 'order_id');
             $table->index(['user_id', 'status'], 'user_id');
             $table->index(['goods_id', 'top', 'status'], 'goods_id_top');
