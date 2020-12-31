@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Block\Common\Category;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Category\CategoryService;
+use App\Core\Service\Goods\Category\CategoryService;
 
 class CategoryBlock extends BaseBlock
 {

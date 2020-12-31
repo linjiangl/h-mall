@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Common\Spec;
+namespace App\Core\Block\Common\Goods\Spec;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Spec\SpecValueService;
+use App\Core\Service\Goods\Spec\SpecService;
 
-class SpecValueBlock extends BaseBlock
+class SpecBlock extends BaseBlock
 {
-    protected string $service = SpecValueService::class;
+    protected string $service = SpecService::class;
 }

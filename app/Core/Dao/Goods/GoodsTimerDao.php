@@ -11,17 +11,17 @@ declare(strict_types=1);
 namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Goods\GoodsAttribute;
+use App\Model\Goods\GoodsTimer;
 
-class GoodsAttributeDao extends AbstractDao
+class GoodsTimerDao extends AbstractDao
 {
-    protected string $model = GoodsAttribute::class;
+    protected string $model = GoodsTimer::class;
 
     protected array $noAllowActions = [];
 
-    protected string $notFoundMessage = '商品属性不存在或已删除';
+    protected string $notFoundMessage = '商品定时不存在或已删除';
 
-    public function info(int $id, array $with = []): GoodsAttribute
+    public function info(int $id, array $with = []): GoodsTimer
     {
         return parent::info($id, $with);
     }

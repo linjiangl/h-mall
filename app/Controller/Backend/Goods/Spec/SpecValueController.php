@@ -8,10 +8,10 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Backend\Spec;
+namespace App\Controller\Backend\Goods\Spec;
 
 use App\Controller\BackendController;
-use App\Core\Block\Common\Spec\SpecValueBlock;
+use App\Core\Block\Common\Goods\Spec\SpecValueBlock;
 
 class SpecValueController extends BackendController
 {

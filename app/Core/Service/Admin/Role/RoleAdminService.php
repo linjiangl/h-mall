@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Role;
+namespace App\Core\Service\Admin\Role;
 
 use App\Core\Dao\Admin\Role\RoleAdminDao;
 use App\Core\Service\AbstractService;

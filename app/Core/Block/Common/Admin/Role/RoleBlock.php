@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Common\Role;
+namespace App\Core\Block\Common\Admin\Role;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Role\RoleMenuService;
-use App\Core\Service\Role\RoleService;
+use App\Core\Service\Admin\Role\RoleMenuService;
+use App\Core\Service\Admin\Role\RoleService;
 use App\Exception\HttpException;
 use Throwable;
 

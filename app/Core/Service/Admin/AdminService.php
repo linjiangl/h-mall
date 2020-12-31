@@ -16,8 +16,8 @@ use App\Core\Dao\Admin\AdminDao;
 use App\Core\Dao\Admin\Role\RoleAdminDao;
 use App\Core\Dao\Admin\Role\RoleDao;
 use App\Core\Service\AbstractService;
+use App\Core\Service\Admin\Role\RoleAdminService;
 use App\Core\Service\Authorize\AdminAuthorizationService;
-use App\Core\Service\Role\RoleAdminService;
 use App\Exception\InternalException;
 use Throwable;
 

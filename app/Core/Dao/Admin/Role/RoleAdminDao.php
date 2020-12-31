@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Core\Dao\Admin\Role;
 
 use App\Core\Dao\AbstractDao;
-use App\Core\Dao\Admin\Role\RoleDao;
 use App\Model\Role\RoleAdmin;
 
 class RoleAdminDao extends AbstractDao

@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace App\Aspect\Admin;
 
 use App\Controller\Backend\Admin\AdminController;
-use App\Controller\Backend\Category\CategoryController;
-use App\Controller\Backend\Role\RoleController;
+use App\Controller\Backend\Admin\Role\RoleController;
+use App\Controller\Backend\Goods\Category\CategoryController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\User\UserController;
 use App\Core\Service\Admin\AdminActionService;

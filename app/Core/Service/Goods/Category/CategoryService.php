@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Category;
+namespace App\Core\Service\Goods\Category;
 
 use App\Constants\Message\GoodsMessage;
 use App\Core\Dao\Goods\Category\CategoryDao;

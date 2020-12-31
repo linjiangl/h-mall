@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Backend\Role;
+namespace App\Controller\Backend\Admin\Role;
 
 use App\Constants\Action\AdminAction;
 use App\Controller\BackendController;
-use App\Core\Block\Common\Role\RoleBlock;
+use App\Core\Block\Common\Admin\Role\RoleBlock;
 use App\Request\Backend\System\RoleRequest;
 
 class RoleController extends BackendController
