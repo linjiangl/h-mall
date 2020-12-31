@@ -109,33 +109,67 @@ class CreateGoodsTables extends Migration
             $table->integer('user_id', false, true);
             $table->integer('category_id', false, true);
             $table->integer('brand_id', false, true)->default(0)->comment('品牌');
-            $table->integer('text_id', false, true)->comment('商品详情ID');
-            $table->string('type', 30)->default('general')->comment('商品类型');
+            $table->string('type', 30)->default('general')->comment('商品类型 general:普通, virtual:虚拟');
             $table->string('title', 100)->comment('标题');
             $table->string('sub_title', 255)->default('')->comment('副标题');
             $table->integer('sales', false, true)->default(0)->comment('销量');
+            $table->integer('virtual_sales', false, true)->default(0)->comment('虚拟销量');
             $table->integer('clicks', false, true)->default(0)->comment('点击量');
             $table->decimal('min_price', 10, 2)->unsigned()->default(0)->comment('最小金额');
             $table->decimal('max_price', 10, 2)->unsigned()->default(0)->comment('最大金额');
             $table->tinyInteger('status')->default(1)->comment('状态 -1:已删除, 0:已下架, 1:已上架');
             $table->tinyInteger('is_show')->default(1)->comment('是否显示 0:不显示, 1:显示');
-            $table->string('refund_type', 30)->default('')->comment('退款类型 空:无操作,all:退货退款,money:仅退款,refuse:拒绝退款');
-            $table->smallInteger('buy_limit', false, true)->default(0)->comment('单次购买上限 0:不限制');
-            $table->smallInteger('buy_limit_total', false, true)->default(0)->comment('购买上限 0:不限制');
+            $table->tinyInteger('is_on_shelf')->default(1)->comment('是否上架 0:放入仓库, 1:立即上架');
+            $table->tinyInteger('is_consume_discount')->default(0)->comment('是否参与会员等级折扣 0:否,1:是');
+            $table->tinyInteger('is_free_shipping')->default(1)->comment('是否包邮 0:否, 1:是');
+            $table->decimal('achieve_amount', 5)->default(99)->comment('达到多少金额包邮');
+            $table->tinyInteger('recommend_way')->default(0)->comment('推荐方式 0:无,1:新品,2:精品,3:推荐');
+            $table->string('refund_type', 30)->default('money')->comment('退款类型 money:仅退款,all:退货退款,refuse:拒绝退款');
+            $table->smallInteger('buy_max', false, true)->default(0)->comment('限购 0:不限制');
+            $table->smallInteger('buy_min', false, true)->default(0)->comment('起售 0:不限制');
+            $table->string('video_url', 255)->comment('视频地址');
             $table->string('images', 1000)->comment('商品图片');
             $table->integer('created_time', false, true)->default(0);
             $table->integer('updated_time', false, true)->default(0);
 
             $table->index(['shop_id'], 'shop_id');
             $table->index(['user_id'], 'user_id');
-            $table->index(['category_id', 'status'], 'category_id');
-            $table->index(['brand_id', 'status'], 'brand_id');
-            $table->index(['title', 'status'], 'title');
-            $table->index(['sales', 'status'], 'sales');
-            $table->index(['clicks', 'status'], 'clicks');
-            $table->index(['min_price', 'status'], 'min_price');
-            $table->index(['max_price', 'status'], 'max_price');
+            $table->index(['category_id'], 'category_id');
+            $table->index(['brand_id'], 'brand_id');
+            $table->index(['title'], 'title');
+            $table->index(['sales'], 'sales');
+            $table->index(['clicks'], 'clicks');
+            $table->index(['min_price'], 'min_price');
+            $table->index(['max_price'], 'max_price');
             $table->index(['created_time', 'status'], 'created_time');
+        });
+
+        Schema::create('goods_attribute', function (Blueprint $table) {
+            $table->integerIncrements('id');
+            $table->integer('goods_id', false, true);
+            $table->string('goods_unit', 30)->default('')->comment('商品单位');
+            $table->string('goods_service_ids', 255)->default('')->comment('商品服务');
+            $table->text('parameter')->comment('商品参数');
+            $table->mediumText('goods_content')->comment('商品详情');
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
+
+            $table->index(['goods_id'], 'goods_id');
+        });
+
+        Schema::create('goods_timer', function (Blueprint $table) {
+            $table->integerIncrements('id');
+            $table->integer('goods_id', false, true);
+            $table->tinyInteger('on', false, true)->default(0)->comment('定时上架');
+            $table->tinyInteger('off', false, true)->default(0)->comment('定时下架');
+            $table->integer('on_time', false, true)->default(0);
+            $table->integer('off_time', false, true)->default(0);
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
+
+            $table->index(['goods_id'], 'goods_id');
+            $table->index(['on_time'], 'on_time');
+            $table->index(['off_time'], 'off_time');
         });
 
         Schema::create('goods_spec', function (Blueprint $table) {
@@ -182,6 +216,14 @@ class CreateGoodsTables extends Migration
             $table->index(['spec_value_id'], 'spec_value_id');
         });
 
+        Schema::create('goods_service', function (Blueprint $table) {
+            $table->integerIncrements('id');
+            $table->string('name', 100)->comment('商品服务名称');
+            $table->text('description')->comment('商品服务的描述');
+            $table->integer('created_time', false, true)->default(0);
+            $table->integer('updated_time', false, true)->default(0);
+        });
+
         Schema::create('goods_parameter', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('goods_id', false, true);
@@ -204,7 +246,7 @@ class CreateGoodsTables extends Migration
             $table->integer('top', false, true)->default(0)->comment('点赞');
             $table->integer('reply_num', false, true)->default(0)->comment('回复数量');
             $table->integer('additional_num', false, true)->default(0)->comment('追评数量');
-            $table->integer('additional_comment_id', false, true)->default(0)->comment('追评ID');
+            $table->integer('additional_appraises_id', false, true)->default(0)->comment('追评ID');
             $table->tinyInteger('is_additional', false, true)->default(0)->comment('是否追加评价 0:否,1:是');
             $table->tinyInteger('is_image', false, true)->default(0)->comment('是否带图 0:否,1:是');
             $table->tinyInteger('is_anonymous', false, true)->default(0)->comment('是否匿名 0:否,1:是');
@@ -222,7 +264,7 @@ class CreateGoodsTables extends Migration
 
         Schema::create('goods_appraises_reply', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->integer('evaluation_id', false, true)->comment('评价ID');
+            $table->integer('appraises_id', false, true)->comment('评价ID');
             $table->integer('goods_id', false, true);
             $table->integer('goods_sku_id', false, true);
             $table->integer('user_id', false, true)->comment('回复评价的用户ID');
@@ -233,7 +275,7 @@ class CreateGoodsTables extends Migration
             $table->integer('created_time', false, true)->default(0);
             $table->integer('updated_time', false, true)->default(0);
 
-            $table->index(['evaluation_id'], 'evaluation_id');
+            $table->index(['appraises_id'], 'appraises_id');
             $table->index(['goods_id', 'top'], 'goods_id_top');
         });
 
@@ -245,9 +287,12 @@ class CreateGoodsTables extends Migration
         Db::statement("ALTER TABLE `category` COMMENT '商品分类'");
         Db::statement("ALTER TABLE `category_spec` COMMENT '商品分类-关联的商品规格'");
         Db::statement("ALTER TABLE `goods` COMMENT '商品'");
+        Db::statement("ALTER TABLE `goods_attribute` COMMENT '商品属性'");
+        Db::statement("ALTER TABLE `goods_timer` COMMENT '商品定时'");
         Db::statement("ALTER TABLE `goods_spec` COMMENT '商品规格项'");
         Db::statement("ALTER TABLE `goods_sku` COMMENT '商品规格'");
         Db::statement("ALTER TABLE `goods_sku_spec_value` COMMENT '商品规格值'");
+        Db::statement("ALTER TABLE `goods_service` COMMENT '商品服务'");
         Db::statement("ALTER TABLE `goods_parameter` COMMENT '商品参数'");
         Db::statement("ALTER TABLE `goods_appraises` COMMENT '商品评价'");
         Db::statement("ALTER TABLE `goods_appraises_reply` COMMENT '商品评价回复'");
@@ -266,9 +311,12 @@ class CreateGoodsTables extends Migration
         Schema::dropIfExists('category');
         Schema::dropIfExists('category_spec');
         Schema::dropIfExists('goods');
+        Schema::dropIfExists('goods_attribute');
+        Schema::dropIfExists('goods_timer');
         Schema::dropIfExists('goods_spec');
         Schema::dropIfExists('goods_sku');
         Schema::dropIfExists('goods_sku_spec_value');
+        Schema::dropIfExists('goods_service');
         Schema::dropIfExists('goods_parameter');
         Schema::dropIfExists('goods_appraises');
         Schema::dropIfExists('goods_appraises_reply');

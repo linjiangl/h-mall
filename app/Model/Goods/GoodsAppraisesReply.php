@@ -14,7 +14,7 @@ use App\Model\Model;
 
 /**
  * @property int $id
- * @property int $evaluation_id 评价ID
+ * @property int $appraises_id 评价ID
  * @property int $goods_id
  * @property int $goods_sku_id
  * @property int $user_id 回复评价的用户ID
@@ -32,19 +32,19 @@ class GoodsAppraisesReply extends Model
      *
      * @var string
      */
-    protected $table = 'evaluation_reply';
+    protected $table = 'appraises_reply';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'evaluation_id', 'goods_id', 'goods_sku_id', 'user_id', 'reply_user_id', 'top', 'content', 'status', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'appraises_id', 'goods_id', 'goods_sku_id', 'user_id', 'reply_user_id', 'top', 'content', 'status', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'evaluation_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'user_id' => 'integer', 'reply_user_id' => 'integer', 'top' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'appraises_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'user_id' => 'integer', 'reply_user_id' => 'integer', 'top' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }
