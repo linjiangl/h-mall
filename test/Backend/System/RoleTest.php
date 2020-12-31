@@ -12,7 +12,7 @@ namespace HyperfTest\Backend\System;
 
 use App\Constants\State\MenuState;
 use App\Constants\State\RoleState;
-use App\Core\Dao\Role\RoleDao;
+use App\Core\Dao\Admin\Role\RoleDao;
 use App\Core\Dao\System\MenuDao;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;

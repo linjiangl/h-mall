@@ -12,7 +12,7 @@ namespace App\Core\Service\Spec;
 
 use App\Constants\Message\GoodsMessage;
 use App\Core\Dao\Goods\GoodsSkuSpecValueDao;
-use App\Core\Dao\Spec\SpecValueDao;
+use App\Core\Dao\Goods\Spec\SpecValueDao;
 use App\Core\Service\AbstractService;
 use App\Exception\InternalException;
 

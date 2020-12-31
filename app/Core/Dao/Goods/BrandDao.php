@@ -8,8 +8,9 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao;
+namespace App\Core\Dao\Goods;
 
+use App\Core\Dao\AbstractDao;
 use App\Model\Brand;
 
 class BrandDao extends AbstractDao

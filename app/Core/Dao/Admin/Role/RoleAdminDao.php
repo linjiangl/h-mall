@@ -8,9 +8,10 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao\Role;
+namespace App\Core\Dao\Admin\Role;
 
 use App\Core\Dao\AbstractDao;
+use App\Core\Dao\Admin\Role\RoleDao;
 use App\Model\Role\RoleAdmin;
 
 class RoleAdminDao extends AbstractDao

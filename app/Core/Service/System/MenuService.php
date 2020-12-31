@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Core\Service\System;
 
 use App\Constants\State\RoleState;
-use App\Core\Dao\Role\RoleAdminDao;
-use App\Core\Dao\Role\RoleDao;
-use App\Core\Dao\Role\RoleMenuDao;
+use App\Core\Dao\Admin\Role\RoleAdminDao;
+use App\Core\Dao\Admin\Role\RoleDao;
+use App\Core\Dao\Admin\Role\RoleMenuDao;
 use App\Core\Dao\System\MenuDao;
 use App\Core\Service\AbstractService;
 

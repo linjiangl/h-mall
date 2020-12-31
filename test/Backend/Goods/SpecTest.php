@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\Goods;
 
-use App\Core\Dao\Spec\SpecDao;
+use App\Core\Dao\Goods\Spec\SpecDao;
 use App\Model\Spec\Spec;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;

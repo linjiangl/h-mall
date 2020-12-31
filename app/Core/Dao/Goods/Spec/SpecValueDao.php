@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao\Spec;
+namespace App\Core\Dao\Goods\Spec;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Spec\SpecValue;

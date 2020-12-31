@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Core\Service\Spec;
 
 use App\Constants\Message\GoodsMessage;
-use App\Core\Dao\Category\CategorySpecDao;
+use App\Core\Dao\Goods\Category\CategorySpecDao;
 use App\Core\Dao\Goods\GoodsSpecDao;
-use App\Core\Dao\Spec\SpecDao;
+use App\Core\Dao\Goods\Spec\SpecDao;
 use App\Core\Service\AbstractService;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;

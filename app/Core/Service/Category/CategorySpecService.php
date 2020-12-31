@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Category;
 
-use App\Core\Dao\Category\CategorySpecDao;
+use App\Core\Dao\Goods\Category\CategorySpecDao;
 use App\Core\Service\AbstractService;
 
 class CategorySpecService extends AbstractService

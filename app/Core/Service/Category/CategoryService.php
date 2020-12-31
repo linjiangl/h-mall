@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Service\Category;
 
 use App\Constants\Message\GoodsMessage;
-use App\Core\Dao\Category\CategoryDao;
+use App\Core\Dao\Goods\Category\CategoryDao;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
 use App\Exception\BadRequestException;

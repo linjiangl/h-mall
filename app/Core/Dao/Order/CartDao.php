@@ -8,15 +8,14 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao;
+namespace App\Core\Dao\Order;
 
-use App\Model\Slide;
+use App\Core\Dao\AbstractDao;
+use App\Model\Cart;
 
-class SlideDao extends AbstractDao
+class CartDao extends AbstractDao
 {
-    protected string $model = Slide::class;
+    protected string $model = Cart::class;
 
     protected array $noAllowActions = [];
-
-    protected string $notFoundMessage = '幻灯片不存在或已删除';
 }

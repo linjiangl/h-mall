@@ -8,16 +8,16 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao\Spec;
+namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Spec\Spec;
+use App\Model\Advertisement;
 
-class SpecDao extends AbstractDao
+class AdvertisementDao extends AbstractDao
 {
-    protected string $model = Spec::class;
+    protected string $model = Advertisement::class;
 
     protected array $noAllowActions = [];
 
-    protected string $notFoundMessage = '商品规格不存在';
+    protected string $notFoundMessage = '广告不存在';
 }
