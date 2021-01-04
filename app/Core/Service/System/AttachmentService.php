@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\System;
 
-use App\Constants\State\AttachmentState;
+use App\Constants\State\System\AttachmentState;
 use App\Core\Dao\System\AttachmentDao;
 use App\Core\Plugins\Bucket\SamplesBucket;
 use App\Core\Service\AbstractService;

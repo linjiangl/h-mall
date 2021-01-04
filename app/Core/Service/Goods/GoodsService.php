@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Goods;
 
-use App\Constants\State\GoodsState;
+use App\Constants\State\Goods\GoodsState;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Goods\Types\AbstractTypesService;

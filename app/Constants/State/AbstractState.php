@@ -10,6 +10,14 @@ declare(strict_types=1);
  */
 namespace App\Constants\State;
 
+use App\Constants\State\Admin\AdminState;
+use App\Constants\State\Admin\RoleState;
+use App\Constants\State\Goods\CategoryState;
+use App\Constants\State\Goods\GoodsState;
+use App\Constants\State\System\AttachmentState;
+use App\Constants\State\System\MenuState;
+use App\Constants\State\User\UserState;
+
 abstract class AbstractState implements InterfaceState
 {
     /**

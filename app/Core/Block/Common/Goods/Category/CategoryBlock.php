@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Common\Category;
+namespace App\Core\Block\Common\Goods\Category;
 
 use App\Core\Block\BaseBlock;
 use App\Core\Service\Goods\Category\CategoryService;

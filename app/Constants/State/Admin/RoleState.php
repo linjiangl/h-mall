@@ -8,7 +8,9 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Constants\State;
+namespace App\Constants\State\Admin;
+
+use App\Constants\State\AbstractState;
 
 class RoleState extends AbstractState
 {

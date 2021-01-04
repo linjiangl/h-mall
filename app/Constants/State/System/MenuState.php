@@ -8,9 +8,11 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Constants\State;
+namespace App\Constants\State\System;
 
-class CategoryState extends AbstractState
+use App\Constants\State\AbstractState;
+
+class MenuState extends AbstractState
 {
     // 状态
     const STATUS_DISABLED = 0;
@@ -19,8 +21,8 @@ class CategoryState extends AbstractState
     public static function getStatus(): array
     {
         return [
-            self::STATUS_DISABLED => '禁用',
-            self::STATUS_ENABLED => '正常',
+            self::STATUS_DISABLED => '已禁用',
+            self::STATUS_ENABLED => '已启用',
         ];
     }
 }

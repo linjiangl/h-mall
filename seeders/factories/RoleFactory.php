@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-use App\Constants\State\RoleState;
+use App\Constants\State\Admin\RoleState;
 use App\Core\Dao\Admin\Role\RoleDao;
 
 /**

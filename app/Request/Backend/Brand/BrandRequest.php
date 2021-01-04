@@ -28,6 +28,9 @@ class BrandRequest extends AbstractRequest
                 'logo' => 'required|string|max:255',
                 'status' => 'integer'
             ],
+            'post:delete' => [
+                'id' => 'required|integer|gt:0',
+            ],
         ];
         return $rules[$this->getScene()] ?? [];
     }
@@ -35,9 +38,10 @@ class BrandRequest extends AbstractRequest
     public function attributes(): array
     {
         return [
+            'id' => '品牌主键',
             'name' => '品牌名称',
-            'logo' => '品牌LOGO',
-            'status' => '状态'
+            'logo' => '品牌标志',
+            'status' => '品牌状态'
         ];
     }
 }

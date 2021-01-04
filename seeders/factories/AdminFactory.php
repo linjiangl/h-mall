@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-use App\Constants\State\AdminState;
+use App\Constants\State\Admin\AdminState;
 use App\Core\Service\Authorize\AdminAuthorizationService;
 
 class AdminFactory

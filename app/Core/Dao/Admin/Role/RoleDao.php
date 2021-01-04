@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Dao\Admin\Role;
 
-use App\Constants\State\RoleState;
+use App\Constants\State\Admin\RoleState;
 use App\Core\Dao\AbstractDao;
 use App\Model\Role\Role;
 

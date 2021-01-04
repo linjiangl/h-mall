@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Plugins\Bucket;
 
-use App\Constants\State\AttachmentState;
+use App\Constants\State\System\AttachmentState;
 use App\Exception\BadRequestException;
 
 class SamplesBucket

@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\User;
 
-use App\Constants\State\UserState;
+use App\Constants\State\User\UserState;
 use App\Model\Model;
 
 /**

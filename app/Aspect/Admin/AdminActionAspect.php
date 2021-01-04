@@ -12,6 +12,7 @@ namespace App\Aspect\Admin;
 
 use App\Controller\Backend\Admin\AdminController;
 use App\Controller\Backend\Admin\Role\RoleController;
+use App\Controller\Backend\Goods\Brand\BrandController;
 use App\Controller\Backend\Goods\Category\CategoryController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\User\UserController;
@@ -27,11 +28,19 @@ use Hyperf\Di\Exception\Exception;
 class AdminActionAspect extends AbstractAspect
 {
     public $classes = [
+        // goods
+        CategoryController::class . '::*Request',
+        BrandController::class . '::*Request',
+
+        // user
         UserController::class . '::*Request',
+
+        // admin
         AdminController::class . '::*Request',
-        MenuController::class . '::*Request',
         RoleController::class . '::*Request',
-        CategoryController::class . '::*Request'
+
+        // system
+        MenuController::class . '::*Request',
     ];
 
     /**

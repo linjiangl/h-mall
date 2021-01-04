@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-use App\Constants\State\UserState;
+use App\Constants\State\User\UserState;
 use App\Core\Service\Authorize\UserAuthorizationService;
 use App\Model\User\User;
 use Faker\Factory;

@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Backend\System;
 
-use App\Constants\State\MenuState;
-use App\Constants\State\RoleState;
+use App\Constants\State\System\MenuState;
+use App\Constants\State\Admin\RoleState;
 use App\Core\Dao\Admin\Role\RoleDao;
 use App\Core\Dao\System\MenuDao;
 use HyperfTest\Backend\BackendHttpTestCase;

@@ -12,7 +12,7 @@ namespace App\Controller\Backend\Goods\Category;
 
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
-use App\Core\Block\Common\Category\CategoryBlock;
+use App\Core\Block\Common\Goods\Category\CategoryBlock;
 use App\Request\Backend\Category\CategoryRequest;
 
 class CategoryController extends BackendController
