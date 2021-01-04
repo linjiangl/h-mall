@@ -13,7 +13,7 @@ namespace App\Controller\Backend\Goods\Brand;
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\Brand\BrandBlock;
-use App\Request\Backend\Brand\BrandRequest;
+use App\Request\Backend\Goods\BrandRequest;
 
 class BrandController extends BackendController
 {

@@ -17,6 +17,9 @@ use App\Controller\Backend\Goods\Category\CategoryController;
 use App\Controller\Backend\Admin\AdminActionController;
 use App\Controller\Backend\Admin\AdminLoginController;
 use App\Controller\Backend\Goods\GoodsController;
+use App\Controller\Backend\Goods\Parameter\ParameterController;
+use App\Controller\Backend\Goods\Parameter\ParameterOptionsController;
+use App\Controller\Backend\Goods\Service\ServiceController;
 use App\Controller\Backend\Goods\Spec\SpecController;
 use App\Controller\Backend\Goods\Spec\SpecValueController;
 use App\Controller\Backend\System\DistrictController;
@@ -98,6 +101,27 @@ Router::addGroup('/backend', function () {
     Router::post('/brand/create', [BrandController::class, 'storeRequest']);
     Router::post('/brand/update', [BrandController::class, 'updateRequest']);
     Router::post('/brand/delete', [BrandController::class, 'destroyRequest']);
+
+    // goods service
+    Router::post('/goodsService/list', [ServiceController::class, 'index']);
+    Router::post('/goodsService/detail', [ServiceController::class, 'show']);
+    Router::post('/goodsService/create', [ServiceController::class, 'storeRequest']);
+    Router::post('/goodsService/update', [ServiceController::class, 'updateRequest']);
+    Router::post('/goodsService/delete', [ServiceController::class, 'destroyRequest']);
+
+    // parameter
+    Router::post('/parameter/list', [ParameterController::class, 'index']);
+    Router::post('/parameter/detail', [ParameterController::class, 'show']);
+    Router::post('/parameter/create', [ParameterController::class, 'storeRequest']);
+    Router::post('/parameter/update', [ParameterController::class, 'updateRequest']);
+    Router::post('/parameter/delete', [ParameterController::class, 'destroyRequest']);
+
+    // parameter options
+    Router::post('/parameterOptions/list', [ParameterOptionsController::class, 'index']);
+    Router::post('/parameterOptions/detail', [ParameterOptionsController::class, 'show']);
+    Router::post('/parameterOptions/create', [ParameterOptionsController::class, 'storeRequest']);
+    Router::post('/parameterOptions/update', [ParameterOptionsController::class, 'updateRequest']);
+    Router::post('/parameterOptions/delete', [ParameterOptionsController::class, 'destroyRequest']);
 
     // goods
     Router::post('/goods/list', [GoodsController::class, 'index']);

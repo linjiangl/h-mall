@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Request\Backend\System;
 
-use App\Constants\State\BooleanState;
 use App\Constants\State\Admin\RoleState;
+use App\Constants\State\BooleanState;
 use App\Request\AbstractRequest;
 
 class RoleRequest extends AbstractRequest

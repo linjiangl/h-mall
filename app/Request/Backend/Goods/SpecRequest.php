@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Request\Backend\Spec;
+namespace App\Request\Backend\Goods;
 
 use App\Request\AbstractRequest;
 

@@ -12,7 +12,7 @@ namespace App\Controller\Backend\Goods\Spec;
 
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\Spec\SpecBlock;
-use App\Request\Backend\Spec\SpecRequest;
+use App\Request\Backend\Goods\SpecRequest;
 
 class SpecController extends BackendController
 {

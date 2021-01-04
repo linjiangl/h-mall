@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Dao\Goods;
+namespace App\Core\Dao\Goods\Service;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Goods\GoodsService;
 
-class GoodsServiceDao extends AbstractDao
+class ServiceDao extends AbstractDao
 {
     protected string $model = GoodsService::class;
 
