@@ -17,6 +17,12 @@ class ServiceBlock extends BaseBlock
 {
     protected string $service = ServiceService::class;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setSortingToOrderBy();
+    }
+
     protected function handleSoftDelete(): void
     {
     }
