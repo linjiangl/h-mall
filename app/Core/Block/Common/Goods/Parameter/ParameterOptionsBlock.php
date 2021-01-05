@@ -16,4 +16,14 @@ use App\Core\Service\Goods\Parameter\ParameterOptionsService;
 class ParameterOptionsBlock extends BaseBlock
 {
     protected string $service = ParameterOptionsService::class;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setSortingToOrderBy();
+    }
+
+    protected function handleSoftDelete(): void
+    {
+    }
 }

@@ -285,15 +285,6 @@ abstract class AbstractBlock
         return intval($this->request->post($this->primaryKey));
     }
 
-
-    /**
-     * 设置自定义排序
-     */
-    protected function setSortingToOrderBy(): void
-    {
-        $this->orderBy = 'sorting asc, id desc';
-    }
-
     /**
      * 获取数据
      * @return mixed
@@ -312,6 +303,14 @@ abstract class AbstractBlock
     {
         $this->checkIsRead = $isRead;
         $this->userIdColumnName = $userIdColumnName;
+    }
+
+    /**
+     * 设置自定义排序
+     */
+    protected function setSortingToOrderBy(): void
+    {
+        $this->orderBy = 'sorting asc, id desc';
     }
 
     /**

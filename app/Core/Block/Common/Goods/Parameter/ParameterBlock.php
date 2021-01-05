@@ -16,4 +16,8 @@ use App\Core\Service\Goods\Parameter\ParameterService;
 class ParameterBlock extends BaseBlock
 {
     protected string $service = ParameterService::class;
+
+    protected function handleSoftDelete(): void
+    {
+    }
 }
