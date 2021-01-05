@@ -19,6 +19,5 @@ class ServiceBlock extends BaseBlock
 
     protected function handleSoftDelete(): void
     {
-
     }
 }

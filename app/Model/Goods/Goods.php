@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\Goods;
 
-use App\Model\Spec\Spec;
 use App\Model\Model;
+use App\Model\Spec\Spec;
 
 /**
  * @property int $id
