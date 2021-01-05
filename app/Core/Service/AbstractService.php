@@ -38,6 +38,12 @@ abstract class AbstractService
     protected array $authorize = [];
 
     /**
+     * 软删除
+     * @var bool
+     */
+    protected bool $softDelete = true;
+
+    /**
      * 获取分页列表
      * @param array $condition 查询条件
      * @param int $page 当前页
@@ -100,7 +106,7 @@ abstract class AbstractService
      */
     public function remove(int $id): bool
     {
-        return $this->service()->withAuthorize($this->authorize)->remove($id);
+        return $this->service()->withAuthorize($this->authorize)->remove($id, $this->softDelete);
     }
 
     /**
@@ -117,12 +123,11 @@ abstract class AbstractService
     /**
      * 批量删除
      * @param array $selectIds
-     * @param bool $softDelete
      * @return bool
      */
-    public function batchRemove(array $selectIds, bool $softDelete = true): bool
+    public function batchRemove(array $selectIds): bool
     {
-        $this->service()->batchRemove($selectIds, $softDelete);
+        $this->service()->batchRemove($selectIds, $this->softDelete);
         return true;
     }
 

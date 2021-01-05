@@ -16,4 +16,9 @@ use App\Core\Service\Goods\Service\ServiceService;
 class ServiceBlock extends BaseBlock
 {
     protected string $service = ServiceService::class;
+
+    protected function handleSoftDelete(): void
+    {
+
+    }
 }

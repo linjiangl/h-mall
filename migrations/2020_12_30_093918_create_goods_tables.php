@@ -220,6 +220,7 @@ class CreateGoodsTables extends Migration
             $table->integerIncrements('id');
             $table->string('name', 100)->comment('商品服务名称');
             $table->text('description')->comment('商品服务的描述');
+            $table->tinyInteger('sorting', false, true)->default(0)->comment('排序');
             $table->integer('created_time', false, true)->default(0);
             $table->integer('updated_time', false, true)->default(0);
         });

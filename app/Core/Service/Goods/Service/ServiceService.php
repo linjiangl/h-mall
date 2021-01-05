@@ -16,4 +16,6 @@ use App\Core\Service\AbstractService;
 class ServiceService extends AbstractService
 {
     protected string $dao = ServiceDao::class;
+
+    protected bool $softDelete = false;
 }
