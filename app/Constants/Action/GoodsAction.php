@@ -82,32 +82,32 @@ class GoodsAction extends AbstractConstants
     const SERVICE_DELETE = 'service_delete';
 
     /**
-     * @Message("创建商品参数")
+     * @Message("创建商品属性")
      */
     const PARAMETER_CREATE = 'parameter_create';
 
     /**
-     * @Message("修改商品参数")
+     * @Message("修改商品属性")
      */
     const PARAMETER_UPDATE = 'parameter_update';
 
     /**
-     * @Message("删除商品参数")
+     * @Message("删除商品属性")
      */
     const PARAMETER_DELETE = 'parameter_delete';
 
     /**
-     * @Message("创建商品参数选项")
+     * @Message("创建商品属性选项")
      */
     const PARAMETER_OPTION_CREATE = 'parameter_option_create';
 
     /**
-     * @Message("修改商品参数选项")
+     * @Message("修改商品属性选项")
      */
     const PARAMETER_OPTION_UPDATE = 'parameter_option_update';
 
     /**
-     * @Message("删除商品参数选项")
+     * @Message("删除商品属性选项")
      */
     const PARAMETER_OPTION_DELETE = 'parameter_option_delete';
 }

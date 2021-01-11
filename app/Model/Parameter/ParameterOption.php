@@ -44,4 +44,14 @@ class ParameterOption extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'parameter_id' => 'integer', 'type' => 'integer', 'sorting' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+
+    public function getValuesAttribute($value)
+    {
+        return $value ? explode(',', $value) : [];
+    }
+
+    public function setValuesAttribute($value)
+    {
+        $this->attributes['values'] = $value ? implode(',', $value) : '';
+    }
 }
