@@ -17,6 +17,10 @@ class ParameterOptionsBlock extends BaseBlock
 {
     protected string $service = ParameterOptionsService::class;
 
+    protected array $query = [
+        '=' => ['parameter_id']
+    ];
+
     public function __construct()
     {
         parent::__construct();
