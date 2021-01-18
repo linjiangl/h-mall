@@ -20,6 +20,8 @@ class SpecValueService extends AbstractService
 {
     protected string $dao = SpecValueDao::class;
 
+    protected bool $softDelete = false;
+
     public function remove(int $id): bool
     {
         $goodsSkuSpecValueDao = new GoodsSkuSpecValueDao();
