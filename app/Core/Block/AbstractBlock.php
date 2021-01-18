@@ -357,7 +357,9 @@ abstract class AbstractBlock
      */
     protected function beforeBuildQuery(): void
     {
-        $this->with = isset($this->defaultSinceWith[$this->since][$this->action]) ? $this->defaultSinceWith[$this->since][$this->action] : [];
+        if (empty($this->with)) {
+            $this->with = isset($this->defaultSinceWith[$this->since][$this->action]) ? $this->defaultSinceWith[$this->since][$this->action] : [];
+        }
         $this->condition = $this->handleCondition();
         $this->groupBy = [];
     }

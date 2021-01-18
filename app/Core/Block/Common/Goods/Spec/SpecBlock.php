@@ -16,4 +16,12 @@ use App\Core\Service\Goods\Spec\SpecService;
 class SpecBlock extends BaseBlock
 {
     protected string $service = SpecService::class;
+
+    protected array $defaultSinceWith = [
+        'backend' => [
+            'index' => ['values'],
+            'show' => ['values'],
+        ],
+    ];
+
 }
