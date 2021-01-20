@@ -27,6 +27,9 @@ class SpecRequest extends AbstractRequest
                 'name' => 'required|string|max:30',
                 'sorting' => 'integer|max:100'
             ],
+            'post:getListBySpecId' => $rules = [
+                'spec_id' => 'required|integer|gt:0',
+            ],
         ];
         return $rules[$this->getScene()] ?? [];
     }
@@ -37,6 +40,7 @@ class SpecRequest extends AbstractRequest
             'shop_id' => '店铺ID',
             'name' => '规格名称',
             'sorting' => '排序',
+            'spec_id' => '规格ID',
         ];
     }
 }

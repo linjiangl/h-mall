@@ -12,11 +12,13 @@ namespace App\Controller\Backend\Goods\Spec;
 
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\Spec\SpecValueBlock;
+use App\Request\Backend\Goods\SpecRequest;
 
 class SpecValueController extends BackendController
 {
-    public function getListBySpecId(): array
+    public function getListBySpecId(SpecRequest $request): array
     {
+        $request->validated();
         return $this->block()->getListBySpecId();
     }
 
