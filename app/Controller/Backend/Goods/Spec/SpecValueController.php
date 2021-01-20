@@ -15,6 +15,11 @@ use App\Core\Block\Common\Goods\Spec\SpecValueBlock;
 
 class SpecValueController extends BackendController
 {
+    public function getListBySpecId(): array
+    {
+        return $this->block()->getListBySpecId();
+    }
+
     protected function block(): SpecValueBlock
     {
         return new SpecValueBlock();

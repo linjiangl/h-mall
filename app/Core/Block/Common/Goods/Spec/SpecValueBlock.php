@@ -16,4 +16,11 @@ use App\Core\Service\Goods\Spec\SpecValueService;
 class SpecValueBlock extends BaseBlock
 {
     protected string $service = SpecValueService::class;
+
+    public function getListBySpecId(): array
+    {
+        $specId = $this->request->post('spec_id');
+        $service = new SpecValueService();
+        return $service->getListBySpecId(intval($specId));
+    }
 }

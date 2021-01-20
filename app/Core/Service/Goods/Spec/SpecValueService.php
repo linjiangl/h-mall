@@ -22,6 +22,12 @@ class SpecValueService extends AbstractService
 
     protected bool $softDelete = false;
 
+    public function getListBySpecId(int $specId): array
+    {
+        $dao = new SpecValueDao();
+        return $dao->getListBySpecId($specId);
+    }
+
     public function remove(int $id): bool
     {
         $goodsSkuSpecValueDao = new GoodsSkuSpecValueDao();

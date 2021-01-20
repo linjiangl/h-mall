@@ -23,5 +23,4 @@ class SpecBlock extends BaseBlock
             'show' => ['values'],
         ],
     ];
-
 }

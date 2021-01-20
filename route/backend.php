@@ -85,6 +85,7 @@ Router::addGroup('/backend', function () {
     Router::post('/specValue/create', [SpecValueController::class, 'store']);
     Router::post('/specValue/update', [SpecValueController::class, 'update']);
     Router::post('/specValue/delete', [SpecValueController::class, 'destroy']);
+    Router::post('/specValue/getListBySpecId', [SpecValueController::class, 'getListBySpecId']);
 
     // category
     Router::post('/category/list', [CategoryController::class, 'index']);

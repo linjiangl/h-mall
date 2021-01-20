@@ -23,6 +23,6 @@ class SpecValueDao extends AbstractDao
 
     public function getListBySpecId(int $specId): array
     {
-        return $this->getListByCondition([['spec_id', '=', $specId]]);
+        return $this->getListByCondition([['spec_id', '=', $specId]], [], '*', 'sorting asc,id asc');
     }
 }
