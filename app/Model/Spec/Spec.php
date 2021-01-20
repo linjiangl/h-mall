@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Spec;
 
 use App\Model\Model;
+use function Symfony\Component\String\s;
 
 /**
  * @property int $id
@@ -47,6 +48,6 @@ class Spec extends Model
 
     public function values()
     {
-        return $this->hasMany(SpecValue::class)->orderByRaw('sorting asc,id asc');
+        return $this->hasMany(SpecValue::class)->orderByRaw($this->orderByToSorting);
     }
 }

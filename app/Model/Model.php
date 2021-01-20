@@ -18,6 +18,8 @@ abstract class Model extends BaseModel implements CacheableInterface
 {
     use Cacheable;
 
+    protected string $orderByToSorting = 'sorting asc,id asc';
+
     public function freshTimestamp(): string
     {
         return (string)time();
