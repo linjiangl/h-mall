@@ -47,6 +47,6 @@ class Spec extends Model
 
     public function values()
     {
-        return $this->hasMany(SpecValue::class)->orderBy('sorting', 'asc');
+        return $this->hasMany(SpecValue::class)->orderByRaw('sorting asc,id asc');
     }
 }
