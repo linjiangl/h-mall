@@ -12,6 +12,9 @@ namespace App\Model\User;
 
 use App\Constants\State\User\UserState;
 use App\Model\Model;
+use Hyperf\Database\Model\Collection;
+use Hyperf\Database\Model\Relations\HasMany;
+use Hyperf\Database\Model\Relations\HasOne;
 
 /**
  * @property int $id
@@ -33,10 +36,10 @@ use App\Model\Model;
  * @property int $username_updated_time 用户名设置时间
  * @property int $created_time
  * @property int $updated_time
- * @property-read \Hyperf\Database\Model\Collection|\App\Model\User\UserAddress[] $address
- * @property-read  $appends
- * @property-read \App\Model\User\UserVipCard $vipCard
- * @property-read \App\Model\User\UserWallet $wallet
+ * @property-read Collection|UserAddress[] $address
+ * @property-read array $appends
+ * @property-read UserVipCard $vipCard
+ * @property-read UserWallet $wallet
  */
 class User extends Model
 {
@@ -65,22 +68,22 @@ class User extends Model
 
     protected $appends = ['appends'];
 
-    public function getAppendsAttribute() : array
+    public function getAppendsAttribute(): array
     {
         return UserState::handleMessages(['status' => $this->status]);
     }
 
-    public function vipCard()
+    public function vipCard(): HasOne
     {
         return $this->hasOne(UserVipCard::class);
     }
 
-    public function wallet()
+    public function wallet(): HasOne
     {
         return $this->hasOne(UserWallet::class);
     }
 
-    public function address()
+    public function address(): HasMany
     {
         return $this->hasMany(UserAddress::class);
     }

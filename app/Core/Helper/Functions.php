@@ -192,6 +192,6 @@ if (! function_exists('database_text')) {
         if ($schema == 'en') {
             return empty($data) ? '' : json_encode($data, JSON_UNESCAPED_UNICODE);
         }
-        return empty($data) ? [] : json_decode($data);
+        return empty($data) ? [] : json_decode($data, true);
     }
 }

@@ -11,7 +11,8 @@ declare(strict_types=1);
 namespace App\Model\Spec;
 
 use App\Model\Model;
-use function Symfony\Component\String\s;
+use Hyperf\Database\Model\Collection;
+use Hyperf\Database\Model\Relations\HasMany;
 
 /**
  * @property int $id
@@ -21,7 +22,7 @@ use function Symfony\Component\String\s;
  * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
- * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\SpecValue[] $values
+ * @property-read Collection|SpecValue[] $values
  */
 class Spec extends Model
 {
@@ -46,7 +47,7 @@ class Spec extends Model
      */
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function values()
+    public function values(): HasMany
     {
         return $this->hasMany(SpecValue::class)->orderByRaw($this->orderByToSorting);
     }

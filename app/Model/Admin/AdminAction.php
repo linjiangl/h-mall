@@ -22,7 +22,7 @@ use App\Model\Model;
  * @property int $status 状态 -1:已删除
  * @property int $created_time
  * @property int $updated_time
- * @property  $remark
+ * @property array $remark
  */
 class AdminAction extends Model
 {
@@ -47,13 +47,13 @@ class AdminAction extends Model
      */
     protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function getRemarkAttribute($value)
+    public function getRemarkAttribute($value): array
     {
-        return $value ? json_decode($value, true) : '';
+        return database_text($value, 'de');
     }
 
     public function setRemarkAttribute($value)
     {
-        $this->attributes['remark'] = $value ? json_encode($value, JSON_UNESCAPED_UNICODE) : '';
+        $this->attributes['remark'] = database_text($value);
     }
 }

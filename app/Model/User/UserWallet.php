@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\User;
 
 use App\Model\Model;
+use Hyperf\Database\Model\Relations\BelongsTo;
 
 /**
  * @property int $user_id
@@ -47,7 +48,7 @@ class UserWallet extends Model
      */
     protected $casts = ['user_id' => 'integer', 'integral' => 'integer', 'balance' => 'float', 'freeze_integral' => 'integer', 'freeze_balance' => 'float', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

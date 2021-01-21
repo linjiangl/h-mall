@@ -15,7 +15,7 @@ namespace App\Model;
  * @property string $key
  * @property int $created_time
  * @property int $updated_time
- * @property  $value
+ * @property array $value
  */
 class Setting extends Model
 {
@@ -40,7 +40,7 @@ class Setting extends Model
      */
     protected $casts = ['id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function getValueAttribute($value)
+    public function getValueAttribute($value): array
     {
         return database_text($value, 'de');
     }

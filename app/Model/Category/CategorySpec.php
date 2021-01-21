@@ -12,6 +12,7 @@ namespace App\Model\Category;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
+use Hyperf\Database\Model\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -19,7 +20,7 @@ use App\Model\Spec\Spec;
  * @property int $spec_id
  * @property int $created_time
  * @property int $updated_time
- * @property-read \App\Model\Spec\Spec $spec
+ * @property-read Spec $spec
  */
 class CategorySpec extends Model
 {
@@ -44,7 +45,7 @@ class CategorySpec extends Model
      */
     protected $casts = ['id' => 'integer', 'category_id' => 'integer', 'spec_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function spec()
+    public function spec(): BelongsTo
     {
         return $this->belongsTo(Spec::class);
     }

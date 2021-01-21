@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\User;
 
 use App\Model\Model;
+use Hyperf\Database\Model\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -30,7 +31,7 @@ use App\Model\Model;
  * @property int $is_default 是否默认 0:否, 1:是
  * @property int $created_time
  * @property int $updated_time
- * @property-read \App\Model\User\User $user
+ * @property-read User $user
  */
 class UserAddress extends Model
 {
@@ -55,7 +56,7 @@ class UserAddress extends Model
      */
     protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'province_id' => 'integer', 'city_id' => 'integer', 'district_id' => 'integer', 'street_id' => 'integer', 'is_default' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

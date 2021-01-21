@@ -12,6 +12,7 @@ namespace App\Model\Goods;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
+use Hyperf\Database\Model\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -65,7 +66,7 @@ class Goods extends Model
      */
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'clicks' => 'integer', 'min_price' => 'float', 'max_price' => 'float', 'status' => 'integer', 'is_show' => 'integer', 'is_on_shelf' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'achieve_amount' => 'float', 'recommend_way' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function specs()
+    public function specs(): BelongsToMany
     {
         return $this->belongsToMany(Spec::class, (new GoodsSpec())->getTable(), 'goods_id', 'spec_id');
     }
