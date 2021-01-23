@@ -197,6 +197,8 @@ class CreateGoodsTables extends Migration
             $table->integerIncrements('id');
             $table->integer('shop_id', false, true);
             $table->integer('goods_id', false, true);
+            $table->string('sku_name', 255)->default('')->comment('商品sku名称');
+            $table->string('sku_no', 64)->default('')->comment('商品sku编码');
             $table->decimal('sale_price', 10, 2)->unsigned()->default(0)->comment('销售价格');
             $table->decimal('market_price', 10, 2)->unsigned()->default(0)->comment('划线价格');
             $table->decimal('cost_price', 10, 2)->unsigned()->default(0)->comment('成本价格');

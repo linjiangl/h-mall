@@ -16,6 +16,8 @@ use App\Model\Model;
  * @property int $id
  * @property int $shop_id
  * @property int $goods_id
+ * @property string $sku_name 商品sku名称
+ * @property string $sku_no 商品sku编码
  * @property float $sale_price 销售价格
  * @property float $market_price 划线价格
  * @property float $cost_price 成本价格
@@ -42,7 +44,7 @@ class GoodsSku extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'goods_id', 'sale_price', 'market_price', 'cost_price', 'stock', 'stock_alarm', 'clicks', 'sales', 'virtual_sales', 'image', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'shop_id', 'goods_id', 'sku_name', 'sku_no', 'sale_price', 'market_price', 'cost_price', 'stock', 'stock_alarm', 'clicks', 'sales', 'virtual_sales', 'image', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
