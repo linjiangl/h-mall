@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Service\Goods\Types;
 
 /**
- * 普通商品
+ * 实物商品
  */
 class GeneralService extends AbstractTypesService
 {

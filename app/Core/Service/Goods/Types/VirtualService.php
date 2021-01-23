@@ -13,7 +13,7 @@ namespace App\Core\Service\Goods\Types;
 /**
  * 优惠券商品
  */
-class CouponService extends AbstractTypesService
+class VirtualService extends AbstractTypesService
 {
     public function __construct(array $data, int $id = 0)
     {

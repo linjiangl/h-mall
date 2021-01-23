@@ -14,7 +14,7 @@ use App\Constants\State\Goods\GoodsState;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Goods\Types\AbstractTypesService;
-use App\Core\Service\Goods\Types\CouponService;
+use App\Core\Service\Goods\Types\VirtualService;
 use App\Core\Service\Goods\Types\GeneralService;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
@@ -26,7 +26,7 @@ class GoodsService extends AbstractService
 
     protected array $mapClass = [
         GoodsState::TYPE_GENERAL => GeneralService::class,
-        GoodsState::TYPE_COUPON => CouponService::class
+        GoodsState::TYPE_VIRTUAL => VirtualService::class
     ];
 
     public function create(array $data): int

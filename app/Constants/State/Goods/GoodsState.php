@@ -15,26 +15,26 @@ use App\Constants\State\AbstractState;
 class GoodsState extends AbstractState
 {
     // 状态
-    const STATUS_DISABLED = 0;
-    const STATUS_ENABLED = 1;
+    const STATUS_OFF_SALE = 0;
+    const STATUS_ON_SALE = 1;
 
     // 类型
     const TYPE_GENERAL = 'general';
-    const TYPE_COUPON = 'coupon';
+    const TYPE_VIRTUAL = 'virtual';
 
     public static function getStatus(): array
     {
         return [
-            self::STATUS_DISABLED => '下架',
-            self::STATUS_ENABLED => '上架',
+            self::STATUS_OFF_SALE => '仓库中',
+            self::STATUS_ON_SALE => '销售中',
         ];
     }
 
     public static function getTypes(): array
     {
         return [
-            self::TYPE_GENERAL => '普通',
-            self::TYPE_COUPON => '优惠券',
+            self::TYPE_GENERAL => '实物商品',
+            self::TYPE_VIRTUAL => '虚拟商品',
         ];
     }
 }
