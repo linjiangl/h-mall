@@ -129,5 +129,5 @@ Router::addGroup('/backend', function () {
     Router::post('/goods/detail', [GoodsController::class, 'show']);
     Router::post('/goods/create', [GoodsController::class, 'store']);
     Router::post('/goods/update', [GoodsController::class, 'update']);
-    Router::post('/goods/delete', [GoodsController::class, 'destroy']);
+    Router::post('/goods/delete', [GoodsController::class, 'batchDestroyRequest']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

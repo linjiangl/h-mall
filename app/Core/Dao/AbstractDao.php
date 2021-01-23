@@ -231,7 +231,7 @@ abstract class AbstractDao
         $model = new $this->model();
         $query = $this->model::query()->whereIn($model->getKeyName(), $selectIds);
         if ($softDelete) {
-            $query->update(['status' => -1]);
+            $query->update(['status' => -1, 'deleted_time' => time()]);
         } else {
             $query->delete();
         }
