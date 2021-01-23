@@ -22,6 +22,31 @@ class GoodsAction extends AbstractConstants
     use TraitConstants;
 
     /**
+     * @Message("创建商品")
+     */
+    const GOODS_CREATE = 'goods_create';
+
+    /**
+     * @Message("修改商品")
+     */
+    const GOODS_UPDATE = 'goods_update';
+
+    /**
+     * @Message("修改商品状态")
+     */
+    const GOODS_UPDATE_STATUS = 'goods_update_status';
+
+    /**
+     * @Message("删除商品")
+     */
+    const GOODS_DELETE = 'goods_delete';
+
+    /**
+     * @Message("商品加入回收站")
+     */
+    const GOODS_RECYCLE = 'goods_recycle';
+
+    /**
      * @Message("创建分类")
      */
     const CATEGORY_CREATE = 'category_create';

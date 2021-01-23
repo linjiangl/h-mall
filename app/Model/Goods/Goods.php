@@ -11,6 +11,9 @@ declare(strict_types=1);
 namespace App\Model\Goods;
 
 use App\Model\Model;
+use App\Model\Spec\Spec;
+use Hyperf\Database\Model\Collection;
+use Hyperf\Database\Model\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -45,6 +48,7 @@ use App\Model\Model;
  * @property int $created_time
  * @property int $updated_time
  * @property int $deleted_time
+ * @property Collection|GoodsSpec[] $specs
  */
 class Goods extends Model
 {
@@ -68,4 +72,10 @@ class Goods extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'sku_id' => 'integer', 'sale_price' => 'float', 'market_price' => 'float', 'cost_price' => 'float', 'achieve_price' => 'float', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_on_sale' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+
+
+    public function specs(): BelongsToMany
+    {
+        return $this->belongsToMany(GoodsSpec::class, (new Spec())->getTable(), 'goods_id', 'spec_id');
+    }
 }

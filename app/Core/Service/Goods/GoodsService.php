@@ -43,7 +43,7 @@ class GoodsService extends AbstractService
     public function update(int $id, array $data): array
     {
         try {
-            $service = $this->make($data, $id, $data['type']);
+            $service = $this->make($data, $id, $data['type'] ?? GoodsState::TYPE_GENERAL);
             return $service->update();
         } catch (Throwable $e) {
             write_logs('保存失败', $data);

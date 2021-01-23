@@ -61,7 +61,8 @@ abstract class AbstractTypesService implements InterfaceTypesService
 
     public function update(): array
     {
-        return $this->goods;
+        $goodsDao = new GoodsDao();
+        return $goodsDao->update($this->goodsId, $this->goods);
     }
 
     protected function handleGoodsData(): array
