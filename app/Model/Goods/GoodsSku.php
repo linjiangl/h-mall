@@ -16,12 +16,14 @@ use App\Model\Model;
  * @property int $id
  * @property int $shop_id
  * @property int $goods_id
- * @property int $coupon_id 优惠券ID
- * @property float $price 金额
- * @property float $original_price 原价
+ * @property float $sale_price 销售价格
+ * @property float $market_price 划线价格
+ * @property float $cost_price 成本价格
  * @property int $stock 库存
- * @property int $sales 销量
+ * @property int $stock_alarm 库存预警
  * @property int $clicks 点击量
+ * @property int $sales 销量
+ * @property int $virtual_sales 虚拟销量
  * @property string $image 图片
  * @property int $created_time
  * @property int $updated_time
@@ -40,12 +42,12 @@ class GoodsSku extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'goods_id', 'coupon_id', 'price', 'original_price', 'stock', 'sales', 'clicks', 'image', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'shop_id', 'goods_id', 'sale_price', 'market_price', 'cost_price', 'stock', 'stock_alarm', 'clicks', 'sales', 'virtual_sales', 'image', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'goods_id' => 'integer', 'coupon_id' => 'integer', 'price' => 'float', 'original_price' => 'float', 'stock' => 'integer', 'sales' => 'integer', 'clicks' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'goods_id' => 'integer', 'sale_price' => 'float', 'market_price' => 'float', 'cost_price' => 'float', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }
