@@ -29,9 +29,6 @@ use App\Model\Model;
  * @property string $introduction 促销语
  * @property string $keywords 关键词
  * @property string $type 商品类型 general:普通, virtual:虚拟
- * @property string $unit 单位
- * @property float $weight 重量（单位g）
- * @property float $volume 体积（单位立方米）
  * @property int $clicks 点击量
  * @property int $sales 销量
  * @property int $virtual_sales 虚拟销量
@@ -63,12 +60,12 @@ class Goods extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'sku_id', 'name', 'sale_price', 'market_price', 'cost_price', 'achieve_price', 'stock', 'stock_alarm', 'introduction', 'keywords', 'type', 'unit', 'weight', 'volume', 'clicks', 'sales', 'virtual_sales', 'status', 'recommend_way', 'is_on_sale', 'is_consume_discount', 'is_free_shipping', 'buy_max', 'buy_min', 'refund_type', 'images', 'video_url', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'sku_id', 'name', 'sale_price', 'market_price', 'cost_price', 'achieve_price', 'stock', 'stock_alarm', 'introduction', 'keywords', 'type', 'clicks', 'sales', 'virtual_sales', 'status', 'recommend_way', 'is_on_sale', 'is_consume_discount', 'is_free_shipping', 'buy_max', 'buy_min', 'refund_type', 'images', 'video_url', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'sku_id' => 'integer', 'sale_price' => 'float', 'market_price' => 'float', 'cost_price' => 'float', 'achieve_price' => 'float', 'stock' => 'integer', 'stock_alarm' => 'integer', 'weight' => 'float', 'volume' => 'float', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_on_sale' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'sku_id' => 'integer', 'sale_price' => 'float', 'market_price' => 'float', 'cost_price' => 'float', 'achieve_price' => 'float', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_on_sale' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

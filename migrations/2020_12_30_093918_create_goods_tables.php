@@ -120,9 +120,6 @@ class CreateGoodsTables extends Migration
             $table->string('introduction', 255)->default('')->comment('促销语');
             $table->string('keywords', 255)->default('')->comment('关键词');
             $table->string('type', 30)->default('general')->comment('商品类型 general:普通, virtual:虚拟');
-            $table->string('unit', 30)->default('件')->comment('单位');
-            $table->decimal('weight', 10, 2)->unsigned()->default(0)->comment('重量（单位g）');
-            $table->decimal('volume', 10, 2)->unsigned()->default(0)->comment('体积（单位立方米）');
             $table->integer('clicks', false, true)->default(0)->comment('点击量');
             $table->integer('sales', false, true)->default(0)->comment('销量');
             $table->integer('virtual_sales', false, true)->default(0)->comment('虚拟销量');
@@ -158,6 +155,8 @@ class CreateGoodsTables extends Migration
             $table->integerIncrements('id');
             $table->integer('goods_id', false, true);
             $table->string('goods_unit', 30)->default('')->comment('商品单位');
+            $table->decimal('goods_weight', 10, 2)->unsigned()->default(0)->comment('重量（单位g）');
+            $table->decimal('goods_volume', 10, 2)->unsigned()->default(0)->comment('体积（单位立方米）');
             $table->string('goods_service_ids', 255)->default('')->comment('商品服务');
             $table->text('parameter')->comment('商品参数');
             $table->mediumText('goods_content')->comment('商品详情');
