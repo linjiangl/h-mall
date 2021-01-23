@@ -340,7 +340,6 @@ abstract class AbstractBlock
                 // 排序
                 $sort = $this->request->post('sorter', '');
                 if ($sort) {
-                    $sort = json_decode($sort, true);
                     $orderBy = '';
                     foreach ($sort as $key => $value) {
                         $value = str_replace('end', '', $value);
