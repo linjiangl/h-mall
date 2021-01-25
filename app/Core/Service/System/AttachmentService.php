@@ -22,12 +22,13 @@ class AttachmentService extends AbstractService
 {
     protected string $dao = AttachmentDao::class;
 
-    public function getInfoByMd5(string $md5): ?Attachment
+    public function getInfoByEncrypt(string $encrypt): ?Attachment
     {
         try {
             $dao = new AttachmentDao();
-            return $dao->getInfoByMd5($md5);
+            return $dao->getInfoByEncrypt($encrypt);
         } catch (Throwable $e) {
+            print_r([$encrypt, $e->getMessage()]);
             return null;
         }
     }
@@ -43,9 +44,9 @@ class AttachmentService extends AbstractService
     public function createUpload(array $fileData, string $hash, string $key, string $system = AttachmentState::SYSTEM_QINIU): int
     {
         $config = config('custom')['attachment'];
-        $md5 = '';
-        if ($fileData['size'] <= $config['check_md5'] && file_exists($fileData['tmp_file'])) {
-            $md5 = md5_file($fileData['tmp_file']);
+        $encrypt = '';
+        if ($fileData['size'] <= $config['check_encrypt_size'] && file_exists($fileData['tmp_file'])) {
+            $encrypt = md5_file($fileData['tmp_file']);
         }
 
         $data = [
@@ -55,7 +56,7 @@ class AttachmentService extends AbstractService
             'hash' => $hash,
             'key' => $key,
             'index' => $this->generateIndex($key),
-            'md5' => $md5,
+            'encrypt' => $encrypt,
             'status' => AttachmentState::STATUS_ENABLED
         ];
         return $this->create($data);

@@ -26,8 +26,8 @@ class AttachmentDao extends AbstractDao
         return $this->getInfoByCondition([['index', '=', $index]]);
     }
 
-    public function getInfoByMd5(string $md5): Attachment
+    public function getInfoByEncrypt(string $encrypt): Attachment
     {
-        return $this->getInfoByCondition([['md5', '=', $md5]]);
+        return $this->getInfoByCondition([['encrypt', '=', $encrypt]]);
     }
 }
