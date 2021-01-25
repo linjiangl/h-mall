@@ -28,7 +28,6 @@ class AttachmentService extends AbstractService
             $dao = new AttachmentDao();
             return $dao->getInfoByEncrypt($encrypt);
         } catch (Throwable $e) {
-            print_r([$encrypt, $e->getMessage()]);
             return null;
         }
     }
