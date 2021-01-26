@@ -38,6 +38,11 @@ class ServiceController extends BackendController
         return $this->destroy();
     }
 
+    public function all(): array
+    {
+        return $this->block()->all();
+    }
+
     protected function block(): ServiceBlock
     {
         return new ServiceBlock();

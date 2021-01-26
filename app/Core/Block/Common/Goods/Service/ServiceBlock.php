@@ -23,6 +23,12 @@ class ServiceBlock extends BaseBlock
         $this->setSortingToOrderBy();
     }
 
+    public function all(): array
+    {
+        $service = new ServiceService();
+        return $service->all();
+    }
+
     protected function handleSoftDelete(): void
     {
     }

@@ -109,6 +109,7 @@ Router::addGroup('/backend', function () {
     Router::post('/goodsService/create', [ServiceController::class, 'storeRequest']);
     Router::post('/goodsService/update', [ServiceController::class, 'updateRequest']);
     Router::post('/goodsService/delete', [ServiceController::class, 'destroyRequest']);
+    Router::post('/goodsService/all', [ServiceController::class, 'all']);
 
     // parameter
     Router::post('/parameter/list', [ParameterController::class, 'index']);
