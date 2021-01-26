@@ -44,7 +44,7 @@ class AttachmentService extends AbstractService
     {
         $config = config('custom')['attachment'];
         $encrypt = '';
-        if ($fileData['size'] <= $config['check_encrypt_size'] && file_exists($fileData['tmp_file'])) {
+        if ($fileData['size'] <= $config['encrypt_limit_size'] && file_exists($fileData['tmp_file'])) {
             $encrypt = md5_file($fileData['tmp_file']);
         }
 

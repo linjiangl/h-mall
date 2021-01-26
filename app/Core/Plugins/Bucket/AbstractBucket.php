@@ -113,7 +113,7 @@ abstract class AbstractBucket
     protected function checkFileExists(UploadedFile $file)
     {
         $config = config('custom')['attachment'];
-        if ($file->getSize() <= $config['check_encrypt_size']) {
+        if ($file->getSize() <= $config['encrypt_limit_size']) {
             $md5 = md5_file($file->getRealPath());
             $service = new AttachmentService();
             $info = $service->getInfoByEncrypt($md5);

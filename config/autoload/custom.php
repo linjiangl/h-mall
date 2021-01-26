@@ -4,14 +4,14 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
 return [
     // 附件配置
     'attachment' => [
-        'check_encrypt_size' => 1024 * 1024 * 2, // 小于等于该值时,检查文件的 MD5 散列值
+        'encrypt_limit_size' => 1024 * 1024 * 10, // 小于等于该值时,检查文件的 MD5 散列值
     ],
     // 七牛存储配置
     'qn' => [
