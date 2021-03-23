@@ -96,7 +96,7 @@ abstract class AbstractBlock
         'between' => ['created_time'], // 支持数组,字符串(,)
         'in' => ['status']
         // 'like' => ['title'] // 模糊查询('title%')
-        // 'like_all' => ['title'] // 模糊查询('%title%')
+        // '`like_`all' => ['title'] // 模糊查询('%title%')
     ];
 
     /**
@@ -396,6 +396,7 @@ abstract class AbstractBlock
                             $queryValue = "{$queryValue}%";
                             break;
                         case 'like_all':
+                            $symbol = 'like';
                             $queryValue = "%{$queryValue}%";
                             break;
                     }
