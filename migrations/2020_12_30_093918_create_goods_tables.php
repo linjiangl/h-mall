@@ -153,9 +153,6 @@ class CreateGoodsTables extends Migration
         Schema::create('goods_attribute', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('goods_id', false, true);
-            $table->string('goods_unit', 30)->default('')->comment('商品单位');
-            $table->decimal('goods_weight', 10, 2)->unsigned()->default(0)->comment('重量（单位g）');
-            $table->decimal('goods_volume', 10, 2)->unsigned()->default(0)->comment('体积（单位立方米）');
             $table->string('goods_service_ids', 255)->default('')->comment('商品服务');
             $table->text('parameter')->comment('商品参数');
             $table->mediumText('goods_content')->comment('商品详情');
@@ -205,6 +202,9 @@ class CreateGoodsTables extends Migration
             $table->integer('clicks', false, true)->default(0)->comment('点击量');
             $table->integer('sales', false, true)->default(0)->comment('销量');
             $table->integer('virtual_sales', false, true)->default(0)->comment('虚拟销量');
+            $table->string('unit', 30)->default('')->comment('商品单位');
+            $table->decimal('weight', 10, 2)->unsigned()->default(0)->comment('重量（单位kg）');
+            $table->decimal('volume', 10, 2)->unsigned()->default(0)->comment('体积（单位立方米）');
             $table->string('image', 255)->default('')->comment('图片');
             $table->integer('created_time', false, true)->default(0);
             $table->integer('updated_time', false, true)->default(0);
@@ -212,8 +212,8 @@ class CreateGoodsTables extends Migration
             $table->index(['shop_id'], 'shop_id');
             $table->index(['goods_id'], 'goods_id');
             $table->index(['sale_price'], 'sale_price');
-            $table->index(['stock'], 'stock');
             $table->index(['sales'], 'sales');
+            $table->index(['stock'], 'stock');
             $table->index(['stock_alarm'], 'stock_alarm');
         });
 
