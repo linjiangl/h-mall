@@ -255,7 +255,7 @@ abstract class AbstractDao
      * @param array $condition 查询条件
      * @param array $with 关联模型
      * @param string $select 字段
-     * @return Model|Collection|mixed
+     * @return Builder|\Hyperf\Database\Query\Builder|Model|object
      */
     public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*')
     {

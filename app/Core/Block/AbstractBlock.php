@@ -343,7 +343,7 @@ abstract class AbstractBlock
                     $orderBy = '';
                     foreach ($sort as $key => $value) {
                         $value = str_replace('end', '', $value);
-                        $orderBy = $orderBy . "{$key} {$value}";
+                        $orderBy = $orderBy . "$key $value";
                     }
                     $this->orderBy = $orderBy;
                 }
@@ -357,7 +357,7 @@ abstract class AbstractBlock
     protected function beforeBuildQuery(): void
     {
         if (empty($this->with)) {
-            $this->with = isset($this->defaultSinceWith[$this->since][$this->action]) ? $this->defaultSinceWith[$this->since][$this->action] : [];
+            $this->with = $this->defaultSinceWith[$this->since][$this->action] ?? [];
         }
         $this->condition = $this->handleCondition();
         $this->groupBy = [];
@@ -393,10 +393,11 @@ abstract class AbstractBlock
                             }
                             break;
                         case 'like':
-                            $queryValue = "{$queryValue}%";
+                            $queryValue = "$queryValue%";
                             break;
                         case 'like_all':
-                            $queryValue = "%{$queryValue}%";
+                            $symbol = 'like';
+                            $queryValue = "%$queryValue%";
                             break;
                     }
                     $condition[] = [$query, $symbol, $queryValue];

@@ -137,7 +137,6 @@ class CreateGoodsTables extends Migration
             $table->integer('updated_time', false, true)->default(0);
             $table->integer('deleted_time', false, true)->default(0);
 
-
             $table->index(['shop_id'], 'shop_id');
             $table->index(['category_id'], 'category_id');
             $table->index(['brand_id'], 'brand_id');

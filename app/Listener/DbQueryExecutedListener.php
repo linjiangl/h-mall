@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 /**
  * @Listener
  */
-class DbQueryLogsListener implements ListenerInterface
+class DbQueryExecutedListener implements ListenerInterface
 {
     /**
      * @var LoggerInterface
@@ -42,7 +42,7 @@ class DbQueryLogsListener implements ListenerInterface
     }
 
     /**
-     * @param object $event
+     * @param QueryExecuted $event
      */
     public function process(object $event)
     {

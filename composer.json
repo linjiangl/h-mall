@@ -13,48 +13,44 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=7.4",
-        "ext-swoole": ">=4.5",
-        "ext-json": "*",
         "ext-bcmath": "*",
-        "ext-openssl": "*",
-        "ext-redis": "*",
-        "ext-pdo": "*",
         "ext-iconv": "*",
-        "hyperf/cache": "~2.0.0",
-        "hyperf/command": "~2.0.0",
-        "hyperf/config": "~2.0.0",
-        "hyperf/db-connection": "~2.0.0",
-        "hyperf/framework": "~2.0.0",
-        "hyperf/guzzle": "~2.0.0",
-        "hyperf/http-server": "~2.0.0",
-        "hyperf/logger": "~2.0.0",
-        "hyperf/memory": "~2.0.0",
-        "hyperf/process": "~2.0.0",
-        "hyperf/redis": "~2.0.0",
-        "hyperf/db": "~2.0.0",
-        "hyperf/snowflake": "~2.0.0",
-        "hyperf/rate-limit": "~2.0.0",
-        "hyperf/validation": "~2.0.0",
-        "hyperf/model-cache": "~2.0.0",
-        "hyperf/constants": "~2.0.0",
-        "hyperf/paginator": "~2.0.0",
-        "hyperf/translation": "~2.0.0",
-        "hyperf/crontab": "~2.0.0",
-        "hyperf/async-queue": "~2.0.0",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-pdo": "*",
+        "ext-redis": "*",
+        "ext-swoole": ">=4.5",
         "gregwar/captcha": "^1.1",
-        "qiniu/php-sdk": "^7.2",
-        "phper666/jwt-auth": "^3.0"
+        "hyperf/cache": "~2.1.0",
+        "hyperf/command": "~2.1.0",
+        "hyperf/config": "~2.1.0",
+        "hyperf/constants": "^2.1",
+        "hyperf/database": "~2.1.0",
+        "hyperf/db": "^2.1",
+        "hyperf/db-connection": "~2.1.0",
+        "hyperf/framework": "~2.1.0",
+        "hyperf/guzzle": "~2.1.0",
+        "hyperf/http-server": "~2.1.0",
+        "hyperf/logger": "~2.1.0",
+        "hyperf/memory": "~2.1.0",
+        "hyperf/model-cache": "^2.1",
+        "hyperf/paginator": "^2.1",
+        "hyperf/process": "~2.1.0",
+        "hyperf/rate-limit": "^2.1",
+        "hyperf/redis": "~2.1.0",
+        "hyperf/translation": "^2.1",
+        "hyperf/validation": "^2.1",
+        "phper666/jwt-auth": "^3.0",
+        "qiniu/php-sdk": "^7.3"
     },
     "require-dev": {
-        "swoole/ide-helper": "^4.5",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "fzaninotto/faker": "^1.9",
+        "hyperf/devtool": "~2.1.0",
+        "hyperf/testing": "~2.1.0",
         "mockery/mockery": "^1.0",
-        "doctrine/common": "^2.9",
         "phpstan/phpstan": "^0.12",
-        "hyperf/devtool": "~2.0.0",
-        "hyperf/testing": "~2.0.0",
-        "phpmd/phpmd": "^2.8",
-        "fzaninotto/faker": "^1.9"
+        "swoole/ide-helper": "^4.5"
     },
     "suggest": {
         "ext-openssl": "Required to use HTTPS.",
@@ -68,7 +64,7 @@
             "App\\": "app/"
         },
         "files": [
-          "app/Core/Helper/Functions.php"
+            "app/Core/Helper/Functions.php"
         ]
     },
     "autoload-dev": {
@@ -78,11 +74,12 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "extra": {
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
     },
+    "extra": [],
     "scripts": {
-        "pre-install-cmd": "Installer\\Script::install",
-        "pre-update-cmd": "Installer\\Script::install",
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
@@ -90,10 +87,11 @@
             "rm -rf runtime/container"
         ],
         "test": "co-phpunit -c phpunit.xml --colors=always",
-        "fixer": "./script/php-cs-fixer.sh",
+        "cs-fix": "php-cs-fixer fix $1",
         "analyse": "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./app ./config",
-        "start": "php ./bin/hyperf.php start",
-        "start-dev": "rm -rf runtime/container && php ./bin/hyperf.php start",
-        "format": "./script/php-cs-fixer.sh"
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "php ./bin/hyperf.php start"
+        ]
     }
 }

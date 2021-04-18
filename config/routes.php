@@ -4,11 +4,11 @@ declare(strict_types=1);
 /**
  * Multi-user mall
  *
- * @link     https://store.yii.red
- * @document https://document.store.yii.red
+ * @link     https://mall.xcmei.com
+ * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-require_once BASE_PATH . '/route/common.php';
-require_once BASE_PATH . '/route/backend.php';
-require_once BASE_PATH . '/route/frontend.php';
-require_once BASE_PATH . '/route/app.php';
+require_once BASE_PATH . '/config/routes/common.php';
+require_once BASE_PATH . '/config/routes/backend.php';
+require_once BASE_PATH . '/config/routes/frontend.php';
+require_once BASE_PATH . '/config/routes/app.php';
