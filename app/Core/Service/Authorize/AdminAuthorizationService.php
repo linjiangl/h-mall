@@ -16,20 +16,12 @@ use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
-use Phper666\JWTAuth\JWT;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
 
 class AdminAuthorizationService extends AbstractAuthorizationService
 {
     protected string $scene = 'admin';
-
-    public function __construct()
-    {
-        /** @var JWT $jwt */
-        $jwt = container()->get(JWT::class);
-        $this->jwt = $jwt->setScene($this->scene);
-    }
 
     public function authorize(): array
     {
