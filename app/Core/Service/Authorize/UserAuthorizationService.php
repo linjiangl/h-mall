@@ -18,6 +18,13 @@ use Throwable;
 
 class UserAuthorizationService extends AbstractAuthorizationService
 {
+    public function authorize(): array
+    {
+        $token = $this->getRequestToken();
+        $this->parseToken($token);
+        return parent::authorize();
+    }
+
     public function login(string $account, string $password): array
     {
         try {

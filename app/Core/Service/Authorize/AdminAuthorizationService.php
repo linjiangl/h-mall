@@ -14,12 +14,18 @@ use App\Core\Dao\Admin\AdminDao;
 use App\Core\Service\Admin\AdminService;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
-use App\Exception\UnauthorizedException;
 use Throwable;
 
 class AdminAuthorizationService extends AbstractAuthorizationService
 {
     protected string $scene = 'admin';
+
+    public function authorize(): array
+    {
+        $token = $this->getRequestToken();
+        $this->parseToken($token);
+        return parent::authorize();
+    }
 
     public function login(string $account, string $password): array
     {

@@ -24,7 +24,6 @@ use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Token\RegisteredClaims;
 use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
-use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 
 abstract class AbstractAuthorizationService implements InterfaceAuthorizationService
@@ -162,5 +161,10 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
     public function getHeader()
     {
         return $this->config['header'];
+    }
+
+    public function getRequestToken(): string
+    {
+        return request()->getHeaderLine($this->getHeader()) ?? '';
     }
 }

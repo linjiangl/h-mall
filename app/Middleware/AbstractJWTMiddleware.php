@@ -50,7 +50,7 @@ abstract class AbstractJWTMiddleware implements MiddlewareInterface
     {
         try {
             $isValidToken = false;
-            $token = $request->getHeaderLine($this->service->getHeader()) ?? '';
+            $token = $this->service->getRequestToken();
             if (strlen($token) > 0 && $this->service->parseToken($token)->validationToken()) {
                 $isValidToken = true;
             }
