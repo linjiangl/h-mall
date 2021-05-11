@@ -12,34 +12,14 @@ namespace App\Core\Service\Authorize;
 
 use App\Core\Dao\Admin\AdminDao;
 use App\Core\Service\Admin\AdminService;
-use App\Exception\CacheErrorException;
 use App\Exception\HttpException;
 use App\Exception\InternalException;
 use App\Exception\UnauthorizedException;
-use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
 
 class AdminAuthorizationService extends AbstractAuthorizationService
 {
     protected string $scene = 'admin';
-
-    public function authorize(): array
-    {
-        $ssoKey = config('jwt')['scene'][$this->scene]['sso_key'];
-        $data = $this->getParserData();
-        $adminId = $data[$ssoKey];
-        if (! $adminId) {
-            throw new UnauthorizedException();
-        }
-
-        $adminDao = new AdminDao();
-        $admin = $adminDao->info($adminId);
-        if (! $admin) {
-            throw new UnauthorizedException();
-        }
-
-        return $admin->toArray();
-    }
 
     public function login(string $account, string $password): array
     {
@@ -56,24 +36,20 @@ class AdminAuthorizationService extends AbstractAuthorizationService
             throw new InternalException('账号/密码错误');
         }
 
-        try {
-            $token = $this->jwt->getToken([
-                'admin_id' => $admin->id,
-                'username' => $admin->username,
-                'real_name' => $admin->real_name,
-                'avatar' => $admin->avatar,
-            ]);
+        $token = $this->createToken([
+            'admin_id' => $admin->id,
+            'username' => $admin->username,
+            'real_name' => $admin->real_name,
+            'avatar' => $admin->avatar,
+        ]);
 
-            $admin->lasted_login_time = time();
-            $admin->save();
+        $admin->lasted_login_time = time();
+        $admin->save();
 
-            return [
-                'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
-                'exp' => $this->jwt->getTTL(),
-            ];
-        } catch (InvalidArgumentException $e) {
-            throw new CacheErrorException();
-        }
+        return [
+            'token' => $token,
+            'exp' => $this->getTTL(),
+        ];
     }
 
     public function register(string $username, string $password, string $confirmPassword, array $extend = []): array

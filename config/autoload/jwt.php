@@ -25,7 +25,7 @@ return [
         'default' => [],
         'admin' => [
             'secret' => 'U2FsdGVkX1/Yrvu0ss0KUQ8PnCWGdSEQ',
-            'ttl' => env('JWT_TTL', 10),
+            'ttl' => env('JWT_TTL', 86400),
             'header' => env('JWT_HEADER', 'Authorization'),
             'issued' => env('JWT_ISSUED', 'http://xcmei.com'),
         ]

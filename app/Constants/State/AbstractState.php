@@ -34,7 +34,7 @@ abstract class AbstractState implements InterfaceState
      * @param string $default 默认消息
      * @return string
      */
-    public static function getMessage($optionValue, $optionKey = 'status', $default = ''): string
+    public static function getMessage($optionValue, string $optionKey = 'status', string $default = ''): string
     {
         $arg = explode('_', $optionKey);
         $method = 'get';

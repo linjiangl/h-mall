@@ -13,14 +13,13 @@ namespace App\Middleware;
 use App\Core\Service\Authorize\UserAuthorizationService;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Hyperf\Utils\Context;
-use Phper666\JWTAuth\JWT;
 use Psr\Http\Message\ServerRequestInterface;
 
 class JWTFrontendMiddleware extends AbstractJWTMiddleware
 {
-    public function __construct(HttpResponse $response, JWT $jwt)
+    public function __construct(HttpResponse $response)
     {
-        parent::__construct($response, $jwt);
+        parent::__construct($response);
         $this->service = new UserAuthorizationService();
     }
 

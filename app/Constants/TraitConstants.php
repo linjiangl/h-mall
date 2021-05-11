@@ -10,9 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Constants;
 
-/**
- * @method static getMessage($option)
- */
 trait TraitConstants
 {
+    public static function getMessage($option)
+    {
+        return parent::getMessage($option);
+    }
 }

@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace App\Core\Service\Authorize;
 
 use App\Exception\BadRequestException;
-use App\Exception\CacheErrorException;
+use DateTime;
 use DateTimeImmutable;
 use DateTimeZone;
 use Hyperf\Utils\Str;
@@ -24,7 +24,8 @@ use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Token\RegisteredClaims;
 use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
-use Psr\SimpleCache\InvalidArgumentException;
+use Psr\Http\Message\ServerRequestInterface;
+use Throwable;
 
 abstract class AbstractAuthorizationService implements InterfaceAuthorizationService
 {
@@ -52,28 +53,26 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
             $this->config = config('jwt')['scene'][$this->scene];
         }
 
-        $this->configuration = Configuration::forSymmetricSigner(
-            new Sha256(),
-            InMemory::base64Encoded($this->config['secret'])
-        );
-        assert($this->configuration instanceof Configuration);
+        $this->configuration = Configuration::forSymmetricSigner(new Sha256(), InMemory::base64Encoded($this->config['secret']));
+    }
 
-
+    public function authorize(): array
+    {
+        return $this->getParserData(true);
     }
 
     public function logout(): bool
     {
-        try {
-            return $this->jwt->logout();
-        } catch (InvalidArgumentException $e) {
-            throw new CacheErrorException();
-        }
+        return true;
     }
 
-    public function setToken(string $token): self
+    public function parseToken(string $token): self
     {
-        $this->plain = $this->configuration->parser()->parse($token);
-        assert($this->plain instanceof Plain);
+        try {
+            $this->plain = $this->configuration->parser()->parse($token);
+        } catch (Throwable $e) {
+            throw new BadRequestException('token 解析错误');
+        }
         return $this;
     }
 
@@ -91,13 +90,17 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
             ->withClaim('auth', $user)
             ->getToken($this->configuration->signer(), $this->configuration->signingKey());
 
-        return $token->toString();
+        $token = $token->toString();
+        $this->parseToken($token);
+
+        return $token;
     }
 
     public function refreshToken(): array
     {
         $user = $this->getParserData(true);
         $token = $this->createToken($user);
+
         return [
             'token' => $token,
             'exp' => $this->getTTL(),
@@ -106,7 +109,16 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
 
     public function getTTL()
     {
-        return $this->plain->claims()->get(RegisteredClaims::EXPIRATION_TIME);
+        $expData = (array)$this->plain->claims()->get(RegisteredClaims::EXPIRATION_TIME);
+        try {
+            $from = $expData['timezone_type'] != 3 ? 'UTC' : $expData['timezone'];
+            $datetime = new DateTime($expData['date'], new DateTimeZone($from));
+            $datetime->setTimezone(new DateTimeZone('Asia/Shanghai'));
+            $date = $datetime->format('Y-m-d H:i:s');
+            return strtotime($date) - time();
+        } catch (Throwable $e) {
+            return -1;
+        }
     }
 
     public function validationToken(): bool
@@ -118,16 +130,16 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
 
         try {
             $this->configuration->validator()->assert($this->plain, ...$constraints);
+            return true;
         } catch (RequiredConstraintsViolated $e) {
             return false;
         }
-        return true;
     }
 
     public function getParserData(bool $filter = false): array
     {
         $all = $this->plain->claims()->all();
-        // 只获取用户数据
+        // 只获取授权用户数据
         if ($filter) {
             $all = $all['auth'];
         }
@@ -145,5 +157,10 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
             $salt = $this->generateSalt();
         }
         return sha1(substr(md5($password), 0, 16) . $salt);
+    }
+
+    public function getHeader()
+    {
+        return $this->config['header'];
     }
 }

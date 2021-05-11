@@ -10,16 +10,13 @@ declare(strict_types=1);
  */
 namespace App\Middleware;
 
-use App\Core\Service\Authorize\InterfaceAuthorizationService;
-use App\Exception\CacheErrorException;
+use App\Core\Service\Authorize\AbstractAuthorizationService;
 use App\Exception\UnauthorizedException;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
-use Phper666\JWTAuth\JWT;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
 
 abstract class AbstractJWTMiddleware implements MiddlewareInterface
@@ -27,19 +24,16 @@ abstract class AbstractJWTMiddleware implements MiddlewareInterface
     /**
      * @var HttpResponse
      */
-    protected $response;
-
-    protected $jwt;
+    protected HttpResponse $response;
 
     /**
-     * @var InterfaceAuthorizationService
+     * @var AbstractAuthorizationService
      */
-    protected $service;
+    protected AbstractAuthorizationService $service;
 
-    public function __construct(HttpResponse $response, JWT $jwt)
+    public function __construct(HttpResponse $response)
     {
         $this->response = $response;
-        $this->jwt = $jwt;
     }
 
     /**
@@ -57,21 +51,14 @@ abstract class AbstractJWTMiddleware implements MiddlewareInterface
         try {
             $isValidToken = false;
             $token = $request->getHeaderLine($this->service->getHeader()) ?? '';
-            if (strlen($token) > 0) {
-                $token = ucfirst($token);
-                $arr = explode("{$this->service->getPrefix()} ", $token);
-                $token = $arr[1] ?? '';
-                if (strlen($token) > 0 && $this->jwt->checkToken()) {
-                    $isValidToken = true;
-                }
+            if (strlen($token) > 0 && $this->service->parseToken($token)->validationToken()) {
+                $isValidToken = true;
             }
 
             $request = $this->handleWithAttribute($request);
             if (! $isValidToken) {
                 throw new UnauthorizedException();
             }
-        } catch (InvalidArgumentException $e) {
-            throw new CacheErrorException();
         } catch (Throwable $e) {
             write_logs('授权失败', $e->getMessage());
             throw new UnauthorizedException();
