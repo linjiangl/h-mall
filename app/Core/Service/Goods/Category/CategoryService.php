@@ -98,7 +98,7 @@ class CategoryService extends AbstractService
      * @param mixed $status
      * @return array
      */
-    public function getListByParentId(int $parentId = 0, $status = null)
+    public function getListByParentId(int $parentId = 0, $status = null): array
     {
         $dao = new CategoryDao();
         return $dao->getListByParentId($parentId, $status);
@@ -111,7 +111,7 @@ class CategoryService extends AbstractService
      * @param int $level
      * @return array
      */
-    public function convertCategoriesToChildren(array $categories, $parentId = 0, $level = 1): array
+    public function convertCategoriesToChildren(array $categories, int $parentId = 0, int $level = 1): array
     {
         $list = [];
         foreach ($categories as $item) {
@@ -134,7 +134,7 @@ class CategoryService extends AbstractService
      * @param int $level
      * @return array
      */
-    public function convertCategoriesToLevel(array $categories, $parentId = 0, $level = 1): array
+    public function convertCategoriesToLevel(array $categories, int $parentId = 0, int $level = 1): array
     {
         foreach ($categories as $k => $v) {
             if ($v['parent_id'] == $parentId) {
