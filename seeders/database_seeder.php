@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->handleImportClass();
 
         // 系统相关
-        // DistrictFactory::run();
+        DistrictFactory::run();
 
         // 管理相关
         MenuFactory::run();

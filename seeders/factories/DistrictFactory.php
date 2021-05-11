@@ -21,7 +21,7 @@ class DistrictFactory
         foreach ($data as $chunk) {
             $insert = [];
             foreach ($chunk as $item) {
-                $item['created_at'] = $item['updated_at'] = $now;
+                $item['created_time'] = $item['updated_time'] = $now;
                 $insert[] = $item;
             }
 
