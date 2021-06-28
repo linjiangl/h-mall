@@ -261,7 +261,7 @@ abstract class AbstractBlock
      * @param string $since
      * @return $this
      */
-    public function setSince($since = BlockSinceConstants::SINCE_FRONTEND): AbstractBlock
+    public function setSince(string $since = BlockSinceConstants::SINCE_FRONTEND): AbstractBlock
     {
         $this->since = $since;
         return $this;
@@ -271,7 +271,7 @@ abstract class AbstractBlock
      * 设置主键
      * @param string $primaryKey
      */
-    public function setPrimaryKey($primaryKey = 'id'): void
+    public function setPrimaryKey(string $primaryKey = 'id'): void
     {
         $this->primaryKey = $primaryKey;
     }
@@ -384,7 +384,7 @@ abstract class AbstractBlock
         foreach ($this->query as $symbol => $symbolValue) {
             foreach ($symbolValue as $query) {
                 $queryValue = $this->paramType ? $this->handleParamType($query) : $this->request->post($query);
-                if ($queryValue != '') {
+                if (!($queryValue === '' || $queryValue === null)) {
                     switch ($symbol) {
                         case 'in':
                         case 'between':
