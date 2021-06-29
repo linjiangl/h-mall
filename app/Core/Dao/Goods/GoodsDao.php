@@ -33,6 +33,6 @@ class GoodsDao extends AbstractDao
      */
     public function checkCategoryIdHasGoods(int $categoryId): bool
     {
-        return Goods::query()->where('category_id', $categoryId)->count() ? true : false;
+        return (bool)Goods::query()->where('category_id', $categoryId)->count();
     }
 }

@@ -48,7 +48,7 @@ use Hyperf\Database\Model\Relations\BelongsToMany;
  * @property int $created_time
  * @property int $updated_time
  * @property int $deleted_time
- * @property Collection|GoodsSpec[] $specs
+ * @property GoodsSpec[] $specs
  */
 class Goods extends Model
 {

@@ -73,11 +73,15 @@ abstract class AbstractTypesService implements InterfaceTypesService
         $minPrice = $skuPrice[0];
         $maxPrice = end($skuPrice);
 
+        if ($this->goods['images'] && is_array($this->goods['images'])) {
+            $this->goods['images'] = implode(',', $this->goods['images']);
+        }
+
         return [
             'shop_id' => $this->goods['shop_id'],
             'title' => $this->goods['title'],
             'sub_title' => $this->goods['sub_title'],
-            'images' => $this->goods['images'] ? json_encode(explode(',', $this->goods['images'])) : '',
+            'images' => $this->goods['images'],
             'description_id' => $this->goods['description_id'] ?? 0,
             'shipping_required' => $this->goods['shipping_required'],
             'category_id' => $this->goods['category_id'],
