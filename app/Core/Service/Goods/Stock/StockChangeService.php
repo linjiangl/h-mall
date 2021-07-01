@@ -20,7 +20,7 @@ class StockChangeService
     /**
      * @var InterfaceStockChangeService
      */
-    protected $modifyClass;
+    protected $changeStockClass;
 
     public function __construct(string $modifyClass, array $append = [])
     {
@@ -28,7 +28,7 @@ class StockChangeService
             throw new InternalException('该库存业务不存在');
         }
 
-        $this->modifyClass = new $modifyClass($append);
+        $this->changeStockClass = new $modifyClass($append);
     }
 
     /**
@@ -42,7 +42,7 @@ class StockChangeService
     public function created(array $user, int $relationId, string $remark = ''): bool
     {
         try {
-            $this->modifyClass->created($user, $relationId, $remark);
+            $this->changeStockClass->created($user, $relationId, $remark);
             return true;
         } catch (Throwable $e) {
             throw new InternalException($e->getMessage(), $e->getCode());
@@ -60,7 +60,7 @@ class StockChangeService
     public function updated(array $user, int $relationId, string $remark = ''): bool
     {
         try {
-            $this->modifyClass->updated($user, $relationId, $remark);
+            $this->changeStockClass->updated($user, $relationId, $remark);
             return true;
         } catch (Throwable $e) {
             throw new InternalException($e->getMessage(), $e->getCode());
@@ -77,7 +77,7 @@ class StockChangeService
     public function recovery(array $user, int $relationId): bool
     {
         try {
-            $this->modifyClass->recovery($user, $relationId);
+            $this->changeStockClass->recovery($user, $relationId);
             return true;
         } catch (Throwable $e) {
             throw new InternalException($e->getMessage(), $e->getCode());
@@ -95,7 +95,7 @@ class StockChangeService
     public function completed(array $user, int $relationId, string $remark = ''): bool
     {
         try {
-            $this->modifyClass->completed($user, $relationId, $remark);
+            $this->changeStockClass->completed($user, $relationId, $remark);
             return true;
         } catch (Throwable $e) {
             throw new InternalException($e->getMessage(), $e->getCode());
