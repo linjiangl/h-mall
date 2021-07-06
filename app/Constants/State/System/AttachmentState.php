@@ -21,18 +21,16 @@ class AttachmentState extends AbstractState
     // 云存储系统
     const SYSTEM_QINIU = 'qiniu';
 
-    public static function getStatus(): array
+    public static function map(): array
     {
         return [
-            self::STATUS_DISABLED => '失效',
-            self::STATUS_ENABLED => '正常',
-        ];
-    }
-
-    public static function getSystem(): array
-    {
-        return [
-            self::SYSTEM_QINIU => '七牛',
+            'status' => [
+                self::STATUS_DISABLED => '失效',
+                self::STATUS_ENABLED => '正常',
+            ],
+            'system' => [
+                self::SYSTEM_QINIU => '七牛',
+            ]
         ];
     }
 }

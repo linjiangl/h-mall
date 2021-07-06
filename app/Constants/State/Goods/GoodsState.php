@@ -22,19 +22,19 @@ class GoodsState extends AbstractState
     const TYPE_GENERAL = 'general';
     const TYPE_VIRTUAL = 'virtual';
 
-    public static function getStatus(): array
-    {
-        return [
-            self::STATUS_OFF_SALE => '仓库中',
-            self::STATUS_ON_SALE => '销售中',
-        ];
-    }
+    // 推荐方式
 
-    public static function getTypes(): array
+    public static function map(): array
     {
         return [
-            self::TYPE_GENERAL => '实物商品',
-            self::TYPE_VIRTUAL => '虚拟商品',
+            'status' => [
+                self::STATUS_OFF_SALE => '仓库中',
+                self::STATUS_ON_SALE => '销售中',
+            ],
+            'type' => [
+                self::TYPE_GENERAL => '实物商品',
+                self::TYPE_VIRTUAL => '虚拟商品',
+            ]
         ];
     }
 }

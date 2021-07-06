@@ -12,14 +12,15 @@ namespace App\Request\Backend\System;
 
 use App\Constants\State\Admin\RoleState;
 use App\Constants\State\BooleanState;
+use App\Constants\State\ToolsState;
 use App\Request\AbstractRequest;
 
 class RoleRequest extends AbstractRequest
 {
     public function rules(): array
     {
-        $identifier = RoleState::getValidatedInRule(RoleState::getIdentifier());
-        $boolean = BooleanState::getValidatedInRule(BooleanState::getStatus());
+        $identifier = ToolsState::getValidatedInRule(RoleState::class, 'identifier');
+        $boolean = ToolsState::getValidatedInRule(BooleanState::class);
         $idsRegex = $this->getRegex(general_regex('ids'));
         $scene = $this->getScene();
         $rules = [

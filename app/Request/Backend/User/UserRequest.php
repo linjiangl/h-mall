@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Request\Backend\User;
 
+use App\Constants\State\ToolsState;
 use App\Constants\State\User\UserState;
 use App\Request\AbstractRequest;
 
@@ -18,9 +19,9 @@ class UserRequest extends AbstractRequest
     public function rules(): array
     {
         $scene = $this->getScene();
-        $status = UserState::getValidatedInRule(UserState::getStatus());
+        $status = ToolsState::getValidatedInRule(UserState::class, 'status');
         $rules = [
-            'post:update' => $rules = [
+            'post:update' => [
                 'nickname' => 'string|max:30',
                 'avatar' => 'string|max:255',
                 'status' => "in:{$status}",

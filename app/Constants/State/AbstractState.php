@@ -15,46 +15,30 @@ abstract class AbstractState implements InterfaceState
     /**
      * 处理自定义的消息
      * @param array $options 选项
-     * @param string $default 默认消息
      * @return array
      */
-    public static function handleMessages(array $options, string $default = ''): array
+    public static function handleMessages(array $options): array
     {
         $data = [];
         foreach ($options as $key => $value) {
-            $data[$key] = static::getMessage($value, $key, $default);
+            if (is_array($value)) {
+                $data[$key] = static::getMessage($value[0], $key, $value[1]);
+            } else {
+                $data[$key] = static::getMessage($value, $key);
+            }
         }
         return $data;
     }
 
     /**
      * 获取自定义的消息
-     * @param mixed $optionValue 选项值
-     * @param string $optionKey 选项
+     * @param mixed $optionKey 选项的索引
+     * @param string $option 选项
      * @param string $default 默认消息
      * @return string
      */
-    public static function getMessage($optionValue, string $optionKey = 'status', string $default = ''): string
+    public static function getMessage($optionKey, string $option = 'status', string $default = ''): string
     {
-        $arg = explode('_', $optionKey);
-        $method = 'get';
-        foreach ($arg as $item) {
-            $method = $method . ucfirst($item);
-        }
-        $value = $default;
-        if (method_exists(static::class, $method)) {
-            $value = static::$method()[$optionValue] ?? $default;
-        }
-        return $value;
-    }
-
-    /**
-     * 获取验证器(IN)规则
-     * @param array $option
-     * @return string
-     */
-    public static function getValidatedInRule(array $option): string
-    {
-        return implode(',', array_keys($option));
+        return static::map()[$option][$optionKey] ?? $default;
     }
 }
