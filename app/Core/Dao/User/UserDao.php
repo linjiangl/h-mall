@@ -8,6 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
+
 namespace App\Core\Dao\User;
 
 use App\Core\Dao\AbstractDao;
@@ -20,7 +21,7 @@ class UserDao extends AbstractDao
     protected array $noAllowActions = [];
 
     protected string $notFoundMessage = '用户不存在';
-    
+
     protected string $authorizeColumn = 'id';
 
     public function info(int $id, array $with = []): User

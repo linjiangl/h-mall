@@ -14,7 +14,6 @@ use App\Exception\BadRequestException;
 use App\Exception\HttpException;
 use App\Exception\NotFoundException;
 use Hyperf\Database\Model\Builder;
-use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
 use Throwable;
 
@@ -121,7 +120,7 @@ abstract class AbstractDao
      * 详情
      * @param int $id 主键
      * @param array $with 关联模型
-     * @return Model|Collection|mixed
+     * @return mixed
      */
     public function info(int $id, array $with = [])
     {
@@ -252,14 +251,15 @@ abstract class AbstractDao
 
     /**
      * 自定义条件查询详情
-     * @param array $condition 查询条件
-     * @param array $with 关联模型
-     * @param string $select 字段
-     * @return Builder|\Hyperf\Database\Query\Builder|Model|object
+     * @param array $condition
+     * @param array $with
+     * @param string $select
+     * @return mixed
      */
     public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*')
     {
         $query = $this->generateListQuery($condition, '', [], $with);
+        /** @var mixed $model */
         $model = $query->selectRaw($select)->first();
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);

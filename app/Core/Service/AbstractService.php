@@ -73,7 +73,7 @@ abstract class AbstractService
      * @param array $with
      * @return mixed
      */
-    public function info(int $id, $with = [])
+    public function info(int $id, array $with = [])
     {
         return $this->service()->withAuthorize($this->authorize)->info($id, $with);
     }
