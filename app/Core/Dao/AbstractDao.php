@@ -63,6 +63,12 @@ abstract class AbstractDao
     protected bool $softDelete = false;
 
     /**
+     * 获取软删除数据
+     * @var bool
+     */
+    protected bool $queryDelete = false;
+
+    /**
      * 对象不存在的错误提示
      * @var string
      */
@@ -390,12 +396,10 @@ abstract class AbstractDao
     protected function generateListQuery(array $condition = [], string $orderBy = '', array $groupBy = [], array $with = []): Builder
     {
         $query = $this->model::query();
+        $query = $this->handleQueryCondition($query, $condition);
         if (! empty($with)) {
             $this->checkAllowWithModel($with);
             $query->with($this->with);
-        }
-        if (! empty($condition)) {
-            $query = $this->handleQueryCondition($query, $condition);
         }
         if (! empty($groupBy)) {
             $query->groupBy($groupBy);
@@ -423,27 +427,42 @@ abstract class AbstractDao
      */
     protected function handleQueryCondition(Builder $query, array $condition): Builder
     {
-        foreach ($condition as $where) {
-            switch ($where[1]) {
-                case 'in':
-                    $query->whereIn($where[0], $where[2]);
-                    break;
-                case 'between':
-                    $query->whereBetween($where[0], $where[2]);
-                    break;
-                default:
-                    $query->where($where[0], $where[1], $where[2]);
+        if (!empty($condition)) {
+            foreach ($condition as $where) {
+                switch ($where[1]) {
+                    case 'in':
+                        $query->whereIn($where[0], $where[2]);
+                        break;
+                    case 'between':
+                        $query->whereBetween($where[0], $where[2]);
+                        break;
+                    default:
+                        $query->where($where[0], $where[1], $where[2]);
+                }
             }
         }
 
+        return $this->handleSoftDelete($query);
+    }
+
+    /**
+     * 处理软删除
+     * @param Builder $query
+     * @return Builder
+     */
+    protected function handleSoftDelete(Builder $query): Builder
+    {
         // 软删除
         if ($this->softDelete) {
-            $query->where('deleted_time', '>', 0);
-        } else {
-            $query->where('deleted_time', '=', 0);
+            if ($this->queryDelete) {
+                $query->where('deleted_time', '>', 0);
+            } else {
+                $query->where('deleted_time', '=', 0);
+            }
         }
         return $query;
     }
+
 
     /**
      * 方法是可以执行
