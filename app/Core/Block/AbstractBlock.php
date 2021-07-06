@@ -161,9 +161,6 @@ abstract class AbstractBlock
             // 查询前业务处理
             $this->beforeBuildQuery();
 
-            // 软删除处理
-            $this->handleSoftDelete();
-
             return $this->service()->paginate($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
@@ -361,17 +358,6 @@ abstract class AbstractBlock
         }
         $this->condition = $this->handleCondition();
         $this->groupBy = [];
-    }
-
-    /**
-     * 处理软删除
-     */
-    protected function handleSoftDelete(): void
-    {
-        $status = $this->request->post('status', '');
-        if (! $status) {
-            $this->condition[] = ['status', '>', -1];
-        }
     }
 
     /**

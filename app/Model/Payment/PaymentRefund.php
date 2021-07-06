@@ -22,7 +22,7 @@ use App\Model\Model;
  * @property string $refund_method 退款方式
  * @property string $trade_no 第三方退款流水号
  * @property float $amount 金额
- * @property int $status 退款状态 -1:已删除, 0:未处理, 1:已处理
+ * @property int $status 退款状态 0:未处理, 1:已处理
  * @property string $remark
  * @property int $finished_time 退款成功时间
  * @property int $created_time

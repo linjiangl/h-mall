@@ -20,7 +20,7 @@ use App\Model\Model;
  * @property string $payment_method 支付方式
  * @property string $trade_no 第三方支付流水号
  * @property float $amount 金额
- * @property int $status 支付状态 -1:已删除, 0:待支付, 1:支付成功, 2:重复支付退款
+ * @property int $status 支付状态 0:待支付, 1:支付成功, 2:重复支付退款
  * @property string $remark
  * @property int $finished_time 支付完成的时间
  * @property int $created_time

@@ -23,7 +23,7 @@ use App\Model\Model;
  * @property string $mobile 手机号码
  * @property string $id_card 身份证号码
  * @property string $password 会员卡密码
- * @property int $status 状态 -1:已删除, 0:未激活, 1:已激活
+ * @property int $status 状态 0:未激活, 1:已激活
  * @property int $created_time
  * @property int $updated_time
  */

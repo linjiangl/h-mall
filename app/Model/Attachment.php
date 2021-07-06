@@ -19,7 +19,7 @@ namespace App\Model;
  * @property string $key
  * @property string $index 索引
  * @property string $encrypt 文件的 MD5 散列值
- * @property int $status 状态 -1:已删除, 0:已失效, 1:已启用
+ * @property int $status 状态 0:已失效, 1:已启用
  * @property int $created_time
  * @property int $updated_time
  */

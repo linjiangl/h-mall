@@ -57,6 +57,12 @@ abstract class AbstractDao
     protected string $orderBy = 'id desc';
 
     /**
+     * 软删除
+     * @var bool
+     */
+    protected bool $softDelete = false;
+
+    /**
      * 对象不存在的错误提示
      * @var string
      */
@@ -197,10 +203,7 @@ abstract class AbstractDao
 
             $model = $this->info($id);
             if ($softDelete) {
-                $tmp = $model->toArray();
-                if (isset($tmp['status'])) {
-                    $model->update(['status' => -1]);
-                }
+                $model->update(['deleted_time' => time()]);
             } else {
                 $model->delete();
             }
@@ -230,7 +233,7 @@ abstract class AbstractDao
         $model = new $this->model();
         $query = $this->model::query()->whereIn($model->getKeyName(), $selectIds);
         if ($softDelete) {
-            $query->update(['status' => -1, 'deleted_time' => time()]);
+            $query->update(['deleted_time' => time()]);
         } else {
             $query->delete();
         }
@@ -330,7 +333,7 @@ abstract class AbstractDao
         $query = $this->model::query();
         $query = $this->handleQueryCondition($query, $condition);
         if ($softDelete) {
-            $query->update(['status' => -1]);
+            $query->update(['deleted_time' => time()]);
         } else {
             $query->delete();
         }
@@ -431,6 +434,13 @@ abstract class AbstractDao
                 default:
                     $query->where($where[0], $where[1], $where[2]);
             }
+        }
+
+        // 软删除
+        if ($this->softDelete) {
+            $query->where('deleted_time', '>', 0);
+        } else {
+            $query->where('deleted_time', '=', 0);
         }
         return $query;
     }

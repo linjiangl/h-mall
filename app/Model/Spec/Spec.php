@@ -19,7 +19,7 @@ use Hyperf\Database\Model\Relations\HasMany;
  * @property int $shop_id 店铺id 0:系统
  * @property string $name 名称
  * @property int $sorting 排序
- * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
+ * @property int $status 状态 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
  * @property-read Collection|SpecValue[] $values

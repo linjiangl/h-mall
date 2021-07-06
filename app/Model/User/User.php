@@ -27,7 +27,7 @@ use Hyperf\Database\Model\Relations\HasOne;
  * @property string $password 密码
  * @property string $remember_token
  * @property string $salt 加密盐
- * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用, 2:待审核
+ * @property int $status 状态 0:已禁用, 1:已启用, 2:待审核
  * @property int $is_system 是否系统用户
  * @property int $lasted_login_time 最后登录时间
  * @property int $mobile_verified_time 手机验证时间

@@ -21,7 +21,7 @@ use App\Model\Model;
  * @property int $reply_user_id 被回复评价的用户ID
  * @property int $top 点赞
  * @property string $content 评论内容
- * @property int $status 状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过
+ * @property int $status 状态 0:待审核, 1:已通过, 2:未通过
  * @property int $created_time
  * @property int $updated_time
  */

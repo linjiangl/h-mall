@@ -19,7 +19,7 @@ use App\Model\Model;
  * @property string $name 店铺名称
  * @property string $logo 店铺名称
  * @property float $comment_score 评分
- * @property int $status 状态 -1:已删除, 0:待审核, 1:已通过, 2:未通过, 3:已关闭
+ * @property int $status 状态 0:待审核, 1:已通过, 2:未通过, 3:已关闭
  * @property int $created_time
  * @property int $updated_time
  */
