@@ -21,6 +21,7 @@ namespace App\Model;
  * @property string $remark 备注
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  */
 class CustomerService extends Model
 {
@@ -36,12 +37,12 @@ class CustomerService extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'type', 'qq', 'wechat', 'name', 'status', 'remark', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'shop_id', 'type', 'qq', 'wechat', 'name', 'status', 'remark', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'type' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'type' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

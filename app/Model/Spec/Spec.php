@@ -11,8 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Spec;
 
 use App\Model\Model;
-use Hyperf\Database\Model\Collection;
-use Hyperf\Database\Model\Relations\HasMany;
 
 /**
  * @property int $id
@@ -22,7 +20,7 @@ use Hyperf\Database\Model\Relations\HasMany;
  * @property int $status 状态 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
- * @property-read Collection|SpecValue[] $values
+ * @property-read SpecValue[] $values
  */
 class Spec extends Model
 {
@@ -38,16 +36,16 @@ class Spec extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'name', 'sorting', 'status', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'shop_id', 'name', 'sorting', 'status', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 
-    public function values(): HasMany
+    public function values()
     {
         return $this->hasMany(SpecValue::class)->orderByRaw($this->orderByToSorting);
     }

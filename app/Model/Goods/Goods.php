@@ -12,8 +12,6 @@ namespace App\Model\Goods;
 
 use App\Model\Model;
 use App\Model\Spec\Spec;
-use Hyperf\Database\Model\Collection;
-use Hyperf\Database\Model\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -23,10 +21,10 @@ use Hyperf\Database\Model\Relations\BelongsToMany;
  * @property int $brand_id 品牌
  * @property int $sku_id
  * @property string $name 商品名称
- * @property float $sale_price 销售价格
- * @property float $market_price 划线价格
- * @property float $cost_price 成本价
- * @property float $achieve_price 达到多少金额包邮
+ * @property string $sale_price 销售价格
+ * @property string $market_price 划线价格
+ * @property string $cost_price 成本价
+ * @property string $achieve_price 达到多少金额包邮
  * @property int $stock 商品库存（总和）
  * @property int $stock_alarm 库存预警
  * @property string $introduction 促销语
@@ -71,9 +69,9 @@ class Goods extends Model
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'sku_id' => 'integer', 'sale_price' => 'float', 'market_price' => 'float', 'cost_price' => 'float', 'achieve_price' => 'float', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_on_sale' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'sku_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_on_sale' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 
-    public function specs(): BelongsToMany
+    public function specs()
     {
         return $this->belongsToMany(GoodsSpec::class, (new Spec())->getTable(), 'goods_id', 'spec_id');
     }

@@ -11,17 +11,16 @@ declare(strict_types=1);
 namespace App\Model\User;
 
 use App\Model\Model;
-use Hyperf\Database\Model\Relations\BelongsTo;
 
 /**
  * @property int $user_id
  * @property int $integral 积分
- * @property float $balance 余额
+ * @property string $balance 余额
  * @property int $freeze_integral 冻结的积分
- * @property float $freeze_balance 冻结的余额
+ * @property string $freeze_balance 冻结的余额
  * @property int $created_time
  * @property int $updated_time
- * @property-read \App\Model\User\User $user
+ * @property-read User $user
  */
 class UserWallet extends Model
 {
@@ -46,9 +45,9 @@ class UserWallet extends Model
      *
      * @var array
      */
-    protected $casts = ['user_id' => 'integer', 'integral' => 'integer', 'balance' => 'float', 'freeze_integral' => 'integer', 'freeze_balance' => 'float', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['user_id' => 'integer', 'integral' => 'integer', 'freeze_integral' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

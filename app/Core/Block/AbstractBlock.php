@@ -370,7 +370,7 @@ abstract class AbstractBlock
         foreach ($this->query as $symbol => $symbolValue) {
             foreach ($symbolValue as $query) {
                 $queryValue = $this->paramType ? $this->handleParamType($query) : $this->request->post($query);
-                if (!($queryValue === '' || $queryValue === null)) {
+                if (! ($queryValue === '' || $queryValue === null)) {
                     switch ($symbol) {
                         case 'in':
                         case 'between':

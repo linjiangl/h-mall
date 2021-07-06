@@ -15,11 +15,11 @@ use App\Model\Model;
 /**
  * @property int $id
  * @property int $date 日期
- * @property float $order_total_amount 销售总金额
- * @property float $order_paid_amount 已支付金额
- * @property float $order_unpaid_amount 未支付金额
- * @property float $order_canceled_amount 已取消金额
- * @property float $order_finished_amount 已完成金额
+ * @property string $order_total_amount 销售总金额
+ * @property string $order_paid_amount 已支付金额
+ * @property string $order_unpaid_amount 未支付金额
+ * @property string $order_canceled_amount 已取消金额
+ * @property string $order_finished_amount 已完成金额
  * @property int $order_total_user 下单总人数
  * @property int $order_paid_user 未支付下单人数
  * @property int $order_unpaid_user 已支付下单人数
@@ -69,5 +69,5 @@ class StatisticsOrder extends Model
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'date' => 'integer', 'order_total_amount' => 'float', 'order_paid_amount' => 'float', 'order_unpaid_amount' => 'float', 'order_canceled_amount' => 'float', 'order_finished_amount' => 'float', 'order_total_user' => 'integer', 'order_paid_user' => 'integer', 'order_unpaid_user' => 'integer', 'order_canceled_user' => 'integer', 'order_finished_user' => 'integer', 'order_total_number' => 'integer', 'order_paid_number' => 'integer', 'order_unpaid_number' => 'integer', 'order_canceled_number' => 'integer', 'order_finished_number' => 'integer', 'order_total_quantity' => 'integer', 'order_paid_quantity' => 'integer', 'order_unpaid_quantity' => 'integer', 'order_canceled_quantity' => 'integer', 'order_finished_quantity' => 'integer', 'order_total_spu' => 'integer', 'order_paid_spu' => 'integer', 'order_unpaid_spu' => 'integer', 'order_canceled_spu' => 'integer', 'order_finished_spu' => 'integer', 'order_total_sku' => 'integer', 'order_paid_sku' => 'integer', 'order_unpaid_sku' => 'integer', 'order_canceled_sku' => 'integer', 'order_finished_sku' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'date' => 'integer', 'order_total_user' => 'integer', 'order_paid_user' => 'integer', 'order_unpaid_user' => 'integer', 'order_canceled_user' => 'integer', 'order_finished_user' => 'integer', 'order_total_number' => 'integer', 'order_paid_number' => 'integer', 'order_unpaid_number' => 'integer', 'order_canceled_number' => 'integer', 'order_finished_number' => 'integer', 'order_total_quantity' => 'integer', 'order_paid_quantity' => 'integer', 'order_unpaid_quantity' => 'integer', 'order_canceled_quantity' => 'integer', 'order_finished_quantity' => 'integer', 'order_total_spu' => 'integer', 'order_paid_spu' => 'integer', 'order_unpaid_spu' => 'integer', 'order_canceled_spu' => 'integer', 'order_finished_spu' => 'integer', 'order_total_sku' => 'integer', 'order_paid_sku' => 'integer', 'order_unpaid_sku' => 'integer', 'order_canceled_sku' => 'integer', 'order_finished_sku' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

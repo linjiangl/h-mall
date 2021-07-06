@@ -19,7 +19,7 @@ use App\Model\Model;
  * @property int $order_goods_id
  * @property int $goods_id
  * @property int $goods_sku_id
- * @property float $amount
+ * @property string $amount
  * @property int $created_time
  * @property int $updated_time
  */
@@ -44,5 +44,5 @@ class RefundGoods extends Model
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'refund_id' => 'integer', 'order_id' => 'integer', 'order_goods_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'amount' => 'float', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'refund_id' => 'integer', 'order_id' => 'integer', 'order_goods_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

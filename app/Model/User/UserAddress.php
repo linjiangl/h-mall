@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\User;
 
 use App\Model\Model;
-use Hyperf\Database\Model\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -56,7 +55,7 @@ class UserAddress extends Model
      */
     protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'province_id' => 'integer', 'city_id' => 'integer', 'district_id' => 'integer', 'street_id' => 'integer', 'is_default' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

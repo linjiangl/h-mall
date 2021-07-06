@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Model\Spec;
 
 use App\Model\Model;
-use Hyperf\Database\Model\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -46,7 +45,7 @@ class SpecValue extends Model
      */
     protected $casts = ['id' => 'integer', 'spec_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function spec(): BelongsTo
+    public function spec()
     {
         return $this->belongsTo(Spec::class);
     }

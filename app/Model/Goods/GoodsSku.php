@@ -18,9 +18,9 @@ use App\Model\Model;
  * @property int $goods_id
  * @property string $sku_name 商品sku名称
  * @property string $sku_no 商品sku编码
- * @property float $sale_price 销售价格
- * @property float $market_price 划线价格
- * @property float $cost_price 成本价格
+ * @property string $sale_price 销售价格
+ * @property string $market_price 划线价格
+ * @property string $cost_price 成本价格
  * @property int $stock 库存
  * @property int $stock_alarm 库存预警
  * @property int $clicks 点击量
@@ -51,5 +51,5 @@ class GoodsSku extends Model
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'goods_id' => 'integer', 'sale_price' => 'float', 'market_price' => 'float', 'cost_price' => 'float', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'goods_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

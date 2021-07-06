@@ -22,6 +22,7 @@ namespace App\Model;
  * @property int $status 状态 0:已失效, 1:已启用
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  */
 class Attachment extends Model
 {
@@ -37,12 +38,12 @@ class Attachment extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'system', 'type', 'size', 'hash', 'key', 'index', 'encrypt', 'status', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'system', 'type', 'size', 'hash', 'key', 'index', 'encrypt', 'status', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'size' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'size' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

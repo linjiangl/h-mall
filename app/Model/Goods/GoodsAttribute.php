@@ -16,8 +16,8 @@ use App\Model\Model;
  * @property int $id
  * @property int $goods_id
  * @property string $goods_unit 商品单位
- * @property float $goods_weight 重量（单位g）
- * @property float $goods_volume 体积（单位立方米）
+ * @property string $goods_weight 重量（单位g）
+ * @property string $goods_volume 体积（单位立方米）
  * @property string $goods_service_ids 商品服务
  * @property string $parameter 商品参数
  * @property string $goods_content 商品详情
@@ -45,5 +45,5 @@ class GoodsAttribute extends Model
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'goods_id' => 'integer', 'goods_weight' => 'float', 'goods_volume' => 'float', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'goods_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

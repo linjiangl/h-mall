@@ -16,7 +16,7 @@ use App\Model\Model;
  * @property int $id
  * @property string $name 商品服务名称
  * @property string $description 商品服务的描述
- * @property int $sorting
+ * @property int $sorting 排序
  * @property int $created_time
  * @property int $updated_time
  */

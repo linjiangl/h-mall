@@ -16,13 +16,14 @@ use App\Model\Model;
  * @property int $id
  * @property int $shop_id
  * @property int $user_id
- * @property float $amount
+ * @property string $amount
  * @property int $refused_time 拒绝时间
  * @property int $finished_time 完成时间
  * @property int $status 状态 -1:已删除
  * @property string $remark
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  */
 class ShopWithdraw extends Model
 {
@@ -38,12 +39,12 @@ class ShopWithdraw extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'refused_time', 'finished_time', 'status', 'remark', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'refused_time', 'finished_time', 'status', 'remark', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'amount' => 'float', 'refused_time' => 'integer', 'finished_time' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'refused_time' => 'integer', 'finished_time' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

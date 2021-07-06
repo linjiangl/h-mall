@@ -19,9 +19,9 @@ use App\Model\Model;
  * @property string $client_ip
  * @property string $module
  * @property string $action
- * @property int $status 状态 -1:已删除
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  * @property array $remark
  */
 class AdminAction extends Model
@@ -38,16 +38,16 @@ class AdminAction extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'admin_id', 'username', 'client_ip', 'module', 'action', 'status', 'remark', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'admin_id', 'username', 'client_ip', 'module', 'action', 'remark', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 
-    public function getRemarkAttribute($value): array
+    public function getRemarkAttribute($value) : array
     {
         return database_text($value, 'de');
     }

@@ -16,9 +16,10 @@ use App\Model\Model;
  * @property int $id
  * @property int $user_id
  * @property int $message_id
- * @property int $status 状态 0:删除, 1:已读, 2:未读
+ * @property int $status 状态 0:未读, 1:已读
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  */
 class MessageReceiver extends Model
 {
@@ -34,12 +35,12 @@ class MessageReceiver extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'message_id', 'status', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'user_id', 'message_id', 'status', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'message_id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'message_id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }
