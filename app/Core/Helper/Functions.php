@@ -200,7 +200,7 @@ if (! function_exists('create_table_comment')) {
     function create_table_comment(string $table, string $comment): void
     {
         $tableName = get_table_name($table);
-        Db::statement("ALTER TABLE `{$tableName}` COMMENT '{$comment}'");
+        Db::statement("ALTER TABLE `$tableName` COMMENT '$comment'");
     }
 }
 
