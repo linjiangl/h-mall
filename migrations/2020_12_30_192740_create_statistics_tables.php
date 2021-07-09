@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateStatisticsTables extends Migration
 {
@@ -59,7 +58,7 @@ class CreateStatisticsTables extends Migration
             $table->index(['date'], 'date');
         });
 
-        Db::statement("ALTER TABLE `statistics_order` COMMENT '统计-订单'");
+        create_table_comment('statistics_order', '统计-订单');
     }
 
     /**

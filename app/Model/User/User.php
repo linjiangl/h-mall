@@ -34,10 +34,10 @@ use App\Model\Model;
  * @property int $created_time
  * @property int $updated_time
  * @property int $deleted_time
- * @property \App\Model\User\UserAddress[]|\Hyperf\Database\Model\Collection $address
  * @property array $appends
- * @property \App\Model\User\UserVipCard $vipCard
- * @property \App\Model\User\UserWallet $wallet
+ * @property UserAddress[] $address
+ * @property UserVipCard $vipCard
+ * @property UserWallet $wallet
  */
 class User extends Model
 {

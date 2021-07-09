@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateShopTables extends Migration
 {
@@ -86,10 +85,10 @@ class CreateShopTables extends Migration
             $table->index(['amount'], 'amount');
         });
 
-        Db::statement("ALTER TABLE `shop` COMMENT '店铺'");
-        Db::statement("ALTER TABLE `shop_finance` COMMENT '店铺资金'");
-        Db::statement("ALTER TABLE `shop_withdraw` COMMENT '店铺提现'");
-        Db::statement("ALTER TABLE `shop_statement` COMMENT '店铺流水'");
+        create_table_comment('shop', '店铺');
+        create_table_comment('shop_finance', '店铺资金');
+        create_table_comment('shop_withdraw', '店铺提现');
+        create_table_comment('shop_statement', '店铺流水');
     }
 
     /**

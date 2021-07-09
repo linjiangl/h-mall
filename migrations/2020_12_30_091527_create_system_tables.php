@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateSystemTables extends Migration
 {
@@ -158,16 +157,16 @@ class CreateSystemTables extends Migration
             $table->index(['shop_id'], 'shop_id');
         });
 
-        Db::statement("ALTER TABLE `setting` COMMENT '系统设置'");
-        Db::statement("ALTER TABLE `text` COMMENT '系统文本'");
-        Db::statement("ALTER TABLE `menu` COMMENT '系统菜单'");
-        Db::statement("ALTER TABLE `attachment` COMMENT '系统附件'");
-        Db::statement("ALTER TABLE `district` COMMENT '地区'");
-        Db::statement("ALTER TABLE `express` COMMENT '物流'");
-        Db::statement("ALTER TABLE `slide` COMMENT '幻灯片'");
-        Db::statement("ALTER TABLE `navigation` COMMENT '导航'");
-        Db::statement("ALTER TABLE `advertisement` COMMENT '广告'");
-        Db::statement("ALTER TABLE `customer_service` COMMENT '客服'");
+        create_table_comment('setting', '系统设置');
+        create_table_comment('text', '系统文本');
+        create_table_comment('menu', '系统菜单');
+        create_table_comment('attachment', '系统附件');
+        create_table_comment('district', '地区');
+        create_table_comment('express', '物流');
+        create_table_comment('slide', '幻灯片');
+        create_table_comment('navigation', '导航');
+        create_table_comment('advertisement', '广告');
+        create_table_comment('customer_service', '客服');
     }
 
     /**

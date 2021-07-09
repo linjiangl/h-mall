@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateRoleTables extends Migration
 {
@@ -56,9 +55,9 @@ class CreateRoleTables extends Migration
             $table->index(['menu_id'], 'menu_id');
         });
 
-        Db::statement("ALTER TABLE `role` COMMENT '权限'");
-        Db::statement("ALTER TABLE `role_admin` COMMENT '管理员权限'");
-        Db::statement("ALTER TABLE `role_menu` COMMENT '权限菜单'");
+        create_table_comment('role', '权限');
+        create_table_comment('role_admin', '管理员权限');
+        create_table_comment('role_menu', '权限菜单');
     }
 
     /**

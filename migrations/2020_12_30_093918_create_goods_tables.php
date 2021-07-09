@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateGoodsTables extends Migration
 {
@@ -295,23 +294,23 @@ class CreateGoodsTables extends Migration
             $table->index(['goods_id', 'top'], 'goods_id_top');
         });
 
-        Db::statement("ALTER TABLE `brand` COMMENT '商品品牌'");
-        Db::statement("ALTER TABLE `spec` COMMENT '商品規格'");
-        Db::statement("ALTER TABLE `spec_value` COMMENT '商品规格值'");
-        Db::statement("ALTER TABLE `parameter` COMMENT '商品参数'");
-        Db::statement("ALTER TABLE `parameter_options` COMMENT '商品参数选项'");
-        Db::statement("ALTER TABLE `category` COMMENT '商品分类'");
-        Db::statement("ALTER TABLE `category_spec` COMMENT '商品分类-关联的商品规格'");
-        Db::statement("ALTER TABLE `goods` COMMENT '商品'");
-        Db::statement("ALTER TABLE `goods_attribute` COMMENT '商品属性'");
-        Db::statement("ALTER TABLE `goods_timer` COMMENT '商品定时'");
-        Db::statement("ALTER TABLE `goods_spec` COMMENT '商品规格项'");
-        Db::statement("ALTER TABLE `goods_sku` COMMENT '商品规格'");
-        Db::statement("ALTER TABLE `goods_sku_spec_value` COMMENT '商品规格值'");
-        Db::statement("ALTER TABLE `goods_service` COMMENT '商品服务'");
-        Db::statement("ALTER TABLE `goods_parameter` COMMENT '商品参数'");
-        Db::statement("ALTER TABLE `goods_evaluate` COMMENT '商品评价'");
-        Db::statement("ALTER TABLE `goods_evaluate_reply` COMMENT '商品评价回复'");
+        create_table_comment('brand', '商品品牌');
+        create_table_comment('spec', '商品規格');
+        create_table_comment('spec_value', '商品规格值');
+        create_table_comment('parameter', '商品参数');
+        create_table_comment('parameter_options', '商品参数选项');
+        create_table_comment('category', '商品分类');
+        create_table_comment('category_spec', '商品分类-关联的商品规格');
+        create_table_comment('goods', '商品');
+        create_table_comment('goods_attribute', '商品属性');
+        create_table_comment('goods_timer', '商品定时');
+        create_table_comment('goods_spec', '商品规格项');
+        create_table_comment('goods_sku', '商品规格');
+        create_table_comment('goods_sku_spec_value', '商品规格值');
+        create_table_comment('goods_service', '商品服务');
+        create_table_comment('goods_parameter', '商品参数');
+        create_table_comment('goods_evaluate', '商品评价');
+        create_table_comment('goods_evaluate_reply', '商品评价回复');
     }
 
     /**

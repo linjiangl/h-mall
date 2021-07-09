@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 use App\Exception\InternalException;
 use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\DbConnection\Db;
 use Hyperf\Framework\Logger\StdoutLogger;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -180,7 +181,7 @@ if (! function_exists('write_logs')) {
 if (! function_exists('database_text')) {
     /**
      * 数据库文本数据.
-     * @param $data
+     * @param mixed $data 要处理的数据
      * @return array|false|mixed|string
      */
     function database_text($data, string $schema = 'en')
@@ -189,5 +190,26 @@ if (! function_exists('database_text')) {
             return empty($data) ? '' : json_encode($data, JSON_UNESCAPED_UNICODE);
         }
         return empty($data) ? [] : json_decode($data, true);
+    }
+}
+
+if (! function_exists('create_table_comment')) {
+    /**
+     * 创建表注释.
+     */
+    function create_table_comment(string $table, string $comment): void
+    {
+        $tableName = get_table_name($table);
+        Db::statement("ALTER TABLE `{$tableName}` COMMENT '{$comment}'");
+    }
+}
+
+if (! function_exists('get_table_name')) {
+    /**
+     * 获取数据库真实的表名.
+     */
+    function get_table_name(string $table): string
+    {
+        return $tableName = config('databases')['default']['prefix'] . $table;
     }
 }

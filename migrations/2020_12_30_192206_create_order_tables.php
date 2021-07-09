@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateOrderTables extends Migration
 {
@@ -147,11 +146,11 @@ class CreateOrderTables extends Migration
             $table->index(['order_no'], 'order_no');
         });
 
-        Db::statement("ALTER TABLE `cart` COMMENT '购物车'");
-        Db::statement("ALTER TABLE `order` COMMENT '订单'");
-        Db::statement("ALTER TABLE `order_goods` COMMENT '订单商品'");
-        Db::statement("ALTER TABLE `order_express` COMMENT '订单物流'");
-        Db::statement("ALTER TABLE `order_invoice` COMMENT '订单发票'");
+        create_table_comment('cart', '购物车');
+        create_table_comment('order', '订单');
+        create_table_comment('order_goods', '订单商品');
+        create_table_comment('order_express', '订单物流');
+        create_table_comment('order_invoice', '订单发票');
     }
 
     /**

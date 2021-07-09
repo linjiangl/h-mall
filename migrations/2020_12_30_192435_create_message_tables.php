@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateMessageTables extends Migration
 {
@@ -69,10 +68,10 @@ class CreateMessageTables extends Migration
             $table->unique(['user_id'], 'user_id');
         });
 
-        Db::statement("ALTER TABLE `message` COMMENT '消息'");
-        Db::statement("ALTER TABLE `message_text` COMMENT '消息文本'");
-        Db::statement("ALTER TABLE `message_receiver` COMMENT '消息接收者'");
-        Db::statement("ALTER TABLE `message_subscription` COMMENT '消息订阅'");
+        create_table_comment('message', '消息');
+        create_table_comment('message_text', '消息文本');
+        create_table_comment('message_receiver', '消息接收者');
+        create_table_comment('message_subscription', '消息订阅');
     }
 
     /**

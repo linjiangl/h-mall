@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateAdminTables extends Migration
 {
@@ -68,9 +67,9 @@ class CreateAdminTables extends Migration
             $table->index(['admin_id'], 'admin_id');
         });
 
-        Db::statement("ALTER TABLE `admin` COMMENT '管理员'");
-        Db::statement("ALTER TABLE `admin_login` COMMENT '管理员登录日志'");
-        Db::statement("ALTER TABLE `admin_action` COMMENT '管理员操作日志'");
+        create_table_comment('admin', '管理员');
+        create_table_comment('admin_login', '管理员登录日志');
+        create_table_comment('admin_action', '管理员操作日志');
     }
 
     /**

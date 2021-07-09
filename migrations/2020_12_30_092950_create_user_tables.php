@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreateUserTables extends Migration
 {
@@ -173,14 +172,14 @@ class CreateUserTables extends Migration
             $table->index(['created_time'], 'created_time');
         });
 
-        Db::statement("ALTER TABLE `user` COMMENT '用户'");
-        Db::statement("ALTER TABLE `user_wallet` COMMENT '用户钱包'");
-        Db::statement("ALTER TABLE `user_vip_card` COMMENT '用户会员卡'");
-        Db::statement("ALTER TABLE `user_address` COMMENT '用户地址'");
-        Db::statement("ALTER TABLE `user_history` COMMENT '用户浏览记录'");
-        Db::statement("ALTER TABLE `user_favorite` COMMENT '用户收藏'");
-        Db::statement("ALTER TABLE `user_invoice` COMMENT '用户发票'");
-        Db::statement("ALTER TABLE `user_statement` COMMENT '用户流水'");
+        create_table_comment('user', '用户');
+        create_table_comment('user_wallet', '用户钱包');
+        create_table_comment('user_vip_card', '用户会员卡');
+        create_table_comment('user_address', '用户地址');
+        create_table_comment('user_history', '用户浏览记录');
+        create_table_comment('user_favorite', '用户收藏');
+        create_table_comment('user_invoice', '用户发票');
+        create_table_comment('user_statement', '用户流水');
     }
 
     /**

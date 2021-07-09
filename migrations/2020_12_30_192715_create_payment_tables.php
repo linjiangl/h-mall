@@ -11,7 +11,6 @@ declare(strict_types=1);
 use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
-use Hyperf\DbConnection\Db;
 
 class CreatePaymentTables extends Migration
 {
@@ -64,8 +63,8 @@ class CreatePaymentTables extends Migration
             $table->index(['trade_no'], 'trade_no');
         });
 
-        Db::statement("ALTER TABLE `payment` COMMENT '支付记录'");
-        Db::statement("ALTER TABLE `payment_refund` COMMENT '支付退款记录'");
+        create_table_comment('payment', '支付记录');
+        create_table_comment('payment_refund', '支付退款记录');
     }
 
     /**
