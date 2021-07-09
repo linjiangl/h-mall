@@ -20,7 +20,7 @@ use App\Model\Model;
  * @property string $type 类别 order:订单, withdraw:提现, refund:退款
  * @property string $module 关联模型
  * @property int $module_id
- * @property string $order_sn
+ * @property string $order_no
  * @property string $remark
  * @property int $created_time
  * @property int $updated_time
@@ -40,7 +40,7 @@ class ShopStatement extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'type', 'module', 'module_id', 'order_sn', 'remark', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'amount', 'type', 'module', 'module_id', 'order_no', 'remark', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.

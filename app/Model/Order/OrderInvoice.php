@@ -17,7 +17,7 @@ use App\Model\Model;
  * @property int $shop_id
  * @property int $user_id
  * @property int $order_id
- * @property string $order_sn
+ * @property string $order_no
  * @property int $open_type 开具类型
  * @property int $type 发票类型
  * @property string $title 发票抬头
@@ -44,7 +44,7 @@ class OrderInvoice extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'order_id', 'order_sn', 'open_type', 'type', 'title', 'taxpayer_no', 'status', 'invoice_url', 'refused_reason', 'invoice', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'order_id', 'order_no', 'open_type', 'type', 'title', 'taxpayer_no', 'status', 'invoice_url', 'refused_reason', 'invoice', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.

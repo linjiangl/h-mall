@@ -54,3 +54,4 @@ class OrderGoods extends Model
      */
     protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'quantity' => 'integer', 'refund_id' => 'integer', 'refund_goods_id' => 'integer', 'refund_status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }
+

@@ -17,8 +17,8 @@ use App\Model\Model;
  * @property int $user_id
  * @property int $shop_id
  * @property int $order_id
- * @property string $refund_sn
- * @property string $order_sn
+ * @property string $refund_no
+ * @property string $order_no
  * @property int $order_status
  * @property string $service_type 服务类型 money:仅退款, all:退货退款
  * @property int $express_status 物流状态 1:未收货, 2:已收货
@@ -55,7 +55,7 @@ class Refund extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'shop_id', 'order_id', 'refund_sn', 'order_sn', 'order_status', 'service_type', 'express_status', 'amount', 'reason', 'status', 'applied_time', 'edited_time', 'canceled_time', 'refused_time', 'agreed_time', 'shipped_time', 'received_time', 'finished_time', 'failed_time', 'address', 'proofs', 'remark', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'user_id', 'shop_id', 'order_id', 'refund_no', 'order_no', 'order_status', 'service_type', 'express_status', 'amount', 'reason', 'status', 'applied_time', 'edited_time', 'canceled_time', 'refused_time', 'agreed_time', 'shipped_time', 'received_time', 'finished_time', 'failed_time', 'address', 'proofs', 'remark', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.

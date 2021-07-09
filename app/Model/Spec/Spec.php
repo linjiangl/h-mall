@@ -20,7 +20,8 @@ use App\Model\Model;
  * @property int $status 状态 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
- * @property-read SpecValue[] $values
+ * @property int $deleted_time
+ * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\SpecValue[] $values
  */
 class Spec extends Model
 {

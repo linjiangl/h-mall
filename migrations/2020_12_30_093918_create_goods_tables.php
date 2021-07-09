@@ -249,8 +249,9 @@ class CreateGoodsTables extends Migration
             $table->index(['goods_id'], 'goods_id');
         });
 
-        Schema::create('goods_appraises', function (Blueprint $table) {
+        Schema::create('goods_evaluate', function (Blueprint $table) {
             $table->integerIncrements('id');
+            $table->unsignedInteger('parent_id')->default(0)->comment('上级评论ID');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('order_goods_id');
@@ -260,8 +261,7 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('top')->default(0)->comment('点赞');
             $table->unsignedInteger('reply_num')->default(0)->comment('回复数量');
             $table->unsignedInteger('additional_num')->default(0)->comment('追评数量');
-            $table->unsignedInteger('additional_appraises_id')->default(0)->comment('追评ID');
-            $table->unsignedTinyInteger('is_additional')->default(0)->comment('是否追加评价 0:否,1:是');
+            $table->unsignedTinyInteger('is_additional')->default(0)->comment('是否是追加的评价 0:否,1:是');
             $table->unsignedTinyInteger('is_image')->default(0)->comment('是否带图 0:否,1:是');
             $table->unsignedTinyInteger('is_anonymous')->default(0)->comment('是否匿名 0:否,1:是');
             $table->string('content', 255)->comment('评论内容');
@@ -271,15 +271,15 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
 
-            $table->unique(['order_goods_id', 'status'], 'order_goods_id');
-            $table->index(['order_id', 'status'], 'order_id');
-            $table->index(['user_id', 'status'], 'user_id');
-            $table->index(['goods_id', 'top', 'status'], 'goods_id_top');
+            $table->index(['order_goods_id'], 'order_goods_id');
+            $table->index(['order_id'], 'order_id');
+            $table->index(['user_id'], 'user_id');
+            $table->index(['goods_id', 'parent_id', 'top'], 'goods_id');
         });
 
-        Schema::create('goods_appraises_reply', function (Blueprint $table) {
+        Schema::create('goods_evaluate_reply', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('appraises_id')->comment('评价ID');
+            $table->unsignedInteger('goods_evaluate_id')->comment('评价ID');
             $table->unsignedInteger('goods_id');
             $table->unsignedInteger('goods_sku_id');
             $table->unsignedInteger('user_id')->comment('回复评价的用户ID');
@@ -291,7 +291,7 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
 
-            $table->index(['appraises_id'], 'appraises_id');
+            $table->index(['goods_evaluate_id'], 'goods_evaluate_id');
             $table->index(['goods_id', 'top'], 'goods_id_top');
         });
 
@@ -310,8 +310,8 @@ class CreateGoodsTables extends Migration
         Db::statement("ALTER TABLE `goods_sku_spec_value` COMMENT '商品规格值'");
         Db::statement("ALTER TABLE `goods_service` COMMENT '商品服务'");
         Db::statement("ALTER TABLE `goods_parameter` COMMENT '商品参数'");
-        Db::statement("ALTER TABLE `goods_appraises` COMMENT '商品评价'");
-        Db::statement("ALTER TABLE `goods_appraises_reply` COMMENT '商品评价回复'");
+        Db::statement("ALTER TABLE `goods_evaluate` COMMENT '商品评价'");
+        Db::statement("ALTER TABLE `goods_evaluate_reply` COMMENT '商品评价回复'");
     }
 
     /**
@@ -334,7 +334,7 @@ class CreateGoodsTables extends Migration
         Schema::dropIfExists('goods_sku_spec_value');
         Schema::dropIfExists('goods_service');
         Schema::dropIfExists('goods_parameter');
-        Schema::dropIfExists('goods_appraises');
-        Schema::dropIfExists('goods_appraises_reply');
+        Schema::dropIfExists('goods_evaluate');
+        Schema::dropIfExists('goods_evaluate_reply');
     }
 }

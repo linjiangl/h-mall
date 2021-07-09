@@ -16,11 +16,11 @@ use App\Model\Model;
  * @property int $id
  * @property int $parameter_id
  * @property string $option 选项名称
- * @property string $values 选项值
  * @property int $type 类型 0:单选,1:多选,2:输入
  * @property int $sorting 排序
  * @property int $created_time
  * @property int $updated_time
+ * @property  $values 选项值
  */
 class ParameterOption extends Model
 {

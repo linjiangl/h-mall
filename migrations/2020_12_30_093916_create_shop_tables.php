@@ -76,7 +76,7 @@ class CreateShopTables extends Migration
             $table->string('type', 20)->comment('类别 order:订单, withdraw:提现, refund:退款');
             $table->string('module', 20)->default('')->comment('关联模型');
             $table->unsignedInteger('module_id')->default(0);
-            $table->string('order_sn', 64)->default('');
+            $table->string('order_no', 64)->default('');
             $table->string('remark', 255)->default('');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);

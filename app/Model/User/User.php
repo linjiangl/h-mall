@@ -34,10 +34,10 @@ use App\Model\Model;
  * @property int $created_time
  * @property int $updated_time
  * @property int $deleted_time
+ * @property-read \Hyperf\Database\Model\Collection|\App\Model\User\UserAddress[] $address
  * @property-read array $appends
- * @property-read UserAddress[] $address
- * @property-read UserVipCard $vipCard
- * @property-read UserWallet $wallet
+ * @property-read \App\Model\User\UserVipCard $vipCard
+ * @property-read \App\Model\User\UserWallet $wallet
  */
 class User extends Model
 {

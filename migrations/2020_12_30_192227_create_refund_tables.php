@@ -25,8 +25,8 @@ class CreateRefundTables extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('shop_id');
             $table->unsignedInteger('order_id');
-            $table->string('refund_sn', 32);
-            $table->string('order_sn', 32);
+            $table->string('refund_no', 32);
+            $table->string('order_no', 32);
             $table->unsignedTinyInteger('order_status');
             $table->string('service_type', 30)->comment('服务类型 money:仅退款, all:退货退款');
             $table->tinyInteger('express_status')->default(1)->comment('物流状态 1:未收货, 2:已收货');
@@ -49,9 +49,9 @@ class CreateRefundTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
 
-            $table->unique(['refund_sn'], 'refund_sn');
+            $table->unique(['refund_no'], 'refund_no');
             $table->index(['order_id'], 'order_id');
-            $table->index(['order_sn'], 'order_sn');
+            $table->index(['order_no'], 'order_no');
             $table->index(['user_id', 'status'], 'user_id');
             $table->index(['shop_id', 'status'], 'shop_id');
             $table->index(['created_time', 'status'], 'created_time');

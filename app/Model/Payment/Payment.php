@@ -17,7 +17,7 @@ use App\Model\Model;
  * @property int $user_id
  * @property string $serial_no 业务编号
  * @property string $payment_method 支付方式
- * @property string $order_maps 支付的订单ID集合
+ * @property string $order_maps
  * @property string $trade_no 第三方支付流水号
  * @property string $amount 金额
  * @property int $status 支付状态 0:待支付, 1:支付成功, 2:重复支付退款

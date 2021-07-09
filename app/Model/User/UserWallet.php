@@ -20,7 +20,7 @@ use App\Model\Model;
  * @property string $freeze_balance 冻结的余额
  * @property int $created_time
  * @property int $updated_time
- * @property-read User $user
+ * @property-read \App\Model\User\User $user
  */
 class UserWallet extends Model
 {

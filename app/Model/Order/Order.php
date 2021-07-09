@@ -16,7 +16,7 @@ use App\Model\Model;
  * @property int $id
  * @property int $shop_id
  * @property int $user_id
- * @property string $order_sn 订单编号
+ * @property string $order_no 订单编号
  * @property string $payment_method 支付类型
  * @property string $trade_no 第三方支付流水号
  * @property string $goods_amount 商品总金额
@@ -39,11 +39,11 @@ use App\Model\Model;
  * @property int $dispatched_time 发货时间
  * @property int $confirmed_time 确认时间
  * @property int $canceled_time 取消时间
- * @property int $comment_time 评论时间
- * @property int $additional_comment_time 追加评论时间
+ * @property int $evaluate_time 评论时间
+ * @property int $additional_evaluate_time 追加评论时间
  * @property int $status 订单状态
  * @property string $buyer_message 买家留言
- * @property string $seller_message 买家留言
+ * @property string $seller_message 卖家留言
  * @property string $refund_type
  * @property int $created_time
  * @property int $updated_time
@@ -63,12 +63,12 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'order_sn', 'payment_method', 'trade_no', 'goods_amount', 'total_amount', 'express_amount', 'discount_amount', 'consignee', 'mobile', 'province', 'city', 'district', 'street', 'address', 'zip_code', 'is_dispatched', 'is_comment', 'is_additional', 'is_credited', 'payment_time', 'dispatched_time', 'confirmed_time', 'canceled_time', 'comment_time', 'additional_comment_time', 'status', 'buyer_message', 'seller_message', 'refund_type', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'order_no', 'payment_method', 'trade_no', 'goods_amount', 'total_amount', 'express_amount', 'discount_amount', 'consignee', 'mobile', 'province', 'city', 'district', 'street', 'address', 'zip_code', 'is_dispatched', 'is_comment', 'is_additional', 'is_credited', 'payment_time', 'dispatched_time', 'confirmed_time', 'canceled_time', 'evaluate_time', 'additional_evaluate_time', 'status', 'buyer_message', 'seller_message', 'refund_type', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'is_dispatched' => 'integer', 'is_comment' => 'integer', 'is_additional' => 'integer', 'is_credited' => 'integer', 'payment_time' => 'integer', 'dispatched_time' => 'integer', 'confirmed_time' => 'integer', 'canceled_time' => 'integer', 'comment_time' => 'integer', 'additional_comment_time' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'is_dispatched' => 'integer', 'is_comment' => 'integer', 'is_additional' => 'integer', 'is_credited' => 'integer', 'payment_time' => 'integer', 'dispatched_time' => 'integer', 'confirmed_time' => 'integer', 'canceled_time' => 'integer', 'evaluate_time' => 'integer', 'additional_evaluate_time' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

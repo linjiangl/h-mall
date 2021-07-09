@@ -38,7 +38,7 @@ class CreateOrderTables extends Migration
             $table->integerIncrements('id');
             $table->unsignedInteger('shop_id');
             $table->unsignedInteger('user_id');
-            $table->string('order_sn', 64)->comment('订单编号');
+            $table->string('order_no', 64)->comment('订单编号');
             $table->string('payment_method', 30)->default('')->comment('支付类型');
             $table->string('trade_no', 64)->default('')->comment('第三方支付流水号');
             $table->decimal('goods_amount', 10)->unsigned()->default(0)->comment('商品总金额');
@@ -61,17 +61,17 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('dispatched_time')->default(0)->comment('发货时间');
             $table->unsignedInteger('confirmed_time')->default(0)->comment('确认时间');
             $table->unsignedInteger('canceled_time')->comment('取消时间');
-            $table->unsignedInteger('comment_time')->default(0)->comment('评论时间');
-            $table->unsignedInteger('additional_comment_time')->default(0)->comment('追加评论时间');
+            $table->unsignedInteger('evaluate_time')->default(0)->comment('评论时间');
+            $table->unsignedInteger('additional_evaluate_time')->default(0)->comment('追加评论时间');
             $table->smallInteger('status')->comment('订单状态');
             $table->string('buyer_message', 255)->default('')->comment('买家留言');
-            $table->string('seller_message', 255)->default('')->comment('买家留言');
+            $table->string('seller_message', 255)->default('')->comment('卖家留言');
             $table->string('refund_type', 30)->default('');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
 
-            $table->unique(['order_sn'], 'order_sn');
+            $table->unique(['order_no'], 'order_no');
             $table->index(['trade_no'], 'trade_no');
             $table->index(['mobile'], 'mobile');
             $table->index(['total_amount'], 'total_amount');
@@ -128,7 +128,7 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('shop_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('order_id');
-            $table->string('order_sn', 64);
+            $table->string('order_no', 64);
             $table->unsignedTinyInteger('open_type')->comment('开具类型');
             $table->unsignedTinyInteger('type')->comment('发票类型');
             $table->string('title', 150)->comment('发票抬头');
@@ -144,7 +144,7 @@ class CreateOrderTables extends Migration
             $table->index(['shop_id'], 'shop_id');
             $table->index(['user_id'], 'user_id');
             $table->index(['order_id'], 'order_id');
-            $table->index(['order_sn'], 'order_sn');
+            $table->index(['order_no'], 'order_no');
         });
 
         Db::statement("ALTER TABLE `cart` COMMENT '购物车'");

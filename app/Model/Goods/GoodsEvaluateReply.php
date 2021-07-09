@@ -10,11 +10,11 @@ declare(strict_types=1);
  */
 namespace App\Model\Goods;
 
-use App\Model\Model;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
- * @property int $appraises_id 评价ID
+ * @property int $goods_evaluate_id 评价ID
  * @property int $goods_id
  * @property int $goods_sku_id
  * @property int $user_id 回复评价的用户ID
@@ -26,26 +26,26 @@ use App\Model\Model;
  * @property int $updated_time
  * @property int $deleted_time
  */
-class GoodsAppraisesReply extends Model
+class GoodsEvaluateReply extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'appraises_reply';
+    protected $table = 'goods_evaluate_reply';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'appraises_id', 'goods_id', 'goods_sku_id', 'user_id', 'reply_user_id', 'top', 'content', 'status', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'goods_evaluate_id', 'goods_id', 'goods_sku_id', 'user_id', 'reply_user_id', 'top', 'content', 'status', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'appraises_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'user_id' => 'integer', 'reply_user_id' => 'integer', 'top' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'goods_evaluate_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'user_id' => 'integer', 'reply_user_id' => 'integer', 'top' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

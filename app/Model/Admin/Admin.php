@@ -14,7 +14,7 @@ use App\Model\Model;
 
 /**
  * @property int $id
- * @property int $shop_id 门店 0:系统
+ * @property int $shop_id 门店 0:管理员账号
  * @property string $username 用户名
  * @property string $avatar 头像
  * @property string $real_name 姓名
