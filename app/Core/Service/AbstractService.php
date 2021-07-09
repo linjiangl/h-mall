@@ -14,37 +14,30 @@ use App\Core\Dao\AbstractDao;
 
 abstract class AbstractService
 {
-    /**
-     * @var string
-     */
     protected string $dao;
 
     /**
-     * 默认每页条数
-     * @var int
+     * 默认每页条数.
      */
     protected int $limit = 20;
 
     /**
-     * 每页最大条数
-     * @var int
+     * 每页最大条数.
      */
     protected int $maxLimit = 100;
 
     /**
-     * 登录用户
-     * @var array
+     * 登录用户.
      */
     protected array $authorize = [];
 
     /**
-     * 软删除
-     * @var bool
+     * 软删除.
      */
     protected bool $softDelete = true;
 
     /**
-     * 获取分页列表
+     * 获取分页列表.
      * @param array $condition 查询条件
      * @param int $page 当前页
      * @param int $limit 条数
@@ -68,9 +61,8 @@ abstract class AbstractService
     }
 
     /**
-     * 获取详情
+     * 获取详情.
      * @param int $id 主键
-     * @param array $with
      * @return mixed
      */
     public function info(int $id, array $with = [])
@@ -79,9 +71,8 @@ abstract class AbstractService
     }
 
     /**
-     * 创建
+     * 创建.
      * @param array $data 创建的数据
-     * @return int
      */
     public function create(array $data): int
     {
@@ -89,10 +80,9 @@ abstract class AbstractService
     }
 
     /**
-     * 修改
+     * 修改.
      * @param int $id 主键
      * @param array $data 修改的数据
-     * @return array
      */
     public function update(int $id, array $data): array
     {
@@ -100,9 +90,7 @@ abstract class AbstractService
     }
 
     /**
-     * 删除
-     * @param int $id
-     * @return bool
+     * 删除.
      */
     public function remove(int $id): bool
     {
@@ -110,9 +98,7 @@ abstract class AbstractService
     }
 
     /**
-     * 批量插入
-     * @param array $data
-     * @return bool
+     * 批量插入.
      */
     public function batchInsert(array $data): bool
     {
@@ -121,9 +107,7 @@ abstract class AbstractService
     }
 
     /**
-     * 批量删除
-     * @param array $selectIds
-     * @return bool
+     * 批量删除.
      */
     public function batchRemove(array $selectIds): bool
     {
@@ -132,9 +116,7 @@ abstract class AbstractService
     }
 
     /**
-     * 获取列表的查询条件
-     * @param array $params
-     * @return array
+     * 获取列表的查询条件.
      */
     public function getCondition(array $params): array
     {
@@ -142,8 +124,7 @@ abstract class AbstractService
     }
 
     /**
-     * 设置登录用户信息
-     * @param array $user
+     * 设置登录用户信息.
      * @return $this
      */
     public function withAuthorize(array $user): self
@@ -153,8 +134,7 @@ abstract class AbstractService
     }
 
     /**
-     * 设置最大的查询条数
-     * @param int $limit
+     * 设置最大的查询条数.
      */
     public function setMaxLimit(int $limit)
     {
@@ -162,8 +142,7 @@ abstract class AbstractService
     }
 
     /**
-     * 处理查询条数
-     * @param int $limit
+     * 处理查询条数.
      */
     protected function handleQueryLimit(int $limit)
     {
@@ -175,8 +154,7 @@ abstract class AbstractService
     }
 
     /**
-     * 返回数据访问服务抽象类
-     * @return AbstractDao
+     * 返回数据访问服务抽象类.
      */
     protected function service(): AbstractDao
     {

@@ -24,9 +24,8 @@ class MenuService extends AbstractService
     protected array $levelMenus = [];
 
     /**
-     * 获取管理员菜单
+     * 获取管理员菜单.
      * @param int $adminId 管理员id
-     * @return array
      */
     public function getAdminMenus(int $adminId): array
     {
@@ -36,9 +35,7 @@ class MenuService extends AbstractService
     }
 
     /**
-     * 获取权限菜单
-     * @param int $roleId
-     * @return array
+     * 获取权限菜单.
      */
     public function getRoleMenus(int $roleId): array
     {
@@ -57,9 +54,8 @@ class MenuService extends AbstractService
     }
 
     /**
-     * 获取树形菜单
+     * 获取树形菜单.
      * @param mixed $status
-     * @return array
      */
     public function getTreeMenus($status = null): array
     {
@@ -69,9 +65,8 @@ class MenuService extends AbstractService
     }
 
     /**
-     * 获取层次菜单
+     * 获取层次菜单.
      * @param mixed $status
-     * @return array
      */
     public function getLevelMenus($status = null): array
     {
@@ -81,11 +76,10 @@ class MenuService extends AbstractService
     }
 
     /**
-     * 把菜单转成子菜单
+     * 把菜单转成子菜单.
      * @param array $menus 菜单数据
      * @param int $parentId 父级
      * @param int $level 层级
-     * @return array
      */
     public function handleMenusToChildren(array $menus, int $parentId = 0, int $level = 1): array
     {
@@ -106,9 +100,6 @@ class MenuService extends AbstractService
     /**
      * 把菜单分层
      * @param array $menus 菜单数据
-     * @param int $parentId
-     * @param int $level
-     * @return array
      */
     public function handleMenusToLevel(array $menus, int $parentId = 0, int $level = 1): array
     {

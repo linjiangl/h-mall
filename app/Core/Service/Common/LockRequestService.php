@@ -15,10 +15,9 @@ use App\Exception\RequestLockException;
 class LockRequestService
 {
     /**
-     * 开启请求锁机制
+     * 开启请求锁机制.
      * @param array $params 其他参数
      * @param int $ttl 有效期
-     * @param bool $isLock
      */
     public static function open(array $params = [], int $ttl = 10, bool $isLock = true)
     {

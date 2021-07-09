@@ -23,8 +23,6 @@ class GoodsSkuSpecValueDao extends AbstractDao
 
     /**
      * 检查规格值下是否有商品
-     * @param int $specValueId
-     * @return bool
      */
     public function checkSpecValueIdHasGoods(int $specValueId): bool
     {

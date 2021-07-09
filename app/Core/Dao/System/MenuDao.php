@@ -27,10 +27,8 @@ class MenuDao extends AbstractDao
     }
 
     /**
-     * 根据状态获取菜单
+     * 根据状态获取菜单.
      * @param mixed $status 状态
-     * @param string $select
-     * @return array
      */
     public function getListByStatus($status = null, string $select = '*'): array
     {

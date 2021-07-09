@@ -29,7 +29,7 @@ abstract class AbstractHttpTestCase extends HttpTestCase
 
     public function request($url, $data = [], $method = 'post', $header = [])
     {
-        return $this->client->$method($this->apiType . $url, $data, $header);
+        return $this->client->{$method}($this->apiType . $url, $data, $header);
     }
 
     public function handleError($response)

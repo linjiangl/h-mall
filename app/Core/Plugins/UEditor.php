@@ -55,11 +55,11 @@ class UEditor
         'ERROR_HTTP_LINK' => '链接不是http链接',
         'ERROR_HTTP_CONTENTTYPE' => '链接contentType不正确',
         'INVALID_URL' => '非法 URL',
-        'INVALID_IP' => '非法 IP'
+        'INVALID_IP' => '非法 IP',
     ];
 
     /**
-     * 构造函数
+     * 构造函数.
      * @param string $fileField 表单名称
      * @param array $config 配置项
      * @param string $type 类型
@@ -80,8 +80,7 @@ class UEditor
     }
 
     /**
-     * 获取当前上传成功文件的各项信息
-     * @return array
+     * 获取当前上传成功文件的各项信息.
      */
     public function getFileInfo(): array
     {
@@ -91,12 +90,12 @@ class UEditor
             'title' => $this->fileName,
             'original' => $this->oriName,
             'type' => $this->fileType,
-            'size' => $this->fileSize
+            'size' => $this->fileSize,
         ];
     }
 
     /**
-     * 上传文件的主处理方法
+     * 上传文件的主处理方法.
      */
     private function upFile()
     {
@@ -109,10 +108,12 @@ class UEditor
         if ($file->getError()) {
             $this->stateInfo = $this->getStateInfo($file->getError());
             return;
-        } elseif (! file_exists($file->getRealPath())) {
+        }
+        if (! file_exists($file->getRealPath())) {
             $this->stateInfo = $this->getStateInfo('ERROR_TMP_FILE_NOT_FOUND');
             return;
-        } elseif (! is_uploaded_file($file->getRealPath())) {
+        }
+        if (! is_uploaded_file($file->getRealPath())) {
             $this->stateInfo = $this->getStateInfo('ERROR_TMPFILE');
             return;
         }
@@ -147,7 +148,7 @@ class UEditor
     }
 
     /**
-     * 处理base64编码的图片上传
+     * 处理base64编码的图片上传.
      */
     private function upBase64()
     {
@@ -172,7 +173,8 @@ class UEditor
         if (! file_exists($dirname) && ! mkdir($dirname, 0777, true)) {
             $this->stateInfo = $this->getStateInfo('ERROR_CREATE_DIR');
             return;
-        } elseif (! is_writeable($dirname)) {
+        }
+        if (! is_writeable($dirname)) {
             $this->stateInfo = $this->getStateInfo('ERROR_DIR_NOT_WRITEABLE');
             return;
         }
@@ -186,7 +188,7 @@ class UEditor
     }
 
     /**
-     * 拉取远程图片
+     * 拉取远程图片.
      */
     private function saveRemote()
     {
@@ -236,13 +238,13 @@ class UEditor
         ob_start();
         $context = stream_context_create(
             ['http' => [
-                'follow_location' => false // don't follow redirects
+                'follow_location' => false, // don't follow redirects
             ]]
         );
         readfile($imgUrl, false, $context);
         $img = ob_get_contents();
         ob_end_clean();
-        preg_match("/[\/]([^\/]*)[\.]?[^\.\/]*$/", $imgUrl, $m);
+        preg_match('/[\\/]([^\\/]*)[\\.]?[^\\.\\/]*$/', $imgUrl, $m);
 
         $this->oriName = $m ? $m[1] : '';
         $this->fileSize = strlen($img);
@@ -262,7 +264,8 @@ class UEditor
         if (! file_exists($dirname) && ! mkdir($dirname, 0777, true)) {
             $this->stateInfo = $this->getStateInfo('ERROR_CREATE_DIR');
             return;
-        } elseif (! is_writeable($dirname)) {
+        }
+        if (! is_writeable($dirname)) {
             $this->stateInfo = $this->getStateInfo('ERROR_DIR_NOT_WRITEABLE');
             return;
         }
@@ -276,9 +279,8 @@ class UEditor
     }
 
     /**
-     * 上传错误检查
+     * 上传错误检查.
      * @param $errCode
-     * @return string
      */
     private function getStateInfo($errCode): string
     {
@@ -286,8 +288,7 @@ class UEditor
     }
 
     /**
-     * 获取文件扩展名
-     * @return string
+     * 获取文件扩展名.
      */
     private function getFileExt(): string
     {
@@ -295,8 +296,7 @@ class UEditor
     }
 
     /**
-     * 重命名文件
-     * @return string
+     * 重命名文件.
      */
     private function getFullName(): string
     {
@@ -315,13 +315,13 @@ class UEditor
 
         //过滤文件名的非法自负,并替换文件名
         $oriName = substr($this->oriName, 0, strrpos($this->oriName, '.'));
-        $oriName = preg_replace("/[\|\?\"\<\>\/\*\\\\]+/", '', $oriName);
+        $oriName = preg_replace('/[\\|\\?"\\<\\>\\/\\*\\\\]+/', '', $oriName);
         $format = str_replace('{filename}', $oriName, $format);
 
         //替换随机字符串
         $randNum = rand(1, 10000000000) . rand(1, 10000000000);
-        if (preg_match("/\{rand\:([\d]*)\}/i", $format, $matches)) {
-            $format = preg_replace("/\{rand\:[\d]*\}/i", substr($randNum, 0, $matches[1]), $format);
+        if (preg_match('/\\{rand\\:([\\d]*)\\}/i', $format, $matches)) {
+            $format = preg_replace('/\\{rand\\:[\\d]*\\}/i', substr($randNum, 0, $matches[1]), $format);
         }
 
         $ext = $this->getFileExt();
@@ -329,8 +329,7 @@ class UEditor
     }
 
     /**
-     * 获取文件名
-     * @return string
+     * 获取文件名.
      */
     private function getFileName(): string
     {
@@ -338,8 +337,7 @@ class UEditor
     }
 
     /**
-     * 获取文件完整路径
-     * @return string
+     * 获取文件完整路径.
      */
     private function getFilePath(): string
     {
@@ -354,8 +352,7 @@ class UEditor
     }
 
     /**
-     * 文件类型检测
-     * @return bool
+     * 文件类型检测.
      */
     private function checkType(): bool
     {
@@ -363,8 +360,7 @@ class UEditor
     }
 
     /**
-     * 文件大小检测
-     * @return bool
+     * 文件大小检测.
      */
     private function checkSize(): bool
     {

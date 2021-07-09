@@ -22,7 +22,7 @@ abstract class Model extends BaseModel implements CacheableInterface
 
     public function freshTimestamp(): string
     {
-        return (string)time();
+        return (string) time();
     }
 
     public function freshTimestampString(): ?string

@@ -33,7 +33,7 @@ class MenuRequest extends AbstractRequest
                 'icon' => 'string|max:50',
                 'path' => 'string|max:255',
                 'sorting' => 'integer|max:100',
-            ]
+            ],
         ];
         return $rules[$scene] ?? [];
     }

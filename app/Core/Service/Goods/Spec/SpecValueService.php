@@ -40,8 +40,6 @@ class SpecValueService extends AbstractService
 
     /**
      * 创建规格值
-     * @param int $specId
-     * @param array $specValues
      */
     public function createSpecValues(int $specId, array $specValues): void
     {
@@ -52,7 +50,7 @@ class SpecValueService extends AbstractService
                 'spec_id' => $specId,
                 'value' => $item,
                 'created_at' => $now,
-                'updated_at' => $now
+                'updated_at' => $now,
             ];
         }
         $this->batchInsert($insert);
@@ -60,8 +58,6 @@ class SpecValueService extends AbstractService
 
     /**
      * 更新规格值
-     * @param array $spec
-     * @param array $specValues
      */
     public function updateSpecValues(array $spec, array $specValues)
     {

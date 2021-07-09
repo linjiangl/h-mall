@@ -25,8 +25,6 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
     /**
      * Handle the response when found.
      *
-     * @param Dispatched $dispatched
-     * @param ServerRequestInterface $request
      * @return array|Arrayable|mixed|ResponseInterface|string
      */
     protected function handleFound(Dispatched $dispatched, ServerRequestInterface $request)
@@ -61,8 +59,6 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
      * Transfer the non-standard response content to a standard response object.
      *
      * @param array|Arrayable|Jsonable|string $response
-     * @param ServerRequestInterface $request
-     * @return ResponseInterface
      */
     protected function transferToResponse($response, ServerRequestInterface $request): ResponseInterface
     {

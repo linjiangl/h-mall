@@ -19,14 +19,12 @@ use Throwable;
 abstract class AbstractTypesService implements InterfaceTypesService
 {
     /**
-     * 商品id
-     * @var int
+     * 商品id.
      */
     protected int $goodsId = 0;
 
     /**
-     * 商品数据
-     * @var array
+     * 商品数据.
      */
     protected array $goods = [];
 

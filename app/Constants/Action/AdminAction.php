@@ -15,7 +15,7 @@ use Hyperf\Constants\AbstractConstants;
 use Hyperf\Constants\Annotation\Constants;
 
 /**
- * @Constants()
+ * @Constants
  */
 class AdminAction extends AbstractConstants
 {

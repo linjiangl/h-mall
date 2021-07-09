@@ -25,7 +25,7 @@ use Throwable;
 
 /**
  * @Controller(prefix="rate-limit")
- * @RateLimit()
+ * @RateLimit
  */
 class PublicController extends AbstractController
 {
@@ -33,7 +33,7 @@ class PublicController extends AbstractController
     public function config(): array
     {
         return [
-            'system' => 'h-mall'
+            'system' => 'h-mall',
         ];
     }
 
@@ -72,7 +72,7 @@ class PublicController extends AbstractController
                 $uploadConfig = [
                     'pathFormat' => $config['imagePathFormat'],
                     'maxSize' => $config['imageMaxSize'],
-                    'allowFiles' => $config['imageAllowFiles']
+                    'allowFiles' => $config['imageAllowFiles'],
                 ];
                 $fieldName = $config['imageFieldName'];
                 $up = new UEditor($fieldName, $uploadConfig, 'upload');

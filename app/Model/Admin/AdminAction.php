@@ -47,7 +47,7 @@ class AdminAction extends Model
      */
     protected $casts = ['id' => 'integer', 'admin_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 
-    public function getRemarkAttribute($value) : array
+    public function getRemarkAttribute($value): array
     {
         return database_text($value, 'de');
     }

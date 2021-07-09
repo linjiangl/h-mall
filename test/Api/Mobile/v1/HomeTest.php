@@ -12,6 +12,10 @@ namespace HyperfTest\Api\Mobile\v1;
 
 use HyperfTest\AbstractHttpTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class HomeTest extends AbstractHttpTestCase
 {
     public function testMobileHome()

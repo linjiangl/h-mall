@@ -19,7 +19,7 @@ use App\Model\Spec\Spec;
  * @property int $spec_id
  * @property int $created_time
  * @property int $updated_time
- * @property-read \App\Model\Spec\Spec $spec
+ * @property \App\Model\Spec\Spec $spec
  */
 class CategorySpec extends Model
 {

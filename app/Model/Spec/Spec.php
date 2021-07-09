@@ -21,7 +21,7 @@ use App\Model\Model;
  * @property int $created_time
  * @property int $updated_time
  * @property int $deleted_time
- * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\SpecValue[] $values
+ * @property \App\Model\Spec\SpecValue[]|\Hyperf\Database\Model\Collection $values
  */
 class Spec extends Model
 {

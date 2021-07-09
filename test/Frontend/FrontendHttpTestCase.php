@@ -12,6 +12,10 @@ namespace HyperfTest\Frontend;
 
 use HyperfTest\AbstractHttpTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class FrontendHttpTestCase extends AbstractHttpTestCase
 {
     protected string $apiType = '/frontend';

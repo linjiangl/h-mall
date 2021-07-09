@@ -16,11 +16,14 @@ class UserState extends AbstractState
 {
     // 状态
     const STATUS_PENDING = 0;
+
     const STATUS_ENABLED = 1;
+
     const STATUS_DISABLED = 2;
 
     // 是否系统用户
     const IS_SYSTEM_FALSE = 0;
+
     const IS_SYSTEM_TRUE = 1;
 
     public static function map(): array
@@ -33,8 +36,8 @@ class UserState extends AbstractState
             ],
             'is_system' => [
                 self::IS_SYSTEM_FALSE => '否',
-                self::IS_SYSTEM_TRUE => '是'
-            ]
+                self::IS_SYSTEM_TRUE => '是',
+            ],
         ];
     }
 }

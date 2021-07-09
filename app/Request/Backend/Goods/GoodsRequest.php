@@ -35,16 +35,16 @@ class GoodsRequest extends AbstractRequest
                 'type' => 'required|in:' . $types,
                 'virtual_sales' => 'integer',
                 'status' => 'integer|in:' . $status,
-                'recommend_way' => 'in:' ,
+                'recommend_way' => 'in:',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
                 'name' => 'required|string|max:30',
-                'status' => 'integer|in:' . $status
+                'status' => 'integer|in:' . $status,
             ],
             'post:updateStatus' => [
                 'id' => 'required|integer|gt:0',
-                'status' => 'integer|in:' . $status
+                'status' => 'integer|in:' . $status,
             ],
         ];
         return $rules[$this->getScene()] ?? [];
@@ -55,7 +55,7 @@ class GoodsRequest extends AbstractRequest
         return [
             'id' => '商品ID',
             'name' => '商品名称',
-            'status' => '商品状态'
+            'status' => '商品状态',
         ];
     }
 }

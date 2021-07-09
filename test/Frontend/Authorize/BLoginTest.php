@@ -13,6 +13,10 @@ namespace HyperfTest\Frontend\Authorize;
 use HyperfTest\Frontend\FrontendHttpTestCase;
 use HyperfTest\Frontend\TraitFrontendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class BLoginTest extends FrontendHttpTestCase
 {
     use TraitFrontendAuthorize;
@@ -21,7 +25,7 @@ class BLoginTest extends FrontendHttpTestCase
     {
         $result = $this->request('/login', [
             'username' => 'test001',
-            'password' => '123456'
+            'password' => '123456',
         ]);
 
         $this->handleError($result);

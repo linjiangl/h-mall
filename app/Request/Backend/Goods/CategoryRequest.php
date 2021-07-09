@@ -23,7 +23,7 @@ class CategoryRequest extends AbstractRequest
                 'icon' => 'string|max:255',
                 'cover' => 'string|max:255',
                 'sorting' => 'integer|max:100',
-                'status' => 'integer'
+                'status' => 'integer',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
@@ -32,7 +32,7 @@ class CategoryRequest extends AbstractRequest
                 'icon' => 'string|max:255',
                 'cover' => 'string|max:255',
                 'sorting' => 'integer|max:100',
-                'status' => 'integer'
+                'status' => 'integer',
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',
@@ -49,7 +49,7 @@ class CategoryRequest extends AbstractRequest
             'icon' => '图标',
             'cover' => '封面图',
             'sorting' => '排序',
-            'status' => '状态'
+            'status' => '状态',
         ];
     }
 }

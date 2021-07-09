@@ -20,7 +20,9 @@ use Throwable;
 class StockChangeService
 {
     const STOCK_CART = StockCartService::class;
+
     const STOCK_ORDER = StockOrderService::class;
+
     const STOCK_REFUND = StockRefundService::class;
 
     /**
@@ -38,11 +40,7 @@ class StockChangeService
     }
 
     /**
-     * 创建
-     * @param array $user
-     * @param int $relationId
-     * @param string $remark
-     * @return bool
+     * 创建.
      * @throws InternalException
      */
     public function created(array $user, int $relationId, string $remark = ''): bool
@@ -56,11 +54,7 @@ class StockChangeService
     }
 
     /**
-     * 修改
-     * @param array $user
-     * @param int $relationId
-     * @param string $remark
-     * @return bool
+     * 修改.
      * @throws InternalException
      */
     public function updated(array $user, int $relationId, string $remark = ''): bool
@@ -74,10 +68,7 @@ class StockChangeService
     }
 
     /**
-     * 取消
-     * @param array $user
-     * @param int $relationId
-     * @return bool
+     * 取消.
      * @throws InternalException
      */
     public function recovery(array $user, int $relationId): bool
@@ -91,11 +82,7 @@ class StockChangeService
     }
 
     /**
-     * 完成
-     * @param array $user
-     * @param int $relationId
-     * @param string $remark
-     * @return bool
+     * 完成.
      * @throws InternalException
      */
     public function completed(array $user, int $relationId, string $remark = ''): bool

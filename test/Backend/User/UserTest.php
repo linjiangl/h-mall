@@ -13,6 +13,10 @@ namespace HyperfTest\Backend\User;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class UserTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
@@ -27,7 +31,7 @@ class UserTest extends BackendHttpTestCase
     {
         $this->url = '/user/detail';
         $this->data = [
-            'id' => 1
+            'id' => 1,
         ];
         $this->handleHttpShow();
     }

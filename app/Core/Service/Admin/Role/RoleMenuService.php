@@ -21,9 +21,7 @@ class RoleMenuService extends AbstractService
     protected string $dao = RoleMenuDao::class;
 
     /**
-     * 更新权限菜单
-     * @param int $roleId
-     * @param array $menuIds
+     * 更新权限菜单.
      */
     public function saveRoleMenus(int $roleId, array $menuIds): void
     {

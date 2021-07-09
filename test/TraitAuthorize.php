@@ -52,7 +52,7 @@ trait TraitAuthorize
     public function getHeaders(): array
     {
         return [
-            'Authorization' => $this->getToken()
+            'Authorization' => $this->getToken(),
         ];
     }
 

@@ -28,14 +28,12 @@ use Throwable;
 abstract class AbstractAuthorizationService implements InterfaceAuthorizationService
 {
     /**
-     * 场景
-     * @var string
+     * 场景.
      */
     protected string $scene = 'default';
 
     /**
-     * 配置
-     * @var array
+     * 配置.
      */
     protected array $config = [];
 
@@ -107,7 +105,7 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
 
     public function getTTL()
     {
-        $expData = (array)$this->plain->claims()->get(RegisteredClaims::EXPIRATION_TIME);
+        $expData = (array) $this->plain->claims()->get(RegisteredClaims::EXPIRATION_TIME);
         try {
             $from = $expData['timezone_type'] != 3 ? 'UTC' : $expData['timezone'];
             $datetime = new DateTime($expData['date'], new DateTimeZone($from));

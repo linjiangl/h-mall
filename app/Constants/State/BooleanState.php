@@ -13,6 +13,7 @@ namespace App\Constants\State;
 class BooleanState extends AbstractState
 {
     const OPTION_FALSE = 0;
+
     const OPTION_TRUE = 1;
 
     public static function map(): array
@@ -21,7 +22,7 @@ class BooleanState extends AbstractState
             'default' => [
                 self::OPTION_FALSE => '否',
                 self::OPTION_TRUE => '是',
-            ]
+            ],
         ];
     }
 }

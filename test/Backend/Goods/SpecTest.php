@@ -15,6 +15,10 @@ use App\Model\Spec\Spec;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class SpecTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;

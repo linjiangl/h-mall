@@ -18,82 +18,57 @@ use Hyperf\Database\Model\Model;
 use Throwable;
 
 /**
- * Class AbstractDao
- * @package App\Dao
- *
- * 常用状态:
- *  - STATUS_PENDING    // 待处理
- *  - STATUS_ENABLED    // 已启用
- *  - STATUS_DISABLED   // 已禁用
- *  - STATUS_REFUSED    // 已拒绝
- *  - STATUS_CLOSED     // 已关闭
- *  - STATUS_TRASHED    // 回收站
- *  - STATUS_DELETED    // 已删除
- *  - STATUS_APPLIED    // 已申请
+ * Class AbstractDao.
  */
 abstract class AbstractDao
 {
     /**
-     * @var string|Model
+     * @var Model|string
      */
     protected string $model;
 
     /**
-     * 不允许执行的方法
-     * @var array
+     * 不允许执行的方法.
      */
     protected array $noAllowActions = ['create', 'update', 'remove'];
 
     /**
-     * 关联模型
-     * @var array
+     * 关联模型.
      */
     protected array $with = [];
 
     /**
-     * 排序
-     * @var string
+     * 排序.
      */
     protected string $orderBy = 'id desc';
 
     /**
-     * 软删除
-     * @var bool
+     * 软删除.
      */
     protected bool $softDelete = false;
 
     /**
-     * 获取软删除数据
-     * @var bool
+     * 获取软删除数据.
      */
     protected bool $queryDelete = false;
 
     /**
-     * 对象不存在的错误提示
-     * @var string
+     * 对象不存在的错误提示.
      */
     protected string $notFoundMessage = '所请求的资源不存在';
 
     /**
-     * 登录用户
-     * @var array
+     * 登录用户.
      */
     protected array $authorize = [];
 
     /**
-     * 登录用户在对象中字段
-     * @var string
+     * 登录用户在对象中字段.
      */
     protected string $authorizeColumn = 'user_id';
 
     /**
-     * 分页列表
-     * @param array $condition
-     * @param int $page
-     * @param int $limit
-     * @param string $orderBy
-     * @param array $groupBy
-     * @param array $with
+     * 分页列表.
      * @param string[] $columns
      * @return array
      *
@@ -111,15 +86,8 @@ abstract class AbstractDao
     }
 
     /**
-     * 普通列表
-     * @param array $condition
-     * @param int $page
-     * @param int $limit
-     * @param string $orderBy
-     * @param array $groupBy
-     * @param array $with
+     * 普通列表.
      * @param string[] $columns
-     * @return array
      */
     public function list(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
     {
@@ -129,7 +97,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 详情
+     * 详情.
      * @param int $id 主键
      * @param array $with 关联模型
      * @return mixed
@@ -150,9 +118,8 @@ abstract class AbstractDao
     }
 
     /**
-     * 创建
+     * 创建.
      * @param array $data 创建的数据
-     * @return int
      */
     public function create(array $data): int
     {
@@ -166,7 +133,7 @@ abstract class AbstractDao
             }
 
             $pk = $model->getKeyName();
-            $id = $model->$pk;
+            $id = $model->{$pk};
             $this->removeCache($id);
             return $id;
         } catch (Throwable $e) {
@@ -175,10 +142,9 @@ abstract class AbstractDao
     }
 
     /**
-     * 修改
+     * 修改.
      * @param int $id 主键
      * @param array $data 修改的数据
-     * @return array
      */
     public function update(int $id, array $data): array
     {
@@ -197,10 +163,9 @@ abstract class AbstractDao
     }
 
     /**
-     * 删除
+     * 删除.
      * @param int $id 主键
      * @param bool $softDelete 是否软删除
-     * @return bool
      */
     public function remove(int $id, bool $softDelete = true): bool
     {
@@ -221,8 +186,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 批量插入数据
-     * @param array $data
+     * 批量插入数据.
      */
     public function batchInsert(array $data): void
     {
@@ -230,8 +194,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 批量删除数据
-     * @param array $selectIds
+     * 批量删除数据.
      * @param bool $softDelete 是否软删除
      */
     public function batchRemove(array $selectIds, bool $softDelete = true): void
@@ -246,9 +209,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 通过主键集合获取数据
-     * @param array $primaryKeys
-     * @return array
+     * 通过主键集合获取数据.
      */
     public function getListByPrimaryKeys(array $primaryKeys): array
     {
@@ -259,10 +220,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 自定义条件查询详情
-     * @param array $condition
-     * @param array $with
-     * @param string $select
+     * 自定义条件查询详情.
      * @return mixed
      */
     public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*')
@@ -277,13 +235,12 @@ abstract class AbstractDao
     }
 
     /**
-     * 自定义条件查询列表
+     * 自定义条件查询列表.
      * @param array $condition 查询条件
      * @param array $with 管理模型
      * @param string $select 字段
      * @param string $orderBy 排序
      * @param array $groupBy 分组
-     * @return array
      */
     public function getListByCondition(array $condition = [], array $with = [], string $select = '*', string $orderBy = '', array $groupBy = []): array
     {
@@ -294,8 +251,6 @@ abstract class AbstractDao
 
     /**
      * 根据条件统计
-     * @param array $condition
-     * @return int
      */
     public function getCountByCondition(array $condition): int
     {
@@ -305,10 +260,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 根据条件获取对应字段集合
-     * @param array $condition
-     * @param string $column
-     * @return array
+     * 根据条件获取对应字段集合.
      */
     public function getColumnByCondition(array $condition, string $column = 'id'): array
     {
@@ -318,9 +270,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 根据条件更新
-     * @param array $condition
-     * @param array $update
+     * 根据条件更新.
      */
     public function updateByCondition(array $condition, array $update): void
     {
@@ -330,9 +280,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 根据条件删除
-     * @param array $condition
-     * @param bool $softDelete
+     * 根据条件删除.
      */
     public function deleteByCondition(array $condition, bool $softDelete = true): void
     {
@@ -346,8 +294,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 删除多条记录
-     * @param array $primaryKeys
+     * 删除多条记录.
      */
     public function deleteByPrimaryKeys(array $primaryKeys): void
     {
@@ -358,7 +305,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 删除缓存
+     * 删除缓存.
      * @param int $id 主键
      */
     public function removeCache(int $id): void
@@ -366,8 +313,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 获取资源不存在消息
-     * @return string
+     * 获取资源不存在消息.
      */
     public function getNotFoundMessage(): string
     {
@@ -375,8 +321,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 设置登录用户信息
-     * @param array $user
+     * 设置登录用户信息.
      * @return $this
      */
     public function withAuthorize(array $user): self
@@ -386,12 +331,11 @@ abstract class AbstractDao
     }
 
     /**
-     * 生成列表查询器
+     * 生成列表查询器.
      * @param array $condition 查询条件
      * @param string $orderBy 排序
      * @param array $groupBy 分组
      * @param array $with 关联模型
-     * @return Builder
      */
     protected function generateListQuery(array $condition = [], string $orderBy = '', array $groupBy = [], array $with = []): Builder
     {
@@ -411,8 +355,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 检查模型中是否存在对应的关联模型
-     * @param array $with
+     * 检查模型中是否存在对应的关联模型.
      */
     protected function checkAllowWithModel(array $with)
     {
@@ -420,14 +363,11 @@ abstract class AbstractDao
     }
 
     /**
-     * 处理查询条件
-     * @param Builder $query
-     * @param array $condition
-     * @return Builder
+     * 处理查询条件.
      */
     protected function handleQueryCondition(Builder $query, array $condition): Builder
     {
-        if (!empty($condition)) {
+        if (! empty($condition)) {
             foreach ($condition as $where) {
                 switch ($where[1]) {
                     case 'in':
@@ -446,9 +386,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 处理软删除
-     * @param Builder $query
-     * @return Builder
+     * 处理软删除.
      */
     protected function handleSoftDelete(Builder $query): Builder
     {
@@ -463,10 +401,8 @@ abstract class AbstractDao
         return $query;
     }
 
-
     /**
-     * 方法是可以执行
-     * @param string $action
+     * 方法是可以执行.
      */
     protected function actionIsAllow(string $action)
     {
@@ -476,8 +412,7 @@ abstract class AbstractDao
     }
 
     /**
-     * 检查对象是否可以操作
-     * @param array $detail
+     * 检查对象是否可以操作.
      */
     protected function checkIsOperational(array $detail)
     {

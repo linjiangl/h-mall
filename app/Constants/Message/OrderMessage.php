@@ -15,7 +15,7 @@ use Hyperf\Constants\AbstractConstants;
 use Hyperf\Constants\Annotation\Constants;
 
 /**
- * @Constants()
+ * @Constants
  */
 class OrderMessage extends AbstractConstants
 {

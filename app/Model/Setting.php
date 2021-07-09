@@ -40,7 +40,7 @@ class Setting extends Model
      */
     protected $casts = ['id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function getValueAttribute($value) : array
+    public function getValueAttribute($value): array
     {
         return database_text($value, 'de');
     }

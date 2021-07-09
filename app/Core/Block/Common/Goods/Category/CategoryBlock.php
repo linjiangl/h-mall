@@ -18,7 +18,7 @@ class CategoryBlock extends BaseBlock
     protected string $service = CategoryService::class;
 
     protected array $query = [
-        '=' => ['status', 'parent_id']
+        '=' => ['status', 'parent_id'],
     ];
 
     public function parent(): array

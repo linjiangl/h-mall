@@ -24,7 +24,7 @@ class UserFactory
         $service->register('hmallgf', $password, $password, [
             'nickname' => '系统官方',
             'email' => $faker->unique()->safeEmail,
-            'is_system' => UserState::IS_SYSTEM_TRUE
+            'is_system' => UserState::IS_SYSTEM_TRUE,
         ]);
 
         $user = new User();
@@ -33,7 +33,7 @@ class UserFactory
         $service->register('hmallkf', $password, $password, [
             'nickname' => '系统客服',
             'email' => $faker->unique()->safeEmail,
-            'is_system' => UserState::IS_SYSTEM_TRUE
+            'is_system' => UserState::IS_SYSTEM_TRUE,
         ]);
 
         $num = 100;
@@ -41,9 +41,9 @@ class UserFactory
             $service->register($faker->userName, $password, $password, [
                 'nickname' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
-                'is_system' => UserState::IS_SYSTEM_FALSE
+                'is_system' => UserState::IS_SYSTEM_FALSE,
             ]);
-            $num--;
+            --$num;
         }
     }
 }

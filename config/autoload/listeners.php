@@ -9,5 +9,5 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 return [
-    Hyperf\DbConnection\Listener\InitTableCollectorListener::class
+    Hyperf\DbConnection\Listener\InitTableCollectorListener::class,
 ];

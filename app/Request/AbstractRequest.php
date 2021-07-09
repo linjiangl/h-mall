@@ -31,8 +31,7 @@ abstract class AbstractRequest extends FormRequest
     }
 
     /**
-     * 获取验证场景, 主要根据请求类型+路由名称组成
-     * @return string
+     * 获取验证场景, 主要根据请求类型+路由名称组成.
      */
     public function getScene(): string
     {
@@ -43,9 +42,7 @@ abstract class AbstractRequest extends FormRequest
     }
 
     /**
-     * 获取验证规则正则表达式
-     * @param string $regex
-     * @return string
+     * 获取验证规则正则表达式.
      */
     public function getRegex(string $regex): string
     {

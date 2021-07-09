@@ -20,7 +20,7 @@ use App\Model\Model;
  * @property int $status 状态 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
- * @property-read \App\Model\Spec\Spec $spec
+ * @property \App\Model\Spec\Spec $spec
  */
 class SpecValue extends Model
 {

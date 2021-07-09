@@ -16,10 +16,12 @@ class GoodsState extends AbstractState
 {
     // 状态
     const STATUS_OFF_SALE = 0;
+
     const STATUS_ON_SALE = 1;
 
     // 类型
     const TYPE_GENERAL = 'general';
+
     const TYPE_VIRTUAL = 'virtual';
 
     // 推荐方式
@@ -34,7 +36,7 @@ class GoodsState extends AbstractState
             'type' => [
                 self::TYPE_GENERAL => '实物商品',
                 self::TYPE_VIRTUAL => '虚拟商品',
-            ]
+            ],
         ];
     }
 }

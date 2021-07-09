@@ -21,19 +21,16 @@ abstract class AbstractController
 {
     /**
      * @Inject
-     * @var ContainerInterface
      */
     protected ContainerInterface $container;
 
     /**
      * @Inject
-     * @var RequestInterface
      */
     protected RequestInterface $request;
 
     /**
      * @Inject
-     * @var ResponseInterface
      */
     protected ResponseInterface $response;
 
@@ -48,8 +45,7 @@ abstract class AbstractController
     }
 
     /**
-     * 设置方法的执行名称
-     * @param string $actionName
+     * 设置方法的执行名称.
      */
     protected function setActionName(string $actionName)
     {

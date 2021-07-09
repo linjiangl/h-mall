@@ -27,9 +27,7 @@ class CategorySpecDao extends AbstractDao
     }
 
     /**
-     * 检查规格下是否有分类
-     * @param int $specId
-     * @return bool
+     * 检查规格下是否有分类.
      */
     public function checkSpecIdHasCategory(int $specId): bool
     {

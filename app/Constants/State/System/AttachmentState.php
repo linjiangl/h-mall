@@ -16,6 +16,7 @@ class AttachmentState extends AbstractState
 {
     // 状态
     const STATUS_DISABLED = 0;
+
     const STATUS_ENABLED = 1;
 
     // 云存储系统
@@ -30,7 +31,7 @@ class AttachmentState extends AbstractState
             ],
             'system' => [
                 self::SYSTEM_QINIU => '七牛',
-            ]
+            ],
         ];
     }
 }

@@ -25,7 +25,7 @@ class RoleBlock extends BaseBlock
         try {
             $data = $this->request->post();
             $service = new RoleMenuService();
-            $service->saveRoleMenus((int)$data['role_id'], explode(',', $data['menu_ids']));
+            $service->saveRoleMenus((int) $data['role_id'], explode(',', $data['menu_ids']));
             return true;
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());

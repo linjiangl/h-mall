@@ -20,9 +20,7 @@ class RoleAdminDao extends AbstractDao
     protected array $noAllowActions = [];
 
     /**
-     * 获取管理权限
-     * @param int $adminId
-     * @return RoleAdmin
+     * 获取管理权限.
      */
     public function getAdminRole(int $adminId): RoleAdmin
     {
@@ -30,9 +28,7 @@ class RoleAdminDao extends AbstractDao
     }
 
     /**
-     * 获取管理员权限ID
-     * @param int $adminId
-     * @return int
+     * 获取管理员权限ID.
      */
     public function getAdminRoleId(int $adminId): int
     {
@@ -41,9 +37,7 @@ class RoleAdminDao extends AbstractDao
     }
 
     /**
-     * 修改管理员权限
-     * @param int $adminId
-     * @param int $newRoleId
+     * 修改管理员权限.
      */
     public function changeAdminRoleId(int $adminId, int $newRoleId): void
     {
@@ -55,8 +49,7 @@ class RoleAdminDao extends AbstractDao
     }
 
     /**
-     * 重置管理员权限
-     * @param int $roleId
+     * 重置管理员权限.
      */
     public function resetAdminRoleId(int $roleId): void
     {

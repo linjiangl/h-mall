@@ -13,6 +13,10 @@ namespace HyperfTest\Backend\Authorize;
 use App\Core\Service\Authorize\AdminAuthorizationService;
 use HyperfTest\Backend\BackendHttpTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ARegisterTest extends BackendHttpTestCase
 {
     public function testBackendRegister()
@@ -20,7 +24,7 @@ class ARegisterTest extends BackendHttpTestCase
         $result = $this->request('/register', [
             'username' => 'guest',
             'password' => '123456',
-            'password_confirmation' => '123456'
+            'password_confirmation' => '123456',
         ]);
 
         $service = new AdminAuthorizationService();

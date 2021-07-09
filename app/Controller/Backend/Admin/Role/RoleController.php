@@ -32,9 +32,7 @@ class RoleController extends BackendController
     }
 
     /**
-     * 设置权限菜单
-     * @param RoleRequest $request
-     * @return bool
+     * 设置权限菜单.
      */
     public function saveMenus(RoleRequest $request): bool
     {

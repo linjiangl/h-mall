@@ -26,7 +26,7 @@ class AdminRequest extends AbstractRequest
                 'real_name' => 'string|max:20',
                 'mobile' => $mobileRegex . '|unique:admin',
                 'email' => 'email|unique:admin',
-                'role_id' => 'integer'
+                'role_id' => 'integer',
             ],
             'post:update' => $rules = [
                 'username' => 'string|max:30',
@@ -36,7 +36,7 @@ class AdminRequest extends AbstractRequest
                 'mobile' => $mobileRegex,
                 'email' => 'email',
                 'role_id' => 'integer',
-            ]
+            ],
         ];
         return $rules[$scene] ?? [];
     }

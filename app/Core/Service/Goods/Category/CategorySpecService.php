@@ -19,8 +19,6 @@ class CategorySpecService extends AbstractService
 
     /**
      * 创建分类规格
-     * @param int $categoryId
-     * @param array $specIds
      */
     public function createCategorySpecs(int $categoryId, array $specIds)
     {
@@ -36,8 +34,6 @@ class CategorySpecService extends AbstractService
 
     /**
      * 更新分类规格
-     * @param array $category
-     * @param array $specIds
      */
     public function updateCategorySpecs(array $category, array $specIds)
     {
@@ -50,7 +46,7 @@ class CategorySpecService extends AbstractService
         if (count($deleteSpecIds)) {
             $dao->deleteByCondition([
                 ['category_id', '=', $category['id']],
-                ['spec_id', 'in', $deleteSpecIds]
+                ['spec_id', 'in', $deleteSpecIds],
             ]);
         }
 

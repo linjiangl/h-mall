@@ -27,11 +27,10 @@ class UserService extends AbstractService
     protected string $defaultUsername = '新手用户';
 
     /**
-     * 创建用户账号
+     * 创建用户账号.
      * @param string $username 用户名
      * @param string $password 密码
      * @param array $extend 其他数据,如:昵称,手机号,邮箱等
-     * @return int
      */
     public function createAccount(string $username, string $password, array $extend = []): int
     {
@@ -68,7 +67,7 @@ class UserService extends AbstractService
                 'email' => $extend['email'] ?? '',
                 'status' => $extend['status'] ?? UserState::STATUS_ENABLED,
                 'is_system' => $extend['is_system'] ?? UserState::IS_SYSTEM_FALSE,
-                'lasted_login_time' => time()
+                'lasted_login_time' => time(),
             ]);
 
             // 初始化化钱包

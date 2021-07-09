@@ -20,14 +20,12 @@ use Throwable;
 abstract class AbstractBlock
 {
     /**
-     * 场景
-     * @var string
+     * 场景.
      */
     protected string $since = BlockSinceConstants::SINCE_FRONTEND;
 
     /**
-     * 服务类
-     * @var string
+     * 服务类.
      */
     protected string $service;
 
@@ -44,31 +42,27 @@ abstract class AbstractBlock
     protected array $condition = [];
 
     /**
-     * 当前页数
-     * @var int
+     * 当前页数.
      */
     protected int $page = 1;
 
     /**
-     * 查询条数
-     * @var int
+     * 查询条数.
      */
     protected int $limit = 20;
 
     /**
-     * 分组
-     * @var array
+     * 分组.
      */
     protected array $groupBy = [];
 
     /**
-     * 排序
-     * @var string
+     * 排序.
      */
     protected string $orderBy = 'id desc';
 
     /**
-     * 关联模型
+     * 关联模型.
      * @var array
      *
      * 格式: ['option', 'category']
@@ -76,7 +70,7 @@ abstract class AbstractBlock
     protected array $with = [];
 
     /**
-     * 默认关联模型
+     * 默认关联模型.
      * @var array
      *
      * 格式: [
@@ -89,55 +83,45 @@ abstract class AbstractBlock
 
     /**
      * 需要查询的条件.
-     * @var array
      */
     protected array $query = [
         '=' => ['name', 'title'],
         'between' => ['created_time'], // 支持数组,字符串(,)
-        'in' => ['status']
+        'in' => ['status'],
         // 'like' => ['title'] // 模糊查询('title%')
         // 'like_all' => ['title'] // 模糊查询('%title%')
     ];
 
     /**
      * 参数类型.
-     * @var array
      */
     protected array $paramType = [];
 
     /**
      * 执行的方法.
-     * @var string
      */
     protected string $action = '';
 
     /**
      * 请求的数据.
-     * @var array
      */
     protected array $data = [];
 
     /**
-     * 主键
-     * @var string
+     * 主键.
      */
     protected string $primaryKey = 'id';
 
     /**
-     * 检查资源是否可读
-     * @var bool
+     * 检查资源是否可读.
      */
     protected bool $checkIsRead = false;
 
     /**
-     * 用户ID字段名称
-     * @var string
+     * 用户ID字段名称.
      */
     protected string $userIdColumnName = 'user_id';
 
-    /**
-     * @var RequestInterface
-     */
     protected RequestInterface $request;
 
     public function __construct()
@@ -146,8 +130,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 列表
-     * @return array
+     * 列表.
      */
     public function index(): array
     {
@@ -168,8 +151,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 详情
-     * @return array
+     * 详情.
      */
     public function show(): array
     {
@@ -191,8 +173,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 创建
-     * @return int
+     * 创建.
      */
     public function store(): int
     {
@@ -204,8 +185,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 修改
-     * @return array
+     * 修改.
      */
     public function update(): array
     {
@@ -217,8 +197,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 删除
-     * @return bool
+     * 删除.
      */
     public function destroy(): bool
     {
@@ -230,8 +209,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 批量删除
-     * @return bool
+     * 批量删除.
      */
     public function batchDestroy(): bool
     {
@@ -245,8 +223,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 查询条件
-     * @return array
+     * 查询条件.
      */
     public function getCondition(): array
     {
@@ -254,8 +231,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 设置场景
-     * @param string $since
+     * 设置场景.
      * @return $this
      */
     public function setSince(string $since = BlockSinceConstants::SINCE_FRONTEND): AbstractBlock
@@ -265,8 +241,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 设置主键
-     * @param string $primaryKey
+     * 设置主键.
      */
     public function setPrimaryKey(string $primaryKey = 'id'): void
     {
@@ -274,8 +249,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 查询主键
-     * @return int
+     * 查询主键.
      */
     public function getPrimaryKey(): int
     {
@@ -283,7 +257,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 获取数据
+     * 获取数据.
      * @return mixed
      */
     public function getData()
@@ -292,9 +266,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 设置是否检查用户访问资源权限
-     * @param bool $isRead
-     * @param string $userIdColumnName
+     * 设置是否检查用户访问资源权限.
      */
     public function setUserCheckIsRead(bool $isRead, string $userIdColumnName = 'user_id'): void
     {
@@ -303,7 +275,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 设置自定义排序
+     * 设置自定义排序.
      */
     protected function setSortingToOrderBy(): void
     {
@@ -312,7 +284,6 @@ abstract class AbstractBlock
 
     /**
      * 检查用户是否有权限访问对象
-     * @param array $info
      */
     protected function checkUserIsRead(array $info): void
     {
@@ -325,7 +296,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 处理查询参数
+     * 处理查询参数.
      */
     protected function handleQueryParams(): void
     {
@@ -340,7 +311,7 @@ abstract class AbstractBlock
                     $orderBy = '';
                     foreach ($sort as $key => $value) {
                         $value = str_replace('end', '', $value);
-                        $orderBy = $orderBy . "$key $value";
+                        $orderBy = $orderBy . "{$key} {$value}";
                     }
                     $this->orderBy = $orderBy;
                 }
@@ -349,7 +320,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 构建查询之前条件
+     * 构建查询之前条件.
      */
     protected function beforeBuildQuery(): void
     {
@@ -361,8 +332,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 处理查询条件
-     * @return array
+     * 处理查询条件.
      */
     protected function handleCondition(): array
     {
@@ -379,11 +349,11 @@ abstract class AbstractBlock
                             }
                             break;
                         case 'like':
-                            $queryValue = "$queryValue%";
+                            $queryValue = "{$queryValue}%";
                             break;
                         case 'like_all':
                             $symbol = 'like';
-                            $queryValue = "%$queryValue%";
+                            $queryValue = "%{$queryValue}%";
                             break;
                     }
                     $condition[] = [$query, $symbol, $queryValue];
@@ -394,8 +364,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 处理参数类型
-     * @param string $param
+     * 处理参数类型.
      * @return float|int|string
      */
     protected function handleParamType(string $param)
@@ -417,8 +386,7 @@ abstract class AbstractBlock
     }
 
     /**
-     * 业务服务接口类
-     * @return AbstractService
+     * 业务服务接口类.
      */
     protected function service(): AbstractService
     {

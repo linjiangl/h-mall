@@ -22,7 +22,7 @@ use Throwable;
 class AppExceptionHandler extends ExceptionHandler
 {
     /**
-    * @var LoggerInterface
+     * @var LoggerInterface
      */
     private $logger;
 

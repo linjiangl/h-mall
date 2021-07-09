@@ -14,13 +14,11 @@ interface InterfaceTypesService
 {
     /**
      * 创建商品
-     * @return int
      */
     public function create(): int;
 
     /**
      * 编辑商品
-     * @return array
      */
     public function update(): array;
 }

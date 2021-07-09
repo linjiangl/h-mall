@@ -24,8 +24,7 @@ class ModelCommand extends HyperfCommand
     protected $name = 'tools:gen-model';
 
     /**
-     * 迁移表的表名
-     * @var string
+     * 迁移表的表名.
      */
     protected string $migrateTable = 'migrations';
 
@@ -46,15 +45,14 @@ class ModelCommand extends HyperfCommand
         'statistics',
         'role',
         'payment',
-        'parameter'
+        'parameter',
     ];
 
     /**
-     * 指定的数据表
-     * @var array
+     * 指定的数据表.
      */
     protected array $specifyTables = [
-        'parameter'
+        'parameter',
     ];
 
     public function configure()
@@ -88,16 +86,16 @@ class ModelCommand extends HyperfCommand
         $config = config('databases');
         $basePath = $config['default']['commands']['gen:model']['path'];
         $path = $path ? $basePath . '/' . $path : $basePath;
-        $genModelExec = "php bin/hyperf.php gen:model $table --path=$path --with-comments --force-casts --refresh-fillable";
+        $genModelExec = "php bin/hyperf.php gen:model {$table} --path={$path} --with-comments --force-casts --refresh-fillable";
         exec($genModelExec);
-        $this->info("`$table` table generation model class successful");
+        $this->info("`{$table}` table generation model class successful");
     }
 
     protected function phpCsFixerModel()
     {
         $this->line('');
         $appPath = BASE_PATH;
-        $fixerExec = "$appPath/vendor/bin/php-cs-fixer --config=$appPath/.php_cs --verbose fix $appPath/app/Model";
+        $fixerExec = "{$appPath}/vendor/bin/php-cs-fixer --config={$appPath}/.php_cs --verbose fix {$appPath}/app/Model";
         exec($fixerExec);
     }
 

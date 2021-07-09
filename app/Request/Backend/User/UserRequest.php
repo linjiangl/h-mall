@@ -25,7 +25,7 @@ class UserRequest extends AbstractRequest
                 'nickname' => 'string|max:30',
                 'avatar' => 'string|max:255',
                 'status' => "in:{$status}",
-            ]
+            ],
         ];
         return $rules[$scene] ?? [];
     }

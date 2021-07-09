@@ -18,14 +18,12 @@ use Hyperf\RateLimit\Annotation\RateLimit;
 
 /**
  * @Controller(prefix="rate-limit")
- * @RateLimit()
+ * @RateLimit
  */
 class LoginController extends FrontendController
 {
     /**
-     * 登录
-     * @param LoginRequest $request
-     * @return array
+     * 登录.
      */
     public function login(LoginRequest $request): array
     {

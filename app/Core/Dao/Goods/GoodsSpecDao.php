@@ -23,8 +23,6 @@ class GoodsSpecDao extends AbstractDao
 
     /**
      * 检查规格下是否有商品
-     * @param int $specId
-     * @return bool
      */
     public function checkSpecIdHasGoods(int $specId): bool
     {

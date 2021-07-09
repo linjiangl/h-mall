@@ -13,6 +13,10 @@ namespace HyperfTest\Backend\Authorize;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CAuthorizeTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;

@@ -31,7 +31,7 @@ trait TraitBackendAuthorize
         if (! $token) {
             $result = $this->request('/login', [
                 'username' => 'admin',
-                'password' => 'yii.red'
+                'password' => 'yii.red',
             ]);
 
             $this->assertArrayHasKey('token', $result);

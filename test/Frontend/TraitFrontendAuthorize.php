@@ -31,7 +31,7 @@ trait TraitFrontendAuthorize
         if (! $token) {
             $result = $this->request('/login', [
                 'username' => 'test001',
-                'password' => '123456'
+                'password' => '123456',
             ]);
 
             $this->assertArrayHasKey('token', $result);

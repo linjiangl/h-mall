@@ -81,10 +81,8 @@ class CategoryService extends AbstractService
     }
 
     /**
-     * 根据状态获取列表数据
+     * 根据状态获取列表数据.
      * @param mixed $status
-     * @param string $select
-     * @return array
      */
     public function getListByStatus($status = null, string $select = '*'): array
     {
@@ -93,10 +91,8 @@ class CategoryService extends AbstractService
     }
 
     /**
-     * 根据分类获取分类
-     * @param int $parentId
+     * 根据分类获取分类.
      * @param mixed $status
-     * @return array
      */
     public function getListByParentId(int $parentId = 0, $status = null): array
     {
@@ -105,11 +101,7 @@ class CategoryService extends AbstractService
     }
 
     /**
-     * 分类数据归类
-     * @param array $categories
-     * @param int $parentId
-     * @param int $level
-     * @return array
+     * 分类数据归类.
      */
     public function convertCategoriesToChildren(array $categories, int $parentId = 0, int $level = 1): array
     {
@@ -129,10 +121,6 @@ class CategoryService extends AbstractService
 
     /**
      * 分类数据分层
-     * @param array $categories
-     * @param int $parentId
-     * @param int $level
-     * @return array
      */
     public function convertCategoriesToLevel(array $categories, int $parentId = 0, int $level = 1): array
     {
@@ -147,10 +135,8 @@ class CategoryService extends AbstractService
     }
 
     /**
-     * 获取包含自己在内的所有子类ID
-     * @param int $parentId
+     * 获取包含自己在内的所有子类ID.
      * @param null $status
-     * @return array
      */
     public function getChildrenIds(int $parentId, $status = null): array
     {
@@ -166,10 +152,8 @@ class CategoryService extends AbstractService
     }
 
     /**
-     * 获取分类所有父级ID
-     * @param int $categoryId
+     * 获取分类所有父级ID.
      * @param null $status
-     * @return array
      */
     public function getAllParentIds(int $categoryId, $status = null): array
     {

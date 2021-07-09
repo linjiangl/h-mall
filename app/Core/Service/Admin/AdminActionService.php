@@ -45,8 +45,8 @@ class AdminActionService extends AbstractService
             'remark' => [
                 'method' => $request->getMethod(),
                 'url' => $url,
-                'data' => check_production() ? '' : $request->getParsedBody()
-            ]
+                'data' => check_production() ? '' : $request->getParsedBody(),
+            ],
         ]);
         return true;
     }

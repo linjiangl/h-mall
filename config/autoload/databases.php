@@ -34,7 +34,7 @@ return [
             'ttl' => 3600 * 24,
             'empty_model_ttl' => 60,
             'load_script' => true,
-            'use_default_value' => true
+            'use_default_value' => true,
         ],
         'commands' => [
             'gen:model' => [

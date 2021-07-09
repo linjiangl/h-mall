@@ -28,6 +28,6 @@ return [
             'ttl' => env('JWT_TTL', 86400),
             'header' => env('JWT_HEADER', 'Authorization'),
             'issued' => env('JWT_ISSUED', 'http://xcmei.com'),
-        ]
+        ],
     ],
 ];

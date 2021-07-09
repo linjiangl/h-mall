@@ -23,8 +23,8 @@ use App\Model\Spec\Spec;
  * @property int $status 是否显示 -1:已删除 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
- * @property-read \App\Model\Category\Category $parent
- * @property-read \Hyperf\Database\Model\Collection|\App\Model\Spec\Spec[] $specs
+ * @property \App\Model\Category\Category $parent
+ * @property \App\Model\Spec\Spec[]|\Hyperf\Database\Model\Collection $specs
  */
 class Category extends Model
 {

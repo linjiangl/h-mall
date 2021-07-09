@@ -25,7 +25,6 @@ class ServiceRequest extends AbstractRequest
                 'id' => 'required|integer|gt:0',
                 'name' => 'required|string|max:100',
                 'description' => 'string',
-
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',

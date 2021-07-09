@@ -13,8 +13,7 @@ namespace App\Constants\State;
 interface InterfaceState
 {
     /**
-     * 枚举
-     * @return array
+     * 枚举.
      */
     public static function map(): array;
 }

@@ -20,12 +20,12 @@ class SpecRequest extends AbstractRequest
             'post:create' => [
                 'shop_id' => 'integer',
                 'name' => 'required|string|max:30',
-                'sorting' => 'integer|max:100'
+                'sorting' => 'integer|max:100',
             ],
             'post:update' => $rules = [
                 'shop_id' => 'integer',
                 'name' => 'required|string|max:30',
-                'sorting' => 'integer|max:100'
+                'sorting' => 'integer|max:100',
             ],
             'post:getListBySpecId' => $rules = [
                 'spec_id' => 'required|integer|gt:0',

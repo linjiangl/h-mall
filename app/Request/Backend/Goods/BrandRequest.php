@@ -20,13 +20,13 @@ class BrandRequest extends AbstractRequest
             'post:create' => [
                 'name' => 'required|string|max:30',
                 'logo' => 'required|string|max:255',
-                'status' => 'integer'
+                'status' => 'integer',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
                 'name' => 'required|string|max:30',
                 'logo' => 'required|string|max:255',
-                'status' => 'integer'
+                'status' => 'integer',
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',
@@ -41,7 +41,7 @@ class BrandRequest extends AbstractRequest
             'id' => '品牌主键',
             'name' => '品牌名称',
             'logo' => '品牌标志',
-            'status' => '品牌状态'
+            'status' => '品牌状态',
         ];
     }
 }
