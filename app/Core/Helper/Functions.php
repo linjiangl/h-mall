@@ -181,8 +181,8 @@ if (! function_exists('write_logs')) {
 if (! function_exists('database_text')) {
     /**
      * 数据库文本数据.
-     * @param mixed $data 要处理的数据
-     * @return array|false|mixed|string
+     * @param array|string $data 要处理的数据
+     * @return array|string
      */
     function database_text($data, string $schema = 'en')
     {
@@ -199,8 +199,8 @@ if (! function_exists('create_table_comment')) {
      */
     function create_table_comment(string $table, string $comment): void
     {
-        $tableName = get_table_name($table);
-        Db::statement("ALTER TABLE `$tableName` COMMENT '$comment'");
+        $table = get_table_name($table);
+        Db::statement("ALTER TABLE `{$table}` COMMENT '{$comment}'");
     }
 }
 
@@ -210,6 +210,6 @@ if (! function_exists('get_table_name')) {
      */
     function get_table_name(string $table): string
     {
-        return $tableName = config('databases')['default']['prefix'] . $table;
+        return config('databases')['default']['prefix'] . $table;
     }
 }
