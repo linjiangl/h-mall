@@ -12,6 +12,8 @@ namespace App\Core\Service\Goods\Types;
 
 use App\Constants\State\Goods\GoodsState;
 use App\Core\Dao\Goods\GoodsDao;
+use App\Core\Dao\Goods\GoodsParameterDao;
+use App\Core\Dao\Goods\GoodsTimerDao;
 use App\Exception\BadRequestException;
 use App\Model\Goods\Goods;
 use Hyperf\DbConnection\Db;
@@ -115,6 +117,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncParameter(): void
     {
+        (new GoodsParameterDao())->createOrUpdate(['goods_id' => $this->id], $this->post['parameter']);
     }
 
     /**
@@ -122,6 +125,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncTimer(): void
     {
+        (new GoodsTimerDao())->createOrUpdate(['goods_id' => $this->id], $this->post['timer']);
     }
 
     protected function handleGoodsData(): array

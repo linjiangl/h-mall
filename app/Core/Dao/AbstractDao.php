@@ -163,6 +163,19 @@ abstract class AbstractDao
     }
 
     /**
+     * 创建或修改.
+     */
+    public function createOrUpdate(array $attributes, array $values): Model
+    {
+        $model = $this->model::firstOrCreate($attributes, $values);
+        if (! $model->wasRecentlyCreated) {
+            $model->update($values);
+            $model->save();
+        }
+        return $model;
+    }
+
+    /**
      * 删除.
      * @param int $id 主键
      * @param bool $softDelete 是否软删除
