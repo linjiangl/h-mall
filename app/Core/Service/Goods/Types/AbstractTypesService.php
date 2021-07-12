@@ -59,7 +59,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $this->id = $goodsDao->create($data);
 
             $this->goods = $goodsDao->info($this->id);
-            $this->syncSpec();
             $this->syncParameter();
             $this->syncTimer();
             $this->syncSku();
@@ -82,7 +81,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $goodsDao->update($this->id, $data);
 
             $this->goods = $goodsDao->info($this->id);
-            $this->syncSpec();
             $this->syncParameter();
             $this->syncTimer();
             $this->syncSku();
@@ -92,16 +90,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
         } catch (Throwable $e) {
             Db::rollBack();
             throw new BadRequestException($e->getMessage());
-        }
-    }
-
-    /**
-     * 保存商品规格数据.
-     */
-    protected function syncSpec(): void
-    {
-        if (isset($this->post['option_ids']) && count($this->post['option_ids']) > 0) {
-            $this->goods->specs()->sync($this->post['option_ids']);
         }
     }
 

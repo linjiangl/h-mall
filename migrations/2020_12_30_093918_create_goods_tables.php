@@ -180,17 +180,6 @@ class CreateGoodsTables extends Migration
             $table->index(['off_time'], 'off_time');
         });
 
-        Schema::create('goods_spec', function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->unsignedInteger('goods_id');
-            $table->unsignedInteger('spec_id');
-            $table->unsignedInteger('created_time')->default(0);
-            $table->unsignedInteger('updated_time')->default(0);
-
-            $table->unique(['goods_id', 'spec_id'], 'goods_spec_id');
-            $table->index(['spec_id'], 'spec_id');
-        });
-
         Schema::create('goods_sku', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('shop_id');
@@ -220,11 +209,13 @@ class CreateGoodsTables extends Migration
         Schema::create('goods_sku_spec_value', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('goods_sku_id');
+            $table->unsignedInteger('spec_id');
             $table->unsignedInteger('spec_value_id');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->unique(['goods_sku_id', 'spec_value_id'], 'goods_sku_spec_value_id');
+            $table->index(['spec_id'], 'spec_id');
             $table->index(['spec_value_id'], 'spec_value_id');
         });
 
@@ -304,9 +295,8 @@ class CreateGoodsTables extends Migration
         create_table_comment('goods', '商品');
         create_table_comment('goods_attribute', '商品属性');
         create_table_comment('goods_timer', '商品定时');
-        create_table_comment('goods_spec', '商品规格项');
         create_table_comment('goods_sku', '商品规格');
-        create_table_comment('goods_sku_spec_value', '商品规格值');
+        create_table_comment('goods_sku_spec_value', '商品规格选项');
         create_table_comment('goods_service', '商品服务');
         create_table_comment('goods_parameter', '商品参数');
         create_table_comment('goods_evaluate', '商品评价');
@@ -328,7 +318,6 @@ class CreateGoodsTables extends Migration
         Schema::dropIfExists('goods');
         Schema::dropIfExists('goods_attribute');
         Schema::dropIfExists('goods_timer');
-        Schema::dropIfExists('goods_spec');
         Schema::dropIfExists('goods_sku');
         Schema::dropIfExists('goods_sku_spec_value');
         Schema::dropIfExists('goods_service');

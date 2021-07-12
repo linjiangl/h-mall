@@ -12,6 +12,7 @@ namespace App\Core\Service\Goods\Spec;
 
 use App\Constants\Message\GoodsMessage;
 use App\Core\Dao\Goods\Category\CategorySpecDao;
+use App\Core\Dao\Goods\GoodsSkuSpecValueDao;
 use App\Core\Dao\Goods\GoodsSpecDao;
 use App\Core\Dao\Goods\Spec\SpecDao;
 use App\Core\Service\AbstractService;
@@ -70,8 +71,8 @@ class SpecService extends AbstractService
             throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_SPEC_ID_HAS_GOODS));
         }
 
-        $goodsSpecDao = new GoodsSpecDao();
-        if ($goodsSpecDao->checkSpecIdHasGoods($id)) {
+        $skuSpecValueDao = new GoodsSkuSpecValueDao();
+        if ($skuSpecValueDao->checkSpecIdHasGoods($id)) {
             throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_SPEC_ID_HAS_GOODS));
         }
 
