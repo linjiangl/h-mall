@@ -26,7 +26,7 @@ class GoodsSkuSpecValueDao extends AbstractDao
      */
     public function checkSpecIdHasGoods(int $specId): bool
     {
-        return (bool)GoodsSkuSpecValue::query()->where('spec_id', $specId)->count();
+        return (bool) GoodsSkuSpecValue::query()->where('spec_id', $specId)->count();
     }
 
     /**
@@ -34,6 +34,6 @@ class GoodsSkuSpecValueDao extends AbstractDao
      */
     public function checkSpecValueIdHasGoods(int $specValueId): bool
     {
-        return (bool)GoodsSkuSpecValue::query()->where('spec_value_id', $specValueId)->count();
+        return (bool) GoodsSkuSpecValue::query()->where('spec_value_id', $specValueId)->count();
     }
 }

@@ -13,7 +13,6 @@ namespace App\Core\Service\Goods\Spec;
 use App\Constants\Message\GoodsMessage;
 use App\Core\Dao\Goods\Category\CategorySpecDao;
 use App\Core\Dao\Goods\GoodsSkuSpecValueDao;
-use App\Core\Dao\Goods\GoodsSpecDao;
 use App\Core\Dao\Goods\Spec\SpecDao;
 use App\Core\Service\AbstractService;
 use App\Exception\BadRequestException;
