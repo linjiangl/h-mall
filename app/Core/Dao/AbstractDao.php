@@ -187,7 +187,6 @@ abstract class AbstractDao
 
             $model = $this->info($id);
 
-            print_r($model->toArray());
             if ($softDelete) {
                 $model->update(['deleted_time' => time()]);
             } else {
