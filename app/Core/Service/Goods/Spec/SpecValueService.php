@@ -20,8 +20,6 @@ class SpecValueService extends AbstractService
 {
     protected string $dao = SpecValueDao::class;
 
-    protected bool $softDelete = false;
-
     public function getListBySpecId(int $specId): array
     {
         $dao = new SpecValueDao();

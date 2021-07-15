@@ -100,7 +100,7 @@ abstract class AbstractDao
      * 详情.
      * @param int $id 主键
      * @param array $with 关联模型
-     * @return mixed
+     * @return mixed|Model
      */
     public function info(int $id, array $with = [])
     {
@@ -180,12 +180,14 @@ abstract class AbstractDao
      * @param int $id 主键
      * @param bool $softDelete 是否软删除
      */
-    public function remove(int $id, bool $softDelete = true): bool
+    public function remove(int $id, bool $softDelete = false): bool
     {
         try {
             $this->actionIsAllow('remove');
 
             $model = $this->info($id);
+
+            print_r($model->toArray());
             if ($softDelete) {
                 $model->update(['deleted_time' => time()]);
             } else {
@@ -210,7 +212,7 @@ abstract class AbstractDao
      * 批量删除数据.
      * @param bool $softDelete 是否软删除
      */
-    public function batchRemove(array $selectIds, bool $softDelete = true): void
+    public function batchRemove(array $selectIds, bool $softDelete = false): void
     {
         $model = new $this->model();
         $query = $this->model::query()->whereIn($model->getKeyName(), $selectIds);
@@ -295,7 +297,7 @@ abstract class AbstractDao
     /**
      * 根据条件删除.
      */
-    public function deleteByCondition(array $condition, bool $softDelete = true): void
+    public function deleteByCondition(array $condition, bool $softDelete = false): void
     {
         $query = $this->model::query();
         $query = $this->handleQueryCondition($query, $condition);

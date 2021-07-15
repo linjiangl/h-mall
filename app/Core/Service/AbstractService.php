@@ -34,7 +34,7 @@ abstract class AbstractService
     /**
      * 软删除.
      */
-    protected bool $softDelete = true;
+    protected bool $softDelete = false;
 
     /**
      * 获取分页列表.
