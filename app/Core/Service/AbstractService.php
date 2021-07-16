@@ -57,7 +57,7 @@ abstract class AbstractService
     public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
     {
         $this->handleQueryLimit($limit);
-        return $this->service()->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
+        return $this->service()->withSoftDelete($this->softDelete)->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
     }
 
     /**
@@ -94,7 +94,7 @@ abstract class AbstractService
      */
     public function remove(int $id): bool
     {
-        return $this->service()->withAuthorize($this->authorize)->remove($id, $this->softDelete);
+        return $this->service()->withAuthorize($this->authorize)->withSoftDelete($this->softDelete)->remove($id);
     }
 
     /**
@@ -111,25 +111,33 @@ abstract class AbstractService
      */
     public function batchRemove(array $selectIds): bool
     {
-        $this->service()->batchRemove($selectIds, $this->softDelete);
+        $this->service()->withAuthorize($this->authorize)->withSoftDelete($this->softDelete)->batchRemove($selectIds);
         return true;
     }
 
     /**
      * 获取列表的查询条件.
      */
-    public function getCondition(array $params): array
+    public function getCondition(array $post): array
     {
         return [];
     }
 
     /**
      * 设置登录用户信息.
-     * @return $this
      */
     public function withAuthorize(array $user): self
     {
         $this->authorize = $user;
+        return $this;
+    }
+
+    /**
+     * 设置软删除.
+     */
+    public function withSoftDelete(bool $bool): self
+    {
+        $this->softDelete = $bool;
         return $this;
     }
 

@@ -178,16 +178,15 @@ abstract class AbstractDao
     /**
      * 删除.
      * @param int $id 主键
-     * @param bool $softDelete 是否软删除
      */
-    public function remove(int $id, bool $softDelete = false): bool
+    public function remove(int $id): bool
     {
         try {
             $this->actionIsAllow('remove');
 
             $model = $this->info($id);
 
-            if ($softDelete) {
+            if ($this->softDelete) {
                 $model->update(['deleted_time' => time()]);
             } else {
                 $model->delete();
@@ -209,13 +208,12 @@ abstract class AbstractDao
 
     /**
      * 批量删除数据.
-     * @param bool $softDelete 是否软删除
      */
-    public function batchRemove(array $selectIds, bool $softDelete = false): void
+    public function batchRemove(array $selectIds): void
     {
         $model = new $this->model();
         $query = $this->model::query()->whereIn($model->getKeyName(), $selectIds);
-        if ($softDelete) {
+        if ($this->softDelete) {
             $query->update(['deleted_time' => time()]);
         } else {
             $query->delete();
@@ -296,11 +294,11 @@ abstract class AbstractDao
     /**
      * 根据条件删除.
      */
-    public function deleteByCondition(array $condition, bool $softDelete = false): void
+    public function deleteByCondition(array $condition): void
     {
         $query = $this->model::query();
         $query = $this->handleQueryCondition($query, $condition);
-        if ($softDelete) {
+        if ($this->softDelete) {
             $query->update(['deleted_time' => time()]);
         } else {
             $query->delete();
@@ -341,6 +339,16 @@ abstract class AbstractDao
     public function withAuthorize(array $user): self
     {
         $this->authorize = $user;
+        return $this;
+    }
+
+    /**
+     * 设置软删除.
+     * @return $this
+     */
+    public function withSoftDelete(bool $bool): self
+    {
+        $this->softDelete = $bool;
         return $this;
     }
 

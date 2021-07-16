@@ -17,6 +17,8 @@ class AdminActionService extends AbstractService
 {
     protected string $dao = AdminActionDao::class;
 
+    protected bool $softDelete = true;
+
     public function createActionRecord(string $actionName, string $className): bool
     {
         $request = request();
