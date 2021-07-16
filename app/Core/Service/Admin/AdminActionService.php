@@ -17,15 +17,13 @@ class AdminActionService extends AbstractService
 {
     protected string $dao = AdminActionDao::class;
 
-    protected bool $softDelete = true;
-
     public function createActionRecord(string $actionName, string $className): bool
     {
         $request = request();
         if (! $request) {
             return false;
         }
-        $admin = $request->getAttribute('admin', null);
+        $admin = $request->getAttribute('admin');
         if (! $admin) {
             return false;
         }

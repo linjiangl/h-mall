@@ -31,10 +31,7 @@ abstract class AbstractService
      */
     protected array $authorize = [];
 
-    /**
-     * 软删除.
-     */
-    protected bool $softDelete = false;
+    protected string $trashedType = 'default';
 
     /**
      * 获取分页列表.
@@ -57,7 +54,16 @@ abstract class AbstractService
     public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
     {
         $this->handleQueryLimit($limit);
-        return $this->service()->withSoftDelete($this->softDelete)->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
+        return $this->service()->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
+    }
+
+    /**
+     * 普通列表.
+     * @param array|string[] $columns
+     */
+    public function list(array $condition = [], array $with = [], int $limit = -1, string $orderBy = '', array $groupBy = [], array $columns = ['*']): array
+    {
+        return $this->service()->list($condition, $with, $limit, $orderBy, $groupBy, $columns);
     }
 
     /**
@@ -67,7 +73,7 @@ abstract class AbstractService
      */
     public function info(int $id, array $with = [])
     {
-        return $this->service()->withAuthorize($this->authorize)->info($id, $with);
+        return $this->service()->info($id, $with);
     }
 
     /**
@@ -76,7 +82,7 @@ abstract class AbstractService
      */
     public function create(array $data): int
     {
-        return $this->service()->withAuthorize($this->authorize)->create($data);
+        return $this->service()->create($data);
     }
 
     /**
@@ -86,7 +92,7 @@ abstract class AbstractService
      */
     public function update(int $id, array $data): array
     {
-        return $this->service()->withAuthorize($this->authorize)->update($id, $data);
+        return $this->service()->update($id, $data);
     }
 
     /**
@@ -94,7 +100,7 @@ abstract class AbstractService
      */
     public function remove(int $id): bool
     {
-        return $this->service()->withAuthorize($this->authorize)->withSoftDelete($this->softDelete)->remove($id);
+        return $this->service()->remove($id);
     }
 
     /**
@@ -111,7 +117,7 @@ abstract class AbstractService
      */
     public function batchRemove(array $selectIds): bool
     {
-        $this->service()->withAuthorize($this->authorize)->withSoftDelete($this->softDelete)->batchRemove($selectIds);
+        $this->service()->batchRemove($selectIds);
         return true;
     }
 
@@ -133,20 +139,32 @@ abstract class AbstractService
     }
 
     /**
-     * 设置软删除.
+     * 设置最大的查询条数.
      */
-    public function withSoftDelete(bool $bool): self
+    public function setMaxLimit(int $limit): self
     {
-        $this->softDelete = $bool;
+        $this->maxLimit = $limit;
         return $this;
     }
 
     /**
-     * 设置最大的查询条数.
+     * 获取包括删除的数据.
+     * @return $this
      */
-    public function setMaxLimit(int $limit)
+    public function withTrashed(): self
     {
-        $this->maxLimit = $limit;
+        $this->trashedType = 'all';
+        return $this;
+    }
+
+    /**
+     * 仅获取删除的数据.
+     * @return $this
+     */
+    public function onlyTrashed(): self
+    {
+        $this->trashedType = 'only';
+        return $this;
     }
 
     /**
@@ -162,10 +180,29 @@ abstract class AbstractService
     }
 
     /**
+     * 设置dao服务类属性.
+     */
+    protected function setDaoAttribute(AbstractDao $dao)
+    {
+        $dao->withAuthorize($this->authorize);
+
+        switch ($this->trashedType) {
+            case 'all':
+                $dao->withTrashed();
+                break;
+            case 'only':
+                $dao->onlyTrashed();
+                break;
+        }
+    }
+
+    /**
      * 返回数据访问服务抽象类.
      */
     protected function service(): AbstractDao
     {
-        return new $this->dao();
+        $dao = new $this->dao();
+        $this->setDaoAttribute($dao);
+        return $dao;
     }
 }

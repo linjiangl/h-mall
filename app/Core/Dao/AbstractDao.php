@@ -48,9 +48,11 @@ abstract class AbstractDao
     protected bool $softDelete = false;
 
     /**
-     * 获取软删除数据.
+     * 软删除的查询类型.
+     *
+     * default:默认，all:全部数据，only:删除的数据
      */
-    protected bool $queryDelete = false;
+    protected string $trashedType = 'default';
 
     /**
      * 对象不存在的错误提示.
@@ -89,11 +91,13 @@ abstract class AbstractDao
      * 普通列表.
      * @param string[] $columns
      */
-    public function list(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
+    public function list(array $condition = [], array $with = [], int $limit = -1, string $orderBy = '', array $groupBy = [], array $columns = ['*']): array
     {
-        $offset = ($page - 1) * $limit;
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
-        return $query->select($columns)->offset($offset)->limit($limit)->get()->toArray();
+        if ($limit > 0) {
+            $query->limit($limit);
+        }
+        return $query->select($columns)->get()->toArray();
     }
 
     /**
@@ -343,12 +347,22 @@ abstract class AbstractDao
     }
 
     /**
-     * 设置软删除.
+     * 获取包括删除的数据.
      * @return $this
      */
-    public function withSoftDelete(bool $bool): self
+    public function withTrashed(): self
     {
-        $this->softDelete = $bool;
+        $this->trashedType = 'all';
+        return $this;
+    }
+
+    /**
+     * 仅获取删除的数据.
+     * @return $this
+     */
+    public function onlyTrashed(): self
+    {
+        $this->trashedType = 'only';
         return $this;
     }
 
@@ -414,10 +428,13 @@ abstract class AbstractDao
     {
         // 软删除
         if ($this->softDelete) {
-            if ($this->queryDelete) {
-                $query->where('deleted_time', '>', 0);
-            } else {
-                $query->where('deleted_time', '=', 0);
+            switch ($this->trashedType) {
+                case 'default':
+                    $query->where('deleted_time', '=', 0);
+                    break;
+                case 'only':
+                    $query->where('deleted_time', '>', 0);
+                    break;
             }
         }
         return $query;

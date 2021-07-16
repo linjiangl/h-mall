@@ -19,6 +19,8 @@ class AdminActionDao extends AbstractDao
 
     protected array $noAllowActions = [];
 
+    protected bool $softDelete = true;
+
     public function info(int $id, array $with = []): AdminAction
     {
         return parent::info($id, $with);
