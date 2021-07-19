@@ -167,15 +167,19 @@ abstract class AbstractDao
     }
 
     /**
-     * 创建或修改.
+     * 查看或创建.
      */
-    public function createOrUpdate(array $attributes, array $values): Model
+    public function firstOrCreate(array $attributes, array $values): Model
     {
-        $model = $this->model::firstOrCreate($attributes, $values);
-        if (! $model->wasRecentlyCreated) {
-            $model->update($values);
-        }
-        return $model;
+        return $this->model::firstOrCreate($attributes, $values);
+    }
+
+    /**
+     * 修改或创建.
+     */
+    public function updateOrCreate(array $attributes, array $values): Model
+    {
+        return $this->model::updateOrCreate($attributes, $values);
     }
 
     /**

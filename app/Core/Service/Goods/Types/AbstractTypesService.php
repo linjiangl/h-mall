@@ -105,7 +105,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncAttribute(): void
     {
-        (new GoodsAttributeDao())->createOrUpdate(['goods_id' => $this->id], $this->post['attribute']);
+        (new GoodsAttributeDao())->updateOrCreate(['goods_id' => $this->id], $this->post['attribute']);
     }
 
     /**
@@ -113,7 +113,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncTimer(): void
     {
-        (new GoodsTimerDao())->createOrUpdate(['goods_id' => $this->id], $this->post['timer']);
+        (new GoodsTimerDao())->updateOrCreate(['goods_id' => $this->id], $this->post['timer']);
     }
 
     /**
