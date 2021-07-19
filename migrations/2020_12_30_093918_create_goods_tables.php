@@ -214,6 +214,7 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('clicks')->default(0)->comment('点击量');
             $table->unsignedInteger('sales')->default(0)->comment('销量');
             $table->unsignedInteger('virtual_sales')->default(0)->comment('虚拟销量');
+            $table->unsignedTinyInteger('is_default')->default(0)->comment('默认展示 0:否, 1:是');
             $table->string('image', 255)->default('')->comment('图片');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
