@@ -174,7 +174,6 @@ abstract class AbstractDao
         $model = $this->model::firstOrCreate($attributes, $values);
         if (! $model->wasRecentlyCreated) {
             $model->update($values);
-            $model->save();
         }
         return $model;
     }

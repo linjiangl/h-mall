@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Service\Goods\Types;
 
 use App\Constants\State\Goods\GoodsState;
+use App\Core\Dao\Goods\GoodsAttributeDao;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Dao\Goods\GoodsParameterDao;
 use App\Core\Dao\Goods\GoodsTimerDao;
@@ -59,8 +60,9 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $this->id = $goodsDao->create($data);
 
             $this->goods = $goodsDao->info($this->id);
-            $this->syncParameter();
+            $this->syncAttribute();
             $this->syncTimer();
+            $this->syncParameter();
             $this->syncSku();
 
             Db::commit();
@@ -81,6 +83,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $goodsDao->update($this->id, $data);
 
             $this->goods = $goodsDao->info($this->id);
+            $this->syncAttribute();
             $this->syncParameter();
             $this->syncTimer();
             $this->syncSku();
@@ -94,19 +97,13 @@ abstract class AbstractTypesService implements InterfaceTypesService
     }
 
     /**
-     * 保存商品sku数据.
+     * 保存商品属性
      */
-    protected function syncSku(): void
+    protected function syncAttribute(): void
     {
+        (new GoodsAttributeDao())->createOrUpdate(['goods_id' => $this->id], $this->post['attribute']);
     }
 
-    /**
-     * 保存商品参数.
-     */
-    protected function syncParameter(): void
-    {
-        (new GoodsParameterDao())->createOrUpdate(['goods_id' => $this->id], $this->post['parameter']);
-    }
 
     /**
      * 保存商品定时.
@@ -115,6 +112,22 @@ abstract class AbstractTypesService implements InterfaceTypesService
     {
         (new GoodsTimerDao())->createOrUpdate(['goods_id' => $this->id], $this->post['timer']);
     }
+
+    /**
+     * 保存商品参数.
+     */
+    protected function syncParameter(): void
+    {
+
+    }
+
+    /**
+     * 保存商品sku数据.
+     */
+    protected function syncSku(): void
+    {
+    }
+
 
     protected function handleGoodsData(): array
     {
