@@ -22,14 +22,12 @@ class SpecValueService extends AbstractService
 
     public function getListBySpecId(int $specId): array
     {
-        $dao = new SpecValueDao();
-        return $dao->getListBySpecId($specId);
+        return (new SpecValueDao())->getListBySpecId($specId);
     }
 
     public function remove(int $id): bool
     {
-        $goodsSkuSpecValueDao = new GoodsSkuSpecValueDao();
-        if ($goodsSkuSpecValueDao->checkSpecValueIdHasGoods($id)) {
+        if ((new GoodsSkuSpecValueDao())->checkSpecValueIdHasGoods($id)) {
             throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_SPEC_VALUE_ID_HAS_GOODS));
         }
 
@@ -82,7 +80,6 @@ class SpecValueService extends AbstractService
 
     public function removeBySpecId(int $specId): void
     {
-        $dao = new SpecValueDao();
-        $dao->deleteByCondition([['spec_id', '=', $specId]]);
+        (new SpecValueDao())->deleteByCondition([['spec_id', '=', $specId]]);
     }
 }

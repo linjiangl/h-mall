@@ -65,14 +65,12 @@ class CategoryService extends AbstractService
 
     public function remove(int $id): bool
     {
-        $goodsDao = new GoodsDao();
-        if ($goodsDao->checkCategoryIdHasGoods($id)) {
+        if ((new GoodsDao())->checkCategoryIdHasGoods($id)) {
             throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_CATEGORY_ID_HAS_CATEGORY));
         }
 
         try {
-            $categorySpecService = new CategorySpecService();
-            $categorySpecService->removeByCategoryId($id);
+            (new CategorySpecService())->removeByCategoryId($id);
 
             return parent::remove($id);
         } catch (Throwable $e) {
@@ -86,8 +84,7 @@ class CategoryService extends AbstractService
      */
     public function getListByStatus($status = null, string $select = '*'): array
     {
-        $dao = new CategoryDao();
-        return $dao->getListByStatus($status, $select);
+        return (new CategoryDao())->getListByStatus($status, $select);
     }
 
     /**
@@ -96,8 +93,7 @@ class CategoryService extends AbstractService
      */
     public function getListByParentId(int $parentId = 0, $status = null): array
     {
-        $dao = new CategoryDao();
-        return $dao->getListByParentId($parentId, $status);
+        return (new CategoryDao())->getListByParentId($parentId, $status);
     }
 
     /**
@@ -124,7 +120,7 @@ class CategoryService extends AbstractService
      */
     public function convertCategoriesToLevel(array $categories, int $parentId = 0, int $level = 1): array
     {
-        foreach ($categories as $k => $v) {
+        foreach ($categories as $v) {
             if ($v['parent_id'] == $parentId) {
                 $v['level'] = $level;
                 $this->levelData[] = $v;
@@ -161,7 +157,7 @@ class CategoryService extends AbstractService
         $categories = $this->convertCategoriesToLevel($categories);
         $selfCategory = [];
         $data = [];
-        foreach ($categories as $key => $val) {
+        foreach ($categories as $val) {
             $data[] = $val;
             if ($val['id'] == $categoryId) {
                 $selfCategory = $val;

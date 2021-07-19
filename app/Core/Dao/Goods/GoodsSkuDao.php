@@ -20,4 +20,9 @@ class GoodsSkuDao extends AbstractDao
     protected array $noAllowActions = [];
 
     protected string $notFoundMessage = '商品库存不存在或已删除';
+
+    public function info(int $id, array $with = []): GoodsSku
+    {
+        return parent::info($id, $with);
+    }
 }

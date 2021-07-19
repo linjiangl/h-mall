@@ -19,7 +19,6 @@ class ServiceService extends AbstractService
 
     public function all(): array
     {
-        $dao = new ServiceDao();
-        return $dao->getListByCondition();
+        return (new ServiceDao())->getListByCondition();
     }
 }

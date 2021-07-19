@@ -32,8 +32,7 @@ class SpecService extends AbstractService
             // 保存规格值
             if (! empty($data['spec_values'])) {
                 $specValues = is_array($data['spec_values']) ? $data['spec_values'] : explode(',', $data['spec_values']);
-                $specValueService = new SpecValueService();
-                $specValueService->createSpecValues($id, $specValues);
+                (new SpecValueService())->createSpecValues($id, $specValues);
             }
 
             return $id;
@@ -52,8 +51,7 @@ class SpecService extends AbstractService
             // 保存规格值
             if (! empty($data['spec_values'])) {
                 $specValues = is_array($data['spec_values']) ? $data['spec_values'] : explode(',', $data['spec_values']);
-                $specValueService = new SpecValueService();
-                $specValueService->updateSpecValues($spec, $specValues);
+                (new SpecValueService())->updateSpecValues($spec, $specValues);
             }
 
             return $spec;
@@ -65,20 +63,17 @@ class SpecService extends AbstractService
 
     public function remove(int $id): bool
     {
-        $categorySpecDao = new CategorySpecDao();
-        if ($categorySpecDao->checkSpecIdHasCategory($id)) {
+        if ((new CategorySpecDao())->checkSpecIdHasCategory($id)) {
             throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_SPEC_ID_HAS_GOODS));
         }
 
-        $skuSpecValueDao = new GoodsSkuSpecValueDao();
-        if ($skuSpecValueDao->checkSpecIdHasGoods($id)) {
+        if ((new GoodsSkuSpecValueDao())->checkSpecIdHasGoods($id)) {
             throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_SPEC_ID_HAS_GOODS));
         }
 
         try {
             // 删除规格值
-            $specValueService = new SpecValueService();
-            $specValueService->removeBySpecId($id);
+            (new SpecValueService())->removeBySpecId($id);
 
             // 删除规格
             return parent::remove($id);

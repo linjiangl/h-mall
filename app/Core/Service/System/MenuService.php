@@ -29,8 +29,7 @@ class MenuService extends AbstractService
      */
     public function getAdminMenus(int $adminId): array
     {
-        $roleAdminDao = new RoleAdminDao();
-        $roleId = $roleAdminDao->getAdminRoleId($adminId);
+        $roleId = (new RoleAdminDao())->getAdminRoleId($adminId);
         return $this->getRoleMenus($roleId);
     }
 
@@ -39,17 +38,14 @@ class MenuService extends AbstractService
      */
     public function getRoleMenus(int $roleId): array
     {
-        $roleDao = new RoleDao();
-        $role = $roleDao->info($roleId);
+        $role = (new RoleDao())->info($roleId);
         // 超级管理员返回所有菜单
         if ($role->is_super == RoleState::IS_SUPER_TRUE) {
             return $this->getTreeMenus(RoleState::STATUS_ENABLED);
         }
         // 其他返回对应权限菜单
-        $roleMenuDao = new RoleMenuDao();
-        $menuIds = $roleMenuDao->getRoleMenuIds($roleId);
-        $menuDao = new MenuDao();
-        $menus = $menuDao->getListByPrimaryKeys($menuIds);
+        $menuIds = (new RoleMenuDao())->getRoleMenuIds($roleId);
+        $menus = (new MenuDao())->getListByPrimaryKeys($menuIds);
         return $this->handleMenusToChildren($menus);
     }
 
@@ -59,8 +55,7 @@ class MenuService extends AbstractService
      */
     public function getTreeMenus($status = null): array
     {
-        $dao = new MenuDao();
-        $menus = $dao->getListByStatus($status, 'id,parent_id,title,name,icon,path');
+        $menus = (new MenuDao())->getListByStatus($status, 'id,parent_id,title,name,icon,path');
         return $this->handleMenusToChildren($menus);
     }
 
@@ -70,8 +65,7 @@ class MenuService extends AbstractService
      */
     public function getLevelMenus($status = null): array
     {
-        $dao = new MenuDao();
-        $menus = $dao->getListByStatus($status, 'id,parent_id,title,name,icon,path');
+        $menus = (new MenuDao())->getListByStatus($status, 'id,parent_id,title,name,icon,path');
         return $this->handleMenusToLevel($menus);
     }
 

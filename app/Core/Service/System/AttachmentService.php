@@ -25,8 +25,7 @@ class AttachmentService extends AbstractService
     public function getInfoByEncrypt(string $encrypt): ?Attachment
     {
         try {
-            $dao = new AttachmentDao();
-            return $dao->getInfoByEncrypt($encrypt);
+            return (new AttachmentDao())->getInfoByEncrypt($encrypt);
         } catch (Throwable $e) {
             return null;
         }
@@ -91,8 +90,7 @@ class AttachmentService extends AbstractService
      */
     public function failure(string $key)
     {
-        $dao = new AttachmentDao();
-        $info = $dao->getInfoByIndex($this->generateIndex($key));
+        $info = (new AttachmentDao())->getInfoByIndex($this->generateIndex($key));
         $info->status = AttachmentState::STATUS_DISABLED;
         $info->save();
     }
@@ -108,8 +106,8 @@ class AttachmentService extends AbstractService
             foreach ($diff as $item) {
                 $diffIndex[] = $this->generateIndex($item);
             }
-            $dao = new AttachmentDao();
-            $dao->updateByCondition([
+
+            (new AttachmentDao())->updateByCondition([
                 ['index', 'in', $diffIndex],
             ], [
                 'status' => AttachmentState::STATUS_DISABLED,

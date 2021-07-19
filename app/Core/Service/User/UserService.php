@@ -38,8 +38,7 @@ class UserService extends AbstractService
             throw new InternalException('密码不能少于6位');
         }
         try {
-            $userDao = new UserDao();
-            if ($userDao->getInfoByUsername($username)) {
+            if ((new UserDao())->getInfoByUsername($username)) {
                 throw new InternalException('账号已注册');
             }
         } catch (Throwable $e) {
@@ -56,8 +55,7 @@ class UserService extends AbstractService
         Db::beginTransaction();
         try {
             // 创建账号
-            $userDao = new UserDao();
-            $id = $userDao->create([
+            $id = (new UserDao())->create([
                 'username' => $username,
                 'nickname' => $extend['nickname'] ?? $this->defaultUsername,
                 'password' => $passwordHash,
