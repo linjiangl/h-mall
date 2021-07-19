@@ -31,6 +31,8 @@ class CreateRoleTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->unique(['identifier'], 'identifier');
+
+            $table->comment('客服');
         });
 
         Schema::create('role_admin', function (Blueprint $table) {
@@ -42,6 +44,8 @@ class CreateRoleTables extends Migration
 
             $table->unique(['role_id', 'admin_id'], 'role_admin_id');
             $table->index(['admin_id'], 'admin_id');
+
+            $table->comment('管理员权限');
         });
 
         Schema::create('role_menu', function (Blueprint $table) {
@@ -53,11 +57,9 @@ class CreateRoleTables extends Migration
 
             $table->unique(['role_id', 'menu_id'], 'role_menu_id');
             $table->index(['menu_id'], 'menu_id');
-        });
 
-        create_table_comment('role', '权限');
-        create_table_comment('role_admin', '管理员权限');
-        create_table_comment('role_menu', '权限菜单');
+            $table->comment('权限菜单');
+        });
     }
 
     /**

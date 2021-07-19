@@ -37,6 +37,8 @@ class CreateAdminTables extends Migration
             $table->unique(['username'], 'username');
             $table->index(['mobile'], 'mobile');
             $table->index(['lasted_login_time'], 'lasted_login_time');
+
+            $table->comment('管理员');
         });
 
         Schema::create('admin_login', function (Blueprint $table) {
@@ -50,6 +52,8 @@ class CreateAdminTables extends Migration
             $table->unsignedInteger('deleted_time')->default(0);
 
             $table->index(['admin_id'], 'admin_id');
+
+            $table->comment('管理员登录日志');
         });
 
         Schema::create('admin_action', function (Blueprint $table) {
@@ -65,11 +69,9 @@ class CreateAdminTables extends Migration
             $table->unsignedInteger('deleted_time')->default(0);
 
             $table->index(['admin_id'], 'admin_id');
-        });
 
-        create_table_comment('admin', '管理员');
-        create_table_comment('admin_login', '管理员登录日志');
-        create_table_comment('admin_action', '管理员操作日志');
+            $table->comment('管理员操作日志');
+        });
     }
 
     /**

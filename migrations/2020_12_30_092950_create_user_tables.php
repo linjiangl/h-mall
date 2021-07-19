@@ -47,6 +47,8 @@ class CreateUserTables extends Migration
             $table->index(['nickname', 'status'], 'nickname');
             $table->index(['lasted_login_time', 'status'], 'lasted_login_time');
             $table->index(['created_time', 'status'], 'created_time');
+
+            $table->comment('用户');
         });
 
         Schema::create('user_wallet', function (Blueprint $table) {
@@ -61,6 +63,8 @@ class CreateUserTables extends Migration
             $table->unique(['user_id'], 'user_id');
             $table->index(['integral'], 'integral');
             $table->index(['balance'], 'balance');
+
+            $table->comment('用户钱包');
         });
 
         Schema::create('user_vip_card', function (Blueprint $table) {
@@ -85,6 +89,8 @@ class CreateUserTables extends Migration
             $table->index(['grade', 'status'], 'grade');
             $table->index(['total_exp', 'status'], 'total_exp');
             $table->index(['created_time', 'status'], 'created_time');
+
+            $table->comment('用户会员卡');
         });
 
         Schema::create('user_address', function (Blueprint $table) {
@@ -110,6 +116,8 @@ class CreateUserTables extends Migration
             $table->index(['user_id', 'is_default'], 'user_id_is_default');
             $table->index(['province_id'], 'province_id');
             $table->index(['city_id'], 'city_id');
+
+            $table->comment('用户地址');
         });
 
         Schema::create('user_history', function (Blueprint $table) {
@@ -120,6 +128,8 @@ class CreateUserTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->unique(['user_id', 'goods_id'], 'user_id_goods_id');
+
+            $table->comment('用户浏览记录');
         });
 
         Schema::create('user_favorite', function (Blueprint $table) {
@@ -131,6 +141,8 @@ class CreateUserTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->unique(['user_id', 'module', 'module_id'], 'user_id_module_id');
+
+            $table->comment('用户收藏');
         });
 
         Schema::create('user_invoice', function (Blueprint $table) {
@@ -152,6 +164,8 @@ class CreateUserTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['user_id', 'status'], 'user_id');
+
+            $table->comment('用户发票');
         });
 
         Schema::create('user_statement', function (Blueprint $table) {
@@ -170,16 +184,9 @@ class CreateUserTables extends Migration
 
             $table->index(['user_id', 'type'], 'user_id_type');
             $table->index(['created_time'], 'created_time');
-        });
 
-        create_table_comment('user', '用户');
-        create_table_comment('user_wallet', '用户钱包');
-        create_table_comment('user_vip_card', '用户会员卡');
-        create_table_comment('user_address', '用户地址');
-        create_table_comment('user_history', '用户浏览记录');
-        create_table_comment('user_favorite', '用户收藏');
-        create_table_comment('user_invoice', '用户发票');
-        create_table_comment('user_statement', '用户流水');
+            $table->comment('用户流水');
+        });
     }
 
     /**

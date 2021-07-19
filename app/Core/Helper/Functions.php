@@ -193,17 +193,6 @@ if (! function_exists('database_text')) {
     }
 }
 
-if (! function_exists('create_table_comment')) {
-    /**
-     * 创建表注释.
-     */
-    function create_table_comment(string $table, string $comment): void
-    {
-        $table = get_table_name($table);
-        Db::statement("ALTER TABLE `{$table}` COMMENT '{$comment}'");
-    }
-}
-
 if (! function_exists('get_table_name')) {
     /**
      * 获取数据库真实的表名.

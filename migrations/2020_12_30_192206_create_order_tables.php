@@ -31,6 +31,8 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['user_id', 'goods_sku_id'], 'user_goods_sku_id');
+
+            $table->comment('购物车');
         });
 
         Schema::create('order', function (Blueprint $table) {
@@ -77,6 +79,8 @@ class CreateOrderTables extends Migration
             $table->index(['shop_id', 'status'], 'shop_id');
             $table->index(['user_id', 'status'], 'user_id');
             $table->index(['created_time', 'status'], 'created_time');
+
+            $table->comment('订单');
         });
 
         Schema::create('order_goods', function (Blueprint $table) {
@@ -101,6 +105,8 @@ class CreateOrderTables extends Migration
             $table->index(['order_id'], 'order_id');
             $table->index(['goods_id'], 'goods_id');
             $table->index(['goods_name'], 'goods_name');
+
+            $table->comment('订单商品');
         });
 
         Schema::create('order_express', function (Blueprint $table) {
@@ -120,6 +126,8 @@ class CreateOrderTables extends Migration
             $table->index(['refund_id'], 'refund_id');
             $table->index(['express_id'], 'express_id');
             $table->index(['express_number'], 'express_number');
+
+            $table->comment('订单物流');
         });
 
         Schema::create('order_invoice', function (Blueprint $table) {
@@ -144,13 +152,9 @@ class CreateOrderTables extends Migration
             $table->index(['user_id'], 'user_id');
             $table->index(['order_id'], 'order_id');
             $table->index(['order_no'], 'order_no');
-        });
 
-        create_table_comment('cart', '购物车');
-        create_table_comment('order', '订单');
-        create_table_comment('order_goods', '订单商品');
-        create_table_comment('order_express', '订单物流');
-        create_table_comment('order_invoice', '订单发票');
+            $table->comment('订单发票');
+        });
     }
 
     /**

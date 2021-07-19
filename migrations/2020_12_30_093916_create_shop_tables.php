@@ -34,6 +34,8 @@ class CreateShopTables extends Migration
             $table->unique(['user_id'], 'user_id');
             $table->index(['comment_score'], 'comment_score');
             $table->index(['created_time'], 'created_time');
+
+            $table->comment('店铺');
         });
 
         Schema::create('shop_finance', function (Blueprint $table) {
@@ -47,6 +49,8 @@ class CreateShopTables extends Migration
             $table->unique(['shop_id'], 'shop_id');
             $table->index(['balance'], 'balance');
             $table->index(['freeze_balance'], 'freeze_balance');
+
+            $table->comment('店铺资金');
         });
 
         Schema::create('shop_withdraw', function (Blueprint $table) {
@@ -65,6 +69,8 @@ class CreateShopTables extends Migration
             $table->index(['shop_id', 'status'], 'shop_id');
             $table->index(['amount', 'status'], 'amount');
             $table->index(['created_time', 'status'], 'created_time');
+
+            $table->comment('店铺提现');
         });
 
         Schema::create('shop_statement', function (Blueprint $table) {
@@ -83,12 +89,9 @@ class CreateShopTables extends Migration
 
             $table->index(['shop_id', 'amount'], 'shop_id_amount');
             $table->index(['amount'], 'amount');
-        });
 
-        create_table_comment('shop', '店铺');
-        create_table_comment('shop_finance', '店铺资金');
-        create_table_comment('shop_withdraw', '店铺提现');
-        create_table_comment('shop_statement', '店铺流水');
+            $table->comment('店铺流水');
+        });
     }
 
     /**

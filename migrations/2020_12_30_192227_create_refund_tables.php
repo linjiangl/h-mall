@@ -54,6 +54,8 @@ class CreateRefundTables extends Migration
             $table->index(['user_id', 'status'], 'user_id');
             $table->index(['shop_id', 'status'], 'shop_id');
             $table->index(['created_time', 'status'], 'created_time');
+
+            $table->comment('退款订单');
         });
 
         Schema::create('refund_goods', function (Blueprint $table) {
@@ -68,6 +70,8 @@ class CreateRefundTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['refund_id'], 'refund_id');
+
+            $table->comment('退款商品');
         });
 
         Schema::create('refund_action', function (Blueprint $table) {
@@ -82,11 +86,9 @@ class CreateRefundTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['refund_id'], 'refund_id');
-        });
 
-        create_table_comment('refund', '退款');
-        create_table_comment('refund_goods', '退款商品');
-        create_table_comment('refund_action', '退款操作');
+            $table->comment('退款操作');
+        });
     }
 
     /**

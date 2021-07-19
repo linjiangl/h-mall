@@ -37,6 +37,8 @@ class CreatePaymentTables extends Migration
             $table->unique(['serial_no'], 'serial_no');
             $table->index(['order_maps'], 'order_maps');
             $table->index(['trade_no'], 'trade_no');
+
+            $table->comment('支付记录');
         });
 
         Schema::create('payment_refund', function (Blueprint $table) {
@@ -61,10 +63,9 @@ class CreatePaymentTables extends Migration
             $table->index(['order_id'], 'order_id');
             $table->index(['refund_id'], 'refund_id');
             $table->index(['trade_no'], 'trade_no');
-        });
 
-        create_table_comment('payment', '支付记录');
-        create_table_comment('payment_refund', '支付退款记录');
+            $table->comment('支付退款记录');
+        });
     }
 
     /**

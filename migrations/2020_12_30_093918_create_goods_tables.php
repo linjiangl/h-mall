@@ -27,6 +27,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
+
+            $table->comment('商品品牌');
         });
 
         Schema::create('spec', function (Blueprint $table) {
@@ -40,6 +42,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('deleted_time')->default(0);
 
             $table->index(['shop_id', 'name'], 'shop_id_name');
+
+            $table->comment('商品規格');
         });
 
         Schema::create('spec_value', function (Blueprint $table) {
@@ -52,6 +56,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['spec_id', 'status'], 'spec_id');
+
+            $table->comment('商品规格值');
         });
 
         Schema::create('parameter', function (Blueprint $table) {
@@ -62,6 +68,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['shop_id'], 'shop_id');
+
+            $table->comment('商品参数');
         });
 
         Schema::create('parameter_options', function (Blueprint $table) {
@@ -75,6 +83,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['parameter_id'], 'parameter_id');
+
+            $table->comment('商品参数选项');
         });
 
         Schema::create('category', function (Blueprint $table) {
@@ -90,6 +100,8 @@ class CreateGoodsTables extends Migration
 
             $table->index(['parent_id', 'status'], 'parent_id');
             $table->index(['name', 'status'], 'name');
+
+            $table->comment('商品分类');
         });
 
         Schema::create('category_spec', function (Blueprint $table) {
@@ -101,6 +113,8 @@ class CreateGoodsTables extends Migration
 
             $table->unique(['category_id', 'spec_id'], 'category_spec_id');
             $table->index(['spec_id'], 'spec_id');
+
+            $table->comment('商品分类-关联的商品规格');
         });
 
         Schema::create('goods', function (Blueprint $table) {
@@ -148,6 +162,8 @@ class CreateGoodsTables extends Migration
             $table->index(['stock'], 'stock');
             $table->index(['stock_alarm'], 'stock_alarm');
             $table->index(['created_time', 'status'], 'created_time');
+
+            $table->comment('商品');
         });
 
         Schema::create('goods_attribute', function (Blueprint $table) {
@@ -163,6 +179,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['goods_id'], 'goods_id');
+
+            $table->comment('商品属性');
         });
 
         Schema::create('goods_timer', function (Blueprint $table) {
@@ -178,6 +196,8 @@ class CreateGoodsTables extends Migration
             $table->index(['goods_id'], 'goods_id');
             $table->index(['on_time'], 'on_time');
             $table->index(['off_time'], 'off_time');
+
+            $table->comment('商品定时');
         });
 
         Schema::create('goods_sku', function (Blueprint $table) {
@@ -204,6 +224,8 @@ class CreateGoodsTables extends Migration
             $table->index(['stock'], 'stock');
             $table->index(['sales'], 'sales');
             $table->index(['stock_alarm'], 'stock_alarm');
+
+            $table->comment('商品规格');
         });
 
         Schema::create('goods_sku_spec_value', function (Blueprint $table) {
@@ -217,6 +239,8 @@ class CreateGoodsTables extends Migration
             $table->unique(['goods_sku_id', 'spec_value_id'], 'goods_sku_spec_value_id');
             $table->index(['spec_id'], 'spec_id');
             $table->index(['spec_value_id'], 'spec_value_id');
+
+            $table->comment('商品规格选项');
         });
 
         Schema::create('goods_service', function (Blueprint $table) {
@@ -226,6 +250,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedTinyInteger('sorting')->default(0)->comment('排序');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
+
+            $table->comment('商品服务');
         });
 
         Schema::create('goods_parameter', function (Blueprint $table) {
@@ -237,6 +263,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['goods_id'], 'goods_id');
+
+            $table->comment('商品参数');
         });
 
         Schema::create('goods_evaluate', function (Blueprint $table) {
@@ -265,6 +293,8 @@ class CreateGoodsTables extends Migration
             $table->index(['order_id'], 'order_id');
             $table->index(['user_id'], 'user_id');
             $table->index(['goods_id', 'parent_id', 'top'], 'goods_id');
+
+            $table->comment('商品评价');
         });
 
         Schema::create('goods_evaluate_reply', function (Blueprint $table) {
@@ -283,24 +313,9 @@ class CreateGoodsTables extends Migration
 
             $table->index(['goods_evaluate_id'], 'goods_evaluate_id');
             $table->index(['goods_id', 'top'], 'goods_id_top');
-        });
 
-        create_table_comment('brand', '商品品牌');
-        create_table_comment('spec', '商品規格');
-        create_table_comment('spec_value', '商品规格值');
-        create_table_comment('parameter', '商品参数');
-        create_table_comment('parameter_options', '商品参数选项');
-        create_table_comment('category', '商品分类');
-        create_table_comment('category_spec', '商品分类-关联的商品规格');
-        create_table_comment('goods', '商品');
-        create_table_comment('goods_attribute', '商品属性');
-        create_table_comment('goods_timer', '商品定时');
-        create_table_comment('goods_sku', '商品规格');
-        create_table_comment('goods_sku_spec_value', '商品规格选项');
-        create_table_comment('goods_service', '商品服务');
-        create_table_comment('goods_parameter', '商品参数');
-        create_table_comment('goods_evaluate', '商品评价');
-        create_table_comment('goods_evaluate_reply', '商品评价回复');
+            $table->comment('商品评价回复');
+        });
     }
 
     /**

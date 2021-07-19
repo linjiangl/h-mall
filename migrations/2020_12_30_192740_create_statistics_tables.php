@@ -56,9 +56,9 @@ class CreateStatisticsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['date'], 'date');
-        });
 
-        create_table_comment('statistics_order', '统计-订单');
+            $table->comment('统计-订单');
+        });
     }
 
     /**

@@ -36,6 +36,8 @@ class CreateMessageTables extends Migration
             $table->index(['sender_id', 'status', 'type'], 'sender_id');
             $table->index(['receiver_id', 'status', 'type'], 'receiver_id_type');
             $table->index(['created_time', 'status'], 'created_time');
+
+            $table->comment('消息');
         });
 
         Schema::create('message_text', function (Blueprint $table) {
@@ -44,6 +46,8 @@ class CreateMessageTables extends Migration
             $table->text('content')->comment('消息内容');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
+
+            $table->comment('消息文本');
         });
 
         Schema::create('message_receiver', function (Blueprint $table) {
@@ -57,6 +61,8 @@ class CreateMessageTables extends Migration
 
             $table->index(['message_id'], 'message_id');
             $table->index(['user_id', 'status'], 'user_id');
+
+            $table->comment('消息接收者');
         });
 
         Schema::create('message_subscription', function (Blueprint $table) {
@@ -66,12 +72,9 @@ class CreateMessageTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->unique(['user_id'], 'user_id');
-        });
 
-        create_table_comment('message', '消息');
-        create_table_comment('message_text', '消息文本');
-        create_table_comment('message_receiver', '消息接收者');
-        create_table_comment('message_subscription', '消息订阅');
+            $table->comment('消息订阅');
+        });
     }
 
     /**

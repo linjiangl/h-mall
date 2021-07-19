@@ -27,6 +27,8 @@ class CreateSystemTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->unique(['key'], 'key');
+
+            $table->comment('系统设置');
         });
 
         Schema::create('text', function (Blueprint $table) {
@@ -35,6 +37,8 @@ class CreateSystemTables extends Migration
             $table->mediumText('content');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
+
+            $table->comment('系统文本');
         });
 
         Schema::create('menu', function (Blueprint $table) {
@@ -50,6 +54,8 @@ class CreateSystemTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['parent_id'], 'parent_id');
+
+            $table->comment('系统菜单');
         });
 
         Schema::create('attachment', function (Blueprint $table) {
@@ -69,6 +75,8 @@ class CreateSystemTables extends Migration
             $table->unique(['index'], 'index');
             $table->index(['encrypt'], 'encrypt');
             $table->index(['created_time', 'status'], 'md5');
+
+            $table->comment('系统附件');
         });
 
         Schema::create('district', function (Blueprint $table) {
@@ -80,6 +88,8 @@ class CreateSystemTables extends Migration
 
             $table->index(['parent_id'], 'parent_id');
             $table->index(['name'], 'name');
+
+            $table->comment('地区');
         });
 
         Schema::create('express', function (Blueprint $table) {
@@ -95,6 +105,8 @@ class CreateSystemTables extends Migration
             $table->unique(['code'], 'code');
             $table->index(['name'], 'name');
             $table->index(['sorting'], 'sorting');
+
+            $table->comment('物流');
         });
 
         Schema::create('slide', function (Blueprint $table) {
@@ -112,6 +124,8 @@ class CreateSystemTables extends Migration
 
             $table->index(['shop_id'], 'shop_id');
             $table->index(['clicks'], 'clicks');
+
+            $table->comment('幻灯片');
         });
 
         Schema::create('navigation', function (Blueprint $table) {
@@ -123,6 +137,8 @@ class CreateSystemTables extends Migration
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
+
+            $table->comment('导航');
         });
 
         Schema::create('advertisement', function (Blueprint $table) {
@@ -139,6 +155,8 @@ class CreateSystemTables extends Migration
 
             $table->index(['title'], 'title');
             $table->index(['clicks'], 'clicks');
+
+            $table->comment('广告');
         });
 
         Schema::create('customer_service', function (Blueprint $table) {
@@ -155,18 +173,9 @@ class CreateSystemTables extends Migration
             $table->unsignedInteger('deleted_time')->default(0);
 
             $table->index(['shop_id'], 'shop_id');
-        });
 
-        create_table_comment('setting', '系统设置');
-        create_table_comment('text', '系统文本');
-        create_table_comment('menu', '系统菜单');
-        create_table_comment('attachment', '系统附件');
-        create_table_comment('district', '地区');
-        create_table_comment('express', '物流');
-        create_table_comment('slide', '幻灯片');
-        create_table_comment('navigation', '导航');
-        create_table_comment('advertisement', '广告');
-        create_table_comment('customer_service', '客服');
+            $table->comment('客服');
+        });
     }
 
     /**
