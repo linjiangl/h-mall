@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 use App\Exception\InternalException;
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\DbConnection\Db;
 use Hyperf\Framework\Logger\StdoutLogger;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Contract\RequestInterface;
