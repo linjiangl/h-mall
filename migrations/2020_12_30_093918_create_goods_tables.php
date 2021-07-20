@@ -104,19 +104,6 @@ class CreateGoodsTables extends Migration
             $table->comment('商品分类');
         });
 
-        Schema::create('category_spec', function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->unsignedInteger('category_id');
-            $table->unsignedInteger('spec_id');
-            $table->unsignedInteger('created_time')->default(0);
-            $table->unsignedInteger('updated_time')->default(0);
-
-            $table->unique(['category_id', 'spec_id'], 'category_spec_id');
-            $table->index(['spec_id'], 'spec_id');
-
-            $table->comment('商品分类-关联的商品规格');
-        });
-
         Schema::create('goods', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('shop_id');
@@ -330,7 +317,6 @@ class CreateGoodsTables extends Migration
         Schema::dropIfExists('parameter');
         Schema::dropIfExists('parameter_options');
         Schema::dropIfExists('category');
-        Schema::dropIfExists('category_spec');
         Schema::dropIfExists('goods');
         Schema::dropIfExists('goods_attribute');
         Schema::dropIfExists('goods_timer');

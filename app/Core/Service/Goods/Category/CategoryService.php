@@ -10,73 +10,14 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Goods\Category;
 
-use App\Constants\Message\GoodsMessage;
 use App\Core\Dao\Goods\Category\CategoryDao;
-use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
-use App\Exception\BadRequestException;
-use App\Exception\InternalException;
-use Throwable;
 
 class CategoryService extends AbstractService
 {
     protected string $dao = CategoryDao::class;
 
     protected array $levelData = [];
-
-    public function create(array $data): int
-    {
-        try {
-            // 创建分类
-            $id = parent::create($data);
-
-            // 保存规格
-            if (! empty($data['spec_ids'])) {
-                $specIds = is_array($data['spec_ids']) ? $data['spec_ids'] : explode(',', $data['spec_ids']);
-                $categorySpecService = new CategorySpecService();
-                $categorySpecService->createCategorySpecs($id, $specIds);
-            }
-
-            return $id;
-        } catch (Throwable $e) {
-            write_logs('创建失败', $data);
-            throw new BadRequestException($e->getMessage(), $e->getCode());
-        }
-    }
-
-    public function update(int $id, array $data): array
-    {
-        try {
-            $category = parent::update($id, $data);
-
-            // 保存规格
-            if (! empty($data['spec_ids'])) {
-                $specIds = is_array($data['spec_ids']) ? $data['spec_ids'] : explode(',', $data['spec_ids']);
-                $categorySpecService = new CategorySpecService();
-                $categorySpecService->updateCategorySpecs($category, $specIds);
-            }
-
-            return $category;
-        } catch (Throwable $e) {
-            write_logs('保存失败', $data);
-            throw new BadRequestException($e->getMessage(), $e->getCode());
-        }
-    }
-
-    public function remove(int $id): bool
-    {
-        if ((new GoodsDao())->checkCategoryIdHasGoods($id)) {
-            throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_CATEGORY_ID_HAS_CATEGORY));
-        }
-
-        try {
-            (new CategorySpecService())->removeByCategoryId($id);
-
-            return parent::remove($id);
-        } catch (Throwable $e) {
-            throw new BadRequestException($e->getMessage(), $e->getCode());
-        }
-    }
 
     /**
      * 根据状态获取列表数据.
