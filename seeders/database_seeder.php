@@ -30,6 +30,11 @@ class DatabaseSeeder extends Seeder
 
         // 用户相关
         UserFactory::run();
+
+        // 其他
+        CategoryFactory::run();
+        BrandFactory::run();
+        SpecFactory::run();
     }
 
     protected function handleImportClass()
