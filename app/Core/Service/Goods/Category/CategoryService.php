@@ -77,14 +77,14 @@ class CategoryService extends AbstractService
     }
 
     /**
-     * 获取指定分类的子级id.
+     * 获取指定分类的子级.
      * @param mixed $status
      */
-    public function getChildrenIds(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
+    public function getChildrenCategories(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
     {
         $categories = $this->getListByStatus($status, 'id,parent_id');
         $categories = $this->convertCategoriesToLevel($categories);
-        $ids = [];
+        $childrenCategories = [];
         // 到指定分类时，设置为true
         $start = false;
         // 指定分类的层次
@@ -92,7 +92,7 @@ class CategoryService extends AbstractService
         foreach ($categories as $item) {
             if ($start) {
                 if ($item['level'] > $level) {
-                    $ids[] = $item['id'];
+                    $childrenCategories[] = $item;
                 }
                 if ($item['level'] == $level) {
                     break;
@@ -100,12 +100,55 @@ class CategoryService extends AbstractService
             }
 
             if ($item['id'] == $categoryId) {
-                $ids[] = $item['id'];
+                $childrenCategories[] = $item;
                 $start = true;
                 $level = $item['level'];
             }
         }
-        return $ids;
+        return $childrenCategories;
+    }
+
+    /**
+     * 获取指定分类的子级id.
+     * @param mixed $status
+     */
+    public function getChildrenIds(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
+    {
+        return array_column($this->getChildrenCategories($categoryId, $status), 'id');
+    }
+
+    /**
+     * 获取指定分类的父级.
+     * @param mixed $status
+     */
+    public function getParentCategories(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
+    {
+        $categories = $this->getListByStatus($status);
+        $categories = $this->convertCategoriesToLevel($categories);
+        $categories = array_reverse($categories);
+        $parentCategories = [];
+        // 到指定分类时，设置为true
+        $start = false;
+        // 当前的层次
+        $level = 0;
+        foreach ($categories as $item) {
+            if ($start) {
+                if ($item['level'] < $level) {
+                    $parentCategories[] = $item;
+                    --$level;
+                }
+                if ($item['level'] === 1) {
+                    break;
+                }
+            }
+
+            if ($item['id'] == $categoryId) {
+                $parentCategories[] = $item;
+                $start = true;
+                $level = $item['level'];
+            }
+        }
+        return $parentCategories;
     }
 
     /**
@@ -114,30 +157,6 @@ class CategoryService extends AbstractService
      */
     public function getParentIds(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
     {
-        $categories = $this->getListByStatus($status);
-        $categories = $this->convertCategoriesToLevel($categories);
-        $categories = array_reverse($categories);
-        $ids = [];
-        // 到指定分类时，设置为true
-        $start = false;
-        // 指定分类的层次
-        $level = 0;
-        foreach ($categories as $item) {
-            if ($start) {
-                if ($item['level'] < $level) {
-                    $ids[] = $item['id'];
-                }
-                if ($item['level']  === 1) {
-                    break;
-                }
-            }
-
-            if ($item['id'] == $categoryId) {
-                $ids[] = $item['id'];
-                $start = true;
-                $level = $item['level'];
-            }
-        }
-        return $ids;
+        return array_column($this->getParentCategories($categoryId, $status), 'id');
     }
 }
