@@ -31,7 +31,7 @@ class CreateRefundTables extends Migration
             $table->tinyInteger('express_status')->default(1)->comment('物流状态 1:未收货, 2:已收货');
             $table->decimal('amount', 10, 2)->unsigned()->default(0)->comment('退款金额');
             $table->string('reason', 255)->comment('退款原因');
-            $table->smallInteger('status')->default(0)->comment('退款状态 -1:已删除');
+            $table->smallInteger('status')->default(0)->comment('退款状态');
             $table->unsignedInteger('applied_time')->default(0)->comment('用户申请退款时间');
             $table->unsignedInteger('edited_time')->default(0)->comment('用户修改退款订单时间');
             $table->unsignedInteger('canceled_time')->comment('用户撤销退款时间');

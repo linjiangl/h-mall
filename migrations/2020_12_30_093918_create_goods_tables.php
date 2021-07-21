@@ -94,7 +94,7 @@ class CreateGoodsTables extends Migration
             $table->string('icon', 255)->default('')->comment('图标');
             $table->string('cover', 255)->default('')->comment('封面图');
             $table->unsignedTinyInteger('sorting')->default(0);
-            $table->unsignedTinyInteger('status')->default(0)->comment('是否显示 -1:已删除 0:已禁用, 1:已启用');
+            $table->unsignedTinyInteger('status')->default(1)->comment('是否显示 0:已禁用, 1:已启用');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
@@ -124,7 +124,7 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('clicks')->default(0)->comment('点击量');
             $table->unsignedInteger('sales')->default(0)->comment('销量');
             $table->unsignedInteger('virtual_sales')->default(0)->comment('虚拟销量');
-            $table->unsignedTinyInteger('status')->default(0)->comment('状态 -1:已删除 0:仓库中, 1:销售中');
+            $table->unsignedTinyInteger('status')->default(0)->comment('状态 0:仓库中, 1:销售中');
             $table->tinyInteger('recommend_way')->default(0)->comment('推荐方式 0:无,1:新品,2:精品,3:推荐');
             $table->tinyInteger('is_on_sale')->default(0)->comment('是否销售 0:放入仓库, 1:立即销售');
             $table->tinyInteger('is_consume_discount')->default(0)->comment('是否参与会员等级折扣 0:否,1:是');

@@ -19,7 +19,7 @@ use App\Model\Model;
  * @property string $amount
  * @property int $refused_time 拒绝时间
  * @property int $finished_time 完成时间
- * @property int $status 状态 -1:已删除
+ * @property int $status 状态
  * @property string $remark
  * @property int $created_time
  * @property int $updated_time

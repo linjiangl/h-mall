@@ -60,7 +60,7 @@ class CreateShopTables extends Migration
             $table->decimal('amount', 10, 2)->unsigned();
             $table->unsignedInteger('refused_time')->default(0)->comment('拒绝时间');
             $table->unsignedInteger('finished_time')->default(0)->comment('完成时间');
-            $table->unsignedTinyInteger('status')->default(1)->comment('状态 -1:已删除');
+            $table->unsignedTinyInteger('status')->default(1)->comment('状态');
             $table->string('remark', 255)->default('备注');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);

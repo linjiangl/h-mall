@@ -32,7 +32,7 @@ use App\Model\Model;
  * @property int $clicks 点击量
  * @property int $sales 销量
  * @property int $virtual_sales 虚拟销量
- * @property int $status 状态 -1:已删除 0:仓库中, 1:销售中
+ * @property int $status 状态 0:仓库中, 1:销售中
  * @property int $recommend_way 推荐方式 0:无,1:新品,2:精品,3:推荐
  * @property int $is_on_sale 是否销售 0:放入仓库, 1:立即销售
  * @property int $is_consume_discount 是否参与会员等级折扣 0:否,1:是

@@ -24,7 +24,7 @@ use App\Model\Model;
  * @property int $express_status 物流状态 1:未收货, 2:已收货
  * @property string $amount 退款金额
  * @property string $reason 退款原因
- * @property int $status 退款状态 -1:已删除
+ * @property int $status 退款状态
  * @property int $applied_time 用户申请退款时间
  * @property int $edited_time 用户修改退款订单时间
  * @property int $canceled_time 用户撤销退款时间
