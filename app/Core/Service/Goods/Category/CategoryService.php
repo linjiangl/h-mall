@@ -78,9 +78,10 @@ class CategoryService extends AbstractService
 
     /**
      * 获取指定分类的子级.
+     * @param mixed $toColumn 转换数据 默认:对象，'id': 主键集合, 'name': 名称集合
      * @param mixed $status
      */
-    public function getChildrenCategories(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
+    public function getChildrenCategories(int $categoryId, $toColumn = null, $status = CategoryState::STATUS_ENABLED): array
     {
         $categories = $this->getListByStatus($status, 'id,parent_id');
         $categories = $this->convertCategoriesToLevel($categories);
@@ -105,23 +106,18 @@ class CategoryService extends AbstractService
                 $level = $item['level'];
             }
         }
+        if ($toColumn) {
+            $childrenCategories = array_column($childrenCategories, $toColumn);
+        }
         return $childrenCategories;
     }
 
     /**
-     * 获取指定分类的子级id.
-     * @param mixed $status
-     */
-    public function getChildrenIds(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
-    {
-        return array_column($this->getChildrenCategories($categoryId, $status), 'id');
-    }
-
-    /**
      * 获取指定分类的父级.
+     * @param mixed $toColumn 转换数据 默认:对象，'id': 主键集合, 'name': 名称集合
      * @param mixed $status
      */
-    public function getParentCategories(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
+    public function getParentCategories(int $categoryId, $toColumn = null, $status = CategoryState::STATUS_ENABLED): array
     {
         $categories = $this->getListByStatus($status);
         $categories = $this->convertCategoriesToLevel($categories);
@@ -148,15 +144,10 @@ class CategoryService extends AbstractService
                 $level = $item['level'];
             }
         }
+        $parentCategories = array_reverse($parentCategories);
+        if ($toColumn) {
+            $parentCategories = array_column($parentCategories, $toColumn);
+        }
         return $parentCategories;
-    }
-
-    /**
-     * 获取指定分类的父级ID.
-     * @param mixed $status
-     */
-    public function getParentIds(int $categoryId, $status = CategoryState::STATUS_ENABLED): array
-    {
-        return array_column($this->getParentCategories($categoryId, $status), 'id');
     }
 }
