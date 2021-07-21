@@ -39,7 +39,7 @@ use App\Model\Model;
  * @property int $is_free_shipping 是否包邮 0:否, 1:是
  * @property int $buy_max 限购 0:不限制
  * @property int $buy_min 起售 0:不限制
- * @property string $refund_type 退款类型 money:仅退款,all:退货退款,refuse:拒绝退款
+ * @property string $refund_type 退款类型 money:仅支持退款,all:退货退款,refuse:不支持退款
  * @property string $images 商品图片
  * @property string $video_url 视频地址
  * @property int $created_time

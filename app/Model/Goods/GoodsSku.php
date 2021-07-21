@@ -26,6 +26,8 @@ use App\Model\Model;
  * @property int $clicks 点击量
  * @property int $sales 销量
  * @property int $virtual_sales 虚拟销量
+ * @property string $weight 重量（单位kg）
+ * @property string $volume 体积（单位立方米）
  * @property int $is_default 默认展示 0:否, 1:是
  * @property string $image 图片
  * @property int $created_time
@@ -45,7 +47,7 @@ class GoodsSku extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'goods_id', 'sku_name', 'sku_no', 'sale_price', 'market_price', 'cost_price', 'stock', 'stock_alarm', 'clicks', 'sales', 'virtual_sales', 'is_default', 'image', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'shop_id', 'goods_id', 'sku_name', 'sku_no', 'sale_price', 'market_price', 'cost_price', 'stock', 'stock_alarm', 'clicks', 'sales', 'virtual_sales', 'weight', 'volume', 'is_default', 'image', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.

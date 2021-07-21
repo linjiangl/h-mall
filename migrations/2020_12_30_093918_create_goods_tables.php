@@ -131,7 +131,7 @@ class CreateGoodsTables extends Migration
             $table->tinyInteger('is_free_shipping')->default(1)->comment('是否包邮 0:否, 1:是');
             $table->unsignedSmallInteger('buy_max')->default(0)->comment('限购 0:不限制');
             $table->unsignedSmallInteger('buy_min')->default(0)->comment('起售 0:不限制');
-            $table->string('refund_type', 30)->default('money')->comment('退款类型 money:仅退款,all:退货退款,refuse:拒绝退款');
+            $table->string('refund_type', 30)->default('money')->comment('退款类型 money:仅支持退款,all:退货退款,refuse:不支持退款');
             $table->string('images', 1000)->comment('商品图片');
             $table->string('video_url', 255)->comment('视频地址');
             $table->unsignedInteger('created_time')->default(0);
@@ -156,12 +156,13 @@ class CreateGoodsTables extends Migration
         Schema::create('goods_attribute', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('goods_id');
-            $table->string('goods_unit', 30)->default('')->comment('商品单位');
-            $table->decimal('goods_weight', 10)->unsigned()->default(0)->comment('重量（单位g）');
-            $table->decimal('goods_volume', 10)->unsigned()->default(0)->comment('体积（单位立方米）');
-            $table->string('goods_service_ids', 255)->default('')->comment('商品服务');
+            $table->unsignedTinyInteger('is_spec_open')->default(0)->comment('是否启用多规格 0:否,1:是');
+            $table->string('unit', 30)->default('')->comment('商品单位');
+            $table->decimal('weight', 5)->unsigned()->default(0)->comment('重量（单位kg）');
+            $table->decimal('volume', 5)->unsigned()->default(0)->comment('体积（单位立方米）');
+            $table->string('service_ids', 255)->default('')->comment('商品服务');
             $table->text('parameter')->comment('商品参数');
-            $table->mediumText('goods_content')->comment('商品详情');
+            $table->mediumText('content')->comment('商品详情');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
@@ -201,6 +202,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('clicks')->default(0)->comment('点击量');
             $table->unsignedInteger('sales')->default(0)->comment('销量');
             $table->unsignedInteger('virtual_sales')->default(0)->comment('虚拟销量');
+            $table->decimal('weight', 5)->unsigned()->default(0)->comment('重量（单位kg）');
+            $table->decimal('volume', 5)->unsigned()->default(0)->comment('体积（单位立方米）');
             $table->unsignedTinyInteger('is_default')->default(0)->comment('默认展示 0:否, 1:是');
             $table->string('image', 255)->default('')->comment('图片');
             $table->unsignedInteger('created_time')->default(0);
