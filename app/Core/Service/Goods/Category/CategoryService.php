@@ -85,22 +85,24 @@ class CategoryService extends AbstractService
         $categories = $this->getListByStatus($status, 'id,parent_id');
         $categories = $this->convertCategoriesToLevel($categories);
         $ids = [];
-        $isStart = false;
-        $categoryLevel = 0;
+        // 到指定分类时，设置为true
+        $start = false;
+        // 指定分类的层次
+        $level = 0;
         foreach ($categories as $item) {
-            if ($isStart) {
-                if ($item['level'] == $categoryLevel) {
-                    break;
-                }
-                if ($item['level'] > $categoryLevel) {
+            if ($start) {
+                if ($item['level'] > $level) {
                     $ids[] = $item['id'];
+                }
+                if ($item['level'] == $level) {
+                    break;
                 }
             }
 
             if ($item['id'] == $categoryId) {
                 $ids[] = $item['id'];
-                $isStart = true;
-                $categoryLevel = $item['level'];
+                $start = true;
+                $level = $item['level'];
             }
         }
         return $ids;
@@ -114,20 +116,28 @@ class CategoryService extends AbstractService
     {
         $categories = $this->getListByStatus($status);
         $categories = $this->convertCategoriesToLevel($categories);
-        $selfCategory = [];
-        $data = [];
-        foreach ($categories as $val) {
-            $data[] = $val;
-            if ($val['id'] == $categoryId) {
-                $selfCategory = $val;
-                break;
+        $categories = array_reverse($categories);
+        $ids = [];
+        // 到指定分类时，设置为true
+        $start = false;
+        // 指定分类的层次
+        $level = 0;
+        foreach ($categories as $item) {
+            if ($start) {
+                if ($item['level'] < $level) {
+                    $ids[] = $item['id'];
+                }
+                if ($item['level']  === 1) {
+                    break;
+                }
+            }
+
+            if ($item['id'] == $categoryId) {
+                $ids[] = $item['id'];
+                $start = true;
+                $level = $item['level'];
             }
         }
-        foreach ($data as $key => $val) {
-            if ($val['level'] == $selfCategory['level']) {
-                unset($data[$key]);
-            }
-        }
-        return array_column($data, 'id');
+        return $ids;
     }
 }
