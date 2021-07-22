@@ -23,7 +23,7 @@ class JWTBackendMiddleware extends AbstractJWTMiddleware
         $this->service = new AdminAuthorizationService();
     }
 
-    protected function handleWithAttribute($request): ServerRequestInterface
+    protected function handleWithAttribute(ServerRequestInterface $request): ServerRequestInterface
     {
         $jwtData = $this->service->getParserData(true);
         $request = Context::get(ServerRequestInterface::class);

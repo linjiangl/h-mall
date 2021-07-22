@@ -58,7 +58,7 @@ abstract class AbstractJWTMiddleware implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    protected function handleWithAttribute($request)
+    protected function handleWithAttribute(ServerRequestInterface $request): ServerRequestInterface
     {
         return $request;
     }
