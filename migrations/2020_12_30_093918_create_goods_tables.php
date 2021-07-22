@@ -156,7 +156,7 @@ class CreateGoodsTables extends Migration
         Schema::create('goods_attribute', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('goods_id');
-            $table->unsignedTinyInteger('is_spec_open')->default(0)->comment('是否启用多规格 0:否,1:是');
+            $table->unsignedTinyInteger('is_open_spec')->default(0)->comment('是否启用多规格 0:否,1:是');
             $table->string('unit', 30)->default('')->comment('商品单位');
             $table->decimal('weight', 5)->unsigned()->default(0)->comment('重量（单位kg）');
             $table->decimal('volume', 5)->unsigned()->default(0)->comment('体积（单位立方米）');
