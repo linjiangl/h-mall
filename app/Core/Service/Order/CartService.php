@@ -16,7 +16,9 @@ use App\Core\Dao\Order\CartDao;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Goods\Stock\Change\StockCartService;
 use App\Core\Service\Goods\Stock\StockChangeService;
+use App\Exception\BadRequestException;
 use Exception;
+use Hyperf\DbConnection\Db;
 
 class CartService extends AbstractService
 {
@@ -36,29 +38,37 @@ class CartService extends AbstractService
             $data = array_merge($data, $append);
         }
 
-        // 创建购物车
-        $cart = (new CartDao())->firstOrCreate([
-            'user_id' => $user['id'],
-            'goods_sku_id' => $sku->id,
-        ], $data);
+        Db::beginTransaction();
+        try {
+            // 创建购物车
+            $cart = (new CartDao())->firstOrCreate([
+                'user_id' => $user['id'],
+                'goods_sku_id' => $sku->id,
+            ], $data);
 
-        /** @var StockCartService $stockChangeService */
-        $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
-        if ($cart->wasRecentlyCreated) {
-            // 创建占用库存
-            $tmpCart = $cart->toArray();
-            $tmpCart['sku'] = $sku->toArray();
-            $stockChangeService->setAppend(['cart' => $tmpCart])->created($user, $cart->id, '添加购物车');
-        } else {
-            // 购物车商品已存在，增加占用库存数量
-            $data['quantity'] = $cart->quantity + $quantity;
-            $cart->update($data);
+            /** @var StockCartService $stockChangeService */
+            $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
+            if ($cart->wasRecentlyCreated) {
+                // 创建占用库存
+                $tmpCart = $cart->toArray();
+                $tmpCart['sku'] = $sku->toArray();
+                $stockChangeService->setAppend(['cart' => $tmpCart])->created($user, $cart->id, '添加购物车');
+            } else {
+                // 购物车商品已存在，增加占用库存数量
+                $data['quantity'] = $cart->quantity + $quantity;
+                $cart->update($data);
 
-            $tmpCart = $cart->toArray();
-            $tmpCart['sku'] = $sku->toArray();
-            $stockChangeService->setAppend(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
+                $tmpCart = $cart->toArray();
+                $tmpCart['sku'] = $sku->toArray();
+                $stockChangeService->setAppend(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
+            }
+
+            Db::commit();
+            return $cart->id;
+        } catch (Exception $e) {
+            Db::rollBack();
+            throw new BadRequestException($e->getMessage());
         }
-        return $cart->id;
     }
 
     /**
@@ -77,19 +87,27 @@ class CartService extends AbstractService
         if (! empty($append)) {
             $data = array_merge($data, $append);
         }
-        // 修改购物车商品数量
-        $cart->update($data);
 
-        // 修改后的购物车商品数量
-        $tmpCart = $cart->toArray();
-        $tmpCart['sku'] = $cart->sku->toArray();
+        Db::beginTransaction();
+        try {
+            // 修改购物车商品数量
+            $cart->update($data);
 
-        // 修改占用库存
-        /** @var StockCartService $stockChangeService */
-        $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
-        $stockChangeService->setAppend(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
+            // 修改后的购物车商品数量
+            $tmpCart = $cart->toArray();
+            $tmpCart['sku'] = $cart->sku->toArray();
 
-        return $cart->toArray();
+            // 修改占用库存
+            /** @var StockCartService $stockChangeService */
+            $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
+            $stockChangeService->setAppend(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
+
+            Db::commit();
+            return $cart->toArray();
+        } catch (Exception $e) {
+            Db::rollBack();
+            throw new BadRequestException($e->getMessage());
+        }
     }
 
     /**
@@ -103,15 +121,22 @@ class CartService extends AbstractService
             ['user_id', '=', $user['id']],
         ]);
 
-        // 恢复占用库存
-        /** @var StockCartService $stockChangeService */
-        $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
-        $stockChangeService->recovery($user, $cart->id);
+        Db::beginTransaction();
+        try {
+            // 恢复占用库存
+            /** @var StockCartService $stockChangeService */
+            $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
+            $stockChangeService->recovery($user, $cart->id);
 
-        // 删除购物车商品
-        $cart->delete();
+            // 删除购物车商品
+            $cart->delete();
 
-        return true;
+            Db::commit();
+            return true;
+        } catch (Exception $e) {
+            Db::rollBack();
+            throw new BadRequestException($e->getMessage());
+        }
     }
 
     /**
@@ -123,16 +148,23 @@ class CartService extends AbstractService
         $dao = new CartDao();
         $cartList = $dao->getListByCondition($condition);
 
-        // 恢复占用库存
-        /** @var StockCartService $stockChangeService */
-        $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
-        foreach ($cartList as $item) {
-            $stockChangeService->recovery($user, $item['id']);
+        Db::beginTransaction();
+        try {
+            // 恢复占用库存
+            /** @var StockCartService $stockChangeService */
+            $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
+            foreach ($cartList as $item) {
+                $stockChangeService->recovery($user, $item['id']);
+            }
+
+            // 删除购物车商品
+            $dao->deleteByCondition($condition);
+
+            Db::commit();
+            return true;
+        } catch (Exception $e) {
+            Db::rollBack();
+            throw new BadRequestException($e->getMessage());
         }
-
-        // 删除购物车商品
-        $dao->deleteByCondition($condition);
-
-        return true;
     }
 }
