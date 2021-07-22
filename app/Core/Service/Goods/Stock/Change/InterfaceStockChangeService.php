@@ -13,6 +13,11 @@ namespace App\Core\Service\Goods\Stock\Change;
 interface InterfaceStockChangeService
 {
     /**
+     * 设置附加参数.
+     */
+    public function setAppend(array $data): self;
+
+    /**
      * 创建操作.
      * @param array $user 用户
      * @param int $relationId 关联业务ID
@@ -22,6 +27,9 @@ interface InterfaceStockChangeService
 
     /**
      * 修改操作.
+     * @param array $user 用户
+     * @param int $relationId 关联业务ID
+     * @param string $remark 备注
      */
     public function updated(array $user, int $relationId, string $remark = ''): void;
 

@@ -14,8 +14,9 @@ abstract class AbstractStockChangeService implements InterfaceStockChangeService
 {
     protected array $append = [];
 
-    public function __construct(array $append = [])
+    public function setAppend(array $data): self
     {
-        $this->append = $append;
+        $this->append = $data;
+        return $this;
     }
 }

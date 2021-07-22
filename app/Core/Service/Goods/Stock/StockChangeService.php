@@ -30,13 +30,23 @@ class StockChangeService
      */
     protected $changeStockClass;
 
-    public function __construct(string $modifyClass, array $append = [])
+    public function __construct(string $modifyClass)
     {
-        if (class_exists($modifyClass)) {
-            throw new InternalException('该库存业务不存在');
+        if (! class_exists($modifyClass)) {
+            throw new InternalException('修改库存服务不存在');
         }
 
-        $this->changeStockClass = new $modifyClass($append);
+        $this->changeStockClass = new $modifyClass();
+    }
+
+    /**
+     * 设置附加的参数.
+     * @return $this
+     */
+    public function setAppend(array $data): StockChangeService
+    {
+        $this->changeStockClass->setAppend($data);
+        return $this;
     }
 
     /**
