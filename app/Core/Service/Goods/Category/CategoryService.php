@@ -83,7 +83,7 @@ class CategoryService extends AbstractService
      */
     public function getChildrenCategories(int $categoryId, $toColumn = null, $status = CategoryState::STATUS_ENABLED): array
     {
-        $categories = $this->getListByStatus($status, 'id,parent_id');
+        $categories = $this->getListByStatus($status);
         $categories = $this->convertCategoriesToLevel($categories);
         $childrenCategories = [];
         // 到指定分类时，设置为true

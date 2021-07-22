@@ -18,4 +18,14 @@ class CartDao extends AbstractDao
     protected string $model = Cart::class;
 
     protected array $noAllowActions = [];
+
+    public function firstOrCreate(array $attributes, array $values): Cart
+    {
+        return parent::firstOrCreate($attributes, $values);
+    }
+
+    public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*'): Cart
+    {
+        return parent::getInfoByCondition($condition, $with, $select);
+    }
 }

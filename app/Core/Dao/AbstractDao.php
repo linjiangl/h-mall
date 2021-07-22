@@ -168,16 +168,18 @@ abstract class AbstractDao
 
     /**
      * 查看或创建.
+     * @return mixed|Model
      */
-    public function firstOrCreate(array $attributes, array $values): Model
+    public function firstOrCreate(array $attributes, array $values)
     {
         return $this->model::firstOrCreate($attributes, $values);
     }
 
     /**
      * 修改或创建.
+     * @return mixed|Model
      */
-    public function updateOrCreate(array $attributes, array $values): Model
+    public function updateOrCreate(array $attributes, array $values)
     {
         return $this->model::updateOrCreate($attributes, $values);
     }
@@ -240,12 +242,11 @@ abstract class AbstractDao
 
     /**
      * 自定义条件查询详情.
-     * @return mixed
+     * @return mixed|Model
      */
     public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*')
     {
         $query = $this->generateListQuery($condition, '', [], $with);
-        /** @var mixed $model */
         $model = $query->selectRaw($select)->first();
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
