@@ -18,6 +18,14 @@ use App\Request\Common\BatchOperationRequest;
 
 class GoodsController extends BackendController
 {
+    public function storeRequest(GoodsRequest $request): int
+    {
+        $request->validated();
+        $id = $this->store();
+        $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE));
+        return $id;
+    }
+
     public function updateStatusRequest(GoodsRequest $request): array
     {
         $request->validated();

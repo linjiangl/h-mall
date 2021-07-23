@@ -16,6 +16,8 @@ class CategoryRequest extends AbstractRequest
 {
     public function rules(): array
     {
+        parent::rules();
+
         $rules = [
             'post:create' => [
                 'parent_id' => 'required|integer',
@@ -38,7 +40,7 @@ class CategoryRequest extends AbstractRequest
                 'id' => 'required|integer|gt:0',
             ],
         ];
-        return $rules[$this->getScene()] ?? [];
+        return $rules[$this->ruleScene] ?? [];
     }
 
     public function attributes(): array

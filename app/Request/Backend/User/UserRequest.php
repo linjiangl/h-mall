@@ -18,7 +18,8 @@ class UserRequest extends AbstractRequest
 {
     public function rules(): array
     {
-        $scene = $this->getScene();
+        parent::rules();
+
         $status = ToolsState::getValidatedInRule(UserState::class, 'status');
         $rules = [
             'post:update' => [
@@ -27,7 +28,7 @@ class UserRequest extends AbstractRequest
                 'status' => "in:{$status}",
             ],
         ];
-        return $rules[$scene] ?? [];
+        return $rules[$this->ruleScene] ?? [];
     }
 
     public function attributes(): array

@@ -16,7 +16,8 @@ class AdminRequest extends AbstractRequest
 {
     public function rules(): array
     {
-        $scene = $this->getScene();
+        parent::rules();
+
         $mobileRegex = $this->getRegex(general_regex('mobile'));
         $rules = [
             'post:create' => [
@@ -38,7 +39,7 @@ class AdminRequest extends AbstractRequest
                 'role_id' => 'integer',
             ],
         ];
-        return $rules[$scene] ?? [];
+        return $rules[$this->ruleScene] ?? [];
     }
 
     public function attributes(): array

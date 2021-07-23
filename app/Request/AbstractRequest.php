@@ -14,6 +14,8 @@ use Hyperf\Validation\Request\FormRequest;
 
 abstract class AbstractRequest extends FormRequest
 {
+    protected string $ruleScene = '';
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -27,18 +29,27 @@ abstract class AbstractRequest extends FormRequest
      */
     public function rules(): array
     {
+        if (! $this->ruleScene) {
+            $this->getScene();
+        }
+
         return [];
     }
 
     /**
      * 获取验证场景, 主要根据请求类型+路由名称组成.
      */
-    public function getScene(): string
+    public function getScene(): void
     {
         $method = strtolower($this->getMethod());
         $parseUrl = parse_url($this->url());
         $scene = substr(strrchr($parseUrl['path'], '/'), 1);
-        return "{$method}:{$scene}";
+        $this->ruleScene = "{$method}:{$scene}";
+    }
+
+    public function setScene(string $scene): void
+    {
+        $this->ruleScene = $scene;
     }
 
     /**

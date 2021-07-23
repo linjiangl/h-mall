@@ -16,6 +16,8 @@ class LoginRequest extends AbstractRequest
 {
     public function rules(): array
     {
+        parent::rules();
+
         return [
             'username' => 'required|string|max:30',
             'password' => 'required|string|max:30',

@@ -11,43 +11,50 @@ declare(strict_types=1);
 namespace App\Request\Backend\Goods;
 
 use App\Constants\State\Goods\GoodsState;
-use App\Constants\State\ToolsState;
 use App\Request\AbstractRequest;
 
 class GoodsRequest extends AbstractRequest
 {
     public function rules(): array
     {
-        $status = ToolsState::getValidatedInRule(GoodsState::class, 'status');
-        $types = ToolsState::getValidatedInRule(GoodsState::class, 'type');
+        parent::rules();
+
+        $map = GoodsState::map();
 
         $rules = [
             'post:create' => [
                 'category_id' => 'required|integer|gt:0',
                 'brand_id' => 'integer|gt:0',
-                'name' => 'required|string|max:30',
+                'name' => 'required|string|max:100',
                 'sale_price' => 'required|numeric|gt:0',
-                'market_price' => 'numeric|gt:0',
-                'cost_price' => 'numeric|gt:0',
-                'achieve_price' => 'numeric|gt:0',
+                'market_price' => 'required|numeric|gt:0',
+                'cost_price' => 'required|numeric|gt:0',
+                'achieve_price' => 'required|numeric|gt:0',
                 'introduction' => 'string|max:255',
                 'keywords' => 'string|max:255',
-                'type' => 'required|in:' . $types,
+                'type' => 'required|required|in:' . $map['type'],
                 'virtual_sales' => 'integer',
-                'status' => 'integer|in:' . $status,
-                'recommend_way' => 'in:',
+                'status' => 'required|integer|in:' . $map['status'],
+                'recommend_way' => 'required|integer|in:' . $map['recommend_way'],
+                'is_consume_discount' => 'integer|in:' . $map['is_consume_discount'],
+                'is_free_shipping' => 'integer|in:' . $map['is_free_shipping'],
+                'buy_max' => 'integer',
+                'buy_min' => 'integer',
+                'refund_type' => 'required|string|in:' . $map['refund_type'],
+                'images' => 'required|string|max:1000',
+                'video_url' => 'string|max:255',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
                 'name' => 'required|string|max:30',
-                'status' => 'integer|in:' . $status,
+                'status' => 'integer|in:' . $map['type'],
             ],
             'post:updateStatus' => [
                 'id' => 'required|integer|gt:0',
-                'status' => 'integer|in:' . $status,
+                'status' => 'integer|in:' . $map['type'],
             ],
         ];
-        return $rules[$this->getScene()] ?? [];
+        return $rules[$this->ruleScene] ?? [];
     }
 
     public function attributes(): array

@@ -19,10 +19,12 @@ class RoleRequest extends AbstractRequest
 {
     public function rules(): array
     {
+        parent::rules();
+
         $identifier = ToolsState::getValidatedInRule(RoleState::class, 'identifier');
         $boolean = ToolsState::getValidatedInRule(BooleanState::class);
         $idsRegex = $this->getRegex(general_regex('ids'));
-        $scene = $this->getScene();
+
         $rules = [
             'post:create' => [
                 'parent_id' => 'required|integer',
@@ -30,7 +32,7 @@ class RoleRequest extends AbstractRequest
                 'identifier' => "required|in:{$identifier}|unique:role",
                 'is_super' => 'integer|in:' . $boolean,
             ],
-            'post:update' => $rules = [
+            'post:update' => [
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:50',
                 'identifier' => "required|in:{$identifier}",
@@ -41,7 +43,7 @@ class RoleRequest extends AbstractRequest
                 'menu_ids' => 'required|' . $idsRegex,
             ],
         ];
-        return $rules[$scene] ?? [];
+        return $rules[$this->ruleScene] ?? [];
     }
 
     public function attributes(): array

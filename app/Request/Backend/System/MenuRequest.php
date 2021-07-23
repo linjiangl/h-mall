@@ -16,7 +16,8 @@ class MenuRequest extends AbstractRequest
 {
     public function rules(): array
     {
-        $scene = $this->getScene();
+        parent::rules();
+
         $rules = [
             'post:create' => [
                 'parent_id' => 'required|integer',
@@ -35,7 +36,7 @@ class MenuRequest extends AbstractRequest
                 'sorting' => 'integer|max:100',
             ],
         ];
-        return $rules[$scene] ?? [];
+        return $rules[$this->ruleScene] ?? [];
     }
 
     public function attributes(): array

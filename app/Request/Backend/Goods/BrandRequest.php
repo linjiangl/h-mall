@@ -16,6 +16,8 @@ class BrandRequest extends AbstractRequest
 {
     public function rules(): array
     {
+        parent::rules();
+
         $rules = [
             'post:create' => [
                 'name' => 'required|string|max:30',
@@ -32,7 +34,7 @@ class BrandRequest extends AbstractRequest
                 'id' => 'required|integer|gt:0',
             ],
         ];
-        return $rules[$this->getScene()] ?? [];
+        return $rules[$this->ruleScene] ?? [];
     }
 
     public function attributes(): array

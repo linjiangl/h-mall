@@ -125,15 +125,14 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('sales')->default(0)->comment('销量');
             $table->unsignedInteger('virtual_sales')->default(0)->comment('虚拟销量');
             $table->unsignedTinyInteger('status')->default(0)->comment('状态 0:仓库中, 1:销售中');
-            $table->tinyInteger('recommend_way')->default(0)->comment('推荐方式 0:无,1:新品,2:精品,3:推荐');
-            $table->tinyInteger('is_on_sale')->default(0)->comment('是否销售 0:放入仓库, 1:立即销售');
+            $table->tinyInteger('recommend_way')->default(0)->comment('推荐方式 0:无,1:新品,2:热门,3:精品');
             $table->tinyInteger('is_consume_discount')->default(0)->comment('是否参与会员等级折扣 0:否,1:是');
             $table->tinyInteger('is_free_shipping')->default(1)->comment('是否包邮 0:否, 1:是');
             $table->unsignedSmallInteger('buy_max')->default(0)->comment('限购 0:不限制');
             $table->unsignedSmallInteger('buy_min')->default(0)->comment('起售 0:不限制');
-            $table->string('refund_type', 30)->default('money')->comment('退款类型 money:仅支持退款,all:退货退款,refuse:不支持退款');
+            $table->string('refund_type', 30)->default('all')->comment('退款类型 all:退货退款,money:仅支持退款,refuse:不支持退款');
             $table->string('images', 1000)->comment('商品图片');
-            $table->string('video_url', 255)->comment('视频地址');
+            $table->string('video_url', 255)->default('')->comment('视频地址');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
@@ -141,13 +140,9 @@ class CreateGoodsTables extends Migration
             $table->index(['shop_id'], 'shop_id');
             $table->index(['category_id'], 'category_id');
             $table->index(['brand_id'], 'brand_id');
-            $table->index(['type'], 'type');
             $table->index(['keywords'], 'keywords');
             $table->index(['sale_price'], 'sale_price');
             $table->index(['sales'], 'sales');
-            $table->index(['clicks'], 'clicks');
-            $table->index(['stock'], 'stock');
-            $table->index(['stock_alarm'], 'stock_alarm');
             $table->index(['created_time', 'status'], 'created_time');
 
             $table->comment('商品');

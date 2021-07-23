@@ -16,22 +16,24 @@ class SpecRequest extends AbstractRequest
 {
     public function rules(): array
     {
+        parent::rules();
+
         $rules = [
             'post:create' => [
                 'shop_id' => 'integer',
                 'name' => 'required|string|max:30',
                 'sorting' => 'integer|max:100',
             ],
-            'post:update' => $rules = [
+            'post:update' => [
                 'shop_id' => 'integer',
                 'name' => 'required|string|max:30',
                 'sorting' => 'integer|max:100',
             ],
-            'post:getListBySpecId' => $rules = [
+            'post:getListBySpecId' => [
                 'spec_id' => 'required|integer|gt:0',
             ],
         ];
-        return $rules[$this->getScene()] ?? [];
+        return $rules[$this->ruleScene] ?? [];
     }
 
     public function attributes(): array
