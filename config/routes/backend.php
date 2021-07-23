@@ -128,7 +128,7 @@ Router::addGroup('/backend', function () {
     // goods
     Router::post('/goods/list', [GoodsController::class, 'index']);
     Router::post('/goods/detail', [GoodsController::class, 'show']);
-    Router::post('/goods/create', [GoodsController::class, 'store']);
+    Router::post('/goods/create', [GoodsController::class, 'storeRequest']);
     Router::post('/goods/update', [GoodsController::class, 'update']);
     Router::post('/goods/updateStatus', [GoodsController::class, 'updateStatusRequest']);
     Router::post('/goods/delete', [GoodsController::class, 'batchDestroyRequest']);
