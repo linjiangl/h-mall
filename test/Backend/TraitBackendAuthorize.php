@@ -30,8 +30,8 @@ trait TraitBackendAuthorize
         $token = redis()->get($this->tokenCacheIndex);
         if (! $token) {
             $result = $this->request('/login', [
-                'username' => 'admin',
-                'password' => 'yii.red',
+                'username' => env('TESTING_BACKEND_USERNAME', 'admin'),
+                'password' => env('TESTING_BACKEND_PASSWORD', 'admin'),
             ]);
 
             $this->assertArrayHasKey('token', $result);
