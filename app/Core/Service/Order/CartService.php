@@ -52,7 +52,7 @@ class CartService extends AbstractService
                 // 创建占用库存
                 $tmpCart = $cart->toArray();
                 $tmpCart['sku'] = $sku->toArray();
-                $stockChangeService->setAppend(['cart' => $tmpCart])->created($user, $cart->id, '添加购物车');
+                $stockChangeService->setParams(['cart' => $tmpCart])->created($user, $cart->id, '添加购物车');
             } else {
                 // 购物车商品已存在，增加占用库存数量
                 $data['quantity'] = $cart->quantity + $quantity;
@@ -60,7 +60,7 @@ class CartService extends AbstractService
 
                 $tmpCart = $cart->toArray();
                 $tmpCart['sku'] = $sku->toArray();
-                $stockChangeService->setAppend(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
+                $stockChangeService->setParams(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
             }
 
             Db::commit();
@@ -100,7 +100,7 @@ class CartService extends AbstractService
             // 修改占用库存
             /** @var StockCartService $stockChangeService */
             $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
-            $stockChangeService->setAppend(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
+            $stockChangeService->setParams(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
 
             Db::commit();
             return $cart->toArray();

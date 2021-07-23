@@ -12,11 +12,11 @@ namespace App\Core\Service\Goods\Stock\Change;
 
 abstract class AbstractStockChangeService implements InterfaceStockChangeService
 {
-    protected array $append = [];
+    protected array $params = [];
 
-    public function setAppend(array $data): self
+    public function setParams(array $data): self
     {
-        $this->append = $data;
+        $this->params = $data;
         return $this;
     }
 }

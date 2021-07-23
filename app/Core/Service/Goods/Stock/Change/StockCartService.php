@@ -14,7 +14,7 @@ class StockCartService extends AbstractStockChangeService
 {
     public function created(array $user, int $relationId, string $remark = ''): void
     {
-        print_r($this->append);
+        print_r($this->params);
     }
 
     public function updated(array $user, int $relationId, string $remark = ''): void
@@ -25,7 +25,7 @@ class StockCartService extends AbstractStockChangeService
 
     public function recovery(array $user, int $relationId): void
     {
-        print_r($this->append);
+        print_r($this->params);
     }
 
     public function completed(array $user, int $relationId, string $remark = ''): void

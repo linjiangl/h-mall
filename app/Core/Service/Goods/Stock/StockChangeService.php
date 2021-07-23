@@ -43,9 +43,9 @@ class StockChangeService
      * 设置附加的参数.
      * @return $this
      */
-    public function setAppend(array $data): StockChangeService
+    public function setParams(array $data): StockChangeService
     {
-        $this->changeStockClass->setAppend($data);
+        $this->changeStockClass->setParams($data);
         return $this;
     }
 
