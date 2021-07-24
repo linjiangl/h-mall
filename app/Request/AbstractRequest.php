@@ -14,7 +14,10 @@ use Hyperf\Validation\Request\FormRequest;
 
 abstract class AbstractRequest extends FormRequest
 {
-    protected string $ruleScene = '';
+    /**
+     * 请求验证数组的索引.
+     */
+    protected string $requestRuleKey = '';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -27,29 +30,23 @@ abstract class AbstractRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      */
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        if (! $this->ruleScene) {
-            $this->getScene();
+        if ($ruleKey === '') {
+            $this->requestRuleKey = $this->getRequestRuleKey();
         }
-
         return [];
     }
 
     /**
      * 获取验证场景, 主要根据请求类型+路由名称组成.
      */
-    public function getScene(): void
+    public function getRequestRuleKey(): string
     {
         $method = strtolower($this->getMethod());
         $parseUrl = parse_url($this->url());
         $scene = substr(strrchr($parseUrl['path'], '/'), 1);
-        $this->ruleScene = "{$method}:{$scene}";
-    }
-
-    public function setScene(string $scene): void
-    {
-        $this->ruleScene = $scene;
+        return $method . ':' . $scene;
     }
 
     /**

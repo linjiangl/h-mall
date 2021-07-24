@@ -16,9 +16,9 @@ use App\Request\AbstractRequest;
 
 class UserRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        parent::rules();
+        parent::rules($ruleKey);
 
         $status = ToolsState::getValidatedInRule(UserState::class, 'status');
         $rules = [
@@ -28,7 +28,7 @@ class UserRequest extends AbstractRequest
                 'status' => "in:{$status}",
             ],
         ];
-        return $rules[$this->ruleScene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

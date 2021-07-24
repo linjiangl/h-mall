@@ -14,9 +14,9 @@ use App\Request\AbstractRequest;
 
 class ServiceRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        parent::rules();
+        parent::rules($ruleKey);
 
         $rules = [
             'post:create' => [
@@ -32,7 +32,7 @@ class ServiceRequest extends AbstractRequest
                 'id' => 'required|integer|gt:0',
             ],
         ];
-        return $rules[$this->ruleScene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

@@ -14,9 +14,9 @@ use App\Request\AbstractRequest;
 
 class RegisterRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        parent::rules();
+        parent::rules($ruleKey);
 
         return [
             'username' => 'required|string|max:30',

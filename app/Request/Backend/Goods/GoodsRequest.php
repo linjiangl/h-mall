@@ -15,9 +15,9 @@ use App\Request\AbstractRequest;
 
 class GoodsRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        parent::rules();
+        parent::rules($ruleKey);
 
         $map = GoodsState::map();
 
@@ -54,7 +54,7 @@ class GoodsRequest extends AbstractRequest
                 'status' => 'integer|in:' . $map['type'],
             ],
         ];
-        return $rules[$this->ruleScene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

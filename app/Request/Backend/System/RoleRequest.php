@@ -17,9 +17,9 @@ use App\Request\AbstractRequest;
 
 class RoleRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        parent::rules();
+        parent::rules($ruleKey);
 
         $identifier = ToolsState::getValidatedInRule(RoleState::class, 'identifier');
         $boolean = ToolsState::getValidatedInRule(BooleanState::class);
@@ -43,7 +43,7 @@ class RoleRequest extends AbstractRequest
                 'menu_ids' => 'required|' . $idsRegex,
             ],
         ];
-        return $rules[$this->ruleScene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

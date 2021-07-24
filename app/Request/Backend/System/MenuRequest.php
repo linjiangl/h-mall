@@ -14,9 +14,9 @@ use App\Request\AbstractRequest;
 
 class MenuRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        parent::rules();
+        parent::rules($ruleKey);
 
         $rules = [
             'post:create' => [
@@ -36,7 +36,7 @@ class MenuRequest extends AbstractRequest
                 'sorting' => 'integer|max:100',
             ],
         ];
-        return $rules[$this->ruleScene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array
