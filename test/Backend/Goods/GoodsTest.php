@@ -21,6 +21,12 @@ class GoodsTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
+    public function testBackendGoodsIndex()
+    {
+        $this->url = '/goods/list';
+        $this->handleHttpIndex();
+    }
+
     public function testBackendGoodsCreate()
     {
         $this->debug = true;
