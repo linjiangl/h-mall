@@ -29,9 +29,10 @@ class GoodsTest extends BackendHttpTestCase
 
     public function testBackendGoodsCreate()
     {
-        $this->debug = true;
         $this->url = '/goods/create';
-        $this->data = [];
+        $this->data = [
+            'category_id' => 1
+        ];
         $this->handleHttpCreate();
     }
 }

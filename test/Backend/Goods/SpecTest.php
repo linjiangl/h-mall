@@ -25,7 +25,6 @@ class SpecTest extends BackendHttpTestCase
 
     public function testBackendSpecCreate()
     {
-        $this->debug = true;
         $this->url = '/spec/create';
         $this->data = [
             'shop_id' => '0',
