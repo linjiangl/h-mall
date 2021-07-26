@@ -12,7 +12,7 @@ namespace App\Request;
 
 use Hyperf\Validation\Request\FormRequest;
 
-abstract class AbstractRequest extends FormRequest
+abstract class AbstractRequest extends FormRequest implements InterfaceRequest
 {
     /**
      * 请求验证数组的索引.
@@ -32,7 +32,9 @@ abstract class AbstractRequest extends FormRequest
      */
     public function rules(string $ruleKey = ''): array
     {
-        if ($ruleKey === '') {
+        if ($ruleKey) {
+            $this->requestRuleKey = $ruleKey;
+        } else {
             $this->requestRuleKey = $this->getRequestRuleKey();
         }
         return [];
