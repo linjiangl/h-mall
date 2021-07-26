@@ -57,7 +57,10 @@ abstract class AbstractRequest extends FormRequest
         return 'regex:' . $regex;
     }
 
-    public function getStateRuleIn(array $data): string
+    /**
+     * 获取in规则.
+     */
+    public function getRuleInByState(array $data): string
     {
         return implode(',', array_keys($data));
     }
