@@ -31,7 +31,7 @@ class GoodsTest extends BackendHttpTestCase
     {
         $this->url = '/goods/create';
         $this->data = [
-            'category_id' => 1
+            'category_id' => 1,
         ];
         $this->handleHttpCreate();
     }

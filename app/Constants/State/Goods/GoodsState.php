@@ -12,7 +12,6 @@ namespace App\Constants\State\Goods;
 
 use App\Constants\State\AbstractState;
 use App\Constants\State\BooleanState;
-use App\Constants\State\ToolsState;
 
 class GoodsState extends AbstractState
 {
@@ -59,8 +58,8 @@ class GoodsState extends AbstractState
                 self::RECOMMEND_WAY_HOT => '热门',
                 self::RECOMMEND_WAY_BEST => '精品',
             ],
-            'is_consume_discount' => ToolsState::getValidatedInRule(BooleanState::class),
-            'is_free_shipping' => ToolsState::getValidatedInRule(BooleanState::class),
+            'is_consume_discount' => BooleanState::map()['default'],
+            'is_free_shipping' => BooleanState::map()['default'],
             'refund_type' => [
                 self::REFUND_TYPE_ALL => '退货退款',
                 self::REFUND_TYPE_MONEY => '仅支持退款',
