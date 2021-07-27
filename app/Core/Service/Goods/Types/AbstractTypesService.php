@@ -12,7 +12,6 @@ namespace App\Core\Service\Goods\Types;
 
 use App\Core\Dao\Goods\GoodsAttributeDao;
 use App\Core\Dao\Goods\GoodsDao;
-use App\Core\Dao\Goods\GoodsParameterDao;
 use App\Core\Dao\Goods\GoodsSkuDao;
 use App\Core\Dao\Goods\GoodsSkuSpecValueDao;
 use App\Core\Dao\Goods\GoodsTimerDao;
@@ -63,7 +62,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $this->goods = $goodsDao->info($this->id);
             $this->syncAttribute();
             $this->syncTimer();
-            $this->syncParameter();
             $this->syncSku();
             $this->setDefaultSkuId();
 
@@ -87,7 +85,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $this->goods = $goodsDao->info($this->id);
             $this->syncAttribute();
             $this->syncTimer();
-            $this->syncParameter();
             $this->syncSku();
             $this->setDefaultSkuId();
 
@@ -113,29 +110,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
     protected function syncTimer(): void
     {
         (new GoodsTimerDao())->updateOrCreate(['goods_id' => $this->id], $this->post['timer']);
-    }
-
-    /**
-     * 保存商品参数.
-     */
-    protected function syncParameter(): void
-    {
-        $goodsParameterDao = new GoodsParameterDao();
-        $goodsParameterDao->deleteByPrimaryKeys([$this->id]);
-
-        $insert = [];
-        $now = time();
-        foreach ($this->post['parameter'] as $item) {
-            $insert[] = [
-                'goods_id' => $this->id,
-                'option' => $item['option'],
-                'value' => $item['value'],
-                'created_time' => $now,
-                'updated_time' => $now,
-            ];
-        }
-
-        $goodsParameterDao->batchInsert($insert);
     }
 
     /**

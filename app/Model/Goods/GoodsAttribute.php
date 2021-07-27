@@ -17,8 +17,6 @@ use App\Model\Model;
  * @property int $goods_id
  * @property int $is_open_spec 是否启用多规格 0:否,1:是
  * @property string $unit 商品单位
- * @property string $weight 重量（单位kg）
- * @property string $volume 体积（单位立方米）
  * @property string $service_ids 商品服务
  * @property string $parameter 商品参数
  * @property string $content 商品详情
@@ -39,7 +37,7 @@ class GoodsAttribute extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'goods_id', 'is_open_spec', 'unit', 'weight', 'volume', 'service_ids', 'parameter', 'content', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'goods_id', 'is_open_spec', 'unit', 'service_ids', 'parameter', 'content', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.

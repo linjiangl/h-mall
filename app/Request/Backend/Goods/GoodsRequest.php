@@ -43,6 +43,7 @@ class GoodsRequest extends AbstractRequest
                 'refund_type' => 'required|string|in:' . $this->getRuleInByState($map['refund_type']),
                 'images' => 'required|string|max:1000',
                 'video_url' => 'string|max:255',
+                'attribute.'
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',

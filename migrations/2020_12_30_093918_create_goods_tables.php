@@ -152,8 +152,6 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('goods_id');
             $table->unsignedTinyInteger('is_open_spec')->default(0)->comment('是否启用多规格 0:否,1:是');
             $table->string('unit', 30)->default('')->comment('商品单位');
-            $table->decimal('weight', 5)->unsigned()->default(0)->comment('重量（单位kg）');
-            $table->decimal('volume', 5)->unsigned()->default(0)->comment('体积（单位立方米）');
             $table->string('service_ids', 255)->default('')->comment('商品服务');
             $table->text('parameter')->comment('商品参数');
             $table->mediumText('content')->comment('商品详情');
@@ -239,19 +237,6 @@ class CreateGoodsTables extends Migration
             $table->comment('商品服务');
         });
 
-        Schema::create('goods_parameter', function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->unsignedInteger('goods_id');
-            $table->string('option', 30);
-            $table->string('value', 100);
-            $table->unsignedInteger('created_time')->default(0);
-            $table->unsignedInteger('updated_time')->default(0);
-
-            $table->index(['goods_id'], 'goods_id');
-
-            $table->comment('商品参数');
-        });
-
         Schema::create('goods_evaluate', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('parent_id')->default(0)->comment('上级评论ID');
@@ -320,7 +305,6 @@ class CreateGoodsTables extends Migration
         Schema::dropIfExists('goods_sku');
         Schema::dropIfExists('goods_sku_spec_value');
         Schema::dropIfExists('goods_service');
-        Schema::dropIfExists('goods_parameter');
         Schema::dropIfExists('goods_evaluate');
         Schema::dropIfExists('goods_evaluate_reply');
     }
