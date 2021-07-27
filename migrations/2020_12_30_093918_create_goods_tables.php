@@ -110,17 +110,16 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('category_id')->comment('所属分类');
             $table->unsignedInteger('brand_id')->default(0)->comment('品牌');
-            $table->unsignedInteger('sku_id')->default(0);
+            $table->unsignedInteger('default_sku_id')->default(0);
+            $table->string('type', 30)->default('general')->comment('商品类型 general:普通, virtual:虚拟');
             $table->string('name', 100)->comment('商品名称');
-            $table->decimal('sale_price', 10)->unsigned()->default(0)->comment('销售价格');
-            $table->decimal('market_price', 10)->unsigned()->default(0)->comment('划线价格');
-            $table->decimal('cost_price', 10)->unsigned()->default(0)->comment('成本价');
+            $table->string('introduction', 255)->default('')->comment('促销语');
+            $table->string('keywords', 255)->default('')->comment('关键词');
+            $table->decimal('sale_price_min', 10)->unsigned()->default(0)->comment('销售价格（最小值）');
+            $table->decimal('sale_price_max', 10)->unsigned()->default(0)->comment('销售价格（最大值）');
             $table->decimal('achieve_price')->default(99)->comment('达到多少金额包邮');
             $table->unsignedInteger('stock')->default(0)->comment('商品库存（总和）');
             $table->unsignedInteger('stock_alarm')->default(0)->comment('库存预警');
-            $table->string('introduction', 255)->default('')->comment('促销语');
-            $table->string('keywords', 255)->default('')->comment('关键词');
-            $table->string('type', 30)->default('general')->comment('商品类型 general:普通, virtual:虚拟');
             $table->unsignedInteger('clicks')->default(0)->comment('点击量');
             $table->unsignedInteger('sales')->default(0)->comment('销量');
             $table->unsignedInteger('virtual_sales')->default(0)->comment('虚拟销量');
@@ -141,7 +140,7 @@ class CreateGoodsTables extends Migration
             $table->index(['category_id'], 'category_id');
             $table->index(['brand_id'], 'brand_id');
             $table->index(['keywords'], 'keywords');
-            $table->index(['sale_price'], 'sale_price');
+            $table->index(['sale_price_min'], 'sale_price_min');
             $table->index(['sales'], 'sales');
             $table->index(['created_time', 'status'], 'created_time');
 

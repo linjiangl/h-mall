@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Goods\Types;
 
-use App\Constants\State\Goods\GoodsState;
 use App\Core\Dao\Goods\GoodsAttributeDao;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Dao\Goods\GoodsParameterDao;
@@ -223,7 +222,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             }
         }
 
-        $this->goods->sku_id = $defaultSkuId;
+        $this->goods->default_sku_id = $defaultSkuId;
         $this->goods->save();
     }
 
@@ -250,28 +249,36 @@ abstract class AbstractTypesService implements InterfaceTypesService
     protected function handleGoodsData(): array
     {
         $sku = $this->post['sku'];
-        $skuPrice = array_column($sku, 'price');
-        sort($skuPrice);
-        $minPrice = $skuPrice[0];
-        $maxPrice = end($skuPrice);
+        $salePrice = array_column($sku, 'sale_price');
+        sort($salePrice);
+        $minPrice = $salePrice[0];
+        $maxPrice = end($salePrice);
 
         if ($this->post['images'] && is_array($this->post['images'])) {
             $this->post['images'] = implode(',', $this->post['images']);
         }
 
         return [
-            'shop_id' => $this->post['shop_id'],
-            'title' => $this->post['title'],
-            'sub_title' => $this->post['sub_title'],
-            'images' => $this->post['images'],
-            'description_id' => $this->post['description_id'] ?? 0,
-            'shipping_required' => $this->post['shipping_required'],
+            'shop_id' => $this->post['shop_id'] ?? 0,
+            'user_id' => $this->post['user_id'],
+            'brand_id' => $this->post['brand_id'],
             'category_id' => $this->post['category_id'],
-            'min_price' => $minPrice,
-            'max_price' => $maxPrice,
-            'type' => GoodsState::TYPE_GENERAL,
-            'buy_limit' => $this->post['buy_limit'],
-            'buy_limit_total' => $this->post['buy_limit_total'],
+            'type' => $this->post['type'],
+            'name' => $this->post['name'],
+            'introduction' => $this->post['introduction'],
+            'keyword' => $this->post['keyword'],
+            'sale_price_min' => $minPrice,
+            'sale_price_max' => $maxPrice,
+            'achieve_price' => $this->post['achieve_price'],
+            'status' => $this->post['status'],
+            'recommend_way' => $this->post['recommend_way'],
+            'is_consume_discount' => $this->post['is_consume_discount'],
+            'is_free_shipping' => $this->post['is_free_shipping'],
+            'buy_max' => $this->post['buy_max'],
+            'buy_min' => $this->post['buy_min'],
+            'refund_type' => $this->post['refund_type'],
+            'images' => $this->post['images'],
+            'video_url' => $this->post['video_url'] ?? '',
         ];
     }
 }

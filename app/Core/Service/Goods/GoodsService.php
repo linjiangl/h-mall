@@ -32,6 +32,8 @@ class GoodsService extends AbstractService
     public function create(array $data): int
     {
         try {
+            $user = request()->getAttribute('user');
+            $data['user_id'] = $user['id'];
             $service = $this->make($data, 0, $data['type']);
             return $service->create();
         } catch (Throwable $e) {
@@ -43,7 +45,7 @@ class GoodsService extends AbstractService
     public function update(int $id, array $data): array
     {
         try {
-            $service = $this->make($data, $id, $data['type'] ?? GoodsState::TYPE_GENERAL);
+            $service = $this->make($data, $id, $data['type']);
             return $service->update();
         } catch (Throwable $e) {
             write_logs('保存失败', $data);

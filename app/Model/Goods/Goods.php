@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Goods;
 
-use App\Model\Model;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
@@ -18,17 +18,16 @@ use App\Model\Model;
  * @property int $user_id
  * @property int $category_id 所属分类
  * @property int $brand_id 品牌
- * @property int $sku_id
+ * @property int $default_sku_id
+ * @property string $type 商品类型 general:普通, virtual:虚拟
  * @property string $name 商品名称
- * @property string $sale_price 销售价格
- * @property string $market_price 划线价格
- * @property string $cost_price 成本价
+ * @property string $introduction 促销语
+ * @property string $keywords 关键词
+ * @property string $sale_price_min 销售价格（最小值）
+ * @property string $sale_price_max 销售价格（最大值）
  * @property string $achieve_price 达到多少金额包邮
  * @property int $stock 商品库存（总和）
  * @property int $stock_alarm 库存预警
- * @property string $introduction 促销语
- * @property string $keywords 关键词
- * @property string $type 商品类型 general:普通, virtual:虚拟
  * @property int $clicks 点击量
  * @property int $sales 销量
  * @property int $virtual_sales 虚拟销量
@@ -59,12 +58,12 @@ class Goods extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'sku_id', 'name', 'sale_price', 'market_price', 'cost_price', 'achieve_price', 'stock', 'stock_alarm', 'introduction', 'keywords', 'type', 'clicks', 'sales', 'virtual_sales', 'status', 'recommend_way', 'is_consume_discount', 'is_free_shipping', 'buy_max', 'buy_min', 'refund_type', 'images', 'video_url', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'default_sku_id', 'type', 'name', 'introduction', 'keywords', 'sale_price_min', 'sale_price_max', 'achieve_price', 'stock', 'stock_alarm', 'clicks', 'sales', 'virtual_sales', 'status', 'recommend_way', 'is_consume_discount', 'is_free_shipping', 'buy_max', 'buy_min', 'refund_type', 'images', 'video_url', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'sku_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'default_sku_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }
