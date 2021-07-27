@@ -12,16 +12,19 @@ namespace App\Request\Backend\System;
 
 use App\Constants\State\Admin\RoleState;
 use App\Constants\State\BooleanState;
+use App\Constants\State\ToolsState;
 use App\Request\AbstractRequest;
 
 class RoleRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        $identifier = RoleState::getValidatedInRule(RoleState::getIdentifier());
-        $boolean = BooleanState::getValidatedInRule(BooleanState::getStatus());
+        parent::rules($ruleKey);
+
+        $identifier = ToolsState::getValidatedInRule(RoleState::class, 'identifier');
+        $boolean = ToolsState::getValidatedInRule(BooleanState::class);
         $idsRegex = $this->getRegex(general_regex('ids'));
-        $scene = $this->getScene();
+
         $rules = [
             'post:create' => [
                 'parent_id' => 'required|integer',
@@ -29,7 +32,7 @@ class RoleRequest extends AbstractRequest
                 'identifier' => "required|in:{$identifier}|unique:role",
                 'is_super' => 'integer|in:' . $boolean,
             ],
-            'post:update' => $rules = [
+            'post:update' => [
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:50',
                 'identifier' => "required|in:{$identifier}",
@@ -40,7 +43,7 @@ class RoleRequest extends AbstractRequest
                 'menu_ids' => 'required|' . $idsRegex,
             ],
         ];
-        return $rules[$scene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

@@ -19,19 +19,18 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\Di\Exception\Exception;
 
 /**
- * @Aspect()
+ * @Aspect
  */
 class AdminLoginAspect extends AbstractAspect
 {
     public $classes = [
         LoginController::class,
-        RegisterController::class
+        RegisterController::class,
     ];
 
     /**
-     * @param ProceedingJoinPoint $proceedingJoinPoint
-     * @return mixed
      * @throws Exception
+     * @return mixed
      */
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {

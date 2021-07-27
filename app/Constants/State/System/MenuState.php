@@ -16,13 +16,16 @@ class MenuState extends AbstractState
 {
     // 状态
     const STATUS_DISABLED = 0;
+
     const STATUS_ENABLED = 1;
 
-    public static function getStatus(): array
+    public static function map(): array
     {
         return [
-            self::STATUS_DISABLED => '已禁用',
-            self::STATUS_ENABLED => '已启用',
+            'status' => [
+                self::STATUS_DISABLED => '已禁用',
+                self::STATUS_ENABLED => '已启用',
+            ],
         ];
     }
 }

@@ -20,10 +20,7 @@ class RoleMenuDao extends AbstractDao
     protected array $noAllowActions = [];
 
     /**
-     * 获取信息
-     * @param int $roleId
-     * @param int $menuId
-     * @return RoleMenu
+     * 获取信息.
      */
     public function getInfoByRoleMenuId(int $roleId, int $menuId): RoleMenu
     {
@@ -31,9 +28,7 @@ class RoleMenuDao extends AbstractDao
     }
 
     /**
-     * 获取权限所有菜单
-     * @param int $roleId
-     * @return array
+     * 获取权限所有菜单.
      */
     public function getRoleMenuIds(int $roleId): array
     {
@@ -46,8 +41,7 @@ class RoleMenuDao extends AbstractDao
     }
 
     /**
-     * 根据权限删除菜单
-     * @param int $roleId
+     * 根据权限删除菜单.
      * @param array $menuIds 空数组,删除所有菜单
      */
     public function deleteMenusByRoleId(int $roleId, array $menuIds = []): void
@@ -60,9 +54,7 @@ class RoleMenuDao extends AbstractDao
     }
 
     /**
-     * 保存权限菜单
-     * @param int $roleId
-     * @param array $menuIds
+     * 保存权限菜单.
      */
     public function saveRoleMenus(int $roleId, array $menuIds): void
     {
@@ -70,7 +62,7 @@ class RoleMenuDao extends AbstractDao
         foreach ($menuIds as $item) {
             $data[] = [
                 'role_id' => $roleId,
-                'menu_id' => $item
+                'menu_id' => $item,
             ];
         }
         RoleMenu::query()->insert($data);

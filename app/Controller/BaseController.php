@@ -16,8 +16,7 @@ use App\Core\Block\BaseBlock;
 class BaseController extends AbstractController
 {
     /**
-     *  列表
-     * @return array
+     *  列表.
      */
     public function index(): array
     {
@@ -25,8 +24,7 @@ class BaseController extends AbstractController
     }
 
     /**
-     * 详情
-     * @return array
+     * 详情.
      */
     public function show(): array
     {
@@ -34,8 +32,7 @@ class BaseController extends AbstractController
     }
 
     /**
-     * 创建
-     * @return int
+     * 创建.
      */
     public function store(): int
     {
@@ -43,9 +40,7 @@ class BaseController extends AbstractController
     }
 
     /**
-     * 修改
-
-     * @return array
+     * 修改.
      */
     public function update(): array
     {
@@ -53,8 +48,7 @@ class BaseController extends AbstractController
     }
 
     /**
-     * 删除
-     * @return bool
+     * 删除.
      */
     public function destroy(): bool
     {
@@ -62,8 +56,7 @@ class BaseController extends AbstractController
     }
 
     /**
-     * 批量删除
-     * @return bool
+     * 批量删除.
      */
     public function batchDestroy(): bool
     {

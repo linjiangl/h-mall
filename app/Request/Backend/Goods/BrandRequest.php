@@ -14,25 +14,27 @@ use App\Request\AbstractRequest;
 
 class BrandRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
+        parent::rules($ruleKey);
+
         $rules = [
             'post:create' => [
                 'name' => 'required|string|max:30',
                 'logo' => 'required|string|max:255',
-                'status' => 'integer'
+                'status' => 'integer',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
                 'name' => 'required|string|max:30',
                 'logo' => 'required|string|max:255',
-                'status' => 'integer'
+                'status' => 'integer',
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',
             ],
         ];
-        return $rules[$this->getScene()] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array
@@ -41,7 +43,7 @@ class BrandRequest extends AbstractRequest
             'id' => '品牌主键',
             'name' => '品牌名称',
             'logo' => '品牌标志',
-            'status' => '品牌状态'
+            'status' => '品牌状态',
         ];
     }
 }

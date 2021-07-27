@@ -10,13 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Goods\Category;
 
-use App\Constants\Message\GoodsMessage;
+use App\Constants\State\Goods\CategoryState;
 use App\Core\Dao\Goods\Category\CategoryDao;
-use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
-use App\Exception\BadRequestException;
-use App\Exception\InternalException;
-use Throwable;
 
 class CategoryService extends AbstractService
 {
@@ -24,100 +20,38 @@ class CategoryService extends AbstractService
 
     protected array $levelData = [];
 
-    public function create(array $data): int
-    {
-        try {
-            // 创建分类
-            $id = parent::create($data);
-
-            // 保存规格
-            if (! empty($data['spec_ids'])) {
-                $specIds = is_array($data['spec_ids']) ? $data['spec_ids'] : explode(',', $data['spec_ids']);
-                $categorySpecService = new CategorySpecService();
-                $categorySpecService->createCategorySpecs($id, $specIds);
-            }
-
-            return $id;
-        } catch (Throwable $e) {
-            write_logs('创建失败', $data);
-            throw new BadRequestException($e->getMessage(), $e->getCode());
-        }
-    }
-
-    public function update(int $id, array $data): array
-    {
-        try {
-            $category = parent::update($id, $data);
-
-            // 保存规格
-            if (! empty($data['spec_ids'])) {
-                $specIds = is_array($data['spec_ids']) ? $data['spec_ids'] : explode(',', $data['spec_ids']);
-                $categorySpecService = new CategorySpecService();
-                $categorySpecService->updateCategorySpecs($category, $specIds);
-            }
-
-            return $category;
-        } catch (Throwable $e) {
-            write_logs('保存失败', $data);
-            throw new BadRequestException($e->getMessage(), $e->getCode());
-        }
-    }
-
-    public function remove(int $id): bool
-    {
-        $goodsDao = new GoodsDao();
-        if ($goodsDao->checkCategoryIdHasGoods($id)) {
-            throw new InternalException(GoodsMessage::getMessage(GoodsMessage::CHECK_CATEGORY_ID_HAS_CATEGORY));
-        }
-
-        try {
-            $categorySpecService = new CategorySpecService();
-            $categorySpecService->removeByCategoryId($id);
-
-            return parent::remove($id);
-        } catch (Throwable $e) {
-            throw new BadRequestException($e->getMessage(), $e->getCode());
-        }
-    }
-
     /**
-     * 根据状态获取列表数据
+     * 根据状态获取列表数据.
      * @param mixed $status
-     * @param string $select
-     * @return array
      */
-    public function getListByStatus($status = null, string $select = '*'): array
+    public function getListByStatus($status = CategoryState::STATUS_ENABLED, string $select = '*'): array
     {
-        $dao = new CategoryDao();
-        return $dao->getListByStatus($status, $select);
+        return (new CategoryDao())->getListByStatus($status, $select);
     }
 
     /**
-     * 根据分类获取分类
-     * @param int $parentId
+     * 根据分类获取分类.
      * @param mixed $status
-     * @return array
      */
-    public function getListByParentId(int $parentId = 0, $status = null)
+    public function getListByParentId(int $parentId = 0, $status = CategoryState::STATUS_ENABLED): array
     {
-        $dao = new CategoryDao();
-        return $dao->getListByParentId($parentId, $status);
+        return (new CategoryDao())->getListByParentId($parentId, $status);
     }
 
     /**
-     * 分类数据归类
-     * @param array $categories
-     * @param int $parentId
-     * @param int $level
-     * @return array
+     * 分类数据归类.
+     * @param array $cascadesValue 级选的值
+     * @param array $cascadesLabel 级选的标签
      */
-    public function convertCategoriesToChildren(array $categories, $parentId = 0, $level = 1): array
+    public function convertCategoriesToChildren(array $categories, int $parentId = 0, int $level = 1, array $cascadesValue = [], array $cascadesLabel = []): array
     {
         $list = [];
         foreach ($categories as $item) {
+            $item['cascades_value'] = array_merge($cascadesValue, [$item['id']]);
+            $item['cascades_label'] = array_merge($cascadesLabel, [$item['name']]);
             if ($item['parent_id'] === $parentId) {
                 $item['level'] = $level;
-                $children = $this->convertCategoriesToChildren($categories, $item['id'], $level + 1);
+                $children = $this->convertCategoriesToChildren($categories, $item['id'], $level + 1, $item['cascades_value'], $item['cascades_label']);
                 if (! empty($children)) {
                     $item['children'] = $children;
                 }
@@ -129,14 +63,10 @@ class CategoryService extends AbstractService
 
     /**
      * 分类数据分层
-     * @param array $categories
-     * @param int $parentId
-     * @param int $level
-     * @return array
      */
-    public function convertCategoriesToLevel(array $categories, $parentId = 0, $level = 1): array
+    public function convertCategoriesToLevel(array $categories, int $parentId = 0, int $level = 1): array
     {
-        foreach ($categories as $k => $v) {
+        foreach ($categories as $v) {
             if ($v['parent_id'] == $parentId) {
                 $v['level'] = $level;
                 $this->levelData[] = $v;
@@ -147,48 +77,77 @@ class CategoryService extends AbstractService
     }
 
     /**
-     * 获取包含自己在内的所有子类ID
-     * @param int $parentId
-     * @param null $status
-     * @return array
+     * 获取指定分类的子级.
+     * @param mixed $toColumn 转换数据 默认:对象，'id': 主键集合, 'name': 名称集合
+     * @param mixed $status
      */
-    public function getChildrenIds(int $parentId, $status = null): array
+    public function getChildrenCategories(int $categoryId, $toColumn = null, $status = CategoryState::STATUS_ENABLED): array
     {
-        $categories = $this->getListByStatus($status, 'id,parent_id');
+        $categories = $this->getListByStatus($status);
         $categories = $this->convertCategoriesToLevel($categories);
-        $ids = [];
+        $childrenCategories = [];
+        // 到指定分类时，设置为true
+        $start = false;
+        // 指定分类的层次
+        $level = 0;
         foreach ($categories as $item) {
-            if ($item['id'] == $parentId || $item['parent_id'] == $parentId) {
-                $ids[] = $item['id'];
+            if ($start) {
+                if ($item['level'] > $level) {
+                    $childrenCategories[] = $item;
+                }
+                if ($item['level'] == $level) {
+                    break;
+                }
+            }
+
+            if ($item['id'] == $categoryId) {
+                $childrenCategories[] = $item;
+                $start = true;
+                $level = $item['level'];
             }
         }
-        return $ids;
+        if ($toColumn) {
+            $childrenCategories = array_column($childrenCategories, $toColumn);
+        }
+        return $childrenCategories;
     }
 
     /**
-     * 获取分类所有父级ID
-     * @param int $categoryId
-     * @param null $status
-     * @return array
+     * 获取指定分类的父级.
+     * @param mixed $toColumn 转换数据 默认:对象，'id': 主键集合, 'name': 名称集合
+     * @param mixed $status
      */
-    public function getAllParentIds(int $categoryId, $status = null): array
+    public function getParentCategories(int $categoryId, $toColumn = null, $status = CategoryState::STATUS_ENABLED): array
     {
-        $categories = $this->getListByStatus($status, 'id,parent_id');
+        $categories = $this->getListByStatus($status);
         $categories = $this->convertCategoriesToLevel($categories);
-        $selfCategory = [];
-        $data = [];
-        foreach ($categories as $key => $val) {
-            $data[] = $val;
-            if ($val['id'] == $categoryId) {
-                $selfCategory = $val;
-                break;
+        $categories = array_reverse($categories);
+        $parentCategories = [];
+        // 到指定分类时，设置为true
+        $start = false;
+        // 当前的层次
+        $level = 0;
+        foreach ($categories as $item) {
+            if ($start) {
+                if ($item['level'] < $level) {
+                    $parentCategories[] = $item;
+                    --$level;
+                }
+                if ($item['level'] === 1) {
+                    break;
+                }
+            }
+
+            if ($item['id'] == $categoryId) {
+                $parentCategories[] = $item;
+                $start = true;
+                $level = $item['level'];
             }
         }
-        foreach ($data as $key => $val) {
-            if ($val['level'] == $selfCategory['level']) {
-                unset($data[$key]);
-            }
+        $parentCategories = array_reverse($parentCategories);
+        if ($toColumn) {
+            $parentCategories = array_column($parentCategories, $toColumn);
         }
-        return array_column($data, 'id');
+        return $parentCategories;
     }
 }

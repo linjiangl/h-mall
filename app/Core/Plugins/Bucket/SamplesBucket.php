@@ -21,7 +21,7 @@ class SamplesBucket
 
     public function make(string $system = AttachmentState::SYSTEM_QINIU): AbstractBucket
     {
-        if (! in_array($system, array_keys(AttachmentState::getSystem()))) {
+        if (! in_array($system, array_keys(AttachmentState::map()['system']))) {
             throw new BadRequestException('存储实例不存在');
         }
         return new $this->classes[$system]();

@@ -11,17 +11,16 @@ declare(strict_types=1);
 namespace App\Model\Spec;
 
 use App\Model\Model;
-use Hyperf\Database\Model\Relations\BelongsTo;
 
 /**
  * @property int $id
  * @property int $spec_id
  * @property string $value
  * @property int $sorting
- * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
+ * @property int $status 状态 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
- * @property-read Spec $spec
+ * @property \App\Model\Spec\Spec $spec
  */
 class SpecValue extends Model
 {
@@ -46,7 +45,7 @@ class SpecValue extends Model
      */
     protected $casts = ['id' => 'integer', 'spec_id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function spec(): BelongsTo
+    public function spec()
     {
         return $this->belongsTo(Spec::class);
     }

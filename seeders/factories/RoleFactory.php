@@ -12,13 +12,12 @@ use App\Constants\State\Admin\RoleState;
 use App\Core\Dao\Admin\Role\RoleDao;
 
 /**
- * Multi-user mall
+ * Multi-user mall.
  *
- * @link     https://store.yii.red
+ * @see     https://store.yii.red
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */
-
 class RoleFactory
 {
     public static function run()
@@ -31,7 +30,7 @@ class RoleFactory
                 'identifier' => RoleState::IDENTIFIER_SYSTEM_ADMINISTRATOR,
                 'is_super' => RoleState::IS_SUPER_TRUE,
                 'is_system' => RoleState::IS_SYSTEM_TRUE,
-                'status' => RoleState::STATUS_ENABLED
+                'status' => RoleState::STATUS_ENABLED,
             ],
             [
                 'id' => 2,
@@ -40,7 +39,7 @@ class RoleFactory
                 'identifier' => RoleState::IDENTIFIER_ADMINISTRATOR,
                 'is_super' => RoleState::IS_SUPER_FALSE,
                 'is_system' => RoleState::IS_SYSTEM_TRUE,
-                'status' => RoleState::STATUS_ENABLED
+                'status' => RoleState::STATUS_ENABLED,
             ],
             [
                 'id' => 3,
@@ -49,9 +48,8 @@ class RoleFactory
                 'identifier' => RoleState::IDENTIFIER_GUEST,
                 'is_super' => RoleState::IS_SUPER_FALSE,
                 'is_system' => RoleState::IS_SYSTEM_TRUE,
-                'status' => RoleState::STATUS_ENABLED
-            ]
-
+                'status' => RoleState::STATUS_ENABLED,
+            ],
         ];
         $dao = new RoleDao();
         foreach ($data as $item) {

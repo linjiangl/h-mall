@@ -32,8 +32,7 @@ class AdminLoginService extends AbstractService
         $userAgent = $request->getHeader('User-Agent');
         $userAgent = $userAgent ? current($userAgent) : '';
         try {
-            $adminDao = new AdminDao();
-            $admin = $adminDao->getInfoByUsername($username);
+            $admin = (new AdminDao())->getInfoByUsername($username);
             $this->create([
                 'admin_id' => $admin['id'],
                 'username' => $admin['username'],

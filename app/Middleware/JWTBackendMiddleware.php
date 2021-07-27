@@ -13,18 +13,17 @@ namespace App\Middleware;
 use App\Core\Service\Authorize\AdminAuthorizationService;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Hyperf\Utils\Context;
-use Phper666\JWTAuth\JWT;
 use Psr\Http\Message\ServerRequestInterface;
 
 class JWTBackendMiddleware extends AbstractJWTMiddleware
 {
-    public function __construct(HttpResponse $response, JWT $jwt)
+    public function __construct(HttpResponse $response)
     {
-        parent::__construct($response, $jwt);
+        parent::__construct($response);
         $this->service = new AdminAuthorizationService();
     }
 
-    protected function handleWithAttribute($request): ServerRequestInterface
+    protected function handleWithAttribute(ServerRequestInterface $request): ServerRequestInterface
     {
         $jwtData = $this->service->getParserData(true);
         $request = Context::get(ServerRequestInterface::class);

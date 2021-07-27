@@ -26,7 +26,7 @@ class GoodsService extends AbstractService
 
     protected array $mapClass = [
         GoodsState::TYPE_GENERAL => GeneralService::class,
-        GoodsState::TYPE_VIRTUAL => VirtualService::class
+        GoodsState::TYPE_VIRTUAL => VirtualService::class,
     ];
 
     public function create(array $data): int

@@ -14,9 +14,10 @@ use App\Request\AbstractRequest;
 
 class AdminRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        $scene = $this->getScene();
+        parent::rules($ruleKey);
+
         $mobileRegex = $this->getRegex(general_regex('mobile'));
         $rules = [
             'post:create' => [
@@ -26,7 +27,7 @@ class AdminRequest extends AbstractRequest
                 'real_name' => 'string|max:20',
                 'mobile' => $mobileRegex . '|unique:admin',
                 'email' => 'email|unique:admin',
-                'role_id' => 'integer'
+                'role_id' => 'integer',
             ],
             'post:update' => $rules = [
                 'username' => 'string|max:30',
@@ -36,9 +37,9 @@ class AdminRequest extends AbstractRequest
                 'mobile' => $mobileRegex,
                 'email' => 'email',
                 'role_id' => 'integer',
-            ]
+            ],
         ];
-        return $rules[$scene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

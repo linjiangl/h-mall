@@ -17,14 +17,14 @@ use App\Model\Model;
  * @property int $user_id
  * @property int $shop_id
  * @property int $order_id
- * @property string $refund_sn
- * @property string $order_sn
+ * @property string $refund_no
+ * @property string $order_no
  * @property int $order_status
  * @property string $service_type 服务类型 money:仅退款, all:退货退款
  * @property int $express_status 物流状态 1:未收货, 2:已收货
- * @property float $amount 退款金额
+ * @property string $amount 退款金额
  * @property string $reason 退款原因
- * @property int $status 退款状态 -1:已删除
+ * @property int $status 退款状态
  * @property int $applied_time 用户申请退款时间
  * @property int $edited_time 用户修改退款订单时间
  * @property int $canceled_time 用户撤销退款时间
@@ -39,6 +39,7 @@ use App\Model\Model;
  * @property string $remark
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  */
 class Refund extends Model
 {
@@ -54,12 +55,12 @@ class Refund extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'shop_id', 'order_id', 'refund_sn', 'order_sn', 'order_status', 'service_type', 'express_status', 'amount', 'reason', 'status', 'applied_time', 'edited_time', 'canceled_time', 'refused_time', 'agreed_time', 'shipped_time', 'received_time', 'finished_time', 'failed_time', 'address', 'proofs', 'remark', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'user_id', 'shop_id', 'order_id', 'refund_no', 'order_no', 'order_status', 'service_type', 'express_status', 'amount', 'reason', 'status', 'applied_time', 'edited_time', 'canceled_time', 'refused_time', 'agreed_time', 'shipped_time', 'received_time', 'finished_time', 'failed_time', 'address', 'proofs', 'remark', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'order_id' => 'integer', 'order_status' => 'integer', 'express_status' => 'integer', 'amount' => 'float', 'status' => 'integer', 'applied_time' => 'integer', 'edited_time' => 'integer', 'canceled_time' => 'integer', 'refused_time' => 'integer', 'agreed_time' => 'integer', 'shipped_time' => 'integer', 'received_time' => 'integer', 'finished_time' => 'integer', 'failed_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'order_id' => 'integer', 'order_status' => 'integer', 'express_status' => 'integer', 'status' => 'integer', 'applied_time' => 'integer', 'edited_time' => 'integer', 'canceled_time' => 'integer', 'refused_time' => 'integer', 'agreed_time' => 'integer', 'shipped_time' => 'integer', 'received_time' => 'integer', 'finished_time' => 'integer', 'failed_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

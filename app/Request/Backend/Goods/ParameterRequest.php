@@ -14,8 +14,10 @@ use App\Request\AbstractRequest;
 
 class ParameterRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
+        parent::rules($ruleKey);
+
         $rules = [
             'post:create' => [
                 'name' => 'required|string|max:100',
@@ -28,7 +30,7 @@ class ParameterRequest extends AbstractRequest
                 'id' => 'required|integer|gt:0',
             ],
         ];
-        return $rules[$this->getScene()] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

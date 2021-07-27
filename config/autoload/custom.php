@@ -67,5 +67,5 @@ return [
         'catcherUrlPrefix' => '', /* 图片访问路径前缀 */
         'catcherMaxSize' => 2048000, /* 上传大小限制，单位B */
         'catcherAllowFiles' => ['.png', '.jpg', '.jpeg', '.gif', '.bmp'], /* 抓取图片格式显示 */
-    ]
+    ],
 ];

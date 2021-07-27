@@ -17,9 +17,7 @@ use App\Request\Backend\Authorize\RegisterRequest;
 class RegisterController extends BackendController
 {
     /**
-     * 注册
-     * @param RegisterRequest $request
-     * @return array
+     * 注册.
      */
     public function register(RegisterRequest $request): array
     {

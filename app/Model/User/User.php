@@ -12,9 +12,6 @@ namespace App\Model\User;
 
 use App\Constants\State\User\UserState;
 use App\Model\Model;
-use Hyperf\Database\Model\Collection;
-use Hyperf\Database\Model\Relations\HasMany;
-use Hyperf\Database\Model\Relations\HasOne;
 
 /**
  * @property int $id
@@ -27,7 +24,7 @@ use Hyperf\Database\Model\Relations\HasOne;
  * @property string $password 密码
  * @property string $remember_token
  * @property string $salt 加密盐
- * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用, 2:待审核
+ * @property int $status 状态 0:已禁用, 1:已启用, 2:待审核
  * @property int $is_system 是否系统用户
  * @property int $lasted_login_time 最后登录时间
  * @property int $mobile_verified_time 手机验证时间
@@ -36,10 +33,11 @@ use Hyperf\Database\Model\Relations\HasOne;
  * @property int $username_updated_time 用户名设置时间
  * @property int $created_time
  * @property int $updated_time
- * @property-read Collection|UserAddress[] $address
- * @property-read array $appends
- * @property-read UserVipCard $vipCard
- * @property-read UserWallet $wallet
+ * @property int $deleted_time
+ * @property array $appends
+ * @property UserAddress[] $address
+ * @property UserVipCard $vipCard
+ * @property UserWallet $wallet
  */
 class User extends Model
 {
@@ -55,14 +53,14 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'is_system', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'username', 'nickname', 'mobile', 'avatar', 'sex', 'email', 'password', 'remember_token', 'salt', 'status', 'is_system', 'lasted_login_time', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'is_system' => 'integer', 'lasted_login_time' => 'integer', 'mobile_verified_time' => 'integer', 'email_verified_time' => 'integer', 'avatar_updated_time' => 'integer', 'username_updated_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'is_system' => 'integer', 'lasted_login_time' => 'integer', 'mobile_verified_time' => 'integer', 'email_verified_time' => 'integer', 'avatar_updated_time' => 'integer', 'username_updated_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 
     protected $hidden = ['password', 'salt', 'mobile', 'email', 'is_system', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
 
@@ -73,17 +71,17 @@ class User extends Model
         return UserState::handleMessages(['status' => $this->status]);
     }
 
-    public function vipCard(): HasOne
+    public function vipCard()
     {
         return $this->hasOne(UserVipCard::class);
     }
 
-    public function wallet(): HasOne
+    public function wallet()
     {
         return $this->hasOne(UserWallet::class);
     }
 
-    public function address(): HasMany
+    public function address()
     {
         return $this->hasMany(UserAddress::class);
     }

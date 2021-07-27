@@ -17,11 +17,8 @@ class ServiceService extends AbstractService
 {
     protected string $dao = ServiceDao::class;
 
-    protected bool $softDelete = false;
-
     public function all(): array
     {
-        $dao = new ServiceDao();
-        return $dao->getListByCondition();
+        return (new ServiceDao())->getListByCondition();
     }
 }

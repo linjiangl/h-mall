@@ -13,6 +13,10 @@ namespace HyperfTest\Frontend\Authorize;
 use HyperfTest\Frontend\FrontendHttpTestCase;
 use HyperfTest\Frontend\TraitFrontendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CAuthorizeTest extends FrontendHttpTestCase
 {
     use TraitFrontendAuthorize;

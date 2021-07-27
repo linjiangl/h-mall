@@ -20,7 +20,7 @@ class UserDao extends AbstractDao
     protected array $noAllowActions = [];
 
     protected string $notFoundMessage = '用户不存在';
-    
+
     protected string $authorizeColumn = 'id';
 
     public function info(int $id, array $with = []): User

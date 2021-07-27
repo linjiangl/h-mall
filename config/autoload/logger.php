@@ -32,7 +32,7 @@ return [
         'handler' => [
             'class' => Monolog\Handler\StreamHandler::class,
             'constructor' => [
-                'stream' => BASE_PATH . '/runtime/logs/db.log',
+                'stream' => BASE_PATH . '/runtime/logs/db/log-' . date('Y-m-d') . '.log',
                 'level' => $level,
             ],
         ],

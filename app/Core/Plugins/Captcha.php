@@ -16,8 +16,7 @@ use Throwable;
 
 /**
  * 图片验证码
- * Class Captcha
- * @package App\Core\Plugins
+ * Class Captcha.
  */
 class Captcha
 {
@@ -30,8 +29,7 @@ class Captcha
     public int $height = 43; // 长度
 
     /**
-     * 生成
-     * @return array
+     * 生成.
      */
     public function generate(): array
     {
@@ -55,7 +53,6 @@ class Captcha
      * 验证
      * @param $key
      * @param $code
-     * @return bool
      */
     public function validate($key, $code): bool
     {

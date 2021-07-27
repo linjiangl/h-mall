@@ -24,8 +24,7 @@ class ModelCommand extends HyperfCommand
     protected $name = 'tools:gen-model';
 
     /**
-     * 迁移表的表名
-     * @var string
+     * 迁移表的表名.
      */
     protected string $migrateTable = 'migrations';
 
@@ -34,6 +33,7 @@ class ModelCommand extends HyperfCommand
      * @var string[]
      */
     protected array $module = [
+        'admin',
         'user',
         'shop',
         'category',
@@ -45,12 +45,11 @@ class ModelCommand extends HyperfCommand
         'statistics',
         'role',
         'payment',
-        'parameter'
+        'parameter',
     ];
 
     /**
-     * 指定的数据表
-     * @var array
+     * 指定的数据表.
      */
     protected array $specifyTables = [
         'goods_sku', 'goods_attribute',

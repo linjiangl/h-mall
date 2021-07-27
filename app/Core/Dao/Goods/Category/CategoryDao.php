@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Dao\Goods\Category;
 
+use App\Constants\State\Goods\CategoryState;
 use App\Core\Dao\AbstractDao;
 use App\Model\Category\Category;
 
@@ -21,9 +22,9 @@ class CategoryDao extends AbstractDao
 
     protected string $notFoundMessage = '分类不存在';
 
-    protected string $orderBy = 'sorting asc';
+    protected string $orderBy = 'parent_id asc, sorting asc';
 
-    public function getListByStatus($status = null, string $select = '*'): array
+    public function getListByStatus($status = CategoryState::STATUS_ENABLED, string $select = '*'): array
     {
         $condition = [];
         if ($status !== null) {
@@ -32,7 +33,7 @@ class CategoryDao extends AbstractDao
         return $this->getListByCondition($condition, [], $select);
     }
 
-    public function getListByParentId(int $parentId = 0, $status = null)
+    public function getListByParentId(int $parentId = 0, $status = CategoryState::STATUS_ENABLED): array
     {
         $condition = [['parent_id', '=', $parentId]];
         if ($status !== null) {

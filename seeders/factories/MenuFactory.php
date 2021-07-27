@@ -12,9 +12,9 @@ use App\Constants\State\System\MenuState;
 use App\Core\Service\System\MenuService;
 
 /**
- * Multi-user mall
+ * Multi-user mall.
  *
- * @link     https://store.yii.red
+ * @see     https://store.yii.red
  * @document https://document.store.yii.red
  * @contact  8257796@qq.com
  */

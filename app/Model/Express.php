@@ -15,9 +15,10 @@ namespace App\Model;
  * @property string $name 公司名称
  * @property string $code 公司编码
  * @property int $sorting 排序
- * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
+ * @property int $status 状态 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  */
 class Express extends Model
 {
@@ -33,12 +34,12 @@ class Express extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'code', 'sorting', 'status', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'name', 'code', 'sorting', 'status', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'sorting' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

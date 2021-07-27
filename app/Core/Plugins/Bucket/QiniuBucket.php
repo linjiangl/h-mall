@@ -65,7 +65,7 @@ class QiniuBucket extends AbstractBucket
         }
         $data = [
             'success' => [],
-            'fail' => []
+            'fail' => [],
         ];
         foreach ($ret as $k => $v) {
             if ($v['code'] == 200) {

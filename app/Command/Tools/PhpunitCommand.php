@@ -15,7 +15,7 @@ use Hyperf\Command\Command as HyperfCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * @Command()
+ * @Command
  */
 class PhpunitCommand extends HyperfCommand
 {

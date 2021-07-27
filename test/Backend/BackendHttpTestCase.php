@@ -12,6 +12,10 @@ namespace HyperfTest\Backend;
 
 use HyperfTest\AbstractHttpTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class BackendHttpTestCase extends AbstractHttpTestCase
 {
     protected string $apiType = '/backend';

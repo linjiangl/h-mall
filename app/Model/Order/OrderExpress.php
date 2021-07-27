@@ -18,8 +18,8 @@ use App\Model\Model;
  * @property int $refund_id
  * @property int $express_id
  * @property string $express_name 快递名称
- * @property string $express_no 快递单号
- * @property float $amount 快递费
+ * @property string $express_number 快递单号
+ * @property string $amount 快递费
  * @property int $text_id
  * @property string $remark
  * @property int $created_time
@@ -39,12 +39,12 @@ class OrderExpress extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'order_id', 'refund_id', 'express_id', 'express_name', 'express_no', 'amount', 'text_id', 'remark', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'order_id', 'refund_id', 'express_id', 'express_name', 'express_number', 'amount', 'text_id', 'remark', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'order_id' => 'integer', 'refund_id' => 'integer', 'express_id' => 'integer', 'amount' => 'float', 'text_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'order_id' => 'integer', 'refund_id' => 'integer', 'express_id' => 'integer', 'text_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

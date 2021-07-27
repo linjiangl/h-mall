@@ -25,20 +25,14 @@ class AttachmentService extends AbstractService
     public function getInfoByEncrypt(string $encrypt): ?Attachment
     {
         try {
-            $dao = new AttachmentDao();
-            return $dao->getInfoByEncrypt($encrypt);
+            return (new AttachmentDao())->getInfoByEncrypt($encrypt);
         } catch (Throwable $e) {
             return null;
         }
     }
 
     /**
-     * 保存上传文件信息
-     * @param array $fileData
-     * @param string $hash
-     * @param string $key
-     * @param string $system
-     * @return int
+     * 保存上传文件信息.
      */
     public function createUpload(array $fileData, string $hash, string $key, string $system = AttachmentState::SYSTEM_QINIU): int
     {
@@ -56,23 +50,20 @@ class AttachmentService extends AbstractService
             'key' => $key,
             'index' => $this->generateIndex($key),
             'encrypt' => $encrypt,
-            'status' => AttachmentState::STATUS_ENABLED
+            'status' => AttachmentState::STATUS_ENABLED,
         ];
         return $this->create($data);
     }
 
     /**
-     * 批量删除附件
-     * @param array $ids
-     * @param string $system
-     * @return bool
+     * 批量删除附件.
      */
     public function batchDelete(array $ids, string $system = AttachmentState::SYSTEM_QINIU): bool
     {
         $dao = new AttachmentDao();
         $keys = $dao->getColumnByCondition([
             ['id', 'in', $ids],
-            ['system', '=', $system]
+            ['system', '=', $system],
         ], 'key');
 
         if (empty($keys)) {
@@ -95,21 +86,17 @@ class AttachmentService extends AbstractService
     }
 
     /**
-     * 文件失效
-     * @param string $key
+     * 文件失效.
      */
     public function failure(string $key)
     {
-        $dao = new AttachmentDao();
-        $info = $dao->getInfoByIndex($this->generateIndex($key));
+        $info = (new AttachmentDao())->getInfoByIndex($this->generateIndex($key));
         $info->status = AttachmentState::STATUS_DISABLED;
         $info->save();
     }
 
     /**
-     * 文件批量失效
-     * @param array $oldKeys
-     * @param array $newKeys
+     * 文件批量失效.
      */
     public function batchFailure(array $oldKeys, array $newKeys)
     {
@@ -119,19 +106,17 @@ class AttachmentService extends AbstractService
             foreach ($diff as $item) {
                 $diffIndex[] = $this->generateIndex($item);
             }
-            $dao = new AttachmentDao();
-            $dao->updateByCondition([
-                ['index', 'in', $diffIndex]
+
+            (new AttachmentDao())->updateByCondition([
+                ['index', 'in', $diffIndex],
             ], [
-                'status' => AttachmentState::STATUS_DISABLED
+                'status' => AttachmentState::STATUS_DISABLED,
             ]);
         }
     }
 
     /**
-     * 生成文件查询索引
-     * @param string $key
-     * @return string
+     * 生成文件查询索引.
      */
     public function generateIndex(string $key): string
     {

@@ -23,7 +23,7 @@ class AdminActionService extends AbstractService
         if (! $request) {
             return false;
         }
-        $admin = $request->getAttribute('admin', null);
+        $admin = $request->getAttribute('admin');
         if (! $admin) {
             return false;
         }
@@ -45,8 +45,8 @@ class AdminActionService extends AbstractService
             'remark' => [
                 'method' => $request->getMethod(),
                 'url' => $url,
-                'data' => check_production() ? '' : $request->getParsedBody()
-            ]
+                'data' => check_production() ? '' : $request->getParsedBody(),
+            ],
         ]);
         return true;
     }

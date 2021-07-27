@@ -28,11 +28,9 @@ class GoodsDao extends AbstractDao
 
     /**
      * 检查分类下是否有商品
-     * @param int $categoryId
-     * @return bool
      */
     public function checkCategoryIdHasGoods(int $categoryId): bool
     {
-        return Goods::query()->where('category_id', $categoryId)->count() ? true : false;
+        return (bool) Goods::query()->where('category_id', $categoryId)->count();
     }
 }

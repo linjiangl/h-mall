@@ -15,8 +15,8 @@ use App\Model\Model;
 /**
  * @property int $shop_id
  * @property int $user_id
- * @property float $balance 余额
- * @property float $freeze_balance 冻结余额
+ * @property string $balance 余额
+ * @property string $freeze_balance 冻结余额
  * @property int $created_time
  * @property int $updated_time
  */
@@ -41,5 +41,5 @@ class ShopFinance extends Model
      *
      * @var array
      */
-    protected $casts = ['shop_id' => 'integer', 'user_id' => 'integer', 'balance' => 'float', 'freeze_balance' => 'float', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['shop_id' => 'integer', 'user_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

@@ -15,13 +15,16 @@ use App\Model\Spec\Spec;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class SpecTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
     public function testBackendSpecCreate()
     {
-        $this->debug = true;
         $this->url = '/spec/create';
         $this->data = [
             'shop_id' => '0',

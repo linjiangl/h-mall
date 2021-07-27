@@ -14,8 +14,10 @@ use App\Request\AbstractRequest;
 
 class ServiceRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
+        parent::rules($ruleKey);
+
         $rules = [
             'post:create' => [
                 'name' => 'required|string|max:100',
@@ -25,13 +27,12 @@ class ServiceRequest extends AbstractRequest
                 'id' => 'required|integer|gt:0',
                 'name' => 'required|string|max:100',
                 'description' => 'string',
-
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',
             ],
         ];
-        return $rules[$this->getScene()] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

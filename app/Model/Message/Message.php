@@ -21,9 +21,10 @@ use App\Model\Model;
  * @property string $module 模块
  * @property int $module_id
  * @property string $module_url
- * @property int $status 状态 -1:删除, 0:未读, 1:已读
+ * @property int $status 状态 0:未读, 1:已读
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  */
 class Message extends Model
 {
@@ -39,12 +40,12 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'sender_id', 'receiver_id', 'text_id', 'type', 'module', 'module_id', 'module_url', 'status', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'sender_id', 'receiver_id', 'text_id', 'type', 'module', 'module_id', 'module_url', 'status', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'sender_id' => 'integer', 'receiver_id' => 'integer', 'text_id' => 'integer', 'module_id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'sender_id' => 'integer', 'receiver_id' => 'integer', 'text_id' => 'integer', 'module_id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

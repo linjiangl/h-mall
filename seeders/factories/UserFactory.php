@@ -24,16 +24,17 @@ class UserFactory
         $service->register('hmallgf', $password, $password, [
             'nickname' => '系统官方',
             'email' => $faker->unique()->safeEmail,
-            'is_system' => UserState::IS_SYSTEM_TRUE
+            'is_system' => UserState::IS_SYSTEM_TRUE,
         ]);
 
         $user = new User();
-        Db::statement("ALTER TABLE `{$user->getTable()}` AUTO_INCREMENT = 10000");
+        $userTableName = get_table_name($user->getTable());
+        Db::statement("ALTER TABLE `{$userTableName}` AUTO_INCREMENT = 10000");
 
         $service->register('hmallkf', $password, $password, [
             'nickname' => '系统客服',
             'email' => $faker->unique()->safeEmail,
-            'is_system' => UserState::IS_SYSTEM_TRUE
+            'is_system' => UserState::IS_SYSTEM_TRUE,
         ]);
 
         $num = 100;
@@ -41,9 +42,9 @@ class UserFactory
             $service->register($faker->userName, $password, $password, [
                 'nickname' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
-                'is_system' => UserState::IS_SYSTEM_FALSE
+                'is_system' => UserState::IS_SYSTEM_FALSE,
             ]);
-            $num--;
+            --$num;
         }
     }
 }

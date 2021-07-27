@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
+use App\Model\Goods\GoodsSku;
+
 /**
  * @property int $id
  * @property int $user_id
@@ -20,6 +22,7 @@ namespace App\Model;
  * @property int $is_show 是否显示 0:否, 1:是
  * @property int $created_time
  * @property int $updated_time
+ * @property GoodsSku $sku
  */
 class Cart extends Model
 {
@@ -43,4 +46,9 @@ class Cart extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'quantity' => 'integer', 'is_check' => 'integer', 'is_show' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+
+    public function sku()
+    {
+        return $this->belongsTo(GoodsSku::class, 'goods_sku_id');
+    }
 }

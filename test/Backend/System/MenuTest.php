@@ -15,6 +15,10 @@ use App\Model\Menu;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class MenuTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
@@ -29,7 +33,7 @@ class MenuTest extends BackendHttpTestCase
     {
         $this->url = '/menu/detail';
         $this->data = [
-            'id' => 1
+            'id' => 1,
         ];
         $this->handleHttpShow();
     }
@@ -75,7 +79,7 @@ class MenuTest extends BackendHttpTestCase
 
         $this->url = '/menu/delete';
         $this->data = [
-            'id' => $info->id
+            'id' => $info->id,
         ];
         $this->handleHttpDelete();
     }

@@ -17,13 +17,12 @@ use Hyperf\RateLimit\Annotation\RateLimit;
 
 /**
  * @Controller(prefix="rate-limit")
- * @RateLimit()
+ * @RateLimit
  */
 class AuthorizeController extends FrontendController
 {
     /**
-     * 登录用户信息
-     * @return array
+     * 登录用户信息.
      */
     public function show(): array
     {

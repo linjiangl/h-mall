@@ -115,9 +115,8 @@ if (! function_exists('response_json')) {
 
 if (! function_exists('general_regex')) {
     /**
-     * 通用正则表达式
+     * 通用正则表达式.
      * @param string $option 选项
-     * @return string
      */
     function general_regex(string $option = 'mobile'): string
     {
@@ -137,8 +136,7 @@ if (! function_exists('general_regex')) {
 
 if (! function_exists('check_production')) {
     /**
-     * 检测是否生产环境
-     * @return bool
+     * 检测是否生产环境.
      */
     function check_production(): bool
     {
@@ -149,7 +147,6 @@ if (! function_exists('check_production')) {
 if (! function_exists('get_client_ip')) {
     /**
      * 获取客户端IP地址
-     * @return string
      */
     function get_client_ip(): string
     {
@@ -165,7 +162,7 @@ if (! function_exists('get_client_ip')) {
 
 if (! function_exists('write_logs')) {
     /**
-     * 记录日志
+     * 记录日志.
      * @param string $message 日志说明
      * @param null $remark 备注
      * @param string $level 日志级别
@@ -182,10 +179,9 @@ if (! function_exists('write_logs')) {
 
 if (! function_exists('database_text')) {
     /**
-     * 数据库文本数据
-     * @param $data
-     * @param string $schema
-     * @return array|false|mixed|string
+     * 数据库文本数据.
+     * @param array|string $data 要处理的数据
+     * @return array|string
      */
     function database_text($data, string $schema = 'en')
     {
@@ -193,5 +189,15 @@ if (! function_exists('database_text')) {
             return empty($data) ? '' : json_encode($data, JSON_UNESCAPED_UNICODE);
         }
         return empty($data) ? [] : json_decode($data, true);
+    }
+}
+
+if (! function_exists('get_table_name')) {
+    /**
+     * 获取数据库真实的表名.
+     */
+    function get_table_name(string $table): string
+    {
+        return config('databases')['default']['prefix'] . $table;
     }
 }

@@ -21,18 +21,13 @@ class RoleMenuService extends AbstractService
     protected string $dao = RoleMenuDao::class;
 
     /**
-     * 更新权限菜单
-     * @param int $roleId
-     * @param array $menuIds
+     * 更新权限菜单.
      */
     public function saveRoleMenus(int $roleId, array $menuIds): void
     {
         // 选中菜单
-        $roleDao = new RoleDao();
-        $role = $roleDao->info($roleId);
-
-        $menuDao = new MenuDao();
-        $menuCount = $menuDao->getCountByCondition([['id', 'in', $menuIds]]);
+        $role = (new RoleDao())->info($roleId);
+        $menuCount = (new MenuDao())->getCountByCondition([['id', 'in', $menuIds]]);
         if ($menuCount != count($menuIds)) {
             throw new InternalException('菜单数据有误');
         }

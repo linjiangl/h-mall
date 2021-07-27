@@ -16,8 +16,7 @@ use App\Core\Block\Backend\Authorize\AuthorizeBlock;
 class AuthorizeController extends BackendController
 {
     /**
-     * 获取管理员信息
-     * @return array
+     * 获取管理员信息.
      */
     public function show(): array
     {

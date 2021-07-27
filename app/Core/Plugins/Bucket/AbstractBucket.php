@@ -19,7 +19,6 @@ abstract class AbstractBucket
 
     /**
      * cdn地址
-     * @return string
      */
     public function cdn(): string
     {
@@ -27,9 +26,7 @@ abstract class AbstractBucket
     }
 
     /**
-     * 文件全路径
-     * @param string $key
-     * @return string
+     * 文件全路径.
      */
     public function getFullPath(string $key): string
     {
@@ -44,10 +41,9 @@ abstract class AbstractBucket
     }
 
     /**
-     * 生成文件相对路径
+     * 生成文件相对路径.
      * @param string $filename 文件名称,取文件后缀
      * @param string $dir 存在目录
-     * @return string
      */
     public function generateKey(string $filename, $dir = 'images'): string
     {
@@ -61,10 +57,8 @@ abstract class AbstractBucket
     }
 
     /**
-     * 上传文件
+     * 上传文件.
      * @param UploadedFile $file 上传的文件对象
-     * @param string $key
-     * @return array
      */
     public function upload(UploadedFile $file, string $key = ''): array
     {
@@ -72,24 +66,21 @@ abstract class AbstractBucket
     }
 
     /**
-     * 批量删除
-     * @param array $keys
+     * 批量删除.
      * @return array ['success' => [...删除成功的key], 'fail' => [...删除失败的key]]
      */
     public function batchDelete(array $keys): array
     {
         return [
             'success' => [],
-            'fail' => []
+            'fail' => [],
         ];
     }
 
     /**
-     * 返回结果
-     * @param UploadedFile $file
-     * @param string $hash 目标资源的hash值，可用于 ETag 头部。
-     * @param string $key 目标资源的最终名字。
-     * @return array
+     * 返回结果.
+     * @param string $hash 目标资源的hash值，可用于 ETag 头部
+     * @param string $key 目标资源的最终名字
      */
     protected function handleResult(UploadedFile $file, string $hash, string $key): array
     {
@@ -101,13 +92,12 @@ abstract class AbstractBucket
         return [
             'hash' => $hash,
             'path' => $key,
-            'full_path' => $this->getFullPath($key)
+            'full_path' => $this->getFullPath($key),
         ];
     }
 
     /**
-     * 检查文件是否上传
-     * @param UploadedFile $file
+     * 检查文件是否上传.
      * @return array|bool
      */
     protected function checkFileExists(UploadedFile $file)

@@ -13,13 +13,16 @@ namespace App\Constants\State;
 class BooleanState extends AbstractState
 {
     const OPTION_FALSE = 0;
+
     const OPTION_TRUE = 1;
 
-    public static function getStatus(): array
+    public static function map(): array
     {
         return [
-            self::OPTION_FALSE => '否',
-            self::OPTION_TRUE => '是',
+            'default' => [
+                self::OPTION_FALSE => '否',
+                self::OPTION_TRUE => '是',
+            ],
         ];
     }
 }

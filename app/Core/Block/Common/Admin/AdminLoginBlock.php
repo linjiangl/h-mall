@@ -20,6 +20,6 @@ class AdminLoginBlock extends BaseBlock
     protected array $query = [
         '=' => ['username'],
         'between' => ['created_time'],
-        'in' => ['status']
+        'in' => ['status'],
     ];
 }

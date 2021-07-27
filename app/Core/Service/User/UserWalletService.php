@@ -18,14 +18,12 @@ class UserWalletService extends AbstractService
     protected string $dao = UserWalletDao::class;
 
     /**
-     * 初始化用户钱包
-     * @param int $userId
-     * @return bool
+     * 初始化用户钱包.
      */
     public function initUserWallet(int $userId): bool
     {
         $this->create([
-            'user_id' => $userId
+            'user_id' => $userId,
         ]);
         return true;
     }

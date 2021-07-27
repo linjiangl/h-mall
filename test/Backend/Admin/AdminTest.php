@@ -14,6 +14,10 @@ use App\Core\Dao\Admin\AdminDao;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class AdminTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
@@ -28,7 +32,7 @@ class AdminTest extends BackendHttpTestCase
     {
         $this->url = '/admin/detail';
         $this->data = [
-            'id' => 2
+            'id' => 2,
         ];
         $this->handleHttpShow();
     }
@@ -58,7 +62,7 @@ class AdminTest extends BackendHttpTestCase
             'id' => $admin->id,
             'avatar' => 'https://up.enterdesk.com/edpic/31/c3/fd/31c3fdc63511cabedd6415d121fa2d58.jpg',
             'real_name' => '小米22',
-            'role_id' => 2
+            'role_id' => 2,
         ];
         $this->handleHttpUpdate();
     }

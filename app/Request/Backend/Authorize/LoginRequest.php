@@ -14,8 +14,10 @@ use App\Request\AbstractRequest;
 
 class LoginRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
+        parent::rules($ruleKey);
+
         return [
             'username' => 'required|string|max:30',
             'password' => 'required|string|max:30',

@@ -51,8 +51,9 @@ trait TraitAuthorize
 
     public function getHeaders(): array
     {
+        $this->debug = env('TESTING_DEBUG', false);
         return [
-            'Authorization' => $this->getToken()
+            'Authorization' => $this->getToken(),
         ];
     }
 

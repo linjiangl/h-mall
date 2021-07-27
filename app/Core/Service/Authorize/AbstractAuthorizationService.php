@@ -10,58 +10,136 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Authorize;
 
-use App\Exception\CacheErrorException;
+use App\Exception\BadRequestException;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeZone;
 use Hyperf\Utils\Str;
-use Phper666\JWTAuth\JWT;
-use Psr\SimpleCache\InvalidArgumentException;
+use Lcobucci\Clock\SystemClock;
+use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Signer\Key\InMemory;
+use Lcobucci\JWT\Token\Plain;
+use Lcobucci\JWT\Token\RegisteredClaims;
+use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
+use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
+use Throwable;
 
 abstract class AbstractAuthorizationService implements InterfaceAuthorizationService
 {
     /**
-     * @var JWT
+     * 场景.
      */
-    protected JWT $jwt;
-
     protected string $scene = 'default';
 
-    protected string $prefix = 'Bearer';
+    /**
+     * 配置.
+     */
+    protected array $config = [];
 
-    protected string $header = 'Authorization';
+    protected Plain $plain;
+
+    protected Configuration $configuration;
+
+    public function __construct()
+    {
+        if ($this->scene == 'default') {
+            $this->config = config('jwt');
+        } else {
+            $this->config = config('jwt')['scene'][$this->scene];
+        }
+
+        $this->configuration = Configuration::forSymmetricSigner(new Sha256(), InMemory::base64Encoded($this->config['secret']));
+    }
+
+    public function authorize(): array
+    {
+        return $this->getParserData(true);
+    }
 
     public function logout(): bool
     {
+        return true;
+    }
+
+    public function parseToken(string $token): self
+    {
         try {
-            return $this->jwt->logout();
-        } catch (InvalidArgumentException $e) {
-            throw new CacheErrorException();
+            $this->plain = $this->configuration->parser()->parse($token);
+        } catch (Throwable $e) {
+            throw new BadRequestException('token 解析错误');
         }
+        return $this;
+    }
+
+    public function createToken(array $user): string
+    {
+        $now = new DateTimeImmutable();
+        $token = $this->configuration
+            ->builder()
+            ->issuedBy($this->config['issued'])
+            ->permittedFor($this->config['issued'])
+            ->identifiedBy($this->scene)
+            ->issuedAt($now)
+            // ->canOnlyBeUsedAfter($now->modify('+1 second'))
+            ->expiresAt($now->modify("+{$this->config['ttl']} second"))
+            ->withClaim('auth', $user)
+            ->getToken($this->configuration->signer(), $this->configuration->signingKey());
+
+        $token = $token->toString();
+        $this->parseToken($token);
+
+        return $token;
     }
 
     public function refreshToken(): array
     {
+        $user = $this->getParserData(true);
+        $token = $this->createToken($user);
+
+        return [
+            'token' => $token,
+            'exp' => $this->getTTL(),
+        ];
+    }
+
+    public function getTTL()
+    {
+        $expData = (array) $this->plain->claims()->get(RegisteredClaims::EXPIRATION_TIME);
         try {
-            $token = $this->jwt->refreshToken();
-            return [
-                'token' => $this->jwt->tokenPrefix . ' ' . (string) $token,
-                'exp' => $this->jwt->getTTL(),
-            ];
-        } catch (InvalidArgumentException $e) {
-            throw new CacheErrorException();
+            $from = $expData['timezone_type'] != 3 ? 'UTC' : $expData['timezone'];
+            $datetime = new DateTime($expData['date'], new DateTimeZone($from));
+            $datetime->setTimezone(new DateTimeZone('Asia/Shanghai'));
+            $date = $datetime->format('Y-m-d H:i:s');
+            return strtotime($date) - time();
+        } catch (Throwable $e) {
+            return -1;
         }
     }
 
-    public function getTTL(string $token = null): int
+    public function validationToken(): bool
     {
-        return (int)$this->jwt->getTTL($token);
+        $timezone = new DateTimeZone('Asia/Shanghai');
+        $clock = new SystemClock($timezone);
+        $this->configuration->setValidationConstraints(new LooseValidAt($clock));
+        $constraints = $this->configuration->validationConstraints();
+
+        try {
+            $this->configuration->validator()->assert($this->plain, ...$constraints);
+            return true;
+        } catch (RequiredConstraintsViolated $e) {
+            return false;
+        }
     }
 
-    public function getParserData($filter = false): array
+    public function getParserData(bool $filter = false): array
     {
-        $data = $this->jwt->getParserData();
-        if ($data && $filter) {
-            unset($data['jti'], $data['iat'], $data['nbf'], $data['exp'], $data['jwt_scene']);
+        $all = $this->plain->claims()->all();
+        // 只获取授权用户数据
+        if ($filter) {
+            $all = $all['auth'];
         }
-        return $data;
+        return $all;
     }
 
     public function generateSalt($length = 10): string
@@ -77,13 +155,13 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         return sha1(substr(md5($password), 0, 16) . $salt);
     }
 
-    public function getPrefix(): string
+    public function getHeader()
     {
-        return $this->prefix;
+        return $this->config['header'];
     }
 
-    public function getHeader(): string
+    public function getRequestToken(): string
     {
-        return $this->header;
+        return request()->getHeaderLine($this->getHeader()) ?? '';
     }
 }

@@ -26,7 +26,7 @@ use App\Model\Model;
  * @property string $bank_account 银行账号
  * @property int $content_type 发票内容 0:商品明细
  * @property string $email 邮箱
- * @property int $status 状态 -1:已删除, 0:已禁用, 1:已启用
+ * @property int $status 状态 0:已禁用, 1:已启用
  * @property int $created_time
  * @property int $updated_time
  */

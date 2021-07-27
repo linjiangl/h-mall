@@ -22,12 +22,10 @@ class RoleService extends AbstractService
     public function remove(int $id): bool
     {
         // 删除关联的菜单
-        $roleMenuDao = new RoleMenuDao();
-        $roleMenuDao->deleteMenusByRoleId($id);
+        (new RoleMenuDao())->deleteMenusByRoleId($id);
 
         // 重置管理员权限
-        $roleAdminDao = new RoleAdminDao();
-        $roleAdminDao->resetAdminRoleId($id);
+        (new RoleAdminDao())->resetAdminRoleId($id);
 
         return parent::remove($id);
     }

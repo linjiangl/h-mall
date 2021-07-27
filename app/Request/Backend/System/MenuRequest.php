@@ -14,9 +14,10 @@ use App\Request\AbstractRequest;
 
 class MenuRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        $scene = $this->getScene();
+        parent::rules($ruleKey);
+
         $rules = [
             'post:create' => [
                 'parent_id' => 'required|integer',
@@ -33,9 +34,9 @@ class MenuRequest extends AbstractRequest
                 'icon' => 'string|max:50',
                 'path' => 'string|max:255',
                 'sorting' => 'integer|max:100',
-            ]
+            ],
         ];
-        return $rules[$scene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

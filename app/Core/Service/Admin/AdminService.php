@@ -26,7 +26,7 @@ class AdminService extends AbstractService
     protected string $dao = AdminDao::class;
 
     /**
-     * 创建管理员账号
+     * 创建管理员账号.
      * @param string $username 用户名
      * @param string $password 密码
      * @param array $extend 其他数据,如:头像,邮箱等
@@ -63,7 +63,7 @@ class AdminService extends AbstractService
         if (empty($extend['role_id'])) {
             $role = $roleDao->getInfoByIdentifier();
         } else {
-            $role = $roleDao->info((int)$extend['role_id']);
+            $role = $roleDao->info((int) $extend['role_id']);
         }
 
         // 创建账号
@@ -76,7 +76,7 @@ class AdminService extends AbstractService
             'mobile' => $extend['mobile'] ?? '',
             'email' => $extend['email'] ?? '',
             'status' => $extend['status'] ?? AdminState::STATUS_PENDING,
-            'lasted_login_time' => time()
+            'lasted_login_time' => time(),
         ]);
 
         // 账号绑定权限
@@ -90,10 +90,7 @@ class AdminService extends AbstractService
     }
 
     /**
-     * 更新账号信息
-     * @param int $adminId
-     * @param array $data
-     * @return array
+     * 更新账号信息.
      */
     public function updateAccount(int $adminId, array $data): array
     {
@@ -101,8 +98,7 @@ class AdminService extends AbstractService
 
         // 更新权限
         if (isset($data['role_id'])) {
-            $roleAdminDao = new RoleAdminDao();
-            $roleAdminDao->changeAdminRoleId($adminId, (int)$data['role_id']);
+            (new RoleAdminDao())->changeAdminRoleId($adminId, (int) $data['role_id']);
         }
 
         return $admin;

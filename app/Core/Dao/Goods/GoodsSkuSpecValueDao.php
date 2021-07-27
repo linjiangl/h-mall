@@ -22,12 +22,18 @@ class GoodsSkuSpecValueDao extends AbstractDao
     protected string $notFoundMessage = '商品关联规格值不存在';
 
     /**
+     * 检查规格下是否有商品
+     */
+    public function checkSpecIdHasGoods(int $specId): bool
+    {
+        return (bool) GoodsSkuSpecValue::query()->where('spec_id', $specId)->count();
+    }
+
+    /**
      * 检查规格值下是否有商品
-     * @param int $specValueId
-     * @return bool
      */
     public function checkSpecValueIdHasGoods(int $specValueId): bool
     {
-        return GoodsSkuSpecValue::query()->where('spec_value_id', $specValueId)->count() ? true : false;
+        return (bool) GoodsSkuSpecValue::query()->where('spec_value_id', $specValueId)->count();
     }
 }

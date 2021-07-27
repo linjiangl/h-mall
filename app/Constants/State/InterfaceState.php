@@ -12,5 +12,8 @@ namespace App\Constants\State;
 
 interface InterfaceState
 {
-    public static function getStatus(): array;
+    /**
+     * 枚举.
+     */
+    public static function map(): array;
 }

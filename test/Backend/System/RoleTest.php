@@ -17,6 +17,10 @@ use App\Core\Dao\System\MenuDao;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class RoleTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
@@ -31,7 +35,7 @@ class RoleTest extends BackendHttpTestCase
     {
         $this->url = '/role/detail';
         $this->data = [
-            'id' => 1
+            'id' => 1,
         ];
         $this->handleHttpShow();
     }
@@ -71,7 +75,7 @@ class RoleTest extends BackendHttpTestCase
 
         $this->url = '/role/delete';
         $this->data = [
-            'id' => $info->id
+            'id' => $info->id,
         ];
         $this->handleHttpDelete();
     }

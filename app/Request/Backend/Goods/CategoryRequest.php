@@ -14,8 +14,10 @@ use App\Request\AbstractRequest;
 
 class CategoryRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
+        parent::rules($ruleKey);
+
         $rules = [
             'post:create' => [
                 'parent_id' => 'required|integer',
@@ -23,7 +25,7 @@ class CategoryRequest extends AbstractRequest
                 'icon' => 'string|max:255',
                 'cover' => 'string|max:255',
                 'sorting' => 'integer|max:100',
-                'status' => 'integer'
+                'status' => 'integer',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
@@ -32,13 +34,13 @@ class CategoryRequest extends AbstractRequest
                 'icon' => 'string|max:255',
                 'cover' => 'string|max:255',
                 'sorting' => 'integer|max:100',
-                'status' => 'integer'
+                'status' => 'integer',
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',
             ],
         ];
-        return $rules[$this->getScene()] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array
@@ -49,7 +51,7 @@ class CategoryRequest extends AbstractRequest
             'icon' => '图标',
             'cover' => '封面图',
             'sorting' => '排序',
-            'status' => '状态'
+            'status' => '状态',
         ];
     }
 }

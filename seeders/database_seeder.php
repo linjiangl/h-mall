@@ -15,15 +15,13 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
         $this->handleImportClass();
 
         // 系统相关
-        // DistrictFactory::run();
+        DistrictFactory::run();
 
         // 管理相关
         MenuFactory::run();
@@ -32,6 +30,11 @@ class DatabaseSeeder extends Seeder
 
         // 用户相关
         UserFactory::run();
+
+        // 其他
+        CategoryFactory::run();
+        BrandFactory::run();
+        SpecFactory::run();
     }
 
     protected function handleImportClass()

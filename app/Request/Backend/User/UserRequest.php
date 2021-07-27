@@ -10,23 +10,25 @@ declare(strict_types=1);
  */
 namespace App\Request\Backend\User;
 
+use App\Constants\State\ToolsState;
 use App\Constants\State\User\UserState;
 use App\Request\AbstractRequest;
 
 class UserRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
-        $scene = $this->getScene();
-        $status = UserState::getValidatedInRule(UserState::getStatus());
+        parent::rules($ruleKey);
+
+        $status = ToolsState::getValidatedInRule(UserState::class, 'status');
         $rules = [
-            'post:update' => $rules = [
+            'post:update' => [
                 'nickname' => 'string|max:30',
                 'avatar' => 'string|max:255',
                 'status' => "in:{$status}",
-            ]
+            ],
         ];
-        return $rules[$scene] ?? [];
+        return $rules[$this->requestRuleKey] ?? [];
     }
 
     public function attributes(): array

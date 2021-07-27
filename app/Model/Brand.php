@@ -14,9 +14,10 @@ namespace App\Model;
  * @property int $id
  * @property string $name
  * @property string $logo
- * @property int $status 状态 -1:已删除, 0:已失效, 1:已启用
+ * @property int $status 状态 0:已失效, 1:已启用
  * @property int $created_time
  * @property int $updated_time
+ * @property int $deleted_time
  */
 class Brand extends Model
 {
@@ -32,12 +33,12 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'logo', 'status', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'name', 'logo', 'status', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

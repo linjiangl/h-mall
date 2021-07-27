@@ -14,7 +14,7 @@ use App\Request\AbstractRequest;
 
 class BatchOperationRequest extends AbstractRequest
 {
-    public function rules(): array
+    public function rules(string $ruleKey = ''): array
     {
         return [
             'select_ids' => 'required|' . $this->getRegex(general_regex('ids')),
