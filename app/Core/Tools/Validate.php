@@ -82,8 +82,7 @@ class Validate
                 $rule .= 'regex:/^1[\d]{10}$/';
                 break;
             case self::REGEX_TYPE_TELEPHONE:
-                // $rule .= 'regex:/^\d{3,4}-\d{7,8}$/';
-                $rule .= 'string|min:7|max:50';
+                $rule .= 'regex:/^\d{3,4}[- ]\d{7,8}$/';
                 break;
             case self::REGEX_TYPE_ID_CARD:
                 $rule .= 'regex:/^[1-9]\d{5}[1-3]\d{3}[0-9Xx]{8}$/';

@@ -10,7 +10,9 @@ declare(strict_types=1);
  */
 namespace App\Request\Backend\Goods;
 
+use App\Constants\State\Goods\GoodsAttributeState;
 use App\Constants\State\Goods\GoodsState;
+use App\Constants\State\Goods\GoodsTimerState;
 use App\Request\AbstractRequest;
 
 class GoodsRequest extends AbstractRequest
@@ -19,7 +21,9 @@ class GoodsRequest extends AbstractRequest
     {
         parent::rules($ruleKey);
 
-        $map = GoodsState::map();
+        $goodsMap = GoodsState::map();
+        $goodsAttributeMap = GoodsAttributeState::map();
+        $goodsTimerMap = GoodsTimerState::map();
 
         $rules = [
             'post:create' => [
@@ -32,27 +36,35 @@ class GoodsRequest extends AbstractRequest
                 'achieve_price' => 'required|numeric|gt:0',
                 'introduction' => 'string|max:255',
                 'keywords' => 'string|max:255',
-                'type' => 'required|required|in:' . $this->getRuleInByState($map['type']),
+                'type' => 'required|required|in:' . $this->getRuleInByState($goodsMap['type']),
                 'virtual_sales' => 'integer',
-                'status' => 'required|integer|in:' . $this->getRuleInByState($map['status']),
-                'recommend_way' => 'required|integer|in:' . $this->getRuleInByState($map['recommend_way']),
-                'is_consume_discount' => 'integer|in:' . $this->getRuleInByState($map['is_consume_discount']),
-                'is_free_shipping' => 'integer|in:' . $this->getRuleInByState($map['is_free_shipping']),
+                'status' => 'required|integer|in:' . $this->getRuleInByState($goodsMap['status']),
+                'recommend_way' => 'required|integer|in:' . $this->getRuleInByState($goodsMap['recommend_way']),
+                'is_consume_discount' => 'integer|in:' . $this->getRuleInByState($goodsMap['is_consume_discount']),
+                'is_free_shipping' => 'integer|in:' . $this->getRuleInByState($goodsMap['is_free_shipping']),
                 'buy_max' => 'integer',
                 'buy_min' => 'integer',
-                'refund_type' => 'required|string|in:' . $this->getRuleInByState($map['refund_type']),
-                'images' => 'required|string|max:1000',
+                'refund_type' => 'required|string|in:' . $this->getRuleInByState($goodsMap['refund_type']),
+                'images' => 'required|array',
                 'video_url' => 'string|max:255',
-                'attribute.'
+                'attribute.is_open_spec' => 'required|string|in:' . $this->getRuleInByState($goodsAttributeMap['is_open_spec']),
+                'attribute.unit' => 'required|string|max:30',
+                'attribute.service_ids' => 'array',
+                'attribute.parameter' => 'string',
+                'attribute.content' => 'required|string',
+                'timer.on' => 'required|string|in:' . $this->getRuleInByState($goodsTimerMap['on']),
+                'timer.off' => 'required|string|in:' . $this->getRuleInByState($goodsTimerMap['off']),
+                'timer.on_time' => 'required|integer',
+                'timer.off_time' => 'required|integer',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
                 'name' => 'required|string|max:30',
-                'status' => 'integer|in:' . $this->getRuleInByState($map['type']),
+                'status' => 'integer|in:' . $this->getRuleInByState($goodsMap['type']),
             ],
             'post:updateStatus' => [
                 'id' => 'required|integer|gt:0',
-                'status' => 'integer|in:' . $this->getRuleInByState($map['type']),
+                'status' => 'integer|in:' . $this->getRuleInByState($goodsMap['type']),
             ],
         ];
         return $rules[$this->requestRuleKey] ?? [];
