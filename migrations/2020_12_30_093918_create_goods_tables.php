@@ -42,35 +42,6 @@ class CreateGoodsTables extends Migration
             $table->comment('商品品牌');
         });
 
-        Schema::create('spec', function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->unsignedInteger('shop_id')->default(0)->comment('店铺id 0:系统');
-            $table->string('name', 50)->comment('名称');
-            $table->unsignedTinyInteger('sorting')->default(0)->comment('排序');
-            $table->unsignedTinyInteger('status')->default(1)->comment('状态 0:已禁用, 1:已启用');
-            $table->unsignedInteger('created_time')->default(0);
-            $table->unsignedInteger('updated_time')->default(0);
-            $table->unsignedInteger('deleted_time')->default(0);
-
-            $table->index(['shop_id', 'name'], 'shop_id_name');
-
-            $table->comment('商品規格');
-        });
-
-        Schema::create('spec_value', function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->unsignedInteger('spec_id');
-            $table->string('value', 100);
-            $table->unsignedTinyInteger('sorting')->default(0);
-            $table->unsignedTinyInteger('status')->default(1)->comment('状态 0:已禁用, 1:已启用');
-            $table->unsignedInteger('created_time')->default(0);
-            $table->unsignedInteger('updated_time')->default(0);
-
-            $table->index(['spec_id', 'status'], 'spec_id');
-
-            $table->comment('商品规格值');
-        });
-
         Schema::create('parameter', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('shop_id');
@@ -226,10 +197,10 @@ class CreateGoodsTables extends Migration
             $table->integerIncrements('id');
             $table->unsignedInteger('goods_id');
             $table->unsignedInteger('goods_sku_id')->default(0);
-            $table->unsignedInteger('parent_id')->default(0);
-            $table->string('name');
+            $table->unsignedInteger('parent_id')->default(0)->comment('父级id');
+            $table->string('name', 100)->comment('名称');
             $table->unsignedTinyInteger('has_image')->default(0)->comment('是否含有图片 0否,1是');
-            $table->string('image')->default('');
+            $table->string('image')->default('')->comment('图片地址');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 

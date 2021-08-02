@@ -16,10 +16,10 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $id
  * @property int $goods_id
  * @property int $goods_sku_id
- * @property int $parent_id
- * @property string $name
+ * @property int $parent_id 父级id
+ * @property string $name 名称
  * @property int $has_image 是否含有图片 0否,1是
- * @property string $image
+ * @property string $image 图片地址
  * @property int $created_time
  * @property int $updated_time
  */
