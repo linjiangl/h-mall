@@ -13,7 +13,6 @@ namespace App\Core\Service\Goods\Types;
 use App\Core\Dao\Goods\GoodsAttributeDao;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Dao\Goods\GoodsSkuDao;
-use App\Core\Dao\Goods\GoodsSkuSpecValueDao;
 use App\Core\Dao\Goods\GoodsTimerDao;
 use App\Exception\BadRequestException;
 use App\Model\Goods\Goods;
@@ -119,7 +118,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
     {
         $sku = $this->post['sku'];
         $goodsSkuDao = new GoodsSkuDao();
-        $goodsSkuSpecValueDao = new GoodsSkuSpecValueDao();
 
         $insert = [];
         $update = [];
@@ -158,25 +156,8 @@ abstract class AbstractTypesService implements InterfaceTypesService
             }
         }
 
-        // 修改商品规格
-        if (! empty($update)) {
-            foreach ($update as $item) {
-                // 删除原有删除规格属性
-                $goodsSkuSpecValueDao->deleteByCondition([['goods_sku_id', '=', $item['id']]]);
+        // 更新商品规格
 
-                // 更新新的规格属性
-                $goodsSkuDao->update($item['id'], $item);
-                $this->batchInsertSkuSpecValue($item['id'], $item['spec_value']);
-            }
-        }
-
-        // 删除商品规格
-        if (! empty($delete)) {
-            foreach ($delete as $item) {
-                $goodsSkuDao->remove($item['id']);
-                $goodsSkuSpecValueDao->deleteByCondition([['goods_sku_id', '=', $item['id']]]);
-            }
-        }
     }
 
     /**
@@ -205,19 +186,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function batchInsertSkuSpecValue(int $skuId, array $specValueData): void
     {
-        $insert = [];
-        $now = time();
-        foreach ($specValueData as $item) {
-            $insert[] = [
-                'goods_sku_id' => $skuId,
-                'spec_id' => $item['spec_id'],
-                'spec_value_id' => $item['spec_value_id'],
-                'created_time' => $now,
-                'updated_time' => $now,
-            ];
-        }
 
-        (new GoodsSkuSpecValueDao())->batchInsert($insert);
     }
 
     protected function handleGoodsData(): array

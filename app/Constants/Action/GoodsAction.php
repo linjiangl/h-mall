@@ -62,21 +62,6 @@ class GoodsAction extends AbstractConstants
     const CATEGORY_DELETE = 'category_delete';
 
     /**
-     * @Message("创建规格规格")
-     */
-    const SPEC_CREATE = 'spec_create';
-
-    /**
-     * @Message("修改规格规格")
-     */
-    const SPEC_UPDATE = 'spec_update';
-
-    /**
-     * @Message("删除规格规格")
-     */
-    const SPEC_DELETE = 'spec_delete';
-
-    /**
      * @Message("创建商品品牌")
      */
     const BRAND_CREATE = 'brand_create';

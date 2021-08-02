@@ -72,21 +72,6 @@ Router::addGroup('/backend', function () {
     // district
     Router::post('/district/list', [DistrictController::class, 'index']);
 
-    // spec
-    Router::post('/spec/list', [SpecController::class, 'index']);
-    Router::post('/spec/detail', [SpecController::class, 'show']);
-    Router::post('/spec/create', [SpecController::class, 'storeRequest']);
-    Router::post('/spec/update', [SpecController::class, 'update']);
-    Router::post('/spec/delete', [SpecController::class, 'destroy']);
-
-    // specValue
-    Router::post('/specValue/list', [SpecValueController::class, 'index']);
-    Router::post('/specValue/detail', [SpecValueController::class, 'show']);
-    Router::post('/specValue/create', [SpecValueController::class, 'store']);
-    Router::post('/specValue/update', [SpecValueController::class, 'update']);
-    Router::post('/specValue/delete', [SpecValueController::class, 'destroy']);
-    Router::post('/specValue/getListBySpecId', [SpecValueController::class, 'getListBySpecId']);
-
     // category
     Router::post('/category/list', [CategoryController::class, 'index']);
     Router::post('/category/detail', [CategoryController::class, 'show']);
