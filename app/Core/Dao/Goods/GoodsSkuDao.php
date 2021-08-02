@@ -25,4 +25,9 @@ class GoodsSkuDao extends AbstractDao
     {
         return parent::info($id, $with);
     }
+
+    public function getListByGoodsId(int $goodsId): array
+    {
+        return $this->getListByCondition([['goods_id', '=', $goodsId]]);
+    }
 }

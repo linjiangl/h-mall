@@ -45,4 +45,9 @@ class GoodsSpecification extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'parent_id' => 'integer', 'has_image' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+
+    public function children()
+    {
+        return $this->hasMany(GoodsSpecification::class, 'parent_id')->groupBy(['name']);
+    }
 }

@@ -66,4 +66,14 @@ class Goods extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'default_sku_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+
+    public function sku()
+    {
+        return $this->hasMany(GoodsSku::class);
+    }
+
+    public function specification()
+    {
+        return $this->hasMany(GoodsSpecification::class)->where('parent_id', 0)->with(['children']);
+    }
 }

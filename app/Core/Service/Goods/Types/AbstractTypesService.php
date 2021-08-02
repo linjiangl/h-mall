@@ -13,9 +13,12 @@ namespace App\Core\Service\Goods\Types;
 use App\Core\Dao\Goods\GoodsAttributeDao;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Dao\Goods\GoodsSkuDao;
+use App\Core\Dao\Goods\GoodsSpecificationDao;
 use App\Core\Dao\Goods\GoodsTimerDao;
 use App\Exception\BadRequestException;
+use App\Exception\InternalException;
 use App\Model\Goods\Goods;
+use App\Model\Goods\GoodsSpecification;
 use Hyperf\DbConnection\Db;
 use Throwable;
 
@@ -41,6 +44,11 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected Goods $goods;
 
+    /**
+     * 商品规格.
+     */
+    protected array $goodsSpecification;
+
     public function __construct(array $data, int $id = 0)
     {
         $this->id = $id;
@@ -61,6 +69,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $this->goods = $goodsDao->info($this->id);
             $this->syncAttribute();
             $this->syncTimer();
+            $this->syncSpecification();
             $this->syncSku();
             $this->setDefaultSkuId();
 
@@ -84,6 +93,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $this->goods = $goodsDao->info($this->id);
             $this->syncAttribute();
             $this->syncTimer();
+            $this->syncSpecification();
             $this->syncSku();
             $this->setDefaultSkuId();
 
@@ -112,51 +122,95 @@ abstract class AbstractTypesService implements InterfaceTypesService
     }
 
     /**
+     * 保存商品规格
+     */
+    protected function syncSpecification(): void
+    {
+        // 删除所有规格
+        (new GoodsSpecificationDao())->deleteByGoodsId($this->id);
+
+        // 添加商品规格
+        foreach ($this->post['specification'] as $item) {
+            $goodsSpecification = new GoodsSpecification([
+                'goods_id' => $this->id,
+                'name' => $item['name'],
+                'has_image' => $item['has_image'],
+            ]);
+            $goodsSpecification->save();
+
+            $this->goodsSpecification[] = $goodsSpecification;
+        }
+    }
+
+    /**
      * 保存商品sku数据.
      */
     protected function syncSku(): void
     {
-        $sku = $this->post['sku'];
         $goodsSkuDao = new GoodsSkuDao();
-
-        $insert = [];
-        $update = [];
-        $delete = [];
         if (! $this->isCreated) {
-            // 新增
-            $insert = $sku;
-        } else {
-            // 修改
-            foreach ($sku as $item) {
+            // 需要删除的商品规格
+            $updateSkuIds = [];
+            foreach ($this->post['sku'] as $item) {
                 if (isset($item['id']) && intval($item['id']) > 0) {
-                    $update[] = $item;
-                } else {
-                    $insert[] = $item;
+                    $updateSkuIds[] = $item['id'];
                 }
             }
 
-            // 需要删除的商品规格
-            $updateSkuIds = array_column($update, 'id');
-            $skuList = $goodsSkuDao->getListByCondition([['goods_id', '=', $this->id]]);
+            $deleteSkuIds = [];
+            $skuList = $goodsSkuDao->getListByGoodsId($this->id);
             foreach ($skuList as $item) {
                 if (empty($updateSkuIds) || ! in_array($item['id'], $updateSkuIds)) {
-                    $delete[] = $item;
+                    $deleteSkuIds[] = $item['id'];
                 }
             }
-        }
 
-        // 新增商品规格
-        if (! empty($insert)) {
-            foreach ($insert as $item) {
-                unset($item['id']);
-                $item['goods_id'] = $this->id;
-                $skuId = $goodsSkuDao->create($item);
-
-                $this->batchInsertSkuSpecValue($skuId, $item['spec_value']);
+            if (! empty($deleteSkuIds)) {
+                $goodsSkuDao->deleteByCondition([['id', 'in', $deleteSkuIds]]);
             }
         }
 
-        // 更新商品规格
+        // 创建或更新sku数据
+        foreach ($this->post['sku'] as $sku) {
+            $tmp = [
+                'shop_id' => $this->goods->shop_id,
+                'goods_id' => $this->id,
+                'sku_name' => $sku['sku_name'],
+                'sku_no' => $sku['sku_no'] ?? '',
+                'sale_price' => $sku['sale_price'],
+                'market_price' => $sku['market_price'] ?? $sku['sale_price'],
+                'cost_price' => $sku['cost_price'] ?? $sku['sale_price'],
+                'stock' => $sku['stock'],
+                'stock_alarm' => $sku['stock_alarm'],
+                'virtual_sales' => $sku['virtual_sales'] ?? 0,
+                'weight' => $sku['weight'] ?? 0,
+                'volume' => $sku['weight'] ?? 0,
+                'is_default' => $sku['is_default'],
+                'image' => $sku['image'] ?? '',
+            ];
+            if ($sku['id']) {
+                // 新建
+                $goodsSkuId = $goodsSkuDao->create($tmp);
+            } else {
+                // 修改
+                $goodsSku = $goodsSkuDao->update($sku['id'], $tmp);
+                $goodsSkuId = $goodsSku['id'];
+            }
+
+            foreach ($sku['specification'] as $index => $item) {
+                if ($this->goodsSpecification[$index]['has_image'] && ! $item['image']) {
+                    throw new InternalException("{$item['name']} 规格需要上传图片！");
+                }
+                $goodsSpecification = new GoodsSpecification([
+                    'goods_id' => $this->id,
+                    'goods_sku_id' => $goodsSkuId,
+                    'parent_id' => $this->goodsSpecification[$index]['id'],
+                    'name' => $item['name'],
+                    'image' => $item['image'],
+                ]);
+                $goodsSpecification->save();
+            }
+        }
     }
 
     /**
@@ -164,7 +218,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function setDefaultSkuId(): void
     {
-        $skuList = (new GoodsSkuDao())->getListByCondition([['goods_id', '=', $this->id]]);
+        $skuList = (new GoodsSkuDao())->getListByGoodsId($this->id);
         $defaultSkuId = 0;
         foreach ($skuList as $index => $item) {
             if ($index === 0) {
@@ -178,13 +232,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
 
         $this->goods->default_sku_id = $defaultSkuId;
         $this->goods->save();
-    }
-
-    /**
-     * 批量增加商品规格属性.
-     */
-    protected function batchInsertSkuSpecValue(int $skuId, array $specValueData): void
-    {
     }
 
     protected function handleGoodsData(): array
