@@ -53,7 +53,21 @@ class GoodsService extends AbstractService
         }
     }
 
-    public function make(array $data, int $id = 0, string $type = GoodsState::TYPE_GENERAL): AbstractTypesService
+    /**
+     * 处理商品详情.
+     */
+    public function convertGoodsDetail(array $goodsDetail): array
+    {
+        $idx = [];
+        foreach ($goodsDetail['sku'] as $item) {
+            $index = implode('::', array_column($item['specification'], 'name'));
+            $idx[$index] = $item['id'];
+        }
+        $goodsDetail['sku_specification_idx'] = $idx;
+        return $goodsDetail;
+    }
+
+    protected function make(array $data, int $id = 0, string $type = GoodsState::TYPE_GENERAL): AbstractTypesService
     {
         if (! in_array($type, array_keys($this->mapClass))) {
             throw new InternalException('商品类型不存在');
