@@ -24,5 +24,5 @@ class UserAction extends AbstractConstants
     /**
      * @Message("修改用户信息")
      */
-    const USER_UPDATE = 'user_update';
+    public const USER_UPDATE = 'user_update';
 }

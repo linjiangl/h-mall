@@ -24,5 +24,5 @@ class OrderMessage extends AbstractConstants
     /**
      * @Message("订单支付成功,祝你购物愉快!")
      */
-    const PAYMENT_SUCCESS = 'payment_success';
+    public const PAYMENT_SUCCESS = 'payment_success';
 }

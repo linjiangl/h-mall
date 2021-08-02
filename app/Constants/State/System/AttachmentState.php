@@ -15,12 +15,12 @@ use App\Constants\State\AbstractState;
 class AttachmentState extends AbstractState
 {
     // 状态
-    const STATUS_DISABLED = 0;
+    public const STATUS_DISABLED = 0;
 
-    const STATUS_ENABLED = 1;
+    public const STATUS_ENABLED = 1;
 
     // 云存储系统
-    const SYSTEM_QINIU = 'qiniu';
+    public const SYSTEM_QINIU = 'qiniu';
 
     public static function map(): array
     {

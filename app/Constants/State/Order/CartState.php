@@ -15,14 +15,14 @@ use App\Constants\State\AbstractState;
 class CartState extends AbstractState
 {
     // 是否选中
-    const IS_CHECK_FALSE = 0;
+    public const IS_CHECK_FALSE = 0;
 
-    const IS_CHECK_TRUE = 1;
+    public const IS_CHECK_TRUE = 1;
 
     // 是否显示
-    const IS_SHOW_FALSE = 0;
+    public const IS_SHOW_FALSE = 0;
 
-    const IS_SHOW_TRUE = 1;
+    public const IS_SHOW_TRUE = 1;
 
     public static function map(): array
     {

@@ -19,11 +19,11 @@ use Throwable;
 
 class StockChangeService
 {
-    const STOCK_CART = StockCartService::class;
+    public const STOCK_CART = StockCartService::class;
 
-    const STOCK_ORDER = StockOrderService::class;
+    public const STOCK_ORDER = StockOrderService::class;
 
-    const STOCK_REFUND = StockRefundService::class;
+    public const STOCK_REFUND = StockRefundService::class;
 
     /**
      * @var InterfaceStockChangeService

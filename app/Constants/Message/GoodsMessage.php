@@ -24,20 +24,20 @@ class GoodsMessage extends AbstractConstants
     /**
      * @Message("该分类下存在分类")
      */
-    const CHECK_CATEGORY_ID_HAS_CATEGORY = 'check_category_id_has_category';
+    public const CHECK_CATEGORY_ID_HAS_CATEGORY = 'check_category_id_has_category';
 
     /**
      * @Message("该规格下存在分类")
      */
-    const CHECK_SPEC_ID_HAS_CATEGORY = 'check_spec_id_has_category';
+    public const CHECK_SPEC_ID_HAS_CATEGORY = 'check_spec_id_has_category';
 
     /**
      * @Message("该规格下存在商品")
      */
-    const CHECK_SPEC_ID_HAS_GOODS = 'check_spec_id_has_goods';
+    public const CHECK_SPEC_ID_HAS_GOODS = 'check_spec_id_has_goods';
 
     /**
      * @Message("该规格值下存在商品")
      */
-    const CHECK_SPEC_VALUE_ID_HAS_GOODS = 'check_spec_value_id_has_goods';
+    public const CHECK_SPEC_VALUE_ID_HAS_GOODS = 'check_spec_value_id_has_goods';
 }

@@ -12,23 +12,23 @@ namespace App\Core\Tools;
 
 class Validate
 {
-    const REGEX_TYPE_MOBILE = 'mobile'; // 手机号码
+    public const REGEX_TYPE_MOBILE = 'mobile'; // 手机号码
 
-    const REGEX_TYPE_TELEPHONE = 'telephone';   // 电话
+    public const REGEX_TYPE_TELEPHONE = 'telephone';   // 电话
 
-    const REGEX_TYPE_ID_CARD = 'id_card';   // 身份证
+    public const REGEX_TYPE_ID_CARD = 'id_card';   // 身份证
 
-    const REGEX_TYPE_QQ = 'qq'; // QQ号码
+    public const REGEX_TYPE_QQ = 'qq'; // QQ号码
 
-    const REGEX_TYPE_DATE = 'date'; // 日期
+    public const REGEX_TYPE_DATE = 'date'; // 日期
 
-    const REGEX_TYPE_DATE_TIME = 'date_time'; // 日期时间
+    public const REGEX_TYPE_DATE_TIME = 'date_time'; // 日期时间
 
-    const REGEX_TYPE_ZH = 'zh'; // 中文
+    public const REGEX_TYPE_ZH = 'zh'; // 中文
 
-    const REGEX_TYPE_ZH_NAME = 'zh_name'; // 中文姓名
+    public const REGEX_TYPE_ZH_NAME = 'zh_name'; // 中文姓名
 
-    const REGEX_TYPE_POSTAL_CODE = 'postal_code'; // 邮编
+    public const REGEX_TYPE_POSTAL_CODE = 'postal_code'; // 邮编
 
     /**
      * 验证规则，检查对应的模型数据是否存在.

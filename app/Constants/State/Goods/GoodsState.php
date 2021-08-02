@@ -16,30 +16,30 @@ use App\Constants\State\BooleanState;
 class GoodsState extends AbstractState
 {
     // 状态
-    const STATUS_OFF_SALE = 0;
+    public const STATUS_OFF_SALE = 0;
 
-    const STATUS_ON_SALE = 1;
+    public const STATUS_ON_SALE = 1;
 
     // 类型
-    const TYPE_GENERAL = 'general';
+    public const TYPE_GENERAL = 'general';
 
-    const TYPE_VIRTUAL = 'virtual';
+    public const TYPE_VIRTUAL = 'virtual';
 
     // 推荐方式
-    const RECOMMEND_WAY_DEFAULT = 0;
+    public const RECOMMEND_WAY_DEFAULT = 0;
 
-    const RECOMMEND_WAY_NEW = 1;
+    public const RECOMMEND_WAY_NEW = 1;
 
-    const RECOMMEND_WAY_HOT = 2;
+    public const RECOMMEND_WAY_HOT = 2;
 
-    const RECOMMEND_WAY_BEST = 3;
+    public const RECOMMEND_WAY_BEST = 3;
 
     // 退款类型
-    const REFUND_TYPE_ALL = 'all';
+    public const REFUND_TYPE_ALL = 'all';
 
-    const REFUND_TYPE_MONEY = 'money';
+    public const REFUND_TYPE_MONEY = 'money';
 
-    const REFUND_TYPE_REFUSE = 'refuse';
+    public const REFUND_TYPE_REFUSE = 'refuse';
 
     public static function map(): array
     {

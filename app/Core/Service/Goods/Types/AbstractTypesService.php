@@ -157,7 +157,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
         }
 
         // 更新商品规格
-
     }
 
     /**
@@ -186,7 +185,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function batchInsertSkuSpecValue(int $skuId, array $specValueData): void
     {
-
     }
 
     protected function handleGoodsData(): array

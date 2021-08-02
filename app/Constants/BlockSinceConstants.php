@@ -13,8 +13,8 @@ namespace App\Constants;
 class BlockSinceConstants
 {
     // 前端
-    const SINCE_FRONTEND = 'frontend';
+    public const SINCE_FRONTEND = 'frontend';
 
     // 后台管理
-    const SINCE_BACKEND = 'backend';
+    public const SINCE_BACKEND = 'backend';
 }

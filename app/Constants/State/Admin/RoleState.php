@@ -15,28 +15,28 @@ use App\Constants\State\AbstractState;
 class RoleState extends AbstractState
 {
     // 状态
-    const STATUS_DISABLED = 0;
+    public const STATUS_DISABLED = 0;
 
-    const STATUS_ENABLED = 1;
+    public const STATUS_ENABLED = 1;
 
     // 是否超管
-    const IS_SUPER_FALSE = 0;
+    public const IS_SUPER_FALSE = 0;
 
-    const IS_SUPER_TRUE = 1;
+    public const IS_SUPER_TRUE = 1;
 
     // 权限
-    const IDENTIFIER_SYSTEM_ADMINISTRATOR = 'system_administrator';
+    public const IDENTIFIER_SYSTEM_ADMINISTRATOR = 'system_administrator';
 
-    const IDENTIFIER_ADMINISTRATOR = 'administrator';
+    public const IDENTIFIER_ADMINISTRATOR = 'administrator';
 
-    const IDENTIFIER_GUEST = 'guest';
+    public const IDENTIFIER_GUEST = 'guest';
 
-    const IDENTIFIER_OPERATORS = 'operators';
+    public const IDENTIFIER_OPERATORS = 'operators';
 
     // 是否系统权限
-    const IS_SYSTEM_FALSE = 0;
+    public const IS_SYSTEM_FALSE = 0;
 
-    const IS_SYSTEM_TRUE = 1;
+    public const IS_SYSTEM_TRUE = 1;
 
     public static function map(): array
     {

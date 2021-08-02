@@ -21,8 +21,6 @@ use App\Controller\Backend\Goods\GoodsController;
 use App\Controller\Backend\Goods\Parameter\ParameterController;
 use App\Controller\Backend\Goods\Parameter\ParameterOptionsController;
 use App\Controller\Backend\Goods\ServiceTemplateController;
-use App\Controller\Backend\Goods\Spec\SpecController;
-use App\Controller\Backend\Goods\Spec\SpecValueController;
 use App\Controller\Backend\System\DistrictController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\User\UserController;
