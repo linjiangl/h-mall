@@ -10,24 +10,24 @@ declare(strict_types=1);
  */
 namespace App\Model\Goods;
 
-use App\Model\Model;
+use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
- * @property string $name 商品服务名称
- * @property string $description 商品服务的描述
+ * @property string $name 名称
+ * @property string $description 描述
  * @property int $sorting 排序
  * @property int $created_time
  * @property int $updated_time
  */
-class GoodsService extends Model
+class ServiceTemplate extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'goods_service';
+    protected $table = 'service_template';
 
     /**
      * The attributes that are mass assignable.

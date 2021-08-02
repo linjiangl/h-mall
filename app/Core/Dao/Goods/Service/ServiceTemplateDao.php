@@ -11,17 +11,17 @@ declare(strict_types=1);
 namespace App\Core\Dao\Goods\Service;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Goods\GoodsService;
+use App\Model\Goods\ServiceTemplate;
 
-class ServiceDao extends AbstractDao
+class ServiceTemplateDao extends AbstractDao
 {
-    protected string $model = GoodsService::class;
+    protected string $model = ServiceTemplate::class;
 
     protected array $noAllowActions = [];
 
-    protected string $notFoundMessage = '商品服务不存在或已删除';
+    protected string $notFoundMessage = '服务模版不存在或已删除';
 
-    public function info(int $id, array $with = []): GoodsService
+    public function info(int $id, array $with = []): ServiceTemplate
     {
         return parent::info($id, $with);
     }

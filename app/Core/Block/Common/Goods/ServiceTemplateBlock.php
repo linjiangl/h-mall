@@ -8,14 +8,14 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Common\Goods\Service;
+namespace App\Core\Block\Common\Goods;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Goods\Service\ServiceService;
+use App\Core\Service\Goods\ServiceTemplateService;
 
-class ServiceBlock extends BaseBlock
+class ServiceTemplateBlock extends BaseBlock
 {
-    protected string $service = ServiceService::class;
+    protected string $service = ServiceTemplateService::class;
 
     public function __construct()
     {
@@ -25,7 +25,7 @@ class ServiceBlock extends BaseBlock
 
     public function all(): array
     {
-        $service = new ServiceService();
+        $service = new ServiceTemplateService();
         return $service->all();
     }
 
