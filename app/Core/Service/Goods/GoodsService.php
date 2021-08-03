@@ -32,8 +32,6 @@ class GoodsService extends AbstractService
     public function create(array $data): int
     {
         try {
-            $user = request()->getAttribute('user');
-            $data['user_id'] = $user['id'];
             $service = $this->make($data, 0, $data['type']);
             return $service->create();
         } catch (Throwable $e) {

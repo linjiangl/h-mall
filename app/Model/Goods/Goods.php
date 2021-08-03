@@ -10,12 +10,11 @@ declare(strict_types=1);
  */
 namespace App\Model\Goods;
 
-use Hyperf\DbConnection\Model\Model;
+use App\Model\Model;
 
 /**
  * @property int $id
  * @property int $shop_id
- * @property int $user_id
  * @property int $category_id 所属分类
  * @property int $brand_id 品牌
  * @property int $default_sku_id
@@ -58,14 +57,14 @@ class Goods extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'category_id', 'brand_id', 'default_sku_id', 'type', 'name', 'introduction', 'keywords', 'sale_price_min', 'sale_price_max', 'achieve_price', 'stock', 'stock_alarm', 'clicks', 'sales', 'virtual_sales', 'status', 'recommend_way', 'is_consume_discount', 'is_free_shipping', 'buy_max', 'buy_min', 'refund_type', 'images', 'video_url', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'shop_id', 'category_id', 'brand_id', 'default_sku_id', 'type', 'name', 'introduction', 'keywords', 'sale_price_min', 'sale_price_max', 'achieve_price', 'stock', 'stock_alarm', 'clicks', 'sales', 'virtual_sales', 'status', 'recommend_way', 'is_consume_discount', 'is_free_shipping', 'buy_max', 'buy_min', 'refund_type', 'images', 'video_url', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'default_sku_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'category_id' => 'integer', 'brand_id' => 'integer', 'default_sku_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'status' => 'integer', 'recommend_way' => 'integer', 'is_consume_discount' => 'integer', 'is_free_shipping' => 'integer', 'buy_max' => 'integer', 'buy_min' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 
     public function sku()
     {

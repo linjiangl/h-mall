@@ -248,8 +248,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
 
         return [
             'shop_id' => $this->post['shop_id'] ?? 0,
-            'user_id' => $this->post['user_id'],
-            'brand_id' => $this->post['brand_id'],
+            'brand_id' => $this->post['brand_id'] ?? 0,
             'category_id' => $this->post['category_id'],
             'type' => $this->post['type'],
             'name' => $this->post['name'],

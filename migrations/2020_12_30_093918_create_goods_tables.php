@@ -89,7 +89,6 @@ class CreateGoodsTables extends Migration
         Schema::create('goods', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('shop_id');
-            $table->unsignedInteger('user_id');
             $table->unsignedInteger('category_id')->comment('所属分类');
             $table->unsignedInteger('brand_id')->default(0)->comment('品牌');
             $table->unsignedInteger('default_sku_id')->default(0);

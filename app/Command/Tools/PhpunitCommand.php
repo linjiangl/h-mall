@@ -39,7 +39,7 @@ class PhpunitCommand extends HyperfCommand
             $this->output->error('--reset yes/no');
             return;
         }
-        $testExec = 'vendor/bin/co-phpunit -c phpunit.xml --colors=always';
+        $testExec = 'vendor/bin/co-phpunit --prepend test/bootstrap.php -c phpunit.xml --colors=always';
         if ($reset == 'yes') {
             if (stripos(env('DB_DATABASE'), '_test') === false) {
                 $this->output->error('请使用测试数据库(xx_test)做单元测试');

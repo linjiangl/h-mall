@@ -21,30 +21,33 @@ class GoodsController extends BackendController
     public function storeRequest(GoodsRequest $request): int
     {
         $request->validated();
-        $id = $this->store();
+        $result = $this->store();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE));
-        return $id;
+        return $result;
     }
 
     public function updateStatusRequest(GoodsRequest $request): array
     {
         $request->validated();
+        $result = $this->update();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_UPDATE_STATUS));
-        return $this->update();
+        return $result;
     }
 
     public function recycleRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
+        $result = $this->batchDestroy();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE));
-        return $this->batchDestroy();
+        return $result;
     }
 
     public function batchDestroyRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
+        $result = $this->batchDestroy();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE));
-        return $this->batchDestroy();
+        return $result;
     }
 
     protected function block(): GoodsBlock

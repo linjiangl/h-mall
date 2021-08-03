@@ -234,7 +234,7 @@ abstract class AbstractBlock
      * 设置场景.
      * @return $this
      */
-    public function setSince(string $since = BlockSinceConstants::SINCE_FRONTEND): AbstractBlock
+    public function setSince(string $since): AbstractBlock
     {
         $this->since = $since;
         return $this;
@@ -396,6 +396,11 @@ abstract class AbstractBlock
         switch ($this->since) {
             case 'frontend':
                 $authorize = request()->getAttribute('user');
+                $authorize = $authorize ?: [];
+                $service = $service->withAuthorize($authorize);
+                break;
+            case 'backend':
+                $authorize = request()->getAttribute('admin');
                 $authorize = $authorize ?: [];
                 $service = $service->withAuthorize($authorize);
                 break;
