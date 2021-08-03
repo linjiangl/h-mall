@@ -245,10 +245,6 @@ abstract class AbstractTypesService implements InterfaceTypesService
         $minPrice = $salePrice[0];
         $maxPrice = end($salePrice);
 
-        if ($this->post['images'] && is_array($this->post['images'])) {
-            $this->post['images'] = implode(',', $this->post['images']);
-        }
-
         return [
             'shop_id' => $this->post['shop_id'] ?? 0,
             'brand_id' => $this->post['brand_id'] ?? 0,
