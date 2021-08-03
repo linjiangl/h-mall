@@ -28,20 +28,21 @@ class AppExceptionHandler extends ExceptionHandler
 
     public function __construct(ContainerInterface $container)
     {
-        $this->logger = $container->get(LoggerFactory::class)->get('APP');
+        $this->logger = $container->get(LoggerFactory::class)->get('App');
     }
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
+        $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
+        $this->logger->error($throwable->getTraceAsString());
+
         if ($throwable instanceof RateLimitException) {
             return response_json('', 'Too Many Requests', 429);
         }
         if ($throwable instanceof HttpException && $throwable->getCode() < 500) {
             return response_json('', $throwable->getMessage(), $throwable->getCode());
         }
-        $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
-        $this->logger->error($throwable->getTraceAsString());
-        return response_json('', $throwable->getMessage(), 500);
+        return response_json('', 'Internal Server Error.', 500);
     }
 
     public function isValid(Throwable $throwable): bool

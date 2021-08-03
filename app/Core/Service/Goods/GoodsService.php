@@ -35,7 +35,6 @@ class GoodsService extends AbstractService
             $service = $this->make($data, 0, $data['type']);
             return $service->create();
         } catch (Throwable $e) {
-            write_logs('创建失败', $data);
             throw new BadRequestException($e->getMessage(), $e->getCode());
         }
     }
@@ -46,7 +45,6 @@ class GoodsService extends AbstractService
             $service = $this->make($data, $id, $data['type']);
             return $service->update();
         } catch (Throwable $e) {
-            write_logs('保存失败', $data);
             throw new BadRequestException($e->getMessage(), $e->getCode());
         }
     }

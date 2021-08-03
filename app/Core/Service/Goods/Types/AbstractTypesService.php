@@ -58,11 +58,11 @@ abstract class AbstractTypesService implements InterfaceTypesService
     public function create(): int
     {
         $this->isCreated = true;
+        $data = $this->handleGoodsData();
 
         Db::beginTransaction();
         try {
             // 创建商品
-            $data = $this->handleGoodsData();
             $goodsDao = new GoodsDao();
             $this->id = $goodsDao->create($data);
 
@@ -77,16 +77,18 @@ abstract class AbstractTypesService implements InterfaceTypesService
             return $this->id;
         } catch (Throwable $e) {
             Db::rollBack();
+            write_logs('创建失败', $data);
             throw new BadRequestException($e->getMessage());
         }
     }
 
     public function update(): array
     {
+        $data = $this->handleGoodsData();
+
         Db::beginTransaction();
         try {
-            // 创建商品
-            $data = $this->handleGoodsData();
+            // 修改商品
             $goodsDao = new GoodsDao();
             $goodsDao->update($this->id, $data);
 
@@ -101,6 +103,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             return $this->goods->toArray();
         } catch (Throwable $e) {
             Db::rollBack();
+            write_logs('修改失败', $data);
             throw new BadRequestException($e->getMessage());
         }
     }
