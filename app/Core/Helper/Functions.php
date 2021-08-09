@@ -23,60 +23,60 @@ use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 use Swoole\WebSocket\Server as WebSocketServer;
 
-/*
- * 容器实例
- */
 if (! function_exists('container')) {
+    /**
+     * 容器实例.
+     */
     function container(): ContainerInterface
     {
         return ApplicationContext::getContainer();
     }
 }
 
-/*
- * redis 客户端实例
- */
 if (! function_exists('redis')) {
+    /**
+     * redis 客户端实例.
+     */
     function redis(): Redis
     {
         return container()->get(Redis::class);
     }
 }
 
-/*
- * websocket 实例
- */
 if (! function_exists('websocket')) {
+    /**
+     * websocket 实例.
+     */
     function websocket(): WebSocketServer
     {
         return container()->get(WebSocketServer::class);
     }
 }
 
-/*
- * 缓存实例 简单的缓存
- */
 if (! function_exists('cache')) {
+    /**
+     * 缓存实例 简单的缓存.
+     */
     function cache(): CacheInterface
     {
         return container()->get(CacheInterface::class);
     }
 }
 
-/*
- * 控制台日志
- */
 if (! function_exists('stdLog')) {
+    /**
+     * 控制台日志.
+     */
     function stdLog(): StdoutLogger
     {
         return container()->get(StdoutLoggerInterface::class);
     }
 }
 
-/*
- * 文件日志
- */
 if (! function_exists('logger')) {
+    /**
+     * 文件日志.
+     */
     function logger(): LoggerInterface
     {
         return container()->get(LoggerFactory::class)->make();
@@ -84,6 +84,9 @@ if (! function_exists('logger')) {
 }
 
 if (! function_exists('request')) {
+    /**
+     * 请求实例.
+     */
     function request(): RequestInterface
     {
         return container()->get(ServerRequestInterface::class);
@@ -91,6 +94,9 @@ if (! function_exists('request')) {
 }
 
 if (! function_exists('response')) {
+    /**
+     * 响应实例.
+     */
     function response(): ResponseInterface
     {
         return container()->get(ResponseInterface::class);
@@ -98,6 +104,11 @@ if (! function_exists('response')) {
 }
 
 if (! function_exists('response_json')) {
+    /**
+     * 接口响应数据格式.
+     * @param $data
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     function response_json($data, string $message = '', int $code = 200): Psr\Http\Message\ResponseInterface
     {
         $code = $code ?: 500;
