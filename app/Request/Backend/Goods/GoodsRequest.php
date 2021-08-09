@@ -47,7 +47,7 @@ class GoodsRequest extends AbstractRequest
                 'attribute.is_open_spec' => 'required|integer|in:' . $this->getRuleInByState($goodsAttributeMap['is_open_spec']),
                 'attribute.unit' => 'required|string|max:30',
                 'attribute.service_ids' => 'array',
-                'attribute.parameter' => 'string',
+                'attribute.parameter' => 'array',
                 'attribute.content' => 'required|string',
                 'timer.on' => 'required|integer|in:' . $this->getRuleInByState($goodsTimerMap['on']),
                 'timer.off' => 'required|integer|in:' . $this->getRuleInByState($goodsTimerMap['off']),

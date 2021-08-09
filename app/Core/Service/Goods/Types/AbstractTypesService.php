@@ -191,13 +191,13 @@ abstract class AbstractTypesService implements InterfaceTypesService
                 'is_default' => $sku['is_default'],
                 'image' => $sku['image'] ?? '',
             ];
-            if ($sku['id']) {
-                // 新建
-                $goodsSkuId = $goodsSkuDao->create($tmp);
-            } else {
+            if (isset($sku['id']) && $sku['id'] > 0) {
                 // 修改
                 $goodsSku = $goodsSkuDao->update($sku['id'], $tmp);
                 $goodsSkuId = $goodsSku['id'];
+            } else {
+                // 新建
+                $goodsSkuId = $goodsSkuDao->create($tmp);
             }
 
             foreach ($sku['specification'] as $index => $item) {

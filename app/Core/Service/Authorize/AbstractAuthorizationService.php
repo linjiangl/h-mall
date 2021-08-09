@@ -103,7 +103,10 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         ];
     }
 
-    public function getTTL()
+    /**
+     * 获取有效时间，返回-1代表过期
+     */
+    public function getTTL(): int
     {
         $expData = (array) $this->plain->claims()->get(RegisteredClaims::EXPIRATION_TIME);
         try {

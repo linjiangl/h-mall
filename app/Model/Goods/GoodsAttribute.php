@@ -45,4 +45,24 @@ class GoodsAttribute extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'goods_id' => 'integer', 'is_open_spec' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+
+    public function setServiceIdsAttribute($value)
+    {
+        $this->attributes['service_ids'] = ! empty($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : '';
+    }
+
+    public function getServiceIdsAttribute()
+    {
+        return ! empty($this->attributes['service_ids']) ? json_decode($this->attributes['service_ids']) : [];
+    }
+
+    public function setParameterAttribute($value)
+    {
+        $this->attributes['parameter'] = ! empty($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : '';
+    }
+
+    public function getParameterAttribute()
+    {
+        return ! empty($this->attributes['parameter']) ? json_decode($this->attributes['parameter']) : [];
+    }
 }

@@ -55,7 +55,7 @@ class GoodsTest extends BackendHttpTestCase
                 'is_open_spec' => 1,
                 'unit' => '件',
                 'service_ids' => [],
-                'parameter' => '',
+                'parameter' => [],
                 'content' => '米金兑换200元优惠券',
             ],
             'timer' => [
@@ -80,6 +80,7 @@ class GoodsTest extends BackendHttpTestCase
             ],
             'sku' => [
                 [
+                    'id' => 0,
                     'sku_name' => '红色 8+128G 基础套餐',
                     'sku_no' => 'xxxx',
                     'sale_price' => 10,
