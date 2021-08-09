@@ -55,11 +55,11 @@ class GoodsService extends AbstractService
     public function convertGoodsDetail(array $goodsDetail): array
     {
         $idx = [];
-        foreach ($goodsDetail['sku'] as $item) {
-            $index = implode('::', array_column($item['specification'], 'name'));
+        foreach ($goodsDetail['skus'] as $item) {
+            $index = implode('::', array_column($item['specs'], 'name'));
             $idx[$index] = $item['id'];
         }
-        $goodsDetail['sku_specification_idx'] = $idx;
+        $goodsDetail['sku_spec_idx'] = $idx;
         return $goodsDetail;
     }
 

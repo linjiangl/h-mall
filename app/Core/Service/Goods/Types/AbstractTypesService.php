@@ -133,7 +133,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         (new GoodsSpecificationDao())->deleteByGoodsId($this->id);
 
         // 添加商品规格
-        foreach ($this->post['specification'] as $item) {
+        foreach ($this->post['specs'] as $item) {
             $goodsSpecification = new GoodsSpecification([
                 'goods_id' => $this->id,
                 'name' => $item['name'],
@@ -154,7 +154,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         if (! $this->isCreated) {
             // 需要删除的商品规格
             $updateSkuIds = [];
-            foreach ($this->post['sku'] as $item) {
+            foreach ($this->post['skus'] as $item) {
                 if (isset($item['id']) && intval($item['id']) > 0) {
                     $updateSkuIds[] = $item['id'];
                 }
@@ -174,7 +174,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         }
 
         // 创建或更新sku数据
-        foreach ($this->post['sku'] as $sku) {
+        foreach ($this->post['skus'] as $sku) {
             $tmp = [
                 'shop_id' => $this->goods->shop_id,
                 'goods_id' => $this->id,
@@ -200,7 +200,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
                 $goodsSkuId = $goodsSkuDao->create($tmp);
             }
 
-            foreach ($sku['specification'] as $index => $item) {
+            foreach ($sku['specs'] as $index => $item) {
                 if ($this->goodsSpecification[$index]['has_image'] && ! $item['image']) {
                     throw new InternalException("{$item['name']} 规格需要上传图片！");
                 }
@@ -239,7 +239,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
 
     protected function handleGoodsData(): array
     {
-        $sku = $this->post['sku'];
+        $sku = $this->post['skus'];
         $salePrice = array_column($sku, 'sale_price');
         sort($salePrice);
         $minPrice = $salePrice[0];

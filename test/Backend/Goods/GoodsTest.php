@@ -29,6 +29,15 @@ class GoodsTest extends BackendHttpTestCase
         $this->handleHttpIndex();
     }
 
+    public function testBackendGoodsShow()
+    {
+        $this->url = '/goods/detail';
+        $this->data = [
+            'id' => 2,
+        ];
+        $this->handleHttpShow();
+    }
+
     public function testBackendGoodsCreate()
     {
         $this->url = '/goods/create';
@@ -64,7 +73,7 @@ class GoodsTest extends BackendHttpTestCase
                 'on_time' => time(),
                 'off_time' => time(),
             ],
-            'specification' => [
+            'specs' => [
                 [
                     'name' => '颜色',
                     'has_image' => 0,
@@ -78,7 +87,7 @@ class GoodsTest extends BackendHttpTestCase
                     'has_image' => 0,
                 ],
             ],
-            'sku' => [
+            'skus' => [
                 [
                     'id' => 0,
                     'sku_name' => '红色 8+128G 基础套餐',
@@ -90,7 +99,7 @@ class GoodsTest extends BackendHttpTestCase
                     'volume' => 10,
                     'is_default' => 1,
                     'image' => '',
-                    'specification' => [
+                    'specs' => [
                         [
                             'name' => '红色',
                             'has_image' => 0,
@@ -103,6 +112,35 @@ class GoodsTest extends BackendHttpTestCase
                         ],
                         [
                             'name' => '基础套餐',
+                            'has_image' => 0,
+                            'image' => '',
+                        ],
+                    ],
+                ],
+                [
+                    'id' => 0,
+                    'sku_name' => '红色 8+128G 优惠套餐',
+                    'sku_no' => 'xxxx',
+                    'sale_price' => 9.9,
+                    'stock' => 100,
+                    'stock_alarm' => 10,
+                    'weight' => 10,
+                    'volume' => 10,
+                    'is_default' => 0,
+                    'image' => '',
+                    'specs' => [
+                        [
+                            'name' => '红色',
+                            'has_image' => 0,
+                            'image' => '',
+                        ],
+                        [
+                            'name' => '8+128G',
+                            'has_image' => 0,
+                            'image' => '',
+                        ],
+                        [
+                            'name' => '优惠套餐',
                             'has_image' => 0,
                             'image' => '',
                         ],

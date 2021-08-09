@@ -76,13 +76,28 @@ class Goods extends Model
         return ! empty($this->attributes['images']) ? json_decode($this->attributes['images']) : [];
     }
 
-    public function sku()
+    public function default()
     {
-        return $this->hasMany(GoodsSku::class);
+        return $this->belongsTo(GoodsSku::class, 'default_sku_id');
     }
 
-    public function specification()
+    public function attribute()
+    {
+        return $this->hasOne(GoodsAttribute::class);
+    }
+
+    public function timer()
+    {
+        return $this->hasOne(GoodsTimer::class);
+    }
+
+    public function specs()
     {
         return $this->hasMany(GoodsSpecification::class)->where('parent_id', 0)->with(['children']);
+    }
+
+    public function skus()
+    {
+        return $this->hasMany(GoodsSku::class);
     }
 }

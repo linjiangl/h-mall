@@ -460,7 +460,7 @@ abstract class AbstractDao
     protected function checkIsOperational(array $detail)
     {
         if (! empty($this->authorize)) {
-            if ($this->authorize['user_id'] != $detail[$this->authorizeColumn]) {
+            if (isset($this->authorize['user_id']) && $this->authorize['user_id'] != $detail[$this->authorizeColumn]) {
                 throw new BadRequestException('权限不足');
             }
         }
