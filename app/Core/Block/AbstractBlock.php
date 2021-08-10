@@ -365,9 +365,8 @@ abstract class AbstractBlock
 
     /**
      * 处理参数类型.
-     * @return float|int|string
      */
-    protected function handleParamType(string $param)
+    protected function handleParamType(string $param): float|int|string
     {
         // 如果没有指定字符串类型直接返回请求值，没有请求值返回空字符串
         $value = trim($this->request->post($param, ''));
