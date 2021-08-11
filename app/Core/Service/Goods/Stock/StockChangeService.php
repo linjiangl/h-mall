@@ -25,10 +25,7 @@ class StockChangeService
 
     public const STOCK_REFUND = StockRefundService::class;
 
-    /**
-     * @var InterfaceStockChangeService
-     */
-    protected $changeStockClass;
+    protected InterfaceStockChangeService $changeStockClass;
 
     public function __construct(string $modifyClass)
     {
@@ -53,11 +50,10 @@ class StockChangeService
      * 创建.
      * @throws InternalException
      */
-    public function created(array $user, int $relationId, string $remark = ''): bool
+    public function created(array $user, int $relationId, string $remark = ''): void
     {
         try {
             $this->changeStockClass->created($user, $relationId, $remark);
-            return true;
         } catch (Throwable $e) {
             throw new InternalException($e->getMessage(), $e->getCode());
         }
@@ -67,11 +63,10 @@ class StockChangeService
      * 修改.
      * @throws InternalException
      */
-    public function updated(array $user, int $relationId, string $remark = ''): bool
+    public function updated(array $user, int $relationId, string $remark = ''): void
     {
         try {
             $this->changeStockClass->updated($user, $relationId, $remark);
-            return true;
         } catch (Throwable $e) {
             throw new InternalException($e->getMessage(), $e->getCode());
         }
@@ -81,11 +76,10 @@ class StockChangeService
      * 取消.
      * @throws InternalException
      */
-    public function recovery(array $user, int $relationId): bool
+    public function recovery(array $user, int $relationId): void
     {
         try {
             $this->changeStockClass->recovery($user, $relationId);
-            return true;
         } catch (Throwable $e) {
             throw new InternalException($e->getMessage(), $e->getCode());
         }
@@ -95,11 +89,10 @@ class StockChangeService
      * 完成.
      * @throws InternalException
      */
-    public function completed(array $user, int $relationId, string $remark = ''): bool
+    public function completed(array $user, int $relationId, string $remark = ''): void
     {
         try {
             $this->changeStockClass->completed($user, $relationId, $remark);
-            return true;
         } catch (Throwable $e) {
             throw new InternalException($e->getMessage(), $e->getCode());
         }
