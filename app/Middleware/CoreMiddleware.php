@@ -62,10 +62,8 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
      */
     protected function transferToResponse($response, ServerRequestInterface $request): ResponseInterface
     {
-        if (is_array($response) || $response instanceof Arrayable) {
-            if ($response instanceof Arrayable) {
-                $response = $response->toArray();
-            }
+        if ($response instanceof Arrayable) {
+            $response = $response->toArray();
         }
         if ($response instanceof Jsonable) {
             $response = (string) $response;
