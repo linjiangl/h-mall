@@ -106,8 +106,6 @@ if (! function_exists('response')) {
 if (! function_exists('response_json')) {
     /**
      * 接口响应数据格式.
-     * @param $data
-     * @return \Psr\Http\Message\ResponseInterface
      */
     function response_json($data, string $message = '', int $code = 200): Psr\Http\Message\ResponseInterface
     {
