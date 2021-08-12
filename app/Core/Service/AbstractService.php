@@ -69,9 +69,8 @@ abstract class AbstractService
     /**
      * 获取详情.
      * @param int $id 主键
-     * @return mixed
      */
-    public function info(int $id, array $with = [])
+    public function info(int $id, array $with = []): mixed
     {
         return $this->service()->info($id, $with);
     }

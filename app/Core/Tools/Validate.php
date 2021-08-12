@@ -77,35 +77,17 @@ class Validate
         } else {
             $rule = '';
         }
-        switch ($type) {
-            case self::REGEX_TYPE_MOBILE:
-                $rule .= 'regex:/^1[\d]{10}$/';
-                break;
-            case self::REGEX_TYPE_TELEPHONE:
-                $rule .= 'regex:/^\d{3,4}[- ]\d{7,8}$/';
-                break;
-            case self::REGEX_TYPE_ID_CARD:
-                $rule .= 'regex:/^[1-9]\d{5}[1-3]\d{3}[0-9Xx]{8}$/';
-                break;
-            case self::REGEX_TYPE_QQ:
-                $rule .= 'regex:/^[1-9]\d{4,10}$/';
-                break;
-            case self::REGEX_TYPE_DATE:
-                $rule .= 'regex:/^[1-3]\d{3}(-\d{2}){2}$/';
-                break;
-            case self::REGEX_TYPE_DATE_TIME:
-                $rule .= 'regex:/^[1-3]\d{3}(-\d{2}){2}( \d{2}(:\d{2})*)*$/';
-                break;
-            case self::REGEX_TYPE_ZH:
-                $rule .= 'regex:/^[\x{4e00}-\x{9fa5}]+$/u';
-                break;
-            case self::REGEX_TYPE_ZH_NAME:
-                $rule .= 'regex:/^[\x{4e00}-\x{9fa5}]{2,10}$/u';
-                break;
-            case self::REGEX_TYPE_POSTAL_CODE:
-                $rule .= 'regex:/^[1-9]\d{5}$/';
-                break;
-        }
+        $rule .= match ($type) {
+            self::REGEX_TYPE_MOBILE => 'regex:/^1[\d]{10}$/',
+            self::REGEX_TYPE_TELEPHONE => 'regex:/^\d{3,4}[- ]\d{7,8}$/',
+            self::REGEX_TYPE_ID_CARD => 'regex:/^[1-9]\d{5}[1-3]\d{3}[0-9Xx]{8}$/',
+            self::REGEX_TYPE_QQ => 'regex:/^[1-9]\d{4,10}$/',
+            self::REGEX_TYPE_DATE => 'regex:/^[1-3]\d{3}(-\d{2}){2}$/',
+            self::REGEX_TYPE_DATE_TIME => 'regex:/^[1-3]\d{3}(-\d{2}){2}( \d{2}(:\d{2})*)*$/',
+            self::REGEX_TYPE_ZH => 'regex:/^[\x{4e00}-\x{9fa5}]+$/u',
+            self::REGEX_TYPE_ZH_NAME => 'regex:/^[\x{4e00}-\x{9fa5}]{2,10}$/u',
+            self::REGEX_TYPE_POSTAL_CODE => 'regex:/^[1-9]\d{5}$/',
+        };
         return $rule;
     }
 }

@@ -258,9 +258,8 @@ abstract class AbstractBlock
 
     /**
      * 获取数据.
-     * @return mixed
      */
-    public function getData()
+    public function getData(): mixed
     {
         return $this->request->post();
     }
@@ -311,7 +310,7 @@ abstract class AbstractBlock
                     $orderBy = '';
                     foreach ($sort as $key => $value) {
                         $value = str_replace('end', '', $value);
-                        $orderBy = $orderBy . "{$key} {$value}";
+                        $orderBy = $orderBy . $key . ' ' . $value;
                     }
                     $this->orderBy = $orderBy;
                 }
@@ -349,11 +348,11 @@ abstract class AbstractBlock
                             }
                             break;
                         case 'like':
-                            $queryValue = "{$queryValue}%";
+                            $queryValue = $queryValue . '%';
                             break;
                         case 'like_all':
                             $symbol = 'like';
-                            $queryValue = "%{$queryValue}%";
+                            $queryValue = '%' . $queryValue . '%';
                             break;
                     }
                     $condition[] = [$query, $symbol, $queryValue];
@@ -377,15 +376,10 @@ abstract class AbstractBlock
         if (! isset($this->paramType[$param])) {
             return $value;
         }
-        switch ($this->paramType[$param]) {
-            case 'int':
-                $value = intval($value);
-                break;
-            case 'float':
-                $value = floatval($value);
-                break;
-        }
-        return $value;
+        return match ($this->paramType[$param]) {
+            'int' => intval($value),
+            'float' => floatval($value),
+        };
     }
 
     /**
