@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-use App\Exception\InternalException;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Framework\Logger\StdoutLogger;
 use Hyperf\HttpMessage\Stream\SwooleStream;
@@ -21,7 +20,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
-use Swoole\WebSocket\Server as WebSocketServer;
 
 if (! function_exists('container')) {
     /**
@@ -40,16 +38,6 @@ if (! function_exists('redis')) {
     function redis(): Redis
     {
         return container()->get(Redis::class);
-    }
-}
-
-if (! function_exists('websocket')) {
-    /**
-     * websocket 实例.
-     */
-    function websocket(): WebSocketServer
-    {
-        return container()->get(WebSocketServer::class);
     }
 }
 
@@ -122,27 +110,6 @@ if (! function_exists('response_json')) {
     }
 }
 
-if (! function_exists('general_regex')) {
-    /**
-     * 通用正则表达式.
-     * @param string $option 选项
-     */
-    function general_regex(string $option = 'mobile'): string
-    {
-        switch ($option) {
-            case 'mobile':
-                $regex = '/^1\d{10}$/';
-                break;
-            case 'ids':
-                $regex = '/^\d+(,\d+)*$/';
-                break;
-            default:
-                throw new InternalException("{$option}未定义表达式");
-        }
-        return $regex;
-    }
-}
-
 if (! function_exists('check_production')) {
     /**
      * 检测是否生产环境.
@@ -190,9 +157,8 @@ if (! function_exists('database_text')) {
     /**
      * 数据库文本数据.
      * @param array|string $data 要处理的数据
-     * @return array|string
      */
-    function database_text($data, string $schema = 'en')
+    function database_text(array|string $data, string $schema = 'en'): array|string
     {
         if ($schema == 'en') {
             return empty($data) ? '' : json_encode($data, JSON_UNESCAPED_UNICODE);
