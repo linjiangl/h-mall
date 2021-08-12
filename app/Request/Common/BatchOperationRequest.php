@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Request\Common;
 
+use App\Core\Tools\Validate;
 use App\Request\AbstractRequest;
 
 class BatchOperationRequest extends AbstractRequest
@@ -17,7 +18,7 @@ class BatchOperationRequest extends AbstractRequest
     public function rules(string $ruleKey = ''): array
     {
         return [
-            'select_ids' => 'required|' . $this->getRegex(general_regex('ids')),
+            'select_ids' => Validate::ruleRegex(Validate::REGEX_TYPE_IDS, true),
         ];
     }
 

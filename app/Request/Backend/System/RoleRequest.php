@@ -13,6 +13,7 @@ namespace App\Request\Backend\System;
 use App\Constants\State\Admin\RoleState;
 use App\Constants\State\BooleanState;
 use App\Constants\State\ToolsState;
+use App\Core\Tools\Validate;
 use App\Request\AbstractRequest;
 
 class RoleRequest extends AbstractRequest
@@ -23,7 +24,6 @@ class RoleRequest extends AbstractRequest
 
         $identifier = ToolsState::getValidatedInRule(RoleState::class, 'identifier');
         $boolean = ToolsState::getValidatedInRule(BooleanState::class);
-        $idsRegex = $this->getRegex(general_regex('ids'));
 
         $rules = [
             'post:create' => [
@@ -40,7 +40,7 @@ class RoleRequest extends AbstractRequest
             ],
             'post:changeMenu' => [
                 'role_id' => 'required|integer|gt:0',
-                'menu_ids' => 'required|' . $idsRegex,
+                'menu_ids' => Validate::ruleRegex(Validate::REGEX_TYPE_IDS, true),
             ],
         ];
         return $rules[$this->requestRuleKey] ?? [];

@@ -30,6 +30,8 @@ class Validate
 
     public const REGEX_TYPE_POSTAL_CODE = 'postal_code'; // 邮编
 
+    public const REGEX_TYPE_IDS = 'ids'; // 主键多选
+
     /**
      * 验证规则，检查对应的模型数据是否存在.
      * @param string $model 对应模型
