@@ -140,10 +140,10 @@ if (! function_exists('write_logs')) {
     /**
      * 记录日志.
      * @param string $message 日志说明
-     * @param null $remark 备注
+     * @param mixed $remark 备注
      * @param string $level 日志级别
      */
-    function write_logs(string $message, $remark = null, string $level = 'error')
+    function write_logs(string $message, mixed $remark = null, string $level = 'error')
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
         container()->get(LoggerFactory::class)->make('Customize', 'customize')->log($level, $message, [
