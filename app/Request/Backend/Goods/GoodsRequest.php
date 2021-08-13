@@ -53,6 +53,7 @@ class GoodsRequest extends AbstractRequest
                 'timer.off' => 'required|integer|in:' . $this->getRuleInByState($goodsTimerMap['off']),
                 'timer.on_time' => 'required|integer',
                 'timer.off_time' => 'required|integer',
+                'specs.off_time' => 'required|integer',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',

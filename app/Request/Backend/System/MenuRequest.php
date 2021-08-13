@@ -27,7 +27,7 @@ class MenuRequest extends AbstractRequest
                 'path' => 'required|string|max:255',
                 'sorting' => 'integer|max:100',
             ],
-            'post:update' => $rules = [
+            'post:update' => [
                 'parent_id' => 'integer',
                 'title' => 'string|max:50',
                 'name' => 'string|max:100',

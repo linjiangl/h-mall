@@ -99,7 +99,7 @@ class GoodsTest extends BackendHttpTestCase
                     'volume' => 10,
                     'is_default' => 1,
                     'image' => '',
-                    'specs' => [
+                    'spec_values' => [
                         [
                             'name' => '红色',
                             'has_image' => 0,
@@ -128,7 +128,7 @@ class GoodsTest extends BackendHttpTestCase
                     'volume' => 10,
                     'is_default' => 0,
                     'image' => '',
-                    'specs' => [
+                    'spec_values' => [
                         [
                             'name' => '红色',
                             'has_image' => 0,

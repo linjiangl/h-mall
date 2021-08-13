@@ -29,7 +29,7 @@ class AdminRequest extends AbstractRequest
                 'email' => 'email|unique:admin',
                 'role_id' => 'integer',
             ],
-            'post:update' => $rules = [
+            'post:update' => [
                 'username' => 'string|max:30',
                 'password' => 'string|max:30',
                 'avatar' => 'url',

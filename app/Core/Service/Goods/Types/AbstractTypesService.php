@@ -200,7 +200,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
                 $goodsSkuId = $goodsSkuDao->create($tmp);
             }
 
-            foreach ($sku['specs'] as $index => $item) {
+            foreach ($sku['spec_values'] as $index => $item) {
                 if ($this->goodsSpecification[$index]['has_image'] && ! $item['image']) {
                     throw new InternalException("{$item['name']} 规格需要上传图片！");
                 }

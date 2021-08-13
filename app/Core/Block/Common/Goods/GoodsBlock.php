@@ -20,11 +20,11 @@ class GoodsBlock extends BaseBlock
     protected array $defaultSinceWith = [
         'backend' => [
             'index' => ['default'],
-            'show' => ['attribute', 'timer', 'specs', 'skus', 'skus.specs'],
+            'show' => ['attribute', 'timer', 'specs', 'skus', 'skus.specValues'],
         ],
         'frontend' => [
             'index' => [],
-            'show' => ['attribute', 'specs', 'skus', 'skus.specs'],
+            'show' => ['attribute', 'specs', 'skus', 'skus.specValues'],
         ],
     ];
 
