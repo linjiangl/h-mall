@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Request\Backend\Goods;
 
 use App\Constants\State\Goods\GoodsAttributeState;
+use App\Constants\State\Goods\GoodsSpecificationState;
 use App\Constants\State\Goods\GoodsState;
 use App\Constants\State\Goods\GoodsTimerState;
 use App\Request\AbstractRequest;
@@ -24,6 +25,7 @@ class GoodsRequest extends AbstractRequest
         $goodsMap = GoodsState::map();
         $goodsAttributeMap = GoodsAttributeState::map();
         $goodsTimerMap = GoodsTimerState::map();
+        $goodsSpecMap = GoodsSpecificationState::map();
 
         $rules = [
             'post:create' => [
@@ -53,7 +55,26 @@ class GoodsRequest extends AbstractRequest
                 'timer.off' => 'required|integer|in:' . $this->getRuleInByState($goodsTimerMap['off']),
                 'timer.on_time' => 'required|integer',
                 'timer.off_time' => 'required|integer',
-                'specs.off_time' => 'required|integer',
+                'specs.*' => 'required|array',
+                'specs.*.name' => 'required|string|max:50',
+                'specs.*.has_image' => 'required|integer|in:' . $this->getRuleInByState($goodsSpecMap['has_image']),
+                'skus.*' => 'required|array',
+                'skus.*.sku_name' => 'required|string|max:255',
+                'skus.*.sku_no' => 'required|string|max:64',
+                'skus.*.sale_price' => 'required|numeric|gt:0',
+                'skus.*.market_price' => 'numeric|gt:0',
+                'skus.*.cost_price' => 'numeric|gt:0',
+                'skus.*.stock' => 'required|integer',
+                'skus.*.stock_alarm' => 'required|integer',
+                'skus.*.virtual_sales' => 'integer',
+                'skus.*.weight' => 'numeric',
+                'skus.*.volume' => 'numeric',
+                'skus.*.is_default' => 'required|integer|in:' . $this->getRuleInByState($goodsSpecMap['has_image']),
+                'skus.*.image' => 'string|max:255',
+                'skus.*.spec_values.*' => 'required|array',
+                'skus.*.spec_values.*.name' => 'required|string|max:50',
+                'skus.*.spec_values.*.has_image' => 'required|integer|in:' . $this->getRuleInByState($goodsSpecMap['has_image']),
+                'skus.*.spec_values.*.image' => 'string|max:255',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',

@@ -139,7 +139,7 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
-            $table->index(['goods_id'], 'goods_id');
+            $table->unique(['goods_id'], 'goods_id');
 
             $table->comment('商品属性');
         });
@@ -154,7 +154,7 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
-            $table->index(['goods_id'], 'goods_id');
+            $table->unique(['goods_id'], 'goods_id');
             $table->index(['on_time'], 'on_time');
             $table->index(['off_time'], 'off_time');
 
