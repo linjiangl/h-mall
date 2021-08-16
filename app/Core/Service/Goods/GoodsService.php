@@ -35,7 +35,7 @@ class GoodsService extends AbstractService
     {
         $idx = [];
         foreach ($goodsDetail['skus'] as $item) {
-            $index = implode('::', array_column($item['specs'], 'name'));
+            $index = implode('::', array_column($item['spec_values'], 'name'));
             $idx[$index] = $item['id'];
         }
         $goodsDetail['sku_spec_idx'] = $idx;

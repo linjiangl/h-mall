@@ -78,13 +78,19 @@ class GoodsRequest extends AbstractRequest
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
+                'skus.*.id' => 'required|integer',
             ],
             'post:updateStatus' => [
                 'id' => 'required|integer|gt:0',
                 'status' => 'integer|in:' . $this->getRuleInByState($goodsMap['type']),
             ],
         ];
-        return $rules[$this->requestRuleKey] ?? [];
+
+        $rule = $rules[$this->requestRuleKey] ?? [];
+        if ($this->requestRuleKey === 'post:update') {
+            $rule = array_merge($rule, $rules['post:create']);
+        }
+        return $rule;
     }
 
     public function attributes(): array
