@@ -193,7 +193,7 @@ class CreateGoodsTables extends Migration
         });
 
         Schema::create('goods_specification', function (Blueprint $table) {
-            $table->integerIncrements('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('goods_id');
             $table->unsignedInteger('goods_sku_id')->default(0);
             $table->unsignedInteger('parent_id')->default(0)->comment('父级id');

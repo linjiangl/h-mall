@@ -208,9 +208,9 @@ class GoodsTest extends BackendHttpTestCase
             ],
             'skus' => [
                 [
-                    'id' => 0,
+                    'id' => 1,
                     'sku_name' => '红色 8+128G 基础套餐',
-                    'sku_no' => 'xxxx',
+                    'sku_no' => 'xxxxf',
                     'sale_price' => 10,
                     'stock' => 199,
                     'stock_alarm' => 10,
