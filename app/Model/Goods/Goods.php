@@ -93,7 +93,7 @@ class Goods extends Model
 
     public function specs()
     {
-        return $this->hasMany(GoodsSpecification::class, 'goods_id')->where('parent_id', 0)->with(['children']);
+        return $this->hasMany(GoodsSpecification::class)->where('parent_id', 0)->with(['children']);
     }
 
     public function skus()

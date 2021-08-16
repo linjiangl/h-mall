@@ -200,8 +200,6 @@ class CreateGoodsTables extends Migration
             $table->string('name', 100)->comment('名称');
             $table->unsignedTinyInteger('has_image')->default(0)->comment('是否含有图片 0否,1是');
             $table->string('image')->default('')->comment('图片地址');
-            $table->unsignedInteger('created_time')->default(0);
-            $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['goods_id', 'parent_id'], 'goods_id');
             $table->index(['goods_sku_id'], 'goods_sku_id');

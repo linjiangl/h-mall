@@ -182,7 +182,7 @@ class GoodsTest extends BackendHttpTestCase
                     [
                         'label' => '产地',
                         'value' => '澳门生产',
-                    ]
+                    ],
                 ],
                 'content' => '米金兑换200元优惠券15644691',
             ],
