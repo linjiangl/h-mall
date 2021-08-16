@@ -78,8 +78,6 @@ class GoodsRequest extends AbstractRequest
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
-                'name' => 'required|string|max:30',
-                'status' => 'integer|in:' . $this->getRuleInByState($goodsMap['type']),
             ],
             'post:updateStatus' => [
                 'id' => 'required|integer|gt:0',
