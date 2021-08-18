@@ -79,7 +79,7 @@ abstract class AbstractService
      * 创建.
      * @param array $data 创建的数据
      */
-    public function create(array $data): int
+    public function create(array $data): mixed
     {
         return $this->service()->create($data);
     }
@@ -89,7 +89,7 @@ abstract class AbstractService
      * @param int $id 主键
      * @param array $data 修改的数据
      */
-    public function update(int $id, array $data): array
+    public function update(int $id, array $data): mixed
     {
         return $this->service()->update($id, $data);
     }

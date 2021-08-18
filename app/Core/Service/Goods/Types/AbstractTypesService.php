@@ -55,7 +55,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         $this->post = $data;
     }
 
-    public function create(): int
+    public function create(): Goods
     {
         $this->isCreated = true;
         $data = $this->handleGoodsData();
@@ -74,7 +74,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $this->setDefaultSkuId();
 
             Db::commit();
-            return $this->id;
+            return $this->goods;
         } catch (Throwable $e) {
             Db::rollBack();
             write_logs('创建失败', $data);
@@ -82,7 +82,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         }
     }
 
-    public function update(): array
+    public function update(): Goods
     {
         $data = $this->handleGoodsData();
 
@@ -100,7 +100,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             $this->setDefaultSkuId();
 
             Db::commit();
-            return $this->goods->toArray();
+            return $this->goods;
         } catch (Throwable $e) {
             Db::rollBack();
             write_logs('修改失败', $data);

@@ -13,17 +13,18 @@ namespace App\Core\Service\Goods;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Goods\Types\TypeService;
+use App\Model\Goods\Goods;
 
 class GoodsService extends AbstractService
 {
     protected string $dao = GoodsDao::class;
 
-    public function create(array $data): int
+    public function create(array $data): Goods
     {
         return (new TypeService($data))->create();
     }
 
-    public function update(int $id, array $data): array
+    public function update(int $id, array $data): Goods
     {
         return (new TypeService($data, $id))->update();
     }

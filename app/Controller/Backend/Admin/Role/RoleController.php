@@ -13,18 +13,19 @@ namespace App\Controller\Backend\Admin\Role;
 use App\Constants\Action\AdminAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Admin\Role\RoleBlock;
+use App\Model\Role\Role;
 use App\Request\Backend\System\RoleRequest;
 
 class RoleController extends BackendController
 {
-    public function storeRequest(RoleRequest $request): int
+    public function storeRequest(RoleRequest $request): Role
     {
         $request->validated();
         $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_CREATE));
         return $this->store();
     }
 
-    public function updateRequest(RoleRequest $request): array
+    public function updateRequest(RoleRequest $request): Role
     {
         $request->validated();
         $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_UPDATE));

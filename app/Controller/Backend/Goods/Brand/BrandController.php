@@ -13,18 +13,19 @@ namespace App\Controller\Backend\Goods\Brand;
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\Brand\BrandBlock;
+use App\Model\Brand;
 use App\Request\Backend\Goods\BrandRequest;
 
 class BrandController extends BackendController
 {
-    public function storeRequest(BrandRequest $request): int
+    public function storeRequest(BrandRequest $request): Brand
     {
         $request->validated();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_CREATE));
         return $this->store();
     }
 
-    public function updateRequest(BrandRequest $request): array
+    public function updateRequest(BrandRequest $request): Brand
     {
         $request->validated();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_UPDATE));

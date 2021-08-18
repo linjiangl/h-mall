@@ -104,9 +104,8 @@ abstract class AbstractDao
      * 详情.
      * @param int $id 主键
      * @param array $with 关联模型
-     * @return mixed|Model
      */
-    public function info(int $id, array $with = [])
+    public function info(int $id, array $with = []): mixed
     {
         $query = $this->model::query();
         if ($with) {
@@ -125,7 +124,7 @@ abstract class AbstractDao
      * 创建.
      * @param array $data 创建的数据
      */
-    public function create(array $data): int
+    public function create(array $data): mixed
     {
         try {
             $this->actionIsAllow('create');
@@ -139,7 +138,7 @@ abstract class AbstractDao
             $pk = $model->getKeyName();
             $id = $model->{$pk};
             $this->removeCache($id);
-            return $id;
+            return $model;
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -150,7 +149,7 @@ abstract class AbstractDao
      * @param int $id 主键
      * @param array $data 修改的数据
      */
-    public function update(int $id, array $data): array
+    public function update(int $id, array $data): mixed
     {
         try {
             $this->actionIsAllow('update');
@@ -160,7 +159,7 @@ abstract class AbstractDao
                 throw new BadRequestException('更新失败');
             }
             $this->removeCache($id);
-            return $model->toArray();
+            return $model;
         } catch (Throwable $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
@@ -168,18 +167,16 @@ abstract class AbstractDao
 
     /**
      * 查看或创建.
-     * @return mixed|Model
      */
-    public function firstOrCreate(array $attributes, array $values)
+    public function firstOrCreate(array $attributes, array $values): mixed
     {
         return $this->model::firstOrCreate($attributes, $values);
     }
 
     /**
      * 修改或创建.
-     * @return mixed|Model
      */
-    public function updateOrCreate(array $attributes, array $values)
+    public function updateOrCreate(array $attributes, array $values): mixed
     {
         return $this->model::updateOrCreate($attributes, $values);
     }
@@ -242,9 +239,8 @@ abstract class AbstractDao
 
     /**
      * 自定义条件查询详情.
-     * @return mixed|Model
      */
-    public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*')
+    public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*'): mixed
     {
         $query = $this->generateListQuery($condition, '', [], $with);
         $model = $query->selectRaw($select)->first();

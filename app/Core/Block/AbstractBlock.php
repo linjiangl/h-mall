@@ -175,7 +175,7 @@ abstract class AbstractBlock
     /**
      * 创建.
      */
-    public function store(): int
+    public function store(): mixed
     {
         try {
             return $this->service()->create($this->request->post());
@@ -187,7 +187,7 @@ abstract class AbstractBlock
     /**
      * 修改.
      */
-    public function update(): array
+    public function update(): mixed
     {
         try {
             return $this->service()->update($this->getPrimaryKey(), $this->request->post());

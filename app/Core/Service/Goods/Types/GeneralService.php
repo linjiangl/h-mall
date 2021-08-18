@@ -15,8 +15,4 @@ namespace App\Core\Service\Goods\Types;
  */
 class GeneralService extends AbstractTypesService
 {
-    public function __construct(array $data, int $id = 0)
-    {
-        parent::__construct($data, $id);
-    }
 }
