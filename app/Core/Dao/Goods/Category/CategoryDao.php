@@ -13,10 +13,11 @@ namespace App\Core\Dao\Goods\Category;
 use App\Constants\State\Goods\CategoryState;
 use App\Core\Dao\AbstractDao;
 use App\Model\Category\Category;
+use Hyperf\Database\Model\Model;
 
 class CategoryDao extends AbstractDao
 {
-    protected string $model = Category::class;
+    protected string|Model $model = Category::class;
 
     protected array $noAllowActions = [];
 

@@ -12,10 +12,11 @@ namespace App\Core\Dao\Admin;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Admin\Admin;
+use Hyperf\Database\Model\Model;
 
 class AdminDao extends AbstractDao
 {
-    protected string $model = Admin::class;
+    protected string|Model $model = Admin::class;
 
     protected array $noAllowActions = [];
 

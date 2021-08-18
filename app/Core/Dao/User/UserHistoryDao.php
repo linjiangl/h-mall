@@ -12,10 +12,11 @@ namespace App\Core\Dao\User;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\User\UserHistory;
+use Hyperf\Database\Model\Model;
 
 class UserHistoryDao extends AbstractDao
 {
-    protected string $model = UserHistory::class;
+    protected string|Model $model = UserHistory::class;
 
     protected array $noAllowActions = [];
 

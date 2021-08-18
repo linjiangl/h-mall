@@ -12,10 +12,11 @@ namespace App\Core\Dao\Goods\Brand;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Brand;
+use Hyperf\Database\Model\Model;
 
 class BrandDao extends AbstractDao
 {
-    protected string $model = Brand::class;
+    protected string|Model $model = Brand::class;
 
     protected array $noAllowActions = [];
 

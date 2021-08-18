@@ -12,10 +12,11 @@ namespace App\Core\Dao\User;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\User\UserFavorite;
+use Hyperf\Database\Model\Model;
 
 class UserFavoriteDao extends AbstractDao
 {
-    protected string $model = UserFavorite::class;
+    protected string|Model $model = UserFavorite::class;
 
     protected array $noAllowActions = [];
 

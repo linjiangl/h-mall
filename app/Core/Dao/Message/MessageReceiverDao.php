@@ -12,10 +12,11 @@ namespace App\Core\Dao\Message;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Message\MessageReceiver;
+use Hyperf\Database\Model\Model;
 
 class MessageReceiverDao extends AbstractDao
 {
-    protected string $model = MessageReceiver::class;
+    protected string|Model $model = MessageReceiver::class;
 
     protected array $noAllowActions = [];
 

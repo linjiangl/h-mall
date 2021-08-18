@@ -12,10 +12,11 @@ namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Goods\ServiceTemplate;
+use Hyperf\Database\Model\Model;
 
 class ServiceTemplateDao extends AbstractDao
 {
-    protected string $model = ServiceTemplate::class;
+    protected string|Model $model = ServiceTemplate::class;
 
     protected array $noAllowActions = [];
 

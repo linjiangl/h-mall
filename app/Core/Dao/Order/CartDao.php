@@ -12,10 +12,11 @@ namespace App\Core\Dao\Order;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Cart;
+use Hyperf\Database\Model\Model;
 
 class CartDao extends AbstractDao
 {
-    protected string $model = Cart::class;
+    protected string|Model $model = Cart::class;
 
     protected array $noAllowActions = [];
 

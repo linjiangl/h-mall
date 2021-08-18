@@ -12,10 +12,11 @@ namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Slide;
+use Hyperf\Database\Model\Model;
 
 class SlideDao extends AbstractDao
 {
-    protected string $model = Slide::class;
+    protected string|Model $model = Slide::class;
 
     protected array $noAllowActions = [];
 

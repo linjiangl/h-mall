@@ -12,10 +12,11 @@ namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Setting;
+use Hyperf\Database\Model\Model;
 
 class SettingDao extends AbstractDao
 {
-    protected string $model = Setting::class;
+    protected string|Model $model = Setting::class;
 
     protected array $noAllowActions = [];
 

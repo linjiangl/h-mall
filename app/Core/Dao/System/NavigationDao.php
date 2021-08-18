@@ -12,10 +12,11 @@ namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Navigation;
+use Hyperf\Database\Model\Model;
 
 class NavigationDao extends AbstractDao
 {
-    protected string $model = Navigation::class;
+    protected string|Model $model = Navigation::class;
 
     protected array $noAllowActions = [];
 

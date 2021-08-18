@@ -12,10 +12,11 @@ namespace App\Core\Dao\User;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\User\UserVipCard;
+use Hyperf\Database\Model\Model;
 
 class UserVipCardDao extends AbstractDao
 {
-    protected string $model = UserVipCard::class;
+    protected string|Model $model = UserVipCard::class;
 
     protected array $noAllowActions = [];
 

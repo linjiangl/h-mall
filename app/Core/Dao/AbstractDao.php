@@ -25,7 +25,7 @@ abstract class AbstractDao
     /**
      * @var Model|string
      */
-    protected string $model;
+    protected string|Model $model;
 
     /**
      * 不允许执行的方法.
@@ -243,6 +243,7 @@ abstract class AbstractDao
     public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*'): mixed
     {
         $query = $this->generateListQuery($condition, '', [], $with);
+        /** @var mixed $model */
         $model = $query->selectRaw($select)->first();
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
