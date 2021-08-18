@@ -399,16 +399,24 @@ abstract class AbstractDao
     protected function handleQueryCondition(Builder $query, array $condition): Builder
     {
         if (! empty($condition)) {
-            foreach ($condition as $where) {
-                switch ($where[1]) {
-                    case 'in':
-                        $query->whereIn($where[0], $where[2]);
-                        break;
-                    case 'between':
-                        $query->whereBetween($where[0], $where[2]);
-                        break;
-                    default:
-                        $query->where($where[0], $where[1], $where[2]);
+            foreach ($condition as $key => $value) {
+                if (is_array($value) && count($value) === 3) {
+                    switch ($value[1]) {
+                        case 'in':
+                            $query->whereIn($value[0], $value[2]);
+                            break;
+                        case 'between':
+                            $query->whereBetween($value[0], $value[2]);
+                            break;
+                        default:
+                            $query->where($value[0], $value[1], $value[2]);
+                    }
+                } else {
+                    if (is_array($value)) {
+                        $query->whereIn($key, $value);
+                    } else {
+                        $query->where($key, $value);
+                    }
                 }
             }
         }
