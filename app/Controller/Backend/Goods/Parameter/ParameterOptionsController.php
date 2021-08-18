@@ -21,22 +21,19 @@ class ParameterOptionsController extends BackendController
     public function storeRequest(ParameterOptionsRequest $request): ParameterOption
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_CREATE));
-        return $this->store();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_CREATE), $this->store());
     }
 
     public function updateRequest(ParameterOptionsRequest $request): ParameterOption
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_UPDATE));
-        return $this->update();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_UPDATE), $this->update());
     }
 
     public function destroyRequest(ParameterOptionsRequest $request): bool
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_DELETE));
-        return $this->destroy();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_DELETE), $this->destroy());
     }
 
     protected function block(): ParameterOptionsBlock

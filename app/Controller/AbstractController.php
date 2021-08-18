@@ -47,10 +47,12 @@ abstract class AbstractController
     /**
      * 设置方法的执行名称.
      */
-    protected function setActionName(string $actionName)
+    protected function setActionName(string $actionName, mixed $response = null)
     {
         $request = Context::get(ServerRequestInterface::class);
         $request = $request->withAttribute('action_name', $actionName);
         Context::set(ServerRequestInterface::class, $request);
+
+        return $response;
     }
 }

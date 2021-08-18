@@ -21,15 +21,13 @@ class RoleController extends BackendController
     public function storeRequest(RoleRequest $request): Role
     {
         $request->validated();
-        $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_CREATE));
-        return $this->store();
+        return $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_CREATE), $this->store());
     }
 
     public function updateRequest(RoleRequest $request): Role
     {
         $request->validated();
-        $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_UPDATE));
-        return $this->update();
+        return $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_UPDATE), $this->update());
     }
 
     /**
@@ -38,10 +36,9 @@ class RoleController extends BackendController
     public function saveMenus(RoleRequest $request): bool
     {
         $request->validated();
-        $this->setActionName(AdminAction::ROLE_MENU_CHANGE);
         /** @var RoleBlock $service */
         $service = $this->service();
-        return $service->saveRoleMenus();
+        return $this->setActionName(AdminAction::ROLE_MENU_CHANGE, $service->saveRoleMenus());
     }
 
     protected function block(): RoleBlock

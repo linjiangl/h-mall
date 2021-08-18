@@ -22,33 +22,31 @@ class GoodsController extends BackendController
     public function storeRequest(GoodsRequest $request): Goods
     {
         $request->validated();
-        $result = $this->store();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE));
-        return $result;
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE), $this->store());
+    }
+
+    public function updateRequest(GoodsRequest $request): Goods
+    {
+        $request->validated();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE), $this->update());
     }
 
     public function updateStatusRequest(GoodsRequest $request): Goods
     {
         $request->validated();
-        $result = $this->update();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_UPDATE_STATUS));
-        return $result;
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_UPDATE_STATUS), $this->update());
     }
 
     public function recycleRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
-        $result = $this->batchDestroy();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE));
-        return $result;
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE), $this->batchDestroy());
     }
 
     public function batchDestroyRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
-        $result = $this->batchDestroy();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE));
-        return $result;
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE), $this->batchDestroy());
     }
 
     protected function block(): GoodsBlock

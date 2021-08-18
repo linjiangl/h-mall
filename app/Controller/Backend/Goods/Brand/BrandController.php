@@ -21,22 +21,19 @@ class BrandController extends BackendController
     public function storeRequest(BrandRequest $request): Brand
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_CREATE));
-        return $this->store();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_CREATE), $this->store());
     }
 
     public function updateRequest(BrandRequest $request): Brand
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_UPDATE));
-        return $this->update();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_UPDATE), $this->update());
     }
 
     public function destroyRequest(BrandRequest $request): bool
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_DELETE));
-        return $this->destroy();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_DELETE), $this->destroy());
     }
 
     protected function block(): BrandBlock

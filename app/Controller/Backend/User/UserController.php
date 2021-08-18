@@ -20,8 +20,7 @@ class UserController extends BackendController
     public function updateRequest(UserRequest $request): array
     {
         $request->validated();
-        $this->setActionName(UserAction::getMessage(UserAction::USER_UPDATE));
-        return $this->update();
+        return $this->setActionName(UserAction::getMessage(UserAction::USER_UPDATE), $this->update());
     }
 
     protected function block(): UserBlock

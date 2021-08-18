@@ -21,22 +21,19 @@ class CategoryController extends BackendController
     public function storeRequest(CategoryRequest $request): Category
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_CREATE));
-        return $this->store();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_CREATE), $this->store());
     }
 
     public function updateRequest(CategoryRequest $request): Category
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_UPDATE));
-        return $this->update();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_UPDATE), $this->update());
     }
 
     public function destroyRequest(CategoryRequest $request): bool
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_DELETE));
-        return $this->destroy();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_DELETE), $this->destroy());
     }
 
     public function parent(): array

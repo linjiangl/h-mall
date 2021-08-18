@@ -21,15 +21,13 @@ class AdminController extends BackendController
     public function storeRequest(AdminRequest $request): Admin
     {
         $request->validated();
-        $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_CREATE));
-        return $this->store();
+        return $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_CREATE), $this->store());
     }
 
     public function updateRequest(AdminRequest $request): Admin
     {
         $request->validated();
-        $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_UPDATE));
-        return $this->update();
+        return $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_UPDATE), $this->update());
     }
 
     protected function block(): AdminBlock

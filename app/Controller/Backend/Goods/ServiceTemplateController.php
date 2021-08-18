@@ -21,22 +21,19 @@ class ServiceTemplateController extends BackendController
     public function storeRequest(ServiceRequest $request): GoodsService
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_CREATE));
-        return $this->store();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_CREATE), $this->store());
     }
 
     public function updateRequest(ServiceRequest $request): GoodsService
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_UPDATE));
-        return $this->update();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_UPDATE), $this->update());
     }
 
     public function destroyRequest(ServiceRequest $request): bool
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_DELETE));
-        return $this->destroy();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_DELETE), $this->destroy());
     }
 
     public function all(): array
