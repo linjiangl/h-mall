@@ -11,11 +11,9 @@ declare(strict_types=1);
 namespace App\Core\Dao;
 
 use App\Exception\BadRequestException;
-use App\Exception\HttpException;
 use App\Exception\NotFoundException;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Model;
-use Throwable;
 
 /**
  * Class AbstractDao.
@@ -116,7 +114,9 @@ abstract class AbstractDao
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
         }
+
         $this->checkIsOperational($model->toArray());
+
         return $model;
     }
 
@@ -126,22 +126,20 @@ abstract class AbstractDao
      */
     public function create(array $data): mixed
     {
-        try {
-            $this->actionIsAllow('create');
+        $this->actionIsAllow('create');
 
-            /** @var Model $model */
-            $model = new $this->model($data);
-            if (! $model->save()) {
-                throw new BadRequestException('创建失败');
-            }
-
-            $pk = $model->getKeyName();
-            $id = $model->{$pk};
-            $this->removeCache($id);
-            return $model;
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
+        /** @var Model $model */
+        $model = new $this->model($data);
+        if (! $model->save()) {
+            throw new BadRequestException('创建失败');
         }
+
+        $pk = $model->getKeyName();
+        $id = $model->{$pk};
+
+        $this->removeCache($id);
+
+        return $model;
     }
 
     /**
@@ -151,18 +149,16 @@ abstract class AbstractDao
      */
     public function update(int $id, array $data): mixed
     {
-        try {
-            $this->actionIsAllow('update');
+        $this->actionIsAllow('update');
 
-            $model = $this->info($id);
-            if (! $model->update($data)) {
-                throw new BadRequestException('更新失败');
-            }
-            $this->removeCache($id);
-            return $model;
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
+        $model = $this->info($id);
+        if (! $model->update($data)) {
+            throw new BadRequestException('更新失败');
         }
+
+        $this->removeCache($id);
+
+        return $model;
     }
 
     /**
@@ -187,21 +183,19 @@ abstract class AbstractDao
      */
     public function remove(int $id): bool
     {
-        try {
-            $this->actionIsAllow('remove');
+        $this->actionIsAllow('remove');
 
-            $model = $this->info($id);
+        $model = $this->info($id);
 
-            if ($this->softDelete) {
-                $model->update(['deleted_time' => time()]);
-            } else {
-                $model->delete();
-            }
-            $this->removeCache($id);
-            return true;
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
+        if ($this->softDelete) {
+            $model->update(['deleted_time' => time()]);
+        } else {
+            $model->delete();
         }
+
+        $this->removeCache($id);
+
+        return true;
     }
 
     /**

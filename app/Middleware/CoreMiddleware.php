@@ -24,10 +24,8 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
 {
     /**
      * Handle the response when found.
-     *
-     * @return array|Arrayable|mixed|ResponseInterface|string
      */
-    protected function handleFound(Dispatched $dispatched, ServerRequestInterface $request)
+    protected function handleFound(Dispatched $dispatched, ServerRequestInterface $request): mixed
     {
         if ($dispatched->handler->callback instanceof Closure) {
             $parameters = $this->parseClosureParameters($dispatched->handler->callback, $dispatched->params);

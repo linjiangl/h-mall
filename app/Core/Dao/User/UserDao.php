@@ -24,6 +24,11 @@ class UserDao extends AbstractDao
 
     protected string $authorizeColumn = 'id';
 
+    public function create(array $data): User
+    {
+        return parent::create($data);
+    }
+
     public function info(int $id, array $with = []): User
     {
         return parent::info($id, $with);

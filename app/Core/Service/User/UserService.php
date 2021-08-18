@@ -17,6 +17,7 @@ use App\Core\Service\AbstractService;
 use App\Core\Service\Authorize\UserAuthorizationService;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
+use App\Model\User\User;
 use Hyperf\DbConnection\Db;
 use Throwable;
 
@@ -32,7 +33,7 @@ class UserService extends AbstractService
      * @param string $password 密码
      * @param array $extend 其他数据,如:昵称,手机号,邮箱等
      */
-    public function createAccount(string $username, string $password, array $extend = []): int
+    public function createAccount(string $username, string $password, array $extend = []): User
     {
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');
@@ -55,7 +56,7 @@ class UserService extends AbstractService
         Db::beginTransaction();
         try {
             // 创建账号
-            $id = (new UserDao())->create([
+            $user = (new UserDao())->create([
                 'username' => $username,
                 'nickname' => $extend['nickname'] ?? $this->defaultUsername,
                 'password' => $passwordHash,
@@ -70,10 +71,10 @@ class UserService extends AbstractService
 
             // 初始化化钱包
             $userWalletService = new UserWalletService();
-            $userWalletService->initUserWallet($id);
+            $userWalletService->initUserWallet($user->id);
 
             Db::commit();
-            return $id;
+            return $user;
         } catch (Throwable $e) {
             Db::rollBack();
             throw new BadRequestException($e->getMessage());

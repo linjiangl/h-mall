@@ -68,7 +68,7 @@ class BaseController extends AbstractController
         return new BaseBlock();
     }
 
-    protected function service()
+    protected function service(): BaseBlock
     {
         return $this->block()->setSince(BlockSinceConstants::SINCE_FRONTEND);
     }

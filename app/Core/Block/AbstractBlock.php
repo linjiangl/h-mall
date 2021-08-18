@@ -12,10 +12,8 @@ namespace App\Core\Block;
 
 use App\Constants\BlockSinceConstants;
 use App\Core\Service\AbstractService;
-use App\Exception\HttpException;
 use App\Exception\MethodNotAllowedException;
 use Hyperf\HttpServer\Contract\RequestInterface;
-use Throwable;
 
 abstract class AbstractBlock
 {
@@ -134,20 +132,16 @@ abstract class AbstractBlock
      */
     public function index(): array
     {
-        try {
-            // 当前执行的方法
-            $this->action = 'index';
+        // 当前执行的方法
+        $this->action = 'index';
 
-            // 处理查询参数
-            $this->handleQueryParams();
+        // 处理查询参数
+        $this->handleQueryParams();
 
-            // 查询前业务处理
-            $this->beforeBuildQuery();
+        // 查询前业务处理
+        $this->beforeBuildQuery();
 
-            return $this->service()->paginate($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        return $this->service()->paginate($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
     }
 
     /**
@@ -155,21 +149,17 @@ abstract class AbstractBlock
      */
     public function show(): array
     {
-        try {
-            // 当前执行的方法
-            $this->action = 'show';
+        // 当前执行的方法
+        $this->action = 'show';
 
-            // 查询前业务处理
-            $this->beforeBuildQuery();
+        // 查询前业务处理
+        $this->beforeBuildQuery();
 
-            $info = $this->service()->info($this->getPrimaryKey(), $this->with)->toArray();
+        $info = $this->service()->info($this->getPrimaryKey(), $this->with)->toArray();
 
-            $this->checkUserIsRead($info);
+        $this->checkUserIsRead($info);
 
-            return $info;
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        return $info;
     }
 
     /**
@@ -177,11 +167,7 @@ abstract class AbstractBlock
      */
     public function store(): mixed
     {
-        try {
-            return $this->service()->create($this->request->post());
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        return $this->service()->create($this->request->post());
     }
 
     /**
@@ -189,11 +175,7 @@ abstract class AbstractBlock
      */
     public function update(): mixed
     {
-        try {
-            return $this->service()->update($this->getPrimaryKey(), $this->request->post());
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        return $this->service()->update($this->getPrimaryKey(), $this->request->post());
     }
 
     /**
@@ -201,11 +183,7 @@ abstract class AbstractBlock
      */
     public function destroy(): bool
     {
-        try {
-            return $this->service()->remove($this->getPrimaryKey());
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        return $this->service()->remove($this->getPrimaryKey());
     }
 
     /**
@@ -213,13 +191,9 @@ abstract class AbstractBlock
      */
     public function batchDestroy(): bool
     {
-        try {
-            $selectIds = $this->request->post('select_ids', '');
-            $selectIds = explode(',', $selectIds);
-            return $this->service()->batchRemove($selectIds);
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        $selectIds = $this->request->post('select_ids', '');
+        $selectIds = explode(',', $selectIds);
+        return $this->service()->batchRemove($selectIds);
     }
 
     /**
