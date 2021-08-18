@@ -78,7 +78,7 @@ trait TraitAuthorize
         $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
         $this->handleDebug($result);
         $this->handleError($result);
-        $this->assertIsInt($result);
+        $this->assertArrayHasKey('id', $result);
     }
 
     protected function handleHttpUpdate()

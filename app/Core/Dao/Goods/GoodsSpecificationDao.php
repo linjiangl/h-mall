@@ -11,19 +11,20 @@ declare(strict_types=1);
 namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Goods\GoodsTimer;
+use App\Model\Goods\GoodsSpecification;
 use Hyperf\Database\Model\Model;
 
-class GoodsTimerDao extends AbstractDao
+class GoodsSpecificationDao extends AbstractDao
 {
-    protected string|Model $model = GoodsTimer::class;
+    protected string|Model $model = GoodsSpecification::class;
 
     protected array $noAllowActions = [];
 
-    protected string $notFoundMessage = '商品定时不存在或已删除';
-
-    public function info(int $id, array $with = []): GoodsTimer
+    /**
+     * 删除商品规格
+     */
+    public function deleteByGoodsId(int $goodsId): void
     {
-        return parent::info($id, $with);
+        $this->deleteByCondition([['goods_id', '=', $goodsId]]);
     }
 }

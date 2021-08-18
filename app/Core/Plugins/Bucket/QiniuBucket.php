@@ -36,7 +36,7 @@ class QiniuBucket extends AbstractBucket
 
         try {
             if (! $key) {
-                $key = $this->generateKey($file->getClientFilename(), 'images');
+                $key = $this->generateKey($file->getClientFilename());
             }
             $uploadMgr = new UploadManager($this->getConfig());
             [$ret, $err] = $uploadMgr->putFile($this->getToken(), $key, $file->getRealPath());

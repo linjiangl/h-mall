@@ -24,10 +24,8 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
 {
     /**
      * Handle the response when found.
-     *
-     * @return array|Arrayable|mixed|ResponseInterface|string
      */
-    protected function handleFound(Dispatched $dispatched, ServerRequestInterface $request)
+    protected function handleFound(Dispatched $dispatched, ServerRequestInterface $request): mixed
     {
         if ($dispatched->handler->callback instanceof Closure) {
             $parameters = $this->parseClosureParameters($dispatched->handler->callback, $dispatched->params);
@@ -62,10 +60,8 @@ class CoreMiddleware extends \Hyperf\HttpServer\CoreMiddleware
      */
     protected function transferToResponse($response, ServerRequestInterface $request): ResponseInterface
     {
-        if (is_array($response) || $response instanceof Arrayable) {
-            if ($response instanceof Arrayable) {
-                $response = $response->toArray();
-            }
+        if ($response instanceof Arrayable) {
+            $response = $response->toArray();
         }
         if ($response instanceof Jsonable) {
             $response = (string) $response;

@@ -62,7 +62,7 @@ class User extends Model
      */
     protected $casts = ['id' => 'integer', 'sex' => 'integer', 'status' => 'integer', 'is_system' => 'integer', 'lasted_login_time' => 'integer', 'mobile_verified_time' => 'integer', 'email_verified_time' => 'integer', 'avatar_updated_time' => 'integer', 'username_updated_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 
-    protected $hidden = ['password', 'salt', 'mobile', 'email', 'is_system', 'mobile_verified_at', 'email_verified_at', 'avatar_updated_at', 'username_updated_at'];
+    protected $hidden = ['password', 'salt', 'mobile', 'email', 'is_system', 'mobile_verified_time', 'email_verified_time', 'avatar_updated_time', 'username_updated_time'];
 
     protected $appends = ['appends'];
 

@@ -12,10 +12,11 @@ namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Express;
+use Hyperf\Database\Model\Model;
 
 class ExpressDao extends AbstractDao
 {
-    protected string $model = Express::class;
+    protected string|Model $model = Express::class;
 
     protected array $noAllowActions = [];
 

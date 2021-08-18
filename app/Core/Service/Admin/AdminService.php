@@ -16,9 +16,9 @@ use App\Core\Dao\Admin\AdminDao;
 use App\Core\Dao\Admin\Role\RoleAdminDao;
 use App\Core\Dao\Admin\Role\RoleDao;
 use App\Core\Service\AbstractService;
-use App\Core\Service\Admin\Role\RoleAdminService;
 use App\Core\Service\Authorize\AdminAuthorizationService;
 use App\Exception\InternalException;
+use App\Model\Admin\Admin;
 use Throwable;
 
 class AdminService extends AbstractService
@@ -30,14 +30,13 @@ class AdminService extends AbstractService
      * @param string $username 用户名
      * @param string $password 密码
      * @param array $extend 其他数据,如:头像,邮箱等
-     * @return int
      *
      * $extend = [
      *  ...$admin,
      *  role_id
      * ]
      */
-    public function createAccount(string $username, string $password, array $extend = []): int
+    public function createAccount(string $username, string $password, array $extend = []): Admin
     {
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');
@@ -67,7 +66,7 @@ class AdminService extends AbstractService
         }
 
         // 创建账号
-        $id = $adminDao->create([
+        $admin = $adminDao->create([
             'username' => $username,
             'real_name' => $extend['real_name'] ?? '',
             'password' => $passwordHash,
@@ -80,19 +79,15 @@ class AdminService extends AbstractService
         ]);
 
         // 账号绑定权限
-        $roleAdminService = new RoleAdminService();
-        $roleAdminService->create([
-            'admin_id' => $id,
-            'role_id' => $role->id,
-        ]);
+        $admin->roles()->sync([$role->id]);
 
-        return $id;
+        return $admin;
     }
 
     /**
      * 更新账号信息.
      */
-    public function updateAccount(int $adminId, array $data): array
+    public function updateAccount(int $adminId, array $data): Admin
     {
         $admin = $this->update($adminId, $data);
 

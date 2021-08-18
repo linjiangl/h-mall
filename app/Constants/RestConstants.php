@@ -23,20 +23,20 @@ class RestConstants extends AbstractConstants
     /**
      * @Message("创建成功")
      */
-    const HTTP_CREATED = 201;
+    public const HTTP_CREATED = 201;
 
     /**
      * @Message("修改成功")
      */
-    const HTTP_UPDATED = 200;
+    public const HTTP_UPDATED = 200;
 
     /**
      * @Message("删除成功")
      */
-    const HTTP_DELETED = 204;
+    public const HTTP_DELETED = 204;
 
     /**
      * @Message("NOT FOUND")
      */
-    const HTTP_NOT_FOUND = 404;
+    public const HTTP_NOT_FOUND = 404;
 }

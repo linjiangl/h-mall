@@ -20,9 +20,7 @@ use App\Controller\Backend\Goods\Category\CategoryController;
 use App\Controller\Backend\Goods\GoodsController;
 use App\Controller\Backend\Goods\Parameter\ParameterController;
 use App\Controller\Backend\Goods\Parameter\ParameterOptionsController;
-use App\Controller\Backend\Goods\Service\ServiceController;
-use App\Controller\Backend\Goods\Spec\SpecController;
-use App\Controller\Backend\Goods\Spec\SpecValueController;
+use App\Controller\Backend\Goods\ServiceTemplateController;
 use App\Controller\Backend\System\DistrictController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\User\UserController;
@@ -72,21 +70,6 @@ Router::addGroup('/backend', function () {
     // district
     Router::post('/district/list', [DistrictController::class, 'index']);
 
-    // spec
-    Router::post('/spec/list', [SpecController::class, 'index']);
-    Router::post('/spec/detail', [SpecController::class, 'show']);
-    Router::post('/spec/create', [SpecController::class, 'storeRequest']);
-    Router::post('/spec/update', [SpecController::class, 'update']);
-    Router::post('/spec/delete', [SpecController::class, 'destroy']);
-
-    // specValue
-    Router::post('/specValue/list', [SpecValueController::class, 'index']);
-    Router::post('/specValue/detail', [SpecValueController::class, 'show']);
-    Router::post('/specValue/create', [SpecValueController::class, 'store']);
-    Router::post('/specValue/update', [SpecValueController::class, 'update']);
-    Router::post('/specValue/delete', [SpecValueController::class, 'destroy']);
-    Router::post('/specValue/getListBySpecId', [SpecValueController::class, 'getListBySpecId']);
-
     // category
     Router::post('/category/list', [CategoryController::class, 'index']);
     Router::post('/category/detail', [CategoryController::class, 'show']);
@@ -104,12 +87,12 @@ Router::addGroup('/backend', function () {
     Router::post('/brand/delete', [BrandController::class, 'destroyRequest']);
 
     // goods service
-    Router::post('/goodsService/list', [ServiceController::class, 'index']);
-    Router::post('/goodsService/detail', [ServiceController::class, 'show']);
-    Router::post('/goodsService/create', [ServiceController::class, 'storeRequest']);
-    Router::post('/goodsService/update', [ServiceController::class, 'updateRequest']);
-    Router::post('/goodsService/delete', [ServiceController::class, 'destroyRequest']);
-    Router::post('/goodsService/all', [ServiceController::class, 'all']);
+    Router::post('/goodsServiceTemplate/list', [ServiceTemplateController::class, 'index']);
+    Router::post('/goodsServiceTemplate/detail', [ServiceTemplateController::class, 'show']);
+    Router::post('/goodsServiceTemplate/create', [ServiceTemplateController::class, 'storeRequest']);
+    Router::post('/goodsServiceTemplate/update', [ServiceTemplateController::class, 'updateRequest']);
+    Router::post('/goodsServiceTemplate/delete', [ServiceTemplateController::class, 'destroyRequest']);
+    Router::post('/goodsServiceTemplate/all', [ServiceTemplateController::class, 'all']);
 
     // parameter
     Router::post('/parameter/list', [ParameterController::class, 'index']);

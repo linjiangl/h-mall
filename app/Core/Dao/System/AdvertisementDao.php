@@ -12,10 +12,11 @@ namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Advertisement;
+use Hyperf\Database\Model\Model;
 
 class AdvertisementDao extends AbstractDao
 {
-    protected string $model = Advertisement::class;
+    protected string|Model $model = Advertisement::class;
 
     protected array $noAllowActions = [];
 

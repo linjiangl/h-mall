@@ -11,6 +11,8 @@ declare(strict_types=1);
 namespace App\Model\Admin;
 
 use App\Model\Model;
+use App\Model\Role\Role;
+use App\Model\Role\RoleAdmin;
 
 /**
  * @property int $id
@@ -51,4 +53,9 @@ class Admin extends Model
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'status' => 'integer', 'lasted_login_time' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     protected $hidden = ['password', 'salt'];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, (new RoleAdmin())->getTable(), 'admin_id', 'role_id');
+    }
 }

@@ -12,10 +12,11 @@ namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Goods\GoodsAttribute;
+use Hyperf\Database\Model\Model;
 
 class GoodsAttributeDao extends AbstractDao
 {
-    protected string $model = GoodsAttribute::class;
+    protected string|Model $model = GoodsAttribute::class;
 
     protected array $noAllowActions = [];
 

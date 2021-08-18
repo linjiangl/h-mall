@@ -12,10 +12,11 @@ namespace App\Core\Dao\User;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\User\UserWallet;
+use Hyperf\Database\Model\Model;
 
 class UserWalletDao extends AbstractDao
 {
-    protected string $model = UserWallet::class;
+    protected string|Model $model = UserWallet::class;
 
     protected array $noAllowActions = [];
 

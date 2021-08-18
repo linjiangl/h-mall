@@ -11,17 +11,18 @@ declare(strict_types=1);
 namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Goods\GoodsParameter;
+use App\Model\Goods\ServiceTemplate;
+use Hyperf\Database\Model\Model;
 
-class GoodsParameterDao extends AbstractDao
+class ServiceTemplateDao extends AbstractDao
 {
-    protected string $model = GoodsParameter::class;
+    protected string|Model $model = ServiceTemplate::class;
 
     protected array $noAllowActions = [];
 
-    protected string $notFoundMessage = '商品参数不存在或已删除';
+    protected string $notFoundMessage = '服务模版不存在或已删除';
 
-    public function info(int $id, array $with = []): GoodsParameter
+    public function info(int $id, array $with = []): ServiceTemplate
     {
         return parent::info($id, $with);
     }

@@ -12,10 +12,11 @@ namespace App\Core\Dao\Refund;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Refund\RefundGoods;
+use Hyperf\Database\Model\Model;
 
 class RefundGoodsDao extends AbstractDao
 {
-    protected string $model = RefundGoods::class;
+    protected string|Model $model = RefundGoods::class;
 
     protected array $noAllowActions = [];
 

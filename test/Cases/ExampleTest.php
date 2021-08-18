@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace  HyperfTest\Cases;
+namespace HyperfTest\Cases;
 
 use HyperfTest\HttpTestCase;
 

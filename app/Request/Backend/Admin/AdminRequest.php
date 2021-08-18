@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Request\Backend\Admin;
 
+use App\Core\Tools\Validate;
 use App\Request\AbstractRequest;
 
 class AdminRequest extends AbstractRequest
@@ -18,23 +19,22 @@ class AdminRequest extends AbstractRequest
     {
         parent::rules($ruleKey);
 
-        $mobileRegex = $this->getRegex(general_regex('mobile'));
         $rules = [
             'post:create' => [
                 'username' => 'required|string|max:30|unique:admin',
                 'password' => 'required|string|max:30|confirmed',
                 'avatar' => 'url',
                 'real_name' => 'string|max:20',
-                'mobile' => $mobileRegex . '|unique:admin',
+                'mobile' => Validate::ruleRegex(Validate::REGEX_TYPE_MOBILE, false) . '|unique:admin',
                 'email' => 'email|unique:admin',
                 'role_id' => 'integer',
             ],
-            'post:update' => $rules = [
+            'post:update' => [
                 'username' => 'string|max:30',
                 'password' => 'string|max:30',
                 'avatar' => 'url',
                 'real_name' => 'string|max:20',
-                'mobile' => $mobileRegex,
+                'mobile' => Validate::ruleRegex(Validate::REGEX_TYPE_MOBILE, false),
                 'email' => 'email',
                 'role_id' => 'integer',
             ],

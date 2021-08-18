@@ -12,9 +12,9 @@ namespace App\Constants\State;
 
 class BooleanState extends AbstractState
 {
-    const OPTION_FALSE = 0;
+    public const OPTION_FALSE = 0;
 
-    const OPTION_TRUE = 1;
+    public const OPTION_TRUE = 1;
 
     public static function map(): array
     {

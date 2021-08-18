@@ -12,10 +12,11 @@ namespace App\Core\Dao\Admin\Role;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Role\RoleMenu;
+use Hyperf\Database\Model\Model;
 
 class RoleMenuDao extends AbstractDao
 {
-    protected string $model = RoleMenu::class;
+    protected string|Model $model = RoleMenu::class;
 
     protected array $noAllowActions = [];
 

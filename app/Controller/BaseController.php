@@ -34,7 +34,7 @@ class BaseController extends AbstractController
     /**
      * 创建.
      */
-    public function store(): int
+    public function store(): mixed
     {
         return $this->service()->store();
     }
@@ -42,7 +42,7 @@ class BaseController extends AbstractController
     /**
      * 修改.
      */
-    public function update(): array
+    public function update(): mixed
     {
         return $this->service()->update();
     }
@@ -68,7 +68,7 @@ class BaseController extends AbstractController
         return new BaseBlock();
     }
 
-    protected function service()
+    protected function service(): BaseBlock
     {
         return $this->block()->setSince(BlockSinceConstants::SINCE_FRONTEND);
     }

@@ -12,10 +12,11 @@ namespace App\Core\Dao\Order;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Order\OrderExpress;
+use Hyperf\Database\Model\Model;
 
 class OrderExpressDao extends AbstractDao
 {
-    protected string $model = OrderExpress::class;
+    protected string|Model $model = OrderExpress::class;
 
     protected array $noAllowActions = [];
 

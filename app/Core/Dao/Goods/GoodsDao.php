@@ -12,10 +12,11 @@ namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Goods\Goods;
+use Hyperf\Database\Model\Model;
 
 class GoodsDao extends AbstractDao
 {
-    protected string $model = Goods::class;
+    protected string|Model $model = Goods::class;
 
     protected array $noAllowActions = [];
 
@@ -29,7 +30,7 @@ class GoodsDao extends AbstractDao
     /**
      * 检查分类下是否有商品
      */
-    public function checkCategoryIdHasGoods(int $categoryId): bool
+    public function checkCategoryHasGoods(int $categoryId): bool
     {
         return (bool) Goods::query()->where('category_id', $categoryId)->count();
     }

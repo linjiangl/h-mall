@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-use App\Exception\InternalException;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Framework\Logger\StdoutLogger;
 use Hyperf\HttpMessage\Stream\SwooleStream;
@@ -21,62 +20,51 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
-use Swoole\WebSocket\Server as WebSocketServer;
 
-/*
- * 容器实例
- */
 if (! function_exists('container')) {
+    /**
+     * 容器实例.
+     */
     function container(): ContainerInterface
     {
         return ApplicationContext::getContainer();
     }
 }
 
-/*
- * redis 客户端实例
- */
 if (! function_exists('redis')) {
+    /**
+     * redis 客户端实例.
+     */
     function redis(): Redis
     {
         return container()->get(Redis::class);
     }
 }
 
-/*
- * websocket 实例
- */
-if (! function_exists('websocket')) {
-    function websocket(): WebSocketServer
-    {
-        return container()->get(WebSocketServer::class);
-    }
-}
-
-/*
- * 缓存实例 简单的缓存
- */
 if (! function_exists('cache')) {
+    /**
+     * 缓存实例 简单的缓存.
+     */
     function cache(): CacheInterface
     {
         return container()->get(CacheInterface::class);
     }
 }
 
-/*
- * 控制台日志
- */
 if (! function_exists('stdLog')) {
+    /**
+     * 控制台日志.
+     */
     function stdLog(): StdoutLogger
     {
         return container()->get(StdoutLoggerInterface::class);
     }
 }
 
-/*
- * 文件日志
- */
 if (! function_exists('logger')) {
+    /**
+     * 文件日志.
+     */
     function logger(): LoggerInterface
     {
         return container()->get(LoggerFactory::class)->make();
@@ -84,6 +72,9 @@ if (! function_exists('logger')) {
 }
 
 if (! function_exists('request')) {
+    /**
+     * 请求实例.
+     */
     function request(): RequestInterface
     {
         return container()->get(ServerRequestInterface::class);
@@ -91,6 +82,9 @@ if (! function_exists('request')) {
 }
 
 if (! function_exists('response')) {
+    /**
+     * 响应实例.
+     */
     function response(): ResponseInterface
     {
         return container()->get(ResponseInterface::class);
@@ -98,7 +92,10 @@ if (! function_exists('response')) {
 }
 
 if (! function_exists('response_json')) {
-    function response_json($data, string $message = '', int $code = 200): Psr\Http\Message\ResponseInterface
+    /**
+     * 接口响应数据格式.
+     */
+    function response_json(mixed $data, string $message = '', int $code = 200): Psr\Http\Message\ResponseInterface
     {
         $code = $code ?: 500;
         if ($code >= 200 && $code < 300) {
@@ -110,27 +107,6 @@ if (! function_exists('response_json')) {
             ], JSON_UNESCAPED_UNICODE);
         }
         return response()->withAddedHeader('Content-Type', 'application/json')->withStatus($code)->withBody(new SwooleStream($data));
-    }
-}
-
-if (! function_exists('general_regex')) {
-    /**
-     * 通用正则表达式.
-     * @param string $option 选项
-     */
-    function general_regex(string $option = 'mobile'): string
-    {
-        switch ($option) {
-            case 'mobile':
-                $regex = '/^1\d{10}$/';
-                break;
-            case 'ids':
-                $regex = '/^\d+(,\d+)*$/';
-                break;
-            default:
-                throw new InternalException("{$option}未定义表达式");
-        }
-        return $regex;
     }
 }
 
@@ -164,10 +140,10 @@ if (! function_exists('write_logs')) {
     /**
      * 记录日志.
      * @param string $message 日志说明
-     * @param null $remark 备注
+     * @param mixed $remark 备注
      * @param string $level 日志级别
      */
-    function write_logs(string $message, $remark = null, string $level = 'error')
+    function write_logs(string $message, mixed $remark = null, string $level = 'error')
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
         container()->get(LoggerFactory::class)->make('Customize', 'customize')->log($level, $message, [
@@ -181,9 +157,8 @@ if (! function_exists('database_text')) {
     /**
      * 数据库文本数据.
      * @param array|string $data 要处理的数据
-     * @return array|string
      */
-    function database_text($data, string $schema = 'en')
+    function database_text(array|string $data, string $schema = 'en'): array|string
     {
         if ($schema == 'en') {
             return empty($data) ? '' : json_encode($data, JSON_UNESCAPED_UNICODE);

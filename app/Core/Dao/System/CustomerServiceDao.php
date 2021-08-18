@@ -12,10 +12,11 @@ namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\CustomerService;
+use Hyperf\Database\Model\Model;
 
 class CustomerServiceDao extends AbstractDao
 {
-    protected string $model = CustomerService::class;
+    protected string|Model $model = CustomerService::class;
 
     protected array $noAllowActions = [];
 

@@ -31,11 +31,11 @@ abstract class AbstractState implements InterfaceState
 
     /**
      * 获取自定义的消息.
-     * @param mixed $optionKey 选项的索引
+     * @param string $optionKey 选项的索引
      * @param string $option 选项
      * @param string $default 默认消息
      */
-    public static function getMessage($optionKey, string $option = 'status', string $default = ''): string
+    public static function getMessage(string $optionKey, string $option = 'status', string $default = ''): string
     {
         return static::map()[$option][$optionKey] ?? $default;
     }

@@ -55,4 +55,9 @@ class GoodsSku extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'goods_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'is_default' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+
+    public function specValues()
+    {
+        return $this->hasMany(GoodsSpecification::class, 'goods_sku_id')->orderBy('id');
+    }
 }

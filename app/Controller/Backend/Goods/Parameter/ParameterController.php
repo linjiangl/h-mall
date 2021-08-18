@@ -13,18 +13,19 @@ namespace App\Controller\Backend\Goods\Parameter;
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\Parameter\ParameterBlock;
+use App\Model\Parameter\Parameter;
 use App\Request\Backend\Goods\ParameterRequest;
 
 class ParameterController extends BackendController
 {
-    public function storeRequest(ParameterRequest $request): int
+    public function storeRequest(ParameterRequest $request): Parameter
     {
         $request->validated();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_CREATE));
         return $this->store();
     }
 
-    public function updateRequest(ParameterRequest $request): array
+    public function updateRequest(ParameterRequest $request): Parameter
     {
         $request->validated();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_UPDATE));

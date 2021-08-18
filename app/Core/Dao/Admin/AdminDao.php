@@ -12,14 +12,20 @@ namespace App\Core\Dao\Admin;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Admin\Admin;
+use Hyperf\Database\Model\Model;
 
 class AdminDao extends AbstractDao
 {
-    protected string $model = Admin::class;
+    protected string|Model $model = Admin::class;
 
     protected array $noAllowActions = [];
 
     protected string $notFoundMessage = '管理员不存在';
+
+    public function create(array $data): Admin
+    {
+        return parent::create($data);
+    }
 
     public function info(int $id, array $with = []): Admin
     {

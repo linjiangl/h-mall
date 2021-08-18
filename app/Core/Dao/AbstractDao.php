@@ -11,11 +11,9 @@ declare(strict_types=1);
 namespace App\Core\Dao;
 
 use App\Exception\BadRequestException;
-use App\Exception\HttpException;
 use App\Exception\NotFoundException;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Model;
-use Throwable;
 
 /**
  * Class AbstractDao.
@@ -25,7 +23,7 @@ abstract class AbstractDao
     /**
      * @var Model|string
      */
-    protected string $model;
+    protected string|Model $model;
 
     /**
      * 不允许执行的方法.
@@ -104,9 +102,8 @@ abstract class AbstractDao
      * 详情.
      * @param int $id 主键
      * @param array $with 关联模型
-     * @return mixed|Model
      */
-    public function info(int $id, array $with = [])
+    public function info(int $id, array $with = []): mixed
     {
         $query = $this->model::query();
         if ($with) {
@@ -117,7 +114,9 @@ abstract class AbstractDao
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
         }
+
         $this->checkIsOperational($model->toArray());
+
         return $model;
     }
 
@@ -125,24 +124,22 @@ abstract class AbstractDao
      * 创建.
      * @param array $data 创建的数据
      */
-    public function create(array $data): int
+    public function create(array $data): mixed
     {
-        try {
-            $this->actionIsAllow('create');
+        $this->actionIsAllow('create');
 
-            /** @var Model $model */
-            $model = new $this->model($data);
-            if (! $model->save()) {
-                throw new BadRequestException('创建失败');
-            }
-
-            $pk = $model->getKeyName();
-            $id = $model->{$pk};
-            $this->removeCache($id);
-            return $id;
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
+        /** @var Model $model */
+        $model = new $this->model($data);
+        if (! $model->save()) {
+            throw new BadRequestException('创建失败');
         }
+
+        $pk = $model->getKeyName();
+        $id = $model->{$pk};
+
+        $this->removeCache($id);
+
+        return $model;
     }
 
     /**
@@ -150,36 +147,32 @@ abstract class AbstractDao
      * @param int $id 主键
      * @param array $data 修改的数据
      */
-    public function update(int $id, array $data): array
+    public function update(int $id, array $data): mixed
     {
-        try {
-            $this->actionIsAllow('update');
+        $this->actionIsAllow('update');
 
-            $model = $this->info($id);
-            if (! $model->update($data)) {
-                throw new BadRequestException('更新失败');
-            }
-            $this->removeCache($id);
-            return $model->toArray();
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
+        $model = $this->info($id);
+        if (! $model->update($data)) {
+            throw new BadRequestException('更新失败');
         }
+
+        $this->removeCache($id);
+
+        return $model;
     }
 
     /**
      * 查看或创建.
-     * @return mixed|Model
      */
-    public function firstOrCreate(array $attributes, array $values)
+    public function firstOrCreate(array $attributes, array $values): mixed
     {
         return $this->model::firstOrCreate($attributes, $values);
     }
 
     /**
      * 修改或创建.
-     * @return mixed|Model
      */
-    public function updateOrCreate(array $attributes, array $values)
+    public function updateOrCreate(array $attributes, array $values): mixed
     {
         return $this->model::updateOrCreate($attributes, $values);
     }
@@ -190,21 +183,19 @@ abstract class AbstractDao
      */
     public function remove(int $id): bool
     {
-        try {
-            $this->actionIsAllow('remove');
+        $this->actionIsAllow('remove');
 
-            $model = $this->info($id);
+        $model = $this->info($id);
 
-            if ($this->softDelete) {
-                $model->update(['deleted_time' => time()]);
-            } else {
-                $model->delete();
-            }
-            $this->removeCache($id);
-            return true;
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
+        if ($this->softDelete) {
+            $model->update(['deleted_time' => time()]);
+        } else {
+            $model->delete();
         }
+
+        $this->removeCache($id);
+
+        return true;
     }
 
     /**
@@ -242,11 +233,11 @@ abstract class AbstractDao
 
     /**
      * 自定义条件查询详情.
-     * @return mixed|Model
      */
-    public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*')
+    public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*'): mixed
     {
         $query = $this->generateListQuery($condition, '', [], $with);
+        /** @var mixed $model */
         $model = $query->selectRaw($select)->first();
         if (! $model) {
             throw new NotFoundException($this->notFoundMessage);
@@ -408,16 +399,24 @@ abstract class AbstractDao
     protected function handleQueryCondition(Builder $query, array $condition): Builder
     {
         if (! empty($condition)) {
-            foreach ($condition as $where) {
-                switch ($where[1]) {
-                    case 'in':
-                        $query->whereIn($where[0], $where[2]);
-                        break;
-                    case 'between':
-                        $query->whereBetween($where[0], $where[2]);
-                        break;
-                    default:
-                        $query->where($where[0], $where[1], $where[2]);
+            foreach ($condition as $key => $value) {
+                if (is_array($value) && count($value) === 3) {
+                    switch ($value[1]) {
+                        case 'in':
+                            $query->whereIn($value[0], $value[2]);
+                            break;
+                        case 'between':
+                            $query->whereBetween($value[0], $value[2]);
+                            break;
+                        default:
+                            $query->where($value[0], $value[1], $value[2]);
+                    }
+                } else {
+                    if (is_array($value)) {
+                        $query->whereIn($key, $value);
+                    } else {
+                        $query->where($key, $value);
+                    }
                 }
             }
         }
@@ -460,7 +459,7 @@ abstract class AbstractDao
     protected function checkIsOperational(array $detail)
     {
         if (! empty($this->authorize)) {
-            if ($this->authorize['user_id'] != $detail[$this->authorizeColumn]) {
+            if (isset($this->authorize['user_id']) && $this->authorize['user_id'] != $detail[$this->authorizeColumn]) {
                 throw new BadRequestException('权限不足');
             }
         }

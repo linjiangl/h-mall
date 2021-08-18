@@ -12,10 +12,11 @@ namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Attachment;
+use Hyperf\Database\Model\Model;
 
 class AttachmentDao extends AbstractDao
 {
-    protected string $model = Attachment::class;
+    protected string|Model $model = Attachment::class;
 
     protected array $noAllowActions = [];
 

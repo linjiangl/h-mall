@@ -15,11 +15,11 @@ use App\Constants\State\AbstractState;
 class AdminState extends AbstractState
 {
     // 状态
-    const STATUS_PENDING = 0;
+    public const STATUS_PENDING = 0;
 
-    const STATUS_ENABLED = 1;
+    public const STATUS_ENABLED = 1;
 
-    const STATUS_DISABLED = 2;
+    public const STATUS_DISABLED = 2;
 
     public static function map(): array
     {

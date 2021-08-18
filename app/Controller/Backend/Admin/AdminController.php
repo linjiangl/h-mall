@@ -13,18 +13,19 @@ namespace App\Controller\Backend\Admin;
 use App\Constants\Action\AdminAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Admin\AdminBlock;
+use App\Model\Admin\Admin;
 use App\Request\Backend\Admin\AdminRequest;
 
 class AdminController extends BackendController
 {
-    public function storeRequest(AdminRequest $request): int
+    public function storeRequest(AdminRequest $request): Admin
     {
         $request->validated();
         $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_CREATE));
         return $this->store();
     }
 
-    public function updateRequest(AdminRequest $request): array
+    public function updateRequest(AdminRequest $request): Admin
     {
         $request->validated();
         $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_UPDATE));

@@ -10,6 +10,13 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use App\Constants\BlockSinceConstants;
+use App\Core\Block\BaseBlock;
+
 class FrontendController extends BaseController
 {
+    protected function service(): BaseBlock
+    {
+        return $this->block()->setSince(BlockSinceConstants::SINCE_FRONTEND);
+    }
 }

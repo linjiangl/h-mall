@@ -13,10 +13,11 @@ namespace App\Core\Dao\Admin\Role;
 use App\Constants\State\Admin\RoleState;
 use App\Core\Dao\AbstractDao;
 use App\Model\Role\Role;
+use Hyperf\Database\Model\Model;
 
 class RoleDao extends AbstractDao
 {
-    protected string $model = Role::class;
+    protected string|Model $model = Role::class;
 
     protected array $noAllowActions = [];
 

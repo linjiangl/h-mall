@@ -36,11 +36,8 @@ class CreateRoleTables extends Migration
         });
 
         Schema::create('role_admin', function (Blueprint $table) {
-            $table->integerIncrements('id');
             $table->unsignedInteger('role_id');
             $table->unsignedInteger('admin_id');
-            $table->unsignedInteger('created_time')->default(0);
-            $table->unsignedInteger('updated_time')->default(0);
 
             $table->unique(['role_id', 'admin_id'], 'role_admin_id');
             $table->index(['admin_id'], 'admin_id');
@@ -49,11 +46,8 @@ class CreateRoleTables extends Migration
         });
 
         Schema::create('role_menu', function (Blueprint $table) {
-            $table->integerIncrements('id');
             $table->unsignedInteger('role_id');
             $table->unsignedInteger('menu_id');
-            $table->unsignedInteger('created_time')->default(0);
-            $table->unsignedInteger('updated_time')->default(0);
 
             $table->unique(['role_id', 'menu_id'], 'role_menu_id');
             $table->index(['menu_id'], 'menu_id');

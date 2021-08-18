@@ -12,10 +12,11 @@ namespace App\Core\Dao\Goods\Parameter;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Parameter\ParameterOption;
+use Hyperf\Database\Model\Model;
 
 class ParameterOptionsDao extends AbstractDao
 {
-    protected string $model = ParameterOption::class;
+    protected string|Model $model = ParameterOption::class;
 
     protected array $noAllowActions = [];
 

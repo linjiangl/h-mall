@@ -12,10 +12,11 @@ namespace App\Core\Dao\User;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\User\UserAddress;
+use Hyperf\Database\Model\Model;
 
 class UserAddressDao extends AbstractDao
 {
-    protected string $model = UserAddress::class;
+    protected string|Model $model = UserAddress::class;
 
     protected array $noAllowActions = [];
 

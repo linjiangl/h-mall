@@ -52,14 +52,6 @@ abstract class AbstractRequest extends FormRequest implements InterfaceRequest
     }
 
     /**
-     * 获取验证规则正则表达式.
-     */
-    public function getRegex(string $regex): string
-    {
-        return 'regex:' . $regex;
-    }
-
-    /**
      * 获取in规则.
      */
     public function getRuleInByState(array $data): string

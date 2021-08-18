@@ -8,17 +8,17 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Goods\Service;
+namespace App\Core\Service\Goods;
 
-use App\Core\Dao\Goods\Service\ServiceDao;
+use App\Core\Dao\Goods\ServiceTemplateDao;
 use App\Core\Service\AbstractService;
 
-class ServiceService extends AbstractService
+class ServiceTemplateService extends AbstractService
 {
-    protected string $dao = ServiceDao::class;
+    protected string $dao = ServiceTemplateDao::class;
 
     public function all(): array
     {
-        return (new ServiceDao())->getListByCondition();
+        return (new ServiceTemplateDao())->getListByCondition();
     }
 }

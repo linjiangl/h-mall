@@ -10,52 +10,36 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Goods;
 
-use App\Constants\State\Goods\GoodsState;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
-use App\Core\Service\Goods\Types\AbstractTypesService;
-use App\Core\Service\Goods\Types\GeneralService;
-use App\Core\Service\Goods\Types\VirtualService;
-use App\Exception\BadRequestException;
-use App\Exception\InternalException;
-use Throwable;
+use App\Core\Service\Goods\Types\TypeService;
+use App\Model\Goods\Goods;
 
 class GoodsService extends AbstractService
 {
     protected string $dao = GoodsDao::class;
 
-    protected array $mapClass = [
-        GoodsState::TYPE_GENERAL => GeneralService::class,
-        GoodsState::TYPE_VIRTUAL => VirtualService::class,
-    ];
-
-    public function create(array $data): int
+    public function create(array $data): Goods
     {
-        try {
-            $service = $this->make($data, 0, $data['type']);
-            return $service->create();
-        } catch (Throwable $e) {
-            write_logs('创建失败', $data);
-            throw new BadRequestException($e->getMessage(), $e->getCode());
-        }
+        return (new TypeService($data))->create();
     }
 
-    public function update(int $id, array $data): array
+    public function update(int $id, array $data): Goods
     {
-        try {
-            $service = $this->make($data, $id, $data['type'] ?? GoodsState::TYPE_GENERAL);
-            return $service->update();
-        } catch (Throwable $e) {
-            write_logs('保存失败', $data);
-            throw new BadRequestException($e->getMessage(), $e->getCode());
-        }
+        return (new TypeService($data, $id))->update();
     }
 
-    public function make(array $data, int $id = 0, string $type = GoodsState::TYPE_GENERAL): AbstractTypesService
+    /**
+     * 处理商品详情.
+     */
+    public function convertGoodsDetail(array $goodsDetail): array
     {
-        if (! in_array($type, array_keys($this->mapClass))) {
-            throw new InternalException('商品类型不存在');
+        $idx = [];
+        foreach ($goodsDetail['skus'] as $item) {
+            $index = implode('::', array_column($item['spec_values'], 'name'));
+            $idx[$index] = $item['id'];
         }
-        return new $this->mapClass[$type]($data, $id);
+        $goodsDetail['sku_spec_idx'] = $idx;
+        return $goodsDetail;
     }
 }

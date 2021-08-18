@@ -13,6 +13,7 @@ namespace App\Core\Block\Common\Admin;
 use App\Core\Block\BaseBlock;
 use App\Core\Service\Admin\AdminService;
 use App\Exception\HttpException;
+use App\Model\Admin\Admin;
 use Throwable;
 
 class AdminBlock extends BaseBlock
@@ -23,7 +24,7 @@ class AdminBlock extends BaseBlock
         '=' => ['username', 'real_name', 'mobile', 'email', 'status'],
     ];
 
-    public function store(): int
+    public function store(): Admin
     {
         try {
             $post = $this->request->post();
@@ -34,7 +35,7 @@ class AdminBlock extends BaseBlock
         }
     }
 
-    public function update(): array
+    public function update(): Admin
     {
         try {
             $service = new AdminService();

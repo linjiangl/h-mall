@@ -12,10 +12,11 @@ namespace App\Core\Dao\System;
 
 use App\Core\Dao\AbstractDao;
 use App\Model\Menu;
+use Hyperf\Database\Model\Model;
 
 class MenuDao extends AbstractDao
 {
-    protected string $model = Menu::class;
+    protected string|Model $model = Menu::class;
 
     protected array $noAllowActions = [];
 
@@ -30,7 +31,7 @@ class MenuDao extends AbstractDao
      * 根据状态获取菜单.
      * @param mixed $status 状态
      */
-    public function getListByStatus($status = null, string $select = '*'): array
+    public function getListByStatus(mixed $status = null, string $select = '*'): array
     {
         $condition = [];
         if ($status != null) {

@@ -13,18 +13,19 @@ namespace App\Controller\Backend\Goods\Category;
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\Category\CategoryBlock;
+use App\Model\Category\Category;
 use App\Request\Backend\Goods\CategoryRequest;
 
 class CategoryController extends BackendController
 {
-    public function storeRequest(CategoryRequest $request): int
+    public function storeRequest(CategoryRequest $request): Category
     {
         $request->validated();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_CREATE));
         return $this->store();
     }
 
-    public function updateRequest(CategoryRequest $request): array
+    public function updateRequest(CategoryRequest $request): Category
     {
         $request->validated();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_UPDATE));

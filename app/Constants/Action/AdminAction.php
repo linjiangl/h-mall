@@ -24,45 +24,45 @@ class AdminAction extends AbstractConstants
     /**
      * @Message("创建管理员账号")
      */
-    const ADMIN_CREATE = 'admin_create';
+    public const ADMIN_CREATE = 'admin_create';
 
     /**
      * @Message("修改管理员信息")
      */
-    const ADMIN_UPDATE = 'admin_update';
+    public const ADMIN_UPDATE = 'admin_update';
 
     /**
      * @Message("创建菜单")
      */
-    const MENU_CREATE = 'menu_create';
+    public const MENU_CREATE = 'menu_create';
 
     /**
      * @Message("修改菜单")
      */
-    const MENU_UPDATE = 'menu_update';
+    public const MENU_UPDATE = 'menu_update';
 
     /**
      * @Message("删除菜单")
      */
-    const MENU_DELETE = 'menu_delete';
+    public const MENU_DELETE = 'menu_delete';
 
     /**
      * @Message("创建权限")
      */
-    const ROLE_CREATE = 'role_create';
+    public const ROLE_CREATE = 'role_create';
 
     /**
      * @Message("修改权限")
      */
-    const ROLE_UPDATE = 'role_update';
+    public const ROLE_UPDATE = 'role_update';
 
     /**
      * @Message("删除权限")
      */
-    const ROLE_DELETE = 'role_delete';
+    public const ROLE_DELETE = 'role_delete';
 
     /**
      * @Message("设置权限菜单")
      */
-    const ROLE_MENU_CHANGE = 'ROLE_MENU_CHANGE';
+    public const ROLE_MENU_CHANGE = 'ROLE_MENU_CHANGE';
 }

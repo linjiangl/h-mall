@@ -13,38 +13,42 @@ namespace App\Controller\Backend\Goods;
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\GoodsBlock;
+use App\Model\Goods\Goods;
 use App\Request\Backend\Goods\GoodsRequest;
 use App\Request\Common\BatchOperationRequest;
 
 class GoodsController extends BackendController
 {
-    public function storeRequest(GoodsRequest $request): int
+    public function storeRequest(GoodsRequest $request): Goods
     {
         $request->validated();
-        $id = $this->store();
+        $result = $this->store();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE));
-        return $id;
+        return $result;
     }
 
-    public function updateStatusRequest(GoodsRequest $request): array
+    public function updateStatusRequest(GoodsRequest $request): Goods
     {
         $request->validated();
+        $result = $this->update();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_UPDATE_STATUS));
-        return $this->update();
+        return $result;
     }
 
     public function recycleRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
+        $result = $this->batchDestroy();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE));
-        return $this->batchDestroy();
+        return $result;
     }
 
     public function batchDestroyRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
+        $result = $this->batchDestroy();
         $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE));
-        return $this->batchDestroy();
+        return $result;
     }
 
     protected function block(): GoodsBlock
