@@ -13,12 +13,13 @@ namespace App\Controller\Backend\Goods;
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\GoodsBlock;
+use App\Model\Goods\Goods;
 use App\Request\Backend\Goods\GoodsRequest;
 use App\Request\Common\BatchOperationRequest;
 
 class GoodsController extends BackendController
 {
-    public function storeRequest(GoodsRequest $request): int
+    public function storeRequest(GoodsRequest $request): Goods
     {
         $request->validated();
         $result = $this->store();
@@ -26,7 +27,7 @@ class GoodsController extends BackendController
         return $result;
     }
 
-    public function updateStatusRequest(GoodsRequest $request): array
+    public function updateStatusRequest(GoodsRequest $request): Goods
     {
         $request->validated();
         $result = $this->update();

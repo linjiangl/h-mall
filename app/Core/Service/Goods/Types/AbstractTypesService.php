@@ -64,9 +64,9 @@ abstract class AbstractTypesService implements InterfaceTypesService
         try {
             // 创建商品
             $goodsDao = new GoodsDao();
-            $this->id = $goodsDao->create($data);
+            $this->goods = $goodsDao->create($data);
+            $this->id = $this->goods->id;
 
-            $this->goods = $goodsDao->info($this->id);
             $this->syncAttribute();
             $this->syncTimer();
             $this->syncSpecification();
@@ -90,9 +90,8 @@ abstract class AbstractTypesService implements InterfaceTypesService
         try {
             // 修改商品
             $goodsDao = new GoodsDao();
-            $goodsDao->update($this->id, $data);
+            $this->goods = $goodsDao->update($this->id, $data);
 
-            $this->goods = $goodsDao->info($this->id);
             $this->syncAttribute();
             $this->syncTimer();
             $this->syncSpecification();
@@ -194,10 +193,9 @@ abstract class AbstractTypesService implements InterfaceTypesService
             if (isset($sku['id']) && $sku['id'] > 0) {
                 // 修改
                 $goodsSku = $goodsSkuDao->update($sku['id'], $tmp);
-                $goodsSkuId = $goodsSku['id'];
             } else {
                 // 新建
-                $goodsSkuId = $goodsSkuDao->create($tmp);
+                $goodsSku = $goodsSkuDao->create($tmp);
             }
 
             foreach ($sku['spec_values'] as $index => $item) {
@@ -206,7 +204,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
                 }
                 $goodsSpecification = new GoodsSpecification([
                     'goods_id' => $this->id,
-                    'goods_sku_id' => $goodsSkuId,
+                    'goods_sku_id' => $goodsSku->id,
                     'parent_id' => $this->goodsSpecification[$index]['id'],
                     'name' => $item['name'],
                     'image' => $item['image'],
