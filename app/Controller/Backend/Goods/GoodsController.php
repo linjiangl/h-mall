@@ -28,7 +28,7 @@ class GoodsController extends BackendController
     public function updateRequest(GoodsRequest $request): Goods
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE), $this->update());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_UPDATE), $this->update());
     }
 
     public function updateStatusRequest(GoodsRequest $request): Goods
