@@ -22,11 +22,17 @@ class GoodsSkuDao extends AbstractDao
 
     protected string $notFoundMessage = '商品规格不存在或已删除';
 
+    /**
+     * 创建商品
+     */
     public function create(array $data): GoodsSku
     {
         return parent::create($data);
     }
 
+    /**
+     * 修改商品
+     */
     public function update(int $id, array $data): GoodsSku
     {
         return parent::update($id, $data);
