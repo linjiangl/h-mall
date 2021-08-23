@@ -145,7 +145,10 @@ class CartService extends AbstractService
      */
     public function clear(array $user): bool
     {
-        $condition = [['user_id', '=', $user['id']], ['is_show', '=', CartState::IS_SHOW_TRUE]];
+        $condition = [
+            'user_id' => $user['id'],
+            'is_show' => CartState::IS_SHOW_TRUE,
+        ];
         $dao = new CartDao();
         $cartList = $dao->getListByCondition($condition);
 
@@ -167,5 +170,17 @@ class CartService extends AbstractService
             Db::rollBack();
             throw new BadRequestException($e->getMessage());
         }
+    }
+
+    /**
+     * 购车车结算.
+     */
+    public function settlement(array $user, array $selectIds): array
+    {
+        $dao = new CartDao();
+        return $dao->getListByCondition([
+            'user_id' => $user['id'],
+            'id' => $selectIds,
+        ]);
     }
 }
