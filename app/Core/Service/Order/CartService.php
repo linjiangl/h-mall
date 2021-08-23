@@ -17,6 +17,7 @@ use App\Core\Service\AbstractService;
 use App\Core\Service\Goods\Stock\Change\StockCartService;
 use App\Core\Service\Goods\Stock\StockChangeService;
 use App\Exception\BadRequestException;
+use App\Model\Cart;
 use Exception;
 use Hyperf\DbConnection\Db;
 
@@ -27,7 +28,7 @@ class CartService extends AbstractService
     /**
      * 添加购物车.
      */
-    public function add(array $user, int $skuId, int $quantity = 1, array $append = []): int
+    public function add(array $user, int $skuId, int $quantity = 1, array $append = []): Cart
     {
         $sku = (new GoodsSkuDao())->info($skuId);
         $data = [
@@ -64,7 +65,7 @@ class CartService extends AbstractService
             }
 
             Db::commit();
-            return $cart->id;
+            return $cart;
         } catch (Exception $e) {
             Db::rollBack();
             throw new BadRequestException($e->getMessage());
@@ -74,7 +75,7 @@ class CartService extends AbstractService
     /**
      * 修改购物车.
      */
-    public function modify(array $user, int $cartId, int $quantity = 1, array $append = []): array
+    public function modify(array $user, int $cartId, int $quantity = 1, array $append = []): Cart
     {
         $cart = (new CartDao())->getInfoByCondition([
             ['id', '=', $cartId],
@@ -103,7 +104,7 @@ class CartService extends AbstractService
             $stockChangeService->setParams(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
 
             Db::commit();
-            return $cart->toArray();
+            return $cart;
         } catch (Exception $e) {
             Db::rollBack();
             throw new BadRequestException($e->getMessage());
