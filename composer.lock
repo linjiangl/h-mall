@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75b6dc33ab1796becc72e38d0b02aa9e",
+    "content-hash": "e4f439135ee735fbfbed4d9e9af57f47",
     "packages": [
         {
             "name": "bandwidth-throttle/token-bucket",
@@ -6280,6 +6280,52 @@
                 "source": "https://github.com/hyperf/hyperf"
             },
             "time": "2021-07-18T06:50:14+00:00"
+        },
+        {
+            "name": "hyperf/ide-helper",
+            "version": "v2.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/ide-helper.git",
+                "reference": "f03e9f03e9f3cf392c7bee43d40d978528c5e116"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hyperf/ide-helper/zipball/f03e9f03e9f3cf392c7bee43d40d978528c5e116",
+                "reference": "f03e9f03e9f3cf392c7bee43d40d978528c5e116",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "IDE help files for Hyperf.",
+            "homepage": "https://hyperf.io",
+            "keywords": [
+                "hyperf",
+                "ide-helper",
+                "php",
+                "swoole"
+            ],
+            "support": {
+                "docs": "https://hyperf.wiki",
+                "issues": "https://github.com/hyperf/hyperf/issues",
+                "pull-request": "https://github.com/hyperf/hyperf/pulls",
+                "source": "https://github.com/hyperf/hyperf"
+            },
+            "time": "2021-08-23T03:09:11+00:00"
         },
         {
             "name": "hyperf/testing",
