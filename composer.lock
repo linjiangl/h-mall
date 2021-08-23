@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13fc36decd8a126230ede973b5fdfe48",
+    "content-hash": "75b6dc33ab1796becc72e38d0b02aa9e",
     "packages": [
         {
             "name": "bandwidth-throttle/token-bucket",
@@ -6282,52 +6282,6 @@
             "time": "2021-07-18T06:50:14+00:00"
         },
         {
-            "name": "hyperf/ide-helper",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hyperf/ide-helper.git",
-                "reference": "f0735f0abd2d11c0024b790e8a69b8fe7874747e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/ide-helper/zipball/f0735f0abd2d11c0024b790e8a69b8fe7874747e",
-                "reference": "f0735f0abd2d11c0024b790e8a69b8fe7874747e",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "IDE help files for Hyperf.",
-            "homepage": "https://hyperf.io",
-            "keywords": [
-                "hyperf",
-                "ide-helper",
-                "php",
-                "swoole"
-            ],
-            "support": {
-                "docs": "https://hyperf.wiki",
-                "issues": "https://github.com/hyperf/hyperf/issues",
-                "pull-request": "https://github.com/hyperf/hyperf/pulls",
-                "source": "https://github.com/hyperf/hyperf"
-            },
-            "time": "2021-07-18T06:50:14+00:00"
-        },
-        {
             "name": "hyperf/testing",
             "version": "v2.2.0",
             "source": {
@@ -8601,6 +8555,50 @@
             "time": "2020-09-28T06:39:44+00:00"
         },
         {
+            "name": "swoole/ide-helper",
+            "version": "4.4.25",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swoole/ide-helper.git",
+                "reference": "447bc776f3467031979675de9ff18cca4e666869"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swoole/ide-helper/zipball/447bc776f3467031979675de9ff18cca4e666869",
+                "reference": "447bc776f3467031979675de9ff18cca4e666869",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~6.5.0",
+                "laminas/laminas-code": "~3.4.0",
+                "squizlabs/php_codesniffer": "~3.5.0",
+                "symfony/filesystem": "~4.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Team Swoole",
+                    "email": "team@swoole.com"
+                }
+            ],
+            "description": "IDE help files for Swoole.",
+            "support": {
+                "issues": "https://github.com/swoole/ide-helper/issues",
+                "source": "https://github.com/swoole/ide-helper/tree/4.4.25"
+            },
+            "time": "2021-04-09T15:39:25+00:00"
+        },
+        {
             "name": "symfony/event-dispatcher",
             "version": "v5.3.4",
             "source": {
@@ -9183,7 +9181,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-bcmath": "*",
         "ext-iconv": "*",
         "ext-json": "*",
