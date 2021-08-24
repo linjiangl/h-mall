@@ -22,6 +22,9 @@ class AdminDao extends AbstractDao
 
     protected string $notFoundMessage = '管理员不存在';
 
+    /**
+     * 创建管理员.
+     */
     public function create(array $data): Admin
     {
         return parent::create($data);

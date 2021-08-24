@@ -21,22 +21,19 @@ class ParameterController extends BackendController
     public function storeRequest(ParameterRequest $request): Parameter
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_CREATE));
-        return $this->store();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_CREATE), $this->store());
     }
 
     public function updateRequest(ParameterRequest $request): Parameter
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_UPDATE));
-        return $this->update();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_UPDATE), $this->update());
     }
 
     public function destroyRequest(ParameterRequest $request): bool
     {
         $request->validated();
-        $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_DELETE));
-        return $this->destroy();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_DELETE), $this->destroy());
     }
 
     protected function block(): ParameterBlock

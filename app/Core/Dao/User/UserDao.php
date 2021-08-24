@@ -24,6 +24,9 @@ class UserDao extends AbstractDao
 
     protected string $authorizeColumn = 'id';
 
+    /**
+     * 创建用户.
+     */
     public function create(array $data): User
     {
         return parent::create($data);
