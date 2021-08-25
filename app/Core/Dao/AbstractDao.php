@@ -68,6 +68,11 @@ abstract class AbstractDao
     protected string $authorizeColumn = 'user_id';
 
     /**
+     * 对应的关联模型.
+     */
+    protected array $mapWith = [];
+
+    /**
      * 分页列表.
      * @param string[] $columns
      * @return array
@@ -321,6 +326,37 @@ abstract class AbstractDao
      */
     public function removeCache(int $id): void
     {
+    }
+
+    /**
+     * 获取关联模型.
+     */
+    public function getMapWith(string $type, string $class = ''): array
+    {
+        $type = $this->buildMapWithKey($type, $class);
+        if (array_key_exists($type, $this->mapWith)) {
+            return $this->mapWith[$type];
+        }
+        return [];
+    }
+
+    /**
+     * 设置关联模型.
+     */
+    public function setMapWith(): self
+    {
+        return $this;
+    }
+
+    /**
+     * 生成关联模型的索引.
+     */
+    public function buildMapWithKey(string $type, string $class = ''): string
+    {
+        if ($class) {
+            $type = substr(strrchr($class, '\\'), 1) . ':' . $type;
+        }
+        return $type;
     }
 
     /**

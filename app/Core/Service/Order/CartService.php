@@ -175,12 +175,12 @@ class CartService extends AbstractService
     /**
      * 购车车结算.
      */
-    public function settlement(array $user, array $selectIds): array
+    public function settlement(array $user, array $selectIds)
     {
         $dao = new CartDao();
         return $dao->getListByCondition([
             'user_id' => $user['id'],
             'id' => $selectIds,
-        ]);
+        ], $dao->setMapWith()->getMapWith('settlement', self::class));
     }
 }
