@@ -50,4 +50,9 @@ class GoodsSpecification extends Model
     {
         return $this->hasMany(GoodsSpecification::class, 'parent_id')->groupBy(['name']);
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(GoodsSpecification::class);
+    }
 }

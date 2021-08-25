@@ -98,7 +98,7 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('refund_goods_id')->default(0);
             $table->unsignedTinyInteger('refund_status')->default(0);
             $table->string('refund_type', 30)->default('');
-            $table->string('remark', 255)->default('')->comment('备注');
+            $table->text('remark')->comment('备注');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
