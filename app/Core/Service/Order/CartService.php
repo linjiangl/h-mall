@@ -178,12 +178,30 @@ class CartService extends AbstractService
     /**
      * 购车车结算.
      */
-    public function settlement(array $user, array $selectIds): array
+    public function settlement(array $user, array $selectIds, array $append = []): array
     {
         $dao = new CartDao();
-        return $dao->getListByCondition([
+        $list = $dao->getListByCondition([
             'user_id' => $user['id'],
             'id' => $selectIds,
         ], $dao->setMapWith()->getMapWith('settlement', self::class));
+
+        $skus = [];
+        foreach ($list as $item) {
+            $totalAmount = bcmul((string) $item['quantity'], $item['sku']['sale_price'], 2);
+            $skus[] = [
+                'user_id' => $user['id'],
+                'goods_id' => $item['sku']['goods_id'],
+                'goods_sku_id' => $item['sku']['id'],
+                'goods_name' => $item['sku']['goods']['name'],
+                'goods_sku_name' => $item['sku']['sku_name'],
+                'quantity' => $item['quantity'],
+                'total_amount' => $totalAmount,
+                'discount_amount' => 0,
+                'remark' => [],
+            ];
+        }
+
+        return $skus;
     }
 }
