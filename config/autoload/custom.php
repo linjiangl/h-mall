@@ -9,10 +9,16 @@ declare(strict_types=1);
  * @contact  8257796@qq.com
  */
 return [
+    // 店铺
+    'shop' => [
+        'system_shop_id' => 1,
+    ],
+
     // 附件配置
     'attachment' => [
         'encrypt_limit_size' => 1024 * 1024 * 10, // 小于等于该值时,检查文件的 MD5 散列值
     ],
+
     // 七牛存储配置
     'qn' => [
         'access_key' => env('QN_ACCESS_KEY'),
@@ -21,6 +27,7 @@ return [
         'cdn' => env('QN_CDN'),
         'pipeline' => env('QN_PIPELINE'),
     ],
+
     // 百度富文本编辑器配置
     'ueditor' => [
         'imageActionName' => 'uploadimage', /* 执行上传图片的action名称 */
