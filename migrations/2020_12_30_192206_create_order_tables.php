@@ -85,25 +85,27 @@ class CreateOrderTables extends Migration
 
         Schema::create('order_goods', function (Blueprint $table) {
             $table->integerIncrements('id');
+            $table->unsignedInteger('shop_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('goods_id');
             $table->unsignedInteger('goods_sku_id');
-            $table->string('goods_name', 255)->comment('商品名称');
-            $table->string('goods_sku_name', 255)->comment('商品属性名称');
             $table->unsignedInteger('quantity')->comment('数量');
-            $table->decimal('total_amount', 10, 2)->unsigned()->default(0)->comment('商品总金额');
-            $table->decimal('discount_amount', 10, 2)->unsigned()->default(0)->comment('折扣金额');
-            $table->unsignedInteger('refund_id')->default(0);
-            $table->unsignedInteger('refund_goods_id')->default(0);
-            $table->unsignedTinyInteger('refund_status')->default(0);
+            $table->decimal('price', 7, 2)->unsigned()->comment('商品单价');
+            $table->decimal('goods_total_amount', 10, 2)->unsigned()->comment('商品总金额，数量 * 商品单价 = 商品总金额');
+            $table->decimal('discount_amount', 10, 2)->unsigned()->comment('折扣金额，各种优惠/折扣的金额小计');
+            $table->decimal('payment_amount', 10, 2)->unsigned()->comment('实际支付金额，退款成功时需要减去该金额');
+            $table->decimal('total_amount', 10, 2)->unsigned()->comment('应付金额，订单实际支付金额');
+            $table->string('goods_name', 255)->comment('商品名称');
+            $table->text('goods_memo')->comment('商品备注');
+            $table->string('sku_properties_name', 255)->comment('SKU的值。如：机身颜色:黑色;手机套餐:官方标配');
             $table->string('refund_type', 30)->default('');
-            $table->text('remark')->comment('备注');
+            $table->unsignedInteger('refund_id')->default(0);
+            $table->unsignedTinyInteger('refund_status')->default(0);
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['order_id'], 'order_id');
-            $table->index(['goods_id'], 'goods_id');
             $table->index(['goods_name'], 'goods_name');
 
             $table->comment('订单商品');

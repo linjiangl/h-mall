@@ -51,7 +51,7 @@ class ModelCommand extends HyperfCommand
      * 指定的数据表.
      */
     protected array $specifyTables = [
-        'goods_sku', 'goods_attribute',
+        'order_goods',
     ];
 
     public function configure()
@@ -94,7 +94,7 @@ class ModelCommand extends HyperfCommand
     {
         $this->line('');
         $appPath = BASE_PATH;
-        $fixerExec = "{$appPath}/vendor/bin/php-cs-fixer --config={$appPath}/.php_cs --verbose fix {$appPath}/app/Model";
+        $fixerExec = "{$appPath}/vendor/bin/php-cs-fixer --config={$appPath}/.php-cs-fixer.php --verbose fix {$appPath}/app/Model";
         exec($fixerExec);
     }
 
