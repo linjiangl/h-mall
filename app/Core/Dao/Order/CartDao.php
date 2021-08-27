@@ -37,7 +37,7 @@ class CartDao extends AbstractDao
     public function setMapWith(): self
     {
         $this->mapWith = [
-            $this->buildMapWithKey('settlement', CartService::class) => ['sku', 'sku.goods', 'sku.specValues', 'sku.specValues.parent'],
+            $this->buildMapWithKey('settlement', CartService::class) => ['shop', 'sku', 'sku.goods', 'sku.specValues', 'sku.specValues.parent'],
         ];
         return parent::setMapWith();
     }

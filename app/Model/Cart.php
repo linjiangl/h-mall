@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model;
 
 use App\Model\Goods\GoodsSku;
+use App\Model\Shop\Shop;
 
 /**
  * @property int $id
@@ -50,5 +51,10 @@ class Cart extends Model
     public function sku()
     {
         return $this->belongsTo(GoodsSku::class, 'goods_sku_id');
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
     }
 }

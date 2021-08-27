@@ -43,6 +43,7 @@ class CartService extends AbstractService
         try {
             // 创建购物车
             $cart = (new CartDao())->firstOrCreate([
+                'shop_id' => $sku->shop_id,
                 'user_id' => $user['id'],
                 'goods_sku_id' => $sku->id,
             ], $data);
@@ -181,9 +182,22 @@ class CartService extends AbstractService
     public function getSelectCarts(array $user, array $selectIds): array
     {
         $dao = new CartDao();
-        return $dao->getListByCondition([
+        $list = $dao->getListByCondition([
             'user_id' => $user['id'],
             'id' => $selectIds,
         ], $dao->setMapWith()->getMapWith('settlement', self::class));
+
+        $result = [];
+
+        foreach ($list as $item) {
+            if (! isset($result[$item['shop_id']])) {
+                $result[$item['shop_id']] = $item['shop'];
+            }
+            $item['sku']['quantity'] = $item['quantity'];
+            $result[$item['shop_id']]['cart_ids'][] = $item['id'];
+            $result[$item['shop_id']]['sku'][] = $item['sku'];
+        }
+
+        return $result;
     }
 }
