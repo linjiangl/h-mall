@@ -13,6 +13,7 @@
     "require": {
         "php": ">=8.0",
         "ext-swoole": ">=4.7",
+        "ext-bcmath": "*",
         "gregwar/captcha": "^1.1",
         "hyperf/cache": "~2.2.0",
         "hyperf/command": "~2.2.0",
@@ -35,7 +36,6 @@
         "hyperf/validation": "~2.2.0",
         "lcobucci/jwt": "^4.1",
         "qiniu/php-sdk": "^7.3"
-
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
@@ -49,7 +49,6 @@
         "swoole/ide-helper": "~4.4.7"
     },
     "suggest": {
-        "ext-bcmath": "Required to use BCMATH.",
         "ext-openssl": "Required to use HTTPS.",
         "ext-json": "Required to use JSON.",
         "ext-pdo": "Required to use MySQL Client.",
