@@ -15,5 +15,5 @@ interface InterfaceTypesService
     /**
      * 订单结算.
      */
-    public function settlement(array $user, array $products): array;
+    public function settlement(array $products): array;
 }

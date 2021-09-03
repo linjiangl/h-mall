@@ -22,16 +22,16 @@ class TypesService
         self::TYPE_CART => CartService::class,
     ];
 
-    public function __construct(string $type, array $params = [])
+    public function __construct(string $type, array $user = [], array $params = [])
     {
         if (! in_array($type, array_keys($this->mapClass))) {
             throw new InternalException('订单处理业务不存在');
         }
 
-        $this->class = new $this->mapClass[$type]($params);
+        $this->class = new $this->mapClass[$type]($params, $user);
     }
 
-    public function getClass()
+    public function service()
     {
         return $this->class;
     }
