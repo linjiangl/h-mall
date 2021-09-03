@@ -12,7 +12,7 @@ namespace App\Core\Service\Goods;
 
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
-use App\Core\Service\Goods\Types\TypeService;
+use App\Core\Service\Goods\Types\TypesService;
 use App\Model\Goods\Goods;
 
 class GoodsService extends AbstractService
@@ -21,12 +21,12 @@ class GoodsService extends AbstractService
 
     public function create(array $data): Goods
     {
-        return (new TypeService($data))->create();
+        return (new TypesService($data))->getClass()->create();
     }
 
     public function update(int $id, array $data): Goods
     {
-        return (new TypeService($data, $id))->update();
+        return (new TypesService($data, $id))->getClass()->update();
     }
 
     /**

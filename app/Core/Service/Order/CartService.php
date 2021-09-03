@@ -198,6 +198,6 @@ class CartService extends AbstractService
             $result[$item['shop_id']]['sku'][] = $item['sku'];
         }
 
-        return $result;
+        return array_values($result);
     }
 }

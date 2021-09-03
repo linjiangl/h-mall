@@ -12,9 +12,8 @@ namespace App\Core\Service\Goods\Types;
 
 use App\Constants\State\Goods\GoodsState;
 use App\Exception\InternalException;
-use App\Model\Goods\Goods;
 
-class TypeService
+class TypesService
 {
     protected int $id;
 
@@ -39,13 +38,8 @@ class TypeService
         $this->class = new $this->mapClass[$data['type']]($this->post, $this->id);
     }
 
-    public function create(): Goods
+    public function getClass()
     {
-        return $this->class->create();
-    }
-
-    public function update(): Goods
-    {
-        return $this->class->update();
+        return $this->class;
     }
 }
