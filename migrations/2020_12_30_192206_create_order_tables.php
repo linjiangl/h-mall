@@ -21,8 +21,8 @@ class CreateOrderTables extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('shop_id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('shop_id');
             $table->unsignedInteger('goods_id');
             $table->unsignedInteger('goods_sku_id');
             $table->unsignedInteger('quantity')->default(1)->comment('数量');
@@ -31,8 +31,8 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
-            $table->index(['shop_id'], 'shop_id');
             $table->index(['user_id', 'goods_sku_id'], 'user_goods_sku_id');
+            $table->index(['shop_id'], 'shop_id');
 
             $table->comment('购物车');
         });

@@ -32,6 +32,7 @@ class CartService extends AbstractService
     {
         $sku = (new GoodsSkuDao())->info($skuId);
         $data = [
+            'shop_id' => $sku->shop_id,
             'goods_id' => $sku->goods_id,
             'quantity' => $quantity,
         ];
@@ -43,7 +44,6 @@ class CartService extends AbstractService
         try {
             // 创建购物车
             $cart = (new CartDao())->firstOrCreate([
-                'shop_id' => $sku->shop_id,
                 'user_id' => $user['id'],
                 'goods_sku_id' => $sku->id,
             ], $data);

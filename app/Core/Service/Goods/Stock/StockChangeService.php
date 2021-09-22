@@ -30,7 +30,7 @@ class StockChangeService
     public function __construct(string $modifyClass)
     {
         if (! class_exists($modifyClass)) {
-            throw new InternalException('修改库存服务不存在');
+            throw new InternalException('库存修改服务不存在');
         }
 
         $this->changeStockClass = new $modifyClass();

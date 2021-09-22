@@ -14,21 +14,17 @@ use App\Exception\InternalException;
 
 class TypesService
 {
-    public const TYPE_CART = 'cart';
+    public const TYPE_CART = CartService::class;
 
     protected InterfaceTypesService $class;
 
-    protected array $mapClass = [
-        self::TYPE_CART => CartService::class,
-    ];
-
-    public function __construct(string $type, array $user = [], array $params = [])
+    public function __construct(string $class, array $user = [], array $params = [])
     {
-        if (! in_array($type, array_keys($this->mapClass))) {
+        if (! class_exists($class)) {
             throw new InternalException('订单处理业务不存在');
         }
 
-        $this->class = new $this->mapClass[$type]($params, $user);
+        $this->class = new $class($params, $user);
     }
 
     public function service()

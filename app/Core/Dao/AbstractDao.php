@@ -436,7 +436,7 @@ abstract class AbstractDao
     {
         if (! empty($condition)) {
             foreach ($condition as $key => $value) {
-                if (is_array($value) && count($value) === 3) {
+                if (is_integer($key) && is_array($value) && count($value) === 3) {
                     switch ($value[1]) {
                         case 'in':
                             $query->whereIn($value[0], $value[2]);
