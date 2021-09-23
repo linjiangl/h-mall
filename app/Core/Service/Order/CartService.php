@@ -179,12 +179,12 @@ class CartService extends AbstractService
     /**
      * 获取选中的购物车信息.
      */
-    public function getSelectCarts(array $user, array $selectIds): array
+    public function settlement(array $user, array $cartIds): array
     {
         $dao = new CartDao();
         $list = $dao->getListByCondition([
             'user_id' => $user['id'],
-            'id' => $selectIds,
+            'id' => $cartIds,
         ], $dao->setMapWith()->getMapWith('settlement', self::class));
 
         $result = [];
