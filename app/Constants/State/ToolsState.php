@@ -20,7 +20,7 @@ class ToolsState
     public static function getValidatedInRule(string $stateClass, string $option = 'default'): string
     {
         if (! class_exists($stateClass)) {
-            throw new InternalException('枚举类不存');
+            throw new InternalException('枚举类不存在');
         }
         /* @var InterfaceState $stateClass */
         return implode(',', array_keys($stateClass::map()[$option] ?? []));
