@@ -30,7 +30,7 @@ class StockService
 
         // spu 库存增加
         (new GoodsDao())->updateByCondition(['id' => $sku->goods_id], [
-            'stock' => Db::raw("`stock` + $quantity")
+            'stock' => Db::raw("`stock` + {$quantity}"),
         ]);
 
         return $sku;

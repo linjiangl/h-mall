@@ -38,14 +38,9 @@ class UserService extends AbstractService
         if (mb_strlen($password) < 6) {
             throw new InternalException('密码不能少于6位');
         }
-        try {
-            if ((new UserDao())->getInfoByUsername($username)) {
-                throw new InternalException('账号已注册');
-            }
-        } catch (Throwable $e) {
-            if ($e->getCode() != RestConstants::HTTP_NOT_FOUND) {
-                throw new InternalException($e->getMessage());
-            }
+
+        if ((new UserDao())->getCountByCondition(['username' => $username])) {
+            throw new InternalException('账号已注册');
         }
 
         // 生成密码

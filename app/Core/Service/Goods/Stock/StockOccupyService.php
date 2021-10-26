@@ -13,15 +13,14 @@ namespace App\Core\Service\Goods\Stock;
 class StockOccupyService
 {
     /**
-     * 新增库存占用记录
+     * 新增库存占用记录.
      */
     public static function create(int $shopId, int $goodsId, string $module, int $moduleId, array $skus, string $serialNo = '', string $remark = '')
     {
-
     }
 
     /**
-     * 更新库存占用记录
+     * 更新库存占用记录.
      */
     public static function update(int $shopId, int $goodsId, string $module, int $moduleId, array $skus, string $serialNo = '', string $remark = '')
     {
@@ -30,10 +29,9 @@ class StockOccupyService
     }
 
     /**
-     * 删除库存占用记录
+     * 删除库存占用记录.
      */
     public static function destroy(int $shopId, string $module, int $moduleId)
     {
-
     }
 }

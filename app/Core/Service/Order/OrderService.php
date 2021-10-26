@@ -19,6 +19,5 @@ class OrderService extends AbstractService
 
     public function settlement(array $user, array $products)
     {
-
     }
 }
