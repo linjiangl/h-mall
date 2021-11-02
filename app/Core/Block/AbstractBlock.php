@@ -365,12 +365,12 @@ abstract class AbstractBlock
         $service = new $this->service();
 
         switch ($this->since) {
-            case 'frontend':
+            case BlockSinceConstants::SINCE_FRONTEND:
                 $authorize = request()->getAttribute('user');
                 $authorize = $authorize ?: [];
                 $service = $service->withAuthorize($authorize);
                 break;
-            case 'backend':
+            case BlockSinceConstants::SINCE_BACKEND:
                 $authorize = request()->getAttribute('admin');
                 $authorize = $authorize ?: [];
                 $service = $service->withAuthorize($authorize);

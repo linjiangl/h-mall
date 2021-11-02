@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Authorize;
 
+use App\Constants\JwtSinceConstants;
 use App\Core\Dao\Admin\AdminDao;
 use App\Core\Service\Admin\AdminService;
 use App\Exception\HttpException;
@@ -18,7 +19,7 @@ use Throwable;
 
 class AdminAuthorizationService extends AbstractAuthorizationService
 {
-    protected string $scene = 'admin';
+    protected string $scene = JwtSinceConstants::SINCE_BACKEND;
 
     public function authorize(): array
     {

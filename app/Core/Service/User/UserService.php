@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\User;
 
-use App\Constants\RestConstants;
 use App\Constants\State\User\UserState;
 use App\Core\Dao\User\UserDao;
 use App\Core\Service\AbstractService;
