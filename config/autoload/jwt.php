@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-
 use App\Constants\JwtSinceConstants;
 
 return [

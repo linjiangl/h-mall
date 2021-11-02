@@ -97,7 +97,7 @@ abstract class AbstractService
     /**
      * 删除.
      */
-    public function remove(int $id): bool
+    public function remove(int $id): array
     {
         return $this->service()->remove($id);
     }

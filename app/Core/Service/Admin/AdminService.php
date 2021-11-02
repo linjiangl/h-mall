@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Admin;
 
-use App\Constants\RestConstants;
 use App\Constants\State\Admin\AdminState;
 use App\Core\Dao\Admin\AdminDao;
 use App\Core\Dao\Admin\Role\RoleAdminDao;
@@ -19,7 +18,6 @@ use App\Core\Service\AbstractService;
 use App\Core\Service\Authorize\AdminAuthorizationService;
 use App\Exception\InternalException;
 use App\Model\Admin\Admin;
-use Throwable;
 
 class AdminService extends AbstractService
 {

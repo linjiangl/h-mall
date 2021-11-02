@@ -167,7 +167,13 @@ abstract class AbstractBlock
      */
     public function store(): mixed
     {
-        return $this->service()->create($this->request->post());
+        $data = $this->handleStoreData();
+
+        $model = $this->service()->create($data);
+
+        $this->afterStore($model);
+
+        return $model;
     }
 
     /**
@@ -175,7 +181,13 @@ abstract class AbstractBlock
      */
     public function update(): mixed
     {
-        return $this->service()->update($this->getPrimaryKey(), $this->request->post());
+        $data = $this->handleUpdateData();
+
+        $model = $this->service()->create($data);
+
+        $this->afterUpdate($model);
+
+        return $model;
     }
 
     /**
@@ -183,7 +195,11 @@ abstract class AbstractBlock
      */
     public function destroy(): bool
     {
-        return $this->service()->remove($this->getPrimaryKey());
+        $model = $this->service()->remove($this->getPrimaryKey());
+
+        $this->afterDestroy($model);
+
+        return true;
     }
 
     /**
@@ -201,7 +217,7 @@ abstract class AbstractBlock
      */
     public function getCondition(): array
     {
-        return $this->service()->getCondition($this->request->post());
+        return $this->service()->getCondition($this->getData());
     }
 
     /**
@@ -227,15 +243,17 @@ abstract class AbstractBlock
      */
     public function getPrimaryKey(): int
     {
-        return intval($this->request->post($this->primaryKey));
+        $data = $this->getData();
+        return intval($data[$this->primaryKey]);
     }
 
     /**
      * 获取数据.
      */
-    public function getData(): mixed
+    public function getData(): array
     {
-        return $this->request->post();
+        $post = $this->request->post();
+        return empty($post) ? [] : $post;
     }
 
     /**
@@ -269,6 +287,55 @@ abstract class AbstractBlock
     }
 
     /**
+     * 构建查询之前条件.
+     */
+    protected function beforeBuildQuery(): void
+    {
+        if (empty($this->with)) {
+            $this->with = $this->defaultSinceWith[$this->since][$this->action] ?? [];
+        }
+        $this->condition = $this->handleCondition();
+        $this->groupBy = [];
+    }
+
+    /**
+     * 处理创建数据.
+     */
+    protected function handleStoreData(): array
+    {
+        return $this->getData();
+    }
+
+    /**
+     * 处理修改数据.
+     */
+    protected function handleUpdateData(): array
+    {
+        return $this->getData();
+    }
+
+    /**
+     * 创建完成后执行.
+     */
+    protected function afterStore(mixed $model): void
+    {
+    }
+
+    /**
+     * 修改完成后执行.
+     */
+    protected function afterUpdate(mixed $model): void
+    {
+    }
+
+    /**
+     * 删除完成后执行.
+     */
+    protected function afterDestroy(array $model): void
+    {
+    }
+
+    /**
      * 处理查询参数.
      */
     protected function handleQueryParams(): void
@@ -290,18 +357,6 @@ abstract class AbstractBlock
                 }
                 break;
         }
-    }
-
-    /**
-     * 构建查询之前条件.
-     */
-    protected function beforeBuildQuery(): void
-    {
-        if (empty($this->with)) {
-            $this->with = $this->defaultSinceWith[$this->since][$this->action] ?? [];
-        }
-        $this->condition = $this->handleCondition();
-        $this->groupBy = [];
     }
 
     /**
