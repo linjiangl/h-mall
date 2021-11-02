@@ -15,7 +15,7 @@ interface InterfaceStockChangeService
     /**
      * 设置附加参数.
      */
-    public function setParams(array $data): self;
+    public function setParams(array $data): static;
 
     /**
      * 创建操作.

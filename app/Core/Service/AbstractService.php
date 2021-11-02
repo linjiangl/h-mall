@@ -160,7 +160,7 @@ abstract class AbstractService
      * 仅获取删除的数据.
      * @return $this
      */
-    public function onlyTrashed(): self
+    public function onlyTrashed(): static
     {
         $this->trashedType = 'only';
         return $this;

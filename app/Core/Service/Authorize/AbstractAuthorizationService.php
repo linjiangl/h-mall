@@ -63,7 +63,7 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         return true;
     }
 
-    public function parseToken(string $token): self
+    public function parseToken(string $token): static
     {
         try {
             $this->plain = $this->configuration->parser()->parse($token);
