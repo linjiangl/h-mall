@@ -19,7 +19,7 @@ class RoleService extends AbstractService
 {
     protected string $dao = RoleDao::class;
 
-    public function remove(int $id): bool
+    public function remove(int $id): array
     {
         // 删除关联的菜单
         (new RoleMenuDao())->deleteMenusByRoleId($id);
