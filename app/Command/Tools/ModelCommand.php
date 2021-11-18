@@ -63,7 +63,7 @@ class ModelCommand extends HyperfCommand
     public function handle()
     {
         if (! function_exists('exec')) {
-            $this->error('[x] 请取消禁用exec函数');
+            $this->error('[x] 请启用PHP`exec()`函数');
             return;
         }
 
