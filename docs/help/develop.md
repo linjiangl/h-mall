@@ -17,7 +17,7 @@ $ export -p
 
 #### 命令行生成系统日志权限问题
 
-```shell
+```shell script
 # 使用www-data用户执行命令
-$ su www-data -s /bin/bash -c "php artisan tools:test"
+$ su www-data -s /bin/bash -c "php bin/hyperf.php tools:test"
 ```
