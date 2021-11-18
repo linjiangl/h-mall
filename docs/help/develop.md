@@ -14,3 +14,10 @@
 ```shell script
 $ export -p
 ```
+
+#### 命令行生成系统日志权限问题
+
+```shell
+# 使用www-data用户执行命令
+$ su www-data -s /bin/bash -c "php artisan tools:test"
+```
