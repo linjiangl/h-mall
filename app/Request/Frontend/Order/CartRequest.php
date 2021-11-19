@@ -28,8 +28,6 @@ class CartRequest extends AbstractRequest
             'post:update' => [
                 'id' => 'required|integer|gt:0',
                 'quantity' => 'required|integer|gt:0',
-                'logo' => 'required|string|max:255',
-                'status' => 'integer',
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',

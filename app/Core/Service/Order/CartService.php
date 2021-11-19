@@ -80,11 +80,12 @@ class CartService extends AbstractService
     /**
      * 修改购物车.
      */
-    public function modify(array $user, int $cartId, int $quantity = 1, array $append = []): Cart
+    public function modify(int $cartId, int $quantity = 1, array $append = []): Cart
     {
+        $user = $this->authorize;
         $cart = (new CartDao())->getInfoByCondition([
             ['id', '=', $cartId],
-            ['user_id', '=', $user['id']],
+            ['user_id', '=', $user['user_id']],
         ]);
 
         $data = [
@@ -118,10 +119,10 @@ class CartService extends AbstractService
 
     /**
      * 删除购物车商品.
-     * @throws Exception
      */
-    public function delete(array $user, int $cartId): bool
+    public function delete(int $cartId): bool
     {
+        $user = $this->authorize;
         $cart = (new CartDao())->getInfoByCondition([
             ['id', '=', $cartId],
             ['user_id', '=', $user['id']],
@@ -148,8 +149,9 @@ class CartService extends AbstractService
     /**
      * 清空购物车商品
      */
-    public function clear(array $user): bool
+    public function clear(): bool
     {
+        $user = $this->authorize;
         $condition = [
             'user_id' => $user['id'],
             'is_show' => CartState::IS_SHOW_TRUE,
@@ -180,12 +182,14 @@ class CartService extends AbstractService
     /**
      * 获取选中的购物车信息.
      */
-    public function settlement(array $user, array $cartIds): array
+    public function settlement(): array
     {
+        $user = $this->authorize;
         $dao = new CartDao();
         $list = $dao->getListByCondition([
             'user_id' => $user['id'],
-            'id' => $cartIds,
+            'is_check' => CartState::IS_CHECK_TRUE,
+            'is_show' => CartState::IS_SHOW_TRUE,
         ], $dao->setMapWith()->getMapWith('settlement', self::class));
 
         $result = [];

@@ -30,4 +30,14 @@ class CartTest extends FrontendHttpTestCase
         ];
         $this->handleHttpCreate();
     }
+
+    public function testFrontendCartUpdate()
+    {
+        $this->url = '/cart/update';
+        $this->data = [
+            'id' => 5,
+            'quantity' => 1,
+        ];
+        $this->handleHttpUpdate();
+    }
 }

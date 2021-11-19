@@ -23,6 +23,12 @@ class CartController extends FrontendController
         return parent::store();
     }
 
+    public function updateRequest(CartRequest $request): Cart
+    {
+        $request->validated();
+        return parent::update();
+    }
+
     protected function block(): CartBlock
     {
         return new CartBlock();
