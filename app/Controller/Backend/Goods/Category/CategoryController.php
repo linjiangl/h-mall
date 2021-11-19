@@ -30,7 +30,7 @@ class CategoryController extends BackendController
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_UPDATE), $this->update());
     }
 
-    public function destroyRequest(CategoryRequest $request): bool
+    public function removeRequest(CategoryRequest $request): bool
     {
         $request->validated();
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_DELETE), $this->remove());

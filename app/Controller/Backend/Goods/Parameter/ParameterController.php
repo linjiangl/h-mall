@@ -30,7 +30,7 @@ class ParameterController extends BackendController
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_UPDATE), $this->update());
     }
 
-    public function destroyRequest(ParameterRequest $request): bool
+    public function removeRequest(ParameterRequest $request): bool
     {
         $request->validated();
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_DELETE), $this->remove());

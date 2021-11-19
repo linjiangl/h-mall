@@ -25,13 +25,13 @@ class MenuTest extends BackendHttpTestCase
 
     public function testBackendMenuIndex()
     {
-        $this->url = '/menu/list';
+        $this->url = '/menu/paginate';
         $this->handleHttpIndex();
     }
 
     public function testBackendMenuShow()
     {
-        $this->url = '/menu/detail';
+        $this->url = '/menu/info';
         $this->data = [
             'id' => 1,
         ];

@@ -26,7 +26,7 @@ Router::addGroup('/frontend', function () {
     Router::post('/register', [RegisterController::class, 'register']);
 
     // 用户
-    Router::post('/user/detail', [UserController::class, 'info']);
+    Router::post('/user/info', [UserController::class, 'info']);
 });
 
 Router::addGroup('/frontend', function () {

@@ -24,13 +24,13 @@ class AdminTest extends BackendHttpTestCase
 
     public function testBackendAdminIndex()
     {
-        $this->url = '/admin/list';
+        $this->url = '/admin/paginate';
         $this->handleHttpIndex();
     }
 
     public function testBackendAdminShow()
     {
-        $this->url = '/admin/detail';
+        $this->url = '/admin/info';
         $this->data = [
             'id' => 2,
         ];

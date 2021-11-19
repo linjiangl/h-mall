@@ -36,81 +36,81 @@ Router::addGroup('/backend', function () {
 Router::addGroup('/backend', function () {
     // user
     Router::post('/authorize', [AuthorizeController::class, 'info']);
-    Router::post('/user/list', [UserController::class, 'paginate']);
-    Router::post('/user/detail', [UserController::class, 'info']);
+    Router::post('/user/paginate', [UserController::class, 'paginate']);
+    Router::post('/user/info', [UserController::class, 'info']);
     Router::post('/user/update', [UserController::class, 'updateRequest']);
 
     // admin
-    Router::post('/admin/list', [AdminController::class, 'paginate']);
-    Router::post('/admin/detail', [AdminController::class, 'info']);
+    Router::post('/admin/paginate', [AdminController::class, 'paginate']);
+    Router::post('/admin/info', [AdminController::class, 'info']);
     Router::post('/admin/create', [AdminController::class, 'createRequest']);
     Router::post('/admin/update', [AdminController::class, 'updateRequest']);
 
     // admin log
-    Router::post('/adminLogin/list', [AdminLoginController::class, 'paginate']);
+    Router::post('/adminLogin/paginate', [AdminLoginController::class, 'paginate']);
     Router::post('/adminLogin/delete', [AdminLoginController::class, 'batchRemoveRequest']);
-    Router::post('/adminAction/list', [AdminActionController::class, 'paginate']);
+    Router::post('/adminAction/paginate', [AdminActionController::class, 'paginate']);
     Router::post('/adminAction/delete', [AdminActionController::class, 'batchRemoveRequest']);
 
     // role
-    Router::post('/role/list', [RoleController::class, 'paginate']);
-    Router::post('/role/detail', [RoleController::class, 'info']);
+    Router::post('/role/paginate', [RoleController::class, 'paginate']);
+    Router::post('/role/info', [RoleController::class, 'info']);
     Router::post('/role/create', [RoleController::class, 'createRequest']);
     Router::post('/role/update', [RoleController::class, 'updateRequest']);
     Router::post('/role/delete', [RoleController::class, 'remove']);
     Router::post('/role/saveMenus', [RoleController::class, 'saveMenus']);
 
     // menu
-    Router::post('/menu/list', [MenuController::class, 'paginate']);
-    Router::post('/menu/detail', [MenuController::class, 'info']);
+    Router::post('/menu/paginate', [MenuController::class, 'paginate']);
+    Router::post('/menu/info', [MenuController::class, 'info']);
     Router::post('/menu/create', [MenuController::class, 'createRequest']);
     Router::post('/menu/update', [MenuController::class, 'updateRequest']);
     Router::post('/menu/delete', [MenuController::class, 'remove']);
 
     // district
-    Router::post('/district/list', [DistrictController::class, 'paginate']);
+    Router::post('/district/paginate', [DistrictController::class, 'paginate']);
 
     // category
-    Router::post('/category/list', [CategoryController::class, 'paginate']);
-    Router::post('/category/detail', [CategoryController::class, 'info']);
+    Router::post('/category/paginate', [CategoryController::class, 'paginate']);
+    Router::post('/category/info', [CategoryController::class, 'info']);
     Router::post('/category/create', [CategoryController::class, 'createRequest']);
     Router::post('/category/update', [CategoryController::class, 'updateRequest']);
-    Router::post('/category/delete', [CategoryController::class, 'destroyRequest']);
+    Router::post('/category/delete', [CategoryController::class, 'removeRequest']);
     Router::post('/category/parent', [CategoryController::class, 'parent']);
     Router::post('/category/children', [CategoryController::class, 'children']);
 
     // brand
-    Router::post('/brand/list', [BrandController::class, 'paginate']);
-    Router::post('/brand/detail', [BrandController::class, 'info']);
+    Router::post('/brand/paginate', [BrandController::class, 'paginate']);
+    Router::post('/brand/info', [BrandController::class, 'info']);
     Router::post('/brand/create', [BrandController::class, 'createRequest']);
     Router::post('/brand/update', [BrandController::class, 'updateRequest']);
-    Router::post('/brand/delete', [BrandController::class, 'destroyRequest']);
+    Router::post('/brand/delete', [BrandController::class, 'removeRequest']);
 
     // goods service
-    Router::post('/goodsServiceTemplate/list', [ServiceTemplateController::class, 'paginate']);
-    Router::post('/goodsServiceTemplate/detail', [ServiceTemplateController::class, 'info']);
+    Router::post('/goodsServiceTemplate/paginate', [ServiceTemplateController::class, 'paginate']);
+    Router::post('/goodsServiceTemplate/info', [ServiceTemplateController::class, 'info']);
     Router::post('/goodsServiceTemplate/create', [ServiceTemplateController::class, 'createRequest']);
     Router::post('/goodsServiceTemplate/update', [ServiceTemplateController::class, 'updateRequest']);
-    Router::post('/goodsServiceTemplate/delete', [ServiceTemplateController::class, 'destroyRequest']);
+    Router::post('/goodsServiceTemplate/delete', [ServiceTemplateController::class, 'removeRequest']);
     Router::post('/goodsServiceTemplate/all', [ServiceTemplateController::class, 'all']);
 
     // parameter
-    Router::post('/parameter/list', [ParameterController::class, 'paginate']);
-    Router::post('/parameter/detail', [ParameterController::class, 'info']);
+    Router::post('/parameter/paginate', [ParameterController::class, 'paginate']);
+    Router::post('/parameter/info', [ParameterController::class, 'info']);
     Router::post('/parameter/create', [ParameterController::class, 'createRequest']);
     Router::post('/parameter/update', [ParameterController::class, 'updateRequest']);
-    Router::post('/parameter/delete', [ParameterController::class, 'destroyRequest']);
+    Router::post('/parameter/delete', [ParameterController::class, 'removeRequest']);
 
     // parameter options
-    Router::post('/parameterOptions/list', [ParameterOptionsController::class, 'paginate']);
-    Router::post('/parameterOptions/detail', [ParameterOptionsController::class, 'info']);
+    Router::post('/parameterOptions/paginate', [ParameterOptionsController::class, 'paginate']);
+    Router::post('/parameterOptions/info', [ParameterOptionsController::class, 'info']);
     Router::post('/parameterOptions/create', [ParameterOptionsController::class, 'createRequest']);
     Router::post('/parameterOptions/update', [ParameterOptionsController::class, 'updateRequest']);
-    Router::post('/parameterOptions/delete', [ParameterOptionsController::class, 'destroyRequest']);
+    Router::post('/parameterOptions/delete', [ParameterOptionsController::class, 'removeRequest']);
 
     // goods
-    Router::post('/goods/list', [GoodsController::class, 'paginate']);
-    Router::post('/goods/detail', [GoodsController::class, 'info']);
+    Router::post('/goods/paginate', [GoodsController::class, 'paginate']);
+    Router::post('/goods/info', [GoodsController::class, 'info']);
     Router::post('/goods/create', [GoodsController::class, 'createRequest']);
     Router::post('/goods/update', [GoodsController::class, 'updateRequest']);
     Router::post('/goods/updateStatus', [GoodsController::class, 'updateStatusRequest']);

@@ -27,13 +27,13 @@ class RoleTest extends BackendHttpTestCase
 
     public function testBackendRoleIndex()
     {
-        $this->url = '/role/list';
+        $this->url = '/role/paginate';
         $this->handleHttpIndex();
     }
 
     public function testBackendRoleShow()
     {
-        $this->url = '/role/detail';
+        $this->url = '/role/info';
         $this->data = [
             'id' => 1,
         ];
