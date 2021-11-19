@@ -20,7 +20,7 @@ class BaseController extends AbstractController
      */
     public function index(): array
     {
-        return $this->service()->index();
+        return $this->service()->paginate();
     }
 
     /**
@@ -28,7 +28,7 @@ class BaseController extends AbstractController
      */
     public function show(): array
     {
-        return $this->service()->show();
+        return $this->service()->info();
     }
 
     /**
@@ -36,7 +36,7 @@ class BaseController extends AbstractController
      */
     public function store(): mixed
     {
-        return $this->service()->store();
+        return $this->service()->create();
     }
 
     /**
@@ -52,7 +52,7 @@ class BaseController extends AbstractController
      */
     public function destroy(): bool
     {
-        return $this->service()->destroy();
+        return $this->service()->remove();
     }
 
     /**
@@ -60,7 +60,7 @@ class BaseController extends AbstractController
      */
     public function batchDestroy(): bool
     {
-        return $this->service()->batchDestroy();
+        return $this->service()->batchRemove();
     }
 
     protected function block(): BaseBlock

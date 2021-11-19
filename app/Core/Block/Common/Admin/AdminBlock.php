@@ -24,7 +24,7 @@ class AdminBlock extends BaseBlock
         '=' => ['username', 'real_name', 'mobile', 'email', 'status'],
     ];
 
-    public function store(): Admin
+    public function create(): Admin
     {
         try {
             $post = $this->request->post();

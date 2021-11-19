@@ -128,12 +128,12 @@ abstract class AbstractBlock
     }
 
     /**
-     * 列表.
+     * 分页列表.
      */
-    public function index(): array
+    public function paginate(): array
     {
         // 当前执行的方法
-        $this->action = 'index';
+        $this->action = 'paginate';
 
         // 处理查询参数
         $this->handleQueryParams();
@@ -145,12 +145,29 @@ abstract class AbstractBlock
     }
 
     /**
-     * 详情.
+     * 普通列表.
      */
-    public function show(): array
+    public function list(): array
     {
         // 当前执行的方法
-        $this->action = 'show';
+        $this->action = 'list';
+
+        // 处理查询参数
+        $this->handleQueryParams();
+
+        // 查询前业务处理
+        $this->beforeBuildQuery();
+
+        return $this->service()->list($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
+    }
+
+    /**
+     * 详情.
+     */
+    public function info(): array
+    {
+        // 当前执行的方法
+        $this->action = 'info';
 
         // 查询前业务处理
         $this->beforeBuildQuery();
@@ -165,13 +182,13 @@ abstract class AbstractBlock
     /**
      * 创建.
      */
-    public function store(): mixed
+    public function create(): mixed
     {
-        $data = $this->handleStoreData();
+        $data = $this->handleCreateData();
 
         $model = $this->service()->create($data);
 
-        $this->afterStore($model);
+        $this->afterCreate($model);
 
         return $model;
     }
@@ -183,7 +200,7 @@ abstract class AbstractBlock
     {
         $data = $this->handleUpdateData();
 
-        $model = $this->service()->create($data);
+        $model = $this->service()->update($data['id'], $data);
 
         $this->afterUpdate($model);
 
@@ -193,11 +210,11 @@ abstract class AbstractBlock
     /**
      * 删除.
      */
-    public function destroy(): bool
+    public function remove(): bool
     {
         $model = $this->service()->remove($this->getPrimaryKey());
 
-        $this->afterDestroy($model);
+        $this->afterRemove($model);
 
         return true;
     }
@@ -205,7 +222,7 @@ abstract class AbstractBlock
     /**
      * 批量删除.
      */
-    public function batchDestroy(): bool
+    public function batchRemove(): bool
     {
         $selectIds = $this->request->post('select_ids', '');
         $selectIds = explode(',', $selectIds);
@@ -217,7 +234,7 @@ abstract class AbstractBlock
      */
     public function getCondition(): array
     {
-        return $this->service()->getCondition($this->getData());
+        return $this->service()->getCondition();
     }
 
     /**
@@ -301,7 +318,7 @@ abstract class AbstractBlock
     /**
      * 处理创建数据.
      */
-    protected function handleStoreData(): array
+    protected function handleCreateData(): array
     {
         return $this->getData();
     }
@@ -317,7 +334,7 @@ abstract class AbstractBlock
     /**
      * 创建完成后执行.
      */
-    protected function afterStore(mixed $model): void
+    protected function afterCreate(mixed $model): void
     {
     }
 
@@ -331,7 +348,7 @@ abstract class AbstractBlock
     /**
      * 删除完成后执行.
      */
-    protected function afterDestroy(array $model): void
+    protected function afterRemove(array $model): void
     {
     }
 

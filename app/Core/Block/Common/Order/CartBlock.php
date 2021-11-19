@@ -18,9 +18,9 @@ class CartBlock extends BaseBlock
 {
     protected string $service = CartService::class;
 
-    public function store(): Cart
+    public function create(): Cart
     {
-        $data = $this->handleStoreData();
+        $data = $this->handleCreateData();
 
         return $this->service()->add($data['sku_id'], $data['quantity']);
     }
@@ -32,7 +32,7 @@ class CartBlock extends BaseBlock
         return $this->service()->modify($data['id'], $data['quantity']);
     }
 
-    public function destroy(): bool
+    public function remove(): bool
     {
         $data = $this->handleUpdateData();
 
@@ -42,8 +42,7 @@ class CartBlock extends BaseBlock
     }
 
     /**
-     * 购物车服务类
-     * @return CartService
+     * 购物车服务类.
      */
     protected function service(): CartService
     {

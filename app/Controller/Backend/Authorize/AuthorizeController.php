@@ -22,7 +22,7 @@ class AuthorizeController extends BackendController
     {
         /** @var AuthorizeBlock $service */
         $service = $this->service();
-        return $service->show();
+        return $service->info();
     }
 
     protected function block(): AuthorizeBlock
