@@ -12,6 +12,7 @@ use App\Controller\Frontend\Authorize\AuthorizeController;
 use App\Controller\Frontend\Authorize\LoginController;
 use App\Controller\Frontend\Authorize\RegisterController;
 use App\Controller\Frontend\IndexController;
+use App\Controller\Frontend\Order\CartController;
 use App\Controller\Frontend\User\UserController;
 use App\Middleware\JWTFrontendMiddleware;
 use Hyperf\HttpServer\Router\Router;
@@ -31,4 +32,7 @@ Router::addGroup('/frontend', function () {
 Router::addGroup('/frontend', function () {
     // 登录用户相关
     Router::post('/authorize', [AuthorizeController::class, 'show']);
+
+    // 购物车
+    Router::post('/cart/create', [CartController::class, 'storeRequest']);
 }, ['middleware' => [JWTFrontendMiddleware::class]]);

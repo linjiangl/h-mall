@@ -414,7 +414,7 @@ abstract class AbstractBlock
     /**
      * 业务服务接口类.
      */
-    protected function service(): AbstractService
+    protected function service(): mixed
     {
         /** @var AbstractService $service */
         $service = new $this->service();

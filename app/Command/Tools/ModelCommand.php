@@ -85,9 +85,9 @@ class ModelCommand extends HyperfCommand
         $config = config('databases');
         $basePath = $config['default']['commands']['gen:model']['path'];
         $path = $path ? $basePath . '/' . $path : $basePath;
-        $genModelExec = "php bin/hyperf.php gen:model $table --path=$path --inheritance=Model --uses=App\\Model\\Model --with-comments --force-casts --refresh-fillable";
+        $genModelExec = "php bin/hyperf.php gen:model {$table} --path={$path} --inheritance=Model --uses=App\\Model\\Model --with-comments --force-casts --refresh-fillable";
         exec($genModelExec);
-        $this->info("`$table` table generation model class successful");
+        $this->info("`{$table}` table generation model class successful");
     }
 
     protected function phpCsFixerModel()

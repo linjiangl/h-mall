@@ -18,6 +18,7 @@
         </testsuite>
         <testsuite name="Frontend">
             <directory suffix="Test.php">./test/Frontend/Authorize</directory>
+            <directory suffix="Test.php">./test/Frontend/Order</directory>
         </testsuite>
         <testsuite name="Mobile">
             <directory suffix="Test.php">./test/Api/Mobile</directory>

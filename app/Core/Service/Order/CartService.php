@@ -28,8 +28,9 @@ class CartService extends AbstractService
     /**
      * 添加购物车.
      */
-    public function add(array $user, int $skuId, int $quantity = 1, array $append = []): Cart
+    public function add(int $skuId, int $quantity = 1, array $append = []): Cart
     {
+        $user = $this->authorize;
         $sku = (new GoodsSkuDao())->info($skuId);
         $data = [
             'shop_id' => $sku->shop_id,
@@ -44,7 +45,7 @@ class CartService extends AbstractService
         try {
             // 创建购物车
             $cart = (new CartDao())->firstOrCreate([
-                'user_id' => $user['id'],
+                'user_id' => $user['user_id'],
                 'goods_sku_id' => $sku->id,
             ], $data);
 
