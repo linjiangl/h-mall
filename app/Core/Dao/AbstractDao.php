@@ -205,9 +205,9 @@ abstract class AbstractDao
     }
 
     /**
-     * 批量插入数据.
+     * 批量创建数据.
      */
-    public function batchInsert(array $data): void
+    public function batchCreate(array $data): void
     {
         $this->model::query()->insert($data);
     }

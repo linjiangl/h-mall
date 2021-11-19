@@ -105,9 +105,9 @@ abstract class AbstractService
     /**
      * 批量插入.
      */
-    public function batchInsert(array $data): bool
+    public function batchCreate(array $data): bool
     {
-        $this->service()->batchInsert($data);
+        $this->service()->batchCreate($data);
         return true;
     }
 
@@ -123,7 +123,7 @@ abstract class AbstractService
     /**
      * 获取列表的查询条件.
      */
-    public function getCondition(array $post): array
+    public function getCondition(): array
     {
         return [];
     }
