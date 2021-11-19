@@ -186,11 +186,12 @@ abstract class AbstractDao
      * 删除.
      * @param int $id 主键
      */
-    public function remove(int $id): bool
+    public function remove(int $id): array
     {
         $this->actionIsAllow('remove');
 
         $model = $this->info($id);
+        $removeData = $model->toArray();
 
         if ($this->softDelete) {
             $model->update(['deleted_time' => time()]);
@@ -200,13 +201,13 @@ abstract class AbstractDao
 
         $this->removeCache($id);
 
-        return true;
+        return $removeData;
     }
 
     /**
-     * 批量插入数据.
+     * 批量创建数据.
      */
-    public function batchInsert(array $data): void
+    public function batchCreate(array $data): void
     {
         $this->model::query()->insert($data);
     }
@@ -436,7 +437,7 @@ abstract class AbstractDao
     {
         if (! empty($condition)) {
             foreach ($condition as $key => $value) {
-                if (is_array($value) && count($value) === 3) {
+                if (is_integer($key) && is_array($value) && count($value) === 3) {
                     switch ($value[1]) {
                         case 'in':
                             $query->whereIn($value[0], $value[2]);

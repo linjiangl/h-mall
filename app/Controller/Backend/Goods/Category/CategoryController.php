@@ -18,10 +18,10 @@ use App\Request\Backend\Goods\CategoryRequest;
 
 class CategoryController extends BackendController
 {
-    public function storeRequest(CategoryRequest $request): Category
+    public function createRequest(CategoryRequest $request): Category
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_CREATE), $this->store());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_CREATE), $this->create());
     }
 
     public function updateRequest(CategoryRequest $request): Category
@@ -30,10 +30,10 @@ class CategoryController extends BackendController
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_UPDATE), $this->update());
     }
 
-    public function destroyRequest(CategoryRequest $request): bool
+    public function removeRequest(CategoryRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_DELETE), $this->destroy());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::CATEGORY_DELETE), $this->remove());
     }
 
     public function parent(): array

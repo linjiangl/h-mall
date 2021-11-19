@@ -18,10 +18,10 @@ use App\Request\Backend\Admin\AdminRequest;
 
 class AdminController extends BackendController
 {
-    public function storeRequest(AdminRequest $request): Admin
+    public function createRequest(AdminRequest $request): Admin
     {
         $request->validated();
-        return $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_CREATE), $this->store());
+        return $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_CREATE), $this->create());
     }
 
     public function updateRequest(AdminRequest $request): Admin

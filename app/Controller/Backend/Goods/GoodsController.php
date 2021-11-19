@@ -19,10 +19,10 @@ use App\Request\Common\BatchOperationRequest;
 
 class GoodsController extends BackendController
 {
-    public function storeRequest(GoodsRequest $request): Goods
+    public function createRequest(GoodsRequest $request): Goods
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE), $this->store());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE), $this->create());
     }
 
     public function updateRequest(GoodsRequest $request): Goods
@@ -40,13 +40,13 @@ class GoodsController extends BackendController
     public function recycleRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE), $this->batchDestroy());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE), $this->batchRemove());
     }
 
-    public function batchDestroyRequest(BatchOperationRequest $request): bool
+    public function batchRemoveRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE), $this->batchDestroy());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE), $this->batchRemove());
     }
 
     protected function block(): GoodsBlock

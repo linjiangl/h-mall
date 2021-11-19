@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Authorize;
 
+use App\Constants\JwtSinceConstants;
 use App\Exception\BadRequestException;
 use DateTime;
 use DateTimeImmutable;
@@ -30,7 +31,7 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
     /**
      * 场景.
      */
-    protected string $scene = 'default';
+    protected string $scene = JwtSinceConstants::SINCE_DEFAULT;
 
     /**
      * 配置.
@@ -43,7 +44,7 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
 
     public function __construct()
     {
-        if ($this->scene == 'default') {
+        if ($this->scene == JwtSinceConstants::SINCE_DEFAULT) {
             $this->config = config('jwt');
         } else {
             $this->config = config('jwt')['scene'][$this->scene];
@@ -62,7 +63,7 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
         return true;
     }
 
-    public function parseToken(string $token): self
+    public function parseToken(string $token): static
     {
         try {
             $this->plain = $this->configuration->parser()->parse($token);

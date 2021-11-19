@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
 
         // 用户相关
         UserFactory::run();
+        ShopFactory::run();
 
         // 其他
         CategoryFactory::run();

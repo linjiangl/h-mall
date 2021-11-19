@@ -1,25 +1,19 @@
 {
-    "name": "hyperf/hyperf-skeleton",
+    "name": "hyperf/h-mall",
     "type": "project",
     "keywords": [
         "php",
         "swoole",
-        "framework",
         "hyperf",
-        "microservice",
-        "middleware"
+        "shop",
+        "mall"
     ],
-    "description": "A coroutine framework that focuses on hyperspeed and flexible, specifically use for build microservices and middlewares.",
+    "description": "Mall system",
     "license": "Apache-2.0",
     "require": {
         "php": ">=8.0",
+        "ext-swoole": ">=4.7",
         "ext-bcmath": "*",
-        "ext-iconv": "*",
-        "ext-json": "*",
-        "ext-openssl": "*",
-        "ext-pdo": "*",
-        "ext-redis": "*",
-        "ext-swoole": ">=4.5",
         "gregwar/captcha": "^1.1",
         "hyperf/cache": "~2.2.0",
         "hyperf/command": "~2.2.0",

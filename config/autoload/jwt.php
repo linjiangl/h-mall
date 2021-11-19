@@ -8,6 +8,8 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
+use App\Constants\JwtSinceConstants;
+
 return [
     // 非对称加密使用字符串,请使用自己加密的字符串
     'secret' => env('JWT_SECRET', 'U2FsdGVkX1+5a0PASn7USXRvQm71'),
@@ -22,12 +24,12 @@ return [
     'header' => env('JWT_HEADER', 'Authorization'),
 
     'scene' => [
-        'default' => [],
-        'admin' => [
+        JwtSinceConstants::SINCE_DEFAULT => [],
+        JwtSinceConstants::SINCE_BACKEND => [
             'secret' => 'U2FsdGVkX1/Yrvu0ss0KUQ8PnCWGdSEQ',
-            'ttl' => env('JWT_TTL', 86400),
-            'header' => env('JWT_HEADER', 'Authorization'),
-            'issued' => env('JWT_ISSUED', 'http://xcmei.com'),
+            'ttl' => 86400,
+            'header' => 'Authorization',
+            'issued' => 'http://xcmei.com',
         ],
     ],
 ];

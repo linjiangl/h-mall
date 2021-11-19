@@ -244,7 +244,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         $maxPrice = end($salePrice);
 
         return [
-            'shop_id' => $this->post['shop_id'] ?? 0,
+            'shop_id' => $this->post['shop_id'] ?? config('custom')['shop']['system_shop_id'],
             'brand_id' => $this->post['brand_id'] ?? 0,
             'category_id' => $this->post['category_id'],
             'type' => $this->post['type'],

@@ -17,7 +17,7 @@ use Throwable;
 
 class AuthorizeBlock extends BaseBlock
 {
-    public function show(): array
+    public function info(): array
     {
         try {
             $service = new AdminAuthorizationService();

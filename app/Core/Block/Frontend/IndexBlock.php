@@ -16,7 +16,7 @@ class IndexBlock extends BaseBlock
 {
     protected int $page = 1;
 
-    public function index(): array
+    public function paginate(): array
     {
         $page = request()->post('page', 1);
         $this->page = $this->page + $page;

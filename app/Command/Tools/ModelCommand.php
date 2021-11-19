@@ -51,7 +51,7 @@ class ModelCommand extends HyperfCommand
      * 指定的数据表.
      */
     protected array $specifyTables = [
-        'order_goods',
+        'brand',
     ];
 
     public function configure()
@@ -63,7 +63,7 @@ class ModelCommand extends HyperfCommand
     public function handle()
     {
         if (! function_exists('exec')) {
-            $this->error('[x] 请取消禁用exec函数');
+            $this->error('[x] 请启用PHP`exec()`函数');
             return;
         }
 
@@ -85,7 +85,7 @@ class ModelCommand extends HyperfCommand
         $config = config('databases');
         $basePath = $config['default']['commands']['gen:model']['path'];
         $path = $path ? $basePath . '/' . $path : $basePath;
-        $genModelExec = "php bin/hyperf.php gen:model {$table} --path={$path} --with-comments --force-casts --refresh-fillable";
+        $genModelExec = "php bin/hyperf.php gen:model {$table} --path={$path} --inheritance=Model --uses=App\\Model\\Model --with-comments --force-casts --refresh-fillable";
         exec($genModelExec);
         $this->info("`{$table}` table generation model class successful");
     }

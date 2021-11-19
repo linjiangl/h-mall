@@ -24,11 +24,11 @@ class AuthorizeController extends FrontendController
     /**
      * 登录用户信息.
      */
-    public function show(): array
+    public function info(): array
     {
         /** @var AuthorizeBlock $service */
         $service = $this->service();
-        return $service->show();
+        return $service->info();
     }
 
     protected function block(): AuthorizeBlock

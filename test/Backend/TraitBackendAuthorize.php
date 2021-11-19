@@ -31,7 +31,7 @@ trait TraitBackendAuthorize
         if (! $token) {
             $result = $this->request('/login', [
                 'username' => env('TESTING_BACKEND_USERNAME', 'admin'),
-                'password' => env('TESTING_BACKEND_PASSWORD', 'admin'),
+                'password' => env('TESTING_BACKEND_PASSWORD', 'yii.red'),
             ]);
 
             $this->assertArrayHasKey('token', $result);

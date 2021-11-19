@@ -97,7 +97,7 @@ abstract class AbstractService
     /**
      * 删除.
      */
-    public function remove(int $id): bool
+    public function remove(int $id): array
     {
         return $this->service()->remove($id);
     }
@@ -105,9 +105,9 @@ abstract class AbstractService
     /**
      * 批量插入.
      */
-    public function batchInsert(array $data): bool
+    public function batchCreate(array $data): bool
     {
-        $this->service()->batchInsert($data);
+        $this->service()->batchCreate($data);
         return true;
     }
 
@@ -123,7 +123,7 @@ abstract class AbstractService
     /**
      * 获取列表的查询条件.
      */
-    public function getCondition(array $post): array
+    public function getCondition(): array
     {
         return [];
     }
@@ -160,7 +160,7 @@ abstract class AbstractService
      * 仅获取删除的数据.
      * @return $this
      */
-    public function onlyTrashed(): self
+    public function onlyTrashed(): static
     {
         $this->trashedType = 'only';
         return $this;

@@ -20,7 +20,7 @@ use App\Model\Model;
  * @property int $sorting 排序
  * @property int $created_time
  * @property int $updated_time
- * @property  $values 选项值
+ * @property $values 选项值
  */
 class ParameterOption extends Model
 {
@@ -45,7 +45,7 @@ class ParameterOption extends Model
      */
     protected $casts = ['id' => 'integer', 'parameter_id' => 'integer', 'type' => 'integer', 'sorting' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function getValuesAttribute($value)
+    public function getValuesAttribute($value): array
     {
         return $value ? explode(',', $value) : [];
     }

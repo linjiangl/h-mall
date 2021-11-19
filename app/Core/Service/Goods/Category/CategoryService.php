@@ -22,18 +22,16 @@ class CategoryService extends AbstractService
 
     /**
      * 根据状态获取列表数据.
-     * @param mixed $status
      */
-    public function getListByStatus($status = CategoryState::STATUS_ENABLED, string $select = '*'): array
+    public function getListByStatus(mixed $status = CategoryState::STATUS_ENABLED, string $select = '*'): array
     {
         return (new CategoryDao())->getListByStatus($status, $select);
     }
 
     /**
      * 根据分类获取分类.
-     * @param mixed $status
      */
-    public function getListByParentId(int $parentId = 0, $status = CategoryState::STATUS_ENABLED): array
+    public function getListByParentId(int $parentId = 0, mixed $status = CategoryState::STATUS_ENABLED): array
     {
         return (new CategoryDao())->getListByParentId($parentId, $status);
     }
@@ -79,9 +77,8 @@ class CategoryService extends AbstractService
     /**
      * 获取指定分类的子级.
      * @param mixed $toColumn 转换数据 默认:对象，'id': 主键集合, 'name': 名称集合
-     * @param mixed $status
      */
-    public function getChildrenCategories(int $categoryId, $toColumn = null, $status = CategoryState::STATUS_ENABLED): array
+    public function getChildrenCategories(int $categoryId, mixed $toColumn = null, mixed $status = CategoryState::STATUS_ENABLED): array
     {
         $categories = $this->getListByStatus($status);
         $categories = $this->convertCategoriesToLevel($categories);
@@ -115,9 +112,8 @@ class CategoryService extends AbstractService
     /**
      * 获取指定分类的父级.
      * @param mixed $toColumn 转换数据 默认:对象，'id': 主键集合, 'name': 名称集合
-     * @param mixed $status
      */
-    public function getParentCategories(int $categoryId, $toColumn = null, $status = CategoryState::STATUS_ENABLED): array
+    public function getParentCategories(int $categoryId, mixed $toColumn = null, mixed $status = CategoryState::STATUS_ENABLED): array
     {
         $categories = $this->getListByStatus($status);
         $categories = $this->convertCategoriesToLevel($categories);

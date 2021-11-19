@@ -23,13 +23,13 @@ class UserTest extends BackendHttpTestCase
 
     public function testBackendUserIndex()
     {
-        $this->url = '/user/list';
+        $this->url = '/user/paginate';
         $this->handleHttpIndex();
     }
 
     public function testBackendUserShow()
     {
-        $this->url = '/user/detail';
+        $this->url = '/user/info';
         $this->data = [
             'id' => 1,
         ];

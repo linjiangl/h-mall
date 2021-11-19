@@ -16,4 +16,8 @@ use App\Core\Service\AbstractService;
 class OrderService extends AbstractService
 {
     protected string $dao = OrderDao::class;
+
+    public function settlement(array $user, array $products)
+    {
+    }
 }

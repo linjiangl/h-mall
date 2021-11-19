@@ -18,10 +18,10 @@ use App\Request\Backend\System\MenuRequest;
 
 class MenuController extends BackendController
 {
-    public function storeRequest(MenuRequest $request): Menu
+    public function createRequest(MenuRequest $request): Menu
     {
         $request->validated();
-        return $this->setActionName(AdminAction::getMessage(AdminAction::MENU_CREATE), $this->store());
+        return $this->setActionName(AdminAction::getMessage(AdminAction::MENU_CREATE), $this->create());
     }
 
     public function updateRequest(MenuRequest $request): Menu

@@ -25,13 +25,13 @@ class GoodsTest extends BackendHttpTestCase
 
     public function testBackendGoodsIndex()
     {
-        $this->url = '/goods/list';
+        $this->url = '/goods/paginate';
         $this->handleHttpIndex();
     }
 
     public function testBackendGoodsShow()
     {
-        $this->url = '/goods/detail';
+        $this->url = '/goods/info';
         $this->data = [
             'id' => 1,
         ];
