@@ -11,16 +11,20 @@ declare(strict_types=1);
 namespace App\Core\Block\Common\Goods;
 
 use App\Core\Block\BaseBlock;
+use App\Core\Block\TraitSortingBlock;
 use App\Core\Service\Goods\ServiceTemplateService;
 
 class ServiceTemplateBlock extends BaseBlock
 {
+    use TraitSortingBlock;
+
     protected string $service = ServiceTemplateService::class;
 
     public function __construct()
     {
         parent::__construct();
-        $this->setSortingToOrderBy();
+
+        $this->orderBy = $this->setDefaultOrderBy();
     }
 
     public function all(): array

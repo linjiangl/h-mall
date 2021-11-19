@@ -283,14 +283,6 @@ abstract class AbstractBlock
     }
 
     /**
-     * 设置自定义排序.
-     */
-    protected function setSortingToOrderBy(): void
-    {
-        $this->orderBy = 'sorting asc, id desc';
-    }
-
-    /**
      * 检查用户是否有权限访问对象
      */
     protected function checkUserIsRead(array $info): void
@@ -301,18 +293,6 @@ abstract class AbstractBlock
                 throw new MethodNotAllowedException('没有权限访问该资源');
             }
         }
-    }
-
-    /**
-     * 构建查询之前条件.
-     */
-    protected function beforeBuildQuery(): void
-    {
-        if (empty($this->with)) {
-            $this->with = $this->defaultSinceWith[$this->since][$this->action] ?? [];
-        }
-        $this->condition = $this->handleCondition();
-        $this->groupBy = [];
     }
 
     /**
@@ -361,7 +341,7 @@ abstract class AbstractBlock
         $this->limit = intval($this->request->post('limit', $this->limit));
 
         switch ($this->since) {
-            case 'backend':
+            case BlockSinceConstants::SINCE_BACKEND:
                 // 排序
                 $sort = $this->request->post('sorter', '');
                 if ($sort) {
@@ -374,6 +354,17 @@ abstract class AbstractBlock
                 }
                 break;
         }
+    }
+
+    /**
+     * 构建查询之前条件.
+     */
+    protected function beforeBuildQuery(): void
+    {
+        if (empty($this->with)) {
+            $this->with = $this->defaultSinceWith[$this->since][$this->action] ?? [];
+        }
+        $this->condition = $this->handleCondition();
     }
 
     /**
