@@ -16,10 +16,10 @@ use App\Request\Common\BatchOperationRequest;
 
 class AdminActionController extends BackendController
 {
-    public function batchDestroyRequest(BatchOperationRequest $request): bool
+    public function batchRemoveRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
-        return $this->batchDestroy();
+        return $this->batchRemove();
     }
 
     protected function block(): AdminActionBlock

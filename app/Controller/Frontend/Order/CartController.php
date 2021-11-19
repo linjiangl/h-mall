@@ -17,10 +17,10 @@ use App\Request\Frontend\Order\CartRequest;
 
 class CartController extends FrontendController
 {
-    public function storeRequest(CartRequest $request): Cart
+    public function createRequest(CartRequest $request): Cart
     {
         $request->validated();
-        return parent::store();
+        return parent::create();
     }
 
     public function updateRequest(CartRequest $request): Cart

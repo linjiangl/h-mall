@@ -18,10 +18,10 @@ use App\Request\Backend\Goods\ServiceRequest;
 
 class ServiceTemplateController extends BackendController
 {
-    public function storeRequest(ServiceRequest $request): GoodsService
+    public function createRequest(ServiceRequest $request): GoodsService
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_CREATE), $this->store());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_CREATE), $this->create());
     }
 
     public function updateRequest(ServiceRequest $request): GoodsService
@@ -33,7 +33,7 @@ class ServiceTemplateController extends BackendController
     public function destroyRequest(ServiceRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_DELETE), $this->destroy());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_DELETE), $this->remove());
     }
 
     public function all(): array

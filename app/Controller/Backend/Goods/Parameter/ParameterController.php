@@ -18,10 +18,10 @@ use App\Request\Backend\Goods\ParameterRequest;
 
 class ParameterController extends BackendController
 {
-    public function storeRequest(ParameterRequest $request): Parameter
+    public function createRequest(ParameterRequest $request): Parameter
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_CREATE), $this->store());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_CREATE), $this->create());
     }
 
     public function updateRequest(ParameterRequest $request): Parameter
@@ -33,7 +33,7 @@ class ParameterController extends BackendController
     public function destroyRequest(ParameterRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_DELETE), $this->destroy());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_DELETE), $this->remove());
     }
 
     protected function block(): ParameterBlock

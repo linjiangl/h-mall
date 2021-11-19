@@ -16,17 +16,25 @@ use App\Core\Block\BaseBlock;
 class BaseController extends AbstractController
 {
     /**
-     *  列表.
+     *  分页列表.
      */
-    public function index(): array
+    public function paginate(): array
     {
         return $this->service()->paginate();
     }
 
     /**
+     *  普通列表.
+     */
+    public function list(): array
+    {
+        return $this->service()->list();
+    }
+
+    /**
      * 详情.
      */
-    public function show(): array
+    public function info(): array
     {
         return $this->service()->info();
     }
@@ -34,7 +42,7 @@ class BaseController extends AbstractController
     /**
      * 创建.
      */
-    public function store(): mixed
+    public function create(): mixed
     {
         return $this->service()->create();
     }
@@ -50,7 +58,7 @@ class BaseController extends AbstractController
     /**
      * 删除.
      */
-    public function destroy(): bool
+    public function remove(): bool
     {
         return $this->service()->remove();
     }
@@ -58,7 +66,7 @@ class BaseController extends AbstractController
     /**
      * 批量删除.
      */
-    public function batchDestroy(): bool
+    public function batchRemove(): bool
     {
         return $this->service()->batchRemove();
     }

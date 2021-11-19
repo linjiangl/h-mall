@@ -18,7 +18,7 @@ class AuthorizeController extends BackendController
     /**
      * 获取管理员信息.
      */
-    public function show(): array
+    public function info(): array
     {
         /** @var AuthorizeBlock $service */
         $service = $this->service();

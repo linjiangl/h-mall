@@ -19,22 +19,22 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/frontend', function () {
     // 首页
-    Router::addRoute(['GET', 'POST', 'PUT'], '/', [IndexController::class, 'index']);
+    Router::addRoute(['GET', 'POST', 'PUT'], '/', [IndexController::class, 'paginate']);
 
     // 登录/退出
     Router::post('/login', [LoginController::class, 'login']);
     Router::post('/register', [RegisterController::class, 'register']);
 
     // 用户
-    Router::post('/user/detail', [UserController::class, 'show']);
+    Router::post('/user/detail', [UserController::class, 'info']);
 });
 
 Router::addGroup('/frontend', function () {
     // 登录用户相关
-    Router::post('/authorize', [AuthorizeController::class, 'show']);
+    Router::post('/authorize', [AuthorizeController::class, 'info']);
 
     // 购物车
-    Router::post('/cart/create', [CartController::class, 'storeRequest']);
+    Router::post('/cart/create', [CartController::class, 'createRequest']);
     Router::post('/cart/update', [CartController::class, 'updateRequest']);
-    Router::post('/cart/delete', [CartController::class, 'destroy']);
+    Router::post('/cart/delete', [CartController::class, 'remove']);
 }, ['middleware' => [JWTFrontendMiddleware::class]]);

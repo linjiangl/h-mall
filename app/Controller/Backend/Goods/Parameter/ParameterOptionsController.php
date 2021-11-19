@@ -18,10 +18,10 @@ use App\Request\Backend\Goods\ParameterOptionsRequest;
 
 class ParameterOptionsController extends BackendController
 {
-    public function storeRequest(ParameterOptionsRequest $request): ParameterOption
+    public function createRequest(ParameterOptionsRequest $request): ParameterOption
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_CREATE), $this->store());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_CREATE), $this->create());
     }
 
     public function updateRequest(ParameterOptionsRequest $request): ParameterOption
@@ -33,7 +33,7 @@ class ParameterOptionsController extends BackendController
     public function destroyRequest(ParameterOptionsRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_DELETE), $this->destroy());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_DELETE), $this->remove());
     }
 
     protected function block(): ParameterOptionsBlock

@@ -18,10 +18,10 @@ use App\Request\Backend\System\RoleRequest;
 
 class RoleController extends BackendController
 {
-    public function storeRequest(RoleRequest $request): Role
+    public function createRequest(RoleRequest $request): Role
     {
         $request->validated();
-        return $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_CREATE), $this->store());
+        return $this->setActionName(AdminAction::getMessage(AdminAction::ROLE_CREATE), $this->create());
     }
 
     public function updateRequest(RoleRequest $request): Role
