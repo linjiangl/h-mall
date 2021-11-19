@@ -18,7 +18,5 @@ class ShopWithdrawDao extends AbstractDao
 {
     protected string|Model $model = ShopWithdraw::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '提现记录不存在';
 }

@@ -18,8 +18,6 @@ class RoleMenuDao extends AbstractDao
 {
     protected string|Model $model = RoleMenu::class;
 
-    protected array $noAllowActions = [];
-
     /**
      * 获取信息.
      */

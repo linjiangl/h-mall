@@ -97,9 +97,9 @@ abstract class AbstractService
     /**
      * 删除.
      */
-    public function remove(int $id): array
+    public function delete(int $id): array
     {
-        return $this->service()->remove($id);
+        return $this->service()->delete($id);
     }
 
     /**
@@ -114,9 +114,9 @@ abstract class AbstractService
     /**
      * 批量删除.
      */
-    public function batchRemove(array $selectIds): bool
+    public function batchDelete(array $selectIds): bool
     {
-        $this->service()->batchRemove($selectIds);
+        $this->service()->batchDelete($selectIds);
         return true;
     }
 

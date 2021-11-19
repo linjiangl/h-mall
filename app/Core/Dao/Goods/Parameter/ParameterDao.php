@@ -18,8 +18,6 @@ class ParameterDao extends AbstractDao
 {
     protected string|Model $model = Parameter::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '商品参数不存在或已删除';
 
     public function info(int $id, array $with = []): Parameter

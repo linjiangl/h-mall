@@ -18,7 +18,5 @@ class UserFavoriteDao extends AbstractDao
 {
     protected string|Model $model = UserFavorite::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '收藏记录不存在';
 }

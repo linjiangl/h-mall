@@ -19,7 +19,7 @@ class RoleService extends AbstractService
 {
     protected string $dao = RoleDao::class;
 
-    public function remove(int $id): array
+    public function delete(int $id): array
     {
         // 删除关联的菜单
         (new RoleMenuDao())->deleteMenusByRoleId($id);
@@ -27,6 +27,6 @@ class RoleService extends AbstractService
         // 重置管理员权限
         (new RoleAdminDao())->resetAdminRoleId($id);
 
-        return parent::remove($id);
+        return parent::delete($id);
     }
 }

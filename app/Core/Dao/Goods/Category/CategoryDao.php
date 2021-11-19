@@ -19,8 +19,6 @@ class CategoryDao extends AbstractDao
 {
     protected string|Model $model = Category::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '分类不存在';
 
     protected string $orderBy = 'parent_id asc, sorting asc';

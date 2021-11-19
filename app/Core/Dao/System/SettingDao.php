@@ -18,8 +18,6 @@ class SettingDao extends AbstractDao
 {
     protected string|Model $model = Setting::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '配置不存在';
 
     public function getInfoByKey(string $key): Setting

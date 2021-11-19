@@ -18,8 +18,6 @@ class RoleAdminDao extends AbstractDao
 {
     protected string|Model $model = RoleAdmin::class;
 
-    protected array $noAllowActions = [];
-
     /**
      * 获取管理权限.
      */

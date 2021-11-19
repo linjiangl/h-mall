@@ -18,8 +18,6 @@ class AdminLoginDao extends AbstractDao
 {
     protected string|Model $model = AdminLogin::class;
 
-    protected array $noAllowActions = [];
-
     public function info(int $id, array $with = []): AdminLogin
     {
         return parent::info($id, $with);

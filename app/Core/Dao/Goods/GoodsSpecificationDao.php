@@ -18,8 +18,6 @@ class GoodsSpecificationDao extends AbstractDao
 {
     protected string|Model $model = GoodsSpecification::class;
 
-    protected array $noAllowActions = [];
-
     /**
      * 删除商品规格
      */

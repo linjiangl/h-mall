@@ -18,8 +18,6 @@ class ParameterOptionsDao extends AbstractDao
 {
     protected string|Model $model = ParameterOption::class;
 
-    protected array $noAllowActions = [];
-
     public function info(int $id, array $with = []): ParameterOption
     {
         return parent::info($id, $with);

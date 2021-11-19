@@ -18,8 +18,6 @@ class AdminDao extends AbstractDao
 {
     protected string|Model $model = Admin::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '管理员不存在';
 
     /**

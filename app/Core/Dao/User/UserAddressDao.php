@@ -18,8 +18,6 @@ class UserAddressDao extends AbstractDao
 {
     protected string|Model $model = UserAddress::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '收货地址不存在';
 
     public function info(int $id, array $with = []): UserAddress

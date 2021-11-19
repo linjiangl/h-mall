@@ -18,8 +18,6 @@ class ServiceTemplateDao extends AbstractDao
 {
     protected string|Model $model = ServiceTemplate::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '服务模版不存在或已删除';
 
     public function info(int $id, array $with = []): ServiceTemplate

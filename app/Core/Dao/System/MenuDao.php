@@ -18,8 +18,6 @@ class MenuDao extends AbstractDao
 {
     protected string|Model $model = Menu::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '菜单不存在';
 
     public function info(int $id, array $with = []): Menu

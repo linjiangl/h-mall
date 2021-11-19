@@ -30,7 +30,7 @@ class ServiceTemplateController extends BackendController
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_UPDATE), $this->update());
     }
 
-    public function removeRequest(ServiceRequest $request): bool
+    public function deleteRequest(ServiceRequest $request): bool
     {
         $request->validated();
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_DELETE), $this->remove());

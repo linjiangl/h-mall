@@ -19,8 +19,6 @@ class CartDao extends AbstractDao
 {
     protected string|Model $model = Cart::class;
 
-    protected array $noAllowActions = [];
-
     /**
      * 获取或创建购物车.
      */

@@ -43,7 +43,7 @@ class GoodsController extends BackendController
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE), $this->batchRemove());
     }
 
-    public function batchRemoveRequest(BatchOperationRequest $request): bool
+    public function batchDeleteRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE), $this->batchRemove());

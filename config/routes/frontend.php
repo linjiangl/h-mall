@@ -36,5 +36,5 @@ Router::addGroup('/frontend', function () {
     // 购物车
     Router::post('/cart/create', [CartController::class, 'createRequest']);
     Router::post('/cart/update', [CartController::class, 'updateRequest']);
-    Router::post('/cart/delete', [CartController::class, 'remove']);
+    Router::post('/cart/delete', [CartController::class, 'delete']);
 }, ['middleware' => [JWTFrontendMiddleware::class]]);

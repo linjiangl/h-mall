@@ -18,8 +18,6 @@ class AttachmentDao extends AbstractDao
 {
     protected string|Model $model = Attachment::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '附件不存在';
 
     public function getInfoByIndex(string $index): Attachment

@@ -18,7 +18,5 @@ class MessageReceiverDao extends AbstractDao
 {
     protected string|Model $model = MessageReceiver::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '用户消息不存在';
 }

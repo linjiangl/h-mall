@@ -16,7 +16,7 @@ use App\Request\Common\BatchOperationRequest;
 
 class AdminLoginController extends BackendController
 {
-    public function batchRemoveRequest(BatchOperationRequest $request): bool
+    public function batchDeleteRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
         return $this->batchRemove();

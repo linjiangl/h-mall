@@ -18,7 +18,5 @@ class SlideDao extends AbstractDao
 {
     protected string|Model $model = Slide::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '幻灯片不存在或已删除';
 }

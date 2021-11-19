@@ -18,7 +18,5 @@ class OrderGoodsDao extends AbstractDao
 {
     protected string|Model $model = OrderGoods::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '订单商品不存在或已删除';
 }

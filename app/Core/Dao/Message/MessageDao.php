@@ -18,7 +18,5 @@ class MessageDao extends AbstractDao
 {
     protected string|Model $model = Message::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '消息不存在';
 }

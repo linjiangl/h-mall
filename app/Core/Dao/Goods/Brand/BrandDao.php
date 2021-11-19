@@ -18,8 +18,6 @@ class BrandDao extends AbstractDao
 {
     protected string|Model $model = Brand::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '商品品牌不存在';
 
     public function info(int $id, array $with = []): Brand

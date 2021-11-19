@@ -30,7 +30,7 @@ class ParameterOptionsController extends BackendController
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_UPDATE), $this->update());
     }
 
-    public function removeRequest(ParameterOptionsRequest $request): bool
+    public function deleteRequest(ParameterOptionsRequest $request): bool
     {
         $request->validated();
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_DELETE), $this->remove());

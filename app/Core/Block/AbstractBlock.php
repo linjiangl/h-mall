@@ -210,11 +210,11 @@ abstract class AbstractBlock
     /**
      * 删除.
      */
-    public function remove(): bool
+    public function delete(): bool
     {
-        $model = $this->service()->remove($this->getPrimaryKey());
+        $model = $this->service()->delete($this->getPrimaryKey());
 
-        $this->afterRemove($model);
+        $this->afterDelete($model);
 
         return true;
     }
@@ -222,11 +222,11 @@ abstract class AbstractBlock
     /**
      * 批量删除.
      */
-    public function batchRemove(): bool
+    public function batchDelete(): bool
     {
         $selectIds = $this->request->post('select_ids', '');
         $selectIds = explode(',', $selectIds);
-        return $this->service()->batchRemove($selectIds);
+        return $this->service()->batchDelete($selectIds);
     }
 
     /**
@@ -328,7 +328,7 @@ abstract class AbstractBlock
     /**
      * 删除完成后执行.
      */
-    protected function afterRemove(array $model): void
+    protected function afterDelete(array $model): void
     {
     }
 
@@ -422,7 +422,7 @@ abstract class AbstractBlock
     /**
      * 业务服务接口类.
      */
-    protected function service(): mixed
+    protected function service(): AbstractService
     {
         /** @var AbstractService $service */
         $service = new $this->service();

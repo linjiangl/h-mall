@@ -18,7 +18,5 @@ class NavigationDao extends AbstractDao
 {
     protected string|Model $model = Navigation::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '导航不存在';
 }

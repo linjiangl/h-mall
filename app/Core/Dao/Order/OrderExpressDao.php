@@ -18,7 +18,5 @@ class OrderExpressDao extends AbstractDao
 {
     protected string|Model $model = OrderExpress::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '订单物流不存在';
 }

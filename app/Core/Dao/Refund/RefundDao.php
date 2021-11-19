@@ -18,7 +18,5 @@ class RefundDao extends AbstractDao
 {
     protected string|Model $model = Refund::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '退款订单不存在';
 }

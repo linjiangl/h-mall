@@ -28,7 +28,9 @@ abstract class AbstractDao
     /**
      * 不允许执行的方法.
      */
-    protected array $noAllowActions = ['create', 'update', 'remove'];
+    protected array $noAllowActions = [
+        // 'create', 'update', 'delete'
+    ];
 
     /**
      * 关联模型.
@@ -142,7 +144,7 @@ abstract class AbstractDao
         $pk = $model->getKeyName();
         $id = $model->{$pk};
 
-        $this->removeCache($id);
+        $this->deletePkCache($id);
 
         return $model;
     }
@@ -161,9 +163,31 @@ abstract class AbstractDao
             throw new BadRequestException('更新失败');
         }
 
-        $this->removeCache($id);
+        $this->deletePkCache($id);
 
         return $model;
+    }
+
+    /**
+     * 删除.
+     * @param int $id 主键
+     */
+    public function delete(int $id): array
+    {
+        $this->actionIsAllow('delete');
+
+        $model = $this->info($id);
+        $deleteData = $model->toArray();
+
+        if ($this->softDelete) {
+            $model->update(['deleted_time' => time()]);
+        } else {
+            $model->delete();
+        }
+
+        $this->deletePkCache($id);
+
+        return $deleteData;
     }
 
     /**
@@ -183,28 +207,6 @@ abstract class AbstractDao
     }
 
     /**
-     * 删除.
-     * @param int $id 主键
-     */
-    public function remove(int $id): array
-    {
-        $this->actionIsAllow('remove');
-
-        $model = $this->info($id);
-        $removeData = $model->toArray();
-
-        if ($this->softDelete) {
-            $model->update(['deleted_time' => time()]);
-        } else {
-            $model->delete();
-        }
-
-        $this->removeCache($id);
-
-        return $removeData;
-    }
-
-    /**
      * 批量创建数据.
      */
     public function batchCreate(array $data): void
@@ -215,7 +217,7 @@ abstract class AbstractDao
     /**
      * 批量删除数据.
      */
-    public function batchRemove(array $selectIds): void
+    public function batchDelete(array $selectIds): void
     {
         $model = new $this->model();
         $query = $this->model::query()->whereIn($model->getKeyName(), $selectIds);
@@ -322,10 +324,10 @@ abstract class AbstractDao
     }
 
     /**
-     * 删除缓存.
+     * 删除主键缓存.
      * @param int $id 主键
      */
-    public function removeCache(int $id): void
+    public function deletePkCache(int $id): void
     {
     }
 

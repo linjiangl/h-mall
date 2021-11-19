@@ -60,7 +60,7 @@ class BaseController extends AbstractController
      */
     public function remove(): bool
     {
-        return $this->service()->remove();
+        return $this->service()->delete();
     }
 
     /**
@@ -68,7 +68,7 @@ class BaseController extends AbstractController
      */
     public function batchRemove(): bool
     {
-        return $this->service()->batchRemove();
+        return $this->service()->batchDelete();
     }
 
     protected function block(): BaseBlock

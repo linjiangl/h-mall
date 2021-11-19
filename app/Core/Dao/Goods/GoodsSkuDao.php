@@ -18,8 +18,6 @@ class GoodsSkuDao extends AbstractDao
 {
     protected string|Model $model = GoodsSku::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '商品规格不存在或已删除';
 
     /**

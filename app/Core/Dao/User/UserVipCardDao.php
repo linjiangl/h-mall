@@ -18,7 +18,5 @@ class UserVipCardDao extends AbstractDao
 {
     protected string|Model $model = UserVipCard::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '会员卡未申请或已注销';
 }

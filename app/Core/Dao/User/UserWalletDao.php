@@ -18,8 +18,6 @@ class UserWalletDao extends AbstractDao
 {
     protected string|Model $model = UserWallet::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '用户钱包异常';
 
     public function info(int $id, array $with = []): UserWallet

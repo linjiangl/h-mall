@@ -18,8 +18,6 @@ class GoodsDao extends AbstractDao
 {
     protected string|Model $model = Goods::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '商品不存在或已删除';
 
     public function info(int $id, array $with = []): Goods

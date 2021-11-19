@@ -18,7 +18,5 @@ class AdvertisementDao extends AbstractDao
 {
     protected string|Model $model = Advertisement::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '广告不存在';
 }

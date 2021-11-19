@@ -18,7 +18,5 @@ class UserHistoryDao extends AbstractDao
 {
     protected string|Model $model = UserHistory::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '浏览记录不存在';
 }

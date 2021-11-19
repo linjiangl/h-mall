@@ -18,8 +18,6 @@ class UserDao extends AbstractDao
 {
     protected string|Model $model = User::class;
 
-    protected array $noAllowActions = [];
-
     protected string $notFoundMessage = '用户不存在';
 
     protected string $authorizeColumn = 'id';

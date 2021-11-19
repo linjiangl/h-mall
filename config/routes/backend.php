@@ -48,16 +48,16 @@ Router::addGroup('/backend', function () {
 
     // admin log
     Router::post('/adminLogin/paginate', [AdminLoginController::class, 'paginate']);
-    Router::post('/adminLogin/delete', [AdminLoginController::class, 'batchRemoveRequest']);
+    Router::post('/adminLogin/delete', [AdminLoginController::class, 'batchDeleteRequest']);
     Router::post('/adminAction/paginate', [AdminActionController::class, 'paginate']);
-    Router::post('/adminAction/delete', [AdminActionController::class, 'batchRemoveRequest']);
+    Router::post('/adminAction/delete', [AdminActionController::class, 'batchDeleteRequest']);
 
     // role
     Router::post('/role/paginate', [RoleController::class, 'paginate']);
     Router::post('/role/info', [RoleController::class, 'info']);
     Router::post('/role/create', [RoleController::class, 'createRequest']);
     Router::post('/role/update', [RoleController::class, 'updateRequest']);
-    Router::post('/role/delete', [RoleController::class, 'remove']);
+    Router::post('/role/delete', [RoleController::class, 'delete']);
     Router::post('/role/saveMenus', [RoleController::class, 'saveMenus']);
 
     // menu
@@ -65,7 +65,7 @@ Router::addGroup('/backend', function () {
     Router::post('/menu/info', [MenuController::class, 'info']);
     Router::post('/menu/create', [MenuController::class, 'createRequest']);
     Router::post('/menu/update', [MenuController::class, 'updateRequest']);
-    Router::post('/menu/delete', [MenuController::class, 'remove']);
+    Router::post('/menu/delete', [MenuController::class, 'delete']);
 
     // district
     Router::post('/district/paginate', [DistrictController::class, 'paginate']);
@@ -75,7 +75,7 @@ Router::addGroup('/backend', function () {
     Router::post('/category/info', [CategoryController::class, 'info']);
     Router::post('/category/create', [CategoryController::class, 'createRequest']);
     Router::post('/category/update', [CategoryController::class, 'updateRequest']);
-    Router::post('/category/delete', [CategoryController::class, 'removeRequest']);
+    Router::post('/category/delete', [CategoryController::class, 'deleteRequest']);
     Router::post('/category/parent', [CategoryController::class, 'parent']);
     Router::post('/category/children', [CategoryController::class, 'children']);
 
@@ -84,14 +84,14 @@ Router::addGroup('/backend', function () {
     Router::post('/brand/info', [BrandController::class, 'info']);
     Router::post('/brand/create', [BrandController::class, 'createRequest']);
     Router::post('/brand/update', [BrandController::class, 'updateRequest']);
-    Router::post('/brand/delete', [BrandController::class, 'removeRequest']);
+    Router::post('/brand/delete', [BrandController::class, 'deleteRequest']);
 
     // goods service
     Router::post('/goodsServiceTemplate/paginate', [ServiceTemplateController::class, 'paginate']);
     Router::post('/goodsServiceTemplate/info', [ServiceTemplateController::class, 'info']);
     Router::post('/goodsServiceTemplate/create', [ServiceTemplateController::class, 'createRequest']);
     Router::post('/goodsServiceTemplate/update', [ServiceTemplateController::class, 'updateRequest']);
-    Router::post('/goodsServiceTemplate/delete', [ServiceTemplateController::class, 'removeRequest']);
+    Router::post('/goodsServiceTemplate/delete', [ServiceTemplateController::class, 'deleteRequest']);
     Router::post('/goodsServiceTemplate/all', [ServiceTemplateController::class, 'all']);
 
     // parameter
@@ -99,14 +99,14 @@ Router::addGroup('/backend', function () {
     Router::post('/parameter/info', [ParameterController::class, 'info']);
     Router::post('/parameter/create', [ParameterController::class, 'createRequest']);
     Router::post('/parameter/update', [ParameterController::class, 'updateRequest']);
-    Router::post('/parameter/delete', [ParameterController::class, 'removeRequest']);
+    Router::post('/parameter/delete', [ParameterController::class, 'deleteRequest']);
 
     // parameter options
     Router::post('/parameterOptions/paginate', [ParameterOptionsController::class, 'paginate']);
     Router::post('/parameterOptions/info', [ParameterOptionsController::class, 'info']);
     Router::post('/parameterOptions/create', [ParameterOptionsController::class, 'createRequest']);
     Router::post('/parameterOptions/update', [ParameterOptionsController::class, 'updateRequest']);
-    Router::post('/parameterOptions/delete', [ParameterOptionsController::class, 'removeRequest']);
+    Router::post('/parameterOptions/delete', [ParameterOptionsController::class, 'deleteRequest']);
 
     // goods
     Router::post('/goods/paginate', [GoodsController::class, 'paginate']);
@@ -114,6 +114,6 @@ Router::addGroup('/backend', function () {
     Router::post('/goods/create', [GoodsController::class, 'createRequest']);
     Router::post('/goods/update', [GoodsController::class, 'updateRequest']);
     Router::post('/goods/updateStatus', [GoodsController::class, 'updateStatusRequest']);
-    Router::post('/goods/delete', [GoodsController::class, 'batchRemoveRequest']);
+    Router::post('/goods/delete', [GoodsController::class, 'batchDeleteRequest']);
     Router::post('/goods/recycle', [GoodsController::class, 'recycleRequest']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);
