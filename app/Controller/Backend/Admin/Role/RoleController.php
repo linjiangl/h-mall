@@ -37,11 +37,11 @@ class RoleController extends BackendController
     {
         $request->validated();
         /** @var RoleBlock $service */
-        $service = $this->service();
+        $service = $this->getBlock();
         return $this->setActionName(AdminAction::ROLE_MENU_CHANGE, $service->saveRoleMenus());
     }
 
-    protected function block(): RoleBlock
+    protected function setBlock(): RoleBlock
     {
         return new RoleBlock();
     }

@@ -15,8 +15,8 @@ use App\Core\Block\BaseBlock;
 
 class FrontendController extends BaseController
 {
-    protected function service(): BaseBlock
+    protected function getBlock(): BaseBlock
     {
-        return $this->block()->setSince(BlockSinceConstants::SINCE_FRONTEND);
+        return $this->setBlock()->setSince(BlockSinceConstants::SINCE_FRONTEND);
     }
 }

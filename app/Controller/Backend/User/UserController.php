@@ -23,7 +23,7 @@ class UserController extends BackendController
         return $this->setActionName(UserAction::getMessage(UserAction::USER_UPDATE), $this->update());
     }
 
-    protected function block(): UserBlock
+    protected function setBlock(): UserBlock
     {
         return new UserBlock();
     }

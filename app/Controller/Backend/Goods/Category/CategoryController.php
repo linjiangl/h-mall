@@ -39,18 +39,18 @@ class CategoryController extends BackendController
     public function parent(): array
     {
         /** @var CategoryBlock $service */
-        $service = $this->service();
+        $service = $this->getBlock();
         return $service->parent();
     }
 
     public function children(): array
     {
         /** @var CategoryBlock $service */
-        $service = $this->service();
+        $service = $this->getBlock();
         return $service->children();
     }
 
-    protected function block(): CategoryBlock
+    protected function setBlock(): CategoryBlock
     {
         return new CategoryBlock();
     }

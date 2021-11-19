@@ -21,7 +21,7 @@ use Hyperf\RateLimit\Annotation\RateLimit;
  */
 class IndexController extends FrontendController
 {
-    protected function block(): IndexBlock
+    protected function setBlock(): IndexBlock
     {
         return new IndexBlock();
     }

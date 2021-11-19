@@ -36,7 +36,7 @@ class ParameterOptionsController extends BackendController
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_DELETE), $this->remove());
     }
 
-    protected function block(): ParameterOptionsBlock
+    protected function setBlock(): ParameterOptionsBlock
     {
         return new ParameterOptionsBlock();
     }

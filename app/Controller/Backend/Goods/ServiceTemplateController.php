@@ -38,10 +38,10 @@ class ServiceTemplateController extends BackendController
 
     public function all(): array
     {
-        return $this->block()->all();
+        return $this->setBlock()->all();
     }
 
-    protected function block(): ServiceTemplateBlock
+    protected function setBlock(): ServiceTemplateBlock
     {
         return new ServiceTemplateBlock();
     }

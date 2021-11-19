@@ -29,7 +29,14 @@ class CartController extends FrontendController
         return parent::update();
     }
 
-    protected function block(): CartBlock
+    public function clear(): bool
+    {
+        /** @var CartBlock $block */
+        $block = $this->getBlock();
+        return $block->clear();
+    }
+
+    protected function setBlock(): CartBlock
     {
         return new CartBlock();
     }

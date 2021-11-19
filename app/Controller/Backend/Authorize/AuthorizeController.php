@@ -21,11 +21,11 @@ class AuthorizeController extends BackendController
     public function info(): array
     {
         /** @var AuthorizeBlock $service */
-        $service = $this->service();
+        $service = $this->getBlock();
         return $service->info();
     }
 
-    protected function block(): AuthorizeBlock
+    protected function setBlock(): AuthorizeBlock
     {
         return new AuthorizeBlock();
     }

@@ -49,7 +49,7 @@ class GoodsController extends BackendController
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE), $this->batchRemove());
     }
 
-    protected function block(): GoodsBlock
+    protected function setBlock(): GoodsBlock
     {
         return new GoodsBlock();
     }

@@ -30,7 +30,7 @@ class AdminController extends BackendController
         return $this->setActionName(AdminAction::getMessage(AdminAction::ADMIN_UPDATE), $this->update());
     }
 
-    protected function block(): AdminBlock
+    protected function setBlock(): AdminBlock
     {
         return new AdminBlock();
     }

@@ -30,7 +30,7 @@ class MenuController extends BackendController
         return $this->setActionName(AdminAction::getMessage(AdminAction::MENU_UPDATE), $this->update());
     }
 
-    protected function block(): MenuBlock
+    protected function setBlock(): MenuBlock
     {
         return new MenuBlock();
     }

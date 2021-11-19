@@ -29,11 +29,11 @@ class LoginController extends FrontendController
     {
         $request->validated();
         /** @var LoginBlock $service */
-        $service = $this->service();
+        $service = $this->getBlock();
         return $service->login();
     }
 
-    protected function block(): LoginBlock
+    protected function setBlock(): LoginBlock
     {
         return new LoginBlock();
     }

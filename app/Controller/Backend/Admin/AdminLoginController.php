@@ -22,7 +22,7 @@ class AdminLoginController extends BackendController
         return $this->batchRemove();
     }
 
-    protected function block(): AdminLoginBlock
+    protected function setBlock(): AdminLoginBlock
     {
         return new AdminLoginBlock();
     }

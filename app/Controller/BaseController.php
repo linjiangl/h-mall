@@ -20,7 +20,7 @@ class BaseController extends AbstractController
      */
     public function paginate(): array
     {
-        return $this->service()->paginate();
+        return $this->getBlock()->paginate();
     }
 
     /**
@@ -28,7 +28,7 @@ class BaseController extends AbstractController
      */
     public function list(): array
     {
-        return $this->service()->list();
+        return $this->getBlock()->list();
     }
 
     /**
@@ -36,7 +36,7 @@ class BaseController extends AbstractController
      */
     public function info(): array
     {
-        return $this->service()->info();
+        return $this->getBlock()->info();
     }
 
     /**
@@ -44,7 +44,7 @@ class BaseController extends AbstractController
      */
     public function create(): mixed
     {
-        return $this->service()->create();
+        return $this->getBlock()->create();
     }
 
     /**
@@ -52,7 +52,7 @@ class BaseController extends AbstractController
      */
     public function update(): mixed
     {
-        return $this->service()->update();
+        return $this->getBlock()->update();
     }
 
     /**
@@ -60,7 +60,7 @@ class BaseController extends AbstractController
      */
     public function remove(): bool
     {
-        return $this->service()->delete();
+        return $this->getBlock()->delete();
     }
 
     /**
@@ -68,16 +68,16 @@ class BaseController extends AbstractController
      */
     public function batchRemove(): bool
     {
-        return $this->service()->batchDelete();
+        return $this->getBlock()->batchDelete();
     }
 
-    protected function block(): BaseBlock
+    protected function setBlock(): BaseBlock
     {
         return new BaseBlock();
     }
 
-    protected function service(): BaseBlock
+    protected function getBlock(): BaseBlock
     {
-        return $this->block()->setSince(BlockSinceConstants::SINCE_FRONTEND);
+        return $this->setBlock()->setSince(BlockSinceConstants::SINCE_FRONTEND);
     }
 }

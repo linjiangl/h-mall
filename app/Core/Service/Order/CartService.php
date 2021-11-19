@@ -28,7 +28,7 @@ class CartService extends AbstractService
     /**
      * 添加购物车.
      */
-    public function add(int $skuId, int $quantity = 1, array $append = []): Cart
+    public function addCart(int $skuId, int $quantity = 1, array $append = []): Cart
     {
         $user = $this->authorize;
         $sku = (new GoodsSkuDao())->info($skuId);
@@ -80,7 +80,7 @@ class CartService extends AbstractService
     /**
      * 修改购物车.
      */
-    public function modify(int $cartId, int $quantity = 1, array $append = []): Cart
+    public function updateCart(int $cartId, int $quantity = 1, array $append = []): Cart
     {
         $user = $this->authorize;
         $cart = (new CartDao())->getInfoByCondition([
@@ -120,7 +120,7 @@ class CartService extends AbstractService
     /**
      * 删除购物车商品.
      */
-    public function delete(int $cartId): bool
+    public function deleteCart(int $cartId): bool
     {
         $user = $this->authorize;
         $cart = (new CartDao())->getInfoByCondition([
@@ -149,7 +149,7 @@ class CartService extends AbstractService
     /**
      * 清空购物车商品
      */
-    public function clear(): bool
+    public function clearCart(): bool
     {
         $user = $this->authorize;
         $condition = [

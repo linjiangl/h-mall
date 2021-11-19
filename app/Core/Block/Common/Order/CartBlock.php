@@ -25,7 +25,7 @@ class CartBlock extends BaseBlock
         /** @var CartService $service */
         $service = $this->service();
 
-        return $service->add($data['sku_id'], $data['quantity']);
+        return $service->addCart($data['sku_id'], $data['quantity']);
     }
 
     public function update(): Cart
@@ -35,6 +35,24 @@ class CartBlock extends BaseBlock
         /** @var CartService $service */
         $service = $this->service();
 
-        return $service->modify($data['id'], $data['quantity']);
+        return $service->updateCart($data['id'], $data['quantity']);
+    }
+
+    public function delete(): bool
+    {
+        /** @var CartService $service */
+        $service = $this->service();
+
+        $service->delete($this->getPrimaryKey());
+
+        return true;
+    }
+
+    public function clear(): bool
+    {
+        /** @var CartService $service */
+        $service = $this->service();
+
+        return $service->clearCart();
     }
 }

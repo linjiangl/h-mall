@@ -23,11 +23,11 @@ class RegisterController extends BackendController
     {
         $request->validated();
         /** @var RegisterBlock $service */
-        $service = $this->service();
+        $service = $this->getBlock();
         return $service->register();
     }
 
-    protected function block(): RegisterBlock
+    protected function setBlock(): RegisterBlock
     {
         return new RegisterBlock();
     }

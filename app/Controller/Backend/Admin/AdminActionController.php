@@ -22,7 +22,7 @@ class AdminActionController extends BackendController
         return $this->batchRemove();
     }
 
-    protected function block(): AdminActionBlock
+    protected function setBlock(): AdminActionBlock
     {
         return new AdminActionBlock();
     }

@@ -15,7 +15,7 @@ use App\Core\Block\Common\Goods\Brand\BrandBlock;
 
 class BrandController extends BackendController
 {
-    protected function block(): BrandBlock
+    protected function setBlock(): BrandBlock
     {
         return new BrandBlock();
     }
