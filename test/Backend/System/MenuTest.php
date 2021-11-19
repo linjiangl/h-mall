@@ -23,13 +23,13 @@ class MenuTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
-    public function testBackendMenuIndex()
+    public function testBackendMenuPaginate()
     {
         $this->url = '/menu/paginate';
         $this->handleHttpIndex();
     }
 
-    public function testBackendMenuShow()
+    public function testBackendMenuInfo()
     {
         $this->url = '/menu/info';
         $this->data = [

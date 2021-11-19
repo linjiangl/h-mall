@@ -125,7 +125,7 @@ class CartService extends AbstractService
         $user = $this->authorize;
         $cart = (new CartDao())->getInfoByCondition([
             ['id', '=', $cartId],
-            ['user_id', '=', $user['id']],
+            ['user_id', '=', $user['user_id']],
         ]);
 
         Db::beginTransaction();
@@ -153,7 +153,7 @@ class CartService extends AbstractService
     {
         $user = $this->authorize;
         $condition = [
-            'user_id' => $user['id'],
+            'user_id' => $user['user_id'],
             'is_show' => CartState::IS_SHOW_TRUE,
         ];
         $dao = new CartDao();
@@ -187,7 +187,7 @@ class CartService extends AbstractService
         $user = $this->authorize;
         $dao = new CartDao();
         $list = $dao->getListByCondition([
-            'user_id' => $user['id'],
+            'user_id' => $user['user_id'],
             'is_check' => CartState::IS_CHECK_TRUE,
             'is_show' => CartState::IS_SHOW_TRUE,
         ], $dao->setMapWith()->getMapWith('settlement', self::class));

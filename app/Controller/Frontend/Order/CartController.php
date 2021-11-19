@@ -29,10 +29,17 @@ class CartController extends FrontendController
         return parent::update();
     }
 
+    public function deleteRequest(CartRequest $request): bool
+    {
+        $request->validated();
+        return parent::delete();
+    }
+
     public function clear(): bool
     {
         /** @var CartBlock $block */
         $block = $this->getBlock();
+
         return $block->clear();
     }
 

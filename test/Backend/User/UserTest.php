@@ -21,13 +21,13 @@ class UserTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
-    public function testBackendUserIndex()
+    public function testBackendUserPaginate()
     {
         $this->url = '/user/paginate';
         $this->handleHttpIndex();
     }
 
-    public function testBackendUserShow()
+    public function testBackendUserInfo()
     {
         $this->url = '/user/info';
         $this->data = [

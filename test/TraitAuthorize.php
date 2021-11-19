@@ -59,7 +59,7 @@ trait TraitAuthorize
 
     protected function handleHttpIndex()
     {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $result = $this->getHttpResponse();
         $this->handleDebug($result);
         $this->handleError($result);
         $this->assertArrayHasKey('current_page', $result);
@@ -67,7 +67,7 @@ trait TraitAuthorize
 
     protected function handleHttpShow()
     {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $result = $this->getHttpResponse();
         $this->handleDebug($result);
         $this->handleError($result);
         $this->assertArrayHasKey('id', $result);
@@ -75,7 +75,7 @@ trait TraitAuthorize
 
     protected function handleHttpCreate()
     {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $result = $this->getHttpResponse();
         $this->handleDebug($result);
         $this->handleError($result);
         $this->assertArrayHasKey('id', $result);
@@ -83,7 +83,7 @@ trait TraitAuthorize
 
     protected function handleHttpUpdate()
     {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $result = $this->getHttpResponse();
         $this->handleDebug($result);
         $this->handleError($result);
         $this->assertArrayHasKey('id', $result);
@@ -91,9 +91,14 @@ trait TraitAuthorize
 
     protected function handleHttpDelete()
     {
-        $result = $this->request($this->url, $this->data, 'post', $this->getHeaders());
+        $result = $this->getHttpResponse();
         $this->handleDebug($result);
         $this->handleError($result);
+    }
+
+    protected function getHttpResponse()
+    {
+        return $this->request($this->url, $this->data, 'post', $this->getHeaders());
     }
 
     protected function handleDebug($response)

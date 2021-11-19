@@ -33,7 +33,7 @@ class ServiceTemplateController extends BackendController
     public function deleteRequest(ServiceRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_DELETE), $this->remove());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_DELETE), $this->delete());
     }
 
     public function all(): array

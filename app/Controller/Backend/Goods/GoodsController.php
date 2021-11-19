@@ -40,13 +40,13 @@ class GoodsController extends BackendController
     public function recycleRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE), $this->batchRemove());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_RECYCLE), $this->batchDelete());
     }
 
     public function batchDeleteRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE), $this->batchRemove());
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_DELETE), $this->batchDelete());
     }
 
     protected function setBlock(): GoodsBlock

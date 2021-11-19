@@ -23,13 +23,13 @@ class GoodsTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
-    public function testBackendGoodsIndex()
+    public function testBackendGoodsPaginate()
     {
         $this->url = '/goods/paginate';
         $this->handleHttpIndex();
     }
 
-    public function testBackendGoodsShow()
+    public function testBackendGoodsInfo()
     {
         $this->url = '/goods/info';
         $this->data = [

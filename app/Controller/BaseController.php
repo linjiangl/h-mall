@@ -58,7 +58,7 @@ class BaseController extends AbstractController
     /**
      * 删除.
      */
-    public function remove(): bool
+    public function delete(): bool
     {
         return $this->getBlock()->delete();
     }
@@ -66,7 +66,7 @@ class BaseController extends AbstractController
     /**
      * 批量删除.
      */
-    public function batchRemove(): bool
+    public function batchDelete(): bool
     {
         return $this->getBlock()->batchDelete();
     }

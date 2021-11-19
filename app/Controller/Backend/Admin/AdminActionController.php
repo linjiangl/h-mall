@@ -19,7 +19,7 @@ class AdminActionController extends BackendController
     public function batchDeleteRequest(BatchOperationRequest $request): bool
     {
         $request->validated();
-        return $this->batchRemove();
+        return $this->batchDelete();
     }
 
     protected function setBlock(): AdminActionBlock

@@ -22,13 +22,13 @@ class AdminTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
-    public function testBackendAdminIndex()
+    public function testBackendAdminPaginate()
     {
         $this->url = '/admin/paginate';
         $this->handleHttpIndex();
     }
 
-    public function testBackendAdminShow()
+    public function testBackendAdminInfo()
     {
         $this->url = '/admin/info';
         $this->data = [
@@ -37,7 +37,7 @@ class AdminTest extends BackendHttpTestCase
         $this->handleHttpShow();
     }
 
-    public function testBackendAdminStore()
+    public function testBackendAdminCreate()
     {
         $this->url = '/admin/create';
         $this->data = [

@@ -40,4 +40,22 @@ class CartTest extends FrontendHttpTestCase
         ];
         $this->handleHttpUpdate();
     }
+
+    public function testFrontendCartDelete()
+    {
+        $this->url = '/cart/delete';
+        $this->data = [
+            'id' => 6,
+        ];
+        $this->handleHttpDelete();
+    }
+
+    public function testFrontendCartClear()
+    {
+        $this->url = '/cart/clear';
+        $result = $this->getHttpResponse();
+
+        $this->handleDebug($result);
+        $this->handleError($result);
+    }
 }

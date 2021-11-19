@@ -25,13 +25,13 @@ class RoleTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
-    public function testBackendRoleIndex()
+    public function testBackendRolePaginate()
     {
         $this->url = '/role/paginate';
         $this->handleHttpIndex();
     }
 
-    public function testBackendRoleShow()
+    public function testBackendRoleInfo()
     {
         $this->url = '/role/info';
         $this->data = [
