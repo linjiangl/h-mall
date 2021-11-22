@@ -24,7 +24,7 @@ class UserTest extends BackendHttpTestCase
     public function testBackendUserPaginate()
     {
         $this->url = '/user/paginate';
-        $this->handleHttpIndex();
+        $this->handleHttpCreate();
     }
 
     public function testBackendUserInfo()
@@ -33,6 +33,6 @@ class UserTest extends BackendHttpTestCase
         $this->data = [
             'id' => 1,
         ];
-        $this->handleHttpShow();
+        $this->handleHttpInfo();
     }
 }

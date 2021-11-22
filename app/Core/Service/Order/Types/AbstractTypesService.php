@@ -22,23 +22,22 @@ abstract class AbstractTypesService implements InterfaceTypesService
         $this->params = $params;
     }
 
-    public function settlement(array $products): array
+    public function settlement(): array
     {
-        $data = [];
-        foreach ($products as $item) {
-            $totalAmount = bcmul((string) $item['quantity'], $item['sku']['sale_price'], 2);
-            $skus[] = [
-                'user_id' => $this->user['id'],
-                'goods_id' => $item['sku']['goods_id'],
-                'goods_sku_id' => $item['sku']['id'],
-                'goods_name' => $item['sku']['goods']['name'],
-                'goods_sku_name' => $item['sku']['sku_name'],
-                'quantity' => $item['quantity'],
-                'total_amount' => $totalAmount,
-                'discount_amount' => 0,
-                'remark' => [],
-            ];
-        }
-        return $data;
+        return [];
+//        foreach ($products as $item) {
+//            $totalAmount = bcmul((string) $item['quantity'], $item['sku']['sale_price'], 2);
+//            $skus[] = [
+//                'user_id' => $this->user['id'],
+//                'goods_id' => $item['sku']['goods_id'],
+//                'goods_sku_id' => $item['sku']['id'],
+//                'goods_name' => $item['sku']['goods']['name'],
+//                'goods_sku_name' => $item['sku']['sku_name'],
+//                'quantity' => $item['quantity'],
+//                'total_amount' => $totalAmount,
+//                'discount_amount' => 0,
+//                'remark' => [],
+//            ];
+//        }
     }
 }

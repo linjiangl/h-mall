@@ -25,7 +25,7 @@ class AdminTest extends BackendHttpTestCase
     public function testBackendAdminPaginate()
     {
         $this->url = '/admin/paginate';
-        $this->handleHttpIndex();
+        $this->handleHttpPaginate();
     }
 
     public function testBackendAdminInfo()
@@ -34,7 +34,7 @@ class AdminTest extends BackendHttpTestCase
         $this->data = [
             'id' => 2,
         ];
-        $this->handleHttpShow();
+        $this->handleHttpInfo();
     }
 
     public function testBackendAdminCreate()

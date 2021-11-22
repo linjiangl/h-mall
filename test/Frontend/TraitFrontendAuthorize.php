@@ -29,10 +29,12 @@ trait TraitFrontendAuthorize
         $this->setTokenCacheIndex($this->cacheIndex);
         $token = redis()->get($this->tokenCacheIndex);
         if (! $token) {
-            $result = $this->request('/login', [
+            $this->url = '/login';
+            $this->data = [
                 'username' => 'test001',
                 'password' => '123456',
-            ]);
+            ];
+            $result = $this->getHttpResponse(false);
 
             $this->assertArrayHasKey('token', $result);
             $this->setToken($result['token']);

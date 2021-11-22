@@ -26,7 +26,7 @@ class MenuTest extends BackendHttpTestCase
     public function testBackendMenuPaginate()
     {
         $this->url = '/menu/paginate';
-        $this->handleHttpIndex();
+        $this->handleHttpPaginate();
     }
 
     public function testBackendMenuInfo()
@@ -35,7 +35,7 @@ class MenuTest extends BackendHttpTestCase
         $this->data = [
             'id' => 1,
         ];
-        $this->handleHttpShow();
+        $this->handleHttpInfo();
     }
 
     public function testBackendMenuCreate()

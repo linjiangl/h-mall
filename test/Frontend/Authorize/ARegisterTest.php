@@ -27,6 +27,6 @@ class ARegisterTest extends FrontendHttpTestCase
         ]);
 
         $this->handleError($result);
-        $this->assertArrayHasKey('token', $result);
+        $this->assertArrayHasKey('token', $result['data']);
     }
 }

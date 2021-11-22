@@ -22,8 +22,6 @@ trait TraitAuthorize
 
     protected array $data = [];
 
-    protected bool $debug = false;
-
     public function setToken(string $token)
     {
         redis()->set($this->tokenCacheIndex, $token, 3600);
@@ -51,60 +49,52 @@ trait TraitAuthorize
 
     public function getHeaders(): array
     {
-        $this->debug = env('TESTING_DEBUG', false);
         return [
             'Authorization' => $this->getToken(),
         ];
     }
 
-    protected function handleHttpIndex()
+    protected function handleHttpPaginate()
     {
         $result = $this->getHttpResponse();
-        $this->handleDebug($result);
-        $this->handleError($result);
+
         $this->assertArrayHasKey('current_page', $result);
     }
 
-    protected function handleHttpShow()
+    protected function handleHttpInfo()
     {
         $result = $this->getHttpResponse();
-        $this->handleDebug($result);
-        $this->handleError($result);
+
         $this->assertArrayHasKey('id', $result);
     }
 
     protected function handleHttpCreate()
     {
         $result = $this->getHttpResponse();
-        $this->handleDebug($result);
-        $this->handleError($result);
+
         $this->assertArrayHasKey('id', $result);
     }
 
     protected function handleHttpUpdate()
     {
         $result = $this->getHttpResponse();
-        $this->handleDebug($result);
-        $this->handleError($result);
+
         $this->assertArrayHasKey('id', $result);
     }
 
     protected function handleHttpDelete()
     {
         $result = $this->getHttpResponse();
-        $this->handleDebug($result);
-        $this->handleError($result);
+
+        $this->assertTrue($result);
     }
 
-    protected function getHttpResponse()
+    protected function getHttpResponse(bool $header = true)
     {
-        return $this->request($this->url, $this->data, 'post', $this->getHeaders());
-    }
+        $response = $this->request($this->url, $this->data, 'post', $header ? $this->getHeaders() : []);
 
-    protected function handleDebug($response)
-    {
-        if ($this->debug) {
-            print_r($response);
-        }
+        $this->handleError($response);
+
+        return $response['data'];
     }
 }

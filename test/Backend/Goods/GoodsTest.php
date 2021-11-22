@@ -26,7 +26,7 @@ class GoodsTest extends BackendHttpTestCase
     public function testBackendGoodsPaginate()
     {
         $this->url = '/goods/paginate';
-        $this->handleHttpIndex();
+        $this->handleHttpPaginate();
     }
 
     public function testBackendGoodsInfo()
@@ -35,7 +35,7 @@ class GoodsTest extends BackendHttpTestCase
         $this->data = [
             'id' => 1,
         ];
-        $this->handleHttpShow();
+        $this->handleHttpInfo();
     }
 
     public function testBackendGoodsCreate()

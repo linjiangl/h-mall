@@ -13,7 +13,7 @@ namespace App\Core\Service\Order\Types;
 interface InterfaceTypesService
 {
     /**
-     * 订单结算.
+     * 结算接口.
      */
-    public function settlement(array $products): array;
+    public function settlement(): array;
 }

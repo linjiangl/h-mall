@@ -17,14 +17,17 @@ abstract class AbstractHttpTestCase extends HttpTestCase
     /**
      * @var Client
      */
-    protected $client;
+    protected mixed $client;
 
     protected string $apiType = '';
+
+    protected bool $debug = false;
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
         $this->client = make(Client::class);
+        $this->debug = env('TESTING_DEBUG', false);
     }
 
     public function request($url, $data = [], $method = 'post', $header = [])
@@ -34,9 +37,14 @@ abstract class AbstractHttpTestCase extends HttpTestCase
 
     public function handleError($response)
     {
-        if (is_array($response)) {
-            $this->assertArrayNotHasKey('error', $response);
+        if ($this->debug) {
+            print_r($response);
         }
-        $this->assertTrue(true);
+
+        if ($response['code'] > 300) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
     }
 }

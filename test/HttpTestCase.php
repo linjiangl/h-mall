@@ -25,7 +25,7 @@ abstract class HttpTestCase extends TestCase
     /**
      * @var Client
      */
-    protected $client;
+    protected mixed $client;
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {

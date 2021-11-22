@@ -98,15 +98,20 @@ if (! function_exists('response_json')) {
     function response_json(mixed $data, string $message = '', int $code = 200): Psr\Http\Message\ResponseInterface
     {
         $code = $code ?: 500;
+
+        $response = [
+            'code' => $code,
+            'message' => '',
+            'data' => '',
+            'timestamp' => time(),
+        ];
         if ($code >= 200 && $code < 300) {
-            $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+            $response['data'] = $data;
+            $response['message'] = 'OK';
         } else {
-            $data = json_encode([
-                'code' => $code,
-                'error' => $message,
-            ], JSON_UNESCAPED_UNICODE);
+            $response['message'] = $message;
         }
-        return response()->withAddedHeader('Content-Type', 'application/json')->withStatus($code)->withBody(new SwooleStream($data));
+        return response()->withAddedHeader('Content-Type', 'application/json')->withStatus($code)->withBody(new SwooleStream(json_encode($response, JSON_UNESCAPED_UNICODE)));
     }
 }
 

@@ -44,6 +44,7 @@ class CartService extends AbstractService
      */
     public function countCart(): int
     {
+        throw new BadRequestException('ffff');
         $user = $this->authorize;
         $dao = new CartDao();
 

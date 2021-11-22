@@ -55,8 +55,7 @@ class CartTest extends FrontendHttpTestCase
         $this->url = '/cart/clear';
         $result = $this->getHttpResponse();
 
-        $this->handleDebug($result);
-        $this->handleError($result);
+        $this->assertTrue($result);
     }
 
     public function testFrontendCartMy()
@@ -64,8 +63,7 @@ class CartTest extends FrontendHttpTestCase
         $this->url = '/cart/my';
         $result = $this->getHttpResponse();
 
-        $this->handleDebug($result);
-        $this->handleError($result);
+        $this->assertIsArray($result);
     }
 
     public function testFrontendCartCount()
@@ -73,7 +71,6 @@ class CartTest extends FrontendHttpTestCase
         $this->url = '/cart/count';
         $result = $this->getHttpResponse();
 
-        $this->handleDebug($result);
-        $this->handleError($result);
+        $this->assertIsNumeric($result);
     }
 }

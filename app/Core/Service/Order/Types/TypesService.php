@@ -27,7 +27,7 @@ class TypesService
         $this->class = new $class($params, $user);
     }
 
-    public function service()
+    public function getService()
     {
         return $this->class;
     }

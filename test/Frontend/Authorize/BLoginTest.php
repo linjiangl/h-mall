@@ -23,13 +23,6 @@ class BLoginTest extends FrontendHttpTestCase
 
     public function testFrontendLogin()
     {
-        $result = $this->request('/login', [
-            'username' => 'test001',
-            'password' => '123456',
-        ]);
-
-        $this->handleError($result);
-        $this->assertArrayHasKey('token', $result);
-        $this->setToken($result['token']);
+        $this->getToken();
     }
 }

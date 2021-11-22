@@ -29,10 +29,12 @@ trait TraitBackendAuthorize
         $this->setTokenCacheIndex($this->cacheIndex);
         $token = redis()->get($this->tokenCacheIndex);
         if (! $token) {
-            $result = $this->request('/login', [
+            $this->url = '/login';
+            $this->data = [
                 'username' => env('TESTING_BACKEND_USERNAME', 'admin'),
                 'password' => env('TESTING_BACKEND_PASSWORD', 'yii.red'),
-            ]);
+            ];
+            $result = $this->getHttpResponse(false);
 
             $this->assertArrayHasKey('token', $result);
             $this->setToken($result['token']);

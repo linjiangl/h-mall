@@ -28,7 +28,7 @@ class RoleTest extends BackendHttpTestCase
     public function testBackendRolePaginate()
     {
         $this->url = '/role/paginate';
-        $this->handleHttpIndex();
+        $this->handleHttpPaginate();
     }
 
     public function testBackendRoleInfo()
@@ -37,7 +37,7 @@ class RoleTest extends BackendHttpTestCase
         $this->data = [
             'id' => 1,
         ];
-        $this->handleHttpShow();
+        $this->handleHttpInfo();
     }
 
     public function testBackendRoleCreate()
@@ -88,11 +88,13 @@ class RoleTest extends BackendHttpTestCase
         $menuDao = new MenuDao();
         $menuList = $menuDao->getListByStatus(MenuState::STATUS_ENABLED);
 
-        $data = [
+        $this->url = '/role/saveMenus';
+        $this->data = [
             'role_id' => $role->id,
             'menu_ids' => implode(',', array_column($menuList, 'id')),
         ];
-        $result = $this->request('/role/saveMenus', $data, 'post', $this->getHeaders());
-        $this->handleError($result);
+
+        $result = $this->getHttpResponse();
+        $this->assertTrue($result);
     }
 }
