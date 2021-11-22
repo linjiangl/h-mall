@@ -38,4 +38,6 @@ Router::addGroup('/frontend', function () {
     Router::post('/cart/update', [CartController::class, 'updateRequest']);
     Router::post('/cart/delete', [CartController::class, 'deleteRequest']);
     Router::post('/cart/clear', [CartController::class, 'clear']);
+    Router::post('/cart/my', [CartController::class, 'my']);
+    Router::post('/cart/count', [CartController::class, 'count']);
 }, ['middleware' => [JWTFrontendMiddleware::class]]);

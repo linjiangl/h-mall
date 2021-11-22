@@ -43,6 +43,22 @@ class CartController extends FrontendController
         return $block->clear();
     }
 
+    public function my(): array
+    {
+        /** @var CartBlock $block */
+        $block = $this->getBlock();
+
+        return $block->getCart();
+    }
+
+    public function count(): int
+    {
+        /** @var CartBlock $block */
+        $block = $this->getBlock();
+
+        return $block->countCart();
+    }
+
     protected function setBlock(): CartBlock
     {
         return new CartBlock();

@@ -25,7 +25,7 @@ class CartTest extends FrontendHttpTestCase
     {
         $this->url = '/cart/create';
         $this->data = [
-            'sku_id' => 1,
+            'sku_id' => 2,
             'quantity' => 1,
         ];
         $this->handleHttpCreate();
@@ -53,6 +53,24 @@ class CartTest extends FrontendHttpTestCase
     public function testFrontendCartClear()
     {
         $this->url = '/cart/clear';
+        $result = $this->getHttpResponse();
+
+        $this->handleDebug($result);
+        $this->handleError($result);
+    }
+
+    public function testFrontendCartMy()
+    {
+        $this->url = '/cart/my';
+        $result = $this->getHttpResponse();
+
+        $this->handleDebug($result);
+        $this->handleError($result);
+    }
+
+    public function testFrontendCartCount()
+    {
+        $this->url = '/cart/count';
         $result = $this->getHttpResponse();
 
         $this->handleDebug($result);

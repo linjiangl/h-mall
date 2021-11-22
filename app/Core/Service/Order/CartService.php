@@ -26,6 +26,34 @@ class CartService extends AbstractService
     protected string $dao = CartDao::class;
 
     /**
+     * 获取购车信息.
+     */
+    public function getCart(): array
+    {
+        $user = $this->authorize;
+        $dao = new CartDao();
+
+        return $dao->getListByCondition([
+            'user_id' => $user['user_id'],
+            'is_show' => CartState::IS_SHOW_TRUE,
+        ], $dao->setMapWith()->getMapWith('getCart', self::class));
+    }
+
+    /**
+     * 统计购物车商品数量.
+     */
+    public function countCart(): int
+    {
+        $user = $this->authorize;
+        $dao = new CartDao();
+
+        return $dao->getCountByCondition([
+            'user_id' => $user['user_id'],
+            'is_show' => CartState::IS_SHOW_TRUE,
+        ]);
+    }
+
+    /**
      * 添加购物车.
      */
     public function addCart(int $skuId, int $quantity = 1, array $append = []): Cart

@@ -19,6 +19,8 @@ use App\Model\Model;
  * @property string $order_no 订单编号
  * @property string $payment_method 支付类型
  * @property string $trade_no 第三方支付流水号
+ * @property int $buy_quantity 购买总数量，累加商品购买数量
+ * @property int $goods_quantity 商品总数量，订单中的商品数量
  * @property string $goods_amount 商品总金额
  * @property string $total_amount 订单总金额
  * @property string $express_amount 运费
@@ -63,12 +65,12 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'shop_id', 'user_id', 'order_no', 'payment_method', 'trade_no', 'goods_amount', 'total_amount', 'express_amount', 'discount_amount', 'consignee', 'mobile', 'province', 'city', 'district', 'street', 'address', 'zip_code', 'is_dispatched', 'is_comment', 'is_additional', 'is_credited', 'payment_time', 'dispatched_time', 'confirmed_time', 'canceled_time', 'evaluate_time', 'additional_evaluate_time', 'status', 'buyer_message', 'seller_message', 'refund_type', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'shop_id', 'user_id', 'order_no', 'payment_method', 'trade_no', 'buy_quantity', 'goods_quantity', 'goods_amount', 'total_amount', 'express_amount', 'discount_amount', 'consignee', 'mobile', 'province', 'city', 'district', 'street', 'address', 'zip_code', 'is_dispatched', 'is_comment', 'is_additional', 'is_credited', 'payment_time', 'dispatched_time', 'confirmed_time', 'canceled_time', 'evaluate_time', 'additional_evaluate_time', 'status', 'buyer_message', 'seller_message', 'refund_type', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'is_dispatched' => 'integer', 'is_comment' => 'integer', 'is_additional' => 'integer', 'is_credited' => 'integer', 'payment_time' => 'integer', 'dispatched_time' => 'integer', 'confirmed_time' => 'integer', 'canceled_time' => 'integer', 'evaluate_time' => 'integer', 'additional_evaluate_time' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'user_id' => 'integer', 'buy_quantity' => 'integer', 'goods_quantity' => 'integer', 'is_dispatched' => 'integer', 'is_comment' => 'integer', 'is_additional' => 'integer', 'is_credited' => 'integer', 'payment_time' => 'integer', 'dispatched_time' => 'integer', 'confirmed_time' => 'integer', 'canceled_time' => 'integer', 'evaluate_time' => 'integer', 'additional_evaluate_time' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

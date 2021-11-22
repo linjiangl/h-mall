@@ -18,6 +18,22 @@ class CartBlock extends BaseBlock
 {
     protected string $service = CartService::class;
 
+    public function getCart(): array
+    {
+        /** @var CartService $service */
+        $service = $this->service();
+
+        return $service->getCart();
+    }
+
+    public function countCart(): int
+    {
+        /** @var CartService $service */
+        $service = $this->service();
+
+        return $service->countCart();
+    }
+
     public function create(): Cart
     {
         $data = $this->handleCreateData();
