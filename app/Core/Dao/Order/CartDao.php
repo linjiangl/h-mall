@@ -14,6 +14,7 @@ use App\Core\Dao\AbstractDao;
 use App\Core\Service\Order\CartService;
 use App\Model\Cart;
 use Hyperf\Database\Model\Model;
+use Hyperf\Database\Model\Relations\Relation;
 
 class CartDao extends AbstractDao
 {
@@ -36,7 +37,12 @@ class CartDao extends AbstractDao
     {
         $this->mapWith = [
             $this->buildMapWithKey('getCart', CartService::class) => ['shop', 'sku', 'sku.goods', 'sku.specValues', 'sku.specValues.parent'],
-            $this->buildMapWithKey('settlement', CartService::class) => ['shop', 'sku', 'sku.goods', 'sku.specValues', 'sku.specValues.parent'],
+            $this->buildMapWithKey('settlement', CartService::class) => [
+                'shop' => function (Relation $query) {
+                    $query->select(['id', 'name', 'logo', 'comment_score', 'status']);
+                },
+                'sku', 'sku.goods', 'sku.specValues', 'sku.specValues.parent'
+            ],
         ];
         return parent::setMapWith();
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "853ffec31160cbd0ba7c76309c5e08f3",
+    "content-hash": "8ec92bb4912a0d60da4c6e13e86bce80",
     "packages": [
         {
             "name": "bandwidth-throttle/token-bucket",
@@ -9126,9 +9126,9 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.0",
-        "ext-swoole": ">=4.7",
         "ext-bcmath": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-swoole": ">=4.7"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"

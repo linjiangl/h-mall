@@ -12,9 +12,9 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=8.0",
-        "ext-swoole": ">=4.7",
         "ext-bcmath": "*",
         "ext-iconv": "*",
+        "ext-swoole": ">=4.7",
         "gregwar/captcha": "^1.1",
         "hyperf/cache": "~2.2.0",
         "hyperf/command": "~2.2.0",

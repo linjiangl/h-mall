@@ -44,7 +44,6 @@ class CartService extends AbstractService
      */
     public function countCart(): int
     {
-        throw new BadRequestException('ffff');
         $user = $this->authorize;
         $dao = new CartDao();
 
@@ -229,7 +228,7 @@ class CartService extends AbstractService
             }
             $item['sku']['quantity'] = $item['quantity'];
             $result[$item['shop_id']]['cart_ids'][] = $item['id'];
-            $result[$item['shop_id']]['sku'][] = $item['sku'];
+            $result[$item['shop_id']]['sku_list'][] = $item['sku'];
         }
 
         return array_values($result);
