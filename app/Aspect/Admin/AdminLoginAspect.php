@@ -24,15 +24,16 @@ use Hyperf\Di\Exception\Exception;
 class AdminLoginAspect extends AbstractAspect
 {
     public $classes = [
-        LoginController::class,
-        RegisterController::class,
+        LoginController::class . '::login',
+        RegisterController::class . '::register',
     ];
 
     /**
-     * @throws Exception
+     * @param ProceedingJoinPoint $proceedingJoinPoint
      * @return mixed
+     * @throws Exception
      */
-    public function process(ProceedingJoinPoint $proceedingJoinPoint)
+    public function process(ProceedingJoinPoint $proceedingJoinPoint): mixed
     {
         $result = $proceedingJoinPoint->process();
         if (is_array($result) && isset($result['token'])) {

@@ -33,29 +33,30 @@ class AdminActionAspect extends AbstractAspect
 {
     public $classes = [
         // goods
-        CategoryController::class . '::*Request',
-        BrandController::class . '::*Request',
-        ServiceTemplateController::class . '::*Request',
-        ParameterController::class . '::*Request',
-        ParameterOptionsController::class . '::*Request',
-        GoodsController::class . '::*Request',
+        CategoryController::class,
+        BrandController::class,
+        ServiceTemplateController::class,
+        ParameterController::class,
+        ParameterOptionsController::class,
+        GoodsController::class,
 
         // user
-        UserController::class . '::*Request',
+        UserController::class,
 
         // admin
-        AdminController::class . '::*Request',
-        RoleController::class . '::*Request',
+        AdminController::class,
+        RoleController::class,
 
         // system
-        MenuController::class . '::*Request',
+        MenuController::class,
     ];
 
     /**
-     * @throws Exception
+     * @param ProceedingJoinPoint $proceedingJoinPoint
      * @return mixed
+     * @throws Exception
      */
-    public function process(ProceedingJoinPoint $proceedingJoinPoint)
+    public function process(ProceedingJoinPoint $proceedingJoinPoint): mixed
     {
         $result = $proceedingJoinPoint->process();
         $actionName = request()->getAttribute('action_name', '');
