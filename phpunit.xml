@@ -20,11 +20,8 @@
             <directory suffix="Test.php">./test/Frontend/Authorize</directory>
             <directory suffix="Test.php">./test/Frontend/Order</directory>
         </testsuite>
-        <testsuite name="Mobile">
-            <directory suffix="Test.php">./test/Api/Mobile</directory>
-        </testsuite>
-        <testsuite name="Cases">
-            <directory suffix="Test.php">./test/Cases</directory>
+        <testsuite name="MobileV1">
+            <directory suffix="Test.php">./test/Mobile/v1</directory>
         </testsuite>
     </testsuites>
 

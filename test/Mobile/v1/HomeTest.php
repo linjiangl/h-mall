@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Api\Mobile\v1;
+namespace HyperfTest\Mobile\v1;
 
 use HyperfTest\AbstractHttpTestCase;
 
