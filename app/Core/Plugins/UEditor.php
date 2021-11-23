@@ -280,9 +280,8 @@ class UEditor
 
     /**
      * 上传错误检查.
-     * @param $errCode
      */
-    private function getStateInfo($errCode): string
+    private function getStateInfo(int|string $errCode): string
     {
         return ! $this->stateMap[$errCode] ? $this->stateMap['ERROR_UNKNOWN'] : $this->stateMap[$errCode];
     }

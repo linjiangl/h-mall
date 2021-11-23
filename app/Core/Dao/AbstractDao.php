@@ -346,7 +346,7 @@ abstract class AbstractDao
     /**
      * 设置关联模型.
      */
-    public function setMapWith(): self
+    public function setMapWith(): static
     {
         return $this;
     }
@@ -374,7 +374,7 @@ abstract class AbstractDao
      * 设置登录用户信息.
      * @return $this
      */
-    public function withAuthorize(array $user): self
+    public function withAuthorize(array $user): static
     {
         $this->authorize = $user;
         return $this;
@@ -384,7 +384,7 @@ abstract class AbstractDao
      * 获取包括删除的数据.
      * @return $this
      */
-    public function withTrashed(): self
+    public function withTrashed(): static
     {
         $this->trashedType = 'all';
         return $this;
@@ -394,7 +394,7 @@ abstract class AbstractDao
      * 仅获取删除的数据.
      * @return $this
      */
-    public function onlyTrashed(): self
+    public function onlyTrashed(): static
     {
         $this->trashedType = 'only';
         return $this;

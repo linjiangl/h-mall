@@ -32,7 +32,7 @@ class CartDao extends AbstractDao
         return parent::getInfoByCondition($condition, $with, $select);
     }
 
-    public function setMapWith(): self
+    public function setMapWith(): static
     {
         $this->mapWith = [
             $this->buildMapWithKey('getCart', CartService::class) => ['shop', 'sku', 'sku.goods', 'sku.specValues', 'sku.specValues.parent'],

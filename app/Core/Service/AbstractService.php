@@ -131,7 +131,7 @@ abstract class AbstractService
     /**
      * 设置登录用户信息.
      */
-    public function withAuthorize(array $user): self
+    public function withAuthorize(array $user): static
     {
         $this->authorize = $user;
         return $this;
@@ -140,7 +140,7 @@ abstract class AbstractService
     /**
      * 设置最大的查询条数.
      */
-    public function setMaxLimit(int $limit): self
+    public function setMaxLimit(int $limit): static
     {
         $this->maxLimit = $limit;
         return $this;
@@ -150,7 +150,7 @@ abstract class AbstractService
      * 获取包括删除的数据.
      * @return $this
      */
-    public function withTrashed(): self
+    public function withTrashed(): static
     {
         $this->trashedType = 'all';
         return $this;
