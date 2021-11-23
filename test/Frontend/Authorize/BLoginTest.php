@@ -23,6 +23,8 @@ class BLoginTest extends FrontendHttpTestCase
 
     public function testFrontendLogin()
     {
-        $this->getToken();
+        $token = $this->getToken();
+
+        $this->assertIsString($token);
     }
 }

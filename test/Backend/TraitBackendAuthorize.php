@@ -16,7 +16,7 @@ trait TraitBackendAuthorize
 {
     use TraitAuthorize;
 
-    protected string $cacheIndex = 'testing:frontend:token';
+    protected string $cacheIndex = 'testing:backend:token';
 
     public function setToken(string $token)
     {

@@ -23,6 +23,8 @@ class BLoginTest extends BackendHttpTestCase
 
     public function testBackendLogin()
     {
-        $this->getToken();
+        $token = $this->getToken();
+
+        $this->assertIsString($token);
     }
 }
