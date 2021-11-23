@@ -92,7 +92,7 @@ class QiniuBucket extends AbstractBucket
         return new Config(Zone::zonez2());
     }
 
-    public function generateKey(string $filename, $dir = 'images'): string
+    public function generateKey(string $filename, string $dir = 'images'): string
     {
         $key = parent::generateKey($filename, $dir);
         return substr($key, 1);

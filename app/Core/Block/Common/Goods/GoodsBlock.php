@@ -31,6 +31,7 @@ class GoodsBlock extends BaseBlock
     public function info(): array
     {
         $detail = parent::info();
+
         return (new GoodsService())->convertGoodsDetail($detail);
     }
 }

@@ -51,9 +51,8 @@ class MenuService extends AbstractService
 
     /**
      * 获取树形菜单.
-     * @param mixed $status
      */
-    public function getTreeMenus($status = null): array
+    public function getTreeMenus(mixed $status = null): array
     {
         $menus = (new MenuDao())->getListByStatus($status, 'id,parent_id,title,name,icon,path');
         return $this->handleMenusToChildren($menus);
@@ -61,9 +60,8 @@ class MenuService extends AbstractService
 
     /**
      * 获取层次菜单.
-     * @param mixed $status
      */
-    public function getLevelMenus($status = null): array
+    public function getLevelMenus(mixed $status = null): array
     {
         $menus = (new MenuDao())->getListByStatus($status, 'id,parent_id,title,name,icon,path');
         return $this->handleMenusToLevel($menus);
@@ -97,7 +95,7 @@ class MenuService extends AbstractService
      */
     public function handleMenusToLevel(array $menus, int $parentId = 0, int $level = 1): array
     {
-        foreach ($menus as $k => $v) {
+        foreach ($menus as $v) {
             if ($v['parent_id'] == $parentId) {
                 $v['level'] = $level;
                 $this->levelMenus[] = $v;

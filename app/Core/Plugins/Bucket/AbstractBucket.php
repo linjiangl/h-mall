@@ -45,7 +45,7 @@ abstract class AbstractBucket
      * @param string $filename 文件名称,取文件后缀
      * @param string $dir 存在目录
      */
-    public function generateKey(string $filename, $dir = 'images'): string
+    public function generateKey(string $filename, string $dir = 'images'): string
     {
         $suffix = '.jpg';
         if ($filename) {
@@ -98,9 +98,8 @@ abstract class AbstractBucket
 
     /**
      * 检查文件是否上传.
-     * @return array|bool
      */
-    protected function checkFileExists(UploadedFile $file)
+    protected function checkFileExists(UploadedFile $file): bool|array
     {
         $config = config('custom')['attachment'];
         if ($file->getSize() <= $config['encrypt_limit_size']) {

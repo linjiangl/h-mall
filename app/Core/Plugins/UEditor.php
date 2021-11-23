@@ -64,7 +64,7 @@ class UEditor
      * @param array $config 配置项
      * @param string $type 类型
      */
-    public function __construct(string $fileField, array $config, $type = 'upload')
+    public function __construct(string $fileField, array $config, string $type = 'upload')
     {
         $this->fileField = $fileField;
         $this->config = $config;
@@ -142,7 +142,7 @@ class UEditor
             $result = $bucket->upload($uploadFile);
             $this->fullName = $bucket->getFullPath($result['full_path']);
             $this->stateInfo = $this->stateMap[0];
-        } catch (Exception $e) {
+        } catch (Exception) {
             $this->stateInfo = $this->getStateInfo('ERROR_FILE_MOVE');
         }
     }
@@ -196,7 +196,7 @@ class UEditor
         $imgUrl = str_replace('&amp;', '&', $imgUrl);
 
         //http开头验证
-        if (strpos($imgUrl, 'http') !== 0) {
+        if (! str_starts_with($imgUrl, 'http')) {
             $this->stateInfo = $this->getStateInfo('ERROR_HTTP_LINK');
             return;
         }
@@ -222,7 +222,7 @@ class UEditor
         }
 
         //获取请求头并检测死链
-        $heads = get_headers($imgUrl, 1);
+        $heads = get_headers($imgUrl, true);
         if (! (stristr($heads[0], '200') && stristr($heads[0], 'OK'))) {
             $this->stateInfo = $this->getStateInfo('ERROR_DEAD_LINK');
             return;
@@ -311,7 +311,7 @@ class UEditor
         $format = str_replace('{hh}', $d[4], $format);
         $format = str_replace('{ii}', $d[5], $format);
         $format = str_replace('{ss}', $d[6], $format);
-        $format = str_replace('{time}', $t, $format);
+        $format = str_replace('{time}', strval($t), $format);
 
         //过滤文件名的非法自负,并替换文件名
         $oriName = substr($this->oriName, 0, strrpos($this->oriName, '.'));
@@ -344,7 +344,7 @@ class UEditor
         $fullname = $this->fullName;
         $rootPath = $_SERVER['DOCUMENT_ROOT'];
 
-        if (substr($fullname, 0, 1) != '/') {
+        if (! str_starts_with($fullname, '/')) {
             $fullname = '/' . $fullname;
         }
 

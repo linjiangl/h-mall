@@ -30,6 +30,7 @@ class ServiceTemplateBlock extends BaseBlock
     public function all(): array
     {
         $service = new ServiceTemplateService();
+
         return $service->all();
     }
 

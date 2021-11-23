@@ -52,8 +52,6 @@ class AdminActionAspect extends AbstractAspect
     ];
 
     /**
-     * @param ProceedingJoinPoint $proceedingJoinPoint
-     * @return mixed
      * @throws Exception
      */
     public function process(ProceedingJoinPoint $proceedingJoinPoint): mixed

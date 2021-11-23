@@ -12,9 +12,7 @@ namespace App\Core\Block\Common\Admin;
 
 use App\Core\Block\BaseBlock;
 use App\Core\Service\Admin\AdminService;
-use App\Exception\HttpException;
 use App\Model\Admin\Admin;
-use Throwable;
 
 class AdminBlock extends BaseBlock
 {
@@ -26,22 +24,16 @@ class AdminBlock extends BaseBlock
 
     public function create(): Admin
     {
-        try {
-            $post = $this->request->post();
-            $service = new AdminService();
-            return $service->createAccount($post['username'], $post['password'], $post);
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        $post = $this->request->post();
+        $service = new AdminService();
+
+        return $service->createAccount($post['username'], $post['password'], $post);
     }
 
     public function update(): Admin
     {
-        try {
-            $service = new AdminService();
-            return $service->updateAccount($this->getPrimaryKey(), $this->request->post());
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        $service = new AdminService();
+
+        return $service->updateAccount($this->getPrimaryKey(), $this->request->post());
     }
 }

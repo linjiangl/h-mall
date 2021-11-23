@@ -26,7 +26,7 @@ class AttachmentService extends AbstractService
     {
         try {
             return (new AttachmentDao())->getInfoByEncrypt($encrypt);
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return null;
         }
     }
@@ -58,11 +58,11 @@ class AttachmentService extends AbstractService
     /**
      * 批量删除附件.
      */
-    public function batchDelete(array $ids, string $system = AttachmentState::SYSTEM_QINIU): bool
+    public function batchDelete(array $selectIds, string $system = AttachmentState::SYSTEM_QINIU): bool
     {
         $dao = new AttachmentDao();
         $keys = $dao->getColumnByCondition([
-            ['id', 'in', $ids],
+            ['id', 'in', $selectIds],
             ['system', '=', $system],
         ], 'key');
 

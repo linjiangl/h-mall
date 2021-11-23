@@ -33,7 +33,7 @@ class AdminAuthorizationService extends AbstractAuthorizationService
         try {
             $adminDao = new AdminDao();
             $admin = $adminDao->getInfoByUsername($account);
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             throw new InternalException('该管理员账号不存在');
         }
 

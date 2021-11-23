@@ -17,6 +17,7 @@ abstract class AbstractStockChangeService implements InterfaceStockChangeService
     public function setParams(array $data): static
     {
         $this->params = $data;
+
         return $this;
     }
 

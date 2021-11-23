@@ -71,7 +71,7 @@ class UserService extends AbstractService
             return $user;
         } catch (Throwable $e) {
             Db::rollBack();
-            throw new BadRequestException($e->getMessage());
+            throw new BadRequestException('注册账号失败：' . $e->getMessage());
         }
     }
 }

@@ -116,7 +116,7 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
             $datetime->setTimezone(new DateTimeZone('Asia/Shanghai'));
             $date = $datetime->format('Y-m-d H:i:s');
             return strtotime($date) - time();
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return -1;
         }
     }

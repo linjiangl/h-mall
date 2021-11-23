@@ -13,8 +13,6 @@ namespace App\Core\Block\Common\Admin\Role;
 use App\Core\Block\BaseBlock;
 use App\Core\Service\Admin\Role\RoleMenuService;
 use App\Core\Service\Admin\Role\RoleService;
-use App\Exception\HttpException;
-use Throwable;
 
 class RoleBlock extends BaseBlock
 {
@@ -22,13 +20,10 @@ class RoleBlock extends BaseBlock
 
     public function saveRoleMenus(): bool
     {
-        try {
-            $data = $this->request->post();
-            $service = new RoleMenuService();
-            $service->saveRoleMenus((int) $data['role_id'], explode(',', $data['menu_ids']));
-            return true;
-        } catch (Throwable $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        $data = $this->request->post();
+        $service = new RoleMenuService();
+        $service->saveRoleMenus((int) $data['role_id'], explode(',', $data['menu_ids']));
+
+        return true;
     }
 }

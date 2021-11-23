@@ -30,8 +30,8 @@ class UserAuthorizationService extends AbstractAuthorizationService
         try {
             $userDao = new UserDao();
             $user = $userDao->getInfoByUsername($account);
-        } catch (Throwable $e) {
-            throw new InternalException('该账号不存在');
+        } catch (Throwable) {
+            throw new InternalException('该用户账号不存在');
         }
         $user = $user->makeVisible(['password', 'salt', 'mobile', 'email']);
         $passwordHash = $this->generatePasswordHash($password, $user->salt);
