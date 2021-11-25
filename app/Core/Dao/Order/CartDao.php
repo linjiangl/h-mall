@@ -41,7 +41,7 @@ class CartDao extends AbstractDao
                 'shop' => function (Relation $query) {
                     $query->select(['id', 'name', 'logo', 'comment_score', 'status']);
                 },
-                'sku', 'sku.goods', 'sku.specValues', 'sku.specValues.parent'
+                'sku', 'sku.goods', 'sku.specValues', 'sku.specValues.parent',
             ],
         ];
         return parent::setMapWith();

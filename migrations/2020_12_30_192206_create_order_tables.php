@@ -26,12 +26,12 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('goods_id');
             $table->unsignedInteger('goods_sku_id');
             $table->unsignedInteger('quantity')->default(1)->comment('数量');
-            $table->unsignedTinyInteger('is_check')->default(1)->comment('是否选中 0:否, 1:是');
-            $table->unsignedTinyInteger('is_show')->default(1)->comment('是否显示 0:否, 1:是');
+            $table->unsignedTinyInteger('is_check')->default(0)->comment('是否选中 0:否, 1:是');
+            $table->unsignedTinyInteger('is_buy_now')->default(0)->comment('立即购买 0:否, 1:是');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
-            $table->index(['user_id', 'goods_sku_id'], 'user_goods_sku_id');
+            $table->index(['user_id', 'goods_sku_id'], 'user_id_goods_sku_id');
             $table->index(['shop_id'], 'shop_id');
 
             $table->comment('购物车');

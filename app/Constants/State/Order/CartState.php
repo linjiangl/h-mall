@@ -19,10 +19,10 @@ class CartState extends AbstractState
 
     public const IS_CHECK_TRUE = 1;
 
-    // 是否显示
-    public const IS_SHOW_FALSE = 0;
+    // 立即购买
+    public const IS_BUY_NOW_FALSE = 0;
 
-    public const IS_SHOW_TRUE = 1;
+    public const IS_BUY_NOW_TRUE = 1;
 
     public static function map(): array
     {
@@ -31,9 +31,9 @@ class CartState extends AbstractState
                 self::IS_CHECK_FALSE => '否',
                 self::IS_CHECK_TRUE => '是',
             ],
-            'is_show' => [
-                self::IS_SHOW_FALSE => '隐藏',
-                self::IS_SHOW_TRUE => '显示',
+            'is_buy_now' => [
+                self::IS_BUY_NOW_FALSE => '否',
+                self::IS_BUY_NOW_TRUE => '是',
             ],
         ];
     }
