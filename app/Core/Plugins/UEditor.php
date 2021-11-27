@@ -75,8 +75,6 @@ class UEditor
         } else {
             $this->upFile();
         }
-
-        $this->stateMap['ERROR_TYPE_NOT_ALLOWED'] = iconv('unicode', 'utf-8', $this->stateMap['ERROR_TYPE_NOT_ALLOWED']);
     }
 
     /**
@@ -140,7 +138,7 @@ class UEditor
         try {
             $bucket = new QiniuBucket();
             $result = $bucket->upload($uploadFile);
-            $this->fullName = $bucket->getFullPath($result['full_path']);
+            $this->fullName = $result['full_path'];
             $this->stateInfo = $this->stateMap[0];
         } catch (Exception) {
             $this->stateInfo = $this->getStateInfo('ERROR_FILE_MOVE');
@@ -320,7 +318,7 @@ class UEditor
         //替换随机字符串
         $randNum = rand(1, 10000000000) . rand(1, 10000000000);
         if (preg_match('/\\{rand\\:([\\d]*)\\}/i', $format, $matches)) {
-            $format = preg_replace('/\\{rand\\:[\\d]*\\}/i', substr($randNum, 0, $matches[1]), $format);
+            $format = preg_replace('/\\{rand\\:[\\d]*\\}/i', substr($randNum, 0, (int)$matches[1]), $format);
         }
 
         $ext = $this->getFileExt();

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Utils\Context;
@@ -42,6 +43,11 @@ abstract class AbstractController
     protected function returnResponseDelete(): \Psr\Http\Message\ResponseInterface
     {
         return response_json(true, '', 204);
+    }
+
+    protected function returnResponseSourceData(array $response): \Psr\Http\Message\ResponseInterface
+    {
+        return response()->withAddedHeader('Content-Type', 'application/json')->withStatus(200)->withBody(new SwooleStream(json_encode($response, JSON_UNESCAPED_UNICODE)));
     }
 
     /**
