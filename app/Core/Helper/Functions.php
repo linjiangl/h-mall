@@ -100,16 +100,18 @@ if (! function_exists('response_json')) {
         $code = $code ?: 500;
 
         $response = [
-            'code' => $code,
-            'message' => '',
+            'success' => true,
+            'errorCode' => '',
+            'errorMessage' => '',
             'data' => '',
             'timestamp' => time(),
         ];
         if ($code >= 200 && $code < 300) {
             $response['data'] = $data;
-            $response['message'] = 'OK';
         } else {
-            $response['message'] = $message;
+            $response['success'] = false;
+            $response['errorCode'] = (string) $code;
+            $response['errorMessage'] = $message;
         }
         return response()->withAddedHeader('Content-Type', 'application/json')->withStatus($code)->withBody(new SwooleStream(json_encode($response, JSON_UNESCAPED_UNICODE)));
     }
