@@ -25,6 +25,9 @@ class GoodsAttributeDao extends AbstractDao
         return parent::info($id, $with);
     }
 
+    /**
+     * 修改或创建商品属性.
+     */
     public function updateOrCreate(array $attributes, array $values): GoodsAttribute
     {
         return parent::updateOrCreate($attributes, $values);
