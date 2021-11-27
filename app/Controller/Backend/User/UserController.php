@@ -13,11 +13,12 @@ namespace App\Controller\Backend\User;
 use App\Constants\Action\UserAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\User\UserBlock;
+use App\Model\User\User;
 use App\Request\Backend\User\UserRequest;
 
 class UserController extends BackendController
 {
-    public function updateRequest(UserRequest $request): array
+    public function updateRequest(UserRequest $request): User
     {
         $request->validated();
         return $this->setActionName(UserAction::getMessage(UserAction::USER_UPDATE), $this->update());
