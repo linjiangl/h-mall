@@ -32,6 +32,8 @@ class Validate
 
     public const REGEX_TYPE_IDS = 'ids'; // 主键多选
 
+    public const REGEX_TYPE_ATTACHMENT = 'attachment'; // 附件地址
+
     /**
      * 验证规则，检查对应的模型数据是否存在.
      * @param string $model 对应模型
@@ -89,6 +91,7 @@ class Validate
             self::REGEX_TYPE_ZH => 'regex:/^[\x{4e00}-\x{9fa5}]+$/u',
             self::REGEX_TYPE_ZH_NAME => 'regex:/^[\x{4e00}-\x{9fa5}]{2,10}$/u',
             self::REGEX_TYPE_POSTAL_CODE => 'regex:/^[1-9]\d{5}$/',
+            self::REGEX_TYPE_ATTACHMENT => '^(https?)?\/\/([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?',
         };
         return $rule;
     }

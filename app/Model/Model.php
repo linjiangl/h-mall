@@ -20,10 +20,6 @@ abstract class Model extends BaseModel implements CacheableInterface
 
     protected string $orderByToSorting = 'sorting asc,id asc';
 
-    private int $created_time;
-
-    private int $updated_time;
-
     public function freshTimestamp(): string
     {
         return (string) time();

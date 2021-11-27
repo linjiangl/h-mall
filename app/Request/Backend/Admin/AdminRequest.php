@@ -23,7 +23,7 @@ class AdminRequest extends AbstractRequest
             'post:create' => [
                 'username' => 'required|string|max:30|unique:admin',
                 'password' => 'required|string|max:30|confirmed',
-                'avatar' => 'url',
+                'avatar' => Validate::ruleRegex(Validate::REGEX_TYPE_ATTACHMENT, false),
                 'real_name' => 'string|max:20',
                 'mobile' => Validate::ruleRegex(Validate::REGEX_TYPE_MOBILE, false) . '|unique:admin',
                 'email' => 'email|unique:admin',
@@ -32,7 +32,7 @@ class AdminRequest extends AbstractRequest
             'post:update' => [
                 'username' => 'string|max:30',
                 'password' => 'string|max:30',
-                'avatar' => 'url',
+                'avatar' => Validate::ruleRegex(Validate::REGEX_TYPE_ATTACHMENT, false),
                 'real_name' => 'string|max:20',
                 'mobile' => Validate::ruleRegex(Validate::REGEX_TYPE_MOBILE, false),
                 'email' => 'email',

@@ -34,7 +34,7 @@ class AttachmentService extends AbstractService
     /**
      * 保存上传文件信息.
      */
-    public function createUpload(array $fileData, string $hash, string $key, string $system = AttachmentState::SYSTEM_QINIU): int
+    public function createUpload(array $fileData, string $hash, string $key, string $system = AttachmentState::SYSTEM_QINIU): Attachment
     {
         $config = config('custom')['attachment'];
         $encrypt = '';

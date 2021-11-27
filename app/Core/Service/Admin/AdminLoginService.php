@@ -34,8 +34,8 @@ class AdminLoginService extends AbstractService
         try {
             $admin = (new AdminDao())->getInfoByUsername($username);
             $this->create([
-                'admin_id' => $admin['id'],
-                'username' => $admin['username'],
+                'admin_id' => $admin->id,
+                'username' => $admin->username,
                 'client_ip' => get_client_ip(),
                 'user_agent' => $userAgent,
             ]);
