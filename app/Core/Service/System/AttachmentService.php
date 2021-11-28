@@ -22,6 +22,11 @@ class AttachmentService extends AbstractService
 {
     protected string $dao = AttachmentDao::class;
 
+    /**
+     * 根据文件md5获取附件
+     * @param string $encrypt
+     * @return Attachment|null
+     */
     public function getInfoByEncrypt(string $encrypt): ?Attachment
     {
         try {
@@ -90,9 +95,9 @@ class AttachmentService extends AbstractService
      */
     public function failure(string $key)
     {
-        $info = (new AttachmentDao())->getInfoByIndex($this->generateIndex($key));
-        $info->status = AttachmentState::STATUS_DISABLED;
-        $info->save();
+        $attachment = (new AttachmentDao())->getInfoByIndex($this->generateIndex($key));
+        $attachment->status = AttachmentState::STATUS_DISABLED;
+        $attachment->save();
     }
 
     /**

@@ -74,7 +74,7 @@ class CreateSystemTables extends Migration
 
             $table->unique(['index'], 'index');
             $table->index(['encrypt'], 'encrypt');
-            $table->index(['created_time', 'status'], 'md5');
+            $table->index(['created_time', 'status'], 'created_time');
 
             $table->comment('系统附件');
         });
