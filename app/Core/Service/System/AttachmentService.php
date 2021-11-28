@@ -23,9 +23,7 @@ class AttachmentService extends AbstractService
     protected string $dao = AttachmentDao::class;
 
     /**
-     * 根据文件md5获取附件
-     * @param string $encrypt
-     * @return Attachment|null
+     * 根据文件md5获取附件.
      */
     public function getInfoByEncrypt(string $encrypt): ?Attachment
     {

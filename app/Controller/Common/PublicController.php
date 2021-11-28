@@ -46,7 +46,7 @@ class PublicController extends AbstractController
     public function upload(RequestInterface $request): array
     {
         $file = $request->file('file');
-        if (!($file instanceof UploadedFile)) {
+        if (! ($file instanceof UploadedFile)) {
             throw new InternalException('上传文件错误');
         }
 

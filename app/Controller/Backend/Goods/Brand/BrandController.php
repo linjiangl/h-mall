@@ -10,11 +10,32 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Goods\Brand;
 
+use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\Brand\BrandBlock;
+use App\Model\Brand;
+use App\Request\Backend\Goods\BrandRequest;
 
 class BrandController extends BackendController
 {
+    public function createRequest(BrandRequest $request): Brand
+    {
+        $request->validated();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_CREATE), $this->create());
+    }
+
+    public function updateRequest(BrandRequest $request): Brand
+    {
+        $request->validated();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_UPDATE), $this->update());
+    }
+
+    public function deleteRequest(BrandRequest $request): bool
+    {
+        $request->validated();
+        return $this->setActionName(GoodsAction::getMessage(GoodsAction::BRAND_DELETE), $this->delete());
+    }
+
     protected function setBlock(): BrandBlock
     {
         return new BrandBlock();

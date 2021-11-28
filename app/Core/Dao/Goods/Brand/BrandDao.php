@@ -20,6 +20,8 @@ class BrandDao extends AbstractDao
 
     protected string $notFoundMessage = '商品品牌不存在';
 
+    protected bool $softDelete = true;
+
     public function info(int $id, array $with = []): Brand
     {
         return parent::info($id, $with);
