@@ -36,12 +36,12 @@ abstract class AbstractService
     /**
      * 获取分页列表.
      * @param array $condition 查询条件
-     * @param int $page 当前页
-     * @param int $limit 条数
+     * @param array $with 关联模型
+     * @param array|string $columns 查询的字段
      * @param string $orderBy 排序
      * @param array $groupBy 分组
-     * @param array $with 关联模型
-     * @param string[] $columns 查询的地段
+     * @param int $page 当前页
+     * @param int $limit 条数
      * @return array
      *
      * 举例:
@@ -51,19 +51,18 @@ abstract class AbstractService
      *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
      * ]
      */
-    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
+    public function paginate(array $condition = [], array $with = [], string|array $columns = ['*'], string $orderBy = '', array $groupBy = [], int $page = 1, int $limit = 20): array
     {
         $this->handleQueryLimit($limit);
-        return $this->service()->paginate($condition, $page, $this->limit, $orderBy, $groupBy, $with, $columns);
+        return $this->service()->paginate($condition, $with, $columns, $orderBy, $groupBy, $page, $this->limit);
     }
 
     /**
      * 普通列表.
-     * @param array|string[] $columns
      */
-    public function list(array $condition = [], array $with = [], int $limit = -1, string $orderBy = '', array $groupBy = [], array $columns = ['*']): array
+    public function list(array $condition = [], array $with = [], string|array $columns = ['*'], string $orderBy = '', array $groupBy = [], int $limit = -1): array
     {
-        return $this->service()->list($condition, $with, $limit, $orderBy, $groupBy, $columns);
+        return $this->service()->list($condition, $with, $columns, $orderBy, $groupBy, $limit);
     }
 
     /**

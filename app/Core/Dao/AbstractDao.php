@@ -76,8 +76,6 @@ abstract class AbstractDao
 
     /**
      * 分页列表.
-     * @param string[] $columns
-     * @return array
      *
      * 举例:
      * $condition = [
@@ -86,7 +84,7 @@ abstract class AbstractDao
      *  ['created_at', 'between', ['开始时间', '结束时间']], // whereBetween
      * ]
      */
-    public function paginate(array $condition = [], int $page = 1, int $limit = 20, string $orderBy = '', array $groupBy = [], array $with = [], array $columns = ['*']): array
+    public function paginate(array $condition = [], array $with = [], string|array $columns = ['*'], string $orderBy = '', array $groupBy = [], int $page = 1, int $limit = 20): array
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         return $query->paginate($limit, $columns, 'page', $page)->toArray();
@@ -94,9 +92,8 @@ abstract class AbstractDao
 
     /**
      * 普通列表.
-     * @param string[] $columns
      */
-    public function list(array $condition = [], array $with = [], int $limit = -1, string $orderBy = '', array $groupBy = [], array $columns = ['*']): array
+    public function list(array $condition = [], array $with = [], string|array $columns = ['*'], string $orderBy = '', array $groupBy = [], int $limit = -1): array
     {
         $query = $this->generateListQuery($condition, $orderBy, $groupBy, $with);
         if ($limit > 0) {

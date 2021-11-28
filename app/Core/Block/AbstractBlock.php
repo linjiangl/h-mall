@@ -50,6 +50,12 @@ abstract class AbstractBlock
     protected int $limit = 20;
 
     /**
+     * 查询字段.
+     * @var array|string|string[]
+     */
+    protected string|array $select = ['*'];
+
+    /**
      * 分组.
      */
     protected array $groupBy = [];
@@ -141,7 +147,7 @@ abstract class AbstractBlock
         // 查询前业务处理
         $this->beforeBuildQuery();
 
-        return $this->service()->paginate($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
+        return $this->service()->paginate($this->condition, $this->with, $this->select, $this->orderBy, $this->groupBy, $this->page, $this->limit);
     }
 
     /**
@@ -158,7 +164,7 @@ abstract class AbstractBlock
         // 查询前业务处理
         $this->beforeBuildQuery();
 
-        return $this->service()->list($this->condition, $this->page, $this->limit, $this->orderBy, $this->groupBy, $this->with);
+        return $this->service()->list($this->condition, $this->with, $this->select, $this->orderBy, $this->groupBy, $this->limit);
     }
 
     /**

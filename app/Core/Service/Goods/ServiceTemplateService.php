@@ -16,9 +16,4 @@ use App\Core\Service\AbstractService;
 class ServiceTemplateService extends AbstractService
 {
     protected string $dao = ServiceTemplateDao::class;
-
-    public function all(): array
-    {
-        return (new ServiceTemplateDao())->getListByCondition();
-    }
 }

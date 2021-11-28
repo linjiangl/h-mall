@@ -27,13 +27,6 @@ class ServiceTemplateBlock extends BaseBlock
         $this->orderBy = $this->setDefaultOrderBy();
     }
 
-    public function all(): array
-    {
-        $service = new ServiceTemplateService();
-
-        return $service->all();
-    }
-
     protected function handleSoftDelete(): void
     {
     }

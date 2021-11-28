@@ -51,7 +51,7 @@ return [
             'class' => Monolog\Handler\StreamHandler::class,
             'constructor' => [
                 'stream' => BASE_PATH . '/runtime/logs/customize/log-' . date('Y-m') . '-01.log',
-                'level' => $level,
+                'level' => Monolog\Logger::INFO,
             ],
         ],
         'formatter' => [

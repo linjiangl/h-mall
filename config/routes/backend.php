@@ -92,7 +92,7 @@ Router::addGroup('/backend', function () {
     Router::post('/goodsServiceTemplate/create', [ServiceTemplateController::class, 'createRequest']);
     Router::post('/goodsServiceTemplate/update', [ServiceTemplateController::class, 'updateRequest']);
     Router::post('/goodsServiceTemplate/delete', [ServiceTemplateController::class, 'deleteRequest']);
-    Router::post('/goodsServiceTemplate/all', [ServiceTemplateController::class, 'all']);
+    Router::post('/goodsServiceTemplate/list', [ServiceTemplateController::class, 'list']);
 
     // parameter
     Router::post('/parameter/paginate', [ParameterController::class, 'paginate']);
