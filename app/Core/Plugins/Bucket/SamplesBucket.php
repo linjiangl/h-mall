@@ -21,9 +21,9 @@ class SamplesBucket
 
     protected AbstractBucket $bucket;
 
-    public function __construct()
+    public function __construct(string $system = '')
     {
-        $system = AttachmentState::SYSTEM_QINIU;
+        $system = $system ?: AttachmentState::SYSTEM_QINIU;
         if (! in_array($system, array_keys(AttachmentState::map()['system']))) {
             throw new BadRequestException('存储实例不存在');
         }

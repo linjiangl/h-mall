@@ -74,7 +74,7 @@ class AttachmentService extends AbstractService
         }
 
         // 成功删除的资源
-        $bucket = (new SamplesBucket())->make($system);
+        $bucket = (new SamplesBucket($system))->getInstance();
         $result = $bucket->batchDelete($keys);
         if (! empty($result['success'])) {
             $index = [];

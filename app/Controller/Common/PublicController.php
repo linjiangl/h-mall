@@ -50,7 +50,7 @@ class PublicController extends AbstractController
             throw new InternalException('上传文件错误');
         }
 
-        $bucket = (new SamplesBucket())->make();
+        $bucket = (new SamplesBucket())->getInstance();
         return $bucket->upload($file);
     }
 
