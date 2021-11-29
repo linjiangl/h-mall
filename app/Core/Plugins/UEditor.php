@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Plugins;
 
-use App\Core\Plugins\Bucket\QiniuBucket;
+use App\Core\Plugins\Bucket\SamplesBucket;
 use Exception;
 use Hyperf\HttpMessage\Upload\UploadedFile;
 
@@ -136,7 +136,7 @@ class UEditor
         }
 
         try {
-            $bucket = new QiniuBucket();
+            $bucket = (new SamplesBucket())->getInstance();
             $result = $bucket->upload($uploadFile);
             $this->fullName = $result['full_path'];
             $this->stateInfo = $this->stateMap[0];

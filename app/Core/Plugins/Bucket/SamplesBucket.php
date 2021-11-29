@@ -15,15 +15,24 @@ use App\Exception\BadRequestException;
 
 class SamplesBucket
 {
-    protected array $classes = [
+    protected array $mapClass = [
         AttachmentState::SYSTEM_QINIU => QiniuBucket::class,
     ];
 
-    public function make(string $system = AttachmentState::SYSTEM_QINIU): AbstractBucket
+    protected AbstractBucket $bucket;
+
+    public function __construct()
     {
+        $system = AttachmentState::SYSTEM_QINIU;
         if (! in_array($system, array_keys(AttachmentState::map()['system']))) {
             throw new BadRequestException('存储实例不存在');
         }
-        return new $this->classes[$system]();
+
+        $this->bucket = new $this->mapClass[$system]();
+    }
+
+    public function getInstance(): AbstractBucket
+    {
+        return $this->bucket;
     }
 }

@@ -38,7 +38,7 @@ class TypesService
         $this->class = new $this->mapClass[$data['type']]($this->post, $this->id);
     }
 
-    public function service()
+    public function getInstance()
     {
         return $this->class;
     }

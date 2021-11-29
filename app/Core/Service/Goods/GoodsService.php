@@ -21,12 +21,12 @@ class GoodsService extends AbstractService
 
     public function create(array $data): Goods
     {
-        return (new TypesService($data))->service()->create();
+        return (new TypesService($data))->getInstance()->create();
     }
 
     public function update(int $id, array $data): Goods
     {
-        return (new TypesService($data, $id))->service()->update();
+        return (new TypesService($data, $id))->getInstance()->update();
     }
 
     /**
