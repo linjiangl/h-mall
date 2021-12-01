@@ -130,7 +130,7 @@ abstract class AbstractService
     /**
      * 设置登录用户信息.
      */
-    public function withAuthorize(array $user): static
+    public function setAuthorize(array $user): static
     {
         $this->authorize = $user;
         return $this;

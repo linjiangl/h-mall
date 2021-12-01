@@ -41,10 +41,10 @@ abstract class AbstractHttpTestCase extends HttpTestCase
             print_r($response);
         }
 
-        if ($response['code'] > 300) {
-            $this->assertTrue(false);
-        } else {
+        if ($response['success']) {
             $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
     }
 }

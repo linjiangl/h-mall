@@ -437,12 +437,12 @@ abstract class AbstractBlock
             case BlockSinceConstants::SINCE_FRONTEND:
                 $authorize = request()->getAttribute('user');
                 $authorize = $authorize ?: [];
-                $service = $service->withAuthorize($authorize);
+                $service = $service->setAuthorize($authorize);
                 break;
             case BlockSinceConstants::SINCE_BACKEND:
                 $authorize = request()->getAttribute('admin');
                 $authorize = $authorize ?: [];
-                $service = $service->withAuthorize($authorize);
+                $service = $service->setAuthorize($authorize);
                 break;
         }
         return $service;

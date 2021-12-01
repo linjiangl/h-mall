@@ -77,13 +77,13 @@ class CartService extends AbstractService
                 'goods_sku_id' => $sku->id,
             ], $data);
 
-            $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
+            /* @var StockCartService $stockChangeService */
+            $stockChangeService = (new StockChangeService(StockChangeService::STOCK_CART))->getInstance();
             if ($cart->wasRecentlyCreated) {
                 // 创建占用库存
                 $tmpCart = $cart->toArray();
                 $tmpCart['sku'] = $sku->toArray();
 
-                /* @var StockCartService $stockChangeService */
                 $stockChangeService->setParams(['cart' => $tmpCart])->created($user, $cart->id, '添加购物车');
             } else {
                 // 购物车商品已存在，增加占用库存数量
@@ -93,7 +93,6 @@ class CartService extends AbstractService
                 $tmpCart = $cart->toArray();
                 $tmpCart['sku'] = $sku->toArray();
 
-                /* @var StockCartService $stockChangeService */
                 $stockChangeService->setParams(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
             }
 
@@ -133,8 +132,8 @@ class CartService extends AbstractService
             $tmpCart['sku'] = $cart->sku->toArray();
 
             // 修改占用库存
-            $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
             /* @var StockCartService $stockChangeService */
+            $stockChangeService = (new StockChangeService(StockChangeService::STOCK_CART))->getInstance();
             $stockChangeService->setParams(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
 
             Db::commit();
@@ -159,8 +158,8 @@ class CartService extends AbstractService
         Db::beginTransaction();
         try {
             // 恢复占用库存
-            $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
             /* @var StockCartService $stockChangeService */
+            $stockChangeService = (new StockChangeService(StockChangeService::STOCK_CART))->getInstance();
             $stockChangeService->recovery($user, $cart->id);
 
             // 删除购物车商品
@@ -190,9 +189,9 @@ class CartService extends AbstractService
         Db::beginTransaction();
         try {
             // 恢复占用库存
-            $stockChangeService = new StockChangeService(StockChangeService::STOCK_CART);
+            /* @var StockCartService $stockChangeService */
+            $stockChangeService = (new StockChangeService(StockChangeService::STOCK_CART))->getInstance();
             foreach ($cartList as $item) {
-                /* @var StockCartService $stockChangeService */
                 $stockChangeService->recovery($user, $item['id']);
             }
 

@@ -24,21 +24,21 @@ class StockChangeService
 
     public const STOCK_REFUND = StockRefundService::class;
 
-    protected InterfaceStockChangeService $changeStockClass;
+    protected InterfaceStockChangeService $service;
 
-    public function __construct(string $modifyClass, array $data = [])
+    public function __construct(string $modifyClass, array $params = [])
     {
         if (! class_exists($modifyClass)) {
             throw new InternalException('库存修改服务不存在');
         }
 
-        $this->changeStockClass = new $modifyClass();
+        $this->service = new $modifyClass();
 
-        $this->changeStockClass->setParams($data);
+        $this->service->setParams($params);
     }
 
-    public function getService()
+    public function getInstance(): InterfaceStockChangeService
     {
-        return $this->changeStockClass;
+        return $this->service;
     }
 }
