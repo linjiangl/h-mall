@@ -69,9 +69,9 @@ class ModelCommand extends HyperfCommand
 
         $tables = $this->getAllTables();
         foreach ($tables as $table) {
-            $tmpArr = explode('_', $table);
-            if (in_array($tmpArr[0], $this->module)) {
-                $this->genModelExec($table, ucfirst($tmpArr[0]));
+            $tempArr = explode('_', $table);
+            if (in_array($tempArr[0], $this->module)) {
+                $this->genModelExec($table, ucfirst($tempArr[0]));
             } else {
                 $this->genModelExec($table);
             }

@@ -174,7 +174,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
 
         // 创建或更新sku数据
         foreach ($this->post['skus'] as $sku) {
-            $tmp = [
+            $temp = [
                 'shop_id' => $this->goods->shop_id,
                 'goods_id' => $this->id,
                 'sku_name' => $sku['sku_name'],
@@ -192,10 +192,10 @@ abstract class AbstractTypesService implements InterfaceTypesService
             ];
             if (isset($sku['id']) && $sku['id'] > 0) {
                 // 修改
-                $goodsSku = $goodsSkuDao->update($sku['id'], $tmp);
+                $goodsSku = $goodsSkuDao->update($sku['id'], $temp);
             } else {
                 // 新建
-                $goodsSku = $goodsSkuDao->create($tmp);
+                $goodsSku = $goodsSkuDao->create($temp);
             }
 
             foreach ($sku['spec_values'] as $index => $item) {

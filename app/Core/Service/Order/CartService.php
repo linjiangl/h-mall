@@ -81,19 +81,19 @@ class CartService extends AbstractService
             $stockChangeService = (new StockChangeService(StockChangeService::STOCK_CART))->getInstance();
             if ($cart->wasRecentlyCreated) {
                 // 创建占用库存
-                $tmpCart = $cart->toArray();
-                $tmpCart['sku'] = $sku->toArray();
+                $tempCart = $cart->toArray();
+                $tempCart['sku'] = $sku->toArray();
 
-                $stockChangeService->setParams(['cart' => $tmpCart])->created($user, $cart->id, '添加购物车');
+                $stockChangeService->setParams(['cart' => $tempCart])->created($user, $cart->id, '添加购物车');
             } else {
                 // 购物车商品已存在，增加占用库存数量
                 $data['quantity'] = $cart->quantity + $quantity;
                 $cart->update($data);
 
-                $tmpCart = $cart->toArray();
-                $tmpCart['sku'] = $sku->toArray();
+                $tempCart = $cart->toArray();
+                $tempCart['sku'] = $sku->toArray();
 
-                $stockChangeService->setParams(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
+                $stockChangeService->setParams(['cart' => $tempCart])->updated($user, $cart->id, '修改购物车');
             }
 
             Db::commit();
@@ -128,13 +128,13 @@ class CartService extends AbstractService
             $cart->update($data);
 
             // 修改后的购物车商品数量
-            $tmpCart = $cart->toArray();
-            $tmpCart['sku'] = $cart->sku->toArray();
+            $tempCart = $cart->toArray();
+            $tempCart['sku'] = $cart->sku->toArray();
 
             // 修改占用库存
             /* @var StockCartService $stockChangeService */
             $stockChangeService = (new StockChangeService(StockChangeService::STOCK_CART))->getInstance();
-            $stockChangeService->setParams(['cart' => $tmpCart])->updated($user, $cart->id, '修改购物车');
+            $stockChangeService->setParams(['cart' => $tempCart])->updated($user, $cart->id, '修改购物车');
 
             Db::commit();
             return $cart;
