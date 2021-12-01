@@ -30,7 +30,7 @@ class StockService
 
         // spu 库存增加
         (new GoodsDao())->updateByCondition(['id' => $sku->goods_id], [
-            'stock' => Db::raw("`stock` + {$quantity}"),
+            'stock' => Db::raw(sprintf('`stock` + %d', $quantity)),
         ]);
 
         return $sku;
@@ -47,7 +47,7 @@ class StockService
         // 剩余库存
         $surplusStock = $sku->stock - $quantity;
         if ($surplusStock < 0) {
-            throw new BadRequestException("{$spu->name}（{$sku->sku_name}）库存不足！");
+            throw new BadRequestException(sprintf('%s（%s）库存不足！', $spu->name, $sku->sku_name));
         }
 
         // sku 库存减少

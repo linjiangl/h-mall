@@ -85,16 +85,16 @@ class ModelCommand extends HyperfCommand
         $config = config('databases');
         $basePath = $config['default']['commands']['gen:model']['path'];
         $path = $path ? $basePath . '/' . $path : $basePath;
-        $genModelExec = "php bin/hyperf.php gen:model {$table} --path={$path} --inheritance=Model --uses=App\\\\Model\\\\Model --with-comments --force-casts --refresh-fillable";
+        $genModelExec = sprintf('php bin/hyperf.php gen:model %s --path=%s --inheritance=Model --uses=App\\\\Model\\\\Model --with-comments --force-casts --refresh-fillable', $table, $path);
         exec($genModelExec);
-        $this->info("`{$table}` table generation model class successful");
+        $this->info(sprintf('`%s` table generation model class successful', $table));
     }
 
     protected function phpCsFixerModel()
     {
         $this->line('');
         $appPath = BASE_PATH;
-        $fixerExec = "{$appPath}/vendor/bin/php-cs-fixer --config={$appPath}/.php-cs-fixer.php --verbose fix {$appPath}/app/Model";
+        $fixerExec = sprintf('%s/vendor/bin/php-cs-fixer --config=%s/.php-cs-fixer.php --verbose fix %s/app/Model', $appPath, $appPath, $appPath);
         exec($fixerExec);
     }
 

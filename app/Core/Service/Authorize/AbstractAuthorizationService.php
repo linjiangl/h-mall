@@ -83,7 +83,7 @@ abstract class AbstractAuthorizationService implements InterfaceAuthorizationSer
             ->identifiedBy($this->scene)
             ->issuedAt($now)
             // ->canOnlyBeUsedAfter($now->modify('+1 second'))
-            ->expiresAt($now->modify("+{$this->config['ttl']} second"))
+            ->expiresAt($now->modify(sprintf('+%d second', $this->config['ttl'])))
             ->withClaim('auth', $user)
             ->getToken($this->configuration->signer(), $this->configuration->signingKey());
 

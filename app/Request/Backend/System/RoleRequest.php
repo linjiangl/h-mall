@@ -29,13 +29,13 @@ class RoleRequest extends AbstractRequest
             'post:create' => [
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:50',
-                'identifier' => "required|in:{$identifier}|unique:role",
+                'identifier' => sprintf('required|in:%s|unique:role', $identifier),
                 'is_super' => 'integer|in:' . $boolean,
             ],
             'post:update' => [
                 'parent_id' => 'required|integer',
                 'name' => 'required|string|max:50',
-                'identifier' => "required|in:{$identifier}",
+                'identifier' => 'required|in:' . $identifier,
                 'is_super' => 'integer|in:' . $boolean,
             ],
             'post:changeMenu' => [

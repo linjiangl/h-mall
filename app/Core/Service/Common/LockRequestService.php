@@ -25,7 +25,7 @@ class LockRequestService
         if (! empty($params)) {
             $data = [];
             foreach ($params as $key => $val) {
-                $data[] = "{$key}:{$val}";
+                $data[] = sprintf('%d:%s', $key, $val);
             }
             $key = implode(':', $data);
             if (strlen($key) > 64) {
@@ -39,7 +39,7 @@ class LockRequestService
             $lockIndex = $request->getMethod() . ':' . $request->getUri()->getPath() . $key;
             $userId = $request->getAttribute('user_id', 0);
             if ($userId) {
-                $lockIndex = "{$lockIndex}:user_id:{$userId}";
+                $lockIndex = sprintf('%s:user_id:%d', $lockIndex, $userId);
             }
             if (redis()->get($lockIndex)) {
                 throw new RequestLockException();

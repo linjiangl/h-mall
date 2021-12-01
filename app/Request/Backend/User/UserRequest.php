@@ -25,7 +25,7 @@ class UserRequest extends AbstractRequest
             'post:update' => [
                 'nickname' => 'string|max:30',
                 'avatar' => 'string|max:255',
-                'status' => "in:{$status}",
+                'status' => 'in:' . $status,
             ],
         ];
         return $rules[$this->requestRuleKey] ?? [];

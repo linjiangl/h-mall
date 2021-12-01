@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         foreach ($files as $file) {
             $realPath = $file->getRealPath();
             if ($realPath) {
-                require_once "{$realPath}";
+                require_once sprintf('%s', $realPath);
             }
         }
     }

@@ -29,7 +29,7 @@ class UserFactory
 
         $user = new User();
         $userTableName = get_table_name($user->getTable());
-        Db::statement("ALTER TABLE `{$userTableName}` AUTO_INCREMENT = 10000");
+        Db::statement(sprintf('ALTER TABLE `%s` AUTO_INCREMENT = 10000', $userTableName));
 
         $service->register('hmallkf', $password, $password, [
             'nickname' => '系统客服',

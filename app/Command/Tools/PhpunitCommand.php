@@ -50,7 +50,7 @@ class PhpunitCommand extends HyperfCommand
             exec($testExec, $output);
         } else {
             if ($filter != 'all') {
-                $testExec = "{$testExec} '--filter={$filter}'";
+                $testExec = sprintf('%s "--filter=%s"', $testExec, $filter);
             }
             $clear == 'y' && exec('rm -rf runtime/container');
             exec($testExec, $output);

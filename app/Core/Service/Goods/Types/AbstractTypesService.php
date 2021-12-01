@@ -200,7 +200,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
 
             foreach ($sku['spec_values'] as $index => $item) {
                 if ($this->goodsSpecification[$index]['has_image'] && ! $item['image']) {
-                    throw new InternalException("{$item['name']} 规格需要上传图片！");
+                    throw new InternalException(sprintf('%s 规格需要上传图片！', $item['name']));
                 }
                 $goodsSpecification = new GoodsSpecification([
                     'goods_id' => $this->id,
