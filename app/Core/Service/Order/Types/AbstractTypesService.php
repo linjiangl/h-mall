@@ -14,12 +14,11 @@ abstract class AbstractTypesService implements InterfaceTypesService
 {
     protected array $params;
 
-    protected array $user;
-
-    public function __construct(array $user, array $params)
+    public function setParams(array $params): static
     {
-        $this->user = $user;
         $this->params = $params;
+
+        return $this;
     }
 
     public function settlement(): array

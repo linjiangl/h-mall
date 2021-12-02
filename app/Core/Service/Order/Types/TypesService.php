@@ -18,17 +18,17 @@ class TypesService
 
     protected InterfaceTypesService $class;
 
-    public function __construct(string $class, array $user = [], array $params = [])
+    public function __construct(string $class)
     {
         if (! class_exists($class)) {
             throw new InternalException('订单处理业务不存在');
         }
 
-        $this->class = new $class($params, $user);
+        $this->class = new $class();
     }
 
-    public function getService()
+    public function getInstance(array $params = []): InterfaceTypesService
     {
-        return $this->class;
+        return $this->class->setParams($params);
     }
 }

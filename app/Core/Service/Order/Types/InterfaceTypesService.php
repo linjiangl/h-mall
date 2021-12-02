@@ -13,6 +13,11 @@ namespace App\Core\Service\Order\Types;
 interface InterfaceTypesService
 {
     /**
+     * 设置参数.
+     */
+    public function setParams(array $params): static;
+
+    /**
      * 结算接口.
      */
     public function settlement(): array;

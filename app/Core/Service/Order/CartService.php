@@ -216,7 +216,7 @@ class CartService extends AbstractService
         $list = $dao->getListByCondition([
             'user_id' => $user['user_id'],
             'is_check' => CartState::IS_CHECK_TRUE,
-            'is_buy_now' => CartState::IS_BUY_NOW_TRUE,
+            'is_buy_now' => CartState::IS_BUY_NOW_FALSE,
         ], $dao->setMapWith()->getMapWith('settlement', self::class));
 
         $result = [];
