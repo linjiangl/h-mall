@@ -143,10 +143,10 @@ class CreateSystemTables extends Migration
 
         Schema::create('advertisement', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('title', 30)->comment('标题');
-            $table->string('image', 255)->comment('图片');
-            $table->string('url', 255)->comment('链接');
-            $table->string('position', 30)->comment('位置');
+            $table->string('title', 30)->comment('广告语');
+            $table->string('image', 255)->comment('广告图');
+            $table->string('url', 255)->comment('广告链接');
+            $table->string('position', 30)->comment('广告位置');
             $table->unsignedInteger('clicks')->default(0)->comment('点击量');
             $table->unsignedTinyInteger('status')->default(1)->comment('状态 0:已禁用, 1:已启用');
             $table->unsignedInteger('created_time')->default(0);

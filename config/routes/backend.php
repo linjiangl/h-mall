@@ -21,8 +21,10 @@ use App\Controller\Backend\Goods\GoodsController;
 use App\Controller\Backend\Goods\Parameter\ParameterController;
 use App\Controller\Backend\Goods\Parameter\ParameterOptionsController;
 use App\Controller\Backend\Goods\ServiceTemplateController;
+use App\Controller\Backend\System\AdvertisementController;
 use App\Controller\Backend\System\DistrictController;
 use App\Controller\Backend\System\MenuController;
+use App\Controller\Backend\System\SlideController;
 use App\Controller\Backend\User\UserController;
 use App\Middleware\JWTBackendMiddleware;
 use Hyperf\HttpServer\Router\Router;
@@ -69,6 +71,16 @@ Router::addGroup('/backend', function () {
 
     // district
     Router::post('/district/paginate', [DistrictController::class, 'paginate']);
+
+    // slide
+    Router::post('/slide/paginate', [SlideController::class, 'paginate']);
+    Router::post('/slide/create', [SlideController::class, 'createRequest']);
+    Router::post('/slide/update', [SlideController::class, 'updateRequest']);
+
+    // advertisement
+    Router::post('/advertisement/paginate', [AdvertisementController::class, 'paginate']);
+    Router::post('/advertisement/create', [AdvertisementController::class, 'createRequest']);
+    Router::post('/advertisement/update', [AdvertisementController::class, 'updateRequest']);
 
     // category
     Router::post('/category/paginate', [CategoryController::class, 'paginate']);

@@ -20,9 +20,6 @@ use Hyperf\Database\Model\Model;
  */
 abstract class AbstractDao
 {
-    /**
-     * @var Model|string
-     */
     protected string|Model $model;
 
     /**
