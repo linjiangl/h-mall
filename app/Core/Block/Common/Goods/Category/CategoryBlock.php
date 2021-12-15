@@ -24,7 +24,7 @@ class CategoryBlock extends BaseBlock
     public function parent(): array
     {
         $service = new CategoryService();
-        return $service->getListByParentId(0);
+        return $service->getListByParentId();
     }
 
     public function children(): array
@@ -39,9 +39,10 @@ class CategoryBlock extends BaseBlock
         parent::beforeBuildQuery();
 
         switch ($this->action) {
-            case 'index':
+            case 'paginate':
                 $this->with = ['parent'];
                 break;
+            default:
         }
     }
 }

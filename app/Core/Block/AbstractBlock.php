@@ -139,7 +139,7 @@ abstract class AbstractBlock
     public function paginate(): array
     {
         // 当前执行的方法
-        $this->action = 'paginate';
+        $this->action = '';
 
         // 处理查询参数
         $this->handleQueryParams();
@@ -358,6 +358,8 @@ abstract class AbstractBlock
                     }
                     $this->orderBy = $orderBy;
                 }
+                break;
+            case BlockSinceConstants::SINCE_FRONTEND:
                 break;
         }
     }
