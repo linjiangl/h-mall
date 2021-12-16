@@ -11,6 +11,7 @@ declare(strict_types=1);
 use App\Controller\Frontend\Authorize\AuthorizeController;
 use App\Controller\Frontend\Authorize\LoginController;
 use App\Controller\Frontend\Authorize\RegisterController;
+use App\Controller\Frontend\Goods\Category\CategoryController;
 use App\Controller\Frontend\IndexController;
 use App\Controller\Frontend\Order\CartController;
 use App\Controller\Frontend\User\UserController;
@@ -18,12 +19,15 @@ use App\Middleware\JWTFrontendMiddleware;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/frontend', function () {
-    // 首页
-    Router::addRoute(['GET', 'POST', 'PUT'], '/', [IndexController::class, 'paginate']);
-
     // 登录/退出
     Router::post('/login', [LoginController::class, 'login']);
     Router::post('/register', [RegisterController::class, 'register']);
+
+    // 首页
+    Router::addRoute(['GET', 'POST', 'PUT'], '/', [IndexController::class, 'paginate']);
+
+    // 分类
+    Router::post('/category/recommend', [CategoryController::class, 'recommend']);
 
     // 用户
     Router::post('/user/info', [UserController::class, 'info']);

@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Model\Category;
 
+use App\Constants\State\Goods\CategoryState;
+use App\Model\Goods\Goods;
 use App\Model\Model;
 
 /**
@@ -50,5 +52,15 @@ class Category extends Model
     public function parent()
     {
         return $this->hasOne(Category::class, 'id', 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id')->where('status', CategoryState::STATUS_ENABLED)->orderBy('sorting');
+    }
+
+    public function goodsList()
+    {
+        return $this->hasMany(Goods::class, 'category_id', 'id');
     }
 }
