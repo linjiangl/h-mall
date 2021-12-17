@@ -14,6 +14,7 @@ use App\Controller\Frontend\Authorize\RegisterController;
 use App\Controller\Frontend\Goods\Category\CategoryController;
 use App\Controller\Frontend\IndexController;
 use App\Controller\Frontend\Order\CartController;
+use App\Controller\Frontend\System\SlideController;
 use App\Controller\Frontend\User\UserController;
 use App\Middleware\JWTFrontendMiddleware;
 use Hyperf\HttpServer\Router\Router;
@@ -25,9 +26,8 @@ Router::addGroup('/frontend', function () {
 
     // 首页
     Router::addRoute(['GET', 'POST', 'PUT'], '/', [IndexController::class, 'paginate']);
-
-    // 分类
-    Router::post('/category/recommend', [CategoryController::class, 'recommend']);
+    Router::post('/home/category/recommend', [CategoryController::class, 'recommend']);
+    Router::post('/home/slide/list', [SlideController::class, 'list']);
 
     // 用户
     Router::post('/user/info', [UserController::class, 'info']);

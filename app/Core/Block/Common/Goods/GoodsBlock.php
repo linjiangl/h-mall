@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Goods;
 
+use App\Constants\BlockSinceConstants;
 use App\Core\Block\BaseBlock;
 use App\Core\Service\Goods\GoodsService;
 
@@ -18,13 +19,13 @@ class GoodsBlock extends BaseBlock
     protected string $service = GoodsService::class;
 
     protected array $defaultSinceWith = [
-        'backend' => [
-            'index' => ['default'],
-            'show' => ['attribute', 'timer', 'specs', 'skus', 'skus.specValues'],
+        BlockSinceConstants::SINCE_BACKEND => [
+            'paginate' => ['default'],
+            'info' => ['attribute', 'timer', 'specs', 'skus', 'skus.specValues'],
         ],
-        'frontend' => [
-            'index' => [],
-            'show' => ['attribute', 'specs', 'skus', 'skus.specValues'],
+        BlockSinceConstants::SINCE_FRONTEND => [
+            'paginate' => [],
+            'info' => ['attribute', 'specs', 'skus', 'skus.specValues'],
         ],
     ];
 

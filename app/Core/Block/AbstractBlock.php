@@ -139,7 +139,7 @@ abstract class AbstractBlock
     public function paginate(): array
     {
         // 当前执行的方法
-        $this->action = '';
+        $this->action = 'paginate';
 
         // 处理查询参数
         $this->handleQueryParams();

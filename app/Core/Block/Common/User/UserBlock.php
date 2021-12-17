@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\User;
 
+use App\Constants\BlockSinceConstants;
 use App\Core\Block\BaseBlock;
 use App\Core\Service\User\UserService;
 
@@ -25,13 +26,13 @@ class UserBlock extends BaseBlock
     ];
 
     protected array $defaultSinceWith = [
-        'backend' => [
-            'index' => ['wallet'],
-            'show' => ['wallet', 'vipCard'],
+        BlockSinceConstants::SINCE_BACKEND => [
+            'paginate' => ['wallet'],
+            'info' => ['wallet', 'vipCard'],
         ],
-        'frontend' => [
-            'index' => ['wallet'],
-            'show' => ['wallet'],
+        BlockSinceConstants::SINCE_FRONTEND => [
+            'paginate' => ['wallet'],
+            'info' => ['wallet'],
         ],
     ];
 }

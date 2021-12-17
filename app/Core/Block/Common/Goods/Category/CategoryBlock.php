@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Goods\Category;
 
+use App\Constants\BlockSinceConstants;
 use App\Core\Block\BaseBlock;
 use App\Core\Service\Goods\Category\CategoryService;
 
@@ -19,6 +20,17 @@ class CategoryBlock extends BaseBlock
 
     protected array $query = [
         '=' => ['status', 'parent_id'],
+    ];
+
+    protected array $defaultSinceWith = [
+        BlockSinceConstants::SINCE_BACKEND => [
+            'paginate' => ['parent'],
+            'info' => [],
+        ],
+        BlockSinceConstants::SINCE_FRONTEND => [
+            'paginate' => [],
+            'info' => [],
+        ],
     ];
 
     public function parent(): array
@@ -32,17 +44,5 @@ class CategoryBlock extends BaseBlock
         $service = new CategoryService();
         $categories = $service->getListByStatus();
         return $service->convertCategoriesToChildren($categories);
-    }
-
-    protected function beforeBuildQuery(): void
-    {
-        parent::beforeBuildQuery();
-
-        switch ($this->action) {
-            case 'paginate':
-                $this->with = ['parent'];
-                break;
-            default:
-        }
     }
 }
