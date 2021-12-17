@@ -19,6 +19,10 @@ class CategoryGoodsService
 {
     /**
      * 首页分类推荐的商品数据.
+     *
+     * 推荐的商品条件：
+     *  1. 上架的商品
+     *  2. 销量最高的商品
      */
     public static function recommend(int $goodsNumber = 8): array
     {
@@ -38,7 +42,7 @@ class CategoryGoodsService
             },
         ]);
 
-        // 去除没有商品的分类
+        // 删除没有商品的分类
         foreach ($list as $index => $item) {
             $hasGoods = false;
             foreach ($item['children'] as $key => $value) {
@@ -49,11 +53,11 @@ class CategoryGoodsService
                 }
             }
 
-            if (! $hasGoods) {
-                unset($list[$index]);
-            } else {
+            if ($hasGoods) {
                 $item['children'] = array_values($item['children']);
                 $list[$index] = $item;
+            } else {
+                unset($list[$index]);
             }
         }
 
