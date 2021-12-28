@@ -17,6 +17,7 @@
             <directory suffix="Test.php">./test/Backend/Goods</directory>
         </testsuite>
         <testsuite name="Frontend">
+            <directory suffix="Test.php">./test/Frontend/Home</directory>
             <directory suffix="Test.php">./test/Frontend/Authorize</directory>
             <directory suffix="Test.php">./test/Frontend/Order</directory>
         </testsuite>
