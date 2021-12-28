@@ -46,9 +46,9 @@ class Validate
         $rule = 'integer';
         $data = request()->all();
         if (isset($data[$requestFieldName]) && $data[$requestFieldName]) {
-            $rule .= '|exists:' . (new $model())->getTable() . ',' . $column;
+            $rule .= sprintf('|exists:%s,%s', (new $model())->getTable(), $column);
             if ($isRequired) {
-                $rule = 'required|' . $rule;
+                $rule = sprintf('required|%s', $rule);
             }
         }
         return $rule;
@@ -60,13 +60,13 @@ class Validate
      */
     public static function ruleUniqueModel(string $model, string $column, bool $isRequired = false, bool $isExcept = false): string
     {
-        $rule = 'unique:' . (new $model())->getTable() . ',' . $column;
+        $rule = sprintf('unique:%s,%s', (new $model())->getTable(), $column);
         if ($isRequired) {
-            $rule = 'required|' . $rule . '';
+            $rule = sprintf('required|%s', $rule);
         }
         if ($isExcept) {
             $data = request()->all();
-            $rule = $rule . ',' . $data[$column] . ',' . $column;
+            $rule = sprintf('%s,%s,%s', $rule, $data[$column], $column);
         }
         return $rule;
     }
