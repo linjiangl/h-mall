@@ -14,7 +14,7 @@ use App\Core\Dao\AbstractDao;
 use App\Model\Product\ProductAttribute;
 use Hyperf\Database\Model\Model;
 
-class GoodsAttributeDao extends AbstractDao
+class ProductAttributeDao extends AbstractDao
 {
     protected string|Model $model = ProductAttribute::class;
 

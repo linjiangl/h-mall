@@ -14,7 +14,7 @@ use App\Core\Dao\AbstractDao;
 use App\Model\Product\ProductTimer;
 use Hyperf\Database\Model\Model;
 
-class GoodsTimerDao extends AbstractDao
+class ProductTimerDao extends AbstractDao
 {
     protected string|Model $model = ProductTimer::class;
 

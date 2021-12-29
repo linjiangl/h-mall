@@ -34,10 +34,10 @@ class ProductMessage extends AbstractConstants
     /**
      * @Message("该规格下存在商品")
      */
-    public const CHECK_SPEC_ID_HAS_GOODS = 'check_spec_id_has_goods';
+    public const CHECK_SPEC_ID_HAS_PRODUCT = 'check_spec_id_has_product';
 
     /**
      * @Message("该规格值下存在商品")
      */
-    public const CHECK_SPEC_VALUE_ID_HAS_GOODS = 'check_spec_value_id_has_goods';
+    public const CHECK_SPEC_VALUE_ID_HAS_PRODUCT = 'check_spec_value_id_has_product';
 }

@@ -10,11 +10,11 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product\Types;
 
-use App\Core\Dao\Product\GoodsAttributeDao;
-use App\Core\Dao\Product\GoodsDao;
-use App\Core\Dao\Product\GoodsSkuDao;
-use App\Core\Dao\Product\GoodsSpecificationDao;
-use App\Core\Dao\Product\GoodsTimerDao;
+use App\Core\Dao\Product\ProductAttributeDao;
+use App\Core\Dao\Product\ProductDao;
+use App\Core\Dao\Product\ProductSkuDao;
+use App\Core\Dao\Product\ProductSpecificationDao;
+use App\Core\Dao\Product\ProductTimerDao;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
 use App\Model\Product\Product;
@@ -63,7 +63,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         Db::beginTransaction();
         try {
             // 创建商品
-            $goodsDao = new GoodsDao();
+            $goodsDao = new ProductDao();
             $this->goods = $goodsDao->create($data);
             $this->id = $this->goods->id;
 
@@ -89,7 +89,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         Db::beginTransaction();
         try {
             // 修改商品
-            $goodsDao = new GoodsDao();
+            $goodsDao = new ProductDao();
             $this->goods = $goodsDao->update($this->id, $data);
 
             $this->syncAttribute();
@@ -112,7 +112,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncAttribute(): void
     {
-        (new GoodsAttributeDao())->updateOrCreate(['goods_id' => $this->id], $this->post['attribute']);
+        (new ProductAttributeDao())->updateOrCreate(['goods_id' => $this->id], $this->post['attribute']);
     }
 
     /**
@@ -120,7 +120,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncTimer(): void
     {
-        (new GoodsTimerDao())->updateOrCreate(['goods_id' => $this->id], $this->post['timer']);
+        (new ProductTimerDao())->updateOrCreate(['goods_id' => $this->id], $this->post['timer']);
     }
 
     /**
@@ -129,7 +129,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
     protected function syncSpecification(): void
     {
         // 删除所有规格
-        (new GoodsSpecificationDao())->deleteByGoodsId($this->id);
+        (new ProductSpecificationDao())->deleteByGoodsId($this->id);
 
         // 添加商品规格
         foreach ($this->post['specs'] as $item) {
@@ -149,7 +149,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncSku(): void
     {
-        $goodsSkuDao = new GoodsSkuDao();
+        $goodsSkuDao = new ProductSkuDao();
         if (! $this->isCreated) {
             // 需要删除的商品规格
             $updateSkuIds = [];
@@ -219,7 +219,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function setDefaultSkuId(): void
     {
-        $skuList = (new GoodsSkuDao())->getListByGoodsId($this->id);
+        $skuList = (new ProductSkuDao())->getListByGoodsId($this->id);
         $defaultSkuId = 0;
         foreach ($skuList as $index => $item) {
             if ($index === 0) {

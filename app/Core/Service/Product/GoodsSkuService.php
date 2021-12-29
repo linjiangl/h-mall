@@ -10,10 +10,10 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product;
 
-use App\Core\Dao\Product\GoodsSkuDao;
+use App\Core\Dao\Product\ProductSkuDao;
 use App\Core\Service\AbstractService;
 
 class GoodsSkuService extends AbstractService
 {
-    protected string $dao = GoodsSkuDao::class;
+    protected string $dao = ProductSkuDao::class;
 }

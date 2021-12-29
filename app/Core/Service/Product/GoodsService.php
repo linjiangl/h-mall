@@ -10,14 +10,14 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product;
 
-use App\Core\Dao\Product\GoodsDao;
+use App\Core\Dao\Product\ProductDao;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Product\Types\TypesService;
 use App\Model\Product\Product;
 
 class GoodsService extends AbstractService
 {
-    protected string $dao = GoodsDao::class;
+    protected string $dao = ProductDao::class;
 
     public function create(array $data): Product
     {

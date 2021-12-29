@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product\Stock;
 
-use App\Core\Dao\Product\GoodsDao;
-use App\Core\Dao\Product\GoodsSkuDao;
+use App\Core\Dao\Product\ProductDao;
+use App\Core\Dao\Product\ProductSkuDao;
 use App\Exception\BadRequestException;
 use App\Model\Product\ProductSku;
 use Hyperf\DbConnection\Db;
@@ -24,12 +24,12 @@ class StockService
     public function increment(int $skuId, int $quantity = 1): ProductSku
     {
         // sku 库存增加
-        $sku = (new GoodsSkuDao())->info($skuId);
+        $sku = (new ProductSkuDao())->info($skuId);
         $sku->stock += $quantity;
         $sku->save();
 
         // spu 库存增加
-        (new GoodsDao())->updateByCondition(['id' => $sku->goods_id], [
+        (new ProductDao())->updateByCondition(['id' => $sku->goods_id], [
             'stock' => Db::raw(sprintf('`stock` + %d', $quantity)),
         ]);
 
@@ -41,8 +41,8 @@ class StockService
      */
     public function decrement(int $skuId, int $quantity = 1): ProductSku
     {
-        $sku = (new GoodsSkuDao())->info($skuId);
-        $spu = (new GoodsDao())->info($sku->goods_id);
+        $sku = (new ProductSkuDao())->info($skuId);
+        $spu = (new ProductDao())->info($sku->goods_id);
 
         // 剩余库存
         $surplusStock = $sku->stock - $quantity;

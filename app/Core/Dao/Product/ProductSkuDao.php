@@ -14,7 +14,7 @@ use App\Core\Dao\AbstractDao;
 use App\Model\Product\ProductSku;
 use Hyperf\Database\Model\Model;
 
-class GoodsSkuDao extends AbstractDao
+class ProductSkuDao extends AbstractDao
 {
     protected string|Model $model = ProductSku::class;
 

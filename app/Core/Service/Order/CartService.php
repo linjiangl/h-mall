@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Service\Order;
 
 use App\Constants\State\Order\CartState;
-use App\Core\Dao\Product\GoodsSkuDao;
+use App\Core\Dao\Product\ProductSkuDao;
 use App\Core\Dao\Order\CartDao;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Product\Stock\Change\StockCartService;
@@ -59,7 +59,7 @@ class CartService extends AbstractService
     public function addCart(int $skuId, int $quantity = 1, array $append = []): Cart
     {
         $user = $this->authorize;
-        $sku = (new GoodsSkuDao())->info($skuId);
+        $sku = (new ProductSkuDao())->info($skuId);
         $data = [
             'shop_id' => $sku->shop_id,
             'goods_id' => $sku->goods_id,
