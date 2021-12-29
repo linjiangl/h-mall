@@ -12,7 +12,7 @@ namespace App\Controller\Backend\Goods;
 
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
-use App\Core\Block\Common\Goods\GoodsBlock;
+use App\Core\Block\Common\Product\GoodsBlock;
 use App\Model\Product\Product;
 use App\Request\Backend\Goods\GoodsRequest;
 use App\Request\Common\BatchOperationRequest;

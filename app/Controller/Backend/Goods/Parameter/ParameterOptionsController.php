@@ -12,7 +12,7 @@ namespace App\Controller\Backend\Goods\Parameter;
 
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
-use App\Core\Block\Common\Goods\Parameter\ParameterOptionsBlock;
+use App\Core\Block\Common\Product\Parameter\ParameterOptionsBlock;
 use App\Model\Parameter\ParameterOption;
 use App\Request\Backend\Goods\ParameterOptionsRequest;
 
