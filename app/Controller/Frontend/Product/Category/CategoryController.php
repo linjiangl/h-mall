@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Frontend\Goods\Category;
+namespace App\Controller\Frontend\Product\Category;
 
 use App\Controller\FrontendController;
 use App\Core\Block\Frontend\Goods\Category\CategoryBlock;

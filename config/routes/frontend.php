@@ -11,7 +11,7 @@ declare(strict_types=1);
 use App\Controller\Frontend\Authorize\AuthorizeController;
 use App\Controller\Frontend\Authorize\LoginController;
 use App\Controller\Frontend\Authorize\RegisterController;
-use App\Controller\Frontend\Goods\Category\CategoryController;
+use App\Controller\Frontend\Product\Category\CategoryController;
 use App\Controller\Frontend\IndexController;
 use App\Controller\Frontend\Order\CartController;
 use App\Controller\Frontend\System\SlideController;

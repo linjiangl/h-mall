@@ -12,12 +12,12 @@ namespace App\Aspect\Admin;
 
 use App\Controller\Backend\Admin\AdminController;
 use App\Controller\Backend\Admin\Role\RoleController;
-use App\Controller\Backend\Goods\Brand\BrandController;
-use App\Controller\Backend\Goods\Category\CategoryController;
-use App\Controller\Backend\Goods\GoodsController;
-use App\Controller\Backend\Goods\Parameter\ParameterController;
-use App\Controller\Backend\Goods\Parameter\ParameterOptionsController;
-use App\Controller\Backend\Goods\ServiceTemplateController;
+use App\Controller\Backend\Product\Brand\BrandController;
+use App\Controller\Backend\Product\Category\CategoryController;
+use App\Controller\Backend\Product\GoodsController;
+use App\Controller\Backend\Product\Parameter\ParameterController;
+use App\Controller\Backend\Product\Parameter\ParameterOptionsController;
+use App\Controller\Backend\Product\ServiceTemplateController;
 use App\Controller\Backend\System\MenuController;
 use App\Controller\Backend\User\UserController;
 use App\Core\Service\Admin\AdminActionService;

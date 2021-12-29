@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Controller\Backend\Goods\Category;
+namespace App\Controller\Backend\Product\Category;
 
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
