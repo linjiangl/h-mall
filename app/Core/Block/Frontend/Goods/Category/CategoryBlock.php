@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace App\Core\Block\Frontend\Goods\Category;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Goods\Category\CategoryGoodsService;
-use App\Core\Service\Goods\Category\CategoryService;
+use App\Core\Service\Product\Category\CategoryGoodsService;
+use App\Core\Service\Product\Category\CategoryService;
 
 class CategoryBlock extends BaseBlock
 {

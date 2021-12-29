@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Goods\Types;
+namespace App\Core\Service\Product\Types;
 
 /**
- * 实物商品
+ * 优惠券商品
  */
-class GeneralService extends AbstractTypesService
+class VirtualService extends AbstractTypesService
 {
 }

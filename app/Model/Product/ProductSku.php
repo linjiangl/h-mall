@@ -56,7 +56,7 @@ class ProductSku extends Model
      */
     protected $casts = ['id' => 'integer', 'shop_id' => 'integer', 'product_id' => 'integer', 'stock' => 'integer', 'stock_alarm' => 'integer', 'clicks' => 'integer', 'sales' => 'integer', 'virtual_sales' => 'integer', 'is_default' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function goods()
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }

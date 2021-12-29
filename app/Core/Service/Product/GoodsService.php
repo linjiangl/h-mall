@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Goods;
+namespace App\Core\Service\Product;
 
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Service\AbstractService;
-use App\Core\Service\Goods\Types\TypesService;
+use App\Core\Service\Product\Types\TypesService;
 use App\Model\Product\Product;
 
 class GoodsService extends AbstractService

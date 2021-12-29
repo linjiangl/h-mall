@@ -42,7 +42,7 @@ class OrderProducts extends Model
      *
      * @var string
      */
-    protected $table = 'order_goods';
+    protected $table = 'order_products';
 
     /**
      * The attributes that are mass assignable.

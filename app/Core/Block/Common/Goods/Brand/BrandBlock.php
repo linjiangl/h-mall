@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Block\Common\Goods\Brand;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Goods\Brand\BrandService;
+use App\Core\Service\Product\Brand\BrandService;
 
 class BrandBlock extends BaseBlock
 {

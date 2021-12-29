@@ -12,7 +12,7 @@ namespace App\Core\Block\Common\Goods\Category;
 
 use App\Constants\BlockSinceConstants;
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Goods\Category\CategoryService;
+use App\Core\Service\Product\Category\CategoryService;
 
 class CategoryBlock extends BaseBlock
 {

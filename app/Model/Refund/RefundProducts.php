@@ -30,7 +30,7 @@ class RefundProducts extends Model
      *
      * @var string
      */
-    protected $table = 'refund_goods';
+    protected $table = 'refund_products';
 
     /**
      * The attributes that are mass assignable.

@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Goods\Types;
+namespace App\Core\Service\Product\Types;
 
 use App\Core\Dao\Goods\GoodsAttributeDao;
 use App\Core\Dao\Goods\GoodsDao;

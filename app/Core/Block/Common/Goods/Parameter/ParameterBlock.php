@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Block\Common\Goods\Parameter;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Goods\Parameter\ParameterService;
+use App\Core\Service\Product\Parameter\ParameterService;
 
 class ParameterBlock extends BaseBlock
 {

@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Goods\Stock\Change;
+namespace App\Core\Service\Product\Stock\Change;
 
 interface InterfaceStockChangeService
 {

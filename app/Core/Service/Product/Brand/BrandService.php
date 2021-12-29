@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Service\Goods\Parameter;
+namespace App\Core\Service\Product\Brand;
 
-use App\Core\Dao\Goods\Parameter\ParameterDao;
+use App\Core\Dao\Goods\Brand\BrandDao;
 use App\Core\Service\AbstractService;
 
-class ParameterService extends AbstractService
+class BrandService extends AbstractService
 {
-    protected string $dao = ParameterDao::class;
+    protected string $dao = BrandDao::class;
 }

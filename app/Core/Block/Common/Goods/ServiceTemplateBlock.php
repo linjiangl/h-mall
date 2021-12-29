@@ -12,7 +12,7 @@ namespace App\Core\Block\Common\Goods;
 
 use App\Core\Block\BaseBlock;
 use App\Core\Block\TraitSortingBlock;
-use App\Core\Service\Goods\ServiceTemplateService;
+use App\Core\Service\Product\ServiceTemplateService;
 
 class ServiceTemplateBlock extends BaseBlock
 {

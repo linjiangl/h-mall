@@ -13,7 +13,7 @@ namespace App\Controller\Backend\Goods;
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\ServiceTemplateBlock;
-use App\Core\Service\Goods\GoodsService;
+use App\Core\Service\Product\GoodsService;
 use App\Request\Backend\Goods\ServiceRequest;
 
 class ServiceTemplateController extends BackendController
