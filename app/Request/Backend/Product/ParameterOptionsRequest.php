@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Request\Backend\Goods;
+namespace App\Request\Backend\Product;
 
 use App\Request\AbstractRequest;
 
-class BrandRequest extends AbstractRequest
+class ParameterOptionsRequest extends AbstractRequest
 {
     public function rules(string $ruleKey = ''): array
     {
@@ -20,15 +20,15 @@ class BrandRequest extends AbstractRequest
 
         $rules = [
             'post:create' => [
-                'name' => 'required|string|max:30',
-                'logo' => 'required|string|max:255',
-                'status' => 'integer',
+                'option' => 'required|string|max:100',
+                'values' => 'required|array',
+                'type' => 'required|integer',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
-                'name' => 'required|string|max:30',
-                'logo' => 'required|string|max:255',
-                'status' => 'integer',
+                'option' => 'required|string|max:100',
+                'values' => 'required|array',
+                'type' => 'required|integer',
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',
@@ -40,10 +40,9 @@ class BrandRequest extends AbstractRequest
     public function attributes(): array
     {
         return [
-            'id' => '品牌主键',
-            'name' => '品牌名称',
-            'logo' => '品牌标志',
-            'status' => '品牌状态',
+            'option' => '选项',
+            'values' => '选项值',
+            'type' => '类型',
         ];
     }
 }

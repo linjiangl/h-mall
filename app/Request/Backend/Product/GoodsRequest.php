@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Request\Backend\Goods;
+namespace App\Request\Backend\Product;
 
-use App\Constants\State\Goods\GoodsAttributeState;
-use App\Constants\State\Goods\GoodsSpecificationState;
-use App\Constants\State\Goods\GoodsState;
-use App\Constants\State\Goods\GoodsTimerState;
+use App\Constants\State\Product\GoodsAttributeState;
+use App\Constants\State\Product\GoodsSpecificationState;
+use App\Constants\State\Product\GoodsState;
+use App\Constants\State\Product\GoodsTimerState;
 use App\Request\AbstractRequest;
 
 class GoodsRequest extends AbstractRequest

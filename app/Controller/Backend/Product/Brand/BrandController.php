@@ -14,7 +14,7 @@ use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Product\Brand\BrandBlock;
 use App\Model\Brand;
-use App\Request\Backend\Goods\BrandRequest;
+use App\Request\Backend\Product\BrandRequest;
 
 class BrandController extends BackendController
 {

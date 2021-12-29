@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Dao\Product\Category;
 
-use App\Constants\State\Goods\CategoryState;
+use App\Constants\State\Product\CategoryState;
 use App\Core\Dao\AbstractDao;
 use App\Model\Category\Category;
 use Hyperf\Database\Model\Model;

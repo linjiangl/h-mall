@@ -14,7 +14,7 @@ use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Product\Parameter\ParameterOptionsBlock;
 use App\Model\Parameter\ParameterOption;
-use App\Request\Backend\Goods\ParameterOptionsRequest;
+use App\Request\Backend\Product\ParameterOptionsRequest;
 
 class ParameterOptionsController extends BackendController
 {

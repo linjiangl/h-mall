@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model\Category;
 
-use App\Constants\State\Goods\CategoryState;
+use App\Constants\State\Product\CategoryState;
 use App\Model\Product\Product;
 use App\Model\Model;
 

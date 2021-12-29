@@ -14,7 +14,7 @@ use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Product\GoodsBlock;
 use App\Model\Product\Product;
-use App\Request\Backend\Goods\GoodsRequest;
+use App\Request\Backend\Product\GoodsRequest;
 use App\Request\Common\BatchOperationRequest;
 
 class GoodsController extends BackendController

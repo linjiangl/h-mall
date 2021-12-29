@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product\Types;
 
-use App\Constants\State\Goods\GoodsState;
+use App\Constants\State\Product\GoodsState;
 use App\Exception\InternalException;
 
 class TypesService

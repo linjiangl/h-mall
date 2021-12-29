@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace HyperfTest\Backend\Goods;
 
 use App\Constants\State\BooleanState;
-use App\Constants\State\Goods\GoodsState;
+use App\Constants\State\Product\GoodsState;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 

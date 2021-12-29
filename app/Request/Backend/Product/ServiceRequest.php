@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Request\Backend\Goods;
+namespace App\Request\Backend\Product;
 
 use App\Request\AbstractRequest;
 
-class ParameterOptionsRequest extends AbstractRequest
+class ServiceRequest extends AbstractRequest
 {
     public function rules(string $ruleKey = ''): array
     {
@@ -20,15 +20,13 @@ class ParameterOptionsRequest extends AbstractRequest
 
         $rules = [
             'post:create' => [
-                'option' => 'required|string|max:100',
-                'values' => 'required|array',
-                'type' => 'required|integer',
+                'name' => 'required|string|max:100',
+                'description' => 'string',
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
-                'option' => 'required|string|max:100',
-                'values' => 'required|array',
-                'type' => 'required|integer',
+                'name' => 'required|string|max:100',
+                'description' => 'string',
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',
@@ -40,9 +38,8 @@ class ParameterOptionsRequest extends AbstractRequest
     public function attributes(): array
     {
         return [
-            'option' => '选项',
-            'values' => '选项值',
-            'type' => '类型',
+            'name' => '名称',
+            'description' => '描述',
         ];
     }
 }

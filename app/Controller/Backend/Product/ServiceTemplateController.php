@@ -14,7 +14,7 @@ use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Product\ServiceTemplateBlock;
 use App\Core\Service\Product\GoodsService;
-use App\Request\Backend\Goods\ServiceRequest;
+use App\Request\Backend\Product\ServiceRequest;
 
 class ServiceTemplateController extends BackendController
 {
