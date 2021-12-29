@@ -16,10 +16,10 @@ class AdminFactory
     public static function run()
     {
         $service = new AdminAuthorizationService();
-        $password = 'yii.red';
+        $password = '123456';
         $service->register('admin', $password, $password, [
             'real_name' => '姓名',
-            'email' => 'admin@yii.red',
+            'email' => 'admin@xcmei.com',
             'status' => AdminState::STATUS_ENABLED,
             'role_id' => 1,
         ]);

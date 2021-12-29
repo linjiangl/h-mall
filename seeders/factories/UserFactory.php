@@ -20,7 +20,7 @@ class UserFactory
     {
         $faker = Factory::create();
         $service = new UserAuthorizationService();
-        $password = 'yii.red';
+        $password = '123456';
         $service->register('hmallgf', $password, $password, [
             'nickname' => '系统官方',
             'email' => $faker->unique()->safeEmail,

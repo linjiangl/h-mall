@@ -224,9 +224,10 @@ class CartService extends AbstractService
             if (! isset($result[$item['shop_id']])) {
                 $result[$item['shop_id']] = $item['shop'];
             }
-            $item['product_sku']['quantity'] = $item['quantity'];
 
             unset($item['shop']);
+
+            $item['product_sku']['quantity'] = $item['quantity'];
             $result[$item['shop_id']]['cart_list'][] = $item;
         }
 
