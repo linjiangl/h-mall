@@ -21,8 +21,8 @@ class ProductSpecificationDao extends AbstractDao
     /**
      * 删除商品规格
      */
-    public function deleteByGoodsId(int $goodsId): void
+    public function deleteByProductId(int $productId): void
     {
-        $this->deleteByCondition([['goods_id', '=', $goodsId]]);
+        $this->deleteByCondition([['product_id', '=', $productId]]);
     }
 }

@@ -49,7 +49,7 @@ class Cart extends Model
      */
     protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'quantity' => 'integer', 'is_check' => 'integer', 'is_buy_now' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
-    public function sku()
+    public function productSku()
     {
         return $this->belongsTo(ProductSku::class, 'product_sku_id');
     }

@@ -58,13 +58,13 @@ abstract class AbstractTypesService implements InterfaceTypesService
     public function create(): Product
     {
         $this->isCreated = true;
-        $data = $this->handleGoodsData();
+        $data = $this->handleProductData();
 
         Db::beginTransaction();
         try {
             // 创建商品
-            $goodsDao = new ProductDao();
-            $this->product = $goodsDao->create($data);
+            $productDao = new ProductDao();
+            $this->product = $productDao->create($data);
             $this->id = $this->product->id;
 
             $this->syncAttribute();
@@ -84,13 +84,13 @@ abstract class AbstractTypesService implements InterfaceTypesService
 
     public function update(): Product
     {
-        $data = $this->handleGoodsData();
+        $data = $this->handleProductData();
 
         Db::beginTransaction();
         try {
             // 修改商品
-            $goodsDao = new ProductDao();
-            $this->product = $goodsDao->update($this->id, $data);
+            $productDao = new ProductDao();
+            $this->product = $productDao->update($this->id, $data);
 
             $this->syncAttribute();
             $this->syncTimer();
@@ -112,7 +112,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncAttribute(): void
     {
-        (new ProductAttributeDao())->updateOrCreate(['goods_id' => $this->id], $this->post['attribute']);
+        (new ProductAttributeDao())->updateOrCreate(['product_id' => $this->id], $this->post['attribute']);
     }
 
     /**
@@ -120,7 +120,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncTimer(): void
     {
-        (new ProductTimerDao())->updateOrCreate(['goods_id' => $this->id], $this->post['timer']);
+        (new ProductTimerDao())->updateOrCreate(['product_id' => $this->id], $this->post['timer']);
     }
 
     /**
@@ -129,18 +129,18 @@ abstract class AbstractTypesService implements InterfaceTypesService
     protected function syncSpecification(): void
     {
         // 删除所有规格
-        (new ProductSpecificationDao())->deleteByGoodsId($this->id);
+        (new ProductSpecificationDao())->deleteByProductId($this->id);
 
         // 添加商品规格
         foreach ($this->post['specs'] as $item) {
-            $goodsSpecification = new ProductSpecification([
-                'goods_id' => $this->id,
+            $productSpecification = new ProductSpecification([
+                'product_id' => $this->id,
                 'name' => $item['name'],
                 'has_image' => $item['has_image'],
             ]);
-            $goodsSpecification->save();
+            $productSpecification->save();
 
-            $this->productSpecification[] = $goodsSpecification;
+            $this->productSpecification[] = $productSpecification;
         }
     }
 
@@ -149,7 +149,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function syncProductSku(): void
     {
-        $goodsSkuDao = new ProductSkuDao();
+        $productSkuDao = new ProductSkuDao();
         if (! $this->isCreated) {
             // 需要删除的商品规格
             $updateSkuIds = [];
@@ -160,7 +160,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             }
 
             $deleteSkuIds = [];
-            $skuList = $goodsSkuDao->getListByProductId($this->id);
+            $skuList = $productSkuDao->getListByProductId($this->id);
             foreach ($skuList as $item) {
                 if (empty($updateSkuIds) || ! in_array($item['id'], $updateSkuIds)) {
                     $deleteSkuIds[] = $item['id'];
@@ -168,7 +168,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             }
 
             if (! empty($deleteSkuIds)) {
-                $goodsSkuDao->deleteByCondition([['id', 'in', $deleteSkuIds]]);
+                $productSkuDao->deleteByCondition([['id', 'in', $deleteSkuIds]]);
             }
         }
 
@@ -176,7 +176,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         foreach ($this->post['skus'] as $sku) {
             $temp = [
                 'shop_id' => $this->product->shop_id,
-                'goods_id' => $this->id,
+                'product_id' => $this->id,
                 'sku_name' => $sku['sku_name'],
                 'sku_no' => $sku['sku_no'] ?? '',
                 'sale_price' => $sku['sale_price'],
@@ -192,24 +192,24 @@ abstract class AbstractTypesService implements InterfaceTypesService
             ];
             if (isset($sku['id']) && $sku['id'] > 0) {
                 // 修改
-                $goodsSku = $goodsSkuDao->update($sku['id'], $temp);
+                $productSku = $productSkuDao->update($sku['id'], $temp);
             } else {
                 // 新建
-                $goodsSku = $goodsSkuDao->create($temp);
+                $productSku = $productSkuDao->create($temp);
             }
 
             foreach ($sku['spec_values'] as $index => $item) {
                 if ($this->productSpecification[$index]['has_image'] && ! $item['image']) {
                     throw new InternalException(sprintf('%s 规格需要上传图片！', $item['name']));
                 }
-                $goodsSpecification = new ProductSpecification([
-                    'goods_id' => $this->id,
-                    'goods_sku_id' => $goodsSku->id,
+                $productSpecification = new ProductSpecification([
+                    'product_id' => $this->id,
+                    'product_sku_id' => $productSku->id,
                     'parent_id' => $this->productSpecification[$index]['id'],
                     'name' => $item['name'],
                     'image' => $item['image'],
                 ]);
-                $goodsSpecification->save();
+                $productSpecification->save();
             }
         }
     }
@@ -235,7 +235,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         $this->product->save();
     }
 
-    protected function handleGoodsData(): array
+    protected function handleProductData(): array
     {
         $sku = $this->post['skus'];
         $salePrice = array_column($sku, 'sale_price');

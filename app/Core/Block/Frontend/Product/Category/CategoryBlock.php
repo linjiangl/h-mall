@@ -18,8 +18,8 @@ class CategoryBlock extends BaseBlock
 {
     protected string $service = CategoryService::class;
 
-    public function recommend(int $goodsNumber = 8): array
+    public function recommend(int $productNumber = 8): array
     {
-        return CategoryProductsService::recommend($goodsNumber);
+        return CategoryProductsService::recommend($productNumber);
     }
 }

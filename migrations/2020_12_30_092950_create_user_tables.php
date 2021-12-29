@@ -123,11 +123,11 @@ class CreateUserTables extends Migration
         Schema::create('user_history', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('goods_id');
+            $table->unsignedInteger('product_id');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
-            $table->unique(['user_id', 'goods_id'], 'user_id_goods_id');
+            $table->unique(['user_id', 'product_id'], 'user_id_product_id');
 
             $table->comment('用户浏览记录');
         });
@@ -135,7 +135,7 @@ class CreateUserTables extends Migration
         Schema::create('user_favorite', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('user_id');
-            $table->string('module', 30)->comment('模块 goods:商品, shop:店铺');
+            $table->string('module', 30)->comment('模块 product:商品, shop:店铺');
             $table->unsignedInteger('module_id');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);

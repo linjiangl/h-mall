@@ -33,6 +33,6 @@ class ProductBlock extends BaseBlock
     {
         $detail = parent::info();
 
-        return (new ProductService())->convertGoodsDetail($detail);
+        return (new ProductService())->convertProductDetail($detail);
     }
 }

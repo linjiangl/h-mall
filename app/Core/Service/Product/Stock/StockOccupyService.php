@@ -15,17 +15,17 @@ class StockOccupyService
     /**
      * 新增库存占用记录.
      */
-    public static function create(int $shopId, int $goodsId, string $module, int $moduleId, array $skus, string $serialNo = '', string $remark = '')
+    public static function create(int $shopId, int $productId, string $module, int $moduleId, array $skus, string $serialNo = '', string $remark = '')
     {
     }
 
     /**
      * 更新库存占用记录.
      */
-    public static function update(int $shopId, int $goodsId, string $module, int $moduleId, array $skus, string $serialNo = '', string $remark = '')
+    public static function update(int $shopId, int $productId, string $module, int $moduleId, array $skus, string $serialNo = '', string $remark = '')
     {
         self::destroy($shopId, $module, $moduleId);
-        self::create($shopId, $goodsId, $module, $moduleId, $skus, $serialNo, $remark);
+        self::create($shopId, $productId, $module, $moduleId, $skus, $serialNo, $remark);
     }
 
     /**

@@ -32,7 +32,7 @@ use Hyperf\Di\Exception\Exception;
 class AdminActionAspect extends AbstractAspect
 {
     public $classes = [
-        // goods
+        // product
         CategoryController::class,
         BrandController::class,
         ServiceTemplateController::class,

@@ -62,7 +62,7 @@ class CartService extends AbstractService
         $sku = (new ProductSkuDao())->info($skuId);
         $data = [
             'shop_id' => $sku->shop_id,
-            'goods_id' => $sku->goods_id,
+            'product_id' => $sku->product_id,
             'quantity' => $quantity,
         ];
         if (! empty($append)) {
@@ -74,7 +74,7 @@ class CartService extends AbstractService
             // 创建购物车
             $cart = (new CartDao())->firstOrCreate([
                 'user_id' => $user['user_id'],
-                'goods_sku_id' => $sku->id,
+                'product_sku_id' => $sku->id,
             ], $data);
 
             /* @var StockCartService $stockChangeService */
@@ -220,14 +220,14 @@ class CartService extends AbstractService
         ], $dao->setMapWith()->getMapWith('settlement', self::class));
 
         $result = [];
-
         foreach ($list as $item) {
             if (! isset($result[$item['shop_id']])) {
                 $result[$item['shop_id']] = $item['shop'];
             }
-            $item['sku']['quantity'] = $item['quantity'];
-            $result[$item['shop_id']]['cart_ids'][] = $item['id'];
-            $result[$item['shop_id']]['sku_list'][] = $item['sku'];
+            $item['product_sku']['quantity'] = $item['quantity'];
+
+            unset($item['shop']);
+            $result[$item['shop_id']]['cart_list'][] = $item;
         }
 
         return array_values($result);

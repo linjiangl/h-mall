@@ -28,10 +28,10 @@ abstract class AbstractTypesService implements InterfaceTypesService
 //            $totalAmount = bcmul((string) $item['quantity'], $item['sku']['sale_price'], 2);
 //            $skus[] = [
 //                'user_id' => $this->user['id'],
-//                'goods_id' => $item['sku']['goods_id'],
-//                'goods_sku_id' => $item['sku']['id'],
-//                'goods_name' => $item['sku']['goods']['name'],
-//                'goods_sku_name' => $item['sku']['sku_name'],
+//                'product_id' => $item['sku']['product_id'],
+//                'product_sku_id' => $item['sku']['id'],
+//                'product_name' => $item['sku']['product']['name'],
+//                'product_sku_name' => $item['sku']['sku_name'],
 //                'quantity' => $item['quantity'],
 //                'total_amount' => $totalAmount,
 //                'discount_amount' => 0,

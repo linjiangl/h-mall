@@ -45,8 +45,8 @@ class CreateOrderTables extends Migration
             $table->string('payment_method', 30)->default('')->comment('支付类型');
             $table->string('trade_no', 64)->default('')->comment('第三方支付流水号');
             $table->unsignedSmallInteger('buy_quantity')->default(0)->comment('购买总数量，累加商品购买数量');
-            $table->unsignedSmallInteger('product_quantity')->default(0)->comment('商品总数量，订单中的商品数量');
-            $table->decimal('product_amount', 10)->unsigned()->default(0)->comment('商品总金额');
+            $table->unsignedSmallInteger('products_quantity')->default(0)->comment('商品总数量，订单中的商品数量');
+            $table->decimal('products_amount', 10)->unsigned()->default(0)->comment('商品总金额');
             $table->decimal('total_amount', 10)->unsigned()->default(0)->comment('订单总金额');
             $table->decimal('express_amount', 6)->unsigned()->default(0)->comment('运费');
             $table->decimal('discount_amount', 7)->unsigned()->default(0)->comment('折扣金额');

@@ -98,13 +98,13 @@ Router::addGroup('/backend', function () {
     Router::post('/brand/update', [BrandController::class, 'updateRequest']);
     Router::post('/brand/delete', [BrandController::class, 'deleteRequest']);
 
-    // goods service
-    Router::post('/goodsServiceTemplate/paginate', [ServiceTemplateController::class, 'paginate']);
-    Router::post('/goodsServiceTemplate/info', [ServiceTemplateController::class, 'info']);
-    Router::post('/goodsServiceTemplate/create', [ServiceTemplateController::class, 'createRequest']);
-    Router::post('/goodsServiceTemplate/update', [ServiceTemplateController::class, 'updateRequest']);
-    Router::post('/goodsServiceTemplate/delete', [ServiceTemplateController::class, 'deleteRequest']);
-    Router::post('/goodsServiceTemplate/list', [ServiceTemplateController::class, 'list']);
+    // product service
+    Router::post('/productServiceTemplate/paginate', [ServiceTemplateController::class, 'paginate']);
+    Router::post('/productServiceTemplate/info', [ServiceTemplateController::class, 'info']);
+    Router::post('/productServiceTemplate/create', [ServiceTemplateController::class, 'createRequest']);
+    Router::post('/productServiceTemplate/update', [ServiceTemplateController::class, 'updateRequest']);
+    Router::post('/productServiceTemplate/delete', [ServiceTemplateController::class, 'deleteRequest']);
+    Router::post('/productServiceTemplate/list', [ServiceTemplateController::class, 'list']);
 
     // parameter
     Router::post('/parameter/paginate', [ParameterController::class, 'paginate']);
@@ -120,12 +120,12 @@ Router::addGroup('/backend', function () {
     Router::post('/parameterOptions/update', [ParameterOptionsController::class, 'updateRequest']);
     Router::post('/parameterOptions/delete', [ParameterOptionsController::class, 'deleteRequest']);
 
-    // goods
-    Router::post('/goods/paginate', [ProductController::class, 'paginate']);
-    Router::post('/goods/info', [ProductController::class, 'info']);
-    Router::post('/goods/create', [ProductController::class, 'createRequest']);
-    Router::post('/goods/update', [ProductController::class, 'updateRequest']);
-    Router::post('/goods/updateStatus', [ProductController::class, 'updateStatusRequest']);
-    Router::post('/goods/delete', [ProductController::class, 'batchDeleteRequest']);
-    Router::post('/goods/recycle', [ProductController::class, 'recycleRequest']);
+    // product
+    Router::post('/product/paginate', [ProductController::class, 'paginate']);
+    Router::post('/product/info', [ProductController::class, 'info']);
+    Router::post('/product/create', [ProductController::class, 'createRequest']);
+    Router::post('/product/update', [ProductController::class, 'updateRequest']);
+    Router::post('/product/updateStatus', [ProductController::class, 'updateStatusRequest']);
+    Router::post('/product/delete', [ProductController::class, 'batchDeleteRequest']);
+    Router::post('/product/recycle', [ProductController::class, 'recycleRequest']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

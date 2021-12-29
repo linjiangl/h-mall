@@ -24,7 +24,7 @@ class CategoryProductsService
      *  1. 上架的商品
      *  2. 销量最高的商品
      */
-    public static function recommend(int $goodsNumber = 8): array
+    public static function recommend(int $productNumber = 8): array
     {
         $dao = new CategoryDao();
 
@@ -32,10 +32,10 @@ class CategoryProductsService
             'parent_id' => 0,
             'status' => CategoryState::STATUS_ENABLED,
         ], [
-            'children' => function (Relation $query) use ($goodsNumber) {
+            'children' => function (Relation $query) use ($productNumber) {
                 $query->with([
-                    'products' => function (Relation $query) use ($goodsNumber) {
-                        $query->where('status', ProductState::STATUS_ON_SALE)->orderBy('sales', 'desc')->limit($goodsNumber);
+                    'products' => function (Relation $query) use ($productNumber) {
+                        $query->where('status', ProductState::STATUS_ON_SALE)->orderBy('sales', 'desc')->limit($productNumber);
                     },
                     'products.default',
                 ]);
@@ -44,16 +44,16 @@ class CategoryProductsService
 
         // 删除没有商品的分类
         foreach ($list as $index => $item) {
-            $hasGoods = false;
+            $hasProduct = false;
             foreach ($item['children'] as $key => $value) {
-                if (! empty($value['goods_list'])) {
-                    $hasGoods = true;
+                if (! empty($value['products'])) {
+                    $hasProduct = true;
                 } else {
                     unset($item['children'][$key]);
                 }
             }
 
-            if ($hasGoods) {
+            if ($hasProduct) {
                 $item['children'] = array_values($item['children']);
                 $list[$index] = $item;
             } else {

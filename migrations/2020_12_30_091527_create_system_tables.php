@@ -33,7 +33,7 @@ class CreateSystemTables extends Migration
 
         Schema::create('text', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->string('module', 50)->default('goods')->comment('模块 goods:商品, shop:店铺');
+            $table->string('module', 50)->default('product')->comment('模块 product:商品, shop:店铺');
             $table->mediumText('content');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);

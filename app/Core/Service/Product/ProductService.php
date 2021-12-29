@@ -32,14 +32,14 @@ class ProductService extends AbstractService
     /**
      * 处理商品详情.
      */
-    public function convertGoodsDetail(array $goodsDetail): array
+    public function convertProductDetail(array $productDetail): array
     {
         $idx = [];
-        foreach ($goodsDetail['skus'] as $item) {
+        foreach ($productDetail['skus'] as $item) {
             $index = implode('::', array_column($item['spec_values'], 'name'));
             $idx[$index] = $item['id'];
         }
-        $goodsDetail['sku_spec_idx'] = $idx;
-        return $goodsDetail;
+        $productDetail['sku_spec_idx'] = $idx;
+        return $productDetail;
     }
 }

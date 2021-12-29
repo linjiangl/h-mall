@@ -23,13 +23,13 @@ class ProductTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
-    public function testBackendGoodsPaginate()
+    public function testBackendProductPaginate()
     {
         $this->url = '/product/paginate';
         $this->handleHttpPaginate();
     }
 
-    public function testBackendGoodsInfo()
+    public function testBackendProductInfo()
     {
         $this->url = '/product/info';
         $this->data = [
@@ -38,7 +38,7 @@ class ProductTest extends BackendHttpTestCase
         $this->handleHttpInfo();
     }
 
-    public function testBackendGoodsCreate()
+    public function testBackendProductCreate()
     {
         $this->url = '/product/create';
         $this->data = [
@@ -151,7 +151,7 @@ class ProductTest extends BackendHttpTestCase
         $this->handleHttpCreate();
     }
 
-    public function testBackendGoodsUpdate()
+    public function testBackendProductUpdate()
     {
         $this->url = '/product/update';
         $this->data = [

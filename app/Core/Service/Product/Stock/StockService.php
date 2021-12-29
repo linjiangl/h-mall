@@ -29,7 +29,7 @@ class StockService
         $sku->save();
 
         // spu 库存增加
-        (new ProductDao())->updateByCondition(['id' => $sku->goods_id], [
+        (new ProductDao())->updateByCondition(['id' => $sku->product_id], [
             'stock' => Db::raw(sprintf('`stock` + %d', $quantity)),
         ]);
 
@@ -42,7 +42,7 @@ class StockService
     public function decrement(int $skuId, int $quantity = 1): ProductSku
     {
         $sku = (new ProductSkuDao())->info($skuId);
-        $spu = (new ProductDao())->info($sku->goods_id);
+        $spu = (new ProductDao())->info($sku->product_id);
 
         // 剩余库存
         $surplusStock = $sku->stock - $quantity;
