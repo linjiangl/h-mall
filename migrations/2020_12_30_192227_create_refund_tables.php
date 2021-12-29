@@ -58,7 +58,7 @@ class CreateRefundTables extends Migration
             $table->comment('退款订单');
         });
 
-        Schema::create('refund_product', function (Blueprint $table) {
+        Schema::create('refund_products', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('refund_id');
             $table->unsignedInteger('order_id');
@@ -97,7 +97,7 @@ class CreateRefundTables extends Migration
     public function down(): void
     {
         Schema::dropIfExists('refund');
-        Schema::dropIfExists('refund_product');
+        Schema::dropIfExists('refund_products');
         Schema::dropIfExists('refund_action');
     }
 }
