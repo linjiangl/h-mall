@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product;
 
-use App\Core\Dao\Goods\GoodsDao;
+use App\Core\Dao\Product\GoodsDao;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Product\Types\TypesService;
 use App\Model\Product\Product;

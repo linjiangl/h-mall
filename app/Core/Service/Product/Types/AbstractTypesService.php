@@ -10,11 +10,11 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product\Types;
 
-use App\Core\Dao\Goods\GoodsAttributeDao;
-use App\Core\Dao\Goods\GoodsDao;
-use App\Core\Dao\Goods\GoodsSkuDao;
-use App\Core\Dao\Goods\GoodsSpecificationDao;
-use App\Core\Dao\Goods\GoodsTimerDao;
+use App\Core\Dao\Product\GoodsAttributeDao;
+use App\Core\Dao\Product\GoodsDao;
+use App\Core\Dao\Product\GoodsSkuDao;
+use App\Core\Dao\Product\GoodsSpecificationDao;
+use App\Core\Dao\Product\GoodsTimerDao;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
 use App\Model\Product\Product;

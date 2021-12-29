@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product\Brand;
 
-use App\Core\Dao\Goods\Brand\BrandDao;
+use App\Core\Dao\Product\Brand\BrandDao;
 use App\Core\Service\AbstractService;
 
 class BrandService extends AbstractService

@@ -12,7 +12,7 @@ namespace App\Core\Service\Product\Category;
 
 use App\Constants\State\Goods\CategoryState;
 use App\Constants\State\Goods\GoodsState;
-use App\Core\Dao\Goods\Category\CategoryDao;
+use App\Core\Dao\Product\Category\CategoryDao;
 use Hyperf\Database\Model\Relations\Relation;
 
 class CategoryGoodsService

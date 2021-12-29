@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product;
 
-use App\Core\Dao\Goods\GoodsSpecificationDao;
+use App\Core\Dao\Product\GoodsSpecificationDao;
 use App\Core\Service\AbstractService;
 
 class GoodsSpecificationService extends AbstractService

@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product\Parameter;
 
-use App\Core\Dao\Goods\Parameter\ParameterOptionsDao;
+use App\Core\Dao\Product\Parameter\ParameterOptionsDao;
 use App\Core\Service\AbstractService;
 
 class ParameterOptionsService extends AbstractService

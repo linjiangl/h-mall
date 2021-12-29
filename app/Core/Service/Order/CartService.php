@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Service\Order;
 
 use App\Constants\State\Order\CartState;
-use App\Core\Dao\Goods\GoodsSkuDao;
+use App\Core\Dao\Product\GoodsSkuDao;
 use App\Core\Dao\Order\CartDao;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Product\Stock\Change\StockCartService;

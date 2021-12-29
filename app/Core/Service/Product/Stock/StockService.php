@@ -10,8 +10,8 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product\Stock;
 
-use App\Core\Dao\Goods\GoodsDao;
-use App\Core\Dao\Goods\GoodsSkuDao;
+use App\Core\Dao\Product\GoodsDao;
+use App\Core\Dao\Product\GoodsSkuDao;
 use App\Exception\BadRequestException;
 use App\Model\Product\ProductSku;
 use Hyperf\DbConnection\Db;
