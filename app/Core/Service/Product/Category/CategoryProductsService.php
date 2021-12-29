@@ -15,7 +15,7 @@ use App\Constants\State\Product\ProductState;
 use App\Core\Dao\Product\Category\CategoryDao;
 use Hyperf\Database\Model\Relations\Relation;
 
-class CategoryGoodsService
+class CategoryProductsService
 {
     /**
      * 首页分类推荐的商品数据.
@@ -34,10 +34,10 @@ class CategoryGoodsService
         ], [
             'children' => function (Relation $query) use ($goodsNumber) {
                 $query->with([
-                    'goodsList' => function (Relation $query) use ($goodsNumber) {
+                    'products' => function (Relation $query) use ($goodsNumber) {
                         $query->where('status', ProductState::STATUS_ON_SALE)->orderBy('sales', 'desc')->limit($goodsNumber);
                     },
-                    'goodsList.default',
+                    'products.default',
                 ]);
             },
         ]);

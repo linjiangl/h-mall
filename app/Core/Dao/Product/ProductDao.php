@@ -28,7 +28,7 @@ class ProductDao extends AbstractDao
     /**
      * 检查分类下是否有商品
      */
-    public function checkCategoryHasGoods(int $categoryId): bool
+    public function checkCategoryHasProduct(int $categoryId): bool
     {
         return (bool) Product::query()->where('category_id', $categoryId)->count();
     }

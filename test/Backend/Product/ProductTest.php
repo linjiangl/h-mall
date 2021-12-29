@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace HyperfTest\Backend\Goods;
+namespace HyperfTest\Backend\Product;
 
 use App\Constants\State\BooleanState;
 use App\Constants\State\Product\ProductState;
@@ -19,19 +19,19 @@ use HyperfTest\Backend\TraitBackendAuthorize;
  * @internal
  * @coversNothing
  */
-class GoodsTest extends BackendHttpTestCase
+class ProductTest extends BackendHttpTestCase
 {
     use TraitBackendAuthorize;
 
     public function testBackendGoodsPaginate()
     {
-        $this->url = '/goods/paginate';
+        $this->url = '/product/paginate';
         $this->handleHttpPaginate();
     }
 
     public function testBackendGoodsInfo()
     {
-        $this->url = '/goods/info';
+        $this->url = '/product/info';
         $this->data = [
             'id' => 1,
         ];
@@ -40,7 +40,7 @@ class GoodsTest extends BackendHttpTestCase
 
     public function testBackendGoodsCreate()
     {
-        $this->url = '/goods/create';
+        $this->url = '/product/create';
         $this->data = [
             'category_id' => 2,
             'brand_id' => 0,
@@ -153,7 +153,7 @@ class GoodsTest extends BackendHttpTestCase
 
     public function testBackendGoodsUpdate()
     {
-        $this->url = '/goods/update';
+        $this->url = '/product/update';
         $this->data = [
             'id' => 1,
             'category_id' => 2,

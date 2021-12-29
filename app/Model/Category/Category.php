@@ -59,7 +59,7 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id', 'id')->where('status', CategoryState::STATUS_ENABLED)->orderBy('sorting');
     }
 
-    public function goodsList()
+    public function products()
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
     }

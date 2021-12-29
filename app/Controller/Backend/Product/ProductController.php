@@ -12,12 +12,12 @@ namespace App\Controller\Backend\Product;
 
 use App\Constants\Action\ProductAction;
 use App\Controller\BackendController;
-use App\Core\Block\Common\Product\GoodsBlock;
+use App\Core\Block\Common\Product\ProductBlock;
 use App\Model\Product\Product;
 use App\Request\Backend\Product\ProductRequest;
 use App\Request\Common\BatchOperationRequest;
 
-class GoodsController extends BackendController
+class ProductController extends BackendController
 {
     public function createRequest(ProductRequest $request): Product
     {
@@ -49,8 +49,8 @@ class GoodsController extends BackendController
         return $this->setActionName(ProductAction::getMessage(ProductAction::PRODUCT_DELETE), $this->batchDelete());
     }
 
-    protected function setBlock(): GoodsBlock
+    protected function setBlock(): ProductBlock
     {
-        return new GoodsBlock();
+        return new ProductBlock();
     }
 }

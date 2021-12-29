@@ -14,7 +14,7 @@ use App\Core\Dao\AbstractDao;
 use App\Model\Refund\RefundProducts;
 use Hyperf\Database\Model\Model;
 
-class RefundGoodsDao extends AbstractDao
+class RefundProductsDao extends AbstractDao
 {
     protected string|Model $model = RefundProducts::class;
 

@@ -42,12 +42,12 @@ abstract class AbstractTypesService implements InterfaceTypesService
     /**
      * 商品信息.
      */
-    protected Product $goods;
+    protected Product $product;
 
     /**
      * 商品规格.
      */
-    protected array $goodsSpecification;
+    protected array $productSpecification;
 
     public function __construct(array $data, int $id = 0)
     {
@@ -64,17 +64,17 @@ abstract class AbstractTypesService implements InterfaceTypesService
         try {
             // 创建商品
             $goodsDao = new ProductDao();
-            $this->goods = $goodsDao->create($data);
-            $this->id = $this->goods->id;
+            $this->product = $goodsDao->create($data);
+            $this->id = $this->product->id;
 
             $this->syncAttribute();
             $this->syncTimer();
             $this->syncSpecification();
-            $this->syncSku();
+            $this->syncProductSku();
             $this->setDefaultSkuId();
 
             Db::commit();
-            return $this->goods;
+            return $this->product;
         } catch (Throwable $e) {
             Db::rollBack();
             write_logs('创建失败', $data);
@@ -90,16 +90,16 @@ abstract class AbstractTypesService implements InterfaceTypesService
         try {
             // 修改商品
             $goodsDao = new ProductDao();
-            $this->goods = $goodsDao->update($this->id, $data);
+            $this->product = $goodsDao->update($this->id, $data);
 
             $this->syncAttribute();
             $this->syncTimer();
             $this->syncSpecification();
-            $this->syncSku();
+            $this->syncProductSku();
             $this->setDefaultSkuId();
 
             Db::commit();
-            return $this->goods;
+            return $this->product;
         } catch (Throwable $e) {
             Db::rollBack();
             write_logs('修改失败', $data);
@@ -140,14 +140,14 @@ abstract class AbstractTypesService implements InterfaceTypesService
             ]);
             $goodsSpecification->save();
 
-            $this->goodsSpecification[] = $goodsSpecification;
+            $this->productSpecification[] = $goodsSpecification;
         }
     }
 
     /**
      * 保存商品sku数据.
      */
-    protected function syncSku(): void
+    protected function syncProductSku(): void
     {
         $goodsSkuDao = new ProductSkuDao();
         if (! $this->isCreated) {
@@ -160,7 +160,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
             }
 
             $deleteSkuIds = [];
-            $skuList = $goodsSkuDao->getListByGoodsId($this->id);
+            $skuList = $goodsSkuDao->getListByProductId($this->id);
             foreach ($skuList as $item) {
                 if (empty($updateSkuIds) || ! in_array($item['id'], $updateSkuIds)) {
                     $deleteSkuIds[] = $item['id'];
@@ -175,7 +175,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         // 创建或更新sku数据
         foreach ($this->post['skus'] as $sku) {
             $temp = [
-                'shop_id' => $this->goods->shop_id,
+                'shop_id' => $this->product->shop_id,
                 'goods_id' => $this->id,
                 'sku_name' => $sku['sku_name'],
                 'sku_no' => $sku['sku_no'] ?? '',
@@ -199,13 +199,13 @@ abstract class AbstractTypesService implements InterfaceTypesService
             }
 
             foreach ($sku['spec_values'] as $index => $item) {
-                if ($this->goodsSpecification[$index]['has_image'] && ! $item['image']) {
+                if ($this->productSpecification[$index]['has_image'] && ! $item['image']) {
                     throw new InternalException(sprintf('%s 规格需要上传图片！', $item['name']));
                 }
                 $goodsSpecification = new ProductSpecification([
                     'goods_id' => $this->id,
                     'goods_sku_id' => $goodsSku->id,
-                    'parent_id' => $this->goodsSpecification[$index]['id'],
+                    'parent_id' => $this->productSpecification[$index]['id'],
                     'name' => $item['name'],
                     'image' => $item['image'],
                 ]);
@@ -219,7 +219,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
      */
     protected function setDefaultSkuId(): void
     {
-        $skuList = (new ProductSkuDao())->getListByGoodsId($this->id);
+        $skuList = (new ProductSkuDao())->getListByProductId($this->id);
         $defaultSkuId = 0;
         foreach ($skuList as $index => $item) {
             if ($index === 0) {
@@ -231,8 +231,8 @@ abstract class AbstractTypesService implements InterfaceTypesService
             }
         }
 
-        $this->goods->default_sku_id = $defaultSkuId;
-        $this->goods->save();
+        $this->product->default_sku_id = $defaultSkuId;
+        $this->product->save();
     }
 
     protected function handleGoodsData(): array

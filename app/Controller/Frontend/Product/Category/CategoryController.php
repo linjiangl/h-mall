@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Frontend\Product\Category;
 
 use App\Controller\FrontendController;
-use App\Core\Block\Frontend\Goods\Category\CategoryBlock;
+use App\Core\Block\Frontend\Product\Category\CategoryBlock;
 
 class CategoryController extends FrontendController
 {

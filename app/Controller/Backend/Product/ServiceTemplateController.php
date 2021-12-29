@@ -13,18 +13,18 @@ namespace App\Controller\Backend\Product;
 use App\Constants\Action\ProductAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Product\ServiceTemplateBlock;
-use App\Core\Service\Product\GoodsService;
+use App\Core\Service\Product\ProductService;
 use App\Request\Backend\Product\ServiceRequest;
 
 class ServiceTemplateController extends BackendController
 {
-    public function createRequest(ServiceRequest $request): GoodsService
+    public function createRequest(ServiceRequest $request): ProductService
     {
         $request->validated();
         return $this->setActionName(ProductAction::getMessage(ProductAction::SERVICE_CREATE), $this->create());
     }
 
-    public function updateRequest(ServiceRequest $request): GoodsService
+    public function updateRequest(ServiceRequest $request): ProductService
     {
         $request->validated();
         return $this->setActionName(ProductAction::getMessage(ProductAction::SERVICE_UPDATE), $this->update());

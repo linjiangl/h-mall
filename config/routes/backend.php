@@ -17,7 +17,7 @@ use App\Controller\Backend\Authorize\LoginController;
 use App\Controller\Backend\Authorize\RegisterController;
 use App\Controller\Backend\Product\Brand\BrandController;
 use App\Controller\Backend\Product\Category\CategoryController;
-use App\Controller\Backend\Product\GoodsController;
+use App\Controller\Backend\Product\ProductController;
 use App\Controller\Backend\Product\Parameter\ParameterController;
 use App\Controller\Backend\Product\Parameter\ParameterOptionsController;
 use App\Controller\Backend\Product\ServiceTemplateController;
@@ -121,11 +121,11 @@ Router::addGroup('/backend', function () {
     Router::post('/parameterOptions/delete', [ParameterOptionsController::class, 'deleteRequest']);
 
     // goods
-    Router::post('/goods/paginate', [GoodsController::class, 'paginate']);
-    Router::post('/goods/info', [GoodsController::class, 'info']);
-    Router::post('/goods/create', [GoodsController::class, 'createRequest']);
-    Router::post('/goods/update', [GoodsController::class, 'updateRequest']);
-    Router::post('/goods/updateStatus', [GoodsController::class, 'updateStatusRequest']);
-    Router::post('/goods/delete', [GoodsController::class, 'batchDeleteRequest']);
-    Router::post('/goods/recycle', [GoodsController::class, 'recycleRequest']);
+    Router::post('/goods/paginate', [ProductController::class, 'paginate']);
+    Router::post('/goods/info', [ProductController::class, 'info']);
+    Router::post('/goods/create', [ProductController::class, 'createRequest']);
+    Router::post('/goods/update', [ProductController::class, 'updateRequest']);
+    Router::post('/goods/updateStatus', [ProductController::class, 'updateStatusRequest']);
+    Router::post('/goods/delete', [ProductController::class, 'batchDeleteRequest']);
+    Router::post('/goods/recycle', [ProductController::class, 'recycleRequest']);
 }, ['middleware' => [JWTBackendMiddleware::class]]);

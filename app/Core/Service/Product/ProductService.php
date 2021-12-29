@@ -15,7 +15,7 @@ use App\Core\Service\AbstractService;
 use App\Core\Service\Product\Types\TypesService;
 use App\Model\Product\Product;
 
-class GoodsService extends AbstractService
+class ProductService extends AbstractService
 {
     protected string $dao = ProductDao::class;
 

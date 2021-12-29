@@ -14,7 +14,7 @@ use App\Controller\Backend\Admin\AdminController;
 use App\Controller\Backend\Admin\Role\RoleController;
 use App\Controller\Backend\Product\Brand\BrandController;
 use App\Controller\Backend\Product\Category\CategoryController;
-use App\Controller\Backend\Product\GoodsController;
+use App\Controller\Backend\Product\ProductController;
 use App\Controller\Backend\Product\Parameter\ParameterController;
 use App\Controller\Backend\Product\Parameter\ParameterOptionsController;
 use App\Controller\Backend\Product\ServiceTemplateController;
@@ -38,7 +38,7 @@ class AdminActionAspect extends AbstractAspect
         ServiceTemplateController::class,
         ParameterController::class,
         ParameterOptionsController::class,
-        GoodsController::class,
+        ProductController::class,
 
         // user
         UserController::class,

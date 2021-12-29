@@ -8,10 +8,10 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Core\Block\Frontend\Goods\Category;
+namespace App\Core\Block\Frontend\Product\Category;
 
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Product\Category\CategoryGoodsService;
+use App\Core\Service\Product\Category\CategoryProductsService;
 use App\Core\Service\Product\Category\CategoryService;
 
 class CategoryBlock extends BaseBlock
@@ -20,6 +20,6 @@ class CategoryBlock extends BaseBlock
 
     public function recommend(int $goodsNumber = 8): array
     {
-        return CategoryGoodsService::recommend($goodsNumber);
+        return CategoryProductsService::recommend($goodsNumber);
     }
 }

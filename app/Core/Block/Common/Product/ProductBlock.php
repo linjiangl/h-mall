@@ -12,11 +12,11 @@ namespace App\Core\Block\Common\Product;
 
 use App\Constants\BlockSinceConstants;
 use App\Core\Block\BaseBlock;
-use App\Core\Service\Product\GoodsService;
+use App\Core\Service\Product\ProductService;
 
-class GoodsBlock extends BaseBlock
+class ProductBlock extends BaseBlock
 {
-    protected string $service = GoodsService::class;
+    protected string $service = ProductService::class;
 
     protected array $defaultSinceWith = [
         BlockSinceConstants::SINCE_BACKEND => [
@@ -33,6 +33,6 @@ class GoodsBlock extends BaseBlock
     {
         $detail = parent::info();
 
-        return (new GoodsService())->convertGoodsDetail($detail);
+        return (new ProductService())->convertGoodsDetail($detail);
     }
 }
