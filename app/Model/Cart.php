@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use App\Model\Goods\GoodsSku;
+use App\Model\Product\ProductSku;
 use App\Model\Shop\Shop;
 
 /**
@@ -24,7 +24,7 @@ use App\Model\Shop\Shop;
  * @property int $is_buy_now 立即购买 0:否, 1:是
  * @property int $created_time
  * @property int $updated_time
- * @property GoodsSku $sku
+ * @property ProductSku $sku
  */
 class Cart extends Model
 {
@@ -51,7 +51,7 @@ class Cart extends Model
 
     public function sku()
     {
-        return $this->belongsTo(GoodsSku::class, 'product_sku_id');
+        return $this->belongsTo(ProductSku::class, 'product_sku_id');
     }
 
     public function shop()

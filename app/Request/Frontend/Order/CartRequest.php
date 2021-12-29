@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Request\Frontend\Order;
 
 use App\Core\Tools\Validate;
-use App\Model\Goods\GoodsSku;
+use App\Model\Product\ProductSku;
 use App\Request\AbstractRequest;
 
 class CartRequest extends AbstractRequest
@@ -22,7 +22,7 @@ class CartRequest extends AbstractRequest
 
         $rules = [
             'post:create' => [
-                'sku_id' => Validate::ruleExistsModel(GoodsSku::class, 'sku_id', true),
+                'sku_id' => Validate::ruleExistsModel(ProductSku::class, 'sku_id', true),
                 'quantity' => 'required|integer|gt:0',
             ],
             'post:update' => [

@@ -11,16 +11,16 @@ declare(strict_types=1);
 namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Goods\Goods;
+use App\Model\Product\Product;
 use Hyperf\Database\Model\Model;
 
 class GoodsDao extends AbstractDao
 {
-    protected string|Model $model = Goods::class;
+    protected string|Model $model = Product::class;
 
     protected string $notFoundMessage = '商品不存在或已删除';
 
-    public function info(int $id, array $with = []): Goods
+    public function info(int $id, array $with = []): Product
     {
         return parent::info($id, $with);
     }
@@ -30,6 +30,6 @@ class GoodsDao extends AbstractDao
      */
     public function checkCategoryHasGoods(int $categoryId): bool
     {
-        return (bool) Goods::query()->where('category_id', $categoryId)->count();
+        return (bool) Product::query()->where('category_id', $categoryId)->count();
     }
 }

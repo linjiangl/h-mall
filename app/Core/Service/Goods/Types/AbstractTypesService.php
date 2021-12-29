@@ -17,8 +17,8 @@ use App\Core\Dao\Goods\GoodsSpecificationDao;
 use App\Core\Dao\Goods\GoodsTimerDao;
 use App\Exception\BadRequestException;
 use App\Exception\InternalException;
-use App\Model\Goods\Goods;
-use App\Model\Goods\GoodsSpecification;
+use App\Model\Product\Product;
+use App\Model\Product\ProductSpecification;
 use Hyperf\DbConnection\Db;
 use Throwable;
 
@@ -42,7 +42,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
     /**
      * 商品信息.
      */
-    protected Goods $goods;
+    protected Product $goods;
 
     /**
      * 商品规格.
@@ -55,7 +55,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         $this->post = $data;
     }
 
-    public function create(): Goods
+    public function create(): Product
     {
         $this->isCreated = true;
         $data = $this->handleGoodsData();
@@ -82,7 +82,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
         }
     }
 
-    public function update(): Goods
+    public function update(): Product
     {
         $data = $this->handleGoodsData();
 
@@ -133,7 +133,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
 
         // 添加商品规格
         foreach ($this->post['specs'] as $item) {
-            $goodsSpecification = new GoodsSpecification([
+            $goodsSpecification = new ProductSpecification([
                 'goods_id' => $this->id,
                 'name' => $item['name'],
                 'has_image' => $item['has_image'],
@@ -202,7 +202,7 @@ abstract class AbstractTypesService implements InterfaceTypesService
                 if ($this->goodsSpecification[$index]['has_image'] && ! $item['image']) {
                     throw new InternalException(sprintf('%s 规格需要上传图片！', $item['name']));
                 }
-                $goodsSpecification = new GoodsSpecification([
+                $goodsSpecification = new ProductSpecification([
                     'goods_id' => $this->id,
                     'goods_sku_id' => $goodsSku->id,
                     'parent_id' => $this->goodsSpecification[$index]['id'],

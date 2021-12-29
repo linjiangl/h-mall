@@ -13,7 +13,7 @@ namespace App\Core\Service\Goods\Stock;
 use App\Core\Dao\Goods\GoodsDao;
 use App\Core\Dao\Goods\GoodsSkuDao;
 use App\Exception\BadRequestException;
-use App\Model\Goods\GoodsSku;
+use App\Model\Product\ProductSku;
 use Hyperf\DbConnection\Db;
 
 class StockService
@@ -21,7 +21,7 @@ class StockService
     /**
      * 增加库存.
      */
-    public function increment(int $skuId, int $quantity = 1): GoodsSku
+    public function increment(int $skuId, int $quantity = 1): ProductSku
     {
         // sku 库存增加
         $sku = (new GoodsSkuDao())->info($skuId);
@@ -39,7 +39,7 @@ class StockService
     /**
      * 减少库存.
      */
-    public function decrement(int $skuId, int $quantity = 1): GoodsSku
+    public function decrement(int $skuId, int $quantity = 1): ProductSku
     {
         $sku = (new GoodsSkuDao())->info($skuId);
         $spu = (new GoodsDao())->info($sku->goods_id);

@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Model\Goods;
+namespace App\Model\Product;
 
 use App\Model\Model;
 

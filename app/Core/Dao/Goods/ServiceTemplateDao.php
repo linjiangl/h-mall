@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Goods\ServiceTemplate;
+use App\Model\Product\ServiceTemplate;
 use Hyperf\Database\Model\Model;
 
 class ServiceTemplateDao extends AbstractDao

@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Model\Goods;
+namespace App\Model\Product;
 
 use App\Model\Model;
 
@@ -17,9 +17,9 @@ use App\Model\Model;
  * @property int $parent_id 上级评论ID
  * @property int $user_id
  * @property int $order_id
- * @property int $order_goods_id
- * @property int $goods_id
- * @property int $goods_sku_id
+ * @property int $order_product_id
+ * @property int $product_id
+ * @property int $product_sku_id
  * @property int $score 评分
  * @property int $top 点赞
  * @property int $reply_num 回复数量
@@ -34,26 +34,26 @@ use App\Model\Model;
  * @property int $updated_time
  * @property int $deleted_time
  */
-class GoodsEvaluate extends Model
+class ProductEvaluate extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'goods_evaluate';
+    protected $table = 'product_evaluate';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'user_id', 'order_id', 'order_goods_id', 'goods_id', 'goods_sku_id', 'score', 'top', 'reply_num', 'additional_num', 'is_additional', 'is_image', 'is_anonymous', 'content', 'images', 'status', 'created_time', 'updated_time', 'deleted_time'];
+    protected $fillable = ['id', 'parent_id', 'user_id', 'order_id', 'order_product_id', 'product_id', 'product_sku_id', 'score', 'top', 'reply_num', 'additional_num', 'is_additional', 'is_image', 'is_anonymous', 'content', 'images', 'status', 'created_time', 'updated_time', 'deleted_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'order_goods_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'score' => 'integer', 'top' => 'integer', 'reply_num' => 'integer', 'additional_num' => 'integer', 'is_additional' => 'integer', 'is_image' => 'integer', 'is_anonymous' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'parent_id' => 'integer', 'user_id' => 'integer', 'order_id' => 'integer', 'order_product_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'score' => 'integer', 'top' => 'integer', 'reply_num' => 'integer', 'additional_num' => 'integer', 'is_additional' => 'integer', 'is_image' => 'integer', 'is_anonymous' => 'integer', 'status' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer', 'deleted_time' => 'integer'];
 }

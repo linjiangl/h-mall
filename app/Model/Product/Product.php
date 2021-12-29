@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://mall.xcmei.com
  * @contact  8257796@qq.com
  */
-namespace App\Model\Goods;
+namespace App\Model\Product;
 
 use App\Model\Model;
 
@@ -43,14 +43,14 @@ use App\Model\Model;
  * @property int $updated_time
  * @property int $deleted_time
  */
-class Goods extends Model
+class Product extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'goods';
+    protected $table = 'product';
 
     /**
      * The attributes that are mass assignable.
@@ -78,26 +78,26 @@ class Goods extends Model
 
     public function default()
     {
-        return $this->belongsTo(GoodsSku::class, 'default_sku_id');
+        return $this->belongsTo(ProductSku::class, 'default_sku_id');
     }
 
     public function attribute()
     {
-        return $this->hasOne(GoodsAttribute::class);
+        return $this->hasOne(ProductAttribute::class);
     }
 
     public function timer()
     {
-        return $this->hasOne(GoodsTimer::class);
+        return $this->hasOne(ProductTimer::class);
     }
 
     public function specs()
     {
-        return $this->hasMany(GoodsSpecification::class)->where('parent_id', 0)->with(['children']);
+        return $this->hasMany(ProductSpecification::class)->where('parent_id', 0)->with(['children']);
     }
 
     public function skus()
     {
-        return $this->hasMany(GoodsSku::class);
+        return $this->hasMany(ProductSku::class);
     }
 }

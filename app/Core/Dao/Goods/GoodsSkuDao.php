@@ -11,19 +11,19 @@ declare(strict_types=1);
 namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Goods\GoodsSku;
+use App\Model\Product\ProductSku;
 use Hyperf\Database\Model\Model;
 
 class GoodsSkuDao extends AbstractDao
 {
-    protected string|Model $model = GoodsSku::class;
+    protected string|Model $model = ProductSku::class;
 
     protected string $notFoundMessage = '商品规格不存在或已删除';
 
     /**
      * 创建商品
      */
-    public function create(array $data): GoodsSku
+    public function create(array $data): ProductSku
     {
         return parent::create($data);
     }
@@ -31,12 +31,12 @@ class GoodsSkuDao extends AbstractDao
     /**
      * 修改商品
      */
-    public function update(int $id, array $data): GoodsSku
+    public function update(int $id, array $data): ProductSku
     {
         return parent::update($id, $data);
     }
 
-    public function info(int $id, array $with = []): GoodsSku
+    public function info(int $id, array $with = []): ProductSku
     {
         return parent::info($id, $with);
     }

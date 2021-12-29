@@ -13,25 +13,25 @@ namespace App\Controller\Backend\Goods;
 use App\Constants\Action\GoodsAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Goods\GoodsBlock;
-use App\Model\Goods\Goods;
+use App\Model\Product\Product;
 use App\Request\Backend\Goods\GoodsRequest;
 use App\Request\Common\BatchOperationRequest;
 
 class GoodsController extends BackendController
 {
-    public function createRequest(GoodsRequest $request): Goods
+    public function createRequest(GoodsRequest $request): Product
     {
         $request->validated();
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_CREATE), $this->create());
     }
 
-    public function updateRequest(GoodsRequest $request): Goods
+    public function updateRequest(GoodsRequest $request): Product
     {
         $request->validated();
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_UPDATE), $this->update());
     }
 
-    public function updateStatusRequest(GoodsRequest $request): Goods
+    public function updateStatusRequest(GoodsRequest $request): Product
     {
         $request->validated();
         return $this->setActionName(GoodsAction::getMessage(GoodsAction::GOODS_UPDATE_STATUS), $this->update());

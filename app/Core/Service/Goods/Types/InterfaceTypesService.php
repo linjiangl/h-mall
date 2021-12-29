@@ -10,17 +10,17 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Goods\Types;
 
-use App\Model\Goods\Goods;
+use App\Model\Product\Product;
 
 interface InterfaceTypesService
 {
     /**
      * 创建商品
      */
-    public function create(): Goods;
+    public function create(): Product;
 
     /**
      * 编辑商品
      */
-    public function update(): Goods;
+    public function update(): Product;
 }

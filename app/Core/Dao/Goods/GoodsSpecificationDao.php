@@ -11,12 +11,12 @@ declare(strict_types=1);
 namespace App\Core\Dao\Goods;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Goods\GoodsSpecification;
+use App\Model\Product\ProductSpecification;
 use Hyperf\Database\Model\Model;
 
 class GoodsSpecificationDao extends AbstractDao
 {
-    protected string|Model $model = GoodsSpecification::class;
+    protected string|Model $model = ProductSpecification::class;
 
     /**
      * 删除商品规格
