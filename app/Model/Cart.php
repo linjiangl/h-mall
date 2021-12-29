@@ -17,8 +17,8 @@ use App\Model\Shop\Shop;
  * @property int $id
  * @property int $user_id
  * @property int $shop_id
- * @property int $goods_id
- * @property int $goods_sku_id
+ * @property int $product_id
+ * @property int $product_sku_id
  * @property int $quantity 数量
  * @property int $is_check 是否选中 0:否, 1:是
  * @property int $is_buy_now 立即购买 0:否, 1:是
@@ -40,18 +40,18 @@ class Cart extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'shop_id', 'goods_id', 'goods_sku_id', 'quantity', 'is_check', 'is_buy_now', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'user_id', 'shop_id', 'product_id', 'product_sku_id', 'quantity', 'is_check', 'is_buy_now', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'quantity' => 'integer', 'is_check' => 'integer', 'is_buy_now' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'shop_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'quantity' => 'integer', 'is_check' => 'integer', 'is_buy_now' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 
     public function sku()
     {
-        return $this->belongsTo(GoodsSku::class, 'goods_sku_id');
+        return $this->belongsTo(GoodsSku::class, 'product_sku_id');
     }
 
     public function shop()

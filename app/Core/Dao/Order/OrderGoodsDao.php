@@ -11,12 +11,12 @@ declare(strict_types=1);
 namespace App\Core\Dao\Order;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Order\OrderGoods;
+use App\Model\Order\OrderProducts;
 use Hyperf\Database\Model\Model;
 
 class OrderGoodsDao extends AbstractDao
 {
-    protected string|Model $model = OrderGoods::class;
+    protected string|Model $model = OrderProducts::class;
 
     protected string $notFoundMessage = '订单商品不存在或已删除';
 }

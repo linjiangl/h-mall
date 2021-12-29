@@ -37,7 +37,7 @@ class ModelCommand extends HyperfCommand
         'user',
         'shop',
         'category',
-        'goods',
+        'product',
         'order',
         'refund',
         'message',

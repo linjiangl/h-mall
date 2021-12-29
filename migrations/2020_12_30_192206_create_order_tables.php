@@ -23,15 +23,15 @@ class CreateOrderTables extends Migration
             $table->integerIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('shop_id');
-            $table->unsignedInteger('goods_id');
-            $table->unsignedInteger('goods_sku_id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('product_sku_id');
             $table->unsignedInteger('quantity')->default(1)->comment('数量');
             $table->unsignedTinyInteger('is_check')->default(0)->comment('是否选中 0:否, 1:是');
             $table->unsignedTinyInteger('is_buy_now')->default(0)->comment('立即购买 0:否, 1:是');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
-            $table->index(['user_id', 'goods_sku_id'], 'user_id_goods_sku_id');
+            $table->index(['user_id', 'product_sku_id'], 'user_id_product_sku_id');
             $table->index(['shop_id'], 'shop_id');
 
             $table->comment('购物车');
@@ -45,8 +45,8 @@ class CreateOrderTables extends Migration
             $table->string('payment_method', 30)->default('')->comment('支付类型');
             $table->string('trade_no', 64)->default('')->comment('第三方支付流水号');
             $table->unsignedSmallInteger('buy_quantity')->default(0)->comment('购买总数量，累加商品购买数量');
-            $table->unsignedSmallInteger('goods_quantity')->default(0)->comment('商品总数量，订单中的商品数量');
-            $table->decimal('goods_amount', 10)->unsigned()->default(0)->comment('商品总金额');
+            $table->unsignedSmallInteger('product_quantity')->default(0)->comment('商品总数量，订单中的商品数量');
+            $table->decimal('product_amount', 10)->unsigned()->default(0)->comment('商品总金额');
             $table->decimal('total_amount', 10)->unsigned()->default(0)->comment('订单总金额');
             $table->decimal('express_amount', 6)->unsigned()->default(0)->comment('运费');
             $table->decimal('discount_amount', 7)->unsigned()->default(0)->comment('折扣金额');
@@ -87,17 +87,17 @@ class CreateOrderTables extends Migration
             $table->comment('订单');
         });
 
-        Schema::create('order_goods', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('shop_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('order_id');
-            $table->unsignedInteger('goods_id');
-            $table->unsignedInteger('goods_sku_id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('product_sku_id');
             $table->unsignedInteger('quantity')->comment('购买数量');
             $table->decimal('sale_price', 7, 2)->unsigned()->comment('商品零售价');
             $table->decimal('pay_price', 7, 2)->unsigned()->comment('支付单价');
-            $table->decimal('goods_amount', 10, 2)->unsigned()->comment('商品总金额，数量 * 商品零售价 = 商品总金额');
+            $table->decimal('product_amount', 10, 2)->unsigned()->comment('商品总金额，数量 * 商品零售价 = 商品总金额');
             $table->decimal('discount_amount', 10, 2)->unsigned()->comment('折扣金额，各种优惠/折扣的金额小计');
             $table->decimal('settlement_amount', 10, 2)->unsigned()->comment('结算金额，订单实际支付金额');
             $table->decimal('surplus_refund_amount', 10, 2)->unsigned()->comment('剩余的退款金额，默认结算金额');
@@ -105,15 +105,15 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('refund_id')->default(0);
             $table->unsignedTinyInteger('refund_status')->default(0);
             $table->string('sku_properties_name', 255)->comment('SKU的值。如：机身颜色:黑色;手机套餐:官方标配');
-            $table->string('goods_name', 255)->comment('商品名称');
-            $table->text('goods_memo')->comment('商品备注');
+            $table->string('product_name', 255)->comment('商品名称');
+            $table->text('product_memo')->comment('商品备注');
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['order_id'], 'order_id');
-            $table->index(['goods_id'], 'goods_id');
-            $table->index(['goods_sku_id'], 'goods_sku_id');
-            $table->index(['user_id', 'goods_name'], 'user_id_goods_name');
+            $table->index(['product_id'], 'product_id');
+            $table->index(['product_sku_id'], 'product_sku_id');
+            $table->index(['user_id', 'product_name'], 'user_id_product_name');
 
             $table->comment('订单商品');
         });
@@ -173,7 +173,7 @@ class CreateOrderTables extends Migration
     {
         Schema::dropIfExists('cart');
         Schema::dropIfExists('order');
-        Schema::dropIfExists('order_goods');
+        Schema::dropIfExists('order_products');
         Schema::dropIfExists('order_express');
         Schema::dropIfExists('order_invoice');
     }

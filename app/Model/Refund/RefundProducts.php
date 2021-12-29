@@ -16,14 +16,14 @@ use App\Model\Model;
  * @property int $id
  * @property int $refund_id
  * @property int $order_id
- * @property int $order_goods_id
- * @property int $goods_id
- * @property int $goods_sku_id
+ * @property int $order_product_id
+ * @property int $product_id
+ * @property int $product_sku_id
  * @property string $amount
  * @property int $created_time
  * @property int $updated_time
  */
-class RefundGoods extends Model
+class RefundProducts extends Model
 {
     /**
      * The table associated with the model.
@@ -37,12 +37,12 @@ class RefundGoods extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'refund_id', 'order_id', 'order_goods_id', 'goods_id', 'goods_sku_id', 'amount', 'created_time', 'updated_time'];
+    protected $fillable = ['id', 'refund_id', 'order_id', 'order_product_id', 'product_id', 'product_sku_id', 'amount', 'created_time', 'updated_time'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'refund_id' => 'integer', 'order_id' => 'integer', 'order_goods_id' => 'integer', 'goods_id' => 'integer', 'goods_sku_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
+    protected $casts = ['id' => 'integer', 'refund_id' => 'integer', 'order_id' => 'integer', 'order_product_id' => 'integer', 'product_id' => 'integer', 'product_sku_id' => 'integer', 'created_time' => 'integer', 'updated_time' => 'integer'];
 }

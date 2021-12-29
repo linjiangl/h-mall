@@ -11,12 +11,12 @@ declare(strict_types=1);
 namespace App\Core\Dao\Refund;
 
 use App\Core\Dao\AbstractDao;
-use App\Model\Refund\RefundGoods;
+use App\Model\Refund\RefundProducts;
 use Hyperf\Database\Model\Model;
 
 class RefundGoodsDao extends AbstractDao
 {
-    protected string|Model $model = RefundGoods::class;
+    protected string|Model $model = RefundProducts::class;
 
     protected string $notFoundMessage = '退款的商品不存在';
 }

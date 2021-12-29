@@ -12,7 +12,7 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateGoodsTables extends Migration
+class CreateProductTables extends Migration
 {
     /**
      * Run the migrations.
@@ -86,7 +86,7 @@ class CreateGoodsTables extends Migration
             $table->comment('商品分类');
         });
 
-        Schema::create('goods', function (Blueprint $table) {
+        Schema::create('product', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('shop_id');
             $table->unsignedInteger('category_id')->comment('所属分类');
@@ -128,9 +128,9 @@ class CreateGoodsTables extends Migration
             $table->comment('商品');
         });
 
-        Schema::create('goods_attribute', function (Blueprint $table) {
+        Schema::create('product_attribute', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('goods_id');
+            $table->unsignedInteger('product_id');
             $table->unsignedTinyInteger('is_open_spec')->default(0)->comment('是否启用多规格 0:否,1:是');
             $table->string('unit', 30)->default('')->comment('商品单位');
             $table->string('service_ids', 255)->default('')->comment('商品服务');
@@ -139,14 +139,14 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
-            $table->unique(['goods_id'], 'goods_id');
+            $table->unique(['product_id'], 'product_id');
 
             $table->comment('商品属性');
         });
 
-        Schema::create('goods_timer', function (Blueprint $table) {
+        Schema::create('product_timer', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('goods_id');
+            $table->unsignedInteger('product_id');
             $table->unsignedTinyInteger('on')->default(0)->comment('定时上架');
             $table->unsignedTinyInteger('off')->default(0)->comment('定时下架');
             $table->unsignedInteger('on_time')->default(0);
@@ -154,17 +154,17 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('created_time')->default(0);
             $table->unsignedInteger('updated_time')->default(0);
 
-            $table->unique(['goods_id'], 'goods_id');
+            $table->unique(['product_id'], 'product_id');
             $table->index(['on_time'], 'on_time');
             $table->index(['off_time'], 'off_time');
 
             $table->comment('商品定时');
         });
 
-        Schema::create('goods_sku', function (Blueprint $table) {
+        Schema::create('product_sku', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('shop_id');
-            $table->unsignedInteger('goods_id');
+            $table->unsignedInteger('product_id');
             $table->string('sku_name', 255)->default('')->comment('商品sku名称');
             $table->string('sku_no', 64)->default('')->comment('商品sku编码');
             $table->decimal('sale_price', 10)->unsigned()->default(0)->comment('销售价格');
@@ -183,7 +183,7 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
 
             $table->index(['shop_id'], 'shop_id');
-            $table->index(['goods_id'], 'goods_id');
+            $table->index(['product_id'], 'product_id');
             $table->index(['sale_price'], 'sale_price');
             $table->index(['stock'], 'stock');
             $table->index(['sales'], 'sales');
@@ -192,29 +192,29 @@ class CreateGoodsTables extends Migration
             $table->comment('商品规格');
         });
 
-        Schema::create('goods_specification', function (Blueprint $table) {
+        Schema::create('product_specification', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('goods_id');
-            $table->unsignedInteger('goods_sku_id')->default(0);
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('product_sku_id')->default(0);
             $table->unsignedInteger('parent_id')->default(0)->comment('父级id');
             $table->string('name', 100)->comment('名称');
             $table->unsignedTinyInteger('has_image')->default(0)->comment('是否含有图片 0否,1是');
             $table->string('image')->default('')->comment('图片地址');
 
-            $table->index(['goods_id', 'parent_id'], 'goods_id');
-            $table->index(['goods_sku_id'], 'goods_sku_id');
+            $table->index(['product_id', 'parent_id'], 'product_id');
+            $table->index(['product_sku_id'], 'product_sku_id');
 
             $table->comment('商品规格');
         });
 
-        Schema::create('goods_evaluate', function (Blueprint $table) {
+        Schema::create('product_evaluate', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('parent_id')->default(0)->comment('上级评论ID');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('order_id');
-            $table->unsignedInteger('order_goods_id');
-            $table->unsignedInteger('goods_id');
-            $table->unsignedInteger('goods_sku_id');
+            $table->unsignedInteger('order_product_id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('product_sku_id');
             $table->unsignedTinyInteger('score')->default(0)->comment('评分');
             $table->unsignedInteger('top')->default(0)->comment('点赞');
             $table->unsignedInteger('reply_num')->default(0)->comment('回复数量');
@@ -229,19 +229,19 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
 
-            $table->index(['order_goods_id'], 'order_goods_id');
+            $table->index(['order_product_id'], 'order_product_id');
             $table->index(['order_id'], 'order_id');
             $table->index(['user_id'], 'user_id');
-            $table->index(['goods_id', 'parent_id', 'top'], 'goods_id');
+            $table->index(['product_id', 'parent_id', 'top'], 'product_id');
 
             $table->comment('商品评价');
         });
 
-        Schema::create('goods_evaluate_reply', function (Blueprint $table) {
+        Schema::create('product_evaluate_reply', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('goods_evaluate_id')->comment('评价ID');
-            $table->unsignedInteger('goods_id');
-            $table->unsignedInteger('goods_sku_id');
+            $table->unsignedInteger('product_evaluate_id')->comment('评价ID');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('product_sku_id');
             $table->unsignedInteger('user_id')->comment('回复评价的用户ID');
             $table->unsignedInteger('reply_user_id')->default(0)->comment('被回复评价的用户ID');
             $table->unsignedInteger('top')->default(0)->comment('点赞');
@@ -251,8 +251,8 @@ class CreateGoodsTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
 
-            $table->index(['goods_evaluate_id'], 'goods_evaluate_id');
-            $table->index(['goods_id', 'top'], 'goods_id_top');
+            $table->index(['product_evaluate_id'], 'product_evaluate_id');
+            $table->index(['product_id', 'top'], 'product_id_top');
 
             $table->comment('商品评价回复');
         });
@@ -270,12 +270,12 @@ class CreateGoodsTables extends Migration
         Schema::dropIfExists('parameter');
         Schema::dropIfExists('parameter_options');
         Schema::dropIfExists('category');
-        Schema::dropIfExists('goods');
-        Schema::dropIfExists('goods_attribute');
-        Schema::dropIfExists('goods_timer');
-        Schema::dropIfExists('goods_sku');
-        Schema::dropIfExists('goods_specification');
-        Schema::dropIfExists('goods_evaluate');
-        Schema::dropIfExists('goods_evaluate_reply');
+        Schema::dropIfExists('product');
+        Schema::dropIfExists('product_attribute');
+        Schema::dropIfExists('product_timer');
+        Schema::dropIfExists('product_sku');
+        Schema::dropIfExists('product_specification');
+        Schema::dropIfExists('product_evaluate');
+        Schema::dropIfExists('product_evaluate_reply');
     }
 }
