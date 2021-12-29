@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Product\Parameter;
 
-use App\Constants\Action\GoodsAction;
+use App\Constants\Action\ProductAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Product\Parameter\ParameterOptionsBlock;
 use App\Model\Parameter\ParameterOption;
@@ -21,19 +21,19 @@ class ParameterOptionsController extends BackendController
     public function createRequest(ParameterOptionsRequest $request): ParameterOption
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_CREATE), $this->create());
+        return $this->setActionName(ProductAction::getMessage(ProductAction::PARAMETER_OPTION_CREATE), $this->create());
     }
 
     public function updateRequest(ParameterOptionsRequest $request): ParameterOption
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_UPDATE), $this->update());
+        return $this->setActionName(ProductAction::getMessage(ProductAction::PARAMETER_OPTION_UPDATE), $this->update());
     }
 
     public function deleteRequest(ParameterOptionsRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::PARAMETER_OPTION_DELETE), $this->delete());
+        return $this->setActionName(ProductAction::getMessage(ProductAction::PARAMETER_OPTION_DELETE), $this->delete());
     }
 
     protected function setBlock(): ParameterOptionsBlock

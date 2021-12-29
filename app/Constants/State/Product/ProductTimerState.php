@@ -13,12 +13,13 @@ namespace App\Constants\State\Product;
 use App\Constants\State\AbstractState;
 use App\Constants\State\BooleanState;
 
-class GoodsAttributeState extends AbstractState
+class ProductTimerState extends AbstractState
 {
     public static function map(): array
     {
         return [
-            'is_open_spec' => BooleanState::map()['default'],
+            'on' => BooleanState::map()['default'],
+            'off' => BooleanState::map()['default'],
         ];
     }
 }

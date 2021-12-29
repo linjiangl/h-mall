@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Service\Product\Types;
 
-use App\Constants\State\Product\GoodsState;
+use App\Constants\State\Product\ProductState;
 use App\Exception\InternalException;
 
 class TypesService
@@ -22,8 +22,8 @@ class TypesService
     protected InterfaceTypesService $class;
 
     protected array $mapClass = [
-        GoodsState::TYPE_GENERAL => GeneralService::class,
-        GoodsState::TYPE_VIRTUAL => VirtualService::class,
+        ProductState::TYPE_GENERAL => GeneralService::class,
+        ProductState::TYPE_VIRTUAL => VirtualService::class,
     ];
 
     public function __construct(array $data, int $id = 0)

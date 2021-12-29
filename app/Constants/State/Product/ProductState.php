@@ -13,7 +13,7 @@ namespace App\Constants\State\Product;
 use App\Constants\State\AbstractState;
 use App\Constants\State\BooleanState;
 
-class GoodsState extends AbstractState
+class ProductState extends AbstractState
 {
     // 状态
     public const STATUS_OFF_SALE = 0;

@@ -17,34 +17,34 @@ use Hyperf\Constants\Annotation\Constants;
 /**
  * @Constants
  */
-class GoodsAction extends AbstractConstants
+class ProductAction extends AbstractConstants
 {
     use TraitConstants;
 
     /**
      * @Message("创建商品")
      */
-    public const GOODS_CREATE = 'goods_create';
+    public const PRODUCT_CREATE = 'product_create';
 
     /**
      * @Message("修改商品")
      */
-    public const GOODS_UPDATE = 'goods_update';
+    public const PRODUCT_UPDATE = 'product_update';
 
     /**
      * @Message("修改商品状态")
      */
-    public const GOODS_UPDATE_STATUS = 'goods_update_status';
+    public const PRODUCT_UPDATE_STATUS = 'product_update_status';
 
     /**
      * @Message("删除商品")
      */
-    public const GOODS_DELETE = 'goods_delete';
+    public const PRODUCT_DELETE = 'product_delete';
 
     /**
      * @Message("商品加入回收站")
      */
-    public const GOODS_RECYCLE = 'goods_recycle';
+    public const PRODUCT_RECYCLE = 'product_recycle';
 
     /**
      * @Message("创建分类")

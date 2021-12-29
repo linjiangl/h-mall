@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Backend\Product;
 
-use App\Constants\Action\GoodsAction;
+use App\Constants\Action\ProductAction;
 use App\Controller\BackendController;
 use App\Core\Block\Common\Product\ServiceTemplateBlock;
 use App\Core\Service\Product\GoodsService;
@@ -21,19 +21,19 @@ class ServiceTemplateController extends BackendController
     public function createRequest(ServiceRequest $request): GoodsService
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_CREATE), $this->create());
+        return $this->setActionName(ProductAction::getMessage(ProductAction::SERVICE_CREATE), $this->create());
     }
 
     public function updateRequest(ServiceRequest $request): GoodsService
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_UPDATE), $this->update());
+        return $this->setActionName(ProductAction::getMessage(ProductAction::SERVICE_UPDATE), $this->update());
     }
 
     public function deleteRequest(ServiceRequest $request): bool
     {
         $request->validated();
-        return $this->setActionName(GoodsAction::getMessage(GoodsAction::SERVICE_DELETE), $this->delete());
+        return $this->setActionName(ProductAction::getMessage(ProductAction::SERVICE_DELETE), $this->delete());
     }
 
     protected function setBlock(): ServiceTemplateBlock

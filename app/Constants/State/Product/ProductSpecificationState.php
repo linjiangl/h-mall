@@ -13,7 +13,7 @@ namespace App\Constants\State\Product;
 use App\Constants\State\AbstractState;
 use App\Constants\State\BooleanState;
 
-class GoodsSpecificationState extends AbstractState
+class ProductSpecificationState extends AbstractState
 {
     public static function map(): array
     {

@@ -17,7 +17,7 @@ use Hyperf\Constants\Annotation\Constants;
 /**
  * @Constants
  */
-class GoodsMessage extends AbstractConstants
+class ProductMessage extends AbstractConstants
 {
     use TraitConstants;
 

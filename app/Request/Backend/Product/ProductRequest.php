@@ -10,22 +10,22 @@ declare(strict_types=1);
  */
 namespace App\Request\Backend\Product;
 
-use App\Constants\State\Product\GoodsAttributeState;
-use App\Constants\State\Product\GoodsSpecificationState;
-use App\Constants\State\Product\GoodsState;
-use App\Constants\State\Product\GoodsTimerState;
+use App\Constants\State\Product\ProductAttributeState;
+use App\Constants\State\Product\ProductSpecificationState;
+use App\Constants\State\Product\ProductState;
+use App\Constants\State\Product\ProductTimerState;
 use App\Request\AbstractRequest;
 
-class GoodsRequest extends AbstractRequest
+class ProductRequest extends AbstractRequest
 {
     public function rules(string $ruleKey = ''): array
     {
         parent::rules($ruleKey);
 
-        $goodsMap = GoodsState::map();
-        $goodsAttributeMap = GoodsAttributeState::map();
-        $goodsTimerMap = GoodsTimerState::map();
-        $goodsSpecMap = GoodsSpecificationState::map();
+        $productMap = ProductState::map();
+        $productAttributeMap = ProductAttributeState::map();
+        $productTimerMap = ProductTimerState::map();
+        $productSpecMap = ProductSpecificationState::map();
 
         $rules = [
             'post:create' => [
@@ -35,29 +35,29 @@ class GoodsRequest extends AbstractRequest
                 'achieve_price' => 'required|numeric|gt:0',
                 'introduction' => 'string|max:255',
                 'keywords' => 'string|max:255',
-                'type' => 'required|required|in:' . $this->getRuleInByState($goodsMap['type']),
+                'type' => 'required|required|in:' . $this->getRuleInByState($productMap['type']),
                 'virtual_sales' => 'integer',
-                'status' => 'required|integer|in:' . $this->getRuleInByState($goodsMap['status']),
-                'recommend_way' => 'required|integer|in:' . $this->getRuleInByState($goodsMap['recommend_way']),
-                'is_consume_discount' => 'integer|in:' . $this->getRuleInByState($goodsMap['is_consume_discount']),
-                'is_free_shipping' => 'integer|in:' . $this->getRuleInByState($goodsMap['is_free_shipping']),
+                'status' => 'required|integer|in:' . $this->getRuleInByState($productMap['status']),
+                'recommend_way' => 'required|integer|in:' . $this->getRuleInByState($productMap['recommend_way']),
+                'is_consume_discount' => 'integer|in:' . $this->getRuleInByState($productMap['is_consume_discount']),
+                'is_free_shipping' => 'integer|in:' . $this->getRuleInByState($productMap['is_free_shipping']),
                 'buy_max' => 'integer',
                 'buy_min' => 'integer',
-                'refund_type' => 'required|string|in:' . $this->getRuleInByState($goodsMap['refund_type']),
+                'refund_type' => 'required|string|in:' . $this->getRuleInByState($productMap['refund_type']),
                 'images' => 'required|array',
                 'video_url' => 'string|max:255',
-                'attribute.is_open_spec' => 'required|integer|in:' . $this->getRuleInByState($goodsAttributeMap['is_open_spec']),
+                'attribute.is_open_spec' => 'required|integer|in:' . $this->getRuleInByState($productAttributeMap['is_open_spec']),
                 'attribute.unit' => 'required|string|max:30',
                 'attribute.service_ids' => 'array',
                 'attribute.parameter' => 'array',
                 'attribute.content' => 'required|string',
-                'timer.on' => 'required|integer|in:' . $this->getRuleInByState($goodsTimerMap['on']),
-                'timer.off' => 'required|integer|in:' . $this->getRuleInByState($goodsTimerMap['off']),
+                'timer.on' => 'required|integer|in:' . $this->getRuleInByState($productTimerMap['on']),
+                'timer.off' => 'required|integer|in:' . $this->getRuleInByState($productTimerMap['off']),
                 'timer.on_time' => 'required|integer',
                 'timer.off_time' => 'required|integer',
                 'specs.*' => 'required|array',
                 'specs.*.name' => 'required|string|max:50',
-                'specs.*.has_image' => 'required|integer|in:' . $this->getRuleInByState($goodsSpecMap['has_image']),
+                'specs.*.has_image' => 'required|integer|in:' . $this->getRuleInByState($productSpecMap['has_image']),
                 'skus.*' => 'required|array',
                 'skus.*.sku_name' => 'required|string|max:255',
                 'skus.*.sku_no' => 'required|string|max:64',
@@ -69,11 +69,11 @@ class GoodsRequest extends AbstractRequest
                 'skus.*.virtual_sales' => 'integer',
                 'skus.*.weight' => 'numeric',
                 'skus.*.volume' => 'numeric',
-                'skus.*.is_default' => 'required|integer|in:' . $this->getRuleInByState($goodsSpecMap['has_image']),
+                'skus.*.is_default' => 'required|integer|in:' . $this->getRuleInByState($productSpecMap['has_image']),
                 'skus.*.image' => 'string|max:255',
                 'skus.*.spec_values.*' => 'required|array',
                 'skus.*.spec_values.*.name' => 'required|string|max:50',
-                'skus.*.spec_values.*.has_image' => 'required|integer|in:' . $this->getRuleInByState($goodsSpecMap['has_image']),
+                'skus.*.spec_values.*.has_image' => 'required|integer|in:' . $this->getRuleInByState($productSpecMap['has_image']),
                 'skus.*.spec_values.*.image' => 'string|max:255',
             ],
             'post:update' => [
@@ -82,7 +82,7 @@ class GoodsRequest extends AbstractRequest
             ],
             'post:updateStatus' => [
                 'id' => 'required|integer|gt:0',
-                'status' => 'integer|in:' . $this->getRuleInByState($goodsMap['type']),
+                'status' => 'integer|in:' . $this->getRuleInByState($productMap['type']),
             ],
         ];
 
