@@ -330,10 +330,7 @@ abstract class AbstractDao
      */
     public function getMapWith(string $type): array
     {
-        if (array_key_exists($type, $this->mapWith)) {
-            return $this->mapWith[$type];
-        }
-        return [];
+        return array_key_exists($type, $this->mapWith) ? $this->mapWith[$type] : [];
     }
 
     /**
@@ -342,17 +339,6 @@ abstract class AbstractDao
     public function setMapWith(): static
     {
         return $this;
-    }
-
-    /**
-     * 生成关联模型的索引.
-     */
-    public function buildMapWithKey(string $type, string $class = ''): string
-    {
-        if ($class) {
-            $type = substr(strrchr($class, '\\'), 1) . ':' . $type;
-        }
-        return $type;
     }
 
     /**
