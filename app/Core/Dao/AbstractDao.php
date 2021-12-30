@@ -328,9 +328,8 @@ abstract class AbstractDao
     /**
      * 获取关联模型.
      */
-    public function getMapWith(string $type, string $class = ''): array
+    public function getMapWith(string $type): array
     {
-        $type = $this->buildMapWithKey($type, $class);
         if (array_key_exists($type, $this->mapWith)) {
             return $this->mapWith[$type];
         }

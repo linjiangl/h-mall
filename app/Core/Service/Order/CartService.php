@@ -35,8 +35,8 @@ class CartService extends AbstractService
 
         return $dao->getListByCondition([
             'user_id' => $user['user_id'],
-            'is_buy_now' => CartState::IS_BUY_NOW_TRUE,
-        ], $dao->setMapWith()->getMapWith('getCart', self::class));
+            'is_buy_now' => CartState::IS_BUY_NOW_FALSE,
+        ], $dao->setMapWith()->getMapWith(CartDao::WITH_GET_CART));
     }
 
     /**
@@ -49,7 +49,7 @@ class CartService extends AbstractService
 
         return $dao->getCountByCondition([
             'user_id' => $user['user_id'],
-            'is_buy_now' => CartState::IS_BUY_NOW_TRUE,
+            'is_buy_now' => CartState::IS_BUY_NOW_FALSE,
         ]);
     }
 
@@ -181,7 +181,7 @@ class CartService extends AbstractService
         $user = $this->authorize;
         $condition = [
             'user_id' => $user['user_id'],
-            'is_buy_now' => CartState::IS_BUY_NOW_TRUE,
+            'is_buy_now' => CartState::IS_BUY_NOW_FALSE,
         ];
         $dao = new CartDao();
         $cartList = $dao->getListByCondition($condition);
@@ -217,7 +217,7 @@ class CartService extends AbstractService
             'user_id' => $user['user_id'],
             'is_check' => CartState::IS_CHECK_TRUE,
             'is_buy_now' => CartState::IS_BUY_NOW_FALSE,
-        ], $dao->setMapWith()->getMapWith('settlement', self::class));
+        ], $dao->setMapWith()->getMapWith(CartDao::WITH_SETTLEMENT));
 
         $result = [];
         foreach ($list as $item) {
