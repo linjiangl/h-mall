@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Core\Block\Common\Order;
 
 use App\Core\Block\BaseBlock;
+use App\Core\Service\AbstractService;
 use App\Core\Service\Order\CartService;
 use App\Model\Cart;
 
@@ -20,46 +21,40 @@ class CartBlock extends BaseBlock
 
     public function getCart(): array
     {
-        /** @var CartService $service */
-        $service = $this->service();
-
-        return $service->getCart();
+        return $this->service()->getCart();
     }
 
     public function countCart(): int
     {
-        /** @var CartService $service */
-        $service = $this->service();
+        return $this->service()->countCart();
+    }
 
-        return $service->countCart();
+    public function updateIsCheck(): bool
+    {
+        $post = $this->getData();
+
+        $this->service()->updateIsCheck($post['id'], $post['is_check']);
+
+        return true;
     }
 
     public function create(): Cart
     {
         $data = $this->handleCreateData();
 
-        /** @var CartService $service */
-        $service = $this->service();
-
-        return $service->addCart($data['sku_id'], $data['quantity']);
+        return $this->service()->addCart($data['sku_id'], $data['quantity']);
     }
 
     public function update(): Cart
     {
         $data = $this->handleUpdateData();
 
-        /** @var CartService $service */
-        $service = $this->service();
-
-        return $service->updateCart($data['id'], $data['quantity']);
+        return $this->service()->updateCart($data['id'], $data['quantity']);
     }
 
     public function delete(): bool
     {
-        /** @var CartService $service */
-        $service = $this->service();
-
-        $service->delete($this->getPrimaryKey());
+        $this->service()->delete($this->getPrimaryKey());
 
         return true;
     }
@@ -70,5 +65,13 @@ class CartBlock extends BaseBlock
         $service = $this->service();
 
         return $service->clearCart();
+    }
+
+    /**
+     * @return CartService
+     */
+    protected function service(): AbstractService
+    {
+        return parent::service();
     }
 }

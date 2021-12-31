@@ -29,6 +29,10 @@ class CartRequest extends AbstractRequest
                 'id' => 'required|integer|gt:0',
                 'quantity' => 'required|integer|gt:0',
             ],
+            'post:updateIsCheck' => [
+                'id' => 'required|integer|gt:0',
+                'is_check' => 'required|integer|in:0,1',
+            ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',
             ],
@@ -42,6 +46,7 @@ class CartRequest extends AbstractRequest
             'id' => '主键',
             'sku_id' => '商品规格',
             'quantity' => '数量',
+            'is_check' => '是否选中商品',
         ];
     }
 }

@@ -40,6 +40,7 @@ Router::addGroup('/frontend', function () {
     // 购物车
     Router::post('/cart/create', [CartController::class, 'createRequest']);
     Router::post('/cart/update', [CartController::class, 'updateRequest']);
+    Router::post('/cart/updateIsCheck', [CartController::class, 'updateIsCheckRequest']);
     Router::post('/cart/delete', [CartController::class, 'deleteRequest']);
     Router::post('/cart/clear', [CartController::class, 'clear']);
     Router::post('/cart/my', [CartController::class, 'my']);

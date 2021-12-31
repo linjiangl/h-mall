@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Frontend\Order;
 
 use App\Controller\FrontendController;
+use App\Core\Block\BaseBlock;
 use App\Core\Block\Common\Order\CartBlock;
 use App\Model\Cart;
 use App\Request\Frontend\Order\CartRequest;
@@ -35,32 +36,37 @@ class CartController extends FrontendController
         return parent::delete();
     }
 
+    public function updateIsCheckRequest(CartRequest $request): bool
+    {
+        $request->validated();
+        return $this->getBlock()->updateIsCheck();
+    }
+
     public function clear(): bool
     {
-        /** @var CartBlock $block */
-        $block = $this->getBlock();
-
-        return $block->clear();
+        return $this->getBlock()->clear();
     }
 
     public function my(): array
     {
-        /** @var CartBlock $block */
-        $block = $this->getBlock();
-
-        return $block->getCart();
+        return $this->getBlock()->getCart();
     }
 
     public function count(): int
     {
-        /** @var CartBlock $block */
-        $block = $this->getBlock();
-
-        return $block->countCart();
+        return $this->getBlock()->countCart();
     }
 
     protected function setBlock(): CartBlock
     {
         return new CartBlock();
+    }
+
+    /**
+     * @return CartBlock
+     */
+    protected function getBlock(): BaseBlock
+    {
+        return parent::getBlock();
     }
 }

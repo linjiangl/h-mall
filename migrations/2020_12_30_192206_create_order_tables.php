@@ -26,6 +26,7 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('product_sku_id');
             $table->unsignedInteger('quantity')->default(1)->comment('数量');
+            $table->decimal('sale_price', 10)->unsigned()->comment('商品加入时价格');
             $table->unsignedTinyInteger('is_check')->default(0)->comment('是否选中 0:否, 1:是');
             $table->unsignedTinyInteger('is_buy_now')->default(0)->comment('立即购买 0:否, 1:是');
             $table->unsignedInteger('created_time')->default(0);
@@ -46,8 +47,8 @@ class CreateOrderTables extends Migration
             $table->string('trade_no', 64)->default('')->comment('第三方支付流水号');
             $table->unsignedSmallInteger('buy_quantity')->default(0)->comment('购买总数量，累加商品购买数量');
             $table->unsignedSmallInteger('products_quantity')->default(0)->comment('商品总数量，订单中的商品数量');
-            $table->decimal('products_amount', 10)->unsigned()->default(0)->comment('商品总金额');
-            $table->decimal('total_amount', 10)->unsigned()->default(0)->comment('订单总金额');
+            $table->decimal('products_amount', 11)->unsigned()->default(0)->comment('商品总金额');
+            $table->decimal('total_amount', 11)->unsigned()->default(0)->comment('订单总金额');
             $table->decimal('express_amount', 6)->unsigned()->default(0)->comment('运费');
             $table->decimal('discount_amount', 7)->unsigned()->default(0)->comment('折扣金额');
             $table->string('consignee', 50)->comment('收件人');
@@ -95,12 +96,12 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('product_sku_id');
             $table->unsignedInteger('quantity')->comment('购买数量');
-            $table->decimal('sale_price', 7, 2)->unsigned()->comment('商品零售价');
-            $table->decimal('pay_price', 7, 2)->unsigned()->comment('支付单价');
-            $table->decimal('product_amount', 10, 2)->unsigned()->comment('商品总金额，数量 * 商品零售价 = 商品总金额');
-            $table->decimal('discount_amount', 10, 2)->unsigned()->comment('折扣金额，各种优惠/折扣的金额小计');
-            $table->decimal('settlement_amount', 10, 2)->unsigned()->comment('结算金额，订单实际支付金额');
-            $table->decimal('surplus_refund_amount', 10, 2)->unsigned()->comment('剩余的退款金额，默认结算金额');
+            $table->decimal('sale_price', 7)->unsigned()->comment('商品零售价');
+            $table->decimal('pay_price', 7)->unsigned()->comment('支付单价');
+            $table->decimal('product_amount', 11)->unsigned()->comment('商品总金额，数量 * 商品零售价 = 商品总金额');
+            $table->decimal('discount_amount', 11)->unsigned()->comment('折扣金额，各种优惠/折扣的金额小计');
+            $table->decimal('settlement_amount', 11)->unsigned()->comment('结算金额，订单实际支付金额');
+            $table->decimal('surplus_refund_amount', 11)->unsigned()->comment('剩余的退款金额，默认结算金额');
             $table->string('refund_type', 30)->default('');
             $table->unsignedInteger('refund_id')->default(0);
             $table->unsignedTinyInteger('refund_status')->default(0);
@@ -125,7 +126,7 @@ class CreateOrderTables extends Migration
             $table->unsignedInteger('express_id');
             $table->string('express_name', 20)->comment('快递名称');
             $table->string('express_number', 64)->comment('快递单号');
-            $table->decimal('amount', 6, 2)->unsigned()->default(0)->comment('快递费');
+            $table->decimal('amount', 6)->unsigned()->default(0)->comment('快递费');
             $table->integer('text_id')->default(0);
             $table->string('remark', 255)->default('');
             $table->unsignedInteger('created_time')->default(0);
