@@ -12,6 +12,7 @@ namespace App\Controller\Backend\Authorize;
 
 use App\Controller\BackendController;
 use App\Core\Block\Backend\Authorize\RegisterBlock;
+use App\Core\Block\BaseBlock;
 use App\Request\Backend\Authorize\RegisterRequest;
 
 class RegisterController extends BackendController
@@ -22,13 +23,19 @@ class RegisterController extends BackendController
     public function register(RegisterRequest $request): array
     {
         $request->validated();
-        /** @var RegisterBlock $service */
-        $service = $this->getBlock();
-        return $service->register();
+        return $this->getBlock()->register();
     }
 
     protected function setBlock(): RegisterBlock
     {
         return new RegisterBlock();
+    }
+
+    /**
+     * @return RegisterBlock
+     */
+    protected function getBlock(): BaseBlock
+    {
+        return parent::getBlock();
     }
 }

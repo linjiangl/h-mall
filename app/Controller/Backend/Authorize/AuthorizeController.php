@@ -12,6 +12,7 @@ namespace App\Controller\Backend\Authorize;
 
 use App\Controller\BackendController;
 use App\Core\Block\Backend\Authorize\AuthorizeBlock;
+use App\Core\Block\BaseBlock;
 
 class AuthorizeController extends BackendController
 {
@@ -20,13 +21,19 @@ class AuthorizeController extends BackendController
      */
     public function info(): array
     {
-        /** @var AuthorizeBlock $service */
-        $service = $this->getBlock();
-        return $service->info();
+        return $this->getBlock()->info();
     }
 
     protected function setBlock(): AuthorizeBlock
     {
         return new AuthorizeBlock();
+    }
+
+    /**
+     * @return AuthorizeBlock
+     */
+    protected function getBlock(): BaseBlock
+    {
+        return parent::getBlock();
     }
 }

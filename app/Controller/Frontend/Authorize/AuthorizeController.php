@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Frontend\Authorize;
 
 use App\Controller\FrontendController;
+use App\Core\Block\BaseBlock;
 use App\Core\Block\Frontend\Authorize\AuthorizeBlock;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\RateLimit\Annotation\RateLimit;
@@ -26,13 +27,19 @@ class AuthorizeController extends FrontendController
      */
     public function info(): array
     {
-        /** @var AuthorizeBlock $service */
-        $service = $this->getBlock();
-        return $service->info();
+        return $this->getBlock()->info();
     }
 
     protected function setBlock(): AuthorizeBlock
     {
         return new AuthorizeBlock();
+    }
+
+    /**
+     * @return AuthorizeBlock
+     */
+    protected function getBlock(): BaseBlock
+    {
+        return parent::getBlock();
     }
 }

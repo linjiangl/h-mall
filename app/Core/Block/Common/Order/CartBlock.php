@@ -61,10 +61,7 @@ class CartBlock extends BaseBlock
 
     public function clear(): bool
     {
-        /** @var CartService $service */
-        $service = $this->service();
-
-        return $service->clearCart();
+        return $this->service()->clearCart();
     }
 
     /**

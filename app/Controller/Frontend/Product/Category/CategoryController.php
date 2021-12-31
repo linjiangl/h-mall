@@ -11,20 +11,26 @@ declare(strict_types=1);
 namespace App\Controller\Frontend\Product\Category;
 
 use App\Controller\FrontendController;
+use App\Core\Block\BaseBlock;
 use App\Core\Block\Frontend\Product\Category\CategoryBlock;
 
 class CategoryController extends FrontendController
 {
     public function recommend(): array
     {
-        /** @var CategoryBlock $block */
-        $block = $this->getBlock();
-
-        return $block->recommend();
+        return $this->getBlock()->recommend();
     }
 
     protected function setBlock(): CategoryBlock
     {
         return new CategoryBlock();
+    }
+
+    /**
+     * @return CategoryBlock
+     */
+    protected function getBlock(): BaseBlock
+    {
+        return parent::getBlock();
     }
 }

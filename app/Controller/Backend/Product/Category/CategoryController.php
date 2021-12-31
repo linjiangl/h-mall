@@ -12,6 +12,7 @@ namespace App\Controller\Backend\Product\Category;
 
 use App\Constants\Action\ProductAction;
 use App\Controller\BackendController;
+use App\Core\Block\BaseBlock;
 use App\Core\Block\Common\Product\Category\CategoryBlock;
 use App\Model\Category\Category;
 use App\Request\Backend\Product\CategoryRequest;
@@ -38,20 +39,24 @@ class CategoryController extends BackendController
 
     public function parent(): array
     {
-        /** @var CategoryBlock $service */
-        $service = $this->getBlock();
-        return $service->parent();
+        return $this->getBlock()->parent();
     }
 
     public function children(): array
     {
-        /** @var CategoryBlock $service */
-        $service = $this->getBlock();
-        return $service->children();
+        return $this->getBlock()->children();
     }
 
     protected function setBlock(): CategoryBlock
     {
         return new CategoryBlock();
+    }
+
+    /**
+     * @return CategoryBlock
+     */
+    protected function getBlock(): BaseBlock
+    {
+        return parent::getBlock();
     }
 }

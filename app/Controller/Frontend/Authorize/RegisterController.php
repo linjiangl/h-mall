@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Frontend\Authorize;
 
 use App\Controller\FrontendController;
+use App\Core\Block\BaseBlock;
 use App\Core\Block\Frontend\Authorize\RegisterBlock;
 use App\Request\Frontend\Authorize\RegisterRequest;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -25,13 +26,19 @@ class RegisterController extends FrontendController
     public function register(RegisterRequest $request): array
     {
         $request->validated();
-        /** @var RegisterBlock $service */
-        $service = $this->getBlock();
-        return $service->register();
+        return $this->getBlock()->register();
     }
 
     protected function setBlock(): RegisterBlock
     {
         return new RegisterBlock();
+    }
+
+    /**
+     * @return RegisterBlock
+     */
+    protected function getBlock(): BaseBlock
+    {
+        return parent::getBlock();
     }
 }

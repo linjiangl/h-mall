@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Frontend\Authorize;
 
 use App\Controller\FrontendController;
+use App\Core\Block\BaseBlock;
 use App\Core\Block\Frontend\Authorize\LoginBlock;
 use App\Request\Frontend\Authorize\LoginRequest;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -28,13 +29,19 @@ class LoginController extends FrontendController
     public function login(LoginRequest $request): array
     {
         $request->validated();
-        /** @var LoginBlock $service */
-        $service = $this->getBlock();
-        return $service->login();
+        return $this->getBlock()->login();
     }
 
     protected function setBlock(): LoginBlock
     {
         return new LoginBlock();
+    }
+
+    /**
+     * @return LoginBlock
+     */
+    protected function getBlock(): BaseBlock
+    {
+        return parent::getBlock();
     }
 }

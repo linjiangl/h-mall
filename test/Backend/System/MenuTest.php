@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace HyperfTest\Backend\System;
 
 use App\Core\Dao\System\MenuDao;
-use App\Model\Menu;
 use HyperfTest\Backend\BackendHttpTestCase;
 use HyperfTest\Backend\TraitBackendAuthorize;
 
@@ -55,7 +54,6 @@ class MenuTest extends BackendHttpTestCase
     public function testBackendMenuUpdate()
     {
         $dao = new MenuDao();
-        /** @var Menu $info */
         $info = $dao->getInfoByCondition([['name', '=', 'order']]);
 
         $this->url = '/menu/update';
@@ -74,7 +72,6 @@ class MenuTest extends BackendHttpTestCase
     public function testBackendMenuDelete()
     {
         $dao = new MenuDao();
-        /** @var Menu $info */
         $info = $dao->getInfoByCondition([['name', '=', 'order']]);
 
         $this->url = '/menu/delete';

@@ -25,6 +25,11 @@ class MenuDao extends AbstractDao
         return parent::info($id, $with);
     }
 
+    public function getInfoByCondition(array $condition = [], array $with = [], string $select = '*'): Menu
+    {
+        return parent::getInfoByCondition($condition, $with, $select);
+    }
+
     /**
      * 根据状态获取菜单.
      * @param mixed $status 状态
