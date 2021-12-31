@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Request\Frontend\Order;
 
+use App\Constants\State\Order\CartState;
 use App\Core\Tools\Validate;
 use App\Model\Product\ProductSku;
 use App\Request\AbstractRequest;
@@ -20,18 +21,24 @@ class CartRequest extends AbstractRequest
     {
         parent::rules($ruleKey);
 
+        $cartMap = CartState::map();
+
         $rules = [
             'post:create' => [
                 'sku_id' => Validate::ruleExistsModel(ProductSku::class, 'sku_id', true),
                 'quantity' => 'required|integer|gt:0',
+                'is_check' => 'integer|in:' . $this->getRuleInByState($cartMap['is_check']),
+                'is_buy_now' => 'integer|in:' . $this->getRuleInByState($cartMap['is_buy_now']),
             ],
             'post:update' => [
                 'id' => 'required|integer|gt:0',
                 'quantity' => 'required|integer|gt:0',
+                'is_check' => 'integer|in:' . $this->getRuleInByState($cartMap['is_check']),
+                'is_buy_now' => 'integer|in:' . $this->getRuleInByState($cartMap['is_buy_now']),
             ],
             'post:updateIsCheck' => [
                 'id' => 'required|integer|gt:0',
-                'is_check' => 'required|integer|in:0,1',
+                'is_check' => 'required|integer|in:' . $this->getRuleInByState($cartMap['is_check']),
             ],
             'post:delete' => [
                 'id' => 'required|integer|gt:0',

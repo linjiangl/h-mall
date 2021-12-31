@@ -226,6 +226,7 @@ class CartService extends AbstractService
         ], $dao->setMapWith()->getMapWith(CartDao::WITH_SETTLEMENT));
 
         $result = [];
+        // 按店铺归类
         foreach ($list as $item) {
             if (! isset($result[$item['shop_id']])) {
                 $result[$item['shop_id']] = $item['shop'];

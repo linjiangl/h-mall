@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Core\Block\Common\Order;
 
+use App\Constants\State\Order\CartState;
 use App\Core\Block\BaseBlock;
 use App\Core\Service\AbstractService;
 use App\Core\Service\Order\CartService;
@@ -41,15 +42,22 @@ class CartBlock extends BaseBlock
     public function create(): Cart
     {
         $data = $this->handleCreateData();
+        $append = [
+            'is_check' => $data['is_check'] ?? CartState::IS_CHECK_FALSE,
+            'is_buy_now' => $data['is_buy_now'] ?? CartState::IS_BUY_NOW_FALSE
+        ];
 
-        return $this->service()->addCart($data['sku_id'], $data['quantity']);
+        return $this->service()->addCart($data['sku_id'], $data['quantity'], $append);
     }
 
     public function update(): Cart
     {
         $data = $this->handleUpdateData();
+        $append = [];
+        isset($data['is_check']) && $append['is_check'] = $data['is_check'];
+        isset($data['is_buy_now']) && $append['is_buy_now'] = $data['is_buy_now'];
 
-        return $this->service()->updateCart($data['id'], $data['quantity']);
+        return $this->service()->updateCart($data['id'], $data['quantity'], $append);
     }
 
     public function delete(): bool
