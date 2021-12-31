@@ -44,7 +44,7 @@ class CartBlock extends BaseBlock
         $data = $this->handleCreateData();
         $append = [
             'is_check' => $data['is_check'] ?? CartState::IS_CHECK_FALSE,
-            'is_buy_now' => $data['is_buy_now'] ?? CartState::IS_BUY_NOW_FALSE
+            'is_buy_now' => $data['is_buy_now'] ?? CartState::IS_BUY_NOW_FALSE,
         ];
 
         return $this->service()->addCart($data['sku_id'], $data['quantity'], $append);

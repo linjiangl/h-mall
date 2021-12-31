@@ -28,7 +28,7 @@ class CartTest extends FrontendHttpTestCase
             'sku_id' => 4,
             'quantity' => 1,
             'is_check' => 1,
-            'is_buy_now' => 1
+            'is_buy_now' => 1,
         ];
         $this->handleHttpCreate();
     }
