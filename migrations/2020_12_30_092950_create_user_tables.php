@@ -41,9 +41,9 @@ class CreateUserTables extends Migration
             $table->unsignedInteger('updated_time')->default(0);
             $table->unsignedInteger('deleted_time')->default(0);
 
+            $table->unique(['username'], 'username');
             $table->index(['mobile'], 'mobile');
             $table->index(['email'], 'email');
-            $table->unique(['username', 'status'], 'username');
             $table->index(['nickname', 'status'], 'nickname');
             $table->index(['lasted_login_time', 'status'], 'lasted_login_time');
             $table->index(['created_time', 'status'], 'created_time');
